@@ -30,10 +30,10 @@
 	
 	<!-- 인터셉터 -->
 	<!-- 로그인 객체 생성 -->
-<!-- 	<beans:bean class=""  id="loginInterceptor"/>
+	<beans:bean class=""  id="loginInterceptor"/>
 	
 	<interceptors>
-		로그인 설정
+		<!-- 로그인 설정 -->
 	<interceptor>	
 		<mapping path="/**"/>
 		<exclude-mapping path="/resources/**"/>
@@ -44,6 +44,6 @@
 		<exclude-mapping path="/shop/**"/>
 		<bean:ref bean="loginInterceptor"/>
 	</interceptor>
-	</interceptors> -->
+	</interceptors>
 	
 </beans:beans>
