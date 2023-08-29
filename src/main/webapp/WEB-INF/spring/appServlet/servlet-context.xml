@@ -38,8 +38,16 @@
 	</interceptors>
 		
 	<!-- File Upload : bean 생성 -->
-	<beans:bean class="org.springframework.web.multipart.commons.CommonsMultipartResolver" id="commonsMultipartResolver">
-	
+	<!-- id이름은 반드시 multipartResolver로 작성 -->
+	<!-- defaultEncoding으로  UTF-8 반드시 지정-->
+	<!-- TODO kim j.h 파일 업로드 최대 사이즈 추후 지정 10485760 = 10MB
+		 insert.jsp에서 form태그안에 [enctype="multipart/form-data"] 추가하여 사용
+		 Spring Security 관련 403오류를 방지하기 위해 token 코드도 같이 추가
+		 insert.jsp에서 매개변수로 자료형 MultipartRequest(파일 여려개)와 NultipartFile(파일 한 개) 추가하여 사용
+	-->
+	<beans:bean class="org.springframework.web.multipart.commons.CommonsMultipartResolver" id="multipartResolver">
+		<beans:property name="defaultEncoding" value="UTF-8"></beans:property>
+		<beans:property name="maxUploadSize" value="10485760"></beans:property>
 	</beans:bean>
 	
 </beans:beans>
