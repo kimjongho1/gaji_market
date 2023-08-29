@@ -36,7 +36,7 @@
 		<url-pattern>/</url-pattern>
 	</servlet-mapping>
 
-	<!-- jsp에서 받아온 정보를 controller로 깨지지 않게 처리 -->
+	<!-- jsp에서 받아온 정보를 controller로 깨지지 않게 Filter처리 -->
 	<filter>
 		<filter-name>encodingFilter</filter-name>
 		<filter-class>org.springframework.web.filter.CharacterEncodingFilter
@@ -51,7 +51,7 @@
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>
 
-	<!-- Spring Security를 스프링MVC에서 사용하기 위해 처리 -->
+	<!-- Spring Security를 스프링MVC에서 사용하기 위해 Filter처리 -->
 	<filter>
 		<filter-name>springSecurityFilterChain</filter-name>
 		<filter-class>org.springframework.web.filter.DelegatingFilterProxy
