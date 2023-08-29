@@ -29,14 +29,11 @@
 	
 	<beans:bean class="kh.spring.gaji.common.LoginInterceptor" id="loginInterceptor"/>
 	<interceptors>
-	<!-- TODO kim j.h -->
+	<!-- 로그인 상태에서 관련 권한 url 추후 입력 TODO kim j.h -->
 		<interceptor>
 			<mapping path="/**"/>
 			<exclude-mapping path="/resources/**"/>
-			<exclude-mapping path="/login"/>
-			<exclude-mapping path="/signup"/>
-			<exclude-mapping path="/findid"/>
-			<exclude-mapping path="/findpwd"/>
+			<beans:ref bean="loginInterceptor"/>
 		</interceptor>
 	</interceptors>
 		
