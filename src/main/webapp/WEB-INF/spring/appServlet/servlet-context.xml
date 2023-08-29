@@ -37,7 +37,9 @@
 		</interceptor>
 	</interceptors>
 		
+	<!-- File Upload : bean 생성 -->
+	<beans:bean class="org.springframework.web.multipart.commons.CommonsMultipartResolver" id="commonsMultipartResolver">
 	
-	
+	</beans:bean>
 	
 </beans:beans>
