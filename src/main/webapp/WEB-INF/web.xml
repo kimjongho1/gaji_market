@@ -52,6 +52,9 @@
 	</filter-mapping>
 
 	<!-- Spring Security를 스프링MVC에서 사용하기 위해 Filter처리 -->
+	<!-- TODO kim j.h csrf 공격을 막기 위해서 hidden 태그로 보내줌
+		 403오류를 방지하기 위해 login.jsp에서 token 값으로 전달 처리를 해야함
+		 -->
 	<filter>
 		<filter-name>springSecurityFilterChain</filter-name>
 		<filter-class>org.springframework.web.filter.DelegatingFilterProxy
