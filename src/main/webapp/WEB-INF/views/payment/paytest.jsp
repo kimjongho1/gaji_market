@@ -35,7 +35,7 @@
                 jQuery.ajax({
                     url: "/payments/complete", //cross-domain error가 발생하지 않도록 주의해주세요
                     type: 'POST',
-                    dataType: 'json',
+                    dataType: 'application/json',
                     data: {
                         imp_uid : rsp.imp_uid
                         //기타 필요한 데이터가 있으면 추가 전달
@@ -74,6 +74,5 @@
 </head>
 <body>
 	<button type="button" class="kakaoPay" onclick="kakaoPay()">카카오페이</button>
-	<button type="button" class="tossPay" onclick="tossPay()">토스페이</button>
 </body>
 </html>

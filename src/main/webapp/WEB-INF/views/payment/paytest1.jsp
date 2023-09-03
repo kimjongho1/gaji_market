@@ -1,8 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<script type="text/javascript"
-	src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 <script src="https://cdn.iamport.kr/v1/iamport.js"></script>
 <html>
 <head>
@@ -10,71 +9,72 @@
 <title>paytest 1</title>
 </head>
 <body>
-	<button onclick="kakaoPay()">카카오페이</button>
+	<button onclick="kakaoPay()">카카오페이</button> <!-- 1.카카오페이버튼 -->
 	<button onclick="tossPay()">토스페이</button>
 	<button onclick="nicePay()">카드결제</button>
 
 	<script>
-	function kakaoPay(){
-		const userCode='';
-		IMP.init(userCode);
-		IMP.request_pay({
+	//카카오페이 호출함수
+	function kakaoPay(){									
+		const userCode='';	//가맹점식별번호
+		IMP.init(userCode);	//IMP를 가맹점 식별번호로 초기화
+		
+		IMP.request_pay( //IMP의 pay함수 실행 
+		{	
 			  pg: "kakaopay", // 카카오페이 결제창 호출
-			  amount: 1000,
-			  name: "테스트 주문",
-			  buyer_name: "구매자",
-			  buyer_email: "buyer@iamport.kr",
-			  merchant_uid: "123"
+			  amount: 1000,	// 가격
+			  name: "테스트 주문",	// 주문이름
+			  buyer_name: "구매자",	// 구매자
+			  buyer_email: "buyer@iamport.kr",	//구매자 이메일 
 		},
-		 rsp => {	//rsp를 인자로 받는 무명함수 실행
-			 alert(rsp.imp_uid+ ":" + rsp.merchant_uid);
+		 rsp => {					//rsp를 인자로 받는 무명함수 실행
+			 alert(rsp.imp_uid+ ":" + rsp.merchant_uid);	
 			 console.log(rsp.imp_uid+ ":" + rsp.merchant_uid);
+			 console.log(rsp);
 			 $.ajax({
-			  url: "<%=request.getContextPath()%>/payment/callback",
-			  method: "POST",
+			  url: "<%=request.getContextPath()%>/payment/callback" ,	
+			  method: "post",
 			  dataType: 'json',
 			  data: {
-			        imp_uid: rsp.imp_uid, //결제서비스 제공자가 만든 거래식별자
+			        imp_uid: rsp.imp_uid, //결제서비스 제공자가 거래식별자
 			        merchant_uid: rsp.merchant_uid// 판매자가 지정한 거래식별자
 			  		},
 		  	  success: callback	
-			    });
-		 });
+			  });
+		 });	
 	}
 	
-	function callback(successFail){
-		if(successFail==1)
-		alert("성공?")
-		else
-		alert("실패?")
-	}
-	
-	function tossPay(){
-		const userCode='';
-		IMP.init(userCode);
-		IMP.request_pay({
+	//토스페이 호출함수
+		function tossPay(){
+		const userCode='';	//가맹점식별번호
+		IMP.init(userCode);	//IMP를 가맹점 식별번호로 초기화
+		
+		IMP.request_pay( //IMP의 pay함수 실행 
+		{	
 			  pg: "tosspay", // 카카오페이 결제창 호출
-			  amount: 1000,
-			  name: "테스트 주문",
-			  buyer_name: "구매자",
-			  buyer_email: "buyer@iamport.kr",
+			  amount: 1000,	// 가격
+			  name: "테스트 주문",	// 주문이름
+			  buyer_name: "구매자",	// 구매자
+			  buyer_email: "buyer@iamport.kr",	//구매자 이메일
 		},
-		 rsp => {	//rsp를 인자로 받는 무명함수 실행
-			 alert(rsp.imp_uid+ ":" + rsp.merchant_uid);
+		 rsp => {					//rsp를 인자로 받는 무명함수 실행
+			 alert(rsp.imp_uid+ ":" + rsp.merchant_uid);	
 			 console.log(rsp.imp_uid+ ":" + rsp.merchant_uid);
 			 $.ajax({
-			  url: "<%=request.getContextPath()%>/payment/callback",
-			  method: "POST",
+			  url: "<%=request.getContextPath()%>/payment/callback" ,	
+			  method: "post",
 			  dataType: 'json',
 			  data: {
-			        imp_uid: rsp.imp_uid, //결제서비스 제공자가 만든 거래식별자
-			        merchant_uid: rsp.merchant_uid,// 판매자가 지정한 거래식별자
+			        imp_uid: rsp.imp_uid, //결제서비스 제공자가 거래식별자
+			        merchant_uid: rsp.merchant_uid// 판매자가 지정한 거래식별자
 			  		},
-			  		success: callback	
-			    });
-		 });
+		  	  success: callback	
+			  });
+		 });	
 	}
 	
+	
+	//나이스 페이먼츠 호출함수
 	function nicePay(){
 	const userCode='';
 	IMP.init(userCode);
@@ -83,23 +83,34 @@
 		  amount: 1000,
 		  name: "테스트 주문",
 		  buyer_name: "구매자",
-		  buyer_email: "buyer@iamport.kr"
+		  buyer_email: "buyer@iamport.kr",
 	},
 	 rsp => {	//rsp를 인자로 받는 무명함수 실행
 		 alert(rsp.imp_uid+ ":" + rsp.merchant_uid);
 		 console.log(rsp.imp_uid+ ":" + rsp.merchant_uid);
 		 $.ajax({
 		  url: "<%=request.getContextPath()%>/payment/callback",
-		  method: "POST",
+		  method: "post",
 		  dataType: 'json',
 		  data: {
 		        imp_uid: rsp.imp_uid, //결제서비스 제공자가 만든 거래식별자
-		        merchant_uid: rsp.merchant_uid,// 판매자가 지정한 거래식별자
+		        merchant_uid: rsp.merchant_uid// 판매자가 지정한 거래식별자
 		  		},
 		  		success: callback	
 		    });
 	 });
 	}
+	
+	//callback 함수
+	function callback(data){
+		console.log(data)
+		if() {
+			alert("거래성공")
+			//window.location.href="{pageContext.request.contextPath}/mypage/purchaselist";
+		}
+		else
+			alert("거래실패");
+		}
 	</script>
 </body>
 </html>
