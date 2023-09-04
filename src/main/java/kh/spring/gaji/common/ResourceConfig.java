@@ -1,5 +1,10 @@
 package kh.spring.gaji.common;
 
-public class ResourceConfig {
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 
+@Configuration
+public class ResourceConfig {
+	// @Bean 어노테이션 작성 후
+	// 객체 생성
 }

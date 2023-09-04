@@ -8,7 +8,7 @@ import lombok.Data;
 
 @Component
 @Data
-public class ChattingFile {
+public class ChatFile {
 	private int number;				//파일ID
 	private int chatId;				//채팅방ID
 	private String type;			//파일 타입
