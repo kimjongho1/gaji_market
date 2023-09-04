@@ -16,8 +16,7 @@
 	<script>
 	//카카오페이 호출함수
 	function kakaoPay(){									
-		const userCode='';	//가맹점식별번호
-		IMP.init(userCode);	//IMP를 가맹점 식별번호로 초기화
+		IMP.init('${merchantIdentificationCode}');	//IMP를 가맹점 식별번호로 초기화
 		
 		IMP.request_pay( //IMP의 pay함수 실행 
 		{	
@@ -26,6 +25,7 @@
 			  name: "테스트 주문",	// 주문이름
 			  buyer_name: "구매자",	// 구매자
 			  buyer_email: "buyer@iamport.kr",	//구매자 이메일 
+			  merchant_uid: "ss"
 		},
 		 rsp => {					//rsp를 인자로 받는 무명함수 실행
 			 alert(rsp.imp_uid+ ":" + rsp.merchant_uid);	
@@ -46,8 +46,7 @@
 	
 	//토스페이 호출함수
 		function tossPay(){
-		const userCode='';	//가맹점식별번호
-		IMP.init(userCode);	//IMP를 가맹점 식별번호로 초기화
+		IMP.init('${merchantIdentificationCode}');	//IMP를 가맹점 식별번호로 초기화
 		
 		IMP.request_pay( //IMP의 pay함수 실행 
 		{	
@@ -76,8 +75,7 @@
 	
 	//나이스 페이먼츠 호출함수
 	function nicePay(){
-	const userCode='';
-	IMP.init(userCode);
+	IMP.init('${merchantIdentificationCode}');
 	IMP.request_pay({
 		  pg: "nice_v2.iamport00m", // (신) 나이스페이먼츠 인증 결제용 호출
 		  amount: 1000,
@@ -103,14 +101,15 @@
 	
 	//callback 함수
 	function callback(data){
-		console.log(data)
-		if() {
-			alert("거래성공")
+		if(data.response.status=='paid') {
+			alert("결제완료")
 			//window.location.href="{pageContext.request.contextPath}/mypage/purchaselist";
 		}
-		else
-			alert("거래실패");
+		else{
+			console.log(data);
+			alert(data.response.failReason);
 		}
+	}
 	</script>
 </body>
 </html>

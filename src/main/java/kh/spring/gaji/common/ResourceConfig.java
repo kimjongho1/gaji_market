@@ -1,10 +1,23 @@
 package kh.spring.gaji.common;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import com.siot.IamportRestClient.IamportClient;
+
+
 @Configuration
 public class ResourceConfig {
-	// @Bean 어노테이션 작성 후
-	// 객체 생성
+	
+	@Value("${rest.key}")
+	    private String restKey;
+	    
+	@Value("${restsecret.key}")
+	private String restSecretKey;
+		
+    @Bean
+    public IamportClient api() { 
+        return new IamportClient(restKey,restSecretKey);
+    }
 }

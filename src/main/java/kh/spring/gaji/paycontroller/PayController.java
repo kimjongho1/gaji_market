@@ -11,6 +11,8 @@ import javax.servlet.http.HttpSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -32,10 +34,14 @@ import com.siot.IamportRestClient.response.Payment;
  * Handles requests for the application home page.
  */
 @Controller
+@PropertySource("classpath:/properties/application.properties")
 public class PayController {
 	private static final Logger logger = LoggerFactory.getLogger(PayController.class);
-	private IamportClient api = new IamportClient("");
+	@Autowired
+	private IamportClient api;
 	private CancelData cancelData;
+	@Value("${merchant.identification.code}")
+    private String merchantIdentificationCode;
 	
 	@GetMapping("payment/paytest")
 	public String paytest() {
@@ -48,34 +54,33 @@ public class PayController {
 	}
 	
 	@GetMapping("payment/paytest1")
-	public String paytest1() {
+	public String paytest1(Model model) {
+		model.addAttribute("merchantIdentificationCode",merchantIdentificationCode);
 		return "payment/paytest1";
 	}
 	
 
 	@PostMapping("payment/callback")
 	@ResponseBody
-	public String callback(String imp_uid,String merchant_uid) {
+	public IamportResponse<Payment> callback(String imp_uid,String merchant_uid) {
 		IamportResponse<Payment> result=null;
 		try {
-			System.out.println("imp_uid:"+ imp_uid);
-			System.out.println("merchant_uid:"+ merchant_uid);
 			result= api.paymentByImpUid(imp_uid);
 			BigDecimal amount = new BigDecimal(1000);
-			if(result.getResponse().getStatus().equals("paid")&&amount== result.getResponse().getAmount()) {		// 금액이 일치하면
-				return result.getResponse().getMerchantUid();	// 가맹점에서 부여한 거래정보를 반환.
+			if(result.getResponse().getStatus().equals("paid")&&amount==result.getResponse().getAmount()) {	// 금액이 일치하면
+				return result;	// 가맹점에서 부여한 거래정보를 반환.
 			}
 			else {
 				cancelData=new CancelData(imp_uid, true); // imp_uid를 이용하여 거래취소함수에 인자가될 객체생성
-				cancelData.setReason("금액이 일치하지 않습니다.");	// 취소이유를 세팅해줌
+				cancelData.setReason(result.getResponse().getFailReason());	// 취소이유를 세팅해줌
 				api.cancelPaymentByImpUid(cancelData);	// api의 취소함수에 cancelData를 인자로하여 거래취소.
-				return "금액이 일치하지 않습니다.";	// 이유를 반환함
+				return result;	// 이유를 반환함
 				//결제취소후 return result;
 			}
 		} catch (IamportResponseException | IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return "서버상의 문제가 발생하였습니다. 관리자에게 문의하세요";
+		return result;
 	}
 }
