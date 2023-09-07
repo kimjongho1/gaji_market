@@ -48,7 +48,6 @@ public class PayController {
 		return "payment/paytest";
 	}
 	
-//	@Autowired
 	public PayController() {
 		super();
 	}
@@ -59,6 +58,22 @@ public class PayController {
 		return "payment/paytest1";
 	}
 	
+	
+	@PostMapping("payment/cancel")	//안전거래 후 취소처리를 위한 버튼
+	@ResponseBody
+	public IamportResponse<Payment> cancel(String merchantId) {
+		IamportResponse<Payment> result=null;
+		try {
+			result = api.cancelPaymentByImpUid(cancelData=new CancelData(merchantId, false)); //가맹점 고유식별번호로 거래취소후 , 거래정보담은 객체반환
+			if(result.getResponse().getStatus().equals("cancelled"))
+				//데이터베이스에서 안전거래 삭제. 상품 판매중으로 변경
+			return result;	// 거래정보담은 객체반환 이후 페이지에서 이에따른 처리함.
+		} catch (IamportResponseException | IOException e) {
+			e.printStackTrace();
+		}
+		return result;		// 거래정보담은 객체반환 이후 페이지에서 이에따른 처리함.
+	}
+	
 
 	@PostMapping("payment/callback")
 	@ResponseBody
@@ -66,19 +81,17 @@ public class PayController {
 		IamportResponse<Payment> result=null;
 		try {
 			result= api.paymentByImpUid(imp_uid);
-			BigDecimal amount = new BigDecimal(1000);
-			if(result.getResponse().getStatus().equals("paid")&&amount==result.getResponse().getAmount()) {	// 금액이 일치하면
-				return result;	// 가맹점에서 부여한 거래정보를 반환.
+			BigDecimal amount = new BigDecimal(1000); // 이후에는 merchant로 불러온 가격과 비교할것임.
+			if(result.getResponse().getStatus().equals("paid")&&amount==result.getResponse().getAmount()) {	// 금액이 일치하고 지불이 완료되었다면.
+								//데이터베이스에 안전거래에 대한 데이터를 넣음(상품준비중)
+				return result;	// 거래정보 반환.
 			}
 			else {
 				cancelData=new CancelData(imp_uid, true); // imp_uid를 이용하여 거래취소함수에 인자가될 객체생성
-				cancelData.setReason(result.getResponse().getFailReason());	// 취소이유를 세팅해줌
 				api.cancelPaymentByImpUid(cancelData);	// api의 취소함수에 cancelData를 인자로하여 거래취소.
-				return result;	// 이유를 반환함
-				//결제취소후 return result;
+				return result;	//거래 정보 반환
 			}
 		} catch (IamportResponseException | IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return result;
