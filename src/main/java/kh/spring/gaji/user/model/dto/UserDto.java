@@ -9,11 +9,13 @@ import lombok.Data;
 public class UserDto {
     private String userId;
     private int role;
+    private String name;
     private String password;
     private String mobileNumber;
     private double ratingScore;
     private String nickname;
     private LocalDateTime createdAt;
+    private String email;
     private int enabled;
     private int authority;
     private int keywordCount;

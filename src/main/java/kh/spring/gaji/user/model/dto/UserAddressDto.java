@@ -10,4 +10,5 @@ public class UserAddressDto {
     private String userId;
     private String postCode;
     private String nickname;
+    private String addressNo;
 }

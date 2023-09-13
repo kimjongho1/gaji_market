@@ -2,24 +2,28 @@
 <!DOCTYPE mapper PUBLIC " -//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="goods">
 	
-	<!-- 	<select id="selectList" resultType="MemberVo">
-		select mid,mname,memail,mpwd from member
-	</select>
-	
-	<select id="insert" parameterType="MemberVo">
-		insert into member values(#{mid},#{mname},#{memail},#{mpwd})
-	</select> -->
-	<select id="selectKeepList" parameterType="_int" resultType="GoodsDto"> 			<!-- 사진을 포함한 찜목록을 가져옴 -->
-		select (select url from goods_file gf where gf.goods_id = g.goods_id),user_id,title,price,status,created_at from goods g
-		where goods_id IN(select goods_id from wishlist where user_id=#{})
+	<select id="getKeepList" parameterType="_int" resultType="GoodsDto"> 			<!-- 사진을 포함한 찜목록을 가져옴 -->
+		select goods_id,(select url from goods_file gf where gf.goods_id = g.goods_id),user_id,title,price,status,created_at from goods g
+		where goods_id IN(select goods_id from wishlist where user_id=#{userId})
 		order by created_at desc
 	</select>
 	
-	<select id="selectKeepUserList" parameterType="_int" resultType="GoodsDto"> 			<!-- 사진을 포함한 모아보기목록 가져옴 -->
-		select (select url from goods_file gf where gf.goods_id = g.goods_id),user_id,title,price,status,created_at from goods g
-		where user_id IN(select target_id from favorite_user where user_id=#{})
-		order by created_at desc
+	<select id="getFavoriteList" parameterType="_int" resultType="GoodsDto"> 		<!-- 사진을 포함한 모아보기목록 가져옴 -->
+		select goods_id,(select URL from goods_file gf where gf.goods_id = g.goods_id),user_id,title,price,status,created_at from goods g
+		where user_id IN(select target_id from favorite_user where user_id=#{targetId})
+		order by created_at DESC
 	</select>
 	
+	<select id="getOnSaleList" parameterType="string" resultType="GoodsDto">				<!-- 판매중 + 예약중 불러오기 -->
+		select goods_id,title,price,status from goods where seller_id=#{sellerId} and status IN(1,2) order by refreshed_at DESC;
+	</select>
 	
+	<select id="getSoldOutList" parameterType="string" resultType="GoodsDto">				<!-- 거래완료 판매내역 가지고오기 -->
+		select goods_id,title,price,status from goods where seller_id=#{sellerId} and status IN(3) order by refreshed_at DESC;
+	</select>
+	
+	<select id="getHideList" parameterType="string" resultType="GoodsDto">					<!-- 숨김중인 판매내역 가져오기 -->
+		select goods_id,title,price,status from goods where seller_id=#{sellerId} and status IN(4) order by refreshed_at DESC;
+	</select>
+
 </mapper>
