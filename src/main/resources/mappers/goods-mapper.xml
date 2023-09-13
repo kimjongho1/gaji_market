@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC " -//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="goods">
+	
+	<!-- 	<select id="selectList" resultType="MemberVo">
+		select mid,mname,memail,mpwd from member
+	</select>
+	
+	<select id="insert" parameterType="MemberVo">
+		insert into member values(#{mid},#{mname},#{memail},#{mpwd})
+	</select> -->
+	<select id="selectKeepList" parameterType=""> 			<!-- 사진을 포함한 찜목록을 가져옴 -->
+		select url,user_id,title,price,status from 
+		(select user_id,title,price,status from goods where goods_id IN )
+		join goods_file using (goods_id)
+	</select>
+	
+</mapper>

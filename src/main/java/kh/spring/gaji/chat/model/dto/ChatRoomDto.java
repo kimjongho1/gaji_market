@@ -8,7 +8,7 @@ import lombok.Data;
 
 @Component
 @Data
-public class ChatRoom {
+public class ChatRoomDto {
 	private int chatId;					//채팅방 ID
 	private int goodsId;				//상품 ID
 	private String sellerId;			//회원 아이디 10자이내 영어로만

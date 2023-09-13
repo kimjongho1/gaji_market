@@ -1,4 +1,4 @@
-package kh.spring.gaji.paycontroller;
+package kh.spring.gaji.pay.controller;
 
 import java.io.IOException;
 import java.math.BigDecimal;
@@ -43,7 +43,7 @@ public class PayController {
 	@Value("${merchant.identification.code}")
     private String merchantIdentificationCode;
 	
-	@GetMapping("payment/paytest")
+	@GetMapping("payment/paytest") //이후 삭제할 Mapping
 	public String paytest() {
 		return "payment/paytest";
 	}
@@ -52,7 +52,7 @@ public class PayController {
 		super();
 	}
 	
-	@GetMapping("payment/paytest1")
+	@GetMapping("payment/pay")
 	public String paytest1(Model model) {
 		model.addAttribute("merchantIdentificationCode",merchantIdentificationCode);
 		return "payment/paytest1";
