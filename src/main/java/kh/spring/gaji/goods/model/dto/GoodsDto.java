@@ -19,4 +19,6 @@ public class GoodsDto {
 	private String refreshedAt;
 	private LocalDateTime createdAt;
 	private char safeTradingYN;
+	
+	private String url;
 }

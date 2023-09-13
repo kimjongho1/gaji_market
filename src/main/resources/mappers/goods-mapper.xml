@@ -9,10 +9,17 @@
 	<select id="insert" parameterType="MemberVo">
 		insert into member values(#{mid},#{mname},#{memail},#{mpwd})
 	</select> -->
-	<select id="selectKeepList" parameterType=""> 			<!-- 사진을 포함한 찜목록을 가져옴 -->
-		select url,user_id,title,price,status from 
-		(select user_id,title,price,status from goods where goods_id IN )
-		join goods_file using (goods_id)
+	<select id="selectKeepList" parameterType="_int" resultType="GoodsDto"> 			<!-- 사진을 포함한 찜목록을 가져옴 -->
+		select (select url from goods_file gf where gf.goods_id = g.goods_id),user_id,title,price,status,created_at from goods g
+		where goods_id IN(select goods_id from wishlist where user_id=#{})
+		order by created_at desc
 	</select>
+	
+	<select id="selectKeepUserList" parameterType="_int" resultType="GoodsDto"> 			<!-- 사진을 포함한 모아보기목록 가져옴 -->
+		select (select url from goods_file gf where gf.goods_id = g.goods_id),user_id,title,price,status,created_at from goods g
+		where user_id IN(select target_id from favorite_user where user_id=#{})
+		order by created_at desc
+	</select>
+	
 	
 </mapper>
