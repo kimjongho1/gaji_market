@@ -47,22 +47,22 @@
 		where category_id=1 and title like #{searchWord} and active_status="Y"
 </select> -->
 
-		<insert id="insertGoods">
+		<insert id="insertGoods">	<!-- 상품글 등록 -->
 			insert into goods (user_id,category_id,dong_id,title,price,description,safetrading_yn,lat,lng) 
 			values(#{user_id},#{category_id},#{dong_id},#{title},#{price},#{description},#{safetrading_yn},#{lat},#{lng})
 		</insert>
 
-		<select id="getGoodsInfo" parameterType="_int"> <!--22P 상품글 상세조회  --> <!--  -->
+		<select id="getGoodsInfo" parameterType="_int"> <!--22P 상품글 상세조회  -->
 			select goods_id,user_id,category_id,title,status,price,view_count,description,created_at,safe_trading_yn
-			,dong_id,lat,lng
-			from goods where goods_id=#{goodsId} and active_status="Y"
+			,dong_id,lat,lng,nickname,rating_score
+			from goods join user using (user_id) where goods_id=#{goodsId} and active_status='Y'
 		</select>
 		
-<!-- 		<select id="getFourGoodsList">	 22P 해당 계정의 상품글을 등록일자 내림차순으로 4개까지 가져오기
+		<select id="getFourGoodsList">	<!-- 22P 해당 계정의 상품글을 등록일자 내림차순으로 4개까지 가져오기 -->
 			select goods_id, title, price from 
 			(select goods_id, title, price from goods where user_id = #{userId} order by created_at desc)
 			where ROWNUM <=4
-		</select> -->
+		</select>
 	
 		
 		<update id="updateGoods" parameterType="string"> <!-- 상품글 수정 -->

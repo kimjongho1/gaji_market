@@ -20,4 +20,5 @@ public class UserDto {
     private int authority;
     private int keywordCount;
     private int inviteCount;
+    private int dongId;
 }
