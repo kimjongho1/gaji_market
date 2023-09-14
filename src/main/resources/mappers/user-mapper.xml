@@ -6,6 +6,10 @@
 		select name,rating_score,nickname,mobile_number,(select address from user_address ad where ad.user_id=us.user_id) from user us where user_id=#{userId}
 	</select>
 	
+	<select id="getProfileForGoods">	<!-- 22P 유저 프로필 뽑아오기 -->
+		select nickname,user_id,ratind_score from user where user_id=#{userId}
+	</select>
+	
 	<update id="updateAddressNo" parameterType="string">	<!-- 대표주소를 변경하기위해 주소순서를 하나씩 뒤로 민다 -->
 		update user_address set address_no=address_no+1 from USER_ADDRESS where user_id=#{user_id}
 	</update>
@@ -33,5 +37,30 @@
 	<update id="updatePass" parameterType="map">							<!-- 패스워드를 변경한다 -->
 		update user set password=#{password} where user_id=#{user_id}
 	</update>
+	
+	<select id="checkId" parameterType="string" resultType="_int">	<!-- 아이디 중복검사 -->
+		select count(*) from user where user_id=#{user_id}
+	</select>
+	
+	<insert id="signup">
+		insert into (user user_id,name,password,mobile_number,nickname,email) values(#{user_id},#{name},#{password},#{mobile_number},#{nickname},#{email})
+	</insert>
+	
+	<select id="findId" parameterType="map" resultType="string"> <!-- 아이디 찾기 -->
+		select user_id from user where name=#{name} and email=#{email}
+	</select>
+	
+	
+	<!-- 이메일 인증 미구현 -->
+	
+	
+	<insert id="addAccount"> <!-- 계좌등록 -->
+		insert into user_account (user_account,user_id) values(#{userAccount},#{userId})
+	</insert>
+	
+	<insert id="addFavoriteUser" parameterType="map">	<!-- 유저 즐겨찾기 -->
+		insert into favorite_user values(#{userId},#{targetId})
+	</insert>
+	
 	
 </mapper>

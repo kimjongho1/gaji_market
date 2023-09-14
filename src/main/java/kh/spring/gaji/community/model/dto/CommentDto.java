@@ -14,4 +14,5 @@ public class CommentDto {
     private LocalDateTime wdate;
     private int ccidx;
     private int step;
+    private char activeStatus;
 }

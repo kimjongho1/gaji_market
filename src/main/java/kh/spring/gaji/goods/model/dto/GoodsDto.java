@@ -19,6 +19,10 @@ public class GoodsDto {
 	private String refreshedAt;
 	private LocalDateTime createdAt;
 	private char safeTradingYN;
+	private char activeStatus;
+	private int lat;
+	private int Lng;
+	private int dongId;
 	
 	private String url;
 }

@@ -13,4 +13,8 @@ public class CommunityDto {
     private LocalDateTime createdAt;
     private int viewCount;
     private String location;
+    private char activeStatus;
+    private int lng;
+    private int lat;
+    private int dongId;
 }
