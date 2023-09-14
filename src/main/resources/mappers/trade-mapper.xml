@@ -21,10 +21,6 @@
 		update safe_trading set trading_tatus=4 where transaction_id=#{transactionId}
 	</update>
 	
-	<update id="closeSafeTrading" parameterType="_int">		<!-- 거래확정, 거래상태 업데이트 -->
-		update safe_trading set trading_tatus=4 where transaction_id=#{transactionId}
-	</update>
-	
 	<select id="getSafePurchaseInfo">	<!-- 안전거래 상세정보 가져오기 -->
 		select goods_title,goods_id,buyer_id,mobile_number,shipping_address,price,trading_date,trading_status,tracking_number from safe_trading 
 	</select>
