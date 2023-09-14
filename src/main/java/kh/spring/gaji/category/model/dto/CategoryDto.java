@@ -1,5 +1,7 @@
 package kh.spring.gaji.category.model.dto;
+
 import org.springframework.stereotype.Component;
+
 import lombok.Data;
 
 @Component
