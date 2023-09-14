@@ -24,6 +24,11 @@ public class uploadController {
 	public String showUploadForm() {
 		return "filetest"; // 이미지 업로드 폼을 표시할 JSP 페이지로 이동
 	}
+	@GetMapping("/address")
+	public String address() {
+		return "address/addresstest"; // 이미지 업로드 폼을 표시할 JSP 페이지로 이동
+	}
+	
 
 	@PostMapping("/upload")
 	public String uploadImage(@RequestParam("file") MultipartFile file, Model model) throws IOException {
