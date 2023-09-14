@@ -11,19 +11,19 @@
 	</update>
 	
 	<select id="countNotification">	<!-- 알림갯수 -->
-		select count(*) from notification where user_id=#{} and read_yn='N'
+		select count(*) from notification where user_id=#{userId} and read_yn='N'
 	</select>
 	
 	<select id="getCommentNotice"> <!-- 해당계정의 댓글알림 -->
-		select noti_id,message,read_yn,type,reference_id,created_at from notification where type=1 and user_id=#{user_id}
+		select noti_id,message,read_yn,type,reference_id,created_at from notification where type=1 and user_id=#{userId}
 	</select>
 	
 	<select id="getKeywordNotice"> <!-- 해당계정의 키워드알림 -->
-		select noti_id,message,read_yn,type,reference_id,created_at from notification where type=2 and user_id=#{user_id}
+		select noti_id,message,read_yn,type,reference_id,created_at from notification where type=2 and user_id=#{userId}
 	</select>
 	
 	<select id="getTradeNotice"> <!-- 해당계정의 거래알림 -->
-		select noti_id,message,read_yn,type,reference_id,created_at from notification where type=3 and user_id=#{user_id}
+		select noti_id,message,read_yn,type,reference_id,created_at from notification where type=3 and user_id=#{userId}
 	</select>
 	
 </mapper>
