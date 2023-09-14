@@ -4,6 +4,7 @@
 ### Maven ###
 *.properties
 .env
+.factorypath
 target/
 .metadata/
 pom.xml.tag
