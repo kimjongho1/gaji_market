@@ -6,30 +6,70 @@
 	</insert>
 	
 	<update id="cancelSafeTrading" parameterType="_int">		<!-- 안전거래 결제취소, 레코드는 삭제하지 않고 거래상태 업데이트 -->
-		update safe_trading set trading_tatus=5 where transaction_id=#{transactionId}
+		update safe_trading 
+		set trading_tatus=5 
+		where transaction_id=#{transactionId}
 	</update>
 	
 	<update id="acceptSafeTrading" parameterType="_int">		<!-- 안전거래 수락, 상품준비중으로 거래상태 업데이트 -->
-		update safe_trading set trading_tatus=2 where transaction_id=#{transactionId}
+		update safe_trading 
+		set trading_tatus=2 
+		where transaction_id=#{transactionId}
 	</update>
 	
 	<update id="updateTrackingNumber" parameterType="map">		<!-- 안전거래번호와 운송장번호를 인자로하여, 운송장번호와 거래상태 업데이트 -->
-		update safe_trading set trading_status=3,tracking_number=#{trackingNumber} where transaction_id=#{transactionId}
+		update safe_trading 
+		set trading_status=3,tracking_number=#{trackingNumber} 
+		where transaction_id=#{transactionId}
 	</update>
 	
 	<update id="closeSafeTrading" parameterType="_int">		<!-- 거래확정, 거래상태 업데이트 -->
-		update safe_trading set trading_tatus=4 where transaction_id=#{transactionId}
+		update safe_trading set trading_tatus=4 
+		where transaction_id=#{transactionId}
 	</update>
 
 	<select id="getSafePurchaseInfo">	<!-- 안전거래 상세정보 가져오기 -->
-		select goods_title,goods_id,buyer_id,mobile_number,shipping_address,price,trading_date,trading_status,tracking_number from safe_trading 
+		select goods_title,goods_id,buyer_id,mobile_number,shipping_address,price,trading_date,trading_status,tracking_number 
+		from safe_trading 
 	</select>
 	
 	<select id="getSafePurchaseList" parameterType="string" resultType="SafeTradingDto">	<!-- 안전거래 구매내역 불러오기 -->
-		select goods_id,goods_title,trading_status,price,trading_date from safe_trading where buyer_id=#{buyerId} order by trading_date DESC;
+		select goods_id,goods_title,trading_status,price,trading_date 
+		from safe_trading 
+		where buyer_id=#{buyerId} 
+		order by trading_date DESC;
 	</select>
 	
 	<select id="getInfacePurchaseList" parameterType="string" resultType="SafeTradingDto"> <!-- 직거래 구매내역 불러오기 -->
-		select goods_id,goods_title,trading_status,price,trading_date from in_face_trading where buyer_id=#{buyerId} order by trading_date DESC;
+		select goods_id,goods_title,trading_status,price,trading_date 
+		from in_face_trading 
+		where buyer_id=#{buyerId} 
+		order by trading_date DESC;
+	</select>
+	
+	<select id="adminGetInfacePurchaseList">	<!-- 직거래 조회 -->
+		select goods_id,goods_title,seller_id,buyer_id 
+		from in_face_trading 
+		order by trading_date desc
+	</select>
+	
+	<select id="adminGetSearchInfacePurchaseList">	<!-- 직거래 조회 상품명 -->
+		select goods_id,goods_title,seller_id,buyer_id
+		from in_face_trading
+		where goods_title like #{searchWord}
+		order by trading_date desc
+	</select>
+	
+	<select id="adminGetSearchInfacePurchaseList">	<!-- 직거래 조회 상품ID -->
+		select goods_id,goods_title,seller_id,buyer_id
+		from in_face_trading
+		where goods_id like #{searchWord}
+		order by trading_date desc
+	</select>
+	<select id="adminGetSearchInfacePurchaseList">	<!-- 직거래 조회 회원ID -->
+		select goods_id,goods_title,seller_id,buyer_id
+		from in_face_trading
+		where seller_id like #{searchWord}
+		order by trading_date desc
 	</select>
 </mapper>

@@ -14,4 +14,6 @@ public class InFaceTradingDto {
     private int price;
     private int tradingLocation; 
     private int tradingStatus; 
+    private int LAT;
+    private int LNG;
 }

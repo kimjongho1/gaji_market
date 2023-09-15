@@ -4,7 +4,7 @@
 	
 	<select id="getKeepList" parameterType="_int" resultType="GoodsDto"> <!-- 변경必 --><!-- 사진을 포함한 찜목록을 가져옴 -->
 		select goods_id,(select url from goods_file gf where gf.goods_id = g.goods_id),user_id,title,price,status,created_at from goods g
-		where goods_id IN(select goods_id from wishlist where user_id=#{userId}) and active_status="Y"
+		where goods_id IN(select goods_id from wishlist where user_id=#{userId}) and active_status="Y" and status!=4
 		order by created_at desc
 	</select>
 	
@@ -58,16 +58,18 @@
 			from goods join user using (user_id) where goods_id=#{goodsId} and active_status='Y'
 		</select>
 		
-		<select id="getFourGoodsList">	<!-- 22P 해당 계정의 상품글을 등록일자 내림차순으로 4개까지 가져오기 -->
+<!-- 		<select id="getFourGoodsList">	22P 해당 계정의 상품글을 등록일자 내림차순으로 4개까지 가져오기
 			select goods_id, title, price from 
 			(select goods_id, title, price from goods where user_id = #{userId} order by created_at desc)
 			where ROWNUM <=4
-		</select>
+		</select> -->
 	
 		
-		<update id="updateGoods" parameterType="string"> <!-- 상품글 수정 -->
-			update goods set title=#{title},category_id,title,status,price,view_count,description,safe_trading_yn
-			,dong_id,lat,lng
+		<update id="updateGoods" parameterType="GoodsDto"> <!-- 상품글 수정 -->
+			update goods set title=#{title},category_id=#{category_id},
+			price=#{price},description=#{description}
+			,safe_trading_yn=#{safe_trading_yn}
+			,dong_id=#{dong_id},lat=#{lat},lng=#{lng}
 			where goods_id=#{goodsId}
 		</update>
 		

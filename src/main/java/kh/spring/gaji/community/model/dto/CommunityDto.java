@@ -17,4 +17,5 @@ public class CommunityDto {
     private int lng;
     private int lat;
     private int dongId;
+    private int likeCount;
 }
