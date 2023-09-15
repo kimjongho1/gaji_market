@@ -33,43 +33,48 @@
 		from safe_trading 
 	</select>
 	
-	<select id="getSafePurchaseList" parameterType="string" resultType="SafeTradingDto">	<!-- 안전거래 구매내역 불러오기 -->
+	<select id="getSafePurchaseList" parameterType="string" resultType="SafeTradingDto">	<!-- 안전거래 구매내역(회원) 불러오기 -->
 		select goods_id,goods_title,trading_status,price,trading_date 
 		from safe_trading 
 		where buyer_id=#{buyerId} 
 		order by trading_date DESC;
 	</select>
 	
-	<select id="getInfacePurchaseList" parameterType="string" resultType="SafeTradingDto"> <!-- 직거래 구매내역 불러오기 -->
+	<select id="getInfacePurchaseList" parameterType="string" resultType="SafeTradingDto"> <!-- 직거래 구매내역(회원) 불러오기 -->
 		select goods_id,goods_title,trading_status,price,trading_date 
 		from in_face_trading 
 		where buyer_id=#{buyerId} 
 		order by trading_date DESC;
 	</select>
 	
-	<select id="adminGetInfacePurchaseList">	<!-- 직거래 조회 -->
+	<select id="adminGetInfacePurchaseList">	<!-- 직거래 조회(관리자) -->
 		select goods_id,goods_title,seller_id,buyer_id 
 		from in_face_trading 
 		order by trading_date desc
 	</select>
 	
-	<select id="adminGetSearchInfacePurchaseList">	<!-- 직거래 조회 상품명 -->
+	<select id="adminGetSearchInfacePurchaseList">	<!-- 직거래 조회 상품명(관리자) -->
 		select goods_id,goods_title,seller_id,buyer_id
 		from in_face_trading
 		where goods_title like #{searchWord}
 		order by trading_date desc
 	</select>
 	
-	<select id="adminGetSearchInfacePurchaseList">	<!-- 직거래 조회 상품ID -->
+	<select id="adminGetSearchInfacePurchaseList">	<!-- 직거래 조회 상품ID(관리자) -->
 		select goods_id,goods_title,seller_id,buyer_id
 		from in_face_trading
 		where goods_id like #{searchWord}
 		order by trading_date desc
 	</select>
-	<select id="adminGetSearchInfacePurchaseList">	<!-- 직거래 조회 회원ID -->
+	<select id="adminGetSearchInfacePurchaseList">	<!-- 직거래 조회 회원ID(관리자) -->
 		select goods_id,goods_title,seller_id,buyer_id
 		from in_face_trading
 		where seller_id like #{searchWord}
 		order by trading_date desc
+	</select>
+	
+	<select id="adminGetInfacePurchaseInfo">	<!-- 직거래 세부조회 새로운 INDEX생성필요 -->
+		select goods_id,seller_id,buyer_id,goods_title,price,trading_date,(select name from user u where u.user_id=t.seller_id),
+		(select name from user u2 where u2.user_id=t.buyer_id) from in_face_trading t
 	</select>
 </mapper>

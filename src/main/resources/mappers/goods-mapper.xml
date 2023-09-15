@@ -10,7 +10,7 @@
 	
 	<select id="getFavoriteList" parameterType="_int" resultType="GoodsDto"> <!-- 변경必 --><!-- 사진을 포함한 모아보기목록 가져옴 -->
 		select goods_id,(select URL from goods_file gf where gf.goods_id = g.goods_id),user_id,title,price,status,created_at from goods g
-		where user_id IN(select target_id from favorite_user where user_id=#{targetId}) and active_status="Y"
+		where user_id IN(select target_id from favorite_user where user_id=#{targetId}) and active_status="Y" and status!=4
 		order by created_at DESC
 	</select>
 	
@@ -28,23 +28,23 @@
 	
 <!-- 	<select id="get">		카테고리별 상품글 
 		goods_id,user_id,title,status,price,view_count,description,safe_trading_yn,created_at from goods
-		where category_id=1 and active_status="Y"
+		where category_id=1 and active_status="Y" and and status!=4
 </select> -->
 
 <!-- 	<select id="get">		카테고리별 검색 상품글 dao에서 '%'처리하여 가져오기
 		goods_id,user_id,title,status,price,view_count,description,safe_trading_yn,created_at from goods
-		where category_id=1 and title like #{searchWord} and active_status="Y"
+		where category_id=1 and title like #{searchWord} and active_status="Y" and and status!=4
 </select> -->
 
 <!-- 	<select id="get">		카테고리별 상품글 + 가격범위
 		goods_id,user_id,title,status,price,view_count,description,safe_trading_yn,created_at from goods
-		where category_id=1 and active_status="Y"
+		where category_id=1 and active_status="Y" and and status!=4
 </select> -->
 
 <!-- 	<select id="get">		카테고리별 검색 상품글 dao에서 '%'처리하여 가져오기 + 가격범위
 		goods_id,user_id,title,status,price,view_count,description,safe_trading_yn,created_at
 		,dong_id,lat,lng from goods
-		where category_id=1 and title like #{searchWord} and active_status="Y"
+		where category_id=1 and title like #{searchWord} and active_status="Y" and and status!=4
 </select> -->
 
 		<insert id="insertGoods">	<!-- 상품글 등록 -->
@@ -61,6 +61,7 @@
 <!-- 		<select id="getFourGoodsList">	22P 해당 계정의 상품글을 등록일자 내림차순으로 4개까지 가져오기
 			select goods_id, title, price from 
 			(select goods_id, title, price from goods where user_id = #{userId} order by created_at desc)
+			and and status!=4
 			where ROWNUM <=4
 		</select> -->
 	
