@@ -50,34 +50,65 @@
 		order by trading_date DESC;
 	</select>
 	
-	<select id="adminGetInfacePurchaseList">	<!-- 직거래 조회(관리자) -->
-		select goods_id,goods_title,seller_id,buyer_id 
-		from in_face_trading 
+	<select id="adminGetInfacePurchaseList">	<!-- 33P 직거래 조회(관리자) -->
+		select goods_id,(select user_id seller_id,goods_title from goods g where g.goods_id=i.goods_id),buyer_id 
+		from in_face_trading i
 		order by trading_date desc
 	</select>
 	
-	<select id="adminGetSearchInfacePurchaseList">	<!-- 직거래 조회 상품명(관리자) -->
-		select goods_id,goods_title,seller_id,buyer_id
-		from in_face_trading
+	<select id="adminGetSearchTitleInfacePurchaseList" parameterType="string">	<!-- 33P 직거래 조회 상품명(관리자) -->
+		select goods_id,(select user_id seller_id,goods_title from goods g where g.goods_id=i.goods_id),buyer_id 
+		from in_face_trading i
 		where goods_title like #{searchWord}
 		order by trading_date desc
 	</select>
 	
-	<select id="adminGetSearchInfacePurchaseList">	<!-- 직거래 조회 상품ID(관리자) -->
-		select goods_id,goods_title,seller_id,buyer_id
-		from in_face_trading
+	<select id="adminGetSearchIdInfacePurchaseList" parameterType="string">	<!-- 33P 직거래 조회 상품ID(관리자) -->
+		select goods_id,(select user_id seller_id,goods_title from goods g where g.goods_id=i.goods_id),buyer_id 
+		from in_face_trading i
 		where goods_id like #{searchWord}
 		order by trading_date desc
 	</select>
-	<select id="adminGetSearchInfacePurchaseList">	<!-- 직거래 조회 회원ID(관리자) -->
+	<select id="adminGetSearchUserInfacePurchaseList" parameterType="string">	<!-- 33P 직거래 조회 회원ID(관리자) -->
 		select goods_id,goods_title,seller_id,buyer_id
 		from in_face_trading
 		where seller_id like #{searchWord}
 		order by trading_date desc
 	</select>
 	
-	<select id="adminGetInfacePurchaseInfo">	<!-- 직거래 세부조회 새로운 INDEX생성필요 -->
-		select goods_id,seller_id,buyer_id,goods_title,price,trading_date,(select name from user u where u.user_id=t.seller_id),
-		(select name from user u2 where u2.user_id=t.buyer_id) from in_face_trading t
+	<select id="adminGetInfaceTradingInfo" parameterType="string">	<!-- 34P 직거래 세부조회 새로운 INDEX생성필요 -->
+		select inface_trading_id,goods_id,seller_id,buyer_id,price,trading_date,trading_status
+		from in_face_trading join goods using (goods_id)
+		where IN_FACE_TRADING_ID = #{inFaceTradingId}
+	</select>
+	
+	<select id="adminGetSafeTradingList">	<!-- 35P 안전거래조회(관리자) -->
+		select transaction_id,title goods_title,seller_id,trading_status
+		from safe_trading join goods using (goods_id)
+		order by trading_date desc
+	</select>
+	
+	<select id="adminGetSearchSafeTradingList" parameterType="string"><!-- 35P 안전거래조회(관리자) 검색(안전거래번호) -->
+		select transaction_id,title goods_title,user_id seller_id,trading_status
+		from safe_trading join goods using (goods_id)
+		order by trading_date desc
+		where transaction_id=#{searchWord}
+	</select>
+		<select id="adminGetSearchSafeTradingList" parameterType="string"><!-- 35P 안전거래조회(관리자) 검색(판매자ID) -->
+		select transaction_id,title goods_title,user_id seller_id,trading_status
+		from safe_trading join goods using (goods_id)
+		order by trading_date desc
+		where user_id=#{searchWord}
+	</select>
+	<select id="adminGetSearchSafeTradingList" parameterType="string"><!-- 35P 안전거래조회(관리자) 검색(상품명) -->
+		select transaction_id,title goods_title,user_id seller_id,trading_status
+		from safe_trading join goods using (goods_id)
+		order by trading_date desc
+		where title=#{searchWord}
+	</select>
+	<select id="adminGetSafeTradingInfo">	<!-- 36P 안전거래 세부조회(관리자) -->
+		select s.transaction_id, g.user_id seller_id, s.buyer_id, g.title, s.price, s.shipping_address, trading_date, tracking_number
+		from safe_trading join goods using (goods_id)
+		where transaction_id = #{transactionId}
 	</select>
 </mapper>

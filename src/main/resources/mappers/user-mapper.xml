@@ -35,9 +35,11 @@
 	</select>
 	
 	<select id="checkPass" parameterType="string" resultType="string" >		<!-- 8P 패스워드를 가져온다 (패스워드 변경또는 로그인시 사용)-->
-		select password from user where user_id=#{userId}
+		select password from user where user_id=#{userId}					<!-- 13P 없으면 아이디틀림, 있는데 컨트롤러에서 검사시 다르면 비밀번호틀림 -->
 	</select>
-	
+	<update id="updateInviteCount" parameterType="string">	<!-- 8P 로그인시 방문횟수 + 1 -->
+		update user set invite_count=invite_count+1 where user_id=#{user_id}
+	</update>
 	<update id="updatePass" parameterType="map">							<!-- 8P 패스워드를 변경한다 -->
 		update user set password=#{password} where user_id=#{userId}
 	</update>
@@ -54,9 +56,13 @@
 		insert into (user user_id,name,password,mobile_number,nickname,email) values(#{user_id},#{name},#{password},#{mobile_number},#{nickname},#{email})
 	</insert>
 	
-	<select id="findId" parameterType="map" resultType="string"> <!-- 아이디 찾기 -->
+	<select id="findId" parameterType="map" resultType="string"> <!-- 15P 아이디 찾기 -->
 		select user_id from user where name=#{name} and email=#{email}
 	</select>
+	
+	<update id="findPass" parameterType="map"> <!-- 16P 비밀번호찾기 -->
+		update user set password=#{password} where user_id=#{userId} and name=#{name}
+	</update>
 	
 	
 	<!-- 이메일 인증 미구현 -->
@@ -69,6 +75,5 @@
 	<insert id="addFavoriteUser" parameterType="map">	<!-- 유저 즐겨찾기 -->
 		insert into favorite_user values(#{userId},#{targetId})
 	</insert>
-	
 	
 </mapper>

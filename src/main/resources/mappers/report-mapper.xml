@@ -2,16 +2,16 @@
 <!DOCTYPE mapper PUBLIC " -//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="report">
 
-	<insert id="reportGoods"> 	<!--11P 상품 신고하기 -->
-		insert into goods_report values(#{refId},#{reporterId},#{writer},#{content},#{reportCategory}) 
+	<insert id="reportGoods" parameterType="reportDto"> 	<!--11P 상품 신고하기 -->
+		insert into goods_report values(#{refId},#{reporterId},#{content},#{reportCategory},"","") 
 	</insert>
 	
-	<insert id="reportBoard">	<!-- 커뮤니티글 신고하기 -->
-		insert into community_report values(#{refId},#{reporterId},#{writer},#{content},#{reportCategory})
+	<insert id="reportBoard" parameterType="reportDto">	<!-- 30P 커뮤니티글 신고하기 -->
+		insert into community_report values(#{refId},#{reporterId},#{content},#{reportCategory},"","")
 	</insert>
 	
-	<insert id="reportComment">	<!-- 댓글 -->
-		insert into comment_report values(#{refId},#{reporterId},#{writer},#{content},#{reportCategory})
+	<insert id="reportComment" parameterType="reportDto">	<!-- 30P 댓글신고 -->
+		insert into comment_report values(#{refId},#{reporterId},#{content},#{reportCategory},"","")
 	</insert>
 	
 	

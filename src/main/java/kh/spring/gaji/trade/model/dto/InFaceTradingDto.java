@@ -6,6 +6,7 @@ import lombok.Data;
 @Component
 @Data
 public class InFaceTradingDto {
+	private int inFaceTadingId;
     private int goodsId; 	
     private String buyerId;
     private LocalDateTime tradingDate; 

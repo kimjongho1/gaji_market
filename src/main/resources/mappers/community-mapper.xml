@@ -36,7 +36,11 @@
 	</update>
 	
 	<select id="getBoard" parameterType="_int" resultType="CommunityDto"> <!-- 30P 커뮤니티글 상세조회 -->
-		select board_id,writer,dong_id,title,content,created_at,view_count,lat,lng from community where board_id=#{boardId}
+		select board_id,(select nickname from user where user_id = writer),
+		writer,dong_id,title,content,created_at,view_count,lat,lng,
+		(select count(*) from tbl_like l where l.board_id=c.board_id)
+		from community c
+		where board_id=#{boardId}
 	</select>
 	
 	<delete id="deleteComment"> <!-- 30P 댓글삭제 -->
@@ -44,11 +48,26 @@
 	</delete>
 	
 	<insert id="insertComment">	<!-- 30P 댓글입력 -->
-		insert into comment (board_id,writer_id,content,ccidx,step) 
-		values(#{boardId},#{writerId},#{content},#{ccidx},comment_step_sequence.nextval)
+		insert into comment (board_id,writer_id,content,step) 
+		values(#{boardId},#{writerId},#{content},comment_step_sequence.nextval)
 	</insert>
 	
-	<insert id="insertCoComment"> <!-- 30P 대댓글 입력 -->
-		insert into tbl_comment (board_id,writer_id,content,ccidx,depth,step,id) values(#{idx},#{content},#{cidx},#{depth}+1,#{step}+1,#{mid})
+	<update id="updateComment" parameterType="map">	<!-- 30P 대댓글 입력을 위한 업데이트 -->
+		update comment
+		set step=step+1
+		where board_id=#{boardId} and step>#{step}
+	</update>
+	
+	<insert id="insertCoComment" parameterType="CommentDto"> <!-- 30P 대댓글 입력 -->
+		insert into comment (comment_id,board_id,writer_id,content,ccidx,step,depth) 
+		values(comment_id_sequence.nextval,#{boardId},#{writerId},#{content},#{commentId},#{step}+1,#{depth}+1)
 	</insert>
+	
+
+	<select id="getComment" resultType="CommentDto"> <!-- 댓글가져오기 -->
+		select comment_id,(select nickname from user where user_id=writer_id)
+		depth,content,cidx,wdate
+		from comment order by step asc
+		where board_id = #{boardId}
+	</select>
 </mapper>

@@ -15,4 +15,8 @@ public class CommentDto {
     private int ccidx;
     private int step;
     private char activeStatus;
+    private int depth;
+    
+    //인덱스 생성해야함
+    private String nickname;
 }

@@ -58,13 +58,13 @@
 		where category_id=1 and title like #{searchWord} and active_status="Y" and and status!=4
 </select> -->
 
-		<insert id="insertGoods">	<!-- 상품글 등록 -->
+		<insert id="insertGoods">	<!-- 24P 상품글 등록 -->
 			insert into goods 
-			(user_id,category_id,dong_id,title,price,description,safetrading_yn,lat,lng) 
-			values(#{user_id},#{category_id},#{dong_id},#{title},#{price},#{description},#{safetrading_yn},#{lat},#{lng})
+			(goods_id,user_id,category_id,dong_id,title,price,description,safetrading_yn,lat,lng) 
+			values(goods_id_sequence.nextval,#{userId},#{categoryId},#{dongId},#{title},#{price},#{description},#{safetradingYN},#{lat},#{lng})
 		</insert>
 
-		<select id="getGoodsInfo" parameterType="_int"> <!--22P 상품글 상세조회  -->
+		<select id="getGoodsInfo" parameterType="_int"> <!--23P 상품글 상세조회  -->
 			select goods_id,user_id,category_id,title,status,price,view_count,description,created_at,safe_trading_yn
 			,dong_id,lat,lng,nickname,rating_score
 			from goods join user using (user_id) 
@@ -78,8 +78,11 @@
 			where ROWNUM <=4	
 		</select> -->
 	
+		<insert id="insertWishList">	<!-- 23P 찜하기 -->	
+			insert into wishlist values(#{goodsId},#{userId},"")
+		</insert>
 		
-		<update id="updateGoods" parameterType="GoodsDto"> <!-- 상품글 수정 -->
+		<update id="updateGoods" parameterType="GoodsDto"> <!-- 25P 상품글 수정 -->
 			update goods 
 			set title=#{title},category_id=#{category_id},
 			price=#{price},description=#{description}
