@@ -24,7 +24,7 @@
 		where transaction_id=#{transactionId}
 	</update>
 
-	<select id="getSafePurchaseInfo" parameterType="string">	<!-- 11P 안전거래 상세정보 가져오기 -->
+	<select id="getSafePurchaseInfo" parameterType="string" resultType="SafePurchaseInfoDomain">	<!-- 11P 안전거래 상세정보 가져오기 -->
 		select goods_id,(select goods_title,user_id seller_id from goods g where g.goods_id= s.goods_id),
 			   buyer_id,(select mobile_number,name from user u where u.user_id=s.buyer_id), 
 			   shipping_address, price, trading_date, trading_status, tracking_number 

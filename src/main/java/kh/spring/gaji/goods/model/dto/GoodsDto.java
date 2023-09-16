@@ -23,9 +23,4 @@ public class GoodsDto {
 	private int lat;
 	private int Lng;
 	private int dongId;
-	
-	private String url;	// 필요없는건가요? 
-	
-	//39P에 필요한 변수 
-	private String reportCount;
 }

@@ -18,7 +18,4 @@ public class CommunityDto {
     private char activeStatus;
     private int lng;
     private int lat;
-    
-    //인덱스 필요한부분
-    private int likeCount;
 }

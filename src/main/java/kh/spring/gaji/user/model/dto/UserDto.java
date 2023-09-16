@@ -21,11 +21,4 @@ public class UserDto {
     private int keywordCount;
     private int inviteCount;
     private int dongId;
-    
-    //추가로 필요한 변수 37P
-    private int reportCount;
-    private int commentReportCount;
-    private int communityReportCount;
-    private int goodsReportCount;
-    private int tradeCount;
 }

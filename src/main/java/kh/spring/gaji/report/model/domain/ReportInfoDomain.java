@@ -1,17 +1,19 @@
-package kh.spring.gaji.report.model.dto;
-import java.time.LocalDate;
+package kh.spring.gaji.report.model.domain;
+import java.time.LocalDateTime;
 import org.springframework.stereotype.Component;
 import lombok.Data;
 
 @Component
 @Data
-public class CommentReportInfoIndex {
+public class ReportInfoDomain {
     private String reporterId;
     private int refId;
     private String title;
-    private LocalDate createdAt;
+    private LocalDateTime createdAt;
     private String approvalStatus;
     private String writer;
     private String reportCategory;
     private String content;
 }
+
+

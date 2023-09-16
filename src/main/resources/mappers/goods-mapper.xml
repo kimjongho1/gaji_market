@@ -19,21 +19,21 @@
 	<select id="getOnSaleList" parameterType="string" resultType="GoodsDto">	<!--10P 판매중 + 예약중 불러오기 -->
 		select goods_id,title,price,status 
 		from goods 
-		where seller_id=#{sellerId} and status IN(1,2) and active_status="Y" 
+		where user_id=#{userId} and status IN(1,2) and active_status="Y" 
 		order by refreshed_at DESC;
 	</select>
 	
 	<select id="getSoldOutList" parameterType="string" resultType="GoodsDto">	<!--10P 거래완료 판매내역 가지고오기 -->
 		select goods_id,title,price,status 
 		from goods 
-		where seller_id=#{sellerId} and status IN(3) and active_status="Y" 
+		where user_id=#{user_id} and status IN(3) and active_status="Y" 
 		order by refreshed_at DESC;
 	</select>
 	
 	<select id="getHideList" parameterType="string" resultType="GoodsDto">	<!--10P 숨김중인 판매내역 가져오기 -->
 		select goods_id,title,price,status 
 		from goods 
-		where seller_id=#{sellerId} and status IN(4) and active_status="Y" 
+		where user_id=#{user_id} and status IN(4) and active_status="Y" 
 		order by refreshed_at DESC;
 	</select>
 		
@@ -64,7 +64,7 @@
 			values(goods_id_sequence.nextval,#{userId},#{categoryId},#{dongId},#{title},#{price},#{description},#{safetradingYN},#{lat},#{lng})
 		</insert>
 
-		<select id="getGoodsInfo" parameterType="_int"> <!--23P 상품글 상세조회  -->
+		<select id="getGoodsInfo" parameterType="_int" resultType="GoodsInfoDomain"> <!--23P 상품글 상세조회  -->
 			select goods_id,user_id,category_id,title,status,price,view_count,description,created_at,safe_trading_yn
 			,dong_id,lat,lng,nickname,rating_score
 			from goods join user using (user_id) 

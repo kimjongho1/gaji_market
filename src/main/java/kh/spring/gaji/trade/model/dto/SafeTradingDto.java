@@ -14,10 +14,4 @@ public class SafeTradingDto {
     private String shippingAddress; //이후 int형으로 배송지테이블을 참조하는 번호로 사용해야할듯.
     private String trackingNumber;
     private LocalDateTime tradingDate;
-    
-    //JOIN시 필요할 변수
-    private String name;
-    private int price;
-    private String title;
-    private String sellerId;
 }

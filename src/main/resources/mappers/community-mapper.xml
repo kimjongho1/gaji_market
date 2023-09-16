@@ -1,24 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC " -//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="community">
-	<select id="getBoardList" resultType="CommunityDto" parameterType="map">	<!-- 27P 커뮤니티글 리스트 -->
+	<select id="getBoardList" parameterType="map" resultType="CommunityLikeDomain">	<!-- 27P 커뮤니티글 리스트 -->
 		select c.board_id,c.title,c.writer,c.title,c.created_at,c.view_count,count(c.board_id) as like_count 
-		from community c left join tbl_like l using (board_id) where activate_status='Y' and dong_id=#{dongId}
+		from community c left join tbl_like l using (board_id) 
+		where activate_status='Y' and dong_id=#{dongId}
 		group by c.board_id,c.writer,c.title,c.created_at,c.view_count
 	</select>
-	<select id="getSearchTitleBoardList" parameterType="map" resultType="CommunityDto">	<!-- 27P 커뮤니티글 제목검색 리스트 -->
+	<select id="getSearchTitleBoardList" parameterType="map" resultType="CommunityLikeDomain">	<!-- 27P 커뮤니티글 제목검색 리스트 -->
 		select c.board_id,c.writer,title,c.created_at,c.view_count,count(board_id) as like_count 
 		from community c left join tbl_like l using (board_id)
 		where title like #{searchWord} and activate_status='Y' and dong_id=#{dongId}
 		group by c.board_id,c.writer,c.title,c.created_at,c.view_count
 	</select>
-	<select id="getSearchNicknameBoardList" parameterType="map" resultType="CommunityDto">	<!-- 27P 커뮤니티글 글쓴이 리스트 -->
+	<select id="getSearchNicknameBoardList" parameterType="map" resultType="CommunityLikeDomain">	<!-- 27P 커뮤니티글 글쓴이 리스트 -->
 		select c.board_id,c.writer,c.title,c.created_at,c.view_count,count(board_id) as like_count 
 		from community c left join tbl_like l using (board_id)
 		where nickname like #{searchWord} and activate_status='Y' and dong_id=#{dongId}
 		group by c.board_id,c.writer,c.title,c.created_at,c.view_count
 	</select>
-	<select id="getSearchBoardList" parameterType="map" resultType="CommunityDto">	<!-- 27P 커뮤니티글 제목+글쓴이 검색 리스트 -->
+	<select id="getSearchBoardList" parameterType="map" resultType="CommunityLikeDomain">	<!-- 27P 커뮤니티글 제목+글쓴이 검색 리스트 -->
 		select c.board_id,c.writer,c.title,c.created_at,c.view_count,count(board_id) as like_count 
 		from community c left join tbl_like l using (board_id)
 		where (title like #{searchWord} or nickname like #{searchWord}) and c.activate_status='Y' and dong_id=#{dongId}
@@ -38,7 +39,7 @@
 	<select id="getBoard" parameterType="_int" resultType="CommunityDto"> <!-- 30P 커뮤니티글 상세조회 -->
 		select board_id,(select nickname from user where user_id = writer),
 		writer,dong_id,title,content,created_at,view_count,lat,lng,
-		(select count(*) from tbl_like l where l.board_id=c.board_id)
+		(select count(*) like_count from tbl_like l where l.board_id=c.board_id)
 		from community c
 		where board_id=#{boardId}
 	</select>
@@ -63,7 +64,6 @@
 		values(comment_id_sequence.nextval,#{boardId},#{writerId},#{content},#{commentId},#{step}+1,#{depth}+1)
 	</insert>
 	
-
 	<select id="getComment" resultType="CommentDto"> <!-- 댓글가져오기 -->
 		select comment_id,(select nickname from user where user_id=writer_id)
 		depth,content,cidx,wdate

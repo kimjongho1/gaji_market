@@ -13,7 +13,4 @@ public class ReportDto {
     private int reportCategory;
     private LocalDateTime createdAt;
     private char approvalStatus;	
-    
-    //JOIN시 필요한 변수
-    private String writer;
 }
