@@ -1,4 +1,4 @@
-package kh.spring.gaji.pay.model.dto;
+package kh.spring.gaji.trade.model.dto;
 import java.time.LocalDateTime;
 import org.springframework.stereotype.Component;
 import lombok.Data;
@@ -7,13 +7,12 @@ import lombok.Data;
 @Data
 public class InFaceTradingDto {
     private int goodsId; 	
-    private String sellerId;
     private String buyerId;
-    private String goodsTitle;
     private LocalDateTime tradingDate; 
-    private int price;
-    private int tradingLocation; 
     private int tradingStatus; 
-    private int LAT;
-    private int LNG;
+    
+    //JOIN시 필요할 변수
+    private String goodsTitle;
+    private int price;
+    private String sellerId;
 }

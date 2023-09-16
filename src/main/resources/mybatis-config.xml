@@ -14,14 +14,14 @@
 		<typeAlias type="kh.spring.gaji.chat.model.dto.ChatRoomDto" alias="ChatRoomDto"/>
 		<typeAlias type="kh.spring.gaji.community.model.dto.CommentDto" alias="CommentDto"/>
 		<typeAlias type="kh.spring.gaji.community.model.dto.CommunityDto" alias="CommunityDto"/>
-		<typeAlias type="kh.spring.gaji.dealreview.model.dto.DealReviewDto" alias="DealReviewDto"/>
+		<typeAlias type="kh.spring.gaji.trade.model.dto.DealReviewDto" alias="DealReviewDto"/>
 		<typeAlias type="kh.spring.gaji.file.model.dto.FileDto" alias="FileDto"/>
 		<typeAlias type="kh.spring.gaji.goods.model.dto.GoodsDto" alias="GoodsDto"/>
 		<typeAlias type="kh.spring.gaji.interestcategory.model.dto.InterestCategoryDto" alias="InterestCategoryDto"/>
 		<typeAlias type="kh.spring.gaji.notification.model.dto.NotificationDto" alias="NotificationDto"/>
 		<typeAlias type="kh.spring.gaji.notification.model.dto.NotificationKeywordDto" alias="NotificationKeywordDto"/>
-		<typeAlias type="kh.spring.gaji.pay.model.dto.InFaceTradingDto" alias="InFaceTradingDto"/>
-		<typeAlias type="kh.spring.gaji.pay.model.dto.SafeTradingDto" alias="SafeTradingDto"/>
+		<typeAlias type="kh.spring.gaji.trade.model.dto.InFaceTradingDto" alias="InFaceTradingDto"/>
+		<typeAlias type="kh.spring.gaji.trade.model.dto.SafeTradingDto" alias="SafeTradingDto"/>
 		<typeAlias type="kh.spring.gaji.report.model.dto.ReportDto" alias="ReportDto"/>
 		<typeAlias type="kh.spring.gaji.user.model.dto.UserAccountDto" alias="UserAccountDto"/>
 		<typeAlias type="kh.spring.gaji.user.model.dto.UserAddressDto" alias="UserAddressDto"/>
@@ -29,7 +29,7 @@
 		<typeAlias type="kh.spring.gaji.user.model.dto.UserToUserDto" alias="UserToUserDto"/>
 		<typeAlias type="kh.spring.gaji.wishlist.model.dto.WishListDto" alias="WishListDto"/>
 	</typeAliases>
-	 
+	
 	 <mappers>
 		<mapper resource="mappers/admin-mapper.xml"/> 		<!-- 관리자 관련 쿼리문 -->
 		<mapper resource="mappers/category-mapper.xml"/>	<!-- 카테고리 관련 쿼리문 -->

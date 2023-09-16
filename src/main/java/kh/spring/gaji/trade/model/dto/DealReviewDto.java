@@ -1,4 +1,4 @@
-package kh.spring.gaji.dealreview.model.dto;
+package kh.spring.gaji.trade.model.dto;
 import org.springframework.stereotype.Component;
 import lombok.Data;
 

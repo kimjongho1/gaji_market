@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 @Data
-public class FileDto {
+public class FileDto { //변경해야함.
     private String url;
     private LocalDateTime createdAt;
 }

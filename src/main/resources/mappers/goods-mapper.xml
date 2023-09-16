@@ -2,20 +2,22 @@
 <!DOCTYPE mapper PUBLIC " -//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="goods">
 	
-	<select id="getKeepList" parameterType="_int" resultType="GoodsDto"> <!-- 변경必 --><!-- 사진을 포함한 찜목록을 가져옴 -->
-		select goods_id,(select url from goods_file gf where gf.goods_id = g.goods_id),user_id,title,price,status,created_at from goods g
+	<select id="getKeepList" parameterType="_int" resultType="GoodsDto"> <!--사진API로?--><!-- 사진을 포함한 찜목록을 가져옴 -->
+		select goods_id,user_id,title,price,status,created_at from goods
 		where goods_id IN(select goods_id from wishlist where user_id=#{userId}) and active_status="Y" and status!=4
-		order by created_at desc
+		order by created_at DESC
 	</select>
 	
-	<select id="getFavoriteList" parameterType="_int" resultType="GoodsDto"> <!-- 변경必 --><!-- 사진을 포함한 모아보기목록 가져옴 -->
-		select goods_id,(select URL from goods_file gf where gf.goods_id = g.goods_id),user_id,title,price,status,created_at from goods g
+	<select id="getFavoriteList" parameterType="_int" resultType="GoodsDto"> <!--사진API로?--><!-- 사진을 포함한 모아보기목록 가져옴 -->
+		select goods_id,user_id,title,price,status,created_at from goods g
 		where user_id IN(select target_id from favorite_user where user_id=#{targetId}) and active_status="Y" and status!=4
 		order by created_at DESC
 	</select>
 	
 	<select id="getOnSaleList" parameterType="string" resultType="GoodsDto">	<!-- 판매중 + 예약중 불러오기 -->
-		select goods_id,title,price,status from goods where seller_id=#{sellerId} and status IN(1,2) and active_status="Y" order by refreshed_at DESC;
+		select goods_id,title,price,status from goods 
+		where seller_id=#{sellerId} and status IN(1,2) and active_status="Y" 
+		order by refreshed_at DESC;
 	</select>
 	
 	<select id="getSoldOutList" parameterType="string" resultType="GoodsDto">	<!-- 거래완료 판매내역 가지고오기 -->
