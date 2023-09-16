@@ -5,7 +5,7 @@
 		insert into safe_trading values("",#{sellerId},#{buyerId},#{goodsId},#{perchaseMethod},#{goodsTitle},#{price},#{tradingDate},1,#{shippingAddress},#{mobileNumber})
 	</insert>
 	
-	<update id="cancelSafeTrading" parameterType="_int">		<!-- 안전거래 결제취소, 레코드는 삭제하지 않고 거래상태 업데이트 -->
+	<update id="cancelSafeTrading" parameterType="_int">		<!-- 11P 안전거래 결제취소, 레코드는 삭제하지 않고 거래상태 업데이트 -->
 		update safe_trading 
 		set trading_tatus=5 
 		where transaction_id=#{transactionId}
@@ -23,26 +23,28 @@
 		where transaction_id=#{transactionId}
 	</update>
 	
-	<update id="closeSafeTrading" parameterType="_int">		<!-- 거래확정, 거래상태 업데이트 -->
+	<update id="closeSafeTrading" parameterType="_int">		<!-- 11P 거래확정, 거래상태 업데이트 -->
 		update safe_trading set trading_tatus=4 
 		where transaction_id=#{transactionId}
 	</update>
 
-	<select id="getSafePurchaseInfo">	<!-- 안전거래 상세정보 가져오기 -->
-		select goods_title,goods_id,buyer_id,mobile_number,shipping_address,price,trading_date,trading_status,tracking_number 
-		from safe_trading 
+	<select id="getSafePurchaseInfo">	<!-- 11P 안전거래 상세정보 가져오기 (구매자입장)-->
+		select goods_id,(select goods_title from goods g where g.goods_id= s.goods_id),
+			   buyer_id,(select mobile_number from user u where u.user_id=s.buyer_id), 
+			   shipping_address, price, trading_date, trading_status, tracking_number 
+			   from safe_trading s
 	</select>
 	
-	<select id="getSafePurchaseList" parameterType="string" resultType="SafeTradingDto">	<!-- 안전거래 구매내역(회원) 불러오기 -->
-		select goods_id,goods_title,trading_status,price,trading_date 
-		from safe_trading 
+	<select id="getSafePurchaseList" parameterType="string" resultType="SafeTradingDto">	<!-- 9P 안전거래 구매내역(회원) 불러오기 -->
+		select 	goods_id,goods_title,trading_status,s.price,trading_date 
+		from safe_trading s join goods g using (goods_id)
 		where buyer_id=#{buyerId} 
 		order by trading_date DESC;
 	</select>
 	
-	<select id="getInfacePurchaseList" parameterType="string" resultType="SafeTradingDto"> <!-- 직거래 구매내역(회원) 불러오기 -->
-		select goods_id,goods_title,trading_status,price,trading_date 
-		from in_face_trading 
+	<select id="getInfacePurchaseList" parameterType="string" resultType="SafeTradingDto"> <!-- 9P 직거래 구매내역(회원) 불러오기 -->
+		select goods_id,goods_title,trading_status,i.price,trading_date 
+		from in_face_trading i join goods g using (goods_id)
 		where buyer_id=#{buyerId} 
 		order by trading_date DESC;
 	</select>

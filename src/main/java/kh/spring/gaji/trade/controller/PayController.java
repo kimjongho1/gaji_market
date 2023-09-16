@@ -1,4 +1,4 @@
-package kh.spring.gaji.pay.controller;
+package kh.spring.gaji.trade.controller;
 
 import java.io.IOException;
 import java.math.BigDecimal;
