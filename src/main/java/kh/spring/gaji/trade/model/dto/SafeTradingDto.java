@@ -16,6 +16,7 @@ public class SafeTradingDto {
     private LocalDateTime tradingDate;
     
     //JOIN시 필요할 변수
+    private String name;
     private int price;
     private String goodsTitle;
     private String sellerId;

@@ -15,4 +15,5 @@ public class InFaceTradingDto {
     private String goodsTitle;
     private int price;
     private String sellerId;
+    private String name;
 }

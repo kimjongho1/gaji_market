@@ -1,35 +1,54 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC " -//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="community">
-	<select id="getBoardList" resultType="CommunityDto">	<!-- 커뮤니티글 리스트 -->
+	<select id="getBoardList" resultType="CommunityDto" parameterType="map">	<!-- 27P 커뮤니티글 리스트 -->
 		select c.board_id,c.title,c.writer,c.title,c.created_at,c.view_count,count(c.board_id) as like_count 
-		from community c left join tbl_like l using (board_id) where activate_status='Y'
+		from community c left join tbl_like l using (board_id) where activate_status='Y' and dong_id=#{dongId}
 		group by c.board_id,c.writer,c.title,c.created_at,c.view_count
 	</select>
-	<select id="getSearchTitleBoardList" parameterType="string" resultType="CommunityDto">	<!-- 커뮤니티글 제목검색 리스트 -->
+	<select id="getSearchTitleBoardList" parameterType="map" resultType="CommunityDto">	<!-- 27P 커뮤니티글 제목검색 리스트 -->
 		select c.board_id,c.writer,title,c.created_at,c.view_count,count(board_id) as like_count 
 		from community c left join tbl_like l using (board_id)
-		where title like #{searchWord} and activate_status='Y'
+		where title like #{searchWord} and activate_status='Y' and dong_id=#{dongId}
 		group by c.board_id,c.writer,c.title,c.created_at,c.view_count
 	</select>
-	<select id="getSearchNicknameBoardList" parameterType="string" resultType="CommunityDto">	<!-- 커뮤니티글 글쓴이 리스트 -->
+	<select id="getSearchNicknameBoardList" parameterType="map" resultType="CommunityDto">	<!-- 27P 커뮤니티글 글쓴이 리스트 -->
 		select c.board_id,c.writer,c.title,c.created_at,c.view_count,count(board_id) as like_count 
 		from community c left join tbl_like l using (board_id)
-		where nickname like #{searchWord} and activate_status='Y'
+		where nickname like #{searchWord} and activate_status='Y' and dong_id=#{dongId}
 		group by c.board_id,c.writer,c.title,c.created_at,c.view_count
 	</select>
-	<select id="getSearchBoardList" parameterType="string" resultType="CommunityDto">	<!-- 커뮤니티글 제목+글쓴이 검색 리스트 -->
+	<select id="getSearchBoardList" parameterType="map" resultType="CommunityDto">	<!-- 27P 커뮤니티글 제목+글쓴이 검색 리스트 -->
 		select c.board_id,c.writer,c.title,c.created_at,c.view_count,count(board_id) as like_count 
 		from community c left join tbl_like l using (board_id)
-		where (title like #{searchWord} or nickname like #{searchWord}) and c.activate_status='Y'
+		where (title like #{searchWord} or nickname like #{searchWord}) and c.activate_status='Y' and dong_id=#{dongId}
 		group by c.board_id,c.title,c.writer,c.title,c.created_at,c.view_count
 	</select>
 	
-	<insert id="insertBoard" parameterType="CommunityDto">	<!-- 커뮤니티글 등록 -->
-		insert into Community values("",writer,dong_id,title,content,"","",lat,lng,"")
+	<insert id="insertBoard" parameterType="CommunityDto" >	<!--28P 커뮤니티글 등록 -->
+		insert into Community values(board_id_sequence.nextval,#{writer},#{dongId},#{title},#{content},"",0,#{lat},#{lng},"")
 	</insert>
 	
-	<select id="getBoard" parameterType="_int" resultType="CommunityDto"> <!-- 커뮤니티글 상세조회 -->
+	<update id="updateBoard" parameterType="CommunityDto" >	<!--29P 커뮤니티글 수정 -->
+		update Community set 
+		dong_id=#{dongId}, title=#{title}, content=#{content}, lat=#{lat}, lng=#{lng})
+		where board_id=#{boardId}
+	</update>
+	
+	<select id="getBoard" parameterType="_int" resultType="CommunityDto"> <!-- 30P 커뮤니티글 상세조회 -->
 		select board_id,writer,dong_id,title,content,created_at,view_count,lat,lng from community where board_id=#{boardId}
 	</select>
+	
+	<delete id="deleteComment"> <!-- 30P 댓글삭제 -->
+		update comment set active_status='N' where comment_id=#{commentId}
+	</delete>
+	
+	<insert id="insertComment">	<!-- 30P 댓글입력 -->
+		insert into comment (board_id,writer_id,content,ccidx,step) 
+		values(#{boardId},#{writerId},#{content},#{ccidx},comment_step_sequence.nextval)
+	</insert>
+	
+	<insert id="insertCoComment"> <!-- 30P 대댓글 입력 -->
+		insert into tbl_comment (board_id,writer_id,content,ccidx,depth,step,id) values(#{idx},#{content},#{cidx},#{depth}+1,#{step}+1,#{mid})
+	</insert>
 </mapper>
