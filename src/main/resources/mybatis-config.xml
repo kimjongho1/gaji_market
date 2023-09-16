@@ -28,6 +28,10 @@
 		<typeAlias type="kh.spring.gaji.user.model.dto.UserDto" alias="UserDto"/>
 		<typeAlias type="kh.spring.gaji.user.model.dto.UserToUserDto" alias="UserToUserDto"/>
 		<typeAlias type="kh.spring.gaji.wishlist.model.dto.WishListDto" alias="WishListDto"/>
+		<typeAlias type="kh.spring.gaji.report.model.dto.CommunityReportIndex" alias="CommunityReportIndex"/>
+		<typeAlias type="kh.spring.gaji.report.model.dto.CommunityReportInfoIndex" alias="CommunityReportInfoIndex"/>
+		<typeAlias type="kh.spring.gaji.report.model.dto.CommentReportInfoIndex" alias="CommentReportInfoIndex"/>
+		CommentReportInfoIndex
 	</typeAliases>
 	
 	 <mappers>

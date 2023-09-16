@@ -14,5 +14,97 @@
 		insert into comment_report values(#{refId},#{reporterId},#{content},#{reportCategory},"","")
 	</insert>
 	
+	<select id="getGoodsReportCount"  resultType="GoodsDto">	<!-- 39P 상품글리스트(상품+신고수)  -->
+		select goods_id,title,user_id,(select count(*) report_count from goods_report r where r.ref_id=g.goods_id) 
+		from goods g
+		order by report_count
+	</select>
+	<select id="getGoodsReportCountN" parameterType="string"  resultType="GoodsDto">	<!-- 39P 상품글리스트(상품+신고수) 미검토글만 -->
+		select goods_id,title,user_id,(select count(*) report_count from goods_report r where r.ref_id=g.goods_id) 
+		from goods g
+		where appoval_status ='N'
+		order by report_count 
+	</select>
+	<select id="getSearchGoodsReportCount" parameterType="string" resultType="GoodsDto">	<!-- 39P 회원 ID검색 상품글리스트(상품+신고수) 미검토글만 -->
+		select goods_id,title,user_id,(select count(*) report_count from goods_report r where r.ref_id=g.goods_id) 
+		from goods g
+		where user_id like #{searchWord}
+		order by report_count 
+	</select>
 	
+	<select id="getSearchGoodsReportCountN" parameterType="string"  resultType="GoodsDto">	<!-- 39P 회원 ID검색 상품글리스트(상품+신고수) 미검토글만 -->
+		select goods_id,title,user_id,(select count(*) report_count from goods_report r where r.ref_id=g.goods_id) 
+		from goods g
+		where appoval_status ='N' and user_id like #{searchWord}
+		order by report_count 
+	</select>
+	
+	<select id="getGoodsReportList" parameterType="string" resultType="GoodsDto">	<!-- 40P 하나의 상품글에대한 신고들조회  -->
+		select ref_id,created_at,report_category 
+		from goods_report 
+		where ref_id=#{refId}
+	</select>
+	
+	<select id="getGoodsReportInfo" parameterType="map" resultType="">	<!-- 41P 상품 신고내용 상세조회 -->
+		select r.reporter_id, r.ref_id,title, r.created_at, g.user_id, r.report_category, r.approval_status, r.content
+		from goods_report r join goods g on ref_id=goods_id
+		where ref_id=#{refId} and reporter_id=#{reporterId}
+	</select>
+	
+	<select id="getCommunityReportCount" resultType="CommunityReportListIndex"> <!-- 42P 커뮤니티 신고글 신고수포함 -->
+		select board_id,title,writer,(select count(*) report_count from community_report where ref_id=board_id)
+		from community
+		order by report_count desc
+	</select>
+	<select id="getCommunityReportCountN" resultType="CommunityReportListIndex"> <!-- 42P 커뮤니티 신고글 신고수포함 미검토글만 -->
+		select board_id,title,writer,(select count(*) report_count from community_report where ref_id=board_id)
+		from community
+		where appoval_status ='N' 
+		order by report_count desc
+	</select>
+		<select id="getSearchCommunityReportCount" resultType="CommunityReportListIndex"> <!-- 42P 커뮤니티 신고글 회원 ID검색 신고수포함 미검토글만 -->
+		select board_id,title,writer,(select count(*) report_count from community_report where ref_id=board_id)
+		from community
+		user_id like #{searchWord}
+		order by report_count desc
+	</select>
+	<select id="getSearchCommunityReportCountN" resultType="CommunityReportListIndex"> <!-- 42P 커뮤니티 신고글 회원 ID검색 신고수포함 미검토글만 -->
+		select board_id,title,writer,(select count(*) report_count from community_report where ref_id=board_id)<!-- 인덱스생성해야함 -->
+		from community
+		where appoval_status ='N' user_id like #{searchWord}
+		order by report_count desc
+	</select>
+	<select id="getCommunityReportList" parameterType="string" resultType="CommunityReportIndex"> <!-- 43P 커뮤니티 신고상세 리스트 O-->
+		select ref_id,c.writer,c.title,r.reporter_id,r.report_category,r.created_at
+		from community c join community_report r on board_id=ref_id
+		where board_id=#{boardId}
+	</select>
+	
+	<select id="getCommunityReportInfo" parameterType="map" resultType="CommunityReportInfoIndex"> <!-- 44P 커뮤니티 신고상세조회 O-->
+		select r.reporter_id,r.ref_id,c.title,r.created_at,r.approval_status,c.writer,report_category,content
+		from community_report r join community c on ref_id=board_id
+		where ref_id=#{refId} and reporter_id=#{reporterId}	
+	</select>
+	
+	<select id="getCommentReportCount" parameterType="map" resultType="CommentReportCountIndex">	<!-- 45P 댓글 신고수상위 인덱스 생성해야함 -->
+		select comment_id, writer_id, (select count(*) report_count from comment_report where ref_id=comment_id)
+		from comment 
+		order by comment_report desc
+	</select>
+	<select id="getCommentReportCountN" parameterType="map" resultType="CommentReportCountIndex">	<!-- 45P 미검토 댓글 신고수 상위 인덱스 생성해야함 -->
+		select comment_id, writer_id, (select count(*) report_count from comment_report where ref_id=comment_id)
+		from comment 
+		where approval_status='N'
+		order by comment_report desc
+	</select>
+	<select id="getCommentReportList" parameterType="string" resultType="CommentReportListIndex">		<!-- 46P 하나의 댓글에 대한 신고들  인덱스생성해야함-->									<!--  -->
+		select ref_id,reporter_id,report_category,created_at
+		from comment_report 
+		where ref_id=#{refId}
+	</select>
+	<select id="getCommentReportInfo" parameterType="map" resultType="CommentReportInfoIndex">		<!-- 47P 댓글신고 상세조회 -->
+		select r.reporter_id, c.board_id,r.ref_id, r.created_at, r.approval_status, c.writer_id, r.report_category ,r.content report_content,c.content comment_content
+		from comment_report r join comment c on c.board_id=r.ref_id
+		where ref_id=#{refId} and reporter_id=#{reporterId} 
+	</select>
 </mapper>

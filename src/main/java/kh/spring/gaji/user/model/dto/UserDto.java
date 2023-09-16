@@ -26,6 +26,6 @@ public class UserDto {
     private int reportCount;
     private int commentReportCount;
     private int communityReportCount;
-    private int goodsCount;
+    private int goodsReportCount;
     private int tradeCount;
 }
