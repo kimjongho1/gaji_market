@@ -71,12 +71,12 @@
 		order by report_count desc
 	</select>
 	<select id="getSearchCommunityReportCountN" resultType="CommunityReportListDomain"> <!-- 42P 커뮤니티 신고글 회원 ID검색 신고수포함 미검토글만 -->
-		select board_id,title,writer,(select count(*) report_count from community_report where ref_id=board_id)<!-- 인덱스생성해야함 -->
+		select board_id,title,writer,(select count(*) report_count from community_report where ref_id=board_id)
 		from community
 		where appoval_status ='N' user_id like #{searchWord}
 		order by report_count desc
 	</select>
-	<select id="getCommunityReportList" parameterType="string" resultType="CommunityReportDomain"> <!-- 43P 커뮤니티 신고상세 리스트 O-->
+	<select id="getCommunityReportList" parameterType="string" resultType="CommunityReportInfoDomain"> <!-- 43P 커뮤니티 신고상세 리스트 O-->
 		select ref_id,c.writer,c.title,r.reporter_id,r.report_category,r.created_at
 		from community c join community_report r on board_id=ref_id
 		where board_id=#{boardId}

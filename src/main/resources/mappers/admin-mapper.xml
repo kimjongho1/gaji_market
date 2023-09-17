@@ -64,7 +64,7 @@
 		where transaction_id = #{transactionId}
 	</select>
 	
-	<select id="getUserList" resultType="UserCountReportDomain"> <!-- 37P 회원정보조회 LIST 신고상위 --> <!-- 인덱스필요 -->
+	<select id="getUserList" resultType="UserCountReportDomain"> <!-- 37P 회원정보조회 LIST 신고상위 -->
 		select user_id,name,invite_count,
 		(select count(*) report_count	<!-- 신고당한횟수 -->
 		from

@@ -16,4 +16,3 @@ public class ReportInfoDomain {
     private String content;
 }
 
-

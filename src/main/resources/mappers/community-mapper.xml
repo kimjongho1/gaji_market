@@ -36,7 +36,7 @@
 		where board_id=#{boardId}
 	</update>
 	
-	<select id="getBoard" parameterType="_int" resultType="CommunityDto"> <!-- 30P 커뮤니티글 상세조회 -->
+	<select id="getBoard" parameterType="_int" resultType="CommunityInfoDomain"> <!-- 30P 커뮤니티글 상세조회 -->
 		select board_id,(select nickname from user where user_id = writer),
 		writer,dong_id,title,content,created_at,view_count,lat,lng,
 		(select count(*) like_count from tbl_like l where l.board_id=c.board_id)

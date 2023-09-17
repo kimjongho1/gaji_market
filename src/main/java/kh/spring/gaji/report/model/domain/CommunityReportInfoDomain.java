@@ -5,7 +5,7 @@ import lombok.Data;
 
 @Component
 @Data
-public class CommunityReportDomain {
+public class CommunityReportInfoDomain {
     private int refId;
     private String writer;
     private String title;
