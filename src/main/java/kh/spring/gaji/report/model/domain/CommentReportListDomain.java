@@ -6,6 +6,7 @@ import java.time.LocalDateTime;
 @Component
 @Data
 public class CommentReportListDomain {
+	private LocalDateTime created_at;
     private int refId;
     private String reporterId;
     private String reportCategory;

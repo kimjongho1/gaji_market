@@ -182,7 +182,7 @@
 	</update>
 	
 	<insert id="insertBanUser"	parameterMap="UserBlockingDto">	<!-- 38P 계정정지 테이블에 아이디추가 -->
-		insert into User_Blocking values(#{bannedId},#{administerId},#{reasonForBlocking},"",#{refId},#{reportClass})
+		insert into User_Blocking values(ban_no_sequence.nextval,#{bannedId},#{administerId},#{reasonForBlocking},"",#{refId},#{reportClass})
 	</insert>
 
 </mapper>
