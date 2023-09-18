@@ -1,36 +1,40 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC " -//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="community">
-	<select id="getBoardList" parameterType="map" resultType="CommunityLikeDomain">	<!-- 27P 커뮤니티글 리스트 -->
+	<select id="getBoardList" parameterType="string" resultType="CommunityLikeDomain">	<!-- 27P 커뮤니티글 리스트 -->
 		select c.board_id,c.title,c.writer,c.title,c.created_at,c.view_count,count(c.board_id) as like_count 
 		from community c left join tbl_like l using (board_id) 
 		where activate_status='Y' and dong_id=#{dongId}
 		group by c.board_id,c.writer,c.title,c.created_at,c.view_count
+		order by c.created_at desc
 	</select>
 	<select id="getSearchTitleBoardList" parameterType="map" resultType="CommunityLikeDomain">	<!-- 27P 커뮤니티글 제목검색 리스트 -->
 		select c.board_id,c.writer,title,c.created_at,c.view_count,count(board_id) as like_count 
 		from community c left join tbl_like l using (board_id)
 		where title like #{searchWord} and activate_status='Y' and dong_id=#{dongId}
 		group by c.board_id,c.writer,c.title,c.created_at,c.view_count
+		order by c.created_at desc
 	</select>
 	<select id="getSearchNicknameBoardList" parameterType="map" resultType="CommunityLikeDomain">	<!-- 27P 커뮤니티글 글쓴이 리스트 -->
 		select c.board_id,c.writer,c.title,c.created_at,c.view_count,count(board_id) as like_count 
 		from community c left join tbl_like l using (board_id)
 		where nickname like #{searchWord} and activate_status='Y' and dong_id=#{dongId}
 		group by c.board_id,c.writer,c.title,c.created_at,c.view_count
+		order by c.created_at desc
 	</select>
 	<select id="getSearchBoardList" parameterType="map" resultType="CommunityLikeDomain">	<!-- 27P 커뮤니티글 제목+글쓴이 검색 리스트 -->
 		select c.board_id,c.writer,c.title,c.created_at,c.view_count,count(board_id) as like_count 
 		from community c left join tbl_like l using (board_id)
 		where (title like #{searchWord} or nickname like #{searchWord}) and c.activate_status='Y' and dong_id=#{dongId}
 		group by c.board_id,c.title,c.writer,c.title,c.created_at,c.view_count
+		order by c.created_at desc
 	</select>
 	
 	<insert id="insertBoard" parameterType="CommunityDto" >	<!--28P 커뮤니티글 등록 -->
 		insert into Community values(board_id_sequence.nextval,#{writer},#{dongId},#{title},#{content},"",0,#{lat},#{lng},"")
 	</insert>
 	
-	<update id="updateBoard" parameterType="CommunityDto" >	<!--29P 커뮤니티글 수정 -->
+	<update id="updateBoard" parameterType="map" >	<!--29P 커뮤니티글 수정 -->
 		update Community set 
 		dong_id=#{dongId}, title=#{title}, content=#{content}, lat=#{lat}, lng=#{lng})
 		where board_id=#{boardId}
@@ -44,7 +48,7 @@
 		where board_id=#{boardId}
 	</select>
 	
-	<delete id="deleteComment"> <!-- 30P 댓글삭제 -->
+	<delete id="deleteComment" parameterType="_int"> <!-- 30P 댓글삭제 -->
 		update comment set active_status='N' where comment_id=#{commentId}
 	</delete>
 	

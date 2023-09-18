@@ -42,8 +42,8 @@
 	</select>
 	
 	<select id="getGoodsReportList" parameterType="string" resultType="ReportDto">	<!-- 40P 하나의 상품글에대한 신고들조회  -->
-		select ref_id,created_at,report_category 
-		from goods_report 
+		select ref_id,reporter_id,created_at,report_category <!-- 참조아이디,신고일,신고카테고리 까지 출력후 클릭하면 (참조아이디와 신고자)에 해당하는 신고글 이동 -->
+		from goods_report
 		where ref_id=#{refId}
 	</select>
 	
@@ -99,8 +99,8 @@
 		where approval_status='N'
 		order by report_count desc
 	</select>
-	<select id="getCommentReportList" parameterType="string" resultType="CommentReportListDomain">		<!-- 46P 하나의 댓글에 대한 신고들-->									<!--  -->
-		select 	ref_id,reporter_id,report_category,created_at
+	<select id="getCommentReportList" parameterType="string" resultType="CommentReportListDomain">		<!-- 46P 하나의 댓글에 대한 신고들-->
+		select ref_id,reporter_id,report_category,created_at
 		from comment_report
 		where ref_id=#{refId}
 	</select>

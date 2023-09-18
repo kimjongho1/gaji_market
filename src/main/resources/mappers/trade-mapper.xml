@@ -3,13 +3,13 @@
 <mapper namespace="trade">
 	<update id="cancelSafeTrading" parameterType="_int">		<!-- 11P 안전거래 결제취소, 레코드는 삭제하지 않고 거래상태 업데이트 -->
 		update safe_trading 
-		set trading_tatus=5 
+		set trading_status=5 
 		where transaction_id=#{transactionId}
 	</update>
 	
 	<update id="acceptSafeTrading" parameterType="_int">		<!-- 안전거래 수락, 상품준비중으로 거래상태 업데이트 -->
 		update safe_trading 
-		set trading_tatus=2 
+		set trading_status=2 
 		where transaction_id=#{transactionId}
 	</update>
 	
@@ -25,9 +25,9 @@
 	</update>
 
 	<select id="getSafePurchaseInfo" parameterType="string" resultType="SafePurchaseInfoDomain">	<!-- 11P 안전거래 상세정보 가져오기 -->
-		select goods_id,(select goods_title,user_id seller_id from goods g where g.goods_id= s.goods_id),
-			   buyer_id,(select mobile_number,name from user u where u.user_id=s.buyer_id), 
-			   shipping_address, price, trading_date, trading_status, tracking_number 
+		select s.goods_id,s.goods_title,(select g.user_id seller_id from goods g where g.goods_id= s.goods_id),
+			   s.buyer_id,(select u.mobile_number,u.name from user u where u.user_id=s.buyer_id), 
+			   s.shipping_address, s.price, s.trading_date, s.trading_status, s.tracking_number 
 			   from safe_trading s
 			   where transaction_id=#{transactionId}
 	</select>

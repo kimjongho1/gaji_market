@@ -45,7 +45,7 @@
 	</update>
 	
 	<select id="checkId" parameterType="string" resultType="_int">	<!-- 아이디 중복검사 -->
-		select count(*) from user where user_id=#{user_id}
+		select count(*) from user where user_id=#{userId}
 	</select>
 	
 	<select id="checkMobileNumber" parameterType="string" resultType="_int">	<!-- 7P 전화번호 중복검사 -->
@@ -53,16 +53,20 @@
 	</select>
 	
 	<insert id="signup"> <!-- 회원가입 -->
-		insert into (user user_id,name,password,mobile_number,nickname,email) values(#{user_id},#{name},#{password},#{mobile_number},#{nickname},#{email})
+		insert into user (user_id,name,password,mobile_number,nickname,email) values(#{user_id},#{name},#{password},#{mobile_number},#{nickname},#{email})
 	</insert>
 	
 	<select id="findId" parameterType="map" resultType="string"> <!-- 15P 아이디 찾기 -->
 		select user_id from user where name=#{name} and email=#{email}
 	</select>
 	
-	<update id="findPass" parameterType="map"> <!-- 16P 비밀번호찾기 -->
-		update user set password=#{password} where user_id=#{userId} and name=#{name}
+	<update id="findPass" parameterType="map"> <!-- 16P 비밀번호변경 --> <!-- 이메일인증처리 추가해야함 -->
+		update user 
+		set password=#{password} 
+		where user_id=#{userId} and name=#{name} and email=#{email}
 	</update>
+	
+	
 	<!-- 이메일 인증 미구현 -->
 	
 	
@@ -70,7 +74,7 @@
 		insert into user_account (user_account,user_id) values(#{userAccount},#{userId})
 	</insert>
 	
-	<insert id="addFavoriteUser" parameterType="map">	<!-- 유저 즐겨찾기 -->
+	<insert id="addFavoriteUser" parameterType="map">	<!-- 유저 즐겨찾기(모아보기) 23P -->
 		insert into favorite_user values(#{userId},#{targetId})
 	</insert>
 	

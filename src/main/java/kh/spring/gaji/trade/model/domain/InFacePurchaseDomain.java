@@ -5,6 +5,7 @@ import lombok.Data;
 @Component
 @Data
 public class InFacePurchaseDomain {
+	private int inFaceTradingId;
     private int goodsId;
     private String sellerId;
     private String goodsTitle;
