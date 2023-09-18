@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>paytest 1</title>
+<title>안전결제</title>
 </head>
 <body>
 	<button onclick="kakaoPay()">카카오페이</button> <!-- 1.카카오페이버튼 -->

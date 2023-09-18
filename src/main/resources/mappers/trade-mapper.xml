@@ -33,16 +33,16 @@
 	</select>
 	
 	<select id="getSafePurchaseList" parameterType="string" resultType="SafeTradingDto">	<!-- 9P 안전거래 구매내역(회원) 불러오기 -->
-		select 	transaction_id,goods_title,trading_status,s.price,trading_date 
+		select 	goods_id,transaction_id,goods_title,trading_status,s.price,trading_date 
 		from safe_trading s join goods g using (goods_id)
 		where buyer_id=#{buyerId} 
 		order by trading_date DESC;
 	</select>
 	
-	<select id="getInfacePurchaseList" parameterType="string" resultType="SafeTradingDto"> <!-- 9P 직거래 구매내역(회원) 불러오기 -->
-		select in_face_trading_id,goods_title,trading_status,i.price,trading_date 
+	<select id="getInfacePurchaseList" parameterType="string" resultType="InFaceTradingDto"> <!-- 9P 직거래 구매내역(회원) 불러오기 -->
+		select goods_id,in_face_trading_id,goods_title,trading_status,i.price,trading_date 
 		from in_face_trading i join goods g using (goods_id)
-		where buyer_id=#{buyerId} 
+		where buyer_id=#{} 
 		order by trading_date DESC;
 	</select>
 	

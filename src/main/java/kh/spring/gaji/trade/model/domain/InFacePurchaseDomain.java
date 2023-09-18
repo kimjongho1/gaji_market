@@ -11,5 +11,4 @@ public class InFacePurchaseDomain {
     private String goodsTitle;
     private String buyerId;
     private LocalDateTime tradingDate;
-
 }
