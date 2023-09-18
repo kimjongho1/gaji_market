@@ -15,7 +15,7 @@ import java.io.IOException;
 import java.util.Map;
 
 @Controller
-public class uploadController {
+public class UploadController {
 
 	Dotenv dotenv = Dotenv.load();
 	Cloudinary cloudinary = new Cloudinary(dotenv.get("CLOUDINARY_URL"));
