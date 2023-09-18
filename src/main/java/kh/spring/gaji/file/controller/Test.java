@@ -11,7 +11,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.PropertySource;
 
 
-public class test {
+public class Test {
 
 	public static void main(String[] args) {
 		Dotenv dotenv = Dotenv.load();
