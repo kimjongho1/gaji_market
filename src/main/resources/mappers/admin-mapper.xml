@@ -46,13 +46,13 @@
 		order by trading_date desc
 		where transaction_id like #{searchWord}
 	</select>
-		<select id="getSearchSafeTradingList" parameterType="string" resultType="SafeTradingDomain"><!-- 35P 안전거래조회 검색(판매자ID) -->
+		<select id="getIdSearchSafeTradingList" parameterType="string" resultType="SafeTradingDomain"><!-- 35P 안전거래조회 검색(판매자ID) -->
 		select transaction_id,title goods_title,user_id seller_id,trading_status
 		from safe_trading join goods using (goods_id)
 		order by trading_date desc
 		where user_id like #{searchWord}
 	</select>
-	<select id="getSearchSafeTradingList" parameterType="string" resultType="SafeTradingDomain"><!-- 35P 안전거래조회 검색(상품명) -->
+	<select id="getGoodsSearchSafeTradingList" parameterType="string" resultType="SafeTradingDomain"><!-- 35P 안전거래조회 검색(상품명) -->
 		select transaction_id,title goods_title,user_id seller_id,trading_status
 		from safe_trading join goods using (goods_id)
 		order by trading_date desc

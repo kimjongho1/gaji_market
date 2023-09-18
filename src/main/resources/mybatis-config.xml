@@ -36,6 +36,7 @@
 		<typeAlias type="kh.spring.gaji.trade.model.domain.SafeTradingDomain" alias="SafeTradingDomain"/>
 		<typeAlias type="kh.spring.gaji.trade.model.domain.SafeTradingDomain" alias="SafeTradingInfoDomain"/>
 		<typeAlias type="kh.spring.gaji.user.model.domain.UserCountReportDomain" alias="UserCountReportDomain"/>
+		<typeAlias type="kh.spring.gaji.trade.model.domain.InFaceTradingInfoDomain" alias="InFaceTradingInfoDomain"/>
 		<typeAlias type="kh.spring.gaji.user.model.domain.UserInfoDomain" alias="UserInfoDomain"/>
 		<!-- 커뮤니티 인덱스 -->
 		<typeAlias type="kh.spring.gaji.community.model.domain.CommunityLikeDomain" alias="CommunityLikeDomain"/>
