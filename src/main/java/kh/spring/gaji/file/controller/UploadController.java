@@ -39,7 +39,7 @@ public class UploadController {
 //		String imageUrl = cloudinary.url().generate((String)imageUrl2.get("secure_url")); // 해당파일이 
 //		System.out.println(imageUrl);
 		model.addAttribute("imageUrl", imageUrl2);
-		return "image-display"; // 업로드된 이미지와 URL을 표시할 JSP 페이지로 이동
+		return "filetest"; // 업로드된 이미지와 URL을 표시할 JSP 페이지로 이동
 	
 	}
 
