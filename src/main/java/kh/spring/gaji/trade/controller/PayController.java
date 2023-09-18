@@ -45,7 +45,7 @@ public class PayController {
 	
 	@GetMapping("payment/paytest") //이후 삭제할 Mapping
 	public String paytest() {
-		return "payment/paytest";
+		return "pay/paytest";
 	}
 	
 	public PayController() {
@@ -55,7 +55,7 @@ public class PayController {
 	@GetMapping("payment/pay")
 	public String paytest1(Model model) {
 		model.addAttribute("merchantIdentificationCode",merchantIdentificationCode);
-		return "payment/paytest1";
+		return "pay/paytest1";
 	}
 	
 	
