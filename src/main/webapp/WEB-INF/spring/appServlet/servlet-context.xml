@@ -53,6 +53,8 @@
 	</beans:bean>
 	
 	<!-- 웹소켓 핸들러 : 김종호 추가(230904) -->
+	<beans:bean id="echoHandler" class="kh.spring.gaji.chat.contoller.EchoHandler"></beans:bean>
+	
  	<websocket:handlers>
 		<websocket:mapping handler="echoHandler" path="/echo"/>
 		<websocket:handshake-interceptors>
@@ -60,6 +62,5 @@
 		</websocket:handshake-interceptors>
 	</websocket:handlers>
 	
-	<beans:bean id="echoHandler" class="kh.spring.gaji.chat.contoller.EchoHandler"></beans:bean>
 	
 </beans:beans>

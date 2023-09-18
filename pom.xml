@@ -237,7 +237,7 @@
 			<version>${org.springframework-version}</version>
 		</dependency>
 
-		<!-- Json 타입을 Java형태로 바꿔주는 역할 : 김종호 추가(230830) -->
+	<!-- Json 타입을 Java형태로 바꿔주는 역할 : 김종호 추가(230830) -->
 		<!-- jackson -->
 		<dependency>
 			<groupId>com.fasterxml.jackson.core</groupId>
