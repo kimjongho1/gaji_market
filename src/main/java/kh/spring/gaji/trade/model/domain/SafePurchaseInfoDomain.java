@@ -1,7 +1,6 @@
 package kh.spring.gaji.trade.model.domain;
 import org.springframework.stereotype.Component;
 import lombok.Data;
-import java.time.LocalDateTime;
 
 @Component
 @Data
@@ -14,7 +13,7 @@ public class SafePurchaseInfoDomain {
     private String name;
     private String shippingAddress;
     private double price;
-    private LocalDateTime tradingDate;
+    private String tradingDate;
     private String tradingStatus;
     private String trackingNumber;
 }

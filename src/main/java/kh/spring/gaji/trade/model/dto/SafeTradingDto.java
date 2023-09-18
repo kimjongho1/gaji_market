@@ -1,5 +1,4 @@
-		package kh.spring.gaji.trade.model.dto;
-import java.time.LocalDateTime;
+package kh.spring.gaji.trade.model.dto;
 import org.springframework.stereotype.Component;
 import lombok.Data;
 
@@ -13,5 +12,5 @@ public class SafeTradingDto {
     private int tradingStatus; 
     private String shippingAddress; //이후 int형으로 배송지테이블을 참조하는 번호로 사용해야할듯.
     private String trackingNumber;
-    private LocalDateTime tradingDate;
+    private String tradingDate;
 }

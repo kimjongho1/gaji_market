@@ -1,7 +1,6 @@
 package kh.spring.gaji.report.model.dto;
 import lombok.Data;
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -11,6 +10,6 @@ public class ReportDto {
     private String reporterId;
     private String content;
     private int reportCategory;
-    private LocalDateTime createdAt;
+    private String createdAt;
     private char approvalStatus;	
 }

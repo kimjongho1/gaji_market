@@ -1,6 +1,5 @@
 package kh.spring.gaji.user.model.dto;
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
 import org.springframework.stereotype.Component;
 import lombok.Data;
 
@@ -14,7 +13,7 @@ public class UserDto {
     private String mobileNumber;
     private double ratingScore;
     private String nickname;
-    private LocalDateTime createdAt;
+    private String createdAt;
     private String email;
     private int enabled;
     private int authority;

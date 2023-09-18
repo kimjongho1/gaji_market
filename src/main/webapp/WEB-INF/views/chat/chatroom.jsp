@@ -20,4 +20,7 @@
 	<br>
 	<input type="button" value="전송" id="btnSend">
 </body>
+<script>
+	
+</script>
 </html>

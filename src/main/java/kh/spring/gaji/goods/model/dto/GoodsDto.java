@@ -1,6 +1,5 @@
 package kh.spring.gaji.goods.model.dto;
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
 
 import org.springframework.stereotype.Component;
 import lombok.Data;
@@ -17,7 +16,7 @@ public class GoodsDto {
 	private long viewCount;
 	private String description;
 	private String refreshedAt;
-	private LocalDateTime createdAt;
+	private String createdAt;
 	private char safeTradingYN;
 	private char activeStatus;
 	private int lat;

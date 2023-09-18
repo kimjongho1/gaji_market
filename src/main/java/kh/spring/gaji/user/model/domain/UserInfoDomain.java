@@ -1,5 +1,4 @@
 package kh.spring.gaji.user.model.domain;
-import java.time.LocalDateTime;
 import org.springframework.stereotype.Component;
 import lombok.Data;
 
@@ -10,7 +9,7 @@ public class UserInfoDomain {
     private String nickname;
     private String address;
     private String mobileNumber;
-    private LocalDateTime createdAt;
+    private String createdAt;
     private String activateStatus;
     private int safeTradingCount;
     private int inFaceTradingCount;

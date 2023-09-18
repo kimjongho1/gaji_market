@@ -1,7 +1,6 @@
 package kh.spring.gaji.goods.model.domain;
 import org.springframework.stereotype.Component;
 import lombok.Data;
-import java.time.LocalDateTime;
 
 @Component
 @Data
@@ -14,7 +13,7 @@ public class GoodsInfoDomain{
     private double price;
     private int viewCount;
     private String description;
-    private LocalDateTime createdAt;
+    private String createdAt;
     private String safeTradingYn;
     private String dongId;
     private double lat;
