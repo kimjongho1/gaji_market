@@ -42,7 +42,7 @@
 	<select id="getInfacePurchaseList" parameterType="string" resultType="InFaceTradingDto"> <!-- 9P 직거래 구매내역(회원) 불러오기 -->
 		select goods_id,in_face_trading_id,goods_title,trading_status,i.price,trading_date 
 		from in_face_trading i join goods g using (goods_id)
-		where buyer_id=#{} 
+		where buyer_id=#{buyerId} 
 		order by trading_date DESC;
 	</select>
 	

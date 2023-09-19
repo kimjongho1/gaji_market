@@ -12,7 +12,7 @@ public interface PayService {
 	public int updateTrackingNumber(Map<String,String> map); //운송장번호 업데이트
 	public int closeSafeTrading(int transactionId); //안전결제 취소
 	public SafePurchaseInfoDomain getSafePurchaseInfo(String transactionId);	// 안전거래 상세정보
-	public List<SafeTradingDto> getSafePurchaseList(String buyerId);	// 안전거래 상세정보
+	public List<SafeTradingDto> getSafePurchaseList(String buyerId);	// 안전거래 리스트
 	public int addSafeTrading(SafeTradingDto safeTradingInfo); // 안전결제 추가
 	public List<InFaceTradingDto> getInfacePurchaseList(String buyerId);  //직거래 구매기록
 }
