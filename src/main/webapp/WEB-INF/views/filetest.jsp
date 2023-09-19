@@ -40,6 +40,7 @@
 	<script>
 		ClassicEditor
 		.create(document.querySelector('#editor'), {
+			
 			ckfinder: {
 				uploadUrl : '${pageContext.request.contextPath}/upload'
 			}
