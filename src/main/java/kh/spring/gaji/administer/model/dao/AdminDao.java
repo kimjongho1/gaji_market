@@ -5,10 +5,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import kh.spring.gaji.administer.model.dto.UserBlockingDto;
-import kh.spring.gaji.trade.model.domain.InFacePurchaseDomain;
-import kh.spring.gaji.trade.model.domain.InFaceTradingInfoDomain;
-import kh.spring.gaji.trade.model.domain.SafeTradingDomain;
-import kh.spring.gaji.trade.model.domain.SafeTradingInfoDomain;
+import kh.spring.gaji.pay.model.domain.InFacePurchaseDomain;
+import kh.spring.gaji.pay.model.domain.InFaceTradingInfoDomain;
+import kh.spring.gaji.pay.model.domain.SafeTradingDomain;
+import kh.spring.gaji.pay.model.domain.SafeTradingInfoDomain;
 import kh.spring.gaji.user.model.domain.UserCountReportDomain;
 import kh.spring.gaji.user.model.domain.UserInfoDomain;
 
@@ -63,11 +63,15 @@ public class AdminDao {
 		return sqlSession.selectOne("admin.getGoodsSearchSafeTradingList",searchWold);
 	}
 	
-	public List<UserCountReportDomain> getUserList(int transactionId) {		//37P 회원정보조회 LIST 신고상위
+	public List<UserCountReportDomain> getUserList() {		//37P 회원정보조회 LIST 신고상위
 		return sqlSession.selectList("admin.getUserList");
 	}
-	public List<UserCountReportDomain> adminGetUserList(int transactionId) {	//37P 거래상위 회원정보조회 LIST
+	public List<UserCountReportDomain> adminGetUserList() {	//37P 거래상위 회원정보조회 LIST
 		return sqlSession.selectList("admin.getUserList");
+	}
+	public List<UserCountReportDomain> getSearchUserList(String searchWord) {	//37P 거래상위 회원정보조회 LIST
+		searchWord="%"+searchWord+"%";
+		return sqlSession.selectList("admin.getSearchUserList");
 	}
 	public UserInfoDomain getUserInfo(String userId) {	// 38P 회원정보 세부조회
 		return sqlSession.selectOne("admin.getUserInfo");

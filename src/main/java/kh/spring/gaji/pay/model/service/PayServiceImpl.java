@@ -6,10 +6,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import kh.spring.gaji.pay.model.dao.PayDao;
-import kh.spring.gaji.trade.model.domain.SafePurchaseInfoDomain;
-import kh.spring.gaji.trade.model.dto.DealReviewDto;
-import kh.spring.gaji.trade.model.dto.InFaceTradingDto;
-import kh.spring.gaji.trade.model.dto.SafeTradingDto;
+import kh.spring.gaji.pay.model.domain.SafePurchaseInfoDomain;
+import kh.spring.gaji.pay.model.dto.DealReviewDto;
+import kh.spring.gaji.pay.model.dto.InFaceTradingDto;
+import kh.spring.gaji.pay.model.dto.SafeTradingDto;
 
 @Service
 public class PayServiceImpl implements PayService {
@@ -69,8 +69,8 @@ public class PayServiceImpl implements PayService {
  * import kh.project.dml.admin.model.dao.FpAdminDao; import
  * kh.project.dml.admin.model.vo.FpAdminVo;
  * 
- * @Service("fpAdminServiceImpl") public class FpAdminServiceImpl implements
- * FpAdminService {
+ * @Service("fpAdminServiceImpl")
+ *  public class FpAdminServiceImpl implements FpAdminService {
  * 
  * @Autowired private FpAdminDao fpAdminDao;
  * 
