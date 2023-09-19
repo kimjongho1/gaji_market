@@ -98,7 +98,7 @@
 			,dong_id=#{dong_id},lat=#{lat},lng=#{lng}
 			where goods_id=#{goodsId}
 		</update>
-		
+
 		<delete id="deleteGoods" parameterType="_int"> <!-- 상품글 삭제는 active_status='N'으로 처리함. -->
 			update goods set active_status="N" 
 			where goods_id=#{goodsId}

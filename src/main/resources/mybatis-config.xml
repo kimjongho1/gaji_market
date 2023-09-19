@@ -64,7 +64,6 @@
 		<mapper resource="mappers/category-mapper.xml"/>	<!-- 카테고리 관련 쿼리문 -->
 		<mapper resource="mappers/chat-mapper.xml"/>		<!-- 채팅관련 쿼리문 -->
 		<mapper resource="mappers/community-mapper.xml"/>	<!-- 커뮤니티글 관련 쿼리문 -->
-		<mapper resource="mappers/dealreview-mapper.xml"/>	<!-- 리뷰관련 쿼리문 -->
 		<mapper resource="mappers/file-mapper.xml"/>	<!-- 파일관련 쿼리문 -->
 		<mapper resource="mappers/notification-mapper.xml"/>	<!-- 알림관련 쿼리문 -->
 		<mapper resource="mappers/trade-mapper.xml"/>	<!-- 거래 관련 쿼리문 -->

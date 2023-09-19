@@ -1,10 +1,16 @@
+package kh.spring.gaji.administer.model.dao;
 import java.util.List;
 import org.apache.ibatis.session.SqlSession;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+
+import kh.spring.gaji.administer.model.dto.UserBlockingDto;
 import kh.spring.gaji.trade.model.domain.InFacePurchaseDomain;
 import kh.spring.gaji.trade.model.domain.InFaceTradingInfoDomain;
 import kh.spring.gaji.trade.model.domain.SafeTradingDomain;
 import kh.spring.gaji.trade.model.domain.SafeTradingInfoDomain;
+import kh.spring.gaji.user.model.domain.UserCountReportDomain;
+import kh.spring.gaji.user.model.domain.UserInfoDomain;
 
 @Repository
 public class AdminDao {
@@ -38,32 +44,29 @@ public class AdminDao {
 		return sqlSession.selectList("admin.getSafeTradingList");
 	}
 	
-	public List<SafeTradingDomain> getSearchSafeTradingList(String searchWorld) {	//35P 안전거래 조회 검색(안전거래번호)
+	public List<SafeTradingDomain> getSearchSafeTradingList(String searchWord) {	//35P 안전거래 조회 검색(안전거래번호)
 		searchWord="%"+searchWord+"%";
-		return sqlSession.selectList("admin.getSearchSafeTradingList",searchWorld);
+		return sqlSession.selectList("admin.getSearchSafeTradingList",searchWord);
 	}
 	
-	public List<SafeTradingDomain> getIdSearchSafeTradingList(String searchWorld) { // 35P 안전거래조회 검색(판매자ID)
+	public List<SafeTradingDomain> getIdSearchSafeTradingList(String searchWord) { // 35P 안전거래조회 검색(판매자ID)
 		searchWord="%"+searchWord+"%";
-		return sqlSession.selectList("admin.getIdSearchSafeTradingList",searchWorld);
+		return sqlSession.selectList("admin.getIdSearchSafeTradingList",searchWord);
 	}
 	
-	public List<SafeTradingDomain> getGoodsSearchSafeTradingList(String searchWorld) {	//35P 안전거래조회 검색(상품명)
+	public List<SafeTradingDomain> getGoodsSearchSafeTradingList(String searchWord) {	//35P 안전거래조회 검색(상품명)
 		searchWord="%"+searchWord+"%";
-		return sqlSession.selectList("admin.getGoodsSearchSafeTradingList",searchWorld);
+		return sqlSession.selectList("admin.getGoodsSearchSafeTradingList",searchWord);
 	}
 	
-	public SafeTradingInfoDomain getSafeTradingInfo(String searchWorld) {	//36P 안전거래 세부조회(관리자)
-		searchWord="%"+searchWord+"%";
-		return sqlSession.selectOne("admin.getGoodsSearchSafeTradingList",searchWorld);
+	public SafeTradingInfoDomain getSafeTradingInfo(String searchWold) {	//36P 안전거래 세부조회(관리자)
+		return sqlSession.selectOne("admin.getGoodsSearchSafeTradingList",searchWold);
 	}
 	
 	public List<UserCountReportDomain> getUserList(int transactionId) {		//37P 회원정보조회 LIST 신고상위
-		searchWord="%"+searchWord+"%";
 		return sqlSession.selectList("admin.getUserList");
 	}
 	public List<UserCountReportDomain> adminGetUserList(int transactionId) {	//37P 거래상위 회원정보조회 LIST
-		searchWord="%"+searchWord+"%";
 		return sqlSession.selectList("admin.getUserList");
 	}
 	public UserInfoDomain getUserInfo(String userId) {	// 38P 회원정보 세부조회

@@ -65,22 +65,11 @@
 		from safe_trading s join goods g using (goods_id)
 		where transaction_id = #{transactionId}
 	</select>
-	
 	<select id="getUserList" resultType="UserCountReportDomain"> <!-- 37P 회원정보조회 LIST 신고상위 -->
 		select user_id,name,invite_count,
 		(select count(*) report_count	<!-- 신고당한횟수 -->
-		from
-		(
-		select user_id
-		from community_report join community on ref_id=community_id	<!-- 커뮤니티 신고 -->
-		union 
-		select user_id 
-		from comment_report join comment on ref_id=comment_id	<!-- 댓글 신고 -->
-		union 
-		select user_id 
-		from goods_report join goods on ref_id=goods_id			<!-- 상품 신고 -->
-		)rp
-		where u.user_id=rp.user_id
+		from goods_report join goods g on ref_id=goods_id		
+		where u.user_id=g.user_id
 		),
 		(select count(*) trade_count from	<!-- 거래횟수 -->
 		(
@@ -102,18 +91,8 @@
 		<select id="adminGetUserList" resultType="UserCountReportDomain"> <!-- 37P 거래상위 회원정보조회 LIST -->
 		select user_id,name,invite_count,
 		(select count(*) report_count	<!-- 신고당한횟수 -->
-		from
-		(
-		select user_id
-		from community_report join community on ref_id=community_id	<!-- 커뮤니티 신고 -->
-		union 
-		select user_id 
-		from comment_report join comment on ref_id=comment_id	<!-- 댓글 신고 -->
-		union 
-		select user_id 
-		from goods_report join goods on ref_id=goods_id			<!-- 상품 신고 -->
-		)rp
-		where u.user_id=rp.user_id
+		from goods_report join goods g on ref_id=goods_id		
+		where u.user_id=g.user_id
 		),
 		(select count(*) trade_count from	<!-- 거래횟수 -->
 		(
@@ -145,24 +124,13 @@
 		where sf.user_id=u.user_id
 		) safe_trading_count,
 		
-		(select count(*) 		<!-- 직거래 횟수 -->
+		(select count(*) in_face_trading_count 		<!-- 직거래 횟수 -->
 		from(
 		select buyer_id user_id from in_face_trading
 		union
 		select user_id from goods join in_face_trading using (goods_id)  
 		) i
 		where i.user_id=u.user_id
-		) in_face_trading_count,
-		
-		(select count(*) comment_report_count from (	<!-- 댓글 신고횟수 -->
-		select user_id uid1 from
-		comment_report r1 join community c1 on c1.comment_id=r1.refId
-		where uid1=u.userId
-		),
-		(select count(*) community_report_count from (	<!-- 커뮤니티 신고횟수 -->
-		select user_id uid2 from
-		community_report r2 join community c2 on c2.board_id=r2.refId
-		where uid2=u.userId
 		),
 		(select count(*) goods_report_count from (	<!-- 상품글 신고횟수 -->
 		select user_id uid3 from
@@ -172,7 +140,8 @@
 		from user u
 		where user_id=#{user_id}
 	</select>
-
+	
+	
 	
 	<update id="banUser" parameterType="string">	<!-- 38P 유저 계정 정지 -->
 		update user set enabled = 0 where user_id = #{userId}
@@ -187,3 +156,111 @@
 	</insert>
 
 </mapper>
+
+<!-- <select id="getUserList" resultType="UserCountReportDomain"> 37P 회원정보조회 LIST 신고상위
+		select user_id,name,invite_count,
+		(select count(*) report_count	신고당한횟수
+		from
+		(
+		select user_id
+		from community_report join community on ref_id=community_id	커뮤니티 신고
+		union 
+		select user_id 
+		from comment_report join comment on ref_id=comment_id	댓글 신고
+		union 
+		select user_id 
+		from goods_report join goods on ref_id=goods_id			상품 신고
+		)rp
+		where u.user_id=rp.user_id
+		),
+		(select count(*) trade_count from	거래횟수
+		(
+		 select buyer_id user_id	직거래 구매
+		 from in_face_trading
+		 union
+		 select buyer_id user_id	안전거래 구매
+		 from safe_trading 
+		 union 
+		 select user_id from goods join safe_trading using (goods_id) 안전거래 판매
+		 union 
+		 select user_id from goods join in_face_trading using (goods_id) 직거래 판매
+		) tc
+		where u.user_id=tc.user_id
+		)
+		from user u
+		order by report_count
+	</select>
+		<select id="adminGetUserList" resultType="UserCountReportDomain"> 37P 거래상위 회원정보조회 LIST
+		select user_id,name,invite_count,
+		(select count(*) report_count	신고당한횟수
+		from
+		(
+		select user_id
+		from community_report join community on ref_id=community_id	커뮤니티 신고
+		union 
+		select user_id 
+		from comment_report join comment on ref_id=comment_id	댓글 신고
+		union 
+		select user_id 
+		from goods_report join goods on ref_id=goods_id			상품 신고
+		)rp
+		where u.user_id=rp.user_id
+		),
+		(select count(*) trade_count from	거래횟수
+		(
+		 select buyer_id user_id	직거래 구매
+		 from in_face_trading
+		 union
+		 select buyer_id user_id	안전거래 구매
+		 from safe_trading 
+		 union 
+		 select user_id from goods join safe_trading using (goods_id) 안전거래 판매
+		 union 
+		 select user_id from goods join in_face_trading using (goods_id) 직거래 판매
+		) tc
+		where u.user_id=tc.user_id
+		)
+		from user u
+		order by trade_count
+	</select>
+	
+	<select id="getUserInfo" parameterType="string" resultType="UserInfoDomain">	38P 회원정보 세부조회
+		select name,nickname,address,mobile_number,created_at,activate_status,
+		
+		(select count(*) 		안전거래횟수
+		from(
+		select buyer_id user_id from safe_trading
+		union
+		select user_id from goods join safe_trading using (goods_id)  
+		) sf
+		where sf.user_id=u.user_id
+		) safe_trading_count,
+		
+		(select count(*) 		직거래 횟수
+		from(
+		select buyer_id user_id from in_face_trading
+		union
+		select user_id from goods join in_face_trading using (goods_id)  
+		) i
+		where i.user_id=u.user_id
+		) in_face_trading_count,
+		
+		(select count(*) comment_report_count from (	댓글 신고횟수
+		select user_id uid1 from
+		comment_report r1 join community c1 on c1.comment_id=r1.refId
+		where uid1=u.userId
+		),
+		(select count(*) community_report_count from (	커뮤니티 신고횟수
+		select user_id uid2 from
+		community_report r2 join community c2 on c2.board_id=r2.refId
+		where uid2=u.userId
+		),
+		(select count(*) goods_report_count from (	상품글 신고횟수
+		select user_id uid3 from
+		goods_report r3 join goods g on g.goods_id=r3.refId
+		where uid3=u.userId
+		),
+		from user u
+		where user_id=#{user_id}
+	</select>
+ -->
