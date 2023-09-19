@@ -10,15 +10,24 @@
 		select count(*) from notification where user_id=#{userId} and read_yn='N'
 	</select>
 	
-	<select id="getCommentNotice" resultType="notificationDto" > <!-- 18P해당계정의 댓글알림 -->
+<!-- 	<select id="getNotiKeyword" parameterType="string" resultType="string"> 키워드알림 어케하는건가..
+		select user_id from notification_keyword where keyword like #{keyword} 	 
+	</select>																	
+	 -->
+	 
+	<insert id="insertNoti" parameterType="NotificationDto">	<!-- 알림생성 -->
+		insert into notification values(noti_id_sequence.nextval, #{userId}, #{message}, #{readYN}, #{type}, #{referenceId}, "")
+	</insert>
+	
+	<select id="getCommentNotice" resultType="NotificationDto" > <!-- 18P해당계정의 댓글알림 -->
 		select noti_id,message,read_yn,type,reference_id,created_at from notification where type=1 and user_id=#{userId}
 	</select>
 	
-	<select id="getKeywordNotice" resultType="notificationDto" > <!-- 18P해당계정의 키워드알림 -->
+	<select id="getKeywordNotice" resultType="NotificationDto" > <!-- 18P해당계정의 키워드알림 -->
 		select noti_id,message,read_yn,type,reference_id,created_at from notification where type=2 and user_id=#{userId}
 	</select>
 	
-	<select id="getTradeNotice" resultType="notificationDto" > <!-- 18P해당계정의 거래알림 -->
+	<select id="getTradeNotice" resultType="NotificationDto" > <!-- 18P해당계정의 거래알림 -->
 		select noti_id,message,read_yn,type,reference_id,created_at from notification where type=3 and user_id=#{userId}
 	</select>
 	

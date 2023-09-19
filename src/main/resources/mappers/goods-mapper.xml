@@ -9,6 +9,10 @@
 		order by created_at DESC
 	</select>
 	
+	<select id="updateViewCount"> <!-- 상품글 조회수 +1 -->
+		update goods set view_count=view_count+1
+	</select>
+	
 	<select id="getFavoriteList" parameterType="_int" resultType="GoodsDto"> <!--사진API로?--><!-- 6P 사진을 포함한 모아보기목록 가져옴 -->
 		select goods_id,user_id,title,price,status,created_at 
 		from goods g
@@ -70,6 +74,10 @@
 			from goods join user using (user_id) 
 			where goods_id=#{goodsId} and active_status='Y'
 		</select>
+		
+		<update id="updateStatus" parameterType="string"> <!-- 23P 상품상태 -->
+			update goods set status=#{status} where goods_id=#{goodsId}
+		</update>
 		
 <!-- 		<select id="getFourGoodsList">	22P 해당 계정의 상품글을 등록일자 내림차순으로 4개까지 가져오기
 			select goods_id, title, price from 

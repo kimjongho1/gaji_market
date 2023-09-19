@@ -52,5 +52,9 @@
 		values(transaction_id.nextval,#{buyerId},#{goodsId},#{perchaseMethod},#{price},
 		#{tradingDate},1,#{shippingAddress})
 	</insert>
+	
+	<insert id="addDealReview" parameterType="DealReviewDto"> <!-- 거래후기넣기 아직 화면설계없음. -->
+		insert into dealreview values(#{goodsId},#{buyerId},#{message},#{mannerPoint},#{timePoint},#{goodsPoint})
+	</insert>
 
 </mapper>
