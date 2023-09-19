@@ -25,7 +25,7 @@
 	</update>
 
 	<select id="getSafePurchaseInfo" parameterType="string" resultType="SafePurchaseInfoDomain">	<!-- 11P 안전거래 상세정보 가져오기 -->
-		select s.goods_id,s.goods_title,(select g.user_id seller_id from goods g where g.goods_id= s.goods_id),
+		select s.goods_id,s.goods_title,(select g.user_id seller_id from goods g where g.goods_id = s.goods_id),
 			   s.buyer_id,(select u.mobile_number,u.name from user u where u.user_id=s.buyer_id), 
 			   s.shipping_address, s.price, s.trading_date, s.trading_status, s.tracking_number 
 			   from safe_trading s
@@ -39,12 +39,12 @@
 		order by trading_date DESC;
 	</select>
 	
-	<select id="getInfacePurchaseList" parameterType="string" resultType="InFaceTradingDto"> <!-- 9P 직거래 구매내역(회원) 불러오기 -->
+	<!-- <select id="getInfacePurchaseList" parameterType="string" resultType="InFaceTradingDto"> 9P 직거래 구매내역(회원) 불러오기
 		select goods_id,in_face_trading_id,goods_title,trading_status,i.price,trading_date 
 		from in_face_trading i join goods g using (goods_id)
-		where buyer_id=#{} 
+		where buyer_id=#{}   
 		order by trading_date DESC;
-	</select>
+	</select> -->
 	
 	<insert id="addSafeTrading" parameterType="SafeTradingDto">	<!-- 49P 새로운 안전결제 레코드 생성 -->
 		insert into safe_trading 
