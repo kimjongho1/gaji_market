@@ -38,8 +38,8 @@ public class UserDao {
     }
 
     // 새로 입력된 주소를 count+1 주소 순서에 추가한다
-    public int insertAddress(UserInsertAddressDto userAddressDomain) {
-    	return sqlSession.insert("user.insertAddress", userAddressDomain);
+    public int insertAddress(UserInsertAddressDto userAddressDto) {
+    	return sqlSession.insert("user.insertAddress", userAddressDto);
     }
 
     // 주소 삭제 1단계 작업

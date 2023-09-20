@@ -31,7 +31,7 @@
 		<typeAlias type="kh.spring.gaji.wishlist.model.dto.WishListDto" alias="WishListDto"/>
 		
 		
-		<typeAlias type="kh.spring.gaji.user.model.dto.UserAddressDto" alias="UserAddressDto"/>
+		<typeAlias type="kh.spring.gaji.user.model.dto.UserInsertAddressDto" alias="UserInsertAddressDto"/>
 		<typeAlias type="kh.spring.gaji.report.model.dto.ReportInfoDto" alias="ReportInfoDto"/>
 		<typeAlias type="kh.spring.gaji.pay.model.dto.SafePurchaseInfoDto" alias="SafePurchaseInfoDto"/>
 		<typeAlias type="kh.spring.gaji.pay.model.dto.InFacePurchaseDto" alias="InFacePurchaseDto"/>
