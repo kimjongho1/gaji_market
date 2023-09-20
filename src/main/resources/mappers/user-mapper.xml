@@ -20,7 +20,7 @@
 		update user_address set address_no=1 from user_address where user_id=#{user_id} and address_no=#{addressNo}+1
 	</update>
 	
-	<insert id="insertAddress" parameterType="UserAddressDomain">	<!-- 새로입력된 주소를 count+1 주소순서에 추가한다 -->
+	<insert id="insertAddress" parameterType="UserInsertAddressDto">	<!-- 새로입력된 주소를 count+1 주소순서에 추가한다 -->
 		insert into user_address values(#{address},#{detailAddress},#{userId},#{postCode},#{nickname},(select count(*) from user_address where user_id=#{user_id})+1)
 	</insert>
 	

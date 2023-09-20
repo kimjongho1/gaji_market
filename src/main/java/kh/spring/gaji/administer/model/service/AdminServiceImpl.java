@@ -7,11 +7,11 @@ import org.springframework.transaction.annotation.Transactional;
 
 import kh.spring.gaji.administer.model.dao.AdminDao;
 import kh.spring.gaji.administer.model.dto.UserBlockingDto;
-import kh.spring.gaji.pay.model.domain.InFaceTradingInfoDomain;
-import kh.spring.gaji.pay.model.domain.SafeTradingDomain;
-import kh.spring.gaji.pay.model.domain.SafeTradingInfoDomain;
-import kh.spring.gaji.user.model.domain.UserCountReportDomain;
-import kh.spring.gaji.user.model.domain.UserInfoDomain;
+import kh.spring.gaji.pay.model.dto.AdminSafeTradingDto;
+import kh.spring.gaji.pay.model.dto.InFaceTradingInfoDto;
+import kh.spring.gaji.pay.model.dto.SafeTradingInfoDto;
+import kh.spring.gaji.user.model.dto.UserCountReportDto;
+import kh.spring.gaji.user.model.dto.UserInfoDto;
 
 @Service
 public class AdminServiceImpl implements AdminService {
@@ -20,72 +20,72 @@ public class AdminServiceImpl implements AdminService {
     private AdminDao adminDao;
 
     @Override
-    public List<kh.spring.gaji.pay.model.domain.InFacePurchaseDomain> InFacePurchaseDomain() {
+    public List<kh.spring.gaji.pay.model.dto.InFacePurchaseDto> InFacePurchaseDomain() {
         return adminDao.InFacePurchaseDomain();
     }
 
     @Override
-    public List<kh.spring.gaji.pay.model.domain.InFacePurchaseDomain> getSearchTitleInfacePurchaseList(String searchWord) {
+    public List<kh.spring.gaji.pay.model.dto.InFacePurchaseDto> getSearchTitleInfacePurchaseList(String searchWord) {
         return adminDao.getSearchTitleInfacePurchaseList(searchWord);
     }
 
     @Override
-    public List<kh.spring.gaji.pay.model.domain.InFacePurchaseDomain> getSearchIdInfacePurchaseList(String searchWord) {
+    public List<kh.spring.gaji.pay.model.dto.InFacePurchaseDto> getSearchIdInfacePurchaseList(String searchWord) {
         return adminDao.getSearchIdInfacePurchaseList(searchWord);
     }
 
     @Override
-    public List<kh.spring.gaji.pay.model.domain.InFacePurchaseDomain> getSearchUserInfacePurchaseList(String searchWord) {
+    public List<kh.spring.gaji.pay.model.dto.InFacePurchaseDto> getSearchUserInfacePurchaseList(String searchWord) {
         return adminDao.getSearchUserInfacePurchaseList(searchWord);
     }
 
     @Override
-    public InFaceTradingInfoDomain getInfaceTradingInfo(int inFaceTradingId) {
+    public InFaceTradingInfoDto getInfaceTradingInfo(int inFaceTradingId) {
         return adminDao.getInfaceTradingInfo(inFaceTradingId);
     }
 
     @Override
-    public List<SafeTradingDomain> getSafeTradingList() {
+    public List<AdminSafeTradingDto> getSafeTradingList() {
         return adminDao.getSafeTradingList();
     }
 
     @Override
-    public List<SafeTradingDomain> getSearchSafeTradingList(String searchWord) {
+    public List<AdminSafeTradingDto> getSearchSafeTradingList(String searchWord) {
         return adminDao.getSearchSafeTradingList(searchWord);
     }
 
     @Override
-    public List<SafeTradingDomain> getIdSearchSafeTradingList(String searchWord) {
+    public List<AdminSafeTradingDto> getIdSearchSafeTradingList(String searchWord) {
         return adminDao.getIdSearchSafeTradingList(searchWord);
     }
 
     @Override
-    public List<SafeTradingDomain> getGoodsSearchSafeTradingList(String searchWord) {
+    public List<AdminSafeTradingDto> getGoodsSearchSafeTradingList(String searchWord) {
         return adminDao.getGoodsSearchSafeTradingList(searchWord);
     }
 
     @Override
-    public SafeTradingInfoDomain getSafeTradingInfo(String searchWord) {
+    public SafeTradingInfoDto getSafeTradingInfo(String searchWord) {
         return adminDao.getSafeTradingInfo(searchWord);
     }
 
     @Override
-    public List<UserCountReportDomain> getUserList() {
+    public List<UserCountReportDto> getUserList() {
         return adminDao.getUserList();
     }
 
     @Override
-    public List<UserCountReportDomain> adminGetUserList() {
+    public List<UserCountReportDto> adminGetUserList() {
         return adminDao.adminGetUserList();
     }
 
     @Override
-    public List<UserCountReportDomain> getSearchUserList(String searchWord) {
+    public List<UserCountReportDto> getSearchUserList(String searchWord) {
         return adminDao.getSearchUserList(searchWord);
     }
 
     @Override
-    public UserInfoDomain getUserInfo(String userId) {
+    public UserInfoDto getUserInfo(String userId) {
         return adminDao.getUserInfo(userId);
     }
 

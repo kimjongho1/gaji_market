@@ -9,9 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import kh.spring.gaji.pay.model.dto.DealReviewDto;
-import kh.spring.gaji.user.model.domain.UserAddressDomain;
 import kh.spring.gaji.user.model.dto.UserAddressDto;
 import kh.spring.gaji.user.model.dto.UserDto;
+import kh.spring.gaji.user.model.dto.UserInsertAddressDto;
 
 @Repository
 public class UserDao {
@@ -38,7 +38,7 @@ public class UserDao {
     }
 
     // 새로 입력된 주소를 count+1 주소 순서에 추가한다
-    public int insertAddress(UserAddressDomain userAddressDomain) {
+    public int insertAddress(UserInsertAddressDto userAddressDomain) {
     	return sqlSession.insert("user.insertAddress", userAddressDomain);
     }
 

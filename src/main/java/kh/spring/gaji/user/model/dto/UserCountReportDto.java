@@ -1,11 +1,11 @@
-package kh.spring.gaji.user.model.domain;
+package kh.spring.gaji.user.model.dto;
 
 import org.springframework.stereotype.Component;
 import lombok.Data;
 
 @Component
 @Data
-public class UserCountReportDomain {
+public class UserCountReportDto {
 	private String userId;
 	private String name;
 	private int inviteCount;

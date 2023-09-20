@@ -12,28 +12,28 @@
 	<select id="getDongList" parameterType="string" resultType="map"> <!--동 리스트 뽑기,  dto따로 필요없을듯. -->
 		select * from dong where gu_id=#{guId}
 	</select>
-	<select id="getBoardList" parameterType="string" resultType="CommunityLikeDomain">	<!-- 27P 커뮤니티글 리스트 -->
+	<select id="getBoardList" parameterType="string" resultType="CommunityLikeDto">	<!-- 27P 커뮤니티글 리스트 -->
 		select c.board_id,c.title,c.writer,c.title,c.created_at,c.view_count,count(c.board_id) as like_count 
 		from community c left join tbl_like l using (board_id) 
 		where activate_status='Y' and dong_id=#{dongId}
 		group by c.board_id,c.writer,c.title,c.created_at,c.view_count
 		order by c.created_at desc
 	</select>
-	<select id="getSearchTitleBoardList" parameterType="map" resultType="CommunityLikeDomain">	<!-- 27P 커뮤니티글 제목검색 리스트 -->
+	<select id="getSearchTitleBoardList" parameterType="map" resultType="CommunityLikeDto">	<!-- 27P 커뮤니티글 제목검색 리스트 -->
 		select c.board_id,c.writer,title,c.created_at,c.view_count,count(board_id) as like_count 
 		from community c left join tbl_like l using (board_id)
 		where title like #{searchWord} and activate_status='Y' and dong_id=#{dongId}
 		group by c.board_id,c.writer,c.title,c.created_at,c.view_count
 		order by c.created_at desc
 	</select>
-	<select id="getSearchNicknameBoardList" parameterType="map" resultType="CommunityLikeDomain">	<!-- 27P 커뮤니티글 글쓴이 리스트 -->
+	<select id="getSearchNicknameBoardList" parameterType="map" resultType="CommunityLikeDto">	<!-- 27P 커뮤니티글 글쓴이 리스트 -->
 		select c.board_id,c.writer,c.title,c.created_at,c.view_count,count(board_id) as like_count 
 		from community c left join tbl_like l using (board_id)
 		where nickname like #{searchWord} and activate_status='Y' and dong_id=#{dongId}
 		group by c.board_id,c.writer,c.title,c.created_at,c.view_count
 		order by c.created_at desc
 	</select>
-	<select id="getSearchBoardList" parameterType="map" resultType="CommunityLikeDomain">	<!-- 27P 커뮤니티글 제목+글쓴이 검색 리스트 -->
+	<select id="getSearchBoardList" parameterType="map" resultType="CommunityLikeDto">	<!-- 27P 커뮤니티글 제목+글쓴이 검색 리스트 -->
 		select c.board_id,c.writer,c.title,c.created_at,c.view_count,count(board_id) as like_count 
 		from community c left join tbl_like l using (board_id)
 		where (title like #{searchWord} or nickname like #{searchWord}) and c.activate_status='Y' and dong_id=#{dongId}
@@ -51,7 +51,7 @@
 		where board_id=#{boardId}
 	</update>
 	
-	<select id="getBoard" parameterType="_int" resultType="CommunityInfoDomain"> <!-- 30P 커뮤니티글 상세조회 -->
+	<select id="getBoard" parameterType="_int" resultType="CommunityInfoDto"> <!-- 30P 커뮤니티글 상세조회 -->
 		select board_id,(select nickname from user where user_id = writer),
 		writer,dong_id,title,content,created_at,view_count,lat,lng,
 		(select count(*) like_count from tbl_like l where l.board_id=c.board_id)

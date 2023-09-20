@@ -2,8 +2,8 @@ package kh.spring.gaji.goods.model.Service;
 
 import java.util.List;
 
-import kh.spring.gaji.goods.model.domain.GoodsInfoDomain;
 import kh.spring.gaji.goods.model.dto.GoodsDto;
+import kh.spring.gaji.goods.model.dto.GoodsInfoDto;
 
 public interface GoodsService {
 	List<GoodsDto> getKeepList(int userId);// 5P 사진을 포함한 찜목록을 가져옴
@@ -20,7 +20,7 @@ public interface GoodsService {
 
     int insertGoods(GoodsDto goodsDto); // 24P 상품글 등록
 
-    GoodsInfoDomain getGoodsInfo(int goodsId);// 23P 상품글 상세조회
+    GoodsInfoDto getGoodsInfo(int goodsId);// 23P 상품글 상세조회
 
     int updateStatus(String status, int goodsId); // 23P 상품상태
 

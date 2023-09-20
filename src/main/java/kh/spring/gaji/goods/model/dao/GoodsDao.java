@@ -5,8 +5,9 @@ import java.util.Map;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import kh.spring.gaji.goods.model.domain.GoodsInfoDomain;
+
 import kh.spring.gaji.goods.model.dto.GoodsDto;
+import kh.spring.gaji.goods.model.dto.GoodsInfoDto;
 
 @Repository
 public class GoodsDao{
@@ -48,7 +49,7 @@ public class GoodsDao{
 	    }
 
 	    // 23P 상품글 상세조회
-	    public GoodsInfoDomain getGoodsInfo(int goodsId) {
+	    public GoodsInfoDto getGoodsInfo(int goodsId) {
 	        return sqlSession.selectOne("goods.getGoodsInfo", goodsId);
 	    }
 

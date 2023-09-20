@@ -6,9 +6,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import kh.spring.gaji.pay.model.dao.PayDao;
-import kh.spring.gaji.pay.model.domain.SafePurchaseInfoDomain;
 import kh.spring.gaji.pay.model.dto.DealReviewDto;
 import kh.spring.gaji.pay.model.dto.InFaceTradingDto;
+import kh.spring.gaji.pay.model.dto.SafePurchaseInfoDto;
 import kh.spring.gaji.pay.model.dto.SafeTradingDto;
 
 @Service
@@ -38,7 +38,7 @@ public class PayServiceImpl implements PayService {
 	}
 
 	@Override
-	public SafePurchaseInfoDomain getSafePurchaseInfo(String transactionId) {	// 11P 안전거래 상세정보 가져오기 
+	public SafePurchaseInfoDto getSafePurchaseInfo(String transactionId) {	// 11P 안전거래 상세정보 가져오기 
 		return payDao.getSafePurchaseInfo(transactionId);
 	}
 

@@ -1,10 +1,10 @@
-package kh.spring.gaji.community.model.domain;
+package kh.spring.gaji.community.model.dto;
 import org.springframework.stereotype.Component;
 import lombok.Data;
 
 @Component
 @Data
-public class CommunityLikeDomain {
+public class CommunityLikeDto {
     private int boardId;
     private String title;
     private String writer;

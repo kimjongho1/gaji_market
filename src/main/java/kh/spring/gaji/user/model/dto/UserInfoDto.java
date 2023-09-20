@@ -1,10 +1,10 @@
-package kh.spring.gaji.user.model.domain;
+package kh.spring.gaji.user.model.dto;
 import org.springframework.stereotype.Component;
 import lombok.Data;
 
 @Component
 @Data
-public class UserInfoDomain {
+public class UserInfoDto {
     private String name;
     private String nickname;
     private String address;

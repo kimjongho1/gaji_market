@@ -1,10 +1,10 @@
-package kh.spring.gaji.pay.model.domain;
+package kh.spring.gaji.pay.model.dto;
 import org.springframework.stereotype.Component;
 import lombok.Data;
 
 @Component
 @Data
-public class SafePurchaseInfoDomain {
+public class SafePurchaseInfoDto {
     private int goodsId;
     private String goodsTitle;
     private String sellerId;

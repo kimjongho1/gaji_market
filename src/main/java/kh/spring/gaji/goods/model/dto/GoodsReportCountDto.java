@@ -1,12 +1,12 @@
-package kh.spring.gaji.report.model.domain;
+package kh.spring.gaji.goods.model.dto;
 import org.springframework.stereotype.Component;
 import lombok.Data;
 
 @Component
 @Data
-public class CommunityReportListDomain {
-    private int boardId;
+public class GoodsReportCountDto {
+    private int goodsId;
     private String title;
-    private String writer;
+    private String userId;
     private int reportCount;
 }

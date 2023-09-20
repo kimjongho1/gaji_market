@@ -2,9 +2,9 @@ package kh.spring.gaji.report.model.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import kh.spring.gaji.goods.model.domain.GoodsReportCountDomain;
+import kh.spring.gaji.goods.model.dto.GoodsReportCountDto;
 import kh.spring.gaji.report.model.dao.ReportDao;
-import kh.spring.gaji.report.model.domain.GoodsReportInfoDomain;
+import kh.spring.gaji.report.model.dto.GoodsReportInfoDto;
 import kh.spring.gaji.report.model.dto.ReportDto;
 
 import java.util.List;
@@ -23,25 +23,25 @@ public class ReportServiceImpl implements ReportService {
 
     // 39P 상품글리스트(상품+신고수)
     @Override
-    public List<GoodsReportCountDomain> getGoodsReportCount() {
+    public List<GoodsReportCountDto> getGoodsReportCount() {
         return reportDao.getGoodsReportCount();
     }
 
     // 39P 상품글리스트(상품+신고수) 미검토글만
     @Override
-    public List<GoodsReportCountDomain> getGoodsReportCountN() {
+    public List<GoodsReportCountDto> getGoodsReportCountN() {
         return reportDao.getGoodsReportCountN();
     }
 
     // 39P 회원 ID 검색 상품글리스트(상품+신고수) 미검토글만
     @Override
-    public List<GoodsReportCountDomain> getSearchGoodsReportCount(String searchWord) {
+    public List<GoodsReportCountDto> getSearchGoodsReportCount(String searchWord) {
         return reportDao.getSearchGoodsReportCount(searchWord);
     }
 
     // 39P 회원 ID 검색 상품글리스트(상품+신고수) 미검토글만
     @Override
-    public List<GoodsReportCountDomain> getSearchGoodsReportCountN(String searchWord) {
+    public List<GoodsReportCountDto> getSearchGoodsReportCountN(String searchWord) {
         return reportDao.getSearchGoodsReportCountN(searchWord);
     }
 
@@ -53,7 +53,7 @@ public class ReportServiceImpl implements ReportService {
 
     // 41P 상품 신고내용 상세조회
     @Override
-    public GoodsReportInfoDomain getGoodsReportInfo(Map<String, Object> params) {
+    public GoodsReportInfoDto getGoodsReportInfo(Map<String, Object> params) {
         return reportDao.getGoodsReportInfo(params);
     }
 }

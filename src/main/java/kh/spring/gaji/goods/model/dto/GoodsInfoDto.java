@@ -1,10 +1,10 @@
-package kh.spring.gaji.goods.model.domain;
+package kh.spring.gaji.goods.model.dto;
 import org.springframework.stereotype.Component;
 import lombok.Data;
 
 @Component
 @Data
-public class GoodsInfoDomain{
+public class GoodsInfoDto{
     private int goodsId;
     private String userId;
     private int categoryId;
