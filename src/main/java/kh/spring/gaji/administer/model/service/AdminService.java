@@ -31,11 +31,15 @@ import kh.spring.gaji.user.model.domain.UserInfoDomain;
 	    
 	    SafeTradingInfoDomain getSafeTradingInfo(String searchWord);  // 36P 안전거래 세부조회(관리자)
 	    
-	    List<UserCountReportDomain> getUserList();  // 37P 회원정보조회 LIST 신고상위
+	    List<UserCountReportDomain> getUserList();  // 37P 회원정보조회 LIST
 	    
-	    List<UserCountReportDomain> adminGetUserList();  // 37P 거래상위 회원정보조회 LIST
+	    List<UserCountReportDomain> getTopReportUserList(); // 37P 회원정보조회 LIST 신고상위
 	    
-	    List<UserCountReportDomain> getSearchUserList(String searchWord);  // 37P 거래상위 회원정보조회 LIST
+	    List<UserCountReportDomain> getSearchIdTopReportUserList(String searchWord); // 37P 신고상위 ID검색 회원정보조회 LIST
+	    
+	    List<UserCountReportDomain> getTopTradeUserList(String searchWord); // 37P 거래상위 회원정보조회 LIST
+	    
+	    List<UserCountReportDomain> getSearchIdTopTradeUserList(String searchWord); // 37P 거래상위 ID검색 회원정보조회 LIST
 	    
 	    UserInfoDomain getUserInfo(String userId);  // 38P 회원정보 세부조회
 	    

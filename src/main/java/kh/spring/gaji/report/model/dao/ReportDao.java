@@ -34,13 +34,15 @@ public class ReportDao {
         return sqlSession.selectList("report.getGoodsReportCountN");
     }
 
-    // 39P 회원 ID 검색 상품글리스트(상품+신고수) 미검토글만
+    // 39P 회원 ID 검색 상품글리스트(상품+신고수)
     public List<GoodsReportCountDomain> getSearchGoodsReportCount(String searchWord) {
+    	searchWord = "%"+searchWord+"%";
         return sqlSession.selectList("report.getSearchGoodsReportCount", searchWord);
     }
 
     // 39P 회원 ID 검색 상품글리스트(상품+신고수) 미검토글만
     public List<GoodsReportCountDomain> getSearchGoodsReportCountN(String searchWord) {
+    	searchWord="%"+searchWord+"%";
         return sqlSession.selectList("report.getSearchGoodsReportCountN", searchWord);
     }
 
@@ -50,7 +52,7 @@ public class ReportDao {
     }
 
     // 41P 상품 신고내용 상세조회
-    public GoodsReportInfoDomain getGoodsReportInfo(Map<String, Object> params) {
-        return sqlSession.selectOne("report.getGoodsReportInfo", params);
+    public GoodsReportInfoDomain getGoodsReportInfo(Map<String, Object> map) {
+        return sqlSession.selectOne("report.getGoodsReportInfo", map);
     }
 }

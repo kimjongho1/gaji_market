@@ -88,7 +88,7 @@
 		insert into deal_review values(#{goodsId},#{buyerId},#{message},#{mannerPoint},#{timePoint},#{goodsPoint})
 	</insert>
 	
-	<update id="updateRatingScore"> <!-- trade-mapper의 거래후기에따른 매너온도 업데이트 -->
+	<update id="updateRatingScore" parameterType="map"> <!-- trade-mapper의 거래후기에따른 매너온도 업데이트 -->
 		update user set rating_score= rating_score + (#{mannerPoint}+#{timePoint}+#{goodsPoint}-11)/5
 	</update>
 	

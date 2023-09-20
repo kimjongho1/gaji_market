@@ -63,16 +63,31 @@ public class AdminDao {
 		return sqlSession.selectOne("admin.getGoodsSearchSafeTradingList",searchWold);
 	}
 	
-	public List<UserCountReportDomain> getUserList() {		//37P 회원정보조회 LIST 신고상위
-		return sqlSession.selectList("admin.getUserList");
+	// 회원정보조회 LIST
+	public List<UserCountReportDomain> getUserList() {
+	    return sqlSession.selectList("user.getUserList");
 	}
-	public List<UserCountReportDomain> adminGetUserList() {	//37P 거래상위 회원정보조회 LIST
-		return sqlSession.selectList("admin.getUserList");
+
+	// 회원정보조회 LIST 신고상위
+	public List<UserCountReportDomain> getTopReportUserList() {
+	    return sqlSession.selectList("user.getTopReportUserList");
 	}
-	public List<UserCountReportDomain> getSearchUserList(String searchWord) {	//37P 거래상위 회원정보조회 LIST
-		searchWord="%"+searchWord+"%";
-		return sqlSession.selectList("admin.getSearchUserList");
+
+	// 신고상위 ID검색 회원정보조회 LIST
+	public List<UserCountReportDomain> getSearchIdTopReportUserList(String searchWord) {
+	    return sqlSession.selectList("user.getSearchIdTopReportUserList", searchWord);
 	}
+
+	// 거래상위 회원정보조회 LIST
+	public List<UserCountReportDomain> getTopTradeUserList(String searchWord) {
+	    return sqlSession.selectList("user.getTopTradeUserList", searchWord);
+	}
+
+	// 거래상위 ID검색 회원정보조회 LIST
+	public List<UserCountReportDomain> getSearchIdTopTradeUserList(String searchWord) {
+	    return sqlSession.selectList("user.getSearchIdTopTradeUserList", searchWord);
+	}
+	
 	public UserInfoDomain getUserInfo(String userId) {	// 38P 회원정보 세부조회
 		return sqlSession.selectOne("admin.getUserInfo");
 	}
