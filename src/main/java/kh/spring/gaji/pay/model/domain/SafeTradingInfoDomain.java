@@ -1,4 +1,4 @@
-package kh.spring.gaji.trade.model.domain;
+package kh.spring.gaji.pay.model.domain;
 
 import org.springframework.stereotype.Component;
 import lombok.Data;

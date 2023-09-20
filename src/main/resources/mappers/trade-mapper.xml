@@ -1,6 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC " -//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="trade">
+	
+	<select id="getSafePurchaseList" parameterType="string" resultType="SafeTradingDto">	<!-- 9P 안전거래 구매내역(회원) 불러오기 -->
+		select 	goods_id,transaction_id,goods_title,trading_status,s.price,trading_date 
+		from safe_trading s join goods g using (goods_id)
+		where buyer_id=#{buyerId} 
+		order by trading_date desc;
+	</select>
+	
+	<select id="getInfacePurchaseList" parameterType="string" resultType="InFaceTradingDto"> <!-- 9P 직거래 구매내역(회원) 불러오기 -->
+		select goods_id,in_face_trading_id,goods_title,trading_status,i.price,trading_date 
+		from in_face_trading i join goods g using (goods_id)
+		where buyer_id=#{buyerId} 
+		order by trading_date desc;
+	</select>
+	
 	<update id="cancelSafeTrading" parameterType="_int">		<!-- 11P 안전거래 결제취소, 레코드는 삭제하지 않고 거래상태 업데이트 -->
 		update safe_trading 
 		set trading_status=5 
@@ -25,26 +40,14 @@
 	</update>
 
 	<select id="getSafePurchaseInfo" parameterType="string" resultType="SafePurchaseInfoDomain">	<!-- 11P 안전거래 상세정보 가져오기 -->
-		select s.goods_id,s.goods_title,(select g.user_id seller_id from goods g where g.goods_id = s.goods_id),
+		select s.goods_id,s.goods_title,(select g.user_id seller_id from goods g where g.goods_id= s.goods_id),
 			   s.buyer_id,(select u.mobile_number,u.name from user u where u.user_id=s.buyer_id), 
 			   s.shipping_address, s.price, s.trading_date, s.trading_status, s.tracking_number 
 			   from safe_trading s
 			   where transaction_id=#{transactionId}
 	</select>
 	
-	<select id="getSafePurchaseList" parameterType="string" resultType="SafeTradingDto">	<!-- 9P 안전거래 구매내역(회원) 불러오기 -->
-		select 	goods_id,transaction_id,goods_title,trading_status,s.price,trading_date 
-		from safe_trading s join goods g using (goods_id)
-		where buyer_id=#{buyerId} 
-		order by trading_date DESC;
-	</select>
-	
-	<!-- <select id="getInfacePurchaseList" parameterType="string" resultType="InFaceTradingDto"> 9P 직거래 구매내역(회원) 불러오기
-		select goods_id,in_face_trading_id,goods_title,trading_status,i.price,trading_date 
-		from in_face_trading i join goods g using (goods_id)
-		where buyer_id=#{}   
-		order by trading_date DESC;
-	</select> -->
+
 	
 	<insert id="addSafeTrading" parameterType="SafeTradingDto">	<!-- 49P 새로운 안전결제 레코드 생성 -->
 		insert into safe_trading 
@@ -52,9 +55,4 @@
 		values(transaction_id.nextval,#{buyerId},#{goodsId},#{perchaseMethod},#{price},
 		#{tradingDate},1,#{shippingAddress})
 	</insert>
-	
-	<insert id="addDealReview" parameterType="DealReviewDto"> <!-- 거래후기넣기 아직 화면설계없음. -->
-		insert into dealreview values(#{goodsId},#{buyerId},#{message},#{mannerPoint},#{timePoint},#{goodsPoint})
-	</insert>
-
 </mapper>
