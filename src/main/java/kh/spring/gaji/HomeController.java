@@ -37,7 +37,7 @@ public class HomeController {
 		return "home";
 	}
 
-	// 추후 수정 : 김종호 (230923)
+	// 추후 수정 : 김종호 추가(230923)
 		@GetMapping("/chat")
 		public String chatGET() {
 
