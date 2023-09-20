@@ -26,6 +26,10 @@ public class UploadController {
 	public String showUploadForm() {
 		return "filetest"; // 이미지 업로드 폼을 표시할 JSP 페이지로 이동
 	}
+	@GetMapping("/superce")
+	public String showUploadForm1() {
+		return "superce"; // 이미지 업로드 폼을 표시할 JSP 페이지로 이동
+	}
 	@GetMapping("/address")
 	public String address() {
 		return "address/addresstest"; // 이미지 업로드 폼을 표시할 JSP 페이지로 이동
@@ -42,9 +46,9 @@ public class UploadController {
 		String imageUrl = cloudinary.url().generate((String)imageUrl2.get("secure_url")); // 업로드된 파일의 url을 가져옴
 		System.out.println(imageUrl);
 //		model.addAttribute("imageUrl", imageUrl2);
-		String jsonResponse = "{ \"uploaded\" : true, \"url\" : \"" + imageUrl + "\" }";
-		System.out.println(jsonResponse);
-		Map<String, Object> uploaded = new HashMap<String, Object>();
+//		String jsonResponse = "{ \"uploaded\" : true, \"url\" : \"" + imageUrl + "\" }"; // String 값으로 JSON형식 만듬
+//		System.out.println(jsonResponse);
+		Map<String, Object> uploaded = new HashMap<String, Object>(); // 위에 String 값으로 해도되나 더러워보여 HashMap형식으로 넣고 Gson으로 json형식 변환
 		uploaded.put("uploaded", true);
 		uploaded.put("uploaded", imageUrl);
 		return new Gson().toJson(uploaded);

@@ -33,8 +33,8 @@ public class UserDao {
     }
 
     // 주소 순서를 1로 바꿈으로써 대표 주소 변경
-    public int updateMainAddress(Map<String, Object> params) {
-    	return sqlSession.update("user.updateMainAddress", params);
+    public int updateMainAddress(Map<String, Object> map) {
+    	return sqlSession.update("user.updateMainAddress", map);
     }
 
     // 새로 입력된 주소를 count+1 주소 순서에 추가한다
@@ -70,8 +70,8 @@ public class UserDao {
     }
 
     // 패스워드를 변경한다
-    public int updatePass(Map<String, Object> params) {
-    	return sqlSession.update("user.updatePass", params);
+    public int updatePass(Map<String, Object> map) {
+    	return sqlSession.update("user.updatePass", map);
     }
 
     // 아이디 중복 검사
@@ -90,26 +90,26 @@ public class UserDao {
     }
 
     // 아이디 찾기
-    public String findId(Map<String, Object> params) {
-        return sqlSession.selectOne("user.findId", params);
+    public String findId(Map<String, Object> map) {
+        return sqlSession.selectOne("user.findId", map);
     }
 
     // 비밀번호 변경
-    public int findPass(Map<String, Object> params) {
-    	return sqlSession.update("user.findPass", params);
+    public int findPass(Map<String, Object> map) {
+    	return sqlSession.update("user.findPass", map);
     }
 
     // 계좌 등록
     public int addAccount(String userAccount, String userId) {
-        Map<String, Object> params = new HashMap<>();
-        params.put("userAccount", userAccount);
-        params.put("userId", userId);
-        return sqlSession.insert("user.addAccount", params);
+        Map<String, Object> map = new HashMap<>();
+        map.put("userAccount", userAccount);
+        map.put("userId", userId);
+        return sqlSession.insert("user.addAccount", map);
     }
 
     // 유저 즐겨찾기(모아보기) 23P
-    public int addFavoriteUser(Map<String, Object> params) {
-        return sqlSession.insert("user.addFavoriteUser", params);
+    public int addFavoriteUser(Map<String, Object> map) {
+        return sqlSession.insert("user.addFavoriteUser", map);
     }
 
     // 거래 후기 넣기 (아직 화면 설계 없음)
@@ -118,7 +118,7 @@ public class UserDao {
     }
 
     // trade-mapper의 거래 후기에 따른 매너 온도 업데이트
-    public int updateRatingScore(Map<String, Object> params) {
-    	return sqlSession.update("user.updateRatingScore", params);
+    public int updateRatingScore(Map<String, Object> map) {
+    	return sqlSession.update("user.updateRatingScore", map);
     }
 }

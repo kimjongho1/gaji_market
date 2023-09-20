@@ -5,75 +5,90 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import kh.spring.gaji.administer.model.dto.UserBlockingDto;
-import kh.spring.gaji.pay.model.dto.AdminSafeTradingDto;
-import kh.spring.gaji.pay.model.dto.InFacePurchaseDto;
-import kh.spring.gaji.pay.model.dto.InFaceTradingInfoDto;
-import kh.spring.gaji.pay.model.dto.SafeTradingInfoDto;
-import kh.spring.gaji.user.model.dto.UserCountReportDto;
-import kh.spring.gaji.user.model.dto.UserInfoDto;
+import kh.spring.gaji.pay.model.domain.InFacePurchaseDomain;
+import kh.spring.gaji.pay.model.domain.InFaceTradingInfoDomain;
+import kh.spring.gaji.pay.model.domain.SafeTradingDomain;
+import kh.spring.gaji.pay.model.domain.SafeTradingInfoDomain;
+import kh.spring.gaji.user.model.domain.UserCountReportDomain;
+import kh.spring.gaji.user.model.domain.UserInfoDomain;
 
 @Repository
 public class AdminDao {
 	@Autowired
 	private SqlSession sqlSession;
 	
-	public List<InFacePurchaseDto> InFacePurchaseDomain() {	//33P 직거래 조회 
+	public List<InFacePurchaseDomain> InFacePurchaseDomain() {	//33P 직거래 조회 
 		return sqlSession.selectList("admin.getetInfacePurchaseList");
 	}
 	
-	public List<InFacePurchaseDto> getSearchTitleInfacePurchaseList(String searchWord) {	//33P 직거래 조회 상품명
+	public List<InFacePurchaseDomain> getSearchTitleInfacePurchaseList(String searchWord) {	//33P 직거래 조회 상품명
 		searchWord="%"+searchWord+"%";
 		return sqlSession.selectList("admin.getSearchTitleInfacePurchaseList",searchWord);
 	}
 	
-	public List<InFacePurchaseDto> getSearchIdInfacePurchaseList(String searchWord) {	//33P 직거래 조회 상품ID
+	public List<InFacePurchaseDomain> getSearchIdInfacePurchaseList(String searchWord) {	//33P 직거래 조회 상품ID
 		searchWord="%"+searchWord+"%";
 		return sqlSession.selectList("admin.getSearchIdInfacePurchaseList",searchWord);
 	}
 	
-	public List<InFacePurchaseDto> getSearchUserInfacePurchaseList(String searchWord) {	//33P 직거래 조회 회원ID 
+	public List<InFacePurchaseDomain> getSearchUserInfacePurchaseList(String searchWord) {	//33P 직거래 조회 회원ID 
 		searchWord="%"+searchWord+"%";
 		return sqlSession.selectList("admin.getSearchUserInfacePurchaseList",searchWord);
 	}
 	
-	public InFaceTradingInfoDto getInfaceTradingInfo(int inFaceTradingId) {	//34P 관리자 직거래 세부조회
+	public InFaceTradingInfoDomain getInfaceTradingInfo(int inFaceTradingId) {	//34P 관리자 직거래 세부조회
 		return sqlSession.selectOne("admin.getInfaceTradingInfo",inFaceTradingId);
 	}
 	
-	public List<AdminSafeTradingDto> getSafeTradingList() {	//35P 안전거래조회(관리자)
+	public List<SafeTradingDomain> getSafeTradingList() {	//35P 안전거래조회(관리자)
 		return sqlSession.selectList("admin.getSafeTradingList");
 	}
 	
-	public List<AdminSafeTradingDto> getSearchSafeTradingList(String searchWord) {	//35P 안전거래 조회 검색(안전거래번호)
+	public List<SafeTradingDomain> getSearchSafeTradingList(String searchWord) {	//35P 안전거래 조회 검색(안전거래번호)
 		searchWord="%"+searchWord+"%";
 		return sqlSession.selectList("admin.getSearchSafeTradingList",searchWord);
 	}
 	
-	public List<AdminSafeTradingDto> getIdSearchSafeTradingList(String searchWord) { // 35P 안전거래조회 검색(판매자ID)
+	public List<SafeTradingDomain> getIdSearchSafeTradingList(String searchWord) { // 35P 안전거래조회 검색(판매자ID)
 		searchWord="%"+searchWord+"%";
 		return sqlSession.selectList("admin.getIdSearchSafeTradingList",searchWord);
 	}
 	
-	public List<AdminSafeTradingDto> getGoodsSearchSafeTradingList(String searchWord) {	//35P 안전거래조회 검색(상품명)
+	public List<SafeTradingDomain> getGoodsSearchSafeTradingList(String searchWord) {	//35P 안전거래조회 검색(상품명)
 		searchWord="%"+searchWord+"%";
 		return sqlSession.selectList("admin.getGoodsSearchSafeTradingList",searchWord);
 	}
 	
-	public SafeTradingInfoDto getSafeTradingInfo(String searchWold) {	//36P 안전거래 세부조회(관리자)
+	public SafeTradingInfoDomain getSafeTradingInfo(String searchWold) {	//36P 안전거래 세부조회(관리자)
 		return sqlSession.selectOne("admin.getGoodsSearchSafeTradingList",searchWold);
 	}
 	
-	public List<UserCountReportDto> getUserList() {		//37P 회원정보조회 LIST 신고상위
-		return sqlSession.selectList("admin.getUserList");
+	// 회원정보조회 LIST
+	public List<UserCountReportDomain> getUserList() {
+	    return sqlSession.selectList("user.getUserList");
 	}
-	public List<UserCountReportDto> adminGetUserList() {	//37P 거래상위 회원정보조회 LIST
-		return sqlSession.selectList("admin.getUserList");
+
+	// 회원정보조회 LIST 신고상위
+	public List<UserCountReportDomain> getTopReportUserList() {
+	    return sqlSession.selectList("user.getTopReportUserList");
 	}
-	public List<UserCountReportDto> getSearchUserList(String searchWord) {	//37P 거래상위 회원정보조회 LIST
-		searchWord="%"+searchWord+"%";
-		return sqlSession.selectList("admin.getSearchUserList");
+
+	// 신고상위 ID검색 회원정보조회 LIST
+	public List<UserCountReportDomain> getSearchIdTopReportUserList(String searchWord) {
+	    return sqlSession.selectList("user.getSearchIdTopReportUserList", searchWord);
 	}
-	public UserInfoDto getUserInfo(String userId) {	// 38P 회원정보 세부조회
+
+	// 거래상위 회원정보조회 LIST
+	public List<UserCountReportDomain> getTopTradeUserList(String searchWord) {
+	    return sqlSession.selectList("user.getTopTradeUserList", searchWord);
+	}
+
+	// 거래상위 ID검색 회원정보조회 LIST
+	public List<UserCountReportDomain> getSearchIdTopTradeUserList(String searchWord) {
+	    return sqlSession.selectList("user.getSearchIdTopTradeUserList", searchWord);
+	}
+	
+	public UserInfoDomain getUserInfo(String userId) {	// 38P 회원정보 세부조회
 		return sqlSession.selectOne("admin.getUserInfo");
 	}
 	public int banUser(String userId) {
