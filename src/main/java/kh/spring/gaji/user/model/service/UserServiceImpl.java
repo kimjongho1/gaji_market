@@ -8,6 +8,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import kh.spring.gaji.goods.model.dto.GoodsDto;
+import kh.spring.gaji.goods.model.dto.GoodsListDto;
+import kh.spring.gaji.goods.model.dto.MyGoodsListDto;
 import kh.spring.gaji.pay.model.dto.DealReviewDto;
 import kh.spring.gaji.pay.model.dto.InFaceTradingDto;
 import kh.spring.gaji.pay.model.dto.SafePurchaseInfoDto;
@@ -16,6 +18,7 @@ import kh.spring.gaji.user.model.dao.UserDao;
 import kh.spring.gaji.user.model.dto.UserAddressDto;
 import kh.spring.gaji.user.model.dto.UserDto;
 import kh.spring.gaji.user.model.dto.UserInsertAddressDto;
+import kh.spring.gaji.user.model.dto.UserProfileDto;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -24,7 +27,7 @@ public class UserServiceImpl implements UserService {
     private UserDao userDao;
 
     @Override
-    public List<GoodsDto> getKeepList(String userId) {
+    public List<GoodsListDto> getKeepList(String userId) {
         return userDao.getKeepList(userId);
     }
 
@@ -34,7 +37,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<GoodsDto> getFavoriteList(String userId) {
+    public List<GoodsListDto> getFavoriteList(String userId) {
         return userDao.getFavoriteList(userId);
     }
 
@@ -49,17 +52,17 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<GoodsDto> getOnSaleList(String userId) {
+    public List<MyGoodsListDto> getOnSaleList(String userId) {
         return userDao.getOnSaleList(userId);
     }
 
     @Override
-    public List<GoodsDto> getSoldOutList(String userId) {
+    public List<MyGoodsListDto> getSoldOutList(String userId) {
         return userDao.getSoldOutList(userId);
     }
 
     @Override
-    public List<GoodsDto> getHideList(String userId) {
+    public List<MyGoodsListDto> getHideList(String userId) {
         return userDao.getHideList(userId);
     }
 
@@ -69,7 +72,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<UserDto> getProfile(String userId) {
+    public UserProfileDto getProfile(String userId) {
         return userDao.getProfile(userId);
     }
 

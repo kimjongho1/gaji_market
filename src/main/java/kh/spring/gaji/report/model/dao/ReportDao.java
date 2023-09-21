@@ -24,7 +24,7 @@ public class ReportDao {
     @Autowired
      private SqlSession sqlSession;
 
-    public int reportGoods(ReportDto reportDto) {
+    public int reportGoods(ReportDto reportDto) {	// 상품신고 
         return sqlSession.insert("reportGoods", reportDto);
     }
 }

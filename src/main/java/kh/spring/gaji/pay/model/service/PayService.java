@@ -1,8 +1,8 @@
 package kh.spring.gaji.pay.model.service;
-import kh.spring.gaji.pay.model.dto.SafeTradingDto;
+import kh.spring.gaji.pay.model.dto.InsertSafeTradingDto;
 
 public interface PayService {
     int cancelSafeTrading(int transactionId);
     int closeSafeTrading(int transactionId);
-    int addSafeTrading(SafeTradingDto safeTradingDto);
+    int addSafeTrading(InsertSafeTradingDto insertSafeTradingDto);
 }

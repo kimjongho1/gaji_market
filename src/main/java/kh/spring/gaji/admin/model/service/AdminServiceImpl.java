@@ -52,7 +52,7 @@ import org.springframework.stereotype.Service;
 	    }
 	    // 35P 안전거래조회(관리자)
 	    @Override
-	    public List<SafeTradingDto> getSafeTradingList() {
+	    public List<AdminSafeTradingDto> getSafeTradingList() {
 	        return adminDao.getSafeTradingList();
 	    }
 	 // 35P 안전거래조회 검색(안전거래번호)

@@ -29,7 +29,7 @@
 	</select>
 	
 	<select id="getInfaceTradingInfo" parameterType="string" resultType="InFaceTradingInfoDto">	<!-- 34P 관리자 직거래 세부조회 -->
-		select i.in_face_trading_id,i.goods_id,g.user_id seller_id,buyer_id,i.price,i.trading_date,i.trading_status, i.goods_title
+		select i.in_face_trading_id,i.goods_id,i.goods_title, g.user_id seller_id,buyer_id,i.price,i.trading_date,i.trading_status
 		from in_face_trading i
 		join goods g using (goods_id)
 		where in_face_trading_id= #{inFaceTradingId}
@@ -231,7 +231,7 @@
 	</update>
 	
 	<insert id="insertBanUser"	parameterMap="UserBlockingDto">	<!-- 38P 계정정지 테이블에 아이디추가 -->
-		insert into User_Blocking values(ban_no_sequence.nextval,#{bannedId},#{administerId},#{reasonForBlocking},"",#{refId},#{reportClass})
+		insert into User_Blocking values(ban_no_sequence.nextval,#{bannedId},#{administerId},#{reasonForBlocking},"")
 	</insert>
 		<select id="getGoodsReportCount"  resultType="GoodsReportCountDto">	<!-- 39P 상품글리스트(상품+신고수)  -->
 		select goods_id,title,user_id,(select count(*) report_count from goods_report r where r.ref_id=g.goods_id),created_at
@@ -267,7 +267,7 @@
 	</select>
 	
 	<select id="getGoodsReportInfo" parameterType="map" resultType="GoodsReportInfoDto">	<!-- 41P 상품 신고내용 상세조회 -->
-		select r.reporter_id, r.ref_id,title, r.created_at, g.user_id, r.report_category, r.approval_status, r.content
+		select r.reporter_id, r.ref_id,g.title, r.created_at, g.user_id, r.report_category, r.approval_status, r.content
 		from goods_report r join goods g on ref_id=goods_id
 		where ref_id=#{refId} and reporter_id=#{reporterId}
 	</select>

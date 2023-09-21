@@ -26,7 +26,7 @@
 
 		<insert id="insertGoods" parameterType="GoodsDto">	<!-- 24P 상품글 등록 -->
 			insert into goods 
-			(goods_id,user_id,category_id,dong_id,title,price,description,safetrading_yn,lat,lng) 
+			(goods_id,user_id,category_id,title,dong_id,price,description,safetrading_yn,lat,lng) 
 			values(goods_id_sequence.nextval,#{userId},#{categoryId},#{dongId},#{title},#{price},#{description},#{safetradingYN},#{lat},#{lng})
 		</insert>
 

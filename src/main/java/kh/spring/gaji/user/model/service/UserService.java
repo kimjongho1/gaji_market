@@ -3,6 +3,8 @@ import java.util.List;
 import java.util.Map;
 
 import kh.spring.gaji.goods.model.dto.GoodsDto;
+import kh.spring.gaji.goods.model.dto.GoodsListDto;
+import kh.spring.gaji.goods.model.dto.MyGoodsListDto;
 import kh.spring.gaji.pay.model.dto.DealReviewDto;
 import kh.spring.gaji.pay.model.dto.InFaceTradingDto;
 import kh.spring.gaji.pay.model.dto.SafePurchaseInfoDto;
@@ -10,28 +12,29 @@ import kh.spring.gaji.pay.model.dto.SafeTradingDto;
 import kh.spring.gaji.user.model.dto.UserAddressDto;
 import kh.spring.gaji.user.model.dto.UserDto;
 import kh.spring.gaji.user.model.dto.UserInsertAddressDto;
+import kh.spring.gaji.user.model.dto.UserProfileDto;
 
 public interface UserService {
 
-    List<GoodsDto> getKeepList(String userId);
+    List<GoodsListDto> getKeepList(String userId);
 
     int updateViewCount();
 
-    List<GoodsDto> getFavoriteList(String userId);
+    List<GoodsListDto> getFavoriteList(String userId);
 
     List<SafeTradingDto> getSafePurchaseList(String buyerId);
 
     List<InFaceTradingDto> getInfacePurchaseList(String buyerId);
 
-    List<GoodsDto> getOnSaleList(String userId);
+    List<MyGoodsListDto> getOnSaleList(String userId);
 
-    List<GoodsDto> getSoldOutList(String userId);
+    List<MyGoodsListDto> getSoldOutList(String userId);
 
-    List<GoodsDto> getHideList(String userId);
+    List<MyGoodsListDto> getHideList(String userId);
 
     int insertWishList(Map<String, String> map);
 
-    List<UserDto> getProfile(String userId);
+    UserProfileDto getProfile(String userId);
 
     List<UserAddressDto> getAddress(String userId);
 

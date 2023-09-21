@@ -12,6 +12,4 @@ public interface NotificationService {
     int countNotification(String userId); // 2P 알림갯수
 
     int insertNoti(NotificationDto notificationDto); // 알림생성
-
-    List<NotificationDto> getTradeNotice(String userId);  // 18P 해당계정의 거래알림
 }

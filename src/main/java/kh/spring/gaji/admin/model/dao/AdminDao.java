@@ -49,7 +49,7 @@ public class AdminDao {
     }
 
     // 35P 안전거래조회(관리자)
-    public List<SafeTradingDto> getSafeTradingList() {
+    public List<AdminSafeTradingDto> getSafeTradingList() {
         return sqlSession.selectList("admin.getSafeTradingList");
     }
 

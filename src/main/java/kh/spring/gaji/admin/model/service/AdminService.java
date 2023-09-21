@@ -25,7 +25,7 @@ public interface AdminService {
 
     InFaceTradingInfoDto getInfaceTradingInfo(String inFaceTradingId);
 
-    List<SafeTradingDto> getSafeTradingList();
+    List<AdminSafeTradingDto> getSafeTradingList();
 
     List<AdminSafeTradingDto> getSearchSafeTradingList(String searchWord);
 

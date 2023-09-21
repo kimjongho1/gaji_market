@@ -31,9 +31,4 @@ public class NotificationServiceImpl implements NotificationService {
     public int insertNoti(NotificationDto notificationDto) {
         return notificationDao.insertNoti(notificationDto);
     }
-
-    @Override // 18P 해당계정의 거래알림
-    public List<NotificationDto> getTradeNotice(String userId) {
-        return notificationDao.getTradeNotice(userId);
-    }
 }
