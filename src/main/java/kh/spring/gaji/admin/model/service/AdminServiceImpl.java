@@ -1,12 +1,12 @@
-package kh.spring.gaji.administer.model.service;
+package kh.spring.gaji.admin.model.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import kh.spring.gaji.administer.model.dao.AdminDao;
-import kh.spring.gaji.administer.model.dto.UserBlockingDto;
+import kh.spring.gaji.admin.model.dao.AdminDao;
+import kh.spring.gaji.admin.model.dto.UserBlockingDto;
 import kh.spring.gaji.pay.model.dto.InFaceTradingInfoDto;
 import kh.spring.gaji.pay.model.dto.SafeTradingDto;
 import kh.spring.gaji.pay.model.dto.SafeTradingInfoDto;

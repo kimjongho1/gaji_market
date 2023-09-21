@@ -7,8 +7,8 @@
 	</settings>
 	
 	<typeAliases>
-		<typeAlias type="kh.spring.gaji.administer.model.dto.AdministerDto" alias="AdministerDto"/>
-		<typeAlias type="kh.spring.gaji.administer.model.dto.GajiAccountDto" alias="GajiAccountDto"/>
+		<typeAlias type="kh.spring.gaji.admin.model.dto.AdministerDto" alias="AdministerDto"/>
+		<typeAlias type="kh.spring.gaji.admin.model.dto.GajiAccountDto" alias="GajiAccountDto"/>
 		<typeAlias type="kh.spring.gaji.category.model.dto.CategoryDto" alias="CategoryDto"/>
 		<typeAlias type="kh.spring.gaji.chat.model.dto.ChatMessageDto" alias="ChatMessageDto"/>
 		<typeAlias type="kh.spring.gaji.chat.model.dto.ChatRoomDto" alias="ChatRoomDto"/>
@@ -28,7 +28,6 @@
 		<typeAlias type="kh.spring.gaji.user.model.dto.UserToUserDto" alias="UserToUserDto"/>
 		<typeAlias type="kh.spring.gaji.user.model.dto.UserAddressDto" alias="UserAddressDto"/>
 		<typeAlias type="kh.spring.gaji.wishlist.model.dto.WishListDto" alias="WishListDto"/>
-		<typeAlias type="kh.spring.gaji.wishlist.model.dto.WishListDto" alias="WishListDto"/>
 		
 		
 		<typeAlias type="kh.spring.gaji.user.model.dto.UserInsertAddressDto" alias="UserInsertAddressDto"/>
@@ -40,11 +39,7 @@
 		<typeAlias type="kh.spring.gaji.user.model.dto.UserCountReportDto" alias="UserCountReportDto"/>
 		<typeAlias type="kh.spring.gaji.pay.model.dto.InFaceTradingInfoDto" alias="InFaceTradingInfoDto"/>
 		<typeAlias type="kh.spring.gaji.user.model.dto.UserInfoDto" alias="UserInfoDto"/>
-		<!-- 커뮤니티 인덱스 -->
-		<typeAlias type="kh.spring.gaji.community.model.dto.CommunityLikeDto" alias="CommunityLikeDto"/>
-		<typeAlias type="kh.spring.gaji.community.model.dto.CommunityInfoDto" alias="CommunityInfoDto"/>
-		<typeAlias type="kh.spring.gaji.report.model.dto.CommunityReportListDto" alias="CommunityReportListDto"/>
-		<typeAlias type="kh.spring.gaji.report.model.dto.CommunityReportInfoDto" alias="CommunityReportInfoDto"/> 
+
 		<!-- 댓글 인덱스 -->
 		<typeAlias type="kh.spring.gaji.report.model.dto.CommentReportListDto" alias="CommentReportListDto"/>
 		<typeAlias type="kh.spring.gaji.report.model.dto.CommentReportInfoDto" alias="CommentReportInfoDto"/>
@@ -55,8 +50,12 @@
 		<typeAlias type="kh.spring.gaji.report.model.dto.GoodsReportInfoDto" alias="GoodsReportInfoDto"/>
 	
 
-		
-		
+		<!-- 커뮤니티 인덱스 -->
+		<!-- 		
+		<typeAlias type="kh.spring.gaji.community.model.dto.CommunityLikeDto" alias="CommunityLikeDto"/>
+		<typeAlias type="kh.spring.gaji.community.model.dto.CommunityInfoDto" alias="CommunityInfoDto"/>
+		<typeAlias type="kh.spring.gaji.report.model.dto.CommunityReportListDto" alias="CommunityReportListDto"/>
+		<typeAlias type="kh.spring.gaji.report.model.dto.CommunityReportInfoDto" alias="CommunityReportInfoDto"/> --> 
 		
 		
 	</typeAliases>

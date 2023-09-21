@@ -1,4 +1,4 @@
-package kh.spring.gaji.wishlist.model.dto;
+package kh.spring.gaji.user.model.dto;
 
 import org.springframework.stereotype.Component;
 import lombok.Data;

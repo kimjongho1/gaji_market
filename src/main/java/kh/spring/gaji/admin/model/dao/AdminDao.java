@@ -1,10 +1,10 @@
-package kh.spring.gaji.administer.model.dao;
+package kh.spring.gaji.admin.model.dao;
 import java.util.List;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import kh.spring.gaji.administer.model.dto.UserBlockingDto;
+import kh.spring.gaji.admin.model.dto.UserBlockingDto;
 import kh.spring.gaji.pay.model.dto.InFacePurchaseDto;
 import kh.spring.gaji.pay.model.dto.InFaceTradingInfoDto;
 import kh.spring.gaji.pay.model.dto.SafeTradingDto;

@@ -1,4 +1,4 @@
-package kh.spring.gaji.administer.model.dto;
+package kh.spring.gaji.admin.model.dto;
 import org.springframework.stereotype.Component;
 import lombok.Data;
 

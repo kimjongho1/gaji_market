@@ -1,8 +1,8 @@
-package kh.spring.gaji.administer.model.service;
+package kh.spring.gaji.admin.model.service;
 
 import java.util.List;
 
-import kh.spring.gaji.administer.model.dto.UserBlockingDto;
+import kh.spring.gaji.admin.model.dto.UserBlockingDto;
 import kh.spring.gaji.pay.model.dto.InFacePurchaseDto;
 import kh.spring.gaji.pay.model.dto.InFaceTradingInfoDto;
 import kh.spring.gaji.pay.model.dto.SafeTradingDto;
