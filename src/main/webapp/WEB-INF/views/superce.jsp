@@ -20,6 +20,10 @@
                 max-width: 80%;
                 margin: 20px auto;
             }
+            .ck.ck-dropdown__panel {
+	max-height: 160px; /* or anything else, more likely ~300px or so */
+	overflow-y: auto;
+}
         </style>
         <div id="container">
             <div id="editor">
@@ -98,7 +102,7 @@
                 },
                 // https://ckeditor.com/docs/ckeditor5/latest/features/font.html#configuring-the-font-size-feature
                 fontSize: {
-                    options: [ 10, 12, 14, 'default', 18, 20, 22 ],
+                    options: [ 10, 11, 11.3514, 12, 13, 14, 15, 16,  'default', 17, 18, 19, 20, 21, 22 ],
                     supportAllValues: true
                 },
                 // Be careful with the setting below. It instructs CKEditor to accept ALL HTML markup.

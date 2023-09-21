@@ -63,4 +63,5 @@
 			update goods set active_status="N" 
 			where goods_id=#{goodsId}
 		</delete>
+		
 </mapper>
