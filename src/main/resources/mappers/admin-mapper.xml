@@ -2,70 +2,73 @@
 <!DOCTYPE mapper PUBLIC " -//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="admin">
 		
-	<select id="getetInfacePurchaseList" resultType="InFacePurchaseDomain">	<!-- 33P 직거래 조회 -->
+	<select id="getetInfacePurchaseList" resultType="InFacePurchaseDto">	<!-- 33P 직거래 조회 -->
 		select in_face_trading_id,goods_id,goods_title,(select user_id seller_id from goods g where g.goods_id=i.goods_id),buyer_id 
 		from in_face_trading i
 		order by i.trading_date desc
 	</select>
 	
-	<select id="getSearchTitleInfacePurchaseList" parameterType="string" resultType="InFacePurchaseDomain">	<!-- 33P 직거래 조회 상품명 -->
+	<select id="getSearchTitleInfacePurchaseList" parameterType="string" resultType="InFacePurchaseDto">	<!-- 33P 직거래 조회 상품명 -->
 		select in_face_trading_id,goods_id,goods_title,(select user_id seller_id from goods g where g.goods_id=i.goods_id),buyer_id 
 		from in_face_trading i
 		where goods_title like #{searchWord}
 		order by i.trading_date desc
 	</select>
 	
-	<select id="getSearchIdInfacePurchaseList" parameterType="string" resultType="InFacePurchaseDomain">	<!-- 33P 직거래 조회 상품ID -->
+	<select id="getSearchIdInfacePurchaseList" parameterType="string" resultType="InFacePurchaseDto">	<!-- 33P 직거래 조회 상품ID -->
 		select in_face_trading_id,goods_id,goods_title,(select user_id seller_id, from goods g where g.goods_id=i.goods_id),buyer_id 
 		from in_face_trading i
 		where goods_id like #{searchWord}
 		order by i.trading_date desc
 	</select>
-	<select id="getSearchUserInfacePurchaseList" parameterType="string" resultType="InFacePurchaseDomain">	<!--33P 직거래 조회 회원ID -->
+	<select id="getSearchUserInfacePurchaseList" parameterType="string" resultType="InFacePurchaseDto">	<!--33P 직거래 조회 회원ID -->
 		select in_face_trading_id,goods_id,goods_title,(select user_id seller_id, from goods g where g.goods_id=i.goods_id),buyer_id 
 		from in_face_trading i
 		where user_id like #{searchWord}
 		order by i.trading_date desc
 	</select>
 	
-	<select id="getInfaceTradingInfo" parameterType="string" resultType="InFaceTradingInfoDomain">	<!-- 34P 관리자 직거래 세부조회 새로운 INDEX생성필요 -->
+	<select id="getInfaceTradingInfo" parameterType="string" resultType="InFaceTradingInfoDto">	<!-- 34P 관리자 직거래 세부조 -->
 		select i.in_face_trading_id,i.goods_id,g.user_id seller_id,buyer_id,i.price,i.trading_date,i.trading_status, i.goods_title
 		from in_face_trading i
 		join goods g using (goods_id)
 		where IN_FACE_TRADING_ID = #{inFaceTradingId}
 	</select>
 	
-	<select id="getSafeTradingList" resultType="SafeTradingDomain">	<!-- 35P 안전거래조회(관리자) -->
+	<select id="getSafeTradingList" resultType="SafeTradingDto">	<!-- 35P 안전거래조회(관리자) -->
 		select s.transaction_id, s.goods_title,g.user_id seller_id, s.trading_status
 		from safe_trading s join goods g using (goods_id)
 		order by s.trading_date desc
 	</select>
 	
-	<select id="getSearchSafeTradingList" parameterType="string" resultType="SafeTradingDomain"><!-- 35P 안전거래조회 검색(안전거래번호) -->
+	<select id="getSearchSafeTradingList" parameterType="string" resultType="AdminSafeTradingDto"><!-- 35P 안전거래조회 검색(안전거래번호) -->
 		select s.transaction_id, s.goods_title,g.user_id seller_id, s.trading_status
 		from safe_trading s join goods g using (goods_id)
 		order by trading_date desc
 		where transaction_id like #{searchWord}
 	</select>
-		<select id="getIdSearchSafeTradingList" parameterType="string" resultType="SafeTradingDomain"><!-- 35P 안전거래조회 검색(판매자ID) -->
+	
+	<select id="getIdSearchSafeTradingList" parameterType="string" resultType="AdminSafeTradingDto"><!-- 35P 안전거래조회 검색(판매자ID) -->
 		select s.transaction_id, s.goods_title,g.user_id seller_id, s.trading_status
 		from safe_trading s join goods g using (goods_id)
 		order by trading_date desc
 		where user_id like #{searchWord}
 	</select>
-	<select id="getGoodsSearchSafeTradingList" parameterType="string" resultType="SafeTradingDomain"><!-- 35P 안전거래조회 검색(상품명) -->
+	<select id="getGoodsSearchSafeTradingList" parameterType="string" resultType="AdminSafeTradingDto"><!-- 35P 안전거래조회 검색(상품명) -->
 		select s.transaction_id, s.goods_title,g.user_id seller_id, s.trading_status
 		from safe_trading s join goods g using (goods_id)
 		order by trading_date desc
 		where title like #{searchWord}
 	</select>
-	<select id="getSafeTradingInfo" parameterType="string" resultType="SafeTradingInfoDomain">	<!-- 36P 안전거래 세부조회(관리자) -->
+	<select id="getSafeTradingInfo" parameterType="string" resultType="SafeTradingInfoDto">	<!-- 36P 안전거래 세부조회(관리자) -->
 		select s.transaction_id, s.buyer_id, s.perchase_method, g.user_id seller_id, s.goods_title,
 		 s.price, s.shipping_address, s.trading_date, s.tracking_number
 		from safe_trading s join goods g using (goods_id)
 		where transaction_id = #{transactionId}
 	</select>
-	<select id="getUserList" resultType="UserCountReportDomain"> <!-- 37P 회원정보조회 LIST 신고상위 -->
+	
+	
+	<select id="getUserList" resultType="UserCountReportDto"> <!-- 37P 회원정보조회 LIST -->
 		select user_id,name,invite_count,
 		(select count(*) report_count	<!-- 신고당한횟수 -->
 		from goods_report join goods g on ref_id=goods_id		
@@ -86,33 +89,111 @@
 		where u.user_id=tc.user_id
 		)
 		from user u
-		order by report_count
-	</select>
-		<select id="adminGetUserList" resultType="UserCountReportDomain"> <!-- 37P 거래상위 회원정보조회 LIST -->
-		select user_id,name,invite_count,
-		(select count(*) report_count	<!-- 신고당한횟수 -->
-		from goods_report join goods g on ref_id=goods_id		
-		where u.user_id=g.user_id
-		),
-		(select count(*) trade_count from	<!-- 거래횟수 -->
-		(
-		 select buyer_id user_id	<!-- 직거래 구매 -->
-		 from in_face_trading
-		 union
-		 select buyer_id user_id	<!-- 안전거래 구매 -->
-		 from safe_trading 
-		 union 
-		 select user_id from goods join safe_trading using (goods_id) <!-- 안전거래 판매 -->
-		 union 
-		 select user_id from goods join in_face_trading using (goods_id) <!-- 직거래 판매 -->
-		) tc
-		where u.user_id=tc.user_id
-		)
-		from user u
-		order by trade_count
 	</select>
 	
-	<select id="getUserInfo" parameterType="string" resultType="UserInfoDomain">	<!-- 38P 회원정보 세부조회 -->
+	<!-- 37P 회원정보조회 LIST 신고상위 -->
+	<select id="getTopReportUserList" resultType="UserCountReportDto"> 
+		select user_id,name,invite_count,
+		(select count(*) report_count	<!-- 신고당한횟수 -->
+		from goods_report join goods g on ref_id=goods_id		
+		where u.user_id=g.user_id
+		),
+		(select count(*) trade_count from	<!-- 거래횟수 -->
+		(
+		 select buyer_id user_id	<!-- 직거래 구매 -->
+		 from in_face_trading
+		 union
+		 select buyer_id user_id	<!-- 안전거래 구매 -->
+		 from safe_trading 
+		 union 
+		 select user_id from goods join safe_trading using (goods_id) <!-- 안전거래 판매 -->
+		 union 
+		 select user_id from goods join in_face_trading using (goods_id) <!-- 직거래 판매 -->
+		) tc
+		where u.user_id=tc.user_id
+		)
+		from user u
+		order by report_count desc
+	</select>
+	
+	<!-- 37P 신고상위 ID검색 회원정보조회 LIST -->
+	<select id="GetSearchIdTopReportUserList" resultType="UserCountReportDto" parameterType="string"> 
+		select user_id,name,invite_count,
+		(select count(*) report_count	<!-- 신고당한횟수 -->
+		from goods_report join goods g on ref_id=goods_id		
+		where u.user_id=g.user_id
+		),
+		(select count(*) trade_count from	<!-- 거래횟수 -->
+		(
+		 select buyer_id user_id	<!-- 직거래 구매 -->
+		 from in_face_trading
+		 union
+		 select buyer_id user_id	<!-- 안전거래 구매 -->
+		 from safe_trading 
+		 union 
+		 select user_id from goods join safe_trading using (goods_id) <!-- 안전거래 판매 -->
+		 union 
+		 select user_id from goods join in_face_trading using (goods_id) <!-- 직거래 판매 -->
+		) tc
+		where u.user_id=tc.user_id
+		)
+		from user u
+		where userId like #{searchWord}
+		order by report_count desc
+	</select>
+	
+		<!-- 37P 거래상위 회원정보조회 LIST -->
+	<select id="GetToptradeUserList" resultType="UserCountReportDto" parameterType="string"> 
+		select user_id,name,invite_count,
+		(select count(*) report_count	<!-- 신고당한횟수 -->
+		from goods_report join goods g on ref_id=goods_id		
+		where u.user_id=g.user_id
+		),
+		(select count(*) trade_count from	<!-- 거래횟수 -->
+		(
+		 select buyer_id user_id	<!-- 직거래 구매 -->
+		 from in_face_trading
+		 union
+		 select buyer_id user_id	<!-- 안전거래 구매 -->
+		 from safe_trading 
+		 union 
+		 select user_id from goods join safe_trading using (goods_id) <!-- 안전거래 판매 -->
+		 union 
+		 select user_id from goods join in_face_trading using (goods_id) <!-- 직거래 판매 -->
+		) tc
+		where u.user_id=tc.user_id
+		)
+		from user u
+		order by trade_count desc
+	</select>
+	
+	<!-- 37P 거래상위 ID검색 회원정보조회 LIST -->
+	<select id="GetSearchIdTopTradeUserList" resultType="UserCountReportDto"> 
+		select user_id,name,invite_count,
+		(select count(*) report_count	<!-- 신고당한횟수 -->
+		from goods_report join goods g on ref_id=goods_id		
+		where u.user_id=g.user_id
+		),
+		(select count(*) trade_count from	<!-- 거래횟수 -->
+		(
+		 select buyer_id user_id	<!-- 직거래 구매 -->
+		 from in_face_trading
+		 union
+		 select buyer_id user_id	<!-- 안전거래 구매 -->
+		 from safe_trading 
+		 union 
+		 select user_id from goods join safe_trading using (goods_id) <!-- 안전거래 판매 -->
+		 union 
+		 select user_id from goods join in_face_trading using (goods_id) <!-- 직거래 판매 -->
+		) tc
+		where u.user_id=tc.user_id
+		)
+		from user u
+		where user_id like #{searchWord}
+		order by trade_count desc
+	</select>
+	
+	<select id="getUserInfo" parameterType="string" resultType="UserInfoDto">	<!-- 38P 회원정보 세부조회 -->
 		select name,nickname,address,mobile_number,created_at,activate_status,
 		
 		(select count(*) 		<!-- 안전거래횟수 -->
@@ -141,8 +222,6 @@
 		where user_id=#{user_id}
 	</select>
 	
-	
-	
 	<update id="banUser" parameterType="string">	<!-- 38P 유저 계정 정지 -->
 		update user set enabled = 0 where user_id = #{userId}
 	</update>
@@ -154,10 +233,9 @@
 	<insert id="insertBanUser"	parameterMap="UserBlockingDto">	<!-- 38P 계정정지 테이블에 아이디추가 -->
 		insert into User_Blocking values(ban_no_sequence.nextval,#{bannedId},#{administerId},#{reasonForBlocking},"",#{refId},#{reportClass})
 	</insert>
-
 </mapper>
 
-<!-- <select id="getUserList" resultType="UserCountReportDomain"> 37P 회원정보조회 LIST 신고상위
+<!-- <select id="getUserList" resultType="UserCountReportDto"> 37P 회원정보조회 LIST 신고상위
 		select user_id,name,invite_count,
 		(select count(*) report_count	신고당한횟수
 		from
@@ -190,7 +268,7 @@
 		from user u
 		order by report_count
 	</select>
-		<select id="adminGetUserList" resultType="UserCountReportDomain"> 37P 거래상위 회원정보조회 LIST
+		<select id="adminGetUserList" resultType="UserCountReportDto"> 37P 거래상위 회원정보조회 LIST
 		select user_id,name,invite_count,
 		(select count(*) report_count	신고당한횟수
 		from
@@ -224,7 +302,7 @@
 		order by trade_count
 	</select>
 	
-	<select id="getUserInfo" parameterType="string" resultType="UserInfoDomain">	38P 회원정보 세부조회
+	<select id="getUserInfo" parameterType="string" resultType="UserInfoDto">	38P 회원정보 세부조회
 		select name,nickname,address,mobile_number,created_at,activate_status,
 		
 		(select count(*) 		안전거래횟수

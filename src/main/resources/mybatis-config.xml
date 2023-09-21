@@ -7,8 +7,8 @@
 	</settings>
 	
 	<typeAliases>
-		<typeAlias type="kh.spring.gaji.administer.model.dto.AdministerDto" alias="AdministerDto"/>
-		<typeAlias type="kh.spring.gaji.administer.model.dto.GajiAccountDto" alias="GajiAccountDto"/>
+		<typeAlias type="kh.spring.gaji.admin.model.dto.AdministerDto" alias="AdministerDto"/>
+		<typeAlias type="kh.spring.gaji.admin.model.dto.GajiAccountDto" alias="GajiAccountDto"/>
 		<typeAlias type="kh.spring.gaji.category.model.dto.CategoryDto" alias="CategoryDto"/>
 		<typeAlias type="kh.spring.gaji.chat.model.dto.ChatMessageDto" alias="ChatMessageDto"/>
 		<typeAlias type="kh.spring.gaji.chat.model.dto.ChatRoomDto" alias="ChatRoomDto"/>
@@ -28,35 +28,34 @@
 		<typeAlias type="kh.spring.gaji.user.model.dto.UserToUserDto" alias="UserToUserDto"/>
 		<typeAlias type="kh.spring.gaji.user.model.dto.UserAddressDto" alias="UserAddressDto"/>
 		<typeAlias type="kh.spring.gaji.wishlist.model.dto.WishListDto" alias="WishListDto"/>
-		<typeAlias type="kh.spring.gaji.wishlist.model.dto.WishListDto" alias="WishListDto"/>
 		
 		
-		<typeAlias type="kh.spring.gaji.user.model.domain.UserAddressDomain" alias="UserAddressDomain"/>
-		<typeAlias type="kh.spring.gaji.report.model.domain.ReportInfoDomain" alias="ReportInfoDomain"/>
-		<typeAlias type="kh.spring.gaji.pay.model.domain.SafePurchaseInfoDomain" alias="SafePurchaseInfoDomain"/>
-		<typeAlias type="kh.spring.gaji.pay.model.domain.InFacePurchaseDomain" alias="InFacePurchaseDomain"/>
-		<typeAlias type="kh.spring.gaji.pay.model.domain.SafeTradingDomain" alias="SafeTradingDomain"/>
-		<typeAlias type="kh.spring.gaji.pay.model.domain.SafeTradingDomain" alias="SafeTradingInfoDomain"/>
-		<typeAlias type="kh.spring.gaji.user.model.domain.UserCountReportDomain" alias="UserCountReportDomain"/>
-		<typeAlias type="kh.spring.gaji.pay.model.domain.InFaceTradingInfoDomain" alias="InFaceTradingInfoDomain"/>
-		<typeAlias type="kh.spring.gaji.user.model.domain.UserInfoDomain" alias="UserInfoDomain"/>
-		<!-- 커뮤니티 인덱스 -->
-		<typeAlias type="kh.spring.gaji.community.model.domain.CommunityLikeDomain" alias="CommunityLikeDomain"/>
-		<typeAlias type="kh.spring.gaji.community.model.domain.CommunityInfoDomain" alias="CommunityInfoDomain"/>
-		<typeAlias type="kh.spring.gaji.report.model.domain.CommunityReportListDomain" alias="CommunityReportListDomain"/>
-		<typeAlias type="kh.spring.gaji.report.model.domain.CommunityReportInfoDomain" alias="CommunityReportInfoDomain"/> 
+		<typeAlias type="kh.spring.gaji.user.model.dto.UserInsertAddressDto" alias="UserInsertAddressDto"/>
+		<typeAlias type="kh.spring.gaji.report.model.dto.ReportInfoDto" alias="ReportInfoDto"/>
+		<typeAlias type="kh.spring.gaji.pay.model.dto.SafePurchaseInfoDto" alias="SafePurchaseInfoDto"/>
+		<typeAlias type="kh.spring.gaji.pay.model.dto.InFacePurchaseDto" alias="InFacePurchaseDto"/>
+		<typeAlias type="kh.spring.gaji.pay.model.dto.AdminSafeTradingDto" alias="AdminSafeTradingDto"/>
+		<typeAlias type="kh.spring.gaji.pay.model.dto.SafeTradingInfoDto" alias="SafeTradingInfoDto"/>
+		<typeAlias type="kh.spring.gaji.user.model.dto.UserCountReportDto" alias="UserCountReportDto"/>
+		<typeAlias type="kh.spring.gaji.pay.model.dto.InFaceTradingInfoDto" alias="InFaceTradingInfoDto"/>
+		<typeAlias type="kh.spring.gaji.user.model.dto.UserInfoDto" alias="UserInfoDto"/>
+
 		<!-- 댓글 인덱스 -->
-		<typeAlias type="kh.spring.gaji.report.model.domain.CommentReportListDomain" alias="CommentReportListDomain"/>
-		<typeAlias type="kh.spring.gaji.report.model.domain.CommentReportInfoDomain" alias="CommentReportInfoDomain"/>
-		<typeAlias type="kh.spring.gaji.report.model.domain.CommentReportCountDomain" alias="CommentReportCountDomain"/>
+		<typeAlias type="kh.spring.gaji.report.model.dto.CommentReportListDto" alias="CommentReportListDto"/>
+		<typeAlias type="kh.spring.gaji.report.model.dto.CommentReportInfoDto" alias="CommentReportInfoDto"/>
+		<typeAlias type="kh.spring.gaji.report.model.dto.CommentReportCountDto" alias="CommentReportCountDto"/>
 		<!-- 상품 인덱스 -->
-		<typeAlias type="kh.spring.gaji.goods.model.domain.GoodsInfoDomain" alias="GoodsInfoDomain"/>
-		<typeAlias type="kh.spring.gaji.goods.model.domain.GoodsReportCountDomain" alias="GoodsReportCountDomain"/>
-		<typeAlias type="kh.spring.gaji.report.model.domain.GoodsReportInfoDomain" alias="GoodsReportInfoDomain"/>
+		<typeAlias type="kh.spring.gaji.goods.model.dto.GoodsInfoDto" alias="GoodsInfoDto"/>
+		<typeAlias type="kh.spring.gaji.goods.model.dto.GoodsReportCountDto" alias="GoodsReportCountDto"/>
+		<typeAlias type="kh.spring.gaji.report.model.dto.GoodsReportInfoDto" alias="GoodsReportInfoDto"/>
 	
 
-		
-		
+		<!-- 커뮤니티 인덱스 -->
+		<!-- 		
+		<typeAlias type="kh.spring.gaji.community.model.dto.CommunityLikeDto" alias="CommunityLikeDto"/>
+		<typeAlias type="kh.spring.gaji.community.model.dto.CommunityInfoDto" alias="CommunityInfoDto"/>
+		<typeAlias type="kh.spring.gaji.report.model.dto.CommunityReportListDto" alias="CommunityReportListDto"/>
+		<typeAlias type="kh.spring.gaji.report.model.dto.CommunityReportInfoDto" alias="CommunityReportInfoDto"/> --> 
 		
 		
 	</typeAliases>

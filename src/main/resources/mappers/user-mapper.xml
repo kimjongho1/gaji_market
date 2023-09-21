@@ -20,7 +20,7 @@
 		update user_address set address_no=1 from user_address where user_id=#{user_id} and address_no=#{addressNo}+1
 	</update>
 	
-	<insert id="insertAddress" parameterType="UserAddressDomain">	<!-- 새로입력된 주소를 count+1 주소순서에 추가한다 -->
+	<insert id="insertAddress" parameterType="UserInsertAddressDto">	<!-- 새로입력된 주소를 count+1 주소순서에 추가한다 -->
 		insert into user_address values(#{address},#{detailAddress},#{userId},#{postCode},#{nickname},(select count(*) from user_address where user_id=#{user_id})+1)
 	</insert>
 	
@@ -88,7 +88,7 @@
 		insert into deal_review values(#{goodsId},#{buyerId},#{message},#{mannerPoint},#{timePoint},#{goodsPoint})
 	</insert>
 	
-	<update id="updateRatingScore"> <!-- trade-mapper의 거래후기에따른 매너온도 업데이트 -->
+	<update id="updateRatingScore" parameterType="map"> <!-- trade-mapper의 거래후기에따른 매너온도 업데이트 -->
 		update user set rating_score= rating_score + (#{mannerPoint}+#{timePoint}+#{goodsPoint}-11)/5
 	</update>
 	

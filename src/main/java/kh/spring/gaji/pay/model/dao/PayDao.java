@@ -7,9 +7,9 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import kh.spring.gaji.pay.model.domain.SafePurchaseInfoDomain;
 import kh.spring.gaji.pay.model.dto.DealReviewDto;
 import kh.spring.gaji.pay.model.dto.InFaceTradingDto;
+import kh.spring.gaji.pay.model.dto.SafePurchaseInfoDto;
 import kh.spring.gaji.pay.model.dto.SafeTradingDto;
 
 @Repository
@@ -33,7 +33,7 @@ public class PayDao {
 		return sqlSession.update("trade.closeSafeTrading",transactionId);
 	}; //안전결제 확정
 	
-	public SafePurchaseInfoDomain getSafePurchaseInfo(String transactionId) {
+	public SafePurchaseInfoDto getSafePurchaseInfo(String transactionId) {
 		return sqlSession.selectOne("trade.getSafePurchaseInfo",transactionId);
 	};	// 안전거래 상세정보
 	

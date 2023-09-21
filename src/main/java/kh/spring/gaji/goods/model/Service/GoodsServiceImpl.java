@@ -6,8 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import kh.spring.gaji.goods.model.dao.GoodsDao;
-import kh.spring.gaji.goods.model.domain.GoodsInfoDomain;
 import kh.spring.gaji.goods.model.dto.GoodsDto;
+import kh.spring.gaji.goods.model.dto.GoodsInfoDto;
 
 @Service
 public class GoodsServiceImpl implements GoodsService {
@@ -50,7 +50,7 @@ public class GoodsServiceImpl implements GoodsService {
     }
 
     @Override
-    public GoodsInfoDomain getGoodsInfo(int goodsId) {// 23P 상품글 상세조회
+    public GoodsInfoDto getGoodsInfo(int goodsId) {// 23P 상품글 상세조회
         return goodsDao.getGoodsInfo(goodsId);
     }
 

@@ -8,9 +8,9 @@ import org.springframework.stereotype.Service;
 
 import kh.spring.gaji.pay.model.dto.DealReviewDto;
 import kh.spring.gaji.user.model.dao.UserDao;
-import kh.spring.gaji.user.model.domain.UserAddressDomain;
 import kh.spring.gaji.user.model.dto.UserAddressDto;
 import kh.spring.gaji.user.model.dto.UserDto;
+import kh.spring.gaji.user.model.dto.UserInsertAddressDto;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -41,7 +41,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public int insertAddress(UserAddressDomain userAddressDomain) {
+    public int insertAddress(UserInsertAddressDto userAddressDomain) {
     	return userDao.insertAddress(userAddressDomain);
     }
 

@@ -3,9 +3,9 @@ package kh.spring.gaji.user.model.service;
 import java.util.List;
 
 import kh.spring.gaji.pay.model.dto.DealReviewDto;
-import kh.spring.gaji.user.model.domain.UserAddressDomain;
 import kh.spring.gaji.user.model.dto.UserAddressDto;
 import kh.spring.gaji.user.model.dto.UserDto;
+import kh.spring.gaji.user.model.dto.UserInsertAddressDto;
 
 public interface UserService {
     UserDto getProfile(String userId);
@@ -16,7 +16,7 @@ public interface UserService {
 
     int updateMainAddress(String userId, int addressNo);
 
-    int insertAddress(UserAddressDomain userAddressDomain);
+    int insertAddress(UserInsertAddressDto userAddressDomain);
 
     int deleteAddress1(int postCode);
     
