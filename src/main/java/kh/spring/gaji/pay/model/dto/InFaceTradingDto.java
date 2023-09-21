@@ -7,13 +7,9 @@ import lombok.Data;
 public class InFaceTradingDto {
 	private int inFaceTadingId;
     private int goodsId; 	
+    private String goodsTitle;
+    private int price;
     private String buyerId;
     private String tradingDate; 
     private int tradingStatus; 
-    
-    //JOIN시 필요할 변수
-    private String goodsTitle;
-    private int price;
-    private String sellerId;
-    private String name;
 }

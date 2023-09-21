@@ -1,19 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC " -//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="pay">
+
 	<update id="cancelSafeTrading" parameterType="_int">		<!-- 11P 안전거래 결제취소, 레코드는 삭제하지 않고 거래상태 업데이트 -->
 		update safe_trading 
 		set trading_status=5 
-		where transaction_id=#{transactionId}
+		where transaction_id= #{transactionId}
 	</update>
+	
 	<update id="closeSafeTrading" parameterType="_int">		<!-- 11P 거래확정, 거래상태 업데이트 -->
-		update safe_trading set trading_tatus=4 
-		where transaction_id=#{transactionId}
+		update safe_trading set trading_status=4 
+		where transaction_id= #{transactionId}
 	</update>
-	<insert id="addSafeTrading" parameterType="SafeTradingDto">	<!-- 49P 새로운 안전결제 레코드 생성 -->
+	
+	<insert id="addSafeTrading" parameterType="InsertSafeTradingDto">	<!-- 49P 새로운 안전결제 레코드 생성 -->
 		insert into safe_trading 
 		(transaction_id,buyer_id,goods_id,perchase_method,price,trading_date,trading_status,shpping_address) 
-		values(transaction_id.nextval,#{buyerId},#{goodsId},#{perchaseMethod},#{price},
+		values(transaction_id.nextval,#{buyerId},#{goodsId},#{purchaseMethod},#{price},
 		#{tradingDate},1,#{shippingAddress})
 	</insert>
+	
 </mapper>

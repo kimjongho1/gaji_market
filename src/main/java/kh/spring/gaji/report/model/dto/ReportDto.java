@@ -8,8 +8,8 @@ import org.springframework.stereotype.Component;
 public class ReportDto {
     private int refId;
     private String reporterId;
-    private String content;
     private int reportCategory;
+    private String content;
     private String createdAt;
     private char approvalStatus;	
 }

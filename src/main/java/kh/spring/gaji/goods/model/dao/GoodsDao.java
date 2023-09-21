@@ -23,8 +23,8 @@ public class GoodsDao  {
     }
 
     public int updateStatus(int goodsId, String status) {
-        Map<String, Object> paramMap = Map.of("goodsId", goodsId, "status", status);
-        return sqlSession.update("goods.updateStatus", paramMap);
+        Map<String, Object> map = Map.of("goodsId", goodsId, "status", status);
+        return sqlSession.update("goods.updateStatus", map);
     }
 
     public int updateGoods(GoodsDto goodsDto) {

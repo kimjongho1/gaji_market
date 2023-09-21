@@ -24,7 +24,7 @@
 		where category_id=1 and title like #{searchWord} and active_status="Y" and and status!=4
 </select> -->
 
-		<insert id="insertGoods">	<!-- 24P 상품글 등록 -->
+		<insert id="insertGoods" parameterType="GoodsDto">	<!-- 24P 상품글 등록 -->
 			insert into goods 
 			(goods_id,user_id,category_id,dong_id,title,price,description,safetrading_yn,lat,lng) 
 			values(goods_id_sequence.nextval,#{userId},#{categoryId},#{dongId},#{title},#{price},#{description},#{safetradingYN},#{lat},#{lng})
@@ -37,7 +37,7 @@
 			where goods_id=#{goodsId} and active_status='Y'
 		</select>
 		
-		<update id="updateStatus" parameterType="string"> <!-- 23P 상품상태 -->
+		<update id="updateStatus" parameterType="map"> <!-- 23P 상품상태변경 -->
 			update goods set status=#{status} where goods_id=#{goodsId}
 		</update>
 		

@@ -11,7 +11,7 @@ public class SafeTradingInfoDto {
 	private String perchaseMethod;
 	private String buyerId;
 	private String title;
-	private double price;
+	private int price;
 	private String shippingAddress;
 	private String tradingDate;
 	private String trackingNumber;

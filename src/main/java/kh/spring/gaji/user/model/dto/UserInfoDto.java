@@ -13,7 +13,7 @@ public class UserInfoDto {
     private String activateStatus;
     private int safeTradingCount;
     private int inFaceTradingCount;
-    private int commentReportCount;
-    private int communityReportCount;
+//    private int commentReportCount;
+//    private int communityReportCount;
     private int goodsReportCount;
 }
