@@ -2,45 +2,7 @@
 <!DOCTYPE mapper PUBLIC " -//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="goods">
 	
-	<select id="getKeepList" parameterType="string" resultType="GoodsDto"> <!--사진API로?--><!-- 5P 사진을 포함한 찜목록을 가져옴 -->
-		select goods_id,user_id,title,price,status,created_at 
-		from goods
-		where goods_id IN(select goods_id from wishlist where user_id=#{userId}) and active_status="Y" and status!=4
-		order by created_at DESC
-	</select>
 	
-	<select id="updateViewCount"> <!-- 상품글 조회수 +1 -->
-		update goods set view_count=view_count+1
-	</select>
-	
-	<select id="getFavoriteList" parameterType="string" resultType="GoodsDto"> <!--사진API로?--><!-- 6P 사진을 포함한 모아보기목록 가져옴 -->
-		select goods_id,user_id,title,price,status,created_at 
-		from goods g
-		where user_id IN(select target_id from favorite_user where user_id=#{userId}) and active_status="Y" and status!=4
-		order by created_at DESC
-	</select>
-	
-	<select id="getOnSaleList" parameterType="string" resultType="GoodsDto">	<!--10P 판매중 + 예약중 불러오기 -->
-		select goods_id,title,price,status 
-		from goods 
-		where user_id=#{userId} and status IN(1,2) and active_status="Y" 
-		order by refreshed_at DESC;
-	</select>
-	
-	<select id="getSoldOutList" parameterType="string" resultType="GoodsDto">	<!--10P 거래완료 판매내역 가지고오기 -->
-		select goods_id,title,price,status 
-		from goods 
-		where user_id=#{user_id} and status IN(3) and active_status="Y" 
-		order by refreshed_at DESC;
-	</select>
-	
-	<select id="getHideList" parameterType="string" resultType="GoodsDto">	<!--10P 숨김중인 판매내역 가져오기 -->
-		select goods_id,title,price,status 
-		from goods 
-		where user_id=#{userId} and status IN(4) and active_status="Y" 
-		order by refreshed_at DESC;
-	</select>
-		
 <!-- 	<select id="get">		카테고리별 상품글 
 		goods_id,user_id,title,status,price,view_count,description,safe_trading_yn,created_at from goods
 		where category_id=1 and active_status="Y" and and status!=4
@@ -86,9 +48,7 @@
 			where ROWNUM <=4	
 		</select> -->
 	
-		<insert id="insertWishList">	<!-- 23P 찜하기 -->	
-			insert into wishlist values(#{goodsId},#{userId},"")
-		</insert>
+
 		
 		<update id="updateGoods" parameterType="GoodsDto"> <!-- 25P 상품글 수정 -->
 			update goods 
