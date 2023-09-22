@@ -20,12 +20,4 @@ public class HomeController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 
-	// 추후 수정 : 김종호 추가(230923)
-		@GetMapping("/chat")
-		public String chatGET() {
-
-			logger.info("@ChatController, chat GET()");
-
-			return "chat/chatroom";
-		}
 }
