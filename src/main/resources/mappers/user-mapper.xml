@@ -72,7 +72,7 @@
 	</update>
 	
 	<insert id="insertAddress" parameterType="UserInsertAddressDto">	<!-- 새로입력된 주소를 count+1 주소순서에 추가한다 -->
-		insert into user_address values(#{address},#{detailAddress},#{userId},#{postCode},#{nickname},(select count(*) from user_address where user_id=#{user_id})+1)
+		insert into user_address values(#{detailAddress},#{postCode},#{userId},#{roadAddress},#{address},#{nickname},(select count(*) from user_address where user_id=#{user_id})+1)
 	</insert>
 	
 	<delete id="deleteAddress1" parameterType="_int">	<!-- 주소삭제 1단계 작업 -->
@@ -110,7 +110,7 @@
 	</select>
 	
 	<insert id="signup"> <!-- 회원가입 -->
-		insert into user (user_id,name,password,mobile_number,nickname,email) values(#{user_id},#{name},#{password},#{mobile_number},#{nickname},#{email})
+		insert into users (user_id,name,password,mobile_number,nickname,email) values(#{user_id},#{name},#{password},#{mobile_number},#{nickname},#{email})
 	</insert>
 
 	<select id="getSafePurchaseInfo" parameterType="string" resultType="SafePurchaseInfoDto">	<!-- 11P 안전거래 상세정보 가져오기 -->

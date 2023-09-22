@@ -26,10 +26,10 @@
 </head>
 <body>
 <h1>이미지 업로드</h1>
-    <%-- <form action="${pageContext.request.contextPath}/upload" method="post" enctype="multipart/form-data">
-        <input type="file" name="file" accept="image/*" required>
+     <form action="${pageContext.request.contextPath}/uploaded" method="post" enctype="multipart/form-data">
+        <input type="file" name="files" multiple="multiple" accept="image/*" required>
         <input type="submit" value="업로드">
-    </form> --%>
+    </form> 
     <form action="${pageContext.request.contextPath}/upload" method="post" enctype="multipart/form-data">
 		<div id="editor"></div>
 		<input type="button" class="btn btn-secondary mt-3 mx-2" value="작성취소" />

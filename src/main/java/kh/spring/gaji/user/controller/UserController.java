@@ -33,7 +33,7 @@ public class UserController {
 	        return "redirect:/main"; // 성공 시 메인 페이지로 리다이렉트
 		}
 		
-			
+		
 		
 		
 	}
