@@ -25,4 +25,9 @@ public class PayServiceImpl implements PayService {
     public int addSafeTrading(InsertSafeTradingDto insertSafeTradingDto) {
         return payDao.addSafeTrading(insertSafeTradingDto);
     }
+    
+	@Override
+    public int getAmount(int goodsId) {	// 결제시 가격확인을 위한 함수
+    	return payDao.getAmount(goodsId);
+    }
 }

@@ -9,6 +9,6 @@ public class UserAddressDto {
     private String postCode;
     private String roadAddress;
     private String address;
-    private String nickname;
+    private String addressNickname;
     private int addressNo;
 }

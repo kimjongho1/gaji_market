@@ -21,4 +21,8 @@ public class PayDao {
     public int addSafeTrading(InsertSafeTradingDto insertSafeTradingDto) {	//안전거래 생성 
         return sqlSession.insert("pay.addSafeTrading", insertSafeTradingDto);
     }
+    
+    public int getAmount(int goodsId) {	// 결제시 가격확인을 위한 함수
+    	return sqlSession.selectOne("pay.getAmount",goodsId);
+    }
 }

@@ -38,7 +38,7 @@
 	<!-- CKEditor -->
 	<script src="https://ckeditor.com/apps/ckfinder/3.5.0/ckfinder.js"></script>
 	<script>
-		ClassicEditor
+		ClassicEditor 
 		.create(document.querySelector('#editor'), {
 			
 			ckfinder: {

@@ -13,11 +13,15 @@
 		where transaction_id= #{transactionId}
 	</update>
 	
+	<select id="getAmount" parameterType="string" resultType="_int">	<!-- 결제시 가격확인을 위한 쿼리문 -->
+		select price from goods where goods_id=#{goodsId}
+	</select>
+	
 	<insert id="addSafeTrading" parameterType="InsertSafeTradingDto">	<!-- 49P 새로운 안전결제 레코드 생성 -->
 		insert into safe_trading 
 		(transaction_id,buyer_id,goods_id,perchase_method,price,trading_date,trading_status,shpping_address) 
-		values(transaction_id.nextval,#{buyerId},#{goodsId},#{purchaseMethod},#{price},
-		#{tradingDate},1,#{shippingAddress})
+		values(#{impUid},#{buyerId},#{goodsId},#{purchaseMethod},#{price},
+		"",1,#{shippingAddress})
 	</insert>
 	
 </mapper>

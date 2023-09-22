@@ -1,6 +1,4 @@
 package kh.spring.gaji.goods.model.dto;
-import java.math.BigDecimal;
-
 import org.springframework.stereotype.Component;
 import lombok.Data;
 

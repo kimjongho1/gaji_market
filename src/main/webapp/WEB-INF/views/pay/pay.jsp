@@ -25,11 +25,9 @@
 			  name: "테스트 주문",	// 주문이름
 			  buyer_name: "구매자",	// 구매자
 			  buyer_email: "buyer@iamport.kr",	//구매자 이메일 
-			  merchant_uid: "ss"
 		},
 		 rsp => {					//rsp를 인자로 받는 무명함수 실행
 			 alert(rsp.imp_uid+ ":" + rsp.merchant_uid);	
-			 console.log(rsp.imp_uid+ ":" + rsp.merchant_uid);
 			 console.log(rsp);
 			 $.ajax({
 			  url: "<%=request.getContextPath()%>/payment/callback" ,	
@@ -37,7 +35,6 @@
 			  dataType: 'json',
 			  data: {
 			        imp_uid: rsp.imp_uid, //결제서비스 제공자가 거래식별자
-			        merchant_uid: rsp.merchant_uid// 판매자가 지정한 거래식별자
 			  		},
 		  	  success: callback	
 			  });
@@ -58,14 +55,12 @@
 		},
 		 rsp => {					//rsp를 인자로 받는 무명함수 실행
 			 alert(rsp.imp_uid+ ":" + rsp.merchant_uid);	
-			 console.log(rsp.imp_uid+ ":" + rsp.merchant_uid);
 			 $.ajax({
 			  url: "<%=request.getContextPath()%>/payment/callback" ,	
 			  method: "post",
 			  dataType: 'json',
 			  data: {
 			        imp_uid: rsp.imp_uid, //결제서비스 제공자가 거래식별자
-			        merchant_uid: rsp.merchant_uid// 판매자가 지정한 거래식별자
 			  		},
 		  	  success: callback	
 			  });
@@ -85,14 +80,13 @@
 	},
 	 rsp => {	//rsp를 인자로 받는 무명함수 실행
 		 alert(rsp.imp_uid+ ":" + rsp.merchant_uid);
-		 console.log(rsp.imp_uid+ ":" + rsp.merchant_uid);
 		 $.ajax({
 		  url: "<%=request.getContextPath()%>/payment/callback",
 		  method: "post",
 		  dataType: 'json',
 		  data: {
 		        imp_uid: rsp.imp_uid, //결제서비스 제공자가 만든 거래식별자
-		        merchant_uid: rsp.merchant_uid// 판매자가 지정한 거래식별자
+		        goodsId: "${goodsId}"	//해당 상품글 번호를 같이 보내준다.
 		  		},
 		  		success: callback	
 		    });
@@ -103,7 +97,7 @@
 	function callback(data){
 		if(data.response.status=='paid') {
 			alert("결제완료")
-			//window.location.href="{pageContext.request.contextPath}/mypage/purchaselist";
+			window.location.href="{pageContext.request.contextPath}/mypage/deal/safe/buyer";
 		}
 		else{
 			console.log(data);
