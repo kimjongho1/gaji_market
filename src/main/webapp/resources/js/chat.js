@@ -50,9 +50,30 @@ function setAciveChat(f) {
 
 $(function(){
 
+  const username="${pageContext.request.userPrincipal.name}";
+  
   $("#button-send").on("click", (e) => {
-  console.log("send 버튼 활성화");
+   send();
   });
-});
+
 
 const websocket = new WebSocket("ws://localhost:8090/spring1/echo");
+
+// websocket.onmessage은 서버에 메시지가 도착했을 때 호출되는 이벤트 핸들러
+// onMessage은 websocket.onmessage을 참조함
+websocket.onmessage = onMessage;
+
+function send(){
+
+  let msg = document.getElementById("msg");
+
+  console.log(username + ":" + msg.value);
+  // websocket.send은 웹소켓으로 textMessage객체의 값을 보냄
+  websocket.send(username + ":" + msg.value);
+  //textMessage 객체의 값 초기화
+  msg.value = '';
+}
+
+// 9.25 메시지 화면 출력 작업 재개 
+
+});

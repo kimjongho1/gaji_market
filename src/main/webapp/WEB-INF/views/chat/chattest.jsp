@@ -86,6 +86,12 @@
 					<div class="bubble you">Itâs not that bad...</div>
 					<div class="bubble you">But weâre probably gonna need a new
 						carpet.</div>
+					<div class="bubble you">But weâre probably gonna need a new
+						carpet.</div>
+					<div class="bubble you">But weâre probably gonna need a new
+						carpet.</div>
+					<div class="bubble you">But weâre probably gonna need a new
+						carpet.</div>
 				</div>
 				<div class="chat" data-chat="person4">
 					<div class="conversation-start">
@@ -122,7 +128,7 @@
 				</div>
 				<div class="write">
 					<a href="javascript:;" class="write-link attach"></a> <input
-						type="text" /> <a href="javascript:;" class="write-link smiley"></a>
+						type="text" id="msg"/> <a href="javascript:;" class="write-link smiley"></a>
 					<button class="write-link send" type="button" id="button-send"></button>
 				</div>
 			</div>

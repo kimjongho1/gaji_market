@@ -15,6 +15,6 @@ public class ChatController {
 		log.info("@ChatController, chat GET()");
 		
 		// chat 패키지 아래 chatroom.jsp로 이동
-		return "chat/chatroom";
+		return "chat/chattest";
 	}
 }
