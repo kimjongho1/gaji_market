@@ -3,15 +3,11 @@ package kh.spring.gaji.chat.contoller;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.socket.CloseStatus;
 import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketSession;
 import org.springframework.web.socket.handler.TextWebSocketHandler;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
 
-import kh.spring.gaji.chat.model.dto.ChatMessageDto;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
