@@ -13,7 +13,9 @@ import io.github.cdimascio.dotenv.Dotenv;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Controller
@@ -56,6 +58,31 @@ public class UploadController {
 //		return jsonResponse; // 업로드된 이미지와 URL을 표시할 JSP 페이지로 이동
 	
 	}
+	
+	@PostMapping("/uploaded")
+	public String uploadtest(@RequestParam("files") MultipartFile[] files, Model model) throws IOException{
+	    List<String> imageUrls = new ArrayList<>();
+	    
+//		File imageFile = convertMultipartFileToFile(file); // 해당하는 file형식으로 변환
+//		Map params1 = ObjectUtils.asMap("use_filename", true, "unique_filename", false, "overwrite", true); // 업로드할 파일의 형식을 정해줌
+//		Map imageUrl2 = cloudinary.uploader().upload(imageFile, params1);// (imageFile);// 해당 하는 params1의 설정으로 imageFile을 업로드함.
+//		System.out.println(imageUrl2);
+//		String imageUrl = cloudinary.url().generate((String)imageUrl2.get("secure_url")); // 업로드된 파일의 url을 가져옴
+//		System.out.println(imageUrl);
+//		model.addAttribute("imageUrl", imageUrl2);
+	    Map params1 = ObjectUtils.asMap("use_filename", true, "unique_filename", false, "overwrite", true);
+	    for (MultipartFile file : files) {
+	        File imageFile = convertMultipartFileToFile(file);
+	        Map imageUrl2 = cloudinary.uploader().upload(imageFile, params1);
+	        String imageUrl = cloudinary.url().generate((String) imageUrl2.get("secure_url"));
+	        imageUrls.add(imageUrl);
+	    }
+	    model.addAttribute("imageUrls", imageUrls);
+	    System.out.println(imageUrls);
+		return "image-display"; // 업로드된 이미지와 URL을 표시할 JSP 페이지로 이동
+	
+	}
+	
 
 	private File convertMultipartFileToFile(MultipartFile file) throws IOException {
 		File convertedFile = new File(file.getOriginalFilename());

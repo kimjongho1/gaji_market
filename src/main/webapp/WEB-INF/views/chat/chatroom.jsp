@@ -29,10 +29,13 @@
 <script>
             $(document).ready(function(){
 
+            // username 은 로그인 화면에서 user에 입력한 값
 			const username="${pageContext.request.userPrincipal.name}";
-            $("#disconn").on("click", (e) => {
+			
+			// 접속 끊기
+			/* $("#disconn").on("click", (e) => {
                 disconnect();
-            })
+            }) */
             
             $("#button-send").on("click", (e) => {
                 send();
@@ -53,13 +56,13 @@
                 msg.value = '';
             }
             
-            //채팅창에서 나갔을 때
+            //채팅창에서 나갔을 때 방 폭파 없어도 됨
             function onClose(evt) {
                 var str = username + ": 님이 방을 나가셨습니다.";
                 websocket.send(str);
             }
             
-            //채팅창에 들어왔을 때
+            //채팅창에 들어왔을 때 없어도 됨
             function onOpen(evt) {
                 var str = username + ": 님이 입장하셨습니다.";
                 websocket.send(str);

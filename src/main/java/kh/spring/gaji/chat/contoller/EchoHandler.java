@@ -19,7 +19,6 @@ public class EchoHandler extends TextWebSocketHandler {
 	// websocket 연결 시
 	@Override
 	public void afterConnectionEstablished(WebSocketSession session) throws Exception {
-		System.out.println("aaaaaa");
 		// 세션 리스트에 해당 session을 추가
 		sessionList.add(session);
 
@@ -29,7 +28,6 @@ public class EchoHandler extends TextWebSocketHandler {
 	// 클라이언트가 웹소켓 서버로 메시지를 전송했을 때 실행
 	@Override
 	protected void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception {
-		System.out.println("aaaaavvv");
 		// TextMessage의 getPayload메소드를 통해 view에서 보낸 메시지(이름, 채팅내용, 방번호)를 msg변수에 담아줌
 		String msg = message.getPayload();
 		// 메시지를 구분자(",")를 이용하여 잘라서 배열형태로 담아줌 ex) [손은진, 안녕하세요, 5]

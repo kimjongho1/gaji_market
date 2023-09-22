@@ -128,10 +128,10 @@ body {
 	<form action="doJoin" method="POST" class="joinForm" onsubmit="DoJoinForm__submit(this); return false;">
                                                                                                
       <div class="textForm">
-        <input name="loginId" type="text" class="id" placeholder="아이디">
+        <input name="userId" type="text" class="id" placeholder="아이디">
       </div>
       <div class="textForm">
-        <input name="loginPw" type="password" class="pw" placeholder="비밀번호">
+        <input name="password" type="password" class="pw" placeholder="비밀번호">
       </div>
        <div class="textForm">
         <input name="loginPwConfirm" type="password" class="pw" placeholder="비밀번호 확인">
@@ -143,23 +143,23 @@ body {
         <input name="certification" type="text" class="email" placeholder="인증번호 확인">
       </div>
       <div class="textForm">
-        <input name="name" type="password" class="name" placeholder="이름">
+        <input name="name" type="text" class="name" placeholder="이름">
       </div>
       <div class="textForm">
         <input name="nickname" type="text" class="nickname" placeholder="닉네임">
       </div>
       <div class="textForm">
-        <input name="cellphoneNo" type="number" class="cellphoneNo" placeholder="전화번호">
+        <input name="mobileNumber" type="number" class="mobileNumber" placeholder="전화번호">
       </div>
       <div class="textForm">
-      	<input type="text" id="sample4_postcode" placeholder="우편번호">
+      	<input type="text" name="postCode" id="sample4_postcode" placeholder="우편번호">
 		<input type="button" onclick="sample4_execDaumPostcode()" value="우편번호 찾기">
 	  
 	  <br>
-	  <input type="text" id="sample4_roadAddress" placeholder="도로명주소">
-	  <input type="text" id="sample4_jibunAddress" placeholder="지번주소">
+	  <input type="text" name="roadAddress" id="sample4_roadAddress" placeholder="도로명주소">
+	  <input type="text" name="address" id="sample4_jibunAddress" placeholder="지번주소">
 	  <span id="guide" style="color: #999; display: none"></span>
-	  <input type="text" id="sample4_detailAddress" placeholder="상세주소">
+	  <input type="text" name="detailAddress" id="sample4_detailAddress" placeholder="상세주소">
       <br>
       </div>
       <input type="submit" class="btn" value="J O I N"/>
