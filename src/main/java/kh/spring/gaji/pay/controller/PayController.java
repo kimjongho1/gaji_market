@@ -87,7 +87,7 @@ public class PayController {
 					cancelData=new CancelData(imp_uid, true); 
 					api.cancelPaymentByImpUid(cancelData);
 					return result;	//거래 정보 반환
-				}		
+					/* } */
 			}
 			else {
 				cancelData=new CancelData(imp_uid, true); // imp_uid를 이용하여 거래취소함수에 인자가될 객체생성
