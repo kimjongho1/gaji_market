@@ -29,10 +29,13 @@
 <script>
             $(document).ready(function(){
 
+            // username 은 로그인 화면에서 user에 입력한 값
 			const username="${pageContext.request.userPrincipal.name}";
-            $("#disconn").on("click", (e) => {
+			
+			// 접속 끊기
+			/* $("#disconn").on("click", (e) => {
                 disconnect();
-            })
+            }) */
             
             $("#button-send").on("click", (e) => {
                 send();
