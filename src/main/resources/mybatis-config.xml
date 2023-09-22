@@ -62,7 +62,7 @@
 	</typeAliases>
 	
 	 <mappers>
-		<mapper resource="mappers/admiRn-mapper.xml"/> 		<!-- 관리자 관련 쿼리문 -->
+		<mapper resource="mappers/admin-mapper.xml"/> 		<!-- 관리자 관련 쿼리문 -->
 		<mapper resource="mappers/category-mapper.xml"/>	<!-- 카테고리 관련 쿼리문 -->
 		<mapper resource="mappers/chat-mapper.xml"/>		<!-- 채팅관련 쿼리문 -->
 <!-- 		<mapper resource="mappers/community-mapper.xml"/>	커뮤니티글 관련 쿼리문 -->
