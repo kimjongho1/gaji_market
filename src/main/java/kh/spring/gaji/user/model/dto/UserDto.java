@@ -15,9 +15,6 @@ public class UserDto {
     private String nickname;
     private String createdAt;
     private String email;
-    private int enabled;
-    private int authority;
     private int keywordCount;
-    private int inviteCount;
     private int dongId;
 }

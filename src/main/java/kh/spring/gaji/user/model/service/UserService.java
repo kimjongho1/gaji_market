@@ -1,26 +1,50 @@
 package kh.spring.gaji.user.model.service;
-
 import java.util.List;
+import java.util.Map;
 
+import kh.spring.gaji.goods.model.dto.GoodsDto;
+import kh.spring.gaji.goods.model.dto.GoodsListDto;
+import kh.spring.gaji.goods.model.dto.MyGoodsListDto;
 import kh.spring.gaji.pay.model.dto.DealReviewDto;
+import kh.spring.gaji.pay.model.dto.InFaceTradingDto;
+import kh.spring.gaji.pay.model.dto.SafePurchaseInfoDto;
+import kh.spring.gaji.pay.model.dto.SafeTradingDto;
 import kh.spring.gaji.user.model.dto.UserAddressDto;
 import kh.spring.gaji.user.model.dto.UserDto;
 import kh.spring.gaji.user.model.dto.UserInsertAddressDto;
+import kh.spring.gaji.user.model.dto.UserProfileDto;
 
 public interface UserService {
-    UserDto getProfile(String userId);
+
+    List<GoodsListDto> getKeepList(String userId);
+
+    int updateViewCount();
+
+    List<GoodsListDto> getFavoriteList(String userId);
+
+    List<SafeTradingDto> getSafePurchaseList(String buyerId);
+
+    List<InFaceTradingDto> getInfacePurchaseList(String buyerId);
+
+    List<MyGoodsListDto> getOnSaleList(String userId);
+
+    List<MyGoodsListDto> getSoldOutList(String userId);
+
+    List<MyGoodsListDto> getHideList(String userId);
+
+    int insertWishList(Map<String, String> map);
+
+    UserProfileDto getProfile(String userId);
 
     List<UserAddressDto> getAddress(String userId);
 
     int updateMainAddressNo(String userId);
 
-    int updateMainAddress(String userId, int addressNo);
+    int updateMainAddress(Map<String, String> map);
 
-    int insertAddress(UserInsertAddressDto userAddressDomain);
+    int insertAddress(UserInsertAddressDto addressDto);
 
     int deleteAddress1(int postCode);
-    
-    public int deleteAddress2(int postCode);
 
     int checkNickname(String nickname);
 
@@ -30,7 +54,7 @@ public interface UserService {
 
     int updateInviteCount(String userId);
 
-    int updatePass(String userId, String password);
+    int updatePass(Map<String, Object> map);
 
     int checkId(String userId);
 
@@ -38,15 +62,21 @@ public interface UserService {
 
     int signup(UserDto userDto);
 
-    String findId(String name, String email);
+    SafePurchaseInfoDto getSafePurchaseInfo(int transactionId);
 
-    int findPass(String userId, String name, String email);
+    int acceptSafeTrading(int transactionId);
 
-    int addAccount(String userAccount, String userId);
+    int updateTrackingNumber(Map<String, Object> map);
 
-    int addFavoriteUser(String userId, String targetId);
+    String findId(Map<String, String> map);
+
+    int findPass(Map<String, String> map);
+
+    int addAccount(Map<String, String> map);
+
+    int addFavoriteUser(Map<String, String> map);
 
     int addDealReview(DealReviewDto dealReviewDto);
 
-    int updateRatingScore(String userId, int mannerPoint, int timePoint, int goodsPoint);
+    int updateRatingScore(Map<String, String> map);
 }

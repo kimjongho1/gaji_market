@@ -7,9 +7,10 @@ import lombok.Data;
 public class InFaceTradingInfoDto {
     private int inFaceTradingId;
     private int goodsId;
+    private String goodsTitle;
     private String sellerId;
     private String buyerId;
-    private double price;
+    private int price;
     private String tradingDate; 
     private String tradingStatus;
 

@@ -10,4 +10,5 @@ public class AdminSafeTradingDto {
     private String goodsTitle;
     private String sellerId;
     private String tradingStatus;
+    private String tradingData;
 }

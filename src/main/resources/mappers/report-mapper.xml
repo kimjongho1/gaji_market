@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC " -//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="report">
 
-	<insert id="reportGoods" parameterType="reportDto"> 	<!--11P 상품 신고하기 -->
+	<insert id="reportGoods" parameterType="ReportDto"> 	<!--11P 상품 신고하기 -->
 		insert into goods_report values(#{refId},#{reporterId},#{content},#{reportCategory},"","") 
 	</insert>
 	
@@ -14,44 +14,6 @@
 		insert into comment_report values(#{refId},#{reporterId},#{content},#{reportCategory},"","")
 	</insert>-->
 	
-	<select id="getGoodsReportCount"  resultType="GoodsReportCountDto">	<!-- 39P 상품글리스트(상품+신고수)  -->
-		select goods_id,title,user_id,(select count(*) report_count from goods_report r where r.ref_id=g.goods_id) 
-		from goods g
-		order by report_count
-	</select>
-	
-	<select id="getGoodsReportCountN" parameterType="string"  resultType="GoodsReportCountDto">	<!-- 39P 상품글리스트(상품+신고수) 미검토글만 -->
-		select goods_id,title,user_id,(select count(*) report_count from goods_report r where r.ref_id=g.goods_id) 
-		from goods g
-		where appoval_status ='N'
-		order by report_count 
-	</select>
-	
-	<select id="getSearchGoodsReportCount" parameterType="string" resultType="GoodsReportCountDto">	<!-- 39P 회원 ID검색 상품글리스트(상품+신고수) 미검토글만 -->
-		select goods_id,title,user_id,(select count(*) report_count from goods_report r where r.ref_id=g.goods_id) 
-		from goods g
-		where user_id like #{searchWord}
-		order by report_count 
-	</select>
-	
-	<select id="getSearchGoodsReportCountN" parameterType="string"  resultType="GoodsReportCountDto">	<!-- 39P 회원 ID검색 상품글리스트(상품+신고수) 미검토글만 -->
-		select goods_id,title,user_id,(select count(*) report_count from goods_report r where r.ref_id=g.goods_id) 
-		from goods g
-		where appoval_status ='N' and user_id like #{searchWord}
-		order by report_count 
-	</select>
-	
-	<select id="getGoodsReportList" parameterType="string" resultType="ReportDto">	<!-- 40P 하나의 상품글에대한 신고들조회  -->
-		select ref_id,reporter_id,created_at,report_category <!-- 참조아이디,신고일,신고카테고리 까지 출력후 클릭하면 (참조아이디와 신고자)에 해당하는 신고글 이동 -->
-		from goods_report
-		where ref_id=#{refId}
-	</select>
-	
-	<select id="getGoodsReportInfo" parameterType="map" resultType="GoodsReportInfoDto">	<!-- 41P 상품 신고내용 상세조회 -->
-		select r.reporter_id, r.ref_id,title, r.created_at, g.user_id, r.report_category, r.approval_status, r.content
-		from goods_report r join goods g on ref_id=goods_id
-		where ref_id=#{refId} and reporter_id=#{reporterId}
-	</select>
 	
 <!-- 	<select id="getCommunityReportCount" resultType="CommunityReportListDto"> 42P 커뮤니티 신고글 신고수포함
 		select created_at,board_id,title,writer,(select count(*) report_count from community_report where ref_id=board_id)

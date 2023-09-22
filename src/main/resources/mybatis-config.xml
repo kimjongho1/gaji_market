@@ -9,6 +9,7 @@
 	<typeAliases>
 		<typeAlias type="kh.spring.gaji.admin.model.dto.AdministerDto" alias="AdministerDto"/>
 		<typeAlias type="kh.spring.gaji.admin.model.dto.GajiAccountDto" alias="GajiAccountDto"/>
+		<typeAlias type="kh.spring.gaji.admin.model.dto.UserBlockingDto" alias="UserBlockingDto"/>
 		<typeAlias type="kh.spring.gaji.category.model.dto.CategoryDto" alias="CategoryDto"/>
 		<typeAlias type="kh.spring.gaji.chat.model.dto.ChatMessageDto" alias="ChatMessageDto"/>
 		<typeAlias type="kh.spring.gaji.chat.model.dto.ChatRoomDto" alias="ChatRoomDto"/>
@@ -17,18 +18,20 @@
 		<typeAlias type="kh.spring.gaji.pay.model.dto.DealReviewDto" alias="DealReviewDto"/>
 		<typeAlias type="kh.spring.gaji.file.model.dto.FileDto" alias="FileDto"/>
 		<typeAlias type="kh.spring.gaji.goods.model.dto.GoodsDto" alias="GoodsDto"/>
+		<typeAlias type="kh.spring.gaji.goods.model.dto.GoodsListDto" alias="GoodsListDto"/>
+		<typeAlias type="kh.spring.gaji.goods.model.dto.MyGoodsListDto" alias="MyGoodsListDto"/>
 		<typeAlias type="kh.spring.gaji.interestcategory.model.dto.InterestCategoryDto" alias="InterestCategoryDto"/>
 		<typeAlias type="kh.spring.gaji.notification.model.dto.NotificationDto" alias="NotificationDto"/>
 		<typeAlias type="kh.spring.gaji.notification.model.dto.NotificationKeywordDto" alias="NotificationKeywordDto"/>
 		<typeAlias type="kh.spring.gaji.pay.model.dto.InFaceTradingDto" alias="InFaceTradingDto"/>
 		<typeAlias type="kh.spring.gaji.pay.model.dto.SafeTradingDto" alias="SafeTradingDto"/>
+		<typeAlias type="kh.spring.gaji.pay.model.dto.InsertSafeTradingDto" alias="InsertSafeTradingDto"/>
 		<typeAlias type="kh.spring.gaji.report.model.dto.ReportDto" alias="ReportDto"/>
 		<typeAlias type="kh.spring.gaji.user.model.dto.UserAccountDto" alias="UserAccountDto"/>
 		<typeAlias type="kh.spring.gaji.user.model.dto.UserDto" alias="UserDto"/>
-		<typeAlias type="kh.spring.gaji.user.model.dto.UserToUserDto" alias="UserToUserDto"/>
+		<typeAlias type="kh.spring.gaji.user.model.dto.UserProfileDto" alias="UserProfileDto"/>
 		<typeAlias type="kh.spring.gaji.user.model.dto.UserAddressDto" alias="UserAddressDto"/>
-		<typeAlias type="kh.spring.gaji.wishlist.model.dto.WishListDto" alias="WishListDto"/>
-		
+		<typeAlias type="kh.spring.gaji.user.model.dto.WishListDto" alias="WishListDto"/>
 		
 		<typeAlias type="kh.spring.gaji.user.model.dto.UserInsertAddressDto" alias="UserInsertAddressDto"/>
 		<typeAlias type="kh.spring.gaji.report.model.dto.ReportInfoDto" alias="ReportInfoDto"/>
@@ -39,16 +42,14 @@
 		<typeAlias type="kh.spring.gaji.user.model.dto.UserCountReportDto" alias="UserCountReportDto"/>
 		<typeAlias type="kh.spring.gaji.pay.model.dto.InFaceTradingInfoDto" alias="InFaceTradingInfoDto"/>
 		<typeAlias type="kh.spring.gaji.user.model.dto.UserInfoDto" alias="UserInfoDto"/>
-
-		<!-- 댓글 인덱스 -->
+		
 		<typeAlias type="kh.spring.gaji.report.model.dto.CommentReportListDto" alias="CommentReportListDto"/>
 		<typeAlias type="kh.spring.gaji.report.model.dto.CommentReportInfoDto" alias="CommentReportInfoDto"/>
 		<typeAlias type="kh.spring.gaji.report.model.dto.CommentReportCountDto" alias="CommentReportCountDto"/>
-		<!-- 상품 인덱스 -->
 		<typeAlias type="kh.spring.gaji.goods.model.dto.GoodsInfoDto" alias="GoodsInfoDto"/>
 		<typeAlias type="kh.spring.gaji.goods.model.dto.GoodsReportCountDto" alias="GoodsReportCountDto"/>
 		<typeAlias type="kh.spring.gaji.report.model.dto.GoodsReportInfoDto" alias="GoodsReportInfoDto"/>
-	
+		
 
 		<!-- 커뮤니티 인덱스 -->
 		<!-- 		
@@ -64,10 +65,10 @@
 		<mapper resource="mappers/admin-mapper.xml"/> 		<!-- 관리자 관련 쿼리문 -->
 		<mapper resource="mappers/category-mapper.xml"/>	<!-- 카테고리 관련 쿼리문 -->
 		<mapper resource="mappers/chat-mapper.xml"/>		<!-- 채팅관련 쿼리문 -->
-		<mapper resource="mappers/community-mapper.xml"/>	<!-- 커뮤니티글 관련 쿼리문 -->
+<!-- 		<mapper resource="mappers/community-mapper.xml"/>	커뮤니티글 관련 쿼리문 -->
 		<mapper resource="mappers/file-mapper.xml"/>	<!-- 파일관련 쿼리문 -->
 		<mapper resource="mappers/notification-mapper.xml"/>	<!-- 알림관련 쿼리문 -->
-		<mapper resource="mappers/trade-mapper.xml"/>	<!-- 거래 관련 쿼리문 -->
+		<mapper resource="mappers/pay-mapper.xml"/>	<!-- 거래 관련 쿼리문 -->
 		<mapper resource="mappers/report-mapper.xml"/>	<!-- 신고관련 쿼리문 -->
 		<mapper resource="mappers/user-mapper.xml"/> <!-- 유저 관련 쿼리문 -->
 		<mapper resource="mappers/goods-mapper.xml"/> <!-- 상품 관련 쿼리문 -->

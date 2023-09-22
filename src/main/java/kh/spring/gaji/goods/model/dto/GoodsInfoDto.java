@@ -10,7 +10,7 @@ public class GoodsInfoDto{
     private int categoryId;
     private String title;
     private String status;
-    private double price;
+    private int price;
     private int viewCount;
     private String description;
     private String createdAt;

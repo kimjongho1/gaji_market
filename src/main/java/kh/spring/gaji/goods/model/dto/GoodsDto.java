@@ -7,19 +7,13 @@ import lombok.Data;
 @Component
 @Data
 public class GoodsDto {
-	private int goodsId;
 	private String userId;
 	private int categoryId;
 	private String title;
-	private String status;
-	private BigDecimal price;
-	private long viewCount;
+	private int price;
 	private String description;
-	private String refreshedAt;
-	private String createdAt;
 	private char safeTradingYN;
-	private char activeStatus;
 	private int lat;
-	private int Lng;
+	private int lng;
 	private int dongId;
 }

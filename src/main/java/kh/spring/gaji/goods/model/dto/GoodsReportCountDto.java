@@ -9,4 +9,5 @@ public class GoodsReportCountDto {
     private String title;
     private String userId;
     private int reportCount;
+    private String createdAt;
 }

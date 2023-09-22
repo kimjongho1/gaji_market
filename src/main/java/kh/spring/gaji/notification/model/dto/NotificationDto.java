@@ -10,7 +10,7 @@ public class NotificationDto {
     private String userId;
     private String message;
     private int readYn;
-	/* private int type; */
+    private int type;
     private String referenceId;
     private String createdAt;
 }
