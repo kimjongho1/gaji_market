@@ -36,7 +36,7 @@ public class PayServiceImpl implements PayService {
     	return payDao.getAmount(goodsId);
     }
 	
-	public GoodsPayInfoDto getGoodsInfo(String goodsId) {
+	public GoodsPayInfoDto getGoodsInfo(int goodsId) {
 		return payDao.getGoodsInfo(goodsId);
 	}
 	
@@ -47,4 +47,5 @@ public class PayServiceImpl implements PayService {
 	 public PayUserInfoDto getUserInfo(String userId) {
 		 return payDao.getUserInfo(userId);
 	 }
+
 }

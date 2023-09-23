@@ -12,7 +12,7 @@ public interface PayService {
     public int closeSafeTrading(String transactionId);
     public int addSafeTrading(InsertSafeTradingDto insertSafeTradingDto);
     public int getAmount(int goodsId);
-    public GoodsPayInfoDto getGoodsInfo(String goodsId);
+    public GoodsPayInfoDto getGoodsInfo(int goodsId);
     public List<UserAddressDto> getUserAddressList(String userId);
     public PayUserInfoDto getUserInfo(String userId);
 }

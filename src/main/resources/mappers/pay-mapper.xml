@@ -13,24 +13,25 @@
 		where transaction_id= #{transactionId}
 	</update>
 	
-	<select id="getAmount" parameterType="string" resultType="_int">	<!-- 결제시 가격확인을 위한 쿼리문 -->
+	<select id="getAmount" parameterType="_int" resultType="_int">	<!-- 결제시 가격확인을 위한 쿼리문 -->
 		select price from goods where goods_id=#{goodsId}
 	</select>
 	
-	<select id="getGoodsInfo" parameterType="string" resultType="GoodsInfoDto"> 		<!-- 48P 결제창 들어갈때 가지고 들어갈 상품정보 -->
-		select goods_id, Title, price	
+	<select id="getGoodsInfo" parameterType="_int" resultType="GoodsPayInfoDto"> 		<!-- 48P 결제창 들어갈때 가지고 들어갈 상품정보 -->
+		select goods_id, title, price	
 			   from goods
 			   where goods_id=#{goodsId}
 	</select>
 	
 	<select id="getUserAddressList" parameterType="string" resultType="UserAddressDto">	<!-- 48P 결제창 들어갈때 가지고 들어갈 유저주소들 -->
-		select detatile_address, post_code, road_address, address_nickname
+		select detail_address, post_code, road_address, address_nickname
 			   from user_address
 			   where user_id=#{userId}
+			   order by address_no
 	</select>
 	
 	<select id="getUserInfo" parameterType="string" resultType="PayUserInfoDto"> 		<!-- 48P 결제창 들어갈때 유저정보-->
-		select u.name,u.mobile_number from users join user_address using (user_id)
+		select name,mobile_number from users
 			   where user_id=#{userId}
 	</select>
 	

@@ -13,7 +13,7 @@
 <body>
 
 	<h3>배송지</h3>
-    <select name="selectedAddress">
+    <select id="selectedAddress">
         <c:forEach var="address" items="${userAddress}">
             <option value="${address}">
             ${address.addressNickname},  
@@ -34,7 +34,7 @@
 		</tr>
 		<tr>
 			<td>주문상품</td>
-			<td>${goodsInfo.Title}</td>
+			<td>${goodsInfo.title}</td>
 		</tr>
 		<tr>
 			<td>안전결제수수료</td>
@@ -65,7 +65,7 @@
 	//카카오페이 호출함수
 	function kakaoPay(){									
 		IMP.init('${merchantIdentificationCode}');	//IMP를 가맹점 식별번호로 초기화
-		var selectedAddress = $("#selectedAddress").val();
+		var selectedAddress = $(".selectedAddress").val();
 		IMP.request_pay( //IMP의 pay함수 실행 
 		{	
 			  pg: "kakaopay", // 카카오페이 결제창 호출
@@ -84,8 +84,8 @@
 			  data: {
 				  	goodsId:"${goodsInfo.goodsId}",
 				  	impUid: rsp.imp_uid, //결제서비스 제공자가 거래식별자
-				  	roadAddress: ,
-				  	detailAddress:
+				  	roadAddress: selectedAddress.roadAddress,
+				  	detailAddress:selectedAddress.detailAddress
 			  		},
 		  	  success: callback	
 			  });
@@ -113,8 +113,8 @@
 			  data: {
 				 	goodsId:"${goodsInfo.goodsId}",
 				  	impUid: rsp.imp_uid, //결제서비스 제공자가 거래식별자
-				  	roadAddress: ,
-				  	detailAddress:
+				  	roadAddress: selectedAddress.roadAddress,
+				  	detailAddress:selectedAddress.detailAddress
 			  		},
 		  	  success: callback	
 			  });
@@ -142,8 +142,8 @@
 		  data: {
 			  	goodsId: "${goodsInfo.goodsId}",	//해당 상품글 번호를 같이 보내준다.
 			  	impUid: rsp.imp_uid, //결제서비스 제공자가 만든 거래식별자
-			  	roadAddress: ,
-			  	detailAddress:
+			  	roadAddress: selectedAddress.roadAddress,
+			  	detailAddress:selectedAddress.detailAddress
 		  		},
 		  		success: callback	
 		    });

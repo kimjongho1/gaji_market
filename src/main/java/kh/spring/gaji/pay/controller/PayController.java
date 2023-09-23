@@ -50,11 +50,11 @@ public class PayController {
 	}
 	
 	@GetMapping("payment/pay")
-	public String paytest1(Model model,String goodsId,HttpServletRequest request) {
-		String userId=(String)request.getSession().getAttribute("userId");
-		GoodsPayInfoDto goodsInfo=payServiceImpl.getGoodsInfo(goodsId);
-		List<UserAddressDto> userAddress = payServiceImpl.getUserAddressList(userId);	
-		PayUserInfoDto payUserInfo= payServiceImpl.getUserInfo(userId);			
+	public String paytest1(Model model/* ,int goodsId */,HttpServletRequest request) {
+		/* String userId=(String)request.getSession().getAttribute("userId"); */
+		GoodsPayInfoDto goodsInfo=payServiceImpl.getGoodsInfo(1);	//goodsId =1
+		List<UserAddressDto> userAddress = payServiceImpl.getUserAddressList("qordmlgjs");	 //userId =qordmlgjs
+		PayUserInfoDto payUserInfo= payServiceImpl.getUserInfo("qordmlgjs");			 //userId =qordmlgjs
 		model.addAttribute("merchantIdentificationCode",merchantIdentificationCode);
 		model.addAttribute("goodsInfo",goodsInfo);		//상품정보
 		model.addAttribute("userAddress",userAddress);	//유저주소들
@@ -80,18 +80,19 @@ public class PayController {
 
 	@PostMapping("payment/callback")
 	@ResponseBody
-	public IamportResponse<Payment> callback(String impUid,String detailAddress,String roadAddress,int goodsId,HttpServletRequest request) {
+	public IamportResponse<Payment> callback(String impUid, String detailAddress,
+			String roadAddress/* ,int goodsId */,HttpServletRequest request) {
 		IamportResponse<Payment> result=null;
 		try {
 			result= api.paymentByImpUid(impUid);
-			int amount =(int)Math.round(payServiceImpl.getAmount(goodsId) * 1.035);
+			int amount =(int)Math.round(payServiceImpl.getAmount(1) * 1.035);	//goodsId =1
 			if(result.getResponse().getStatus().equals("paid")&&amount==result.getResponse().getAmount().intValue()) {	// 금액이 일치하고 지불이 완료되었다면.
 				insertSafeTradingDto.setTransactionId(impUid);
 				insertSafeTradingDto.setPrice(amount);
 				insertSafeTradingDto.setPurchaseMethod(result.getResponse().getPayMethod());
 				insertSafeTradingDto.setDetailAddress(detailAddress);
 				insertSafeTradingDto.setRoadAddress(roadAddress);
-				insertSafeTradingDto.setBuyerId((String)request.getSession().getAttribute("userId"));
+				insertSafeTradingDto.setBuyerId("qordmlgjs");	 //userId =qordmlgjs
 				int addResult = payServiceImpl.addSafeTrading(insertSafeTradingDto); //데이터베이스에 안전거래에 대한 데이터를 넣음
 				if(addResult==1) // 가지 데이터베이스에 값이 정상적으로 들어갔다면
 					return result;	// 거래정보 반환.

@@ -33,7 +33,7 @@ public class PayDao {
     }
     
     
-    public GoodsPayInfoDto getGoodsInfo(String goodsId) {	//결제시 상품정보 가져오기
+    public GoodsPayInfoDto getGoodsInfo(int goodsId) {	//결제시 상품정보 가져오기
     	return sqlSession.selectOne("pay.getGoodsInfo",goodsId);
     }
     
