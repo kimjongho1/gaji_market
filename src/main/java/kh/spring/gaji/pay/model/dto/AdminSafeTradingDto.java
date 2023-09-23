@@ -6,7 +6,7 @@ import lombok.Data;
 @Component
 @Data
 public class AdminSafeTradingDto {
-    private int transactionId;
+    private String transactionId;
     private String goodsTitle;
     private String sellerId;
     private String tradingStatus;

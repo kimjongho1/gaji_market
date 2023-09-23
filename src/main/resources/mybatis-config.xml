@@ -42,6 +42,9 @@
 		<typeAlias type="kh.spring.gaji.user.model.dto.UserCountReportDto" alias="UserCountReportDto"/>
 		<typeAlias type="kh.spring.gaji.pay.model.dto.InFaceTradingInfoDto" alias="InFaceTradingInfoDto"/>
 		<typeAlias type="kh.spring.gaji.user.model.dto.UserInfoDto" alias="UserInfoDto"/>
+		<typeAlias type="kh.spring.gaji.pay.model.dto.GoodsPayInfoDto" alias="GoodsPayInfoDto"/>
+		<typeAlias type="kh.spring.gaji.pay.model.dto.PayUserInfoDto" alias="PayUserInfoDto"/>
+		
 		
 		<typeAlias type="kh.spring.gaji.report.model.dto.CommentReportListDto" alias="CommentReportListDto"/>
 		<typeAlias type="kh.spring.gaji.report.model.dto.CommentReportInfoDto" alias="CommentReportInfoDto"/>

@@ -1,9 +1,14 @@
 package kh.spring.gaji.pay.model.service;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import kh.spring.gaji.pay.model.dao.PayDao;
+import kh.spring.gaji.pay.model.dto.GoodsPayInfoDto;
 import kh.spring.gaji.pay.model.dto.InsertSafeTradingDto;
+import kh.spring.gaji.pay.model.dto.PayUserInfoDto;
+import kh.spring.gaji.user.model.dto.UserAddressDto;
 
 @Service
 public class PayServiceImpl implements PayService {
@@ -12,12 +17,12 @@ public class PayServiceImpl implements PayService {
     private PayDao payDao;
 
     @Override
-    public int cancelSafeTrading(int transactionId) {
+    public int cancelSafeTrading(String transactionId) {
         return payDao.cancelSafeTrading(transactionId);
     }
     
     @Override
-    public int closeSafeTrading(int transactionId) {
+    public int closeSafeTrading(String transactionId) {
         return payDao.closeSafeTrading(transactionId);
     }
     
@@ -30,4 +35,16 @@ public class PayServiceImpl implements PayService {
     public int getAmount(int goodsId) {	// 결제시 가격확인을 위한 함수
     	return payDao.getAmount(goodsId);
     }
+	
+	public GoodsPayInfoDto getGoodsInfo(String goodsId) {
+		return payDao.getGoodsInfo(goodsId);
+	}
+	
+	public List<UserAddressDto> getUserAddressList(String userId){
+		return payDao.getUserAddressList(userId);
+	}
+	
+	 public PayUserInfoDto getUserInfo(String userId) {
+		 return payDao.getUserInfo(userId);
+	 }
 }

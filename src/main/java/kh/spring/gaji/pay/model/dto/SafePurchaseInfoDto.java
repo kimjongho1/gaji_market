@@ -12,7 +12,7 @@ public class SafePurchaseInfoDto {
     private String mobileNumber;
     private String name;
     private String shippingAddress;
-    private double price;
+    private int price;
     private String tradingDate;
     private String tradingStatus;
     private String trackingNumber;

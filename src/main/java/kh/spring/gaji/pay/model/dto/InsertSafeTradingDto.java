@@ -5,9 +5,10 @@ import lombok.Data;
 @Data
 @Component
 public class InsertSafeTradingDto {
-	private String impUid;
+	private String transactionId;
 	private String buyerId;
 	private String purchaseMethod;
 	private int price;
-	private String shippingAddress;
+	private String detailAddress;
+	private String roadAddress;
 }
