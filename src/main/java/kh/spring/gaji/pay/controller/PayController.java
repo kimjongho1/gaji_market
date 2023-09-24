@@ -64,12 +64,12 @@ public class PayController {
 	
 	@PostMapping("payment/cancel")	//안전거래 후 취소처리를 위한 버튼
 	@ResponseBody
-	public IamportResponse<Payment> cancel(String imp_uid) {
+	public IamportResponse<Payment> cancel(String impUid) {
 		IamportResponse<Payment> result=null;
 		try {
-			result = api.cancelPaymentByImpUid(cancelData=new CancelData(imp_uid, true)); //가맹점 고유식별번호로 거래취소후 , 거래정보담은 객체반환
+			result = api.cancelPaymentByImpUid(cancelData=new CancelData(impUid, true)); //가맹점 고유식별번호로 거래취소후 , 거래정보담은 객체반환
 			if(result.getResponse().getStatus().equals("cancelled"))
-				payServiceImpl.cancelSafeTrading(imp_uid);//데이터베이스에서 안전거래 취소로 변경. 상품 판매중으로 변경
+				payServiceImpl.cancelSafeTrading(impUid);//데이터베이스에서 안전거래 취소로 변경. 상품 판매중으로 변경
 			return result;	// 거래정보담은 객체반환 이후 페이지에서 이에따른 처리함.
 		} catch (IamportResponseException | IOException e) {
 			e.printStackTrace();
@@ -81,28 +81,36 @@ public class PayController {
 	@PostMapping("payment/callback")
 	@ResponseBody
 	public IamportResponse<Payment> callback(String impUid, String detailAddress,
-			String roadAddress/* ,int goodsId */,HttpServletRequest request) {
+			String roadAddress,int goodsId,HttpServletRequest request) {
 		IamportResponse<Payment> result=null;
 		try {
 			result= api.paymentByImpUid(impUid);
 			int amount =(int)Math.round(payServiceImpl.getAmount(1) * 1.035);	//goodsId =1
+			String goodTitle=result.getResponse().getName();
 			if(result.getResponse().getStatus().equals("paid")&&amount==result.getResponse().getAmount().intValue()) {	// 금액이 일치하고 지불이 완료되었다면.
 				insertSafeTradingDto.setTransactionId(impUid);
+				insertSafeTradingDto.setGoodsId(goodsId);
+				insertSafeTradingDto.setGoodsTitle(goodTitle);
 				insertSafeTradingDto.setPrice(amount);
 				insertSafeTradingDto.setPurchaseMethod(result.getResponse().getPayMethod());
 				insertSafeTradingDto.setDetailAddress(detailAddress);
 				insertSafeTradingDto.setRoadAddress(roadAddress);
 				insertSafeTradingDto.setBuyerId("qordmlgjs");	 //userId =qordmlgjs
+				
 				int addResult = payServiceImpl.addSafeTrading(insertSafeTradingDto); //데이터베이스에 안전거래에 대한 데이터를 넣음
+				
 				if(addResult==1) // 가지 데이터베이스에 값이 정상적으로 들어갔다면
 					return result;	// 거래정보 반환.
+				
 				else			// 가지 데이터베이스에 값이 입력되지 않았다면 거래취소.
 				{
 					cancelData=new CancelData(impUid, true); 
 					api.cancelPaymentByImpUid(cancelData);
 					return result;	//거래 정보 반환
 				}
+				
 			}
+			
 			else {
 				cancelData=new CancelData(impUid, true); // imp_uid를 이용하여 거래취소함수에 인자가될 객체생성
 				api.cancelPaymentByImpUid(cancelData);	// api의 취소함수에 cancelData를 인자로하여 거래취소.

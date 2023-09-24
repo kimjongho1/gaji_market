@@ -7,8 +7,10 @@ import lombok.Data;
 public class InsertSafeTradingDto {
 	private String transactionId;
 	private String buyerId;
-	private String purchaseMethod;
+	private int goodsId;
+	private String goodsTitle;
 	private int price;
+	private String purchaseMethod;
 	private String detailAddress;
 	private String roadAddress;
 }

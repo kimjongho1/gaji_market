@@ -17,38 +17,38 @@
 		where user_id IN(select target_id from favorite_user where user_id=#{userId}) and active_status="Y" and status!=4
 		order by created_at DESC
 	</select>
-	<select id="getSafePurchaseList" parameterType="string" resultType="SafeTradingDto">	<!-- 9P 안전거래 구매내역(회원) 불러오기 -->
-		select 	goods_id,transaction_id,goods_title,trading_status,s.price,trading_date 
+	<select id="getSafePurchaseList" parameterType="string" resultType="UserSafeTradingDto">	<!-- 9P 안전거래 구매내역(회원) 불러오기 -->
+		select 	transaction_id,goods_title,trading_status,s.price,to_char(trading_date, 'YYYY-MM-DD HH24:MI:SS') trading_date
 		from safe_trading s join goods g using (goods_id)
 		where buyer_id=#{buyerId} 
-		order by trading_date desc;
+		order by trading_date desc
 	</select>
 	
 	<select id="getInfacePurchaseList" parameterType="string" resultType="InFaceTradingDto"> <!-- 9P 직거래 구매내역(회원) 불러오기 -->
-		select goods_id,in_face_trading_id,goods_title,trading_status,i.price,trading_date 
+		select goods_id,in_face_trading_id,goods_title,trading_status,i.price,to_char(trading_date, 'YYYY-MM-DD HH24:MI:SS') trading_date
 		from in_face_trading i join goods g using (goods_id)
 		where buyer_id=#{buyerId} 
-		order by trading_date desc;
+		order by trading_date desc
 	</select>
 	<select id="getOnSaleList" parameterType="string" resultType="MyGoodsListDto">	<!--10P 판매중 + 예약중 불러오기 -->
 		select goods_id,title,price,status 
 		from goods 
 		where user_id=#{userId} and status IN(1,2) and active_status="Y" 
-		order by refreshed_at DESC;
+		order by refreshed_at DESC
 	</select>
 	
 	<select id="getSoldOutList" parameterType="string" resultType="MyGoodsListDto">	<!--10P 거래완료 판매내역 가지고오기 -->
 		select goods_id,title,price,status 
 		from goods 
 		where user_id=#{user_id} and status IN(3) and active_status="Y" 
-		order by refreshed_at DESC;
+		order by refreshed_at DESC
 	</select>
 	
 	<select id="getHideList" parameterType="string" resultType="MyGoodsListDto">	<!--10P 숨김중인 판매내역 가져오기 -->
 		select goods_id,title,price,status 
 		from goods 
 		where user_id=#{userId} and status IN(4) and active_status="Y" 
-		order by refreshed_at DESC;
+		order by refreshed_at DESC
 	</select>
 	<insert id="insertWishList">	<!-- 23P 찜하기 -->	
 		insert into wishlist values(#{goodsId},#{userId},"")
@@ -116,7 +116,7 @@
 	<select id="getSafePurchaseInfo" parameterType="string" resultType="SafePurchaseInfoDto">	<!-- 11P 안전거래 상세정보 가져오기 -->
 		select s.goods_id,s.goods_title,(select g.user_id seller_id from goods g where g.goods_id= s.goods_id),
 			   s.buyer_id,(select u.mobile_number,u.name from user u where u.user_id=s.buyer_id), 
-			   s.shipping_address, s.price, s.trading_date, s.trading_status, s.tracking_number 
+			   s.shipping_address, s.price, to_char(s.trading_date, 'YYYY-MM-DD HH24:MI:SS'), s.trading_status, s.tracking_number 
 			   from safe_trading s
 			   where transaction_id=#{transactionId}
 	</select>

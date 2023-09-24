@@ -12,71 +12,72 @@ import kh.spring.gaji.user.model.dto.UserAddressDto;
 import kh.spring.gaji.user.model.dto.UserDto;
 import kh.spring.gaji.user.model.dto.UserInsertAddressDto;
 import kh.spring.gaji.user.model.dto.UserProfileDto;
+import kh.spring.gaji.user.model.dto.UserSafeTradingDto;
 
 
 public interface UserService {
 
-    List<GoodsListDto> getKeepList(String userId);
+    public List<GoodsListDto> getKeepList(String userId);
 
-    int updateViewCount();
+    public int updateViewCount();
 
-    List<GoodsListDto> getFavoriteList(String userId);
+    public List<GoodsListDto> getFavoriteList(String userId);
 
-    List<SafeTradingDto> getSafePurchaseList(String buyerId);
+    public List<UserSafeTradingDto> getSafePurchaseList(String buyerId);
 
-    List<InFaceTradingDto> getInfacePurchaseList(String buyerId);
+    public List<InFaceTradingDto> getInfacePurchaseList(String buyerId);
 
-    List<MyGoodsListDto> getOnSaleList(String userId);
+    public List<MyGoodsListDto> getOnSaleList(String userId);
 
-    List<MyGoodsListDto> getSoldOutList(String userId);
+    public List<MyGoodsListDto> getSoldOutList(String userId);
 
-    List<MyGoodsListDto> getHideList(String userId);
+    public List<MyGoodsListDto> getHideList(String userId);
 
-    int insertWishList(Map<String, String> map);
+    public int insertWishList(Map<String, String> map);
 
-    UserProfileDto getProfile(String userId);
+    public UserProfileDto getProfile(String userId);
 
-    List<UserAddressDto> getAddress(String userId);
+    public List<UserAddressDto> getAddress(String userId);
 
-    int updateMainAddressNo(String userId);
+    public int updateMainAddressNo(String userId);
 
-    int updateMainAddress(Map<String, String> map);
+    public int updateMainAddress(Map<String, String> map);
 
-    int insertAddress(UserInsertAddressDto addressDto);
+    public int insertAddress(UserInsertAddressDto addressDto);
 
-    int deleteAddress1(int postCode);
+    public int deleteAddress1(int postCode);
 
-    int checkNickname(String nickname);
+    public int checkNickname(String nickname);
 
-    int checkEmail(String email);
+    public int checkEmail(String email);
 
-    String checkPass(String userId);
+    public String checkPass(String userId);
 
-    int updateInviteCount(String userId);
+    public int updateInviteCount(String userId);
 
-    int updatePass(Map<String, Object> map);
+    public int updatePass(Map<String, Object> map);
 
-    int checkId(String userId);
+    public int checkId(String userId);
 
-    int checkMobileNumber(String mobileNumber);
+    public int checkMobileNumber(String mobileNumber);
 
-    int signup(UserDto userDto);
+    public int signup(UserDto userDto);
 
-    SafePurchaseInfoDto getSafePurchaseInfo(int transactionId);
+    public SafePurchaseInfoDto getSafePurchaseInfo(int transactionId);
 
-    int acceptSafeTrading(int transactionId);
+    public int acceptSafeTrading(int transactionId);
 
-    int updateTrackingNumber(Map<String, Object> map);
+    public int updateTrackingNumber(Map<String, Object> map);
 
-    String findId(Map<String, String> map);
+    public String findId(Map<String, String> map);
 
-    int findPass(Map<String, String> map);
+    public int findPass(Map<String, String> map);
 
-    int addAccount(Map<String, String> map);
+    public int addAccount(Map<String, String> map);
 
-    int addFavoriteUser(Map<String, String> map);
+    public int addFavoriteUser(Map<String, String> map);
 
-    int addDealReview(DealReviewDto dealReviewDto);
+    public int addDealReview(DealReviewDto dealReviewDto);
 
-    int updateRatingScore(Map<String, String> map);
+    public int updateRatingScore(Map<String, String> map);
 }

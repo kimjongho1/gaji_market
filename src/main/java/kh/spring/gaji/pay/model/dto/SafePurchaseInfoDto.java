@@ -11,9 +11,10 @@ public class SafePurchaseInfoDto {
     private String buyerId;
     private String mobileNumber;
     private String name;
-    private String shippingAddress;
     private int price;
     private String tradingDate;
     private String tradingStatus;
     private String trackingNumber;
+    private String detailAddress;
+    private String roadAddress;
 }

@@ -37,9 +37,8 @@
 	
 	<insert id="addSafeTrading" parameterType="InsertSafeTradingDto">	<!-- 49P 새로운 안전결제 레코드 생성 -->
 		insert into safe_trading 
-		(transaction_id,buyer_id,goods_id,perchase_method,price,trading_date,trading_status,shpping_address) 
-		values(#{impUid},#{buyerId},#{goodsId},#{purchaseMethod},#{price},
-		"",1,#{detailAddress},#{roadAddress})
+		(transaction_id,buyer_id,goods_id,purchase_method,goods_title,price,trading_date,trading_status,detail_address,road_address) 
+		values(#{transactionId},#{buyerId},#{goodsId},#{purchaseMethod},#{goodsTitle},#{price},systimestamp,1,#{detailAddress},#{roadAddress})
 	</insert>
 	
 </mapper>

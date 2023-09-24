@@ -1,12 +1,21 @@
 package kh.spring.gaji.user.controller;
 
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import kh.spring.gaji.user.model.dto.UserSafeTradingDto;
+import kh.spring.gaji.user.model.service.UserService;
 
 @Controller
 @RequestMapping("/mypage")
 public class MyPageController {
+	@Autowired
+	private UserService userService;
 	
 	@GetMapping("/")
 	public String mypage() {	// 마이페이지
@@ -14,7 +23,9 @@ public class MyPageController {
 	}
 	
 	@GetMapping("/orderstatus")
-	public String orderStatus() {	// 나의 구매내역
+	public String orderStatus(Model model) {	// 나의 구매내역
+		List<UserSafeTradingDto> safePurchaseList= userService.getSafePurchaseList("qordmlgjs");	//추후 userId들어가야함
+		model.addAttribute("safePurchaseList",safePurchaseList);
 		return "mypage/orderstatus";
 	}
 	
@@ -44,7 +55,7 @@ public class MyPageController {
 	}
 	
 	@GetMapping("/deal/safe/buyer")
-	public String buyer() {			// 안전 거래 상세조회 구매자 페이지
+	public String buyer(Model model) {			// 안전 거래 상세조회 구매자 페이지
 		return "mypage/buyer";
 	}
 }

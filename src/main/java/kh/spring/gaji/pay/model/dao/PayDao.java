@@ -19,6 +19,10 @@ public class PayDao {
     public int cancelSafeTrading(String transactionId) {	//거래취소
         return sqlSession.update("pay.cancelSafeTrading", transactionId);
     }
+    
+    public int updateGoodsToSelling(int goodsId) {
+    	return sqlSession.update("pay.updateGoodsToSelling",goodsId);
+    }
 
     public int closeSafeTrading(String transactionId) {	//거래확정
         return sqlSession.update("pay.closeSafeTrading", transactionId);

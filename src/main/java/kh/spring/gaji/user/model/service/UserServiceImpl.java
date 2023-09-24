@@ -19,6 +19,7 @@ import kh.spring.gaji.user.model.dto.UserAddressDto;
 import kh.spring.gaji.user.model.dto.UserDto;
 import kh.spring.gaji.user.model.dto.UserInsertAddressDto;
 import kh.spring.gaji.user.model.dto.UserProfileDto;
+import kh.spring.gaji.user.model.dto.UserSafeTradingDto;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -42,7 +43,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<SafeTradingDto> getSafePurchaseList(String buyerId) {
+    public List<UserSafeTradingDto> getSafePurchaseList(String buyerId) {
         return userDao.getSafePurchaseList(buyerId);
     }
 

@@ -3,6 +3,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import kh.spring.gaji.pay.model.dao.PayDao;
 import kh.spring.gaji.pay.model.dto.GoodsPayInfoDto;
@@ -15,8 +16,9 @@ public class PayServiceImpl implements PayService {
 
     @Autowired
     private PayDao payDao;
-
+    
     @Override
+    @Transactional
     public int cancelSafeTrading(String transactionId) {
         return payDao.cancelSafeTrading(transactionId);
     }
@@ -28,6 +30,7 @@ public class PayServiceImpl implements PayService {
     
     @Override
     public int addSafeTrading(InsertSafeTradingDto insertSafeTradingDto) {
+    	
         return payDao.addSafeTrading(insertSafeTradingDto);
     }
     
