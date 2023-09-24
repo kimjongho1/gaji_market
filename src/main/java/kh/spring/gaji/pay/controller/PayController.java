@@ -59,8 +59,8 @@ public class PayController {
 		public String paytest1(Model model,RedirectAttributes attribute/* ,int goodsId */,HttpServletRequest request) {
 			/* String userId=(String)request.getSession().getAttribute("userId"); */
 			if(payServiceImpl.checkGoodsStatus(1)!=1) {	//추후 1은 goodsId로 대체
-				attribute.addAttribute("errorMsg", "예약중인 상품입니다.");
-				return "redirect:/main/";
+				attribute.addFlashAttribute("errorMsg", "예약중인 상품입니다.");
+				return "redirect:/main";
 			}
 			GoodsPayInfoDto goodsInfo=payServiceImpl.getGoodsInfo(1);	//추후 1은 goodsId로 대체
 			List<UserAddressDto> userAddress = payServiceImpl.getUserAddressList("qordmlgjs");	 //추후대체 userId =qordmlgjs

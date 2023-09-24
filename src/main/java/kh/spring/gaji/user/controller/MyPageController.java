@@ -6,8 +6,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import kh.spring.gaji.pay.model.dto.InFaceTradingDto;
 import kh.spring.gaji.user.model.dto.UserSafeTradingDto;
 import kh.spring.gaji.user.model.service.UserService;
 
@@ -17,16 +20,30 @@ public class MyPageController {
 	@Autowired
 	private UserService userService;
 	
-	@GetMapping("/")
+	@GetMapping("")
 	public String mypage() {	// 마이페이지
 		return "mypage/mypage";
 	}
 	
 	@GetMapping("/orderstatus")
-	public String orderStatus(Model model) {	// 나의 구매내역
+	public String orderStatus(Model model) {	// 나의 구매내역 안전거래.
 		List<UserSafeTradingDto> safePurchaseList= userService.getSafePurchaseList("qordmlgjs");	//추후 userId들어가야함
 		model.addAttribute("safePurchaseList",safePurchaseList);
 		return "mypage/orderstatus";
+	}
+	
+	@PostMapping("/getInFaceView")	// 직거래내역을 가져오는 ajax url
+	@ResponseBody
+	public List<InFaceTradingDto> getInfaceView(){
+		System.out.println("MyPageController 직거래내역 url");
+		return userService.getInfacePurchaseList("qordmlgjs"); //이후 userId로 대체.
+	}
+	
+	@PostMapping("/getSafeTradingView")	// 안전거래내역을 가져오는 ajax url
+	@ResponseBody
+	public List<UserSafeTradingDto> getSafeTradingView(){
+		System.out.println("MyPageController 안전거래내역 url");
+		return userService.getSafePurchaseList("qordmlgjs"); //이후 userId로 대체.
 	}
 	
 	@GetMapping("/salesstatus")
