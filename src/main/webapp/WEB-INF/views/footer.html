@@ -1,28 +1,40 @@
-<style>
+ <style>
 .btn_top_animation {
     position: relative;
     z-index: 200
+    
 }
 
 #btn_top {
+    color: brown;
     bottom: 100px;
-    display: none;
+    /* display: none; */
+    /* display: block; */
     left: 50%;
     margin-left: 750px;
     position: fixed;
     right: 500px;
     z-index: 200
-    /* display: block;
-    z-index: 50 */
+    /* z-index: 50 */
 }
-</style>
+
+.cxRRkY {
+        position: absolute;
+        padding: 0px;
+        width: 68px;
+        opacity: 1;
+        visibility: visible;
+        transition: opacity 0.5s ease 0s, visibility 0.5s ease 0s;
+    }
+</style> 
 
 <footer class="footer spad">
 
-    <div width="1200px" class=""><button type="button" id="btn_top"
-        class="btn_top_animation"><img
-            src="/resources/img/Introduction_app/btn_top.png" alt="TOP" loading="eager" width="68"
-            height="68" class=""></button>
+    <div width="1200px" class="">
+        <button type="button" id="btn_top" class="cxRRkY btn_top_animation">
+            
+            <img src="/#" alt="TOP" loading="eager" width="68" height="68" class="">
+        </button>
 
 
     <div class="container">
@@ -77,6 +89,118 @@
                 </div>
             </div>
         </div>
+
+
+        <div>1</div>
+        <div>1</div>
+        <div>1</div>
+        <div>1</div>
+        <div>1</div>
+        <div>1</div>
+        <div>1</div>
+        <div>1</div>
+        <div>1</div>
+        <div>1</div>
+        <div>1</div>
+        <div>1</div>
+        <div>1</div>
+        <div>1</div>
+        <div>1</div>
+        <div>1</div>
+        <div>1</div>
+        <div>1</div>
+        <div>1</div>
+        <div>1</div>
+        <div>1</div>
+        <div>1</div>
+        <div>1</div>
+        <div>1</div>
+        <div>1</div>
+        <div>1</div>
+        <div>1</div>
+        <div>1</div>
+        <div>1</div>
+        <div>1</div>
+        <div>1</div>
+        <div>1</div>
+        <div>1</div>
+        <div>1</div>
+        <div>1</div>
+        <div>1</div>
+        <div>1</div>
+        <div>1</div>
+        <div>1</div>
+        <div>1</div>
+        <div>1</div>
+        <div>1</div>
+        <div>1</div>
+        <div>1</div>
+        <div>1</div>
+        <div>1</div>
+        <div>1</div>
+        <div>1</div>
+        <div>1</div>
+        <div>1</div>
+        <div>1</div>
+        <div>1</div>
+        <div>1</div>
+        <div>1</div>
+        <div>1</div>
+        <div>1</div>
+        <div>1</div>
+        <div>1</div>
+        <div>1</div>
+        <div>1</div>
+        <div>1</div>
+        <div>1</div>
+        <div>1</div>
+        <div>1</div>
+        <div>1</div>
+        <div>1</div>
+        <div>1</div>
+        <div>1</div>
+        <div>1</div>
+        <div>1</div>
+        <div>1</div>
+        <div>1</div>
+        <div>1</div>
+        <div>1</div>
+        <div>1</div>
+        <div>1</div>
+        <div>1</div>
+        <div>1</div>
+        <div>1</div>
+        <div>1</div>
+        <div>1</div>
+        <div>1</div>
+        <div>1</div>
+        <div>1</div>
+        <div>1</div>
+        <div>1</div>
+        <div>1</div>
+        <div>1</div>
+        <div>1</div>
+        <div>1</div>
+        <div>1</div>
+        <div>1</div>
+        <div>1</div>
+        <div>1</div>
+        <div>1</div>
+        <div>1</div>
+        <div>1</div>
+        <div>1</div>
+        <div>1</div>
+        <div>1</div>
+        <div>1</div>
+        <div>1</div>
+        <div>1</div>
+        <div>1</div>
+        <div>1</div>
+        <div>1</div>
+        <div>1</div>
+        <div>1</div>
+        <div>1</div>
+
         <div class="row">
             <div class="col-lg-12">
                 <div class="footer__copyright">
@@ -89,3 +213,19 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
         </div>
     </div>
 </footer>
+
+<script>
+
+const backToTopButton = document.querySelector("#btn_top");
+        window.addEventListener("scroll", function () {
+            if (window.pageYOffset > 200) {
+                backToTopButton.style.display = "block";
+            } else {
+                backToTopButton.style.display = "none";
+            }
+        });
+        backToTopButton.addEventListener("click", function () {
+            window.scrollTo({ top: 0, behavior: "smooth" });
+        });
+
+</script>
