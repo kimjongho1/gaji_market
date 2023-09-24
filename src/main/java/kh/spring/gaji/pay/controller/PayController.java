@@ -17,6 +17,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.siot.IamportRestClient.IamportClient;
 import com.siot.IamportRestClient.exception.IamportResponseException;
@@ -54,22 +55,22 @@ public class PayController {
 		super();
 	}
 	
-	@GetMapping("payment/pay")
-	public String paytest1(Model model/* ,int goodsId */,HttpServletRequest request) {
-		/* String userId=(String)request.getSession().getAttribute("userId"); */
-		if(payServiceImpl.checkGoodsStatus(1)!=1) {
-			model.addAttribute("errorMsg", "예약중인 상품입니다.");
-			return "main/main";
+		@GetMapping("payment/pay")
+		public String paytest1(Model model,RedirectAttributes attribute/* ,int goodsId */,HttpServletRequest request) {
+			/* String userId=(String)request.getSession().getAttribute("userId"); */
+			if(payServiceImpl.checkGoodsStatus(1)!=1) {	//추후 1은 goodsId로 대체
+				attribute.addAttribute("errorMsg", "예약중인 상품입니다.");
+				return "redirect:/main/";
+			}
+			GoodsPayInfoDto goodsInfo=payServiceImpl.getGoodsInfo(1);	//추후 1은 goodsId로 대체
+			List<UserAddressDto> userAddress = payServiceImpl.getUserAddressList("qordmlgjs");	 //추후대체 userId =qordmlgjs
+			PayUserInfoDto payUserInfo= payServiceImpl.getUserInfo("qordmlgjs");			 //추후대체 userId =qordmlgjs 
+			model.addAttribute("merchantIdentificationCode",merchantIdentificationCode);
+			model.addAttribute("goodsInfo",goodsInfo);		//상품정보
+			model.addAttribute("userAddress",userAddress);	//유저주소들
+			model.addAttribute("payUserInfo",payUserInfo);	//유저정보
+			return "pay/pay";
 		}
-		GoodsPayInfoDto goodsInfo=payServiceImpl.getGoodsInfo(1);	//goodsId =1
-		List<UserAddressDto> userAddress = payServiceImpl.getUserAddressList("qordmlgjs");	 //userId =qordmlgjs
-		PayUserInfoDto payUserInfo= payServiceImpl.getUserInfo("qordmlgjs");			 //userId =qordmlgjs
-		model.addAttribute("merchantIdentificationCode",merchantIdentificationCode);
-		model.addAttribute("goodsInfo",goodsInfo);		//상품정보
-		model.addAttribute("userAddress",userAddress);	//유저주소들
-		model.addAttribute("payUserInfo",payUserInfo);	//유저정보
-		return "pay/pay";
-	}
 	
 	@PostMapping("payment/cancel")	//안전거래 후 취소처리를 위한 버튼
 	@ResponseBody
