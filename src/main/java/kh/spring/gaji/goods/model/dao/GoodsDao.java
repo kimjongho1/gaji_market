@@ -22,8 +22,7 @@ public class GoodsDao  {
         return sqlSession.selectOne("goods.getGoodsInfo", goodsId);
     }
 
-    public int updateStatus(int goodsId, String status) { //23P 상품상태변경 
-        Map<String, Object> map = Map.of("goodsId", goodsId, "status", status);
+    public int updateStatus(Map<String, Object> map) { //23P 상품상태변경 
         return sqlSession.update("goods.updateStatus", map);
     }
 

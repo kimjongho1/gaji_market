@@ -1,7 +1,9 @@
 package kh.spring.gaji.pay.controller;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -22,6 +24,7 @@ import com.siot.IamportRestClient.request.CancelData;
 import com.siot.IamportRestClient.response.IamportResponse;
 import com.siot.IamportRestClient.response.Payment;
 
+import kh.spring.gaji.goods.model.Service.GoodsService;
 import kh.spring.gaji.pay.model.dto.GoodsPayInfoDto;
 import kh.spring.gaji.pay.model.dto.InsertSafeTradingDto;
 import kh.spring.gaji.pay.model.dto.PayUserInfoDto;
@@ -39,6 +42,8 @@ public class PayController {
 	private PayService payServiceImpl;
 	@Autowired
 	private InsertSafeTradingDto insertSafeTradingDto;
+	@Autowired
+	private GoodsService goodsService;
 	
 	private CancelData cancelData;
 	
@@ -52,6 +57,10 @@ public class PayController {
 	@GetMapping("payment/pay")
 	public String paytest1(Model model/* ,int goodsId */,HttpServletRequest request) {
 		/* String userId=(String)request.getSession().getAttribute("userId"); */
+		if(payServiceImpl.checkGoodsStatus(1)!=1) {
+			model.addAttribute("errorMsg", "예약중인 상품입니다.");
+			return "main/main";
+		}
 		GoodsPayInfoDto goodsInfo=payServiceImpl.getGoodsInfo(1);	//goodsId =1
 		List<UserAddressDto> userAddress = payServiceImpl.getUserAddressList("qordmlgjs");	 //userId =qordmlgjs
 		PayUserInfoDto payUserInfo= payServiceImpl.getUserInfo("qordmlgjs");			 //userId =qordmlgjs
@@ -99,16 +108,19 @@ public class PayController {
 				
 				int addResult = payServiceImpl.addSafeTrading(insertSafeTradingDto); //데이터베이스에 안전거래에 대한 데이터를 넣음
 				
-				if(addResult==1) // 가지 데이터베이스에 값이 정상적으로 들어갔다면
-					return result;	// 거래정보 반환.
-				
-				else			// 가지 데이터베이스에 값이 입력되지 않았다면 거래취소.
+				if(addResult==1) { // 가지 데이터베이스에 값이 정상적으로 들어갔다면
+					Map<String, Object> map=new HashMap<String, Object>();
+					map.put("status", 2);
+					map.put("goodsId",Integer.valueOf(1)); // 추후 goodsId로 변경해야함.
+					if(goodsService.updateStatus(map)==1);
+						return result;	// 거래정보 반환.
+				}
+				else			// 가지 데이터베이스에 값이 입력되지 않았거나 거래중으로 변경이 안되었다면 거래취소함.
 				{
 					cancelData=new CancelData(impUid, true); 
 					api.cancelPaymentByImpUid(cancelData);
 					return result;	//거래 정보 반환
 				}
-				
 			}
 			
 			else {

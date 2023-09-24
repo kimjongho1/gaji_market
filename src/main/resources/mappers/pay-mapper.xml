@@ -2,6 +2,10 @@
 <!DOCTYPE mapper PUBLIC " -//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="pay">
 
+	<select id="checkGoodsStatus" resultType="_int">
+		select status from goods where goods_id=#{goodsId}
+	</select>
+	
 	<update id="cancelSafeTrading" parameterType="string">		<!-- 11P 안전거래 결제취소, 레코드는 삭제하지 않고 거래상태 업데이트 -->
 		update safe_trading 
 		set trading_status=5 

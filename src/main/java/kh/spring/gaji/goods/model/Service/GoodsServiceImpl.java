@@ -1,4 +1,6 @@
 package kh.spring.gaji.goods.model.Service;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -25,8 +27,8 @@ public class GoodsServiceImpl implements GoodsService {
     }
 
     @Override
-    public int updateStatus(int goodsId, String status) {
-        return goodsDao.updateStatus(goodsId, status);
+    public int updateStatus(Map<String, Object> map) {
+        return goodsDao.updateStatus(map);
     }
 
     @Override

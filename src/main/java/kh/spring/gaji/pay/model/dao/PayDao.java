@@ -16,6 +16,10 @@ public class PayDao {
     @Autowired
     private SqlSession sqlSession;
 
+    public int checkGoodsStatus(int goodsId) {	//판매중 상품인지를 확인함.
+    	return sqlSession.selectOne("pay.checkGoodsStatus",goodsId);
+    }
+    
     public int cancelSafeTrading(String transactionId) {	//거래취소
         return sqlSession.update("pay.cancelSafeTrading", transactionId);
     }

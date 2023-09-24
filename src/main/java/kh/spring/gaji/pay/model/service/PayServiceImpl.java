@@ -17,6 +17,11 @@ public class PayServiceImpl implements PayService {
     @Autowired
     private PayDao payDao;
     
+	@Override
+	public int checkGoodsStatus(int goodsId) {
+		return payDao.checkGoodsStatus(goodsId);
+	}
+    
     @Override
     @Transactional
     public int cancelSafeTrading(String transactionId) {

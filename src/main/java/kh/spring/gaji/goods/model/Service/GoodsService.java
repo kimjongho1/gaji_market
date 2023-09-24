@@ -13,7 +13,7 @@ public interface GoodsService {
 
     GoodsInfoDto getGoodsInfo(int goodsId);
 
-    int updateStatus(int goodsId, String status);
+    int updateStatus(Map<String, Object> map);
 
     int updateGoods(GoodsDto goodsDto);
 

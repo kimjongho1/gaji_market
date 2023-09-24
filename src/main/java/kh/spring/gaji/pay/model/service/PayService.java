@@ -8,6 +8,7 @@ import kh.spring.gaji.user.model.dto.UserAddressDto;
 
 
 public interface PayService {
+	public int checkGoodsStatus(int goodsId);
 	public int cancelSafeTrading(String transactionId);
     public int closeSafeTrading(String transactionId);
     public int addSafeTrading(InsertSafeTradingDto insertSafeTradingDto);
