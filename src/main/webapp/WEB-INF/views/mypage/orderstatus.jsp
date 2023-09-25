@@ -81,11 +81,35 @@
                 </div>
             </div>
         </section>
+        
+        <div class="pagingForSafe">	<%--페이징 이전,번호,다음에 대한 코드 --%> <!-- 안전거래일때 -->
+                <c:if test="${startPageNum!=1}">  <!-- 시작번호가 1이아니면 -->
+                	<a href="<%=request.getContextPath()%>/mypage/orderstatus?currentPageNum=${startPageNum-1}">이전</a> <!-- 이전버튼 -->
+                </c:if>
+        		<c:forEach begin="${startPageNum}" end="${endPageNum}" var="i"> 	<!-- 시작번호부터 끝번호까지 출력 -->
+                <a href="<%=request.getContextPath()%>/mypage/orderstatus?currentPage=${i}"><span>${i} </span></a> 	<!-- 클릭시 해당하는 파일불러오기-->
+                </c:forEach>
+               	<c:if test="${endPageNum<totalPageNum}">												<!-- 끝번호가 총번호보다 작다면 -->
+               	<a href="<%=request.getContextPath()%>/mypage/orderstatus?currentPage=${endPageNum+1}">다음</a>		<!-- 다음버튼도 만들고 누르면 끝번호+1을 현재번호로함. -->
+               	</c:if>
+        </div>
+        
+<%--          <div class="pagingForInface">	페이징 이전,번호,다음에 대한 코드 <!-- 안전거래일때 -->
+                <c:if test="${startPageNum!=1}">  <!-- 시작번호가 1이아니면 -->
+                	<a href="<%=request.getContextPath()%>/mypage/orderstatus?currentPageNum=${startPageNum-1}">이전</a> <!-- 이전버튼 -->
+                </c:if>
+        		<c:forEach begin="${startPageNum}" end="${endPageNum}" var="i"> 	<!-- 시작번호부터 끝번호까지 출력 -->
+                <a href="<%=request.getContextPath()%>/mypage/orderstatus/inface?currentPage=${i}"><span>${i} </span></a> 	<!-- 클릭시 해당하는 파일불러오기-->
+                </c:forEach>
+               	<c:if test="${endPageNum<totalPageNum}">												<!-- 끝번호가 총번호보다 작다면 -->
+               	<a href="<%=request.getContextPath()%>/mypage/orderstatus/inface?currentPage=${endPageNum+1}">다음</a>		<!-- 다음버튼도 만들고 누르면 끝번호+1을 현재번호로함. -->
+               	</c:if>
+        </div> --%>
+        
         <!-- Bootstrap core JS-->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
     </body>
 </html>
-
 
 <script>
 	const viewInface=()=>{
@@ -133,6 +157,8 @@
 		}
 		html+="</div>";
 		$("#replacePoint").replaceWith(table);
+		$(".pagingForSafe").hide();
+		$(".pagingForInface").show();
 	}
 	
 	    var getSafeView=(data)=>{	//안전거래 버튼 클릭시 직거래내역 보이게하기.
@@ -165,5 +191,7 @@
 		}
 		html+="</div>";
 		$("#replacePoint").replaceWith(table);
+		$(".pagingForInface").hide();
+		$(".pagingForSafe").show();
 	}
 </script>
