@@ -124,11 +124,11 @@ public class UserDao {
     	return result;
     }
 
-    public SafePurchaseInfoDto getSafePurchaseInfo(int transactionId) {	//11P 안전거래 상세정보 가져오기
+    public SafePurchaseInfoDto getSafePurchaseInfo(String transactionId) {	//11P 안전거래 상세정보 가져오기
         return sqlSession.selectOne("user.getSafePurchaseInfo", transactionId);
     }
 
-    public int acceptSafeTrading(int transactionId) {	//12P 안전거래 수락, 상품준비중으로 거래상태 업데이트
+    public int acceptSafeTrading(String transactionId) {	//12P 안전거래 수락, 상품준비중으로 거래상태 업데이트
     	return sqlSession.update("user.acceptSafeTrading", transactionId);
     }
 

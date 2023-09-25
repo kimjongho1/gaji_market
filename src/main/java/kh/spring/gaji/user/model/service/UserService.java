@@ -63,9 +63,9 @@ public interface UserService {
 
     public int signup(UserDto userDto);
 
-    public SafePurchaseInfoDto getSafePurchaseInfo(int transactionId);
+    public SafePurchaseInfoDto getSafePurchaseInfo(String transactionId);
 
-    public int acceptSafeTrading(int transactionId);
+    public int acceptSafeTrading(String transactionId);
 
     public int updateTrackingNumber(Map<String, Object> map);
 

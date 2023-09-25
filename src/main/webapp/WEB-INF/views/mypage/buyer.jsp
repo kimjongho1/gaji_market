@@ -7,6 +7,17 @@
 <title>Insert title here</title>
 </head>
 <body>
+<form action="${request.getContextPath}/payment/cancel" method="POST">
+<input type="hidden" name=transactionId/>
+<button type="submit">결제취소</button>
+</form>
+
+${safePurchaseInfoDto.goodsTitle}
+${safePurchaseInfoDto.}
+${safePurchaseInfoDto.Title}
+${safePurchaseInfoDto.goodsTitle}
+${safePurchaseInfoDto.goodsTitle}
+${safePurchaseInfoDto.goodsTitle}
 
 </body>
 </html>
