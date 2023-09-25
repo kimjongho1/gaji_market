@@ -9,9 +9,9 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>Shop Homepage - Start Bootstrap Template</title>
+        <title>구매내역</title>
         <!-- Favicon-->
-        <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+<!--         <link rel="icon" type="image/x-icon" href="assets/favicon.ico" /> -->
         <!-- Bootstrap icons-->
         <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
         <!-- Core theme CSS (includes Bootstrap)-->
@@ -34,6 +34,8 @@
 		}
 		</style>
     </head>
+    
+    
     <body>
         <!-- Section-->
         <div>
@@ -82,54 +84,63 @@
             </div>
         </section>
         
-        <div class="pagingForSafe">	<%--페이징 이전,번호,다음에 대한 코드 --%> <!-- 안전거래일때 -->
-                <c:if test="${startPageNum!=1}">  <!-- 시작번호가 1이아니면 -->
-                	<a href="<%=request.getContextPath()%>/mypage/orderstatus?currentPageNum=${startPageNum-1}">이전</a> <!-- 이전버튼 -->
+        <%-- <div class="pagingForSafe">	페이징 이전,번호,다음에 대한 코드 <!-- 안전거래일때 -->
+                안전<c:if test="${startPageNum!=1}">  <!-- 시작번호가 1이아니면 -->
+                	<button class="paging" onclick="changePage(${startPageNum-1},1)">이전</button>
                 </c:if>
+                
         		<c:forEach begin="${startPageNum}" end="${endPageNum}" var="i"> 	<!-- 시작번호부터 끝번호까지 출력 -->
-                <a href="<%=request.getContextPath()%>/mypage/orderstatus?currentPage=${i}"><span>${i} </span></a> 	<!-- 클릭시 해당하는 파일불러오기-->
+        		<button class="changePage" onclick="changePage(${i},1)">${i}</button>
                 </c:forEach>
+                
                	<c:if test="${endPageNum<totalPageNum}">												<!-- 끝번호가 총번호보다 작다면 -->
-               	<a href="<%=request.getContextPath()%>/mypage/orderstatus?currentPage=${endPageNum+1}">다음</a>		<!-- 다음버튼도 만들고 누르면 끝번호+1을 현재번호로함. -->
+               	<button class=changePage onclick="changePage(${endPageNum+1},1)">다음</button>
                	</c:if>
         </div>
         
-<%--          <div class="pagingForInface">	페이징 이전,번호,다음에 대한 코드 <!-- 안전거래일때 -->
-                <c:if test="${startPageNum!=1}">  <!-- 시작번호가 1이아니면 -->
-                	<a href="<%=request.getContextPath()%>/mypage/orderstatus?currentPageNum=${startPageNum-1}">이전</a> <!-- 이전버튼 -->
+        <div class="pagingForInface">	페이징 이전,번호,다음에 대한 코드 <!-- 직거래일때 -->
+                직거래<c:if test="${startPageNum!=1}">  <!-- 시작번호가 1이아니면 -->
+                	<button class="paging" onclick="changePage(${startPageNum-1},2)">이전</button>
                 </c:if>
+                
         		<c:forEach begin="${startPageNum}" end="${endPageNum}" var="i"> 	<!-- 시작번호부터 끝번호까지 출력 -->
-                <a href="<%=request.getContextPath()%>/mypage/orderstatus/inface?currentPage=${i}"><span>${i} </span></a> 	<!-- 클릭시 해당하는 파일불러오기-->
+        		<button class="changePage" onclick="changePage(${i},2)">${i}</button>
                 </c:forEach>
+                
                	<c:if test="${endPageNum<totalPageNum}">												<!-- 끝번호가 총번호보다 작다면 -->
-               	<a href="<%=request.getContextPath()%>/mypage/orderstatus/inface?currentPage=${endPageNum+1}">다음</a>		<!-- 다음버튼도 만들고 누르면 끝번호+1을 현재번호로함. -->
+               	<button class=changePage onclick="changePage(${endPageNum+1},2)">다음</button>
                	</c:if>
         </div> --%>
+
         
         <!-- Bootstrap core JS-->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+        <!-- <script>$(".pagingForInface").hide();</script> -->
     </body>
 </html>
 
 <script>
+
+	const safeTrading=()=>{
+		$.ajax({
+		url:"${pageContext.request.contextPath}/mypage/getSafeTradingView",
+		data:{userId:"qordmlgjs",currentPageNum:1}, //이후 userId로 바꿔야함
+		type:"POST",
+		dataType:"Json",
+		success:getSafeView
+		});
+	}
+	
 	const viewInface=()=>{
 		$.ajax({
 			url:"${pageContext.request.contextPath}/mypage/getInFaceView",
-			data:{userId:"qordmlgjs"}, //이후 userId로 바꿔야함
+			data:{userId:"qordmlgjs",currentPageNum:1}, //이후 userId로 바꿔야함
 			type:"POST",
 			dataType:"Json",
 			success:getInFaceView
 		});
 	}
-	const safeTrading=()=>{
-		$.ajax({
-			url:"${pageContext.request.contextPath}/mypage/getSafeTradingView",
-			data:{userId:"qordmlgjs"}, //이후 userId로 바꿔야함
-			type:"POST",
-			dataType:"Json",
-			success:getSafeView
-		});
-	}
+
 	
 	var getInFaceView=(data)=>{	//직거래 버튼 클릭시 직거래내역 보이게하기.
 		console.log("getInFaceView");
@@ -156,12 +167,13 @@
             table+=html;
 		}
 		html+="</div>";
+		
 		$("#replacePoint").replaceWith(table);
-		$(".pagingForSafe").hide();
-		$(".pagingForInface").show();
+/* 		$(".pagingForSafe").hide();
+		$(".pagingForInface").show(); */
 	}
 	
-	    var getSafeView=(data)=>{	//안전거래 버튼 클릭시 직거래내역 보이게하기.
+	    var getSafeView=(data)=>{	//안전거래 버튼 클릭시 안전거래내역 불러오기.
 		console.log(data);
 		console.log("getSafeView");
 				var table="<div id='replacePoint' class='row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center'>";
@@ -191,7 +203,28 @@
 		}
 		html+="</div>";
 		$("#replacePoint").replaceWith(table);
-		$(".pagingForInface").hide();
-		$(".pagingForSafe").show();
+/*		$(".pagingForInface").hide();
+		$(".pagingForSafe").show(); */
 	}
+	
+	var changePage=(currentPage,type)=>{	//안전거래 
+		if(type==1){	
+		$.ajax({
+			url:"${pageContext.request.contextPath}/mypage/getSafeTradingView",
+			data:{userId:"qordmlgjs",currentPageNum:currentPage}, //이후 userId로 바꿔야함
+			type:"POST",
+			dataType:"Json",
+			success:getSafeView
+		});
+		}
+		else
+			$.ajax({						//직거래
+				url:"${pageContext.request.contextPath}/mypage/getInFaceView",
+				data:{userId:"qordmlgjs",currentPageNum:currentPage}, //이후 userId로 바꿔야함
+				type:"POST",
+				dataType:"Json",
+				success:getInFaceView
+		});
+	}
+	
 </script>
