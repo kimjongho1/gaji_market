@@ -114,13 +114,14 @@
 	</insert>
 
 	<select id="getSafePurchaseInfo" parameterType="string" resultType="SafePurchaseInfoDto">	<!-- 11P 안전거래 상세정보 가져오기 -->
-		select s.goods_id,s.goods_title,(select g.user_id seller_id from goods g where g.goods_id= s.goods_id),
-			   s.buyer_id,(select u.mobile_number,u.name from user u where u.user_id=s.buyer_id), 
-			   s.shipping_address, s.price, to_char(s.trading_date, 'YYYY-MM-DD HH24:MI:SS'), s.trading_status, s.tracking_number 
+				select s.transaction_id,s.goods_id,s.goods_title,(select g.user_id  from goods g where g.goods_id= s.goods_id) seller_id,
+			   s.buyer_id,(select u.mobile_number from users u where u.user_id=s.buyer_id) mobile_number, 
+               (select u.name from users u where u.user_id=s.buyer_id) name, 
+			   s.detail_address,s.road_address, s.price, to_char(s.trading_date, 'YYYY-MM-DD HH24:MI:SS') trading_data, s.trading_status, s.tracking_number 
 			   from safe_trading s
 			   where transaction_id=#{transactionId}
 	</select>
-	<update id="acceptSafeTrading" parameterType="_int">		<!-- 12P 안전거래 수락, 상품준비중으로 거래상태 업데이트 -->
+	<update id="acceptSafeTrading" parameterType="string">		<!-- 12P 안전거래 수락, 상품준비중으로 거래상태 업데이트 -->
 		update safe_trading 
 		set trading_status=2 
 		where transaction_id=#{transactionId}

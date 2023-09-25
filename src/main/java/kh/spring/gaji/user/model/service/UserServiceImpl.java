@@ -143,12 +143,12 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public SafePurchaseInfoDto getSafePurchaseInfo(int transactionId) {
+    public SafePurchaseInfoDto getSafePurchaseInfo(String transactionId) {
         return userDao.getSafePurchaseInfo(transactionId);
     }
 
     @Override
-    public int acceptSafeTrading(int transactionId) {
+    public int acceptSafeTrading(String transactionId) {
         return userDao.acceptSafeTrading(transactionId);
     }
 

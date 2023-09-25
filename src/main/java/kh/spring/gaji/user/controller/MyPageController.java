@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import kh.spring.gaji.pay.model.dto.InFaceTradingDto;
+import kh.spring.gaji.pay.model.dto.SafePurchaseInfoDto;
 import kh.spring.gaji.user.model.dto.UserSafeTradingDto;
 import kh.spring.gaji.user.model.service.UserService;
 
@@ -73,6 +74,8 @@ public class MyPageController {
 	
 	@GetMapping("/deal/safe/buyer")
 	public String buyer(Model model) {			// 안전 거래 상세조회 구매자 페이지
+		SafePurchaseInfoDto safePurchaseInfoDto = userService.getSafePurchaseInfo("imp_284925307177");
+		model.addAttribute("safePurchaseInfoDto",safePurchaseInfoDto);
 		return "mypage/buyer";
 	}
 }
