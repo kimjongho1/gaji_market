@@ -8,8 +8,8 @@ public class SafePurchaseInfoDto {
 	private String transactionId;
     private int goodsId;
     private String goodsTitle;
-    private String sellerId;
-    private String buyerId;
+    private String sellerName;
+    private String buyerName;
     private String mobileNumber;
     private String name;
     private int price;
@@ -18,4 +18,4 @@ public class SafePurchaseInfoDto {
     private String trackingNumber;
     private String detailAddress;
     private String roadAddress;
-    }
+}

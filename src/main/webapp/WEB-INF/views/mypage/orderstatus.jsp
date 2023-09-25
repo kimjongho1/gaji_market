@@ -75,7 +75,7 @@
                             </div>
                             <!-- Product actions-->
                             <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                                <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">상품정보</a></div>
+                                <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">상품정보</a></div> <!-- 추후${safePurchaseInfo.goodsTitle} 를 담아서 상세정보이동 -->
                             </div>
                         </div>
                     </div>
@@ -115,7 +115,7 @@
         
         <!-- Bootstrap core JS-->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
-        <!-- <script>$(".pagingForInface").hide();</script> -->
+        <!-- <script>$(".pagingForInface").hide();</script> 페이지 진입시에는 안전거래 페이지번호만 보이게하는코드 -->
     </body>
 </html>
 

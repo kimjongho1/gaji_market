@@ -56,10 +56,10 @@ public class PayController {
 	}
 	
 		@GetMapping("payment/pay")
-		public String paytest1(Model model,RedirectAttributes attribute/* ,int goodsId */,HttpServletRequest request) {
+		public String pay(Model model,RedirectAttributes attribute/* ,int goodsId */,HttpServletRequest request) {
 			/* String userId=(String)request.getSession().getAttribute("userId"); */
 			if(payServiceImpl.checkGoodsStatus(2)!=1) {	//추후 1은 goodsId로 대체
-				attribute.addFlashAttribute("errorMsg", "예약중인 상품입니다.");
+				attribute.addFlashAttribute("Msg", "예약중인 상품입니다.");
 				return "redirect:/main";
 			}
 			GoodsPayInfoDto goodsInfo=payServiceImpl.getGoodsInfo(2);	//추후 1은 goodsId로 대체
@@ -70,6 +70,19 @@ public class PayController {
 			model.addAttribute("userAddress",userAddress);	//유저주소들
 			model.addAttribute("payUserInfo",payUserInfo);	//유저정보
 			return "pay/pay";
+		}
+		
+		@PostMapping("payment/closePay")
+		public String closePay(String transactionId,RedirectAttributes attribute,String userId,HttpServletRequest request) {
+			
+			if(userId==(String)request.getSession().getAttribute(userId)) { //혹시 transactionId 변조할까봐 검사.
+				int result = payServiceImpl.closeSafeTrading(transactionId);
+				if(result==1)
+					attribute.addFlashAttribute("Msg", "상품이 확정되었습니다.");
+				else
+					attribute.addFlashAttribute("Msg", "상품확정이 실패하였습니다.");
+			}
+			return "redirect:/main";
 		}
 		
 	@PostMapping("payment/cancel")	//안전거래 후 취소처리를 위한 버튼
