@@ -20,12 +20,12 @@
 		<style>
 		.personal1{
 			  position:absolute;
-			  left:780px;
+			  left:850px;
 			  top:35px;
 		}
 		.personal2{
 			  position:absolute;
-			  left:880px;
+			  left:980px;
 			  top:35px;
 		}
 		.btn{
@@ -75,7 +75,7 @@
                             </div>
                             <!-- Product actions-->
                             <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                                <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">상품정보</a></div> <!-- 추후${safePurchaseInfo.goodsTitle} 를 담아서 상세정보이동 -->
+                                <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="${pageContext.request.contextPath}/mypage/deal/safe/buyer?transactionId=${safePurchaseInfo.transactionId}">상품정보</a></div> <!-- 추후${safePurchaseInfo.goodsTitle} 를 담아서 상세정보이동 -->
                             </div>
                         </div>
                     </div>
@@ -155,7 +155,7 @@
 			else if(item.tradingStatus ==2)
 				html+="거래완료";
 			else
-				html+="(거래취소)";
+				html+="거래취소";
 			
 			html+="</div><img class='card-img-top' src='https://dummyimage.com/450x300/dee2e6/6c757d.jpg' alt=''...'' /><div class='card-body p-4'><div class='text-center'><h5 class='fw-bolder'>"
 			+item.goodsTitle+"</h5>";
@@ -163,8 +163,8 @@
 			html+="<div class='d-flex justify-content-center small text-warning mb-2'>"
             +item.tradingDate+
             "</div>"+item.price+"</div></div><div class='card-footer p-4 pt-0 border-top-0 bg-transparent'>"
-            +"<div class='text-center'><a class='btn btn-outline-dark mt-auto' href="+"#"+">상품정보</a></div></div></div></div>";
-            table+=html;
+            +"<div class='text-center'><a class='btn btn-outline-dark mt-auto' href="+"${pageContext.request.contextPath}/mypage/deal/safe/buyer?transactionId="+${safePurchaseInfo.transactionId}+">상품정보</a></div></div></div></div>";
+            table+=html;	
 		}
 		html+="</div>";
 		
@@ -198,7 +198,7 @@
 			html+="<div class='d-flex justify-content-center small text-warning mb-2'>"
             +item.tradingDate+
             "</div>"+item.price+"</div></div><div class='card-footer p-4 pt-0 border-top-0 bg-transparent'>"
-            +"<div class='text-center'><a class='btn btn-outline-dark mt-auto' href="+"#"+">상품정보</a></div></div></div></div>";
+            +"<div class='text-center'><a class='btn btn-outline-dark mt-auto' href="+"${pageContext.request.contextPath}/mypage/deal/safe/buyer?transactionId="+${safePurchaseInfo.transactionId}+">상품정보</a></div></div></div></div>";
             table+=html;
 		}
 		html+="</div>";

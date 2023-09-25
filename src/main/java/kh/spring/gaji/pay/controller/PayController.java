@@ -58,11 +58,11 @@ public class PayController {
 		@GetMapping("payment/pay")
 		public String pay(Model model,RedirectAttributes attribute/* ,int goodsId */,HttpServletRequest request) {
 			/* String userId=(String)request.getSession().getAttribute("userId"); */
-			if(payServiceImpl.checkGoodsStatus(2)!=1) {	//추후 1은 goodsId로 대체
+			if(payServiceImpl.checkGoodsStatus(1)!=1) {	//추후 1은 goodsId로 대체
 				attribute.addFlashAttribute("Msg", "예약중인 상품입니다.");
 				return "redirect:/main";
 			}
-			GoodsPayInfoDto goodsInfo=payServiceImpl.getGoodsInfo(2);	//추후 1은 goodsId로 대체
+			GoodsPayInfoDto goodsInfo=payServiceImpl.getGoodsInfo(1);	//추후 1은 goodsId로 대체
 			List<UserAddressDto> userAddress = payServiceImpl.getUserAddressList("qordmlgjs");	 //추후대체 userId =qordmlgjs
 			PayUserInfoDto payUserInfo= payServiceImpl.getUserInfo("qordmlgjs");			 //추후대체 userId =qordmlgjs 
 			model.addAttribute("merchantIdentificationCode",merchantIdentificationCode);
@@ -73,30 +73,31 @@ public class PayController {
 		}
 		
 		@PostMapping("payment/closePay")
-		public String closePay(String transactionId,RedirectAttributes attribute,String userId,HttpServletRequest request) {
-			
-			if(userId==(String)request.getSession().getAttribute(userId)) { //혹시 transactionId 변조할까봐 검사.
-				int result = payServiceImpl.closeSafeTrading(transactionId);
-				if(result==1)
-					attribute.addFlashAttribute("Msg", "상품이 확정되었습니다.");
-				else
-					attribute.addFlashAttribute("Msg", "상품확정이 실패하였습니다.");
-			}
-			return "redirect:/main";
+		@ResponseBody
+		public int closePay(String transactionId,String userId,HttpServletRequest request) {
+			System.out.println("payment/closePay들어옴");
+			int result=0;
+			/* if(userId==(String)request.getSession().getAttribute(userId)) { */ //혹시 transactionId 변조할까봐 검사.
+				result = payServiceImpl.closeSafeTrading(transactionId);
+				System.out.println("result:"+result);
+				/* } */
+			return result;
 		}
 		
 	@PostMapping("payment/cancel")	//안전거래 후 취소처리를 위한 버튼
 	@ResponseBody
-	public IamportResponse<Payment> cancel(String impUid) {
+	public IamportResponse<Payment> cancel(String userId,String transactionId,HttpServletRequest request) {
 		IamportResponse<Payment> result=null;
+		/* if(userId==(String)request.getSession().getAttribute(userId)) { */	//이후 세션생기면 활성화할것
 		try {
-			result = api.cancelPaymentByImpUid(cancelData=new CancelData(impUid, true)); //가맹점 고유식별번호로 거래취소후 , 거래정보담은 객체반환
+			result = api.cancelPaymentByImpUid(cancelData=new CancelData(transactionId, true)); //가맹점 고유식별번호로 거래취소후 , 거래정보담은 객체반환
 			if(result.getResponse().getStatus().equals("cancelled"))
-				payServiceImpl.cancelSafeTrading(impUid);//데이터베이스에서 안전거래 취소로 변경. 상품 판매중으로 변경
+				payServiceImpl.cancelSafeTrading(transactionId);//데이터베이스에서 안전거래 취소로 변경. 상품 판매중으로 변경
 			return result;	// 거래정보담은 객체반환 이후 페이지에서 이에따른 처리함.
 		} catch (IamportResponseException | IOException e) {
 			e.printStackTrace();
 		}
+		/* } */
 		return result;		// 거래정보담은 객체반환 이후 페이지에서 이에따른 처리함.
 	}
 	
@@ -108,7 +109,7 @@ public class PayController {
 		IamportResponse<Payment> result=null;
 		try {
 			result= api.paymentByImpUid(impUid);
-			int amount =(int)Math.round(payServiceImpl.getAmount(2) * 1.035);	//goodsId =1
+			int amount =(int)Math.round(payServiceImpl.getAmount(1) * 1.035);	//goodsId =1
 			String goodTitle=result.getResponse().getName();
 			if(result.getResponse().getStatus().equals("paid")&&amount==result.getResponse().getAmount().intValue()) {	// 금액이 일치하고 지불이 완료되었다면.
 				insertSafeTradingDto.setTransactionId(impUid);

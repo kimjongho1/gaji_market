@@ -73,8 +73,8 @@ public class MyPageController {
 	}
 	
 	@GetMapping("/deal/safe/buyer")
-	public String buyer(Model model) {			// 안전 거래 상세조회 구매자 페이지
-		SafePurchaseInfoDto safePurchaseInfoDto = userService.getSafePurchaseInfo("imp_284925307177");	//추후 transactionId를 받아와서 처리하게될것.
+	public String buyer(Model model,String transactionId) {			// 안전 거래 상세조회 구매자 페이지
+		SafePurchaseInfoDto safePurchaseInfoDto = userService.getSafePurchaseInfo(transactionId);	//추후 transactionId를 받아와서 처리하게될것.
 		model.addAttribute("safePurchaseInfoDto",safePurchaseInfoDto);
 		return "mypage/buyer";
 	}

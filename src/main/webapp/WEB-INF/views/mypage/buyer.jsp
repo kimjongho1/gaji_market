@@ -6,22 +6,18 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>안전거래 상세조회</title>
 </head>
 <body>
-<form action="${request.getContextPath()}/payment/cancel" method="POST">
-	<input type="hidden" name=transactionId value="${safePurchaseInfoDto.transactionId}"/>
-	<button type="submit">결제취소</button>
+<c:if test="${safePurchaseInfoDto.tradingStatus eq 1}">
+<button onclick="cancel('${safePurchaseInfoDto.buyerId}','${safePurchaseInfoDto.transactionId}')">결제취소</button>
+</c:if>
 
-<form action="#" method="get">	<!-- 미구현 상태임 -->
-	<input type="hidden" name=transactionId value="${safePurchaseInfoDto.transactionId}"/>
-	<button type="submit">신고하기</button>
-</form>
+<button onclick="report('${safePurchaseInfoDto.buyerId}','${safePurchaseInfoDto.transactionId}')">신고하기</button>
 
-<form action="${request.getContextPath()}/payment/closePay" method="POST">
-	<input type="hidden" name=transactionId value="${safePurchaseInfoDto.transactionId}"/>
-	<button type="submit">거래확정</button>
-</form>
+<c:if test="${safePurchaseInfoDto.tradingStatus eq 3}">
+<button onclick="closePay('${safePurchaseInfoDto.buyerId}','${safePurchaseInfoDto.transactionId}')">결제확정</button>
+</c:if>
 
 <a href="#"><p>상품명:${safePurchaseInfoDto.goodsTitle}</p></a>
 <p>판매자명:${safePurchaseInfoDto.sellerName}</p>
@@ -29,15 +25,63 @@
 <p>휴대폰번호:${safePurchaseInfoDto.mobileNumber}</p>
 <p>배송지:${safePurchaseInfoDto.roadAddress}, ${safePurchaseInfoDto.detailAddress}</p>
 <p>거래일자:${safePurchaseInfoDto.tradingDate}</p>
-<c:if test="${safePurchaseInfoDto.tradingStatus} eq 1"><p>거래상태:입금완료</p></c:if>
-<c:if test="${safePurchaseInfoDto.tradingStatus} eq 2"><p>거래상태:상품준비중</p></c:if>
-<c:if test="${safePurchaseInfoDto.tradingStatus} eq 3"><p>거래상태:배송중</p></c:if>
-<c:if test="${safePurchaseInfoDto.tradingStatus} eq 4"><p>거래상태:거래완료</p></c:if>
-<c:if test="${safePurchaseInfoDto.tradingStatus} eq 5"><p>거래상태:결제취소</p></c:if>
+
+<c:choose>
+<c:when test="${safePurchaseInfoDto.tradingStatus eq 1}"><p>거래상태:입금완료</p></c:when>
+<c:when test="${safePurchaseInfoDto.tradingStatus eq 2}"><p>거래상태:상품준비중</p></c:when>
+<c:when test="${safePurchaseInfoDto.tradingStatus eq 3}"><p>거래상태:배송중</p></c:when>
+<c:when test="${safePurchaseInfoDto.tradingStatus eq 4}"><p>거래상태:거래완료</p></c:when>
+<c:when test="${safePurchaseInfoDto.tradingStatus eq 5}"><p>거래상태:결제취소</p></c:when>
+</c:choose>
 
 <c:if test="not empty ${safePurchaseInfoDto.trackingNumber}">
 <p>운송장번호:${safePurchaseInfoDto.trackingNumber}</p>
 </c:if>
-
+<script>
+	var cancel=(userId1,transactionId1)=>{
+		$.ajax({
+			url:"${pageContext.request.contextPath}/payment/cancel",
+			data:{userId:userId1, transactionId:transactionId1},
+			method: "post",
+			dataType:"json",
+			success:cancelCallBack
+		});
+	}
+	var report=(userId,transactionId)=>{
+		
+	}
+	var closePay=(userId1,transactionId1)=>{
+		$.ajax({
+			url:"${pageContext.request.contextPath}/payment/closePay",	//추후 테스트해봐야함.
+			data:{userId:userId1, transactionId:transactionId1},
+			method: "post",
+			dataType:"text",
+			success:closePayCallback
+		});
+	}
+	
+	function cancelCallBack(data){
+		console.log("cancelCallBack들어옴");
+		console.log(data);
+		if(data.response.status=="cancelled"){
+			alert("거래가 취소되었습니다");
+			window.location.href="${pageContext.request.contextPath}/mypage/orderstatus";
+		}
+		else
+			alert("거래 취소에 실패하였습니다.");
+	}
+	
+	function closePayCallback(data){
+		console.log("ClosePayCallback들어옴");
+		console.log(data);
+		if(data=='1'){
+			alert("거래가 확정되었습니다");
+			window.location.href="${pageContext.request.contextPath}/mypage/orderstatus";
+		}
+		else
+			alert("거래 확정에 실패하였습니다.");
+	}
+	
+</script>
 </body>
 </html>

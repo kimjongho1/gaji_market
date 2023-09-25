@@ -5,6 +5,7 @@ import lombok.Data;
 @Component
 @Data
 public class SafePurchaseInfoDto {
+	private String buyerId;
 	private String transactionId;
     private int goodsId;
     private String goodsTitle;

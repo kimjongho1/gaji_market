@@ -114,7 +114,7 @@
 	</insert>
 
 	<select id="getSafePurchaseInfo" parameterType="string" resultType="SafePurchaseInfoDto">	<!-- 11P 안전거래 상세정보 가져오기 -->
-				select s.transaction_id,s.goods_id,s.goods_title,(select g.user_id  from goods g where g.goods_id= s.goods_id),
+				select s.buyer_id,s.transaction_id,s.goods_id,s.goods_title,(select g.user_id  from goods g where g.goods_id= s.goods_id),
 				(select name from users  where user_Id=s.buyer_Id) buyer_name,
 				(select name from users u1 join goods g1 using(user_id) where g1.goods_id=s.goods_id) seller_name,
 			   (select u.mobile_number from users u where u.user_id=s.buyer_id) mobile_number, 
