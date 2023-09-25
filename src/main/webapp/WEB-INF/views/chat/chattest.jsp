@@ -7,6 +7,7 @@
 <title>Insert title here</title>
 <script src="${pageContext.request.contextPath}/resources/js/jquery-3.3.1.min.js"></script>
 <link href="${pageContext.request.contextPath}/resources/css/chat.css" rel='stylesheet' type='text/css'>
+<link rel="icon" href="favicon.ico" type="image/x-icon">
 </head>
 <body>
 	<div class="wrapper">
@@ -72,6 +73,7 @@
 					<div class="bubble me">Are you serious?</div>
 					<div class="bubble you">When we were younger and free...</div>
 					<div class="bubble you">I've forgotten how it felt before</div>
+					<div class="bubble me">I've forgotten how it felt before</div>
 				</div>
 				<div class="chat" data-chat="person3">
 					<div class="conversation-start">
