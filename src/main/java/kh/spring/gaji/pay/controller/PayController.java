@@ -58,11 +58,11 @@ public class PayController {
 		@GetMapping("payment/pay")
 		public String paytest1(Model model,RedirectAttributes attribute/* ,int goodsId */,HttpServletRequest request) {
 			/* String userId=(String)request.getSession().getAttribute("userId"); */
-			if(payServiceImpl.checkGoodsStatus(1)!=1) {	//추후 1은 goodsId로 대체
+			if(payServiceImpl.checkGoodsStatus(2)!=1) {	//추후 1은 goodsId로 대체
 				attribute.addFlashAttribute("errorMsg", "예약중인 상품입니다.");
 				return "redirect:/main";
 			}
-			GoodsPayInfoDto goodsInfo=payServiceImpl.getGoodsInfo(1);	//추후 1은 goodsId로 대체
+			GoodsPayInfoDto goodsInfo=payServiceImpl.getGoodsInfo(2);	//추후 1은 goodsId로 대체
 			List<UserAddressDto> userAddress = payServiceImpl.getUserAddressList("qordmlgjs");	 //추후대체 userId =qordmlgjs
 			PayUserInfoDto payUserInfo= payServiceImpl.getUserInfo("qordmlgjs");			 //추후대체 userId =qordmlgjs 
 			model.addAttribute("merchantIdentificationCode",merchantIdentificationCode);
@@ -71,7 +71,7 @@ public class PayController {
 			model.addAttribute("payUserInfo",payUserInfo);	//유저정보
 			return "pay/pay";
 		}
-	
+		
 	@PostMapping("payment/cancel")	//안전거래 후 취소처리를 위한 버튼
 	@ResponseBody
 	public IamportResponse<Payment> cancel(String impUid) {
@@ -95,7 +95,7 @@ public class PayController {
 		IamportResponse<Payment> result=null;
 		try {
 			result= api.paymentByImpUid(impUid);
-			int amount =(int)Math.round(payServiceImpl.getAmount(1) * 1.035);	//goodsId =1
+			int amount =(int)Math.round(payServiceImpl.getAmount(2) * 1.035);	//goodsId =1
 			String goodTitle=result.getResponse().getName();
 			if(result.getResponse().getStatus().equals("paid")&&amount==result.getResponse().getAmount().intValue()) {	// 금액이 일치하고 지불이 완료되었다면.
 				insertSafeTradingDto.setTransactionId(impUid);
@@ -112,7 +112,7 @@ public class PayController {
 				if(addResult==1) { // 가지 데이터베이스에 값이 정상적으로 들어갔다면
 					Map<String, Object> map=new HashMap<String, Object>();
 					map.put("status", 2);
-					map.put("goodsId",Integer.valueOf(1)); // 추후 goodsId로 변경해야함.
+					map.put("goodsId",Integer.valueOf(2)); // 추후 goodsId로 변경해야함.
 					if(goodsService.updateStatus(map)==1);
 						return result;	// 거래정보 반환.
 				}

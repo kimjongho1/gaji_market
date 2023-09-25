@@ -2,36 +2,90 @@
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
 <!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>구매내역</title>
-</head>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title>Shop Homepage - Start Bootstrap Template</title>
+        <!-- Favicon-->
+        <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+        <!-- Bootstrap icons-->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
+        <!-- Core theme CSS (includes Bootstrap)-->
+        <script src="${pageContext.request.contextPath}/resources/js/orderstatus.js"></script>
+		<link href="${pageContext.request.contextPath}/resources/css/orderstatus.css" rel='stylesheet' type='text/css'>
+		<style>
+		.personal1{
+			  position:absolute;
+			  left:780px;
+			  top:35px;
+		}
+		.personal2{
+			  position:absolute;
+			  left:880px;
+			  top:35px;
+		}
+		.btn{
+			  background-color: #007BFF; /* 파란색 배경 */
+			  color: white; /* 흰색 글자색 */
+		}
+		</style>
+    </head>
+    <body>
+        <!-- Section-->
+        <div>
+        	<button class="btn btn-outline-dark personal1" id="inFace" onclick="viewInface()">직거래</button>
+			<button class="btn btn-outline-dark personal2" id="safeTrading" onclick="safeTrading()">안전거래</button>
+        </div>
+        <section class="py-5">
+            <div class="container px-4 px-lg-5 mt-5">
+                <div id="replacePoint" class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+                   <c:forEach var="safePurchaseInfo"  items="${safePurchaseList}">
+                    <div class="col mb-5">
+                        <div class="card h-100">
+                            <!-- Sale badge-->
+                            <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">
+								<c:choose>
+									<c:when test="${safePurchaseInfo.tradingStatus eq 1}">입금완료</c:when>
+									<c:when test="${safePurchaseInfo.tradingStatus eq 2}">상품준비중</c:when>
+									<c:when test="${safePurchaseInfo.tradingStatus eq 3}">배송중</c:when>
+									<c:when test="${safePurchaseInfo.tradingStatus eq 4}">거래완료</c:when>
+									<c:when test="${safePurchaseInfo.tradingStatus eq 5}">결제취소</c:when>
+								</c:choose>
+							</div>
+                            <!-- Product image-->
+                            <img class="card-img-top" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" alt="..." />
+                            <!-- Product details-->
+                            <div class="card-body p-4">
+                                <div class="text-center">
+                                    <!-- Product name-->
+                                    <h5 class="fw-bolder">${safePurchaseInfo.goodsTitle}</h5>
+                                    <!-- Product reviews-->
+                                    <div class="d-flex justify-content-center small text-warning mb-2">
+                                    ${safePurchaseInfo.tradingDate}
+                                    </div>
+                                    <!-- Product price-->
+                                    ${safePurchaseInfo.price}
+                                </div>
+                            </div>
+                            <!-- Product actions-->
+                            <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                                <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">상품정보</a></div>
+                            </div>
+                        </div>
+                    </div>
+                    </c:forEach>
+                </div>
+            </div>
+        </section>
+        <!-- Bootstrap core JS-->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+    </body>
+</html>
 
-<body>
-<button id="inFace" onclick="viewInface()">직거래</button>
-<button id="safeTrading" onclick="safeTrading()">안전거래</button>
-<table class="purchaseView">
-	<c:forEach var="safePurchaseInfo"  items="${safePurchaseList}">
-		<tr><th>상품명:</th><td>${safePurchaseInfo.goodsTitle}</td></tr>
-		<tr>
-		<th>거래상태:</th>
-				<td>
-					<c:choose>
-						<c:when test="${safePurchaseInfo.tradingStatus eq 1}">입금완료</c:when>
-						<c:when test="${safePurchaseInfo.tradingStatus eq 2}">상품준비중</c:when>
-						<c:when test="${safePurchaseInfo.tradingStatus eq 3}">배송중</c:when>
-						<c:when test="${safePurchaseInfo.tradingStatus eq 4}">거래완료</c:when>
-						<c:when test="${safePurchaseInfo.tradingStatus eq 5}">결제취소</c:when>
-					</c:choose>
-				</td>
-		</tr>
-		<tr><th>가격:</th><td>${safePurchaseInfo.price}</td></tr>
-		<tr><th>거래일자:</th><td>${safePurchaseInfo.tradingDate}</td></tr>
-	</c:forEach>
-</table>
 
 <script>
 	const viewInface=()=>{
@@ -56,66 +110,60 @@
 	var getInFaceView=(data)=>{	//직거래 버튼 클릭시 직거래내역 보이게하기.
 		console.log("getInFaceView");
 		console.log(data);
-		var table=$("<table class='purchaseView'><table>");
+		var table="<div id='replacePoint' class='row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center'>";
 		
 		for(var i=0; i<data.length; i++){
 			let item=data[i];
-			var html='';
-			
-			html+="<tr><th>상품명</th>"
-			html+="<td>"+item.goodsTitle+"</td></tr>";
-			
-			html+="<tr><th>거래상태</th>";	
+			var html="<div class='col mb-5'><div class='card h-100'><div class='badge bg-dark text-white position-absolute' style='top: 0.5rem; right: 0.5rem'>";
 			if(item.tradingStatus ==1)
-				html+="<td>예약중</td></tr>";
+				html+="예약중";
 			else if(item.tradingStatus ==2)
-				html+="<td>거래완료</td></tr>";
+				html+="거래완료";
 			else
-				html+="<td>(거래취소)</td></tr>";
+				html+="(거래취소)";
 			
-			html+="<tr><th>가격</th>";
-			html+="<td>"+item.price+"</td></tr>";
+			html+="</div><img class='card-img-top' src='https://dummyimage.com/450x300/dee2e6/6c757d.jpg' alt=''...'' /><div class='card-body p-4'><div class='text-center'><h5 class='fw-bolder'>"
+			+item.goodsTitle+"</h5>";
 			
-			html+="<tr><th>거래일자</th>";
-			html+="<td>"+item.tradingDate+"</td></tr>";
-			html.appendTo(table);
+			html+="<div class='d-flex justify-content-center small text-warning mb-2'>"
+            +item.tradingDate+
+            "</div>"+item.price+"</div></div><div class='card-footer p-4 pt-0 border-top-0 bg-transparent'>"
+            +"<div class='text-center'><a class='btn btn-outline-dark mt-auto' href="+"#"+">상품정보</a></div></div></div></div>";
+            table+=html;
 		}
-		$(".purchaseView").replaceWith(table);
+		html+="</div>";
+		$("#replacePoint").replaceWith(table);
 	}
 	
-	var getSafeView=(data)=>{	//직거래 버튼 클릭시 직거래내역 보이게하기.
+	    var getSafeView=(data)=>{	//안전거래 버튼 클릭시 직거래내역 보이게하기.
 		console.log(data);
 		console.log("getSafeView");
-		var table="<table class='purchaseView'>";
+				var table="<div id='replacePoint' class='row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center'>";
 		
 		for(var i=0; i<data.length; i++){
 			let item=data[i];
-			var html="";
-			
-			html+="<tr><th>상품명</th>"
-			html+="<td>"+item.goodsTitle+"</td></tr>";
-			
-			html+="<tr><th>거래상태</th>";	
+			var html="<div class='col mb-5'><div class='card h-100'><div class='badge bg-dark text-white position-absolute' style='top: 0.5rem; right: 0.5rem'>";
 			if(item.tradingStatus ==1)
-				html+="<td>입금완료</td></tr>";
+				html+="입금완료"; 
 			else if(item.tradingStatus ==2)
-				html+="<td>상품준비중</td></tr>";
+				html+="상품준비중";
 			else if(item.tradingStatus ==3)
-				html+="<td>(배송중)</td></tr>";
-			else if(item.tradingStatus ==3)
-				html+="<td>(거래완료)</td></tr>";
+				html+="배송중";
+			else if(item.tradingStatus ==4)
+				html+="거래완료";
 			else
-				html+="<td>(결제취소)</td></tr>";
-			html+="<tr><th>가격</th>";
-			html+="<td>"+item.price+"</td></tr>";
+				html+="결제취소";
 			
-			html+="<tr><th>거래일자</th>";
-			html+="<td>"+item.tradingDate+"</td></tr>";
-			table+=html;
+			html+="</div><img class='card-img-top' src='https://dummyimage.com/450x300/dee2e6/6c757d.jpg' alt=''...'' /><div class='card-body p-4'><div class='text-center'><h5 class='fw-bolder'>"
+			+item.goodsTitle+"</h5>";
+			
+			html+="<div class='d-flex justify-content-center small text-warning mb-2'>"
+            +item.tradingDate+
+            "</div>"+item.price+"</div></div><div class='card-footer p-4 pt-0 border-top-0 bg-transparent'>"
+            +"<div class='text-center'><a class='btn btn-outline-dark mt-auto' href="+"#"+">상품정보</a></div></div></div></div>";
+            table+=html;
 		}
-		table+="<table>";
-		$(".purchaseView").replaceWith(table);
+		html+="</div>";
+		$("#replacePoint").replaceWith(table);
 	}
 </script>
-</body>
-</html>
