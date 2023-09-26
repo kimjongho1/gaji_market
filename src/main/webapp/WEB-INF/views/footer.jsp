@@ -40,7 +40,7 @@
 
         <div class="container">
             <div class="footer__about__logo">
-                <a href="./index.html"><img src="img/logo.png" alt=""></a>
+                <a href="./index.html"><img src="${pageContext.request.contextPath}/resources/img/logo.png" alt=""></a>
             </div>
             <div class="row">
                 <div class="col-lg-3 col-md-6 col-sm-6">
