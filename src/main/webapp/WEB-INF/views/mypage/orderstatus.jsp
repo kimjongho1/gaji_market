@@ -163,7 +163,7 @@
 			html+="<div class='d-flex justify-content-center small text-warning mb-2'>"
             +item.tradingDate+
             "</div>"+item.price+"</div></div><div class='card-footer p-4 pt-0 border-top-0 bg-transparent'>"
-            +"<div class='text-center'><a class='btn btn-outline-dark mt-auto' href="+"${pageContext.request.contextPath}/mypage/deal/safe/buyer?transactionId="+${safePurchaseInfo.transactionId}+">상품정보</a></div></div></div></div>";
+            +"<div class='text-center'><a class='btn btn-outline-dark mt-auto' href="+"${pageContext.request.contextPath}/mypage/deal/safe/buyer?transactionId="+item.transactionId+">상품정보</a></div></div></div></div>";
             table+=html;	
 		}
 		html+="</div>";
@@ -198,7 +198,7 @@
 			html+="<div class='d-flex justify-content-center small text-warning mb-2'>"
             +item.tradingDate+
             "</div>"+item.price+"</div></div><div class='card-footer p-4 pt-0 border-top-0 bg-transparent'>"
-            +"<div class='text-center'><a class='btn btn-outline-dark mt-auto' href="+"${pageContext.request.contextPath}/mypage/deal/safe/buyer?transactionId="+${safePurchaseInfo.transactionId}+">상품정보</a></div></div></div></div>";
+            +"<div class='text-center'><a class='btn btn-outline-dark mt-auto' href="+"${pageContext.request.contextPath}/mypage/deal/safe/buyer?transactionId="+item.transactionId+">상품정보</a></div></div></div></div>";
             table+=html;
 		}
 		html+="</div>";

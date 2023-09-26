@@ -30,7 +30,6 @@ import kh.spring.gaji.pay.model.dto.GoodsPayInfoDto;
 import kh.spring.gaji.pay.model.dto.InsertSafeTradingDto;
 import kh.spring.gaji.pay.model.dto.PayUserInfoDto;
 import kh.spring.gaji.pay.model.service.PayService;
-import kh.spring.gaji.pay.model.service.PayServiceImpl;
 import kh.spring.gaji.user.model.dto.UserAddressDto;
 
 @Controller
@@ -43,8 +42,6 @@ public class PayController {
 	private PayService payServiceImpl;
 	@Autowired
 	private InsertSafeTradingDto insertSafeTradingDto;
-	
-	private GoodsService goodsService;
 	
 	private CancelData cancelData;
 	
@@ -127,7 +124,7 @@ public class PayController {
 					Map<String, Object> map=new HashMap<String, Object>();
 					map.put("status", 2);
 					map.put("goodsId",Integer.valueOf(2)); // 추후 goodsId로 변경해야함.
-					if(goodsService.updateStatus(map)==1);
+					if(payServiceImpl.updateStatus(map)==1);
 						return result;	// 거래정보 반환.
 				}
 				else			// 가지 데이터베이스에 값이 입력되지 않았거나 거래중으로 변경이 안되었다면 거래취소함.

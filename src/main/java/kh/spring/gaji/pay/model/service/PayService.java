@@ -1,5 +1,6 @@
 package kh.spring.gaji.pay.model.service;
 import java.util.List;
+import java.util.Map;
 
 import kh.spring.gaji.pay.model.dto.GoodsPayInfoDto;
 import kh.spring.gaji.pay.model.dto.InsertSafeTradingDto;
@@ -11,6 +12,7 @@ public interface PayService {
 	public int checkGoodsStatus(int goodsId);
 	public int cancelSafeTrading(String transactionId);
     public int closeSafeTrading(String transactionId);
+    int updateStatus(Map<String, Object> map);
     public int addSafeTrading(InsertSafeTradingDto insertSafeTradingDto);
     public int getAmount(int goodsId);
     public GoodsPayInfoDto getGoodsInfo(int goodsId);

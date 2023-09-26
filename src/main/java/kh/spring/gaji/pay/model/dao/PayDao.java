@@ -1,6 +1,7 @@
 package kh.spring.gaji.pay.model.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +23,10 @@ public class PayDao {
     
     public int cancelSafeTrading(String transactionId) {	//거래취소
         return sqlSession.update("pay.cancelSafeTrading", transactionId);
+    }
+    
+    public int updateStatus(Map<String, Object> map) { //23P 상품상태변경 
+        return sqlSession.update("pay.updateStatus", map);
     }
     
     public int updateGoodsToSelling(int goodsId) {

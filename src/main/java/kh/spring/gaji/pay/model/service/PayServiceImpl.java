@@ -1,5 +1,6 @@
 package kh.spring.gaji.pay.model.service;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -55,5 +56,10 @@ public class PayServiceImpl implements PayService {
 	 public PayUserInfoDto getUserInfo(String userId) {
 		 return payDao.getUserInfo(userId);
 	 }
+
+	@Override
+	public int updateStatus(Map<String, Object> map) {
+		return payDao.updateStatus(map);
+	}
 
 }
