@@ -16,7 +16,7 @@ public class UserController {
 	
 	@GetMapping("/signup")
 	public String signup() {	// 개인회원가입
-		service.checkMobileNumber(null)
+		service.checkMobileNumber(null);
 		
 		
 		return "user/signup";
