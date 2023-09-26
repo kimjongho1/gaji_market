@@ -13,12 +13,19 @@
 	</update>
 	
 	<update id="updateStatus" parameterType="map"> <!-- 23P 상품상태변경 -->
-			update goods set status=#{status} where goods_id=#{goodsId}
+			update goods set 
+			status=#{status} 
+			where goods_id=#{goodsId}
 	</update>
 	
 	<update id="closeSafeTrading" parameterType="string">		<!-- 11P 거래확정, 거래상태 업데이트 -->
 		update safe_trading set trading_status=4 
 		where transaction_id= #{transactionId}
+	</update>
+	
+	<update id="changeStatus" parameterType="map">	<!-- 안전거래 거래상태 변경 -->
+		update safe_trading set trading_status=#{status}
+		where transaction_id= #{transactionId} and user_id=#{userId}
 	</update>
 	
 	<select id="getAmount" parameterType="_int" resultType="_int">	<!-- 결제시 가격확인을 위한 쿼리문 -->
