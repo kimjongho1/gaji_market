@@ -1,27 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xmlns:context="http://www.springframework.org/schema/context"
 	xmlns:security="http://www.springframework.org/schema/security"
-	xsi:schemaLocation="http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-5.7.xsd
-		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
-		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
-
-	<!-- TODO kim j.h -->
-	<security:http>
-		<security:intercept-url pattern="/resoruces/**" access="permitAll" />
-		<security:form-login login-page="TODO 로그인페이지"
-							authentication-success-forward-url="TODO 로그인이 성공하면 이곳으로 이동"
-							authentication-failure-url="TODO로그인이 실패하면 이곳으로 이동"
-		/>
-						<!-- invalidate-session 갑이 ture 경우 로그아웃하면 세션이 무효화되고 사용자는 다시 로그인을 해야 한다
-							 false 값일 경우 세션은 무효화되지 않고 사용자는 로그아웃 후에도 세션을 계속 사용할 수 있다
-							 그러니 보안적인 면으로 본다면 true값을 권장한다 -->
-						<!-- TODO kim j.h controller에서 자료형 principal 사용 -->
-		<security:logout logout-url="TODO 로그아웃페이지"
-						logout-success-url="TODO 로그아웃에 성공하면 이곳으로 이동"
-						invalidate-session="true" 
-						delete-cookies="TODO 삭제할 컬럼명 쿠키 ex)mid, mpaw"
+	xsi:schemaLocation="http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	<!-- spring-security -->
+	<!-- 컨테이너의 HTTP security 요소 -->
+	<security:http use-expressions="true">
+		<!-- isAuthenticated() 사용자가 인증된 경우 참 -->
+		<!-- permitAll() 항상 참으로 평가함 -->
+		<security:intercept-url pattern="/chat" access="isAuthenticated()"/>
+		<!-- <security:intercept-url pattern="/goods/**" access="isAuthenticated()"/> -->
+		<!-- <security:intercept-url pattern="/sample/all" access="permitAll"/> -->
+		<security:form-login login-page="/login"
 		/>
 	</security:http>
+	<!-- AuthenticationManager 빈 생성 -->
+	<security:authentication-manager>
+	</security:authentication-manager>
 </beans>
