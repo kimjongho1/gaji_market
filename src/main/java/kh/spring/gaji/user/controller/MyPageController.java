@@ -1,6 +1,10 @@
 package kh.spring.gaji.user.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -9,6 +13,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import kh.spring.gaji.pay.model.dto.InFaceTradingDto;
 import kh.spring.gaji.pay.model.dto.SafePurchaseInfoDto;
@@ -72,6 +77,20 @@ public class MyPageController {
 		SafePurchaseInfoDto safePurchaseInfoDto = userService.getSafePurchaseInfo(transactionId);
 		model.addAttribute("safePurchaseInfoDto",safePurchaseInfoDto);
 		return "mypage/seller";
+	}
+	
+	@PostMapping("/deal/safe/seller/insert/trackingnumber")
+	public String insertTrackingNumber(Model model,int shippingCompany,String trackingNumber,String transactionId,RedirectAttributes redirectattr) {
+		Map<String,Object> map= new HashMap<String,Object>();
+		String msg=null;
+		map.put("shippingCompany",shippingCompany);
+		map.put("trackingNumber", trackingNumber);
+		map.put("transactionId", transactionId);
+		if(userService.updateTrackingNumber(map)==1)
+			redirectattr.addFlashAttribute("msg","운송장이 등록되었습니다");
+		else
+			redirectattr.addFlashAttribute("msg","운송장 등록에 실패했습니다");
+		return "redirect:/mypage/deal/safe/seller?transactionId="+transactionId;
 	}
 	
 	@GetMapping("/deal/safe/buyer")

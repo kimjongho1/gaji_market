@@ -36,7 +36,7 @@ public class UserController {
 	        return "user/singup"; // 예외 발생 시 다시 회원 가입 페이지로 이동
 	    }
 	}
-	
+
 	
 	@GetMapping("/idInquiry")
 	public String idInquiry() {		// 아이디찾기

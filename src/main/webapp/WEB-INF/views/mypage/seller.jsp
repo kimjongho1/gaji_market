@@ -60,9 +60,19 @@
         display: flex;
         justify-content: center;
     }
+    
 </style>
 </head>
 <body>
+
+
+<c:if test="${not empty msg}">
+<script>
+	alert("${msg}");
+</script>
+</c:if>
+
+
 <h1>안전거래 상세조회</h1>
 <div class="container">
     <c:if test="${safePurchaseInfoDto.tradingStatus ne 5}">
@@ -71,11 +81,21 @@
     <c:if test="${safePurchaseInfoDto.tradingStatus eq 1}">
     <button onclick="accept('${safePurchaseInfoDto.sellerId}','${safePurchaseInfoDto.transactionId}')">안전결제 수락</button>
 	</c:if>
-    <c:if test="${safePurchaseInfoDto.tradingStatus eq 2}">
-        <button onclick="InsertTrackingNumber('${safePurchaseInfoDto.sellerId}','${safePurchaseInfoDto.transactionId}')">운송장 등록</button>
-        
+    
+	<c:if test="${safePurchaseInfoDto.tradingStatus eq 2}">
+    <form action="${pageContext.request.contextPath}/mypage/deal/safe/seller/insert/trackingnumber" method="post">
+   		<select name="shippingCompany">
+    		<option value="1">대한통운</option>
+    		<option value="2">우체국택배</option>
+    		<option value="3">한진택배</option>
+    		<option value="4">로젠택배</option>
+    	</select>
+    	<input type="hidden" value="${safePurchaseInfoDto.transactionId}" name="transactionId">
+    	<div><span>운송장번호</span><input type="text" name="trackingNumber" pattern="^\d{13}$" title="13자리 입력" required></div>
+    	<button type="submit">운송장 등록</button>    
+    </form>
     </c:if>
-
+    
     <a href="#"><p>상품명:${safePurchaseInfoDto.goodsTitle}</p></a>
     <p>판매자명:${safePurchaseInfoDto.sellerName}</p>
     <p>구매자명:${safePurchaseInfoDto.buyerName}</p>
@@ -91,10 +111,24 @@
         <c:when test="${safePurchaseInfoDto.tradingStatus eq 5}"><p>거래상태:결제취소</p></c:when>
     </c:choose>
 
-    <c:if test="not empty ${safePurchaseInfoDto.trackingNumber}">
-        <p>운송장번호:${safePurchaseInfoDto.trackingNumber}</p>
+    <c:if test="${not empty safePurchaseInfoDto.trackingNumber}">
+        운송장번호:
+        <c:choose>
+        <c:when test="${safePurchaseInfoDto.shippingCompany eq 1}">
+        	대한통운
+        </c:when>
+        <c:when test="${safePurchaseInfoDto.shippingCompany eq 2}">
+        	우체국택배
+        </c:when>
+        <c:when test="${safePurchaseInfoDto.shippingCompany eq 3}">
+        	한진택배
+        </c:when>
+        <c:when test="${safePurchaseInfoDto.shippingCompany eq 4}">
+        	로젠택배
+        </c:when>
+        </c:choose>
+         ${safePurchaseInfoDto.trackingNumber}</p>
     </c:if>
-    
 </div>
 
 <script>

@@ -92,9 +92,25 @@
         <c:when test="${safePurchaseInfoDto.tradingStatus eq 5}"><p>거래상태:결제취소</p></c:when>
     </c:choose>
 
-    <c:if test="not empty ${safePurchaseInfoDto.trackingNumber}">
-        <p>운송장번호:${safePurchaseInfoDto.trackingNumber}</p>
+    <c:if test="${not empty safePurchaseInfoDto.trackingNumber}">
+        운송장번호:
+        <c:choose>
+        <c:when test="${safePurchaseInfoDto.shippingCompany eq 1}">
+        	대한통운
+        </c:when>
+        <c:when test="${safePurchaseInfoDto.shippingCompany eq 2}">
+        	우체국택배
+        </c:when>
+        <c:when test="${safePurchaseInfoDto.shippingCompany eq 3}">
+        	한진택배
+        </c:when>
+        <c:when test="${safePurchaseInfoDto.shippingCompany eq 4}">
+        	로젠택배
+        </c:when>
+        </c:choose>
+         ${safePurchaseInfoDto.trackingNumber}</p>
     </c:if>
+
 </div>
 <script>
 var cancel=(userId1,transactionId1)=>{

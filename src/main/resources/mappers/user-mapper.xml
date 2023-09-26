@@ -120,7 +120,7 @@
 				(select user_id from goods g where g.goods_id=s.goods_Id) seller_id,
 			   (select u.mobile_number from users u where u.user_id=s.buyer_id) mobile_number, 
                (select u.name from users u where u.user_id=s.buyer_id) name, 
-			   s.detail_address,s.road_address, s.price, to_char(s.trading_date, 'YYYY-MM-DD HH24:MI:SS') trading_date, s.trading_status, s.tracking_number 
+			   s.detail_address,s.road_address, s.price, to_char(s.trading_date, 'YYYY-MM-DD HH24:MI:SS') trading_date, s.trading_status, s.shipping_company ,s.tracking_number 
 			   from safe_trading s
 			   where transaction_id=#{transactionId}
 	</select>
@@ -132,7 +132,7 @@
 	
 	<update id="updateTrackingNumber" parameterType="map">		<!-- 12P 안전거래번호와 운송장번호를 인자로하여, 운송장번호와 거래상태 업데이트 -->
 		update safe_trading 
-		set trading_status=3,tracking_number=#{trackingNumber} 
+		set trading_status=3,tracking_number=#{trackingNumber} ,shipping_company=#{shippingCompany}
 		where transaction_id=#{transactionId}
 	</update>
 	
