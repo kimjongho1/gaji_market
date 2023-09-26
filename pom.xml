@@ -189,13 +189,14 @@
 			<version>1.18.22</version>
 			<scope>provided</scope>
 		</dependency>
-
+		
 		<dependency>
 			<groupId>org.bgee.log4jdbc-log4j2</groupId>
 			<artifactId>log4jdbc-log4j2-jdbc4.1</artifactId>
 			<version>1.16</version>
 		</dependency>
 
+		<!-- security 4종: 김종호 추가(230926) -->
 		<dependency>
 			<groupId>org.springframework.security</groupId>
 			<artifactId>spring-security-core</artifactId>
@@ -213,6 +214,13 @@
 			<artifactId>spring-security-config</artifactId>
 			<version>${org.springframework.security-version}</version>
 		</dependency>
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-taglibs</artifactId>
+			<version>${org.springframework.security-version}</version>
+		</dependency>
+
+
 		<!-- File Upload -->
 		<!-- commons-fileupload -->
 		<dependency>
@@ -237,7 +245,7 @@
 			<version>${org.springframework-version}</version>
 		</dependency>
 
-	<!-- Json 타입을 Java형태로 바꿔주는 역할 : 김종호 추가(230830) -->
+		<!-- Json 타입을 Java형태로 바꿔주는 역할 : 김종호 추가(230830) -->
 		<!-- jackson -->
 		<dependency>
 			<groupId>com.fasterxml.jackson.core</groupId>
