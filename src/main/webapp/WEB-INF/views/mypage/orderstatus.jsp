@@ -29,20 +29,34 @@
 			  top:35px;
 		}
 		.btn{
-			  background-color: #007bff; /* 파란색 배경 */
+			  background-color: #007BFF; /* 파란색 배경 */
 			  color: white; /* 흰색 글자색 */
+		}
+		.btn-top{
+			  
+			  display:flex;
+			  justify-content: center;		
+			  padding-top: 35px;
+		}
+		.personal{
+			  margin: 0 50px 0 50px ;
 		}
 		</style>
     </head>
     
     
     <body>
+    
+  
         <!-- Section-->
-        <div>
-        	<button class="btn btn-outline-dark personal1" id="inFace" onclick="viewInface()">직거래</button>
-			<button class="btn btn-outline-dark personal2" id="safeTrading" onclick="safeTrading()">안전거래</button>
+
+        <div class="btn-top">
+        	<button class="btn btn-outline-dark personal" id="inFace" onclick="viewInface()">직거래</button>
+			<button class="btn btn-outline-dark personal" id="safeTrading" onclick="safeTrading()">안전거래</button>
         </div>
-        <section class="py-5">
+    
+        
+        <section class="py-1">
             <div class="container px-4 px-lg-5 mt-5">
                 <div id="replacePoint" class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
                    <c:forEach var="safePurchaseInfo"  items="${safePurchaseList}">
