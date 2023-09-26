@@ -1,173 +1,207 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>회원가입</title>
 <style>
-	* {
-  margin: 0px;
-  padding: 0px;
-  text-decoration: none;
-  font-family:sans-serif;
-
+* {
+	margin: 0px;
+	padding: 0px;
+	text-decoration: none;
+	font-family: sans-serif;
 }
 
 body {
-  background-image:#34495e;
+	background-image: #34495e;
 }
 
 .joinForm {
-  position:absolute;
-  width:400px;
-  height:400px;
-  padding: 30px, 20px;
-  background-color:#FFFFFF;
-  text-align:center;
-  top:40%;
-  left:50%;
-  transform: translate(-50%,-50%);
-  border-radius: 15px;
+	position: absolute;
+	width: 400px;
+	height: 400px;
+	padding: 30px, 20px;
+	background-color: #FFFFFF;
+	text-align: center;
+	top: 40%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	border-radius: 15px;
 }
 
 .joinForm h2 {
-  text-align: center;
-  margin: 30px;
+	text-align: center;
+	margin: 30px;
 }
 
 .textForm {
-  border-bottom: 2px solid #adadad;
-  margin: 30px;
-  padding: 10px 10px;
+	border-bottom: 2px solid #adadad;
+	margin: 30px;
+	padding: 10px 10px;
 }
 
-
 .id {
-  width: 100%;
-  border:none;
-  outline:none;
-  color: #636e72;
-  font-size:16px;
-  height:25px;
-  background: none;
+	width: 100%;
+	border: none;
+	outline: none;
+	color: #636e72;
+	font-size: 16px;
+	height: 25px;
+	background: none;
 }
 
 .pw {
-  width: 100%;
-  border:none;
-  outline:none;
-  color: #636e72;
-  font-size:16px;
-  height:25px;
-  background: none;
+	width: 100%;
+	border: none;
+	outline: none;
+	color: #636e72;
+	font-size: 16px;
+	height: 25px;
+	background: none;
 }
 
 .name {
-  width: 100%;
-  border:none;
-  outline:none;
-  color: #636e72;
-  font-size:16px;
-  height:25px;
-  background: none;
+	width: 100%;
+	border: none;
+	outline: none;
+	color: #636e72;
+	font-size: 16px;
+	height: 25px;
+	background: none;
 }
 
 .email {
-  width: 100%;
-  border:none;
-  outline:none;
-  color: #636e72;
-  font-size:16px;
-  height:25px;
-  background: none;
+	width: 100%;
+	border: none;
+	outline: none;
+	color: #636e72;
+	font-size: 16px;
+	height: 25px;
+	background: none;
 }
 
 .nickname {
-  width: 100%;
-  border:none;
-  outline:none;
-  color: #636e72;
-  font-size:16px;
-  height:25px;
-  background: none;
+	width: 100%;
+	border: none;
+	outline: none;
+	color: #636e72;
+	font-size: 16px;
+	height: 25px;
+	background: none;
 }
 
 .cellphoneNo {
-  width: 100%;
-  border:none;
-  outline:none;
-  color: #636e72;
-  font-size:16px;
-  height:25px;
-  background: none;
+	width: 100%;
+	border: none;
+	outline: none;
+	color: #636e72;
+	font-size: 16px;
+	height: 25px;
+	background: none;
 }
+
 .btn {
-  position:relative;
-  left:40%;
-  transform: translateX(-50%);
-  margin-bottom: 40px;
-  width:80%;
-  height:40px;
-  background: linear-gradient(125deg,#81ecec,#6c5ce7,#81ecec);
-  background-position: left;
-  background-size: 200%;
-  color:white;
-  font-weight: bold;
-  border:none;
-  cursor:pointer;
-  transition: 0.4s;
-  display:inline;
+	position: relative;
+	left: 40%;
+	transform: translateX(-50%);
+	margin-bottom: 40px;
+	width: 80%;
+	height: 40px;
+	background: linear-gradient(125deg, #81ecec, #6c5ce7, #81ecec);
+	background-position: left;
+	background-size: 200%;
+	color: white;
+	font-weight: bold;
+	border: none;
+	cursor: pointer;
+	transition: 0.4s;
+	display: inline;
 }
+
 .btn:hover {
-  background-position: right;
+	background-position: right;
+}
+
+.btn-postcode {
+	background-color: #3498db;
+	color: #fff;
+	border: none;
+	padding: 5px 10px;
+	cursor: pointer;
+	border-radius: 5px;
+	margin-left: 5px;
+}
+
+.btn-postcode:hover {
+	background-color: #2980b9;
 }
 </style>
 </head>
 <body>
-	<form action=signup method="POST" class="joinForm" onsubmit="DoJoinForm__submit(this); return false;">
-                                                                                               
-      <div class="textForm">
-        <input name="userId" type="text" class="id" placeholder="아이디" required="required">
-      </div>
-      <div class="textForm">
-        <input name="password" type="password" class="pw" placeholder="비밀번호" required="required">
-      </div>
-       <div class="textForm">
-        <input name="loginPwConfirm" type="password" class="pw" placeholder="비밀번호 확인" required="required">
-      </div>      
-      <div class="textForm">
-        <input name="email" type="text" class="email" placeholder="이메일" required="required">
-      </div>
-      <div class="textForm">
-        <input name="certification" type="text" class="email" placeholder="인증번호 확인" required="required">
-      </div>
-      <div class="textForm">
-        <input name="name" type="text" class="name" placeholder="이름" required="required">
-      </div>
-      <div class="textForm">
-        <input name="nickname" type="text" class="nickname" placeholder="닉네임" required="required">
-      </div>
-      <div class="textForm">
-        <input name="mobileNumber" type="text" class="cellphoneNo" placeholder="전화번호" required="required">
-      </div>
-      <!-- <div class="textForm">
-      	<input type="text" name="postCode" id="sample4_postcode" placeholder="우편번호">
-		<input type="button" onclick="sample4_execDaumPostcode()" value="우편번호 찾기">
-	  
-	  <br>
-	  <input type="text" name="roadAddress" id="sample4_roadAddress" placeholder="도로명주소">
-	  <input type="text" name="address" id="sample4_jibunAddress" placeholder="지번주소">
-	  <span id="guide" style="color: #999; display: none"></span>
-	  <input type="text" name="detailAddress" id="sample4_detailAddress" placeholder="상세주소">
-      <br>
-      </div> -->
-      <input type="submit" class="btn" value="J O I N"/>
-    </form>
+	<form action=signup method="POST" class="joinForm"
+		onsubmit="DoJoinForm__submit(this); return false;">
+
+		<div class="textForm">
+			<input name="userId" type="text" class="id" placeholder="아이디"
+				required="required">
+		</div>
+		<div class="textForm">
+			<input name="password" type="password" class="pw" placeholder="비밀번호"
+				required="required">
+		</div>
+		<div class="textForm">
+			<input name="loginPwConfirm" type="password" class="pw"
+				placeholder="비밀번호 확인" required="required">
+		</div>
+		<div class="textForm">
+			<input name="email" type="text" class="email" placeholder="이메일"
+				required="required">
+		</div>
+		<div class="textForm">
+			<input name="certification" type="text" class="email"
+				placeholder="인증번호 확인" required="required">
+		</div>
+		<div class="textForm">
+			<input name="name" type="text" class="name" placeholder="이름"
+				required="required">
+		</div>
+		<div class="textForm">
+			<input name="nickname" type="text" class="nickname" placeholder="닉네임"
+				required="required">
+		</div>
+		<div class="textForm">
+			<input name="mobileNumber" type="text" class="cellphoneNo"
+				placeholder="전화번호" required="required">
+		</div>
+		<div class="textForm">
+			<span>
+			<input type="text" name="postCode" id="sample4_postcode"
+				placeholder="우편번호" required="required" class="cellphoneNo">
+			<button type="button" class="btn-postcode"
+				onclick="sample4_execDaumPostcode()">우편번호 찾기</button>
+				</span>
+		</div>
+		<br>
+		<div class="textForm">
+			<input type="text" name="roadAddress" id="sample4_roadAddress"
+				placeholder="도로명주소" class="cellphoneNo">
+		</div>
+		<div class="textForm">
+			<input type="text" name="address" id="sample4_jibunAddress"
+				placeholder="지번주소" class="cellphoneNo"> <span id="guide"
+				style="color: #999; display: none"></span>
+		</div>
+		<div class="textForm">
+			<input type="text" name="detailAddress" id="sample4_detailAddress"
+				placeholder="상세주소" class="cellphoneNo">
+		</div>
+		<input type="submit" class="btn" value="J O I N" />
+	</form>
 </body>
-<!-- <script
+<script
 	src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-	<script>
+<script>
 	//본 예제에서는 도로명 주소 표기 방식에 대한 법령에 따라, 내려오는 데이터를 조합하여 올바른 주소를 구성하는 방법을 설명합니다.
 	function sample4_execDaumPostcode() {
 		new daum.Postcode(
@@ -228,5 +262,5 @@ body {
 					}
 				}).open();
 	}
-</script> -->
+</script>
 </html>

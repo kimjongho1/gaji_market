@@ -16,6 +16,12 @@ public class UserController {
 	
 	@GetMapping("/signup")
 	public String signup() {	// 개인회원가입
+<<<<<<< HEAD
+=======
+
+		
+		
+>>>>>>> 3e1393efb51026bde56fa60b96b3838a4ea0f6fb
 		return "user/signup";
 	}
 	@PostMapping("signup")
