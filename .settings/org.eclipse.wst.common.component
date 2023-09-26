@@ -48,8 +48,8 @@
         
         
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/resources"/>
-        <wb-resource deploy-path="/WEB-INF/classes" source-path="/.apt_generated"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/.apt_generated_tests"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/.apt_generated"/>
                                                                 		
         
         
