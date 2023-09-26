@@ -71,7 +71,7 @@
     <c:if test="${safePurchaseInfoDto.tradingStatus eq 1}">
     <button onclick="accept('${safePurchaseInfoDto.sellerId}','${safePurchaseInfoDto.transactionId}')">안전결제 수락</button>
 	</c:if>
-    <c:if test="${safePurchaseInfoDto.tradingStatus eq 3}">
+    <c:if test="${safePurchaseInfoDto.tradingStatus eq 2}">
         <button onclick="InsertTrackingNumber('${safePurchaseInfoDto.sellerId}','${safePurchaseInfoDto.transactionId}')">운송장 등록</button>
         
     </c:if>
@@ -131,7 +131,7 @@
     var acceptCallback=(data)=>{
     	if(data=='1'){
     		alert('안전결제가 수락되었습니다.');
-    		window.location.href="${pageContext.request.contextPath}/mypage/salestatus";
+    		window.location.href="${pageContext.request.contextPath}/mypage/deal/safe/seller?transcation="+${safePurchaseInfoDto.transactionId};
     	}
     	else
     		alert("안전결제 수락에 실패했습니다.");
