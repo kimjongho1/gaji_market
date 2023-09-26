@@ -231,6 +231,10 @@ body {
 			<input type="text" name="detailAddress" id="sample4_detailAddress"
 				placeholder="상세주소" class="cellphoneNo">
 		</div>
+		<div class="textForm">
+			<input type="text" name="addressNickname" id="sample4_detailAddress"
+				placeholder="주소별칭" class="cellphoneNo">
+		</div>
 		<input type="submit" class="btn" value="J O I N" />
 	</form>
 </body>

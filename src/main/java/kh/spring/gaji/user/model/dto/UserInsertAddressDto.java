@@ -5,10 +5,11 @@ import lombok.Data;
 @Component
 @Data
 public class UserInsertAddressDto {
-    private String address;
     private String detailAddress;
-    private String userId;
     private String postCode;
-    private String nickname;
+    private String userId;
+    private String roadAddress;
+    private String address;
+    private String addressNickname;
     private String addressNo;
 }

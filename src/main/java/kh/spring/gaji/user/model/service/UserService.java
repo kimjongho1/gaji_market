@@ -1,4 +1,5 @@
 package kh.spring.gaji.user.model.service;
+import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 import kh.spring.gaji.goods.model.dto.GoodsDto;
@@ -61,7 +62,7 @@ public interface UserService {
 
     public int checkMobileNumber(String mobileNumber);
 
-    public int signup(UserDto userDto);
+    public int signup(UserDto userDto,UserInsertAddressDto addressDto) throws IOException;
 
     public SafePurchaseInfoDto getSafePurchaseInfo(String transactionId);
 

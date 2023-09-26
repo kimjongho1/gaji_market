@@ -1,5 +1,6 @@
 package kh.spring.gaji.user.model.service;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
@@ -138,8 +139,12 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public int signup(UserDto userDto) {
-        return userDao.signup(userDto);
+    @Transactional
+    public int signup(UserDto userDto, UserInsertAddressDto addressDto) throws IOException{
+    	int result = 0;
+    	result = userDao.signup(userDto);
+    	result += userDao.insertAddress(addressDto);		
+        return result;
     }
 
     @Override
