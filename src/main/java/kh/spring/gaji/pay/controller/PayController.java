@@ -43,7 +43,7 @@ public class PayController {
 	private PayService payServiceImpl;
 	@Autowired
 	private InsertSafeTradingDto insertSafeTradingDto;
-	@Autowired
+	
 	private GoodsService goodsService;
 	
 	private CancelData cancelData;
