@@ -16,8 +16,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
  * Handles requests for the application home page.
  */
 @Controller
-public class HomeController {
-	
-	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
+@RequestMapping("/")
+public class HomeController {	
+//	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 
+	@GetMapping("/")
+	public String main() { //메인 페이지
+		return "/home";
+	}
+	
 }
