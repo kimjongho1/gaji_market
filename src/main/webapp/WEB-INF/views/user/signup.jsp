@@ -130,10 +130,37 @@ body {
 	padding: 5px 10px;
 	cursor: pointer;
 	border-radius: 5px;
+	width:150px;
+	margin-left: 5px;
+}
+.btn-email {
+	background-color: #3498db;
+	color: #fff;
+	border: none;
+	padding: 5px 10px;
+	cursor: pointer;
+	border-radius: 5px;
+	width:150px;
+	margin-left: 5px;
+}
+.btn-id {
+	background-color: #3498db;
+	color: #fff;
+	border: none;
+	padding: 5px 10px;
+	cursor: pointer;
+	border-radius: 5px;
+	width:150px;
 	margin-left: 5px;
 }
 
 .btn-postcode:hover {
+	background-color: #2980b9;
+}
+.btn-email:hover {
+	background-color: #2980b9;
+}
+.btn-id:hover {
 	background-color: #2980b9;
 }
 </style>
@@ -143,8 +170,12 @@ body {
 		onsubmit="DoJoinForm__submit(this); return false;">
 
 		<div class="textForm">
-			<input name="userId" type="text" class="id" placeholder="아이디"
+			<span style="display: flex;">
+				<input name="userId" type="text" class="id" placeholder="아이디"
 				required="required">
+				<button type="button" class="btn-id"
+				onclick="">중복확인</button>
+			</span>
 		</div>
 		<div class="textForm">
 			<input name="password" type="password" class="pw" placeholder="비밀번호"
@@ -155,8 +186,12 @@ body {
 				placeholder="비밀번호 확인" required="required">
 		</div>
 		<div class="textForm">
-			<input name="email" type="text" class="email" placeholder="이메일"
+			<span style="display: flex;">
+				<input name="email" type="text" class="email" placeholder="이메일"
 				required="required">
+				<button type="button" class="btn-email"
+				onclick="">인증번호 요청</button>
+			</span>
 		</div>
 		<div class="textForm">
 			<input name="certification" type="text" class="email"
@@ -175,7 +210,7 @@ body {
 				placeholder="전화번호" required="required">
 		</div>
 		<div class="textForm">
-			<span>
+			<span style="display: flex;">
 			<input type="text" name="postCode" id="sample4_postcode"
 				placeholder="우편번호" required="required" class="cellphoneNo">
 			<button type="button" class="btn-postcode"
