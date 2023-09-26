@@ -11,20 +11,19 @@
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;900&display=swap" rel="stylesheet">
 
     <!-- Css Styles -->
-    <link rel="stylesheet" href="../../resources/css/font-awesome.min.css" type="text/css">
-    <link rel="stylesheet" href="../../resources/css/nice-select.css" type="text/css">
-    <link rel="stylesheet" href="../../resources/css/jquery-ui.min.css" type="text/css">
-    <link rel="stylesheet" href="../../resources/css/owl.carousel.min.css" type="text/css">
-    <link rel="stylesheet" href="../../resources/css/slicknav.min.css" type="text/css">  
-    <link rel="stylesheet" href="../../resources/css/elegant-icons.css" type="text/css">
-    <link rel="stylesheet" href="../../resources/css/bootstrap.min.css" type="text/css">
-    <link rel="stylesheet" href="../../resources/css/style.css" type="text/css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/resources/css/font-awesome.min.css" type="text/css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/resources/css/nice-select.css" type="text/css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/resources/css/jquery-ui.min.css" type="text/css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/resources/css/owl.carousel.min.css" type="text/css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/resources/css/slicknav.min.css" type="text/css">  
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/resources/css/elegant-icons.css" type="text/css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/resources/css/bootstrap.min.css" type="text/css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/resources/css/style.css" type="text/css">
 
 </head>
 <style>
 
 header {
-        height: 93px;
         position: static;
         z-index: 1000;
         width: 100%;
@@ -58,7 +57,7 @@ header {
             <div class="row">
 
                     <div class="header__logo">
-                        <a href="./index.html"><img src="img/logo.png" alt=""></a>
+                        <a href="./index.html"><img src="${pageContext.request.contextPath}/resources/img/logo.png" alt=""></a>
                     </div>
                 
 
@@ -143,14 +142,14 @@ header {
 
     </script>
 
-    <script src="js/jquery-3.3.1.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-    <script src="js/jquery.nice-select.min.js"></script>
-    <script src="js/jquery-ui.min.js"></script>
-    <script src="js/jquery.slicknav.js"></script>
-    <script src="js/mixitup.min.js"></script>
-    <script src="js/owl.carousel.min.js"></script>
-    <script src="js/main.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/js/jquery-3.3.1.min.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/js/bootstrap.min.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/js/jquery.nice-select.min.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/js/jquery-ui.min.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/js/jquery.slicknav.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/js/mixitup.min.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/js/owl.carousel.min.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/js/main.js"></script>
 
 
 
