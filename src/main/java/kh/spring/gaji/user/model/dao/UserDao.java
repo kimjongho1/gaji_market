@@ -118,10 +118,8 @@ public class UserDao {
     }
 
     public int signup(UserDto userDto) {	//회원가입
-    	int result = 0;
-    	result = sqlSession.insert("user.signup", userDto);
-    	result = sqlSession.insert("user.insertAddress", userDto);
-    	return result;
+    	
+    	return sqlSession.insert("user.signup", userDto);
     }
 
     public SafePurchaseInfoDto getSafePurchaseInfo(String transactionId) {	//11P 안전거래 상세정보 가져오기

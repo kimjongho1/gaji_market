@@ -7,5 +7,5 @@ import org.springframework.stereotype.Component;
 @Data
 public class FileDto { //변경해야함.
     private String url;
-    private String createdAt;
+    private int goodsId;
 }

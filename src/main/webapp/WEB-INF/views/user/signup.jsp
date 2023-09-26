@@ -125,33 +125,33 @@ body {
 </style>
 </head>
 <body>
-	<form action="doJoin" method="POST" class="joinForm" onsubmit="DoJoinForm__submit(this); return false;">
+	<form action=signup method="POST" class="joinForm" onsubmit="DoJoinForm__submit(this); return false;">
                                                                                                
       <div class="textForm">
-        <input name="userId" type="text" class="id" placeholder="아이디">
+        <input name="userId" type="text" class="id" placeholder="아이디" required="required">
       </div>
       <div class="textForm">
-        <input name="password" type="password" class="pw" placeholder="비밀번호">
+        <input name="password" type="password" class="pw" placeholder="비밀번호" required="required">
       </div>
        <div class="textForm">
-        <input name="loginPwConfirm" type="password" class="pw" placeholder="비밀번호 확인">
+        <input name="loginPwConfirm" type="password" class="pw" placeholder="비밀번호 확인" required="required">
       </div>      
       <div class="textForm">
-        <input name="email" type="text" class="email" placeholder="이메일">
+        <input name="email" type="text" class="email" placeholder="이메일" required="required">
       </div>
       <div class="textForm">
-        <input name="certification" type="text" class="email" placeholder="인증번호 확인">
+        <input name="certification" type="text" class="email" placeholder="인증번호 확인" required="required">
       </div>
       <div class="textForm">
-        <input name="name" type="text" class="name" placeholder="이름">
+        <input name="name" type="text" class="name" placeholder="이름" required="required">
       </div>
       <div class="textForm">
-        <input name="nickname" type="text" class="nickname" placeholder="닉네임">
+        <input name="nickname" type="text" class="nickname" placeholder="닉네임" required="required">
       </div>
       <div class="textForm">
-        <input name="mobileNumber" type="number" class="mobileNumber" placeholder="전화번호">
+        <input name="mobileNumber" type="text" class="cellphoneNo" placeholder="전화번호" required="required">
       </div>
-      <div class="textForm">
+      <!-- <div class="textForm">
       	<input type="text" name="postCode" id="sample4_postcode" placeholder="우편번호">
 		<input type="button" onclick="sample4_execDaumPostcode()" value="우편번호 찾기">
 	  
@@ -161,11 +161,11 @@ body {
 	  <span id="guide" style="color: #999; display: none"></span>
 	  <input type="text" name="detailAddress" id="sample4_detailAddress" placeholder="상세주소">
       <br>
-      </div>
+      </div> -->
       <input type="submit" class="btn" value="J O I N"/>
     </form>
 </body>
-<script
+<!-- <script
 	src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 	<script>
 	//본 예제에서는 도로명 주소 표기 방식에 대한 법령에 따라, 내려오는 데이터를 조합하여 올바른 주소를 구성하는 방법을 설명합니다.
@@ -228,5 +228,5 @@ body {
 					}
 				}).open();
 	}
-</script>
+</script> -->
 </html>
