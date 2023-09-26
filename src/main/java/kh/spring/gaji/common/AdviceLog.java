@@ -20,7 +20,7 @@ public class AdviceLog {
 	@Pointcut("execution(public * kh.spring.gaji..*Dao.*(..))")
 	public void daoPointCut() {}
 	
-	@Pointcut("execution(public * kh.spring.gaji..*Service.*(..))")
+	@Pointcut("execution(public * kh.spring.gaji..*ServiceImpl.*(..))")
 	public void servicePointCut() {}
 	
 	@Pointcut("execution(public * kh.spring.gaji..*Controller.*(..))")
