@@ -6,6 +6,7 @@ import lombok.Data;
 @Data
 public class SafePurchaseInfoDto {
 	private String buyerId;
+	private String sellerId;
 	private String transactionId;
     private int goodsId;
     private String goodsTitle;

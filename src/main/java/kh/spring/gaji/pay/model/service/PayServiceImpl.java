@@ -22,7 +22,8 @@ public class PayServiceImpl implements PayService {
 	public int checkGoodsStatus(int goodsId) {
 		return payDao.checkGoodsStatus(goodsId);
 	}
-    
+  
+	
     @Override
     @Transactional
     public int cancelSafeTrading(String transactionId) {
@@ -60,6 +61,12 @@ public class PayServiceImpl implements PayService {
 	@Override
 	public int updateStatus(Map<String, Object> map) {
 		return payDao.updateStatus(map);
+	}
+
+
+	@Override
+	public int changeStatus(Map<String, Object> map) {
+		return payDao.changeStatus(map);
 	}
 
 }

@@ -106,16 +106,14 @@
             success:cancelCallBack
         });
     }
-    var report=(userId,transactionId)=>{
-
-    }
-    var closePay=(userId1,transactionId1)=>{
+    
+    var accept=(userId1,transactionId1)=>{
         $.ajax({
-            url:"${pageContext.request.contextPath}/payment/closePay",    //추후 테스트해봐야함.
+            url:"${pageContext.request.contextPath}/payment/changestatus",    //추후 테스트해봐야함.
             data:{userId:userId1, transactionId:transactionId1},
             method: "post",
             dataType:"text",
-            success:closePayCallback
+            success:acceptPayCallback
         });
     }
 
@@ -130,15 +128,15 @@
             alert("거래 취소에 실패하였습니다.");
     }
 
-    function closePayCallback(data){
-        console.log("ClosePayCallback들어옴");
+    function acceptPayCallback(data){
+        console.log("acceptPayCallback들어옴");
         console.log(data);
         if(data=='1'){
-            alert("거래가 확정되었습니다");
-            window.location.href="${pageContext.request.contextPath}/mypage/orderstatus";
+            alert("거래가 수락되었습니다");
+            window.location.href="${pageContext.request.contextPath}/mypage/salesstatus";
         }
         else
-            alert("거래 확정에 실패하였습니다.");
+            alert("거래가 수락에 실패하였습니다.");
     }
 
 </script>

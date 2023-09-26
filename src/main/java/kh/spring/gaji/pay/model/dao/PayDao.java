@@ -21,6 +21,10 @@ public class PayDao {
     	return sqlSession.selectOne("pay.checkGoodsStatus",goodsId);
     }
     
+    public int changeStatus(Map<String,Object> map) {
+    	return sqlSession.update("pay.changeStatus",map);
+    }
+    
     public int cancelSafeTrading(String transactionId) {	//거래취소
         return sqlSession.update("pay.cancelSafeTrading", transactionId);
     }

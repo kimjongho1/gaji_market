@@ -72,7 +72,6 @@ public class PayController {
 		@PostMapping("payment/closePay")
 		@ResponseBody
 		public int closePay(String transactionId,String userId,HttpServletRequest request) {
-			System.out.println("payment/closePay들어옴");
 			int result=0;
 			/* if(userId==(String)request.getSession().getAttribute(userId)) { */ //혹시 transactionId 변조할까봐 검사.
 				result = payServiceImpl.closeSafeTrading(transactionId);
@@ -80,6 +79,18 @@ public class PayController {
 				/* } */
 			return result;
 		}
+		
+	@PostMapping("payment/changestatus")
+	@ResponseBody
+	public int changeStatus(String transactionId,String userId,int status,HttpServletRequest request) {
+		Map<String,Object> map=new HashMap<String,Object>();
+	/*	if(userId=request.getSession().getAttribute(userId)) {*/
+		map.put("userId", userId);
+		map.put("status", status);
+		map.put("transactionId",transactionId);
+		return payServiceImpl.changeStatus(map);
+	/*	}*/
+	}
 		
 	@PostMapping("payment/cancel")	//안전거래 후 취소처리를 위한 버튼
 	@ResponseBody

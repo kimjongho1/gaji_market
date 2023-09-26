@@ -117,6 +117,7 @@
 				select s.buyer_id,s.transaction_id,s.goods_id,s.goods_title,(select g.user_id  from goods g where g.goods_id= s.goods_id),
 				(select name from users  where user_Id=s.buyer_Id) buyer_name,
 				(select name from users u1 join goods g1 using(user_id) where g1.goods_id=s.goods_id) seller_name,
+				(select user_id from goods g where g.goods_id=s.goods_Id) seller_id,
 			   (select u.mobile_number from users u where u.user_id=s.buyer_id) mobile_number, 
                (select u.name from users u where u.user_id=s.buyer_id) name, 
 			   s.detail_address,s.road_address, s.price, to_char(s.trading_date, 'YYYY-MM-DD HH24:MI:SS') trading_date, s.trading_status, s.tracking_number 
