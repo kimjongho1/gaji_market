@@ -45,7 +45,7 @@
             cursor: pointer;
         }
         button:hover {
-            background-color: #0056b3;
+            background-color: #007bff;
         }
         h1{
         	position:relative;

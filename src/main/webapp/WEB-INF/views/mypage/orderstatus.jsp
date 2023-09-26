@@ -29,7 +29,7 @@
 			  top:35px;
 		}
 		.btn{
-			  background-color: #007BFF; /* 파란색 배경 */
+			  background-color: #007bff; /* 파란색 배경 */
 			  color: white; /* 흰색 글자색 */
 		}
 		</style>
