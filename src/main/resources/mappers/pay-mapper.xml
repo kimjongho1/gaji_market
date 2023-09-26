@@ -24,8 +24,8 @@
 	</update>
 	
 	<update id="changeStatus" parameterType="map">	<!-- 안전거래 거래상태 변경 -->
-		update safe_trading set trading_status=#{status}
-		where transaction_id= #{transactionId} and user_id=#{userId}
+		update safe_trading s set trading_status=#{status}
+		where transaction_id= #{transactionId} and (select user_id from goods g where s.goods_Id=g.goods_Id)=#{userId}
 	</update>
 	
 	<select id="getAmount" parameterType="_int" resultType="_int">	<!-- 결제시 가격확인을 위한 쿼리문 -->

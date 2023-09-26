@@ -68,7 +68,9 @@ public class MyPageController {
 	}
 	
 	@GetMapping("/deal/safe/seller")
-	public String seller() {		// 안전 거래 상세조회 판매자 페이지
+	public String seller(Model model,String transactionId) {		// 안전 거래 상세조회 판매자 페이지
+		SafePurchaseInfoDto safePurchaseInfoDto = userService.getSafePurchaseInfo(transactionId);
+		model.addAttribute("safePurchaseInfoDto",safePurchaseInfoDto);
 		return "mypage/seller";
 	}
 	

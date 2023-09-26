@@ -94,7 +94,9 @@
     <c:if test="not empty ${safePurchaseInfoDto.trackingNumber}">
         <p>운송장번호:${safePurchaseInfoDto.trackingNumber}</p>
     </c:if>
+    
 </div>
+
 <script>
     var cancel=(userId1,transactionId1)=>{
         $.ajax({
@@ -116,19 +118,19 @@
             alert("거래 취소에 실패하였습니다.");
     }
     
-    accept=(sellerId,transactionId)=>{
+    var accept=(sellerId,transactionId)=>{
     	 $.ajax({
-             url:"${pageContext.request.contextPath}/payment/cancel",
-             data:{userId:userId1, transactionId:transactionId1,status:2},
+             url:"${pageContext.request.contextPath}/payment/changestatus",
+             data:{userId:sellerId, transactionId:transactionId , status:2},
              method: "post",
              dataType:"json",
              success:acceptCallback
          });
     }
     
-    acceptCallback=(data)=>{
-    	if(data='1'){
-    		alert('안전결제가 수락되었습니다.');+
+    var acceptCallback=(data)=>{
+    	if(data=='1'){
+    		alert('안전결제가 수락되었습니다.');
     		window.location.href="${pageContext.request.contextPath}/mypage/salestatus";
     	}
     	else
