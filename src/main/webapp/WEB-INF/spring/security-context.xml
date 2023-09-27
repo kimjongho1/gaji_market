@@ -10,10 +10,12 @@
 		<!-- isAuthenticated() 사용자가 인증된 경우 참 -->
 		<!-- permitAll() 항상 참으로 평가함 -->
 		<security:intercept-url pattern="/chat" access="isAuthenticated()"/>
+		<security:intercept-url pattern="/login" access="isAnonymous()"/>
 		<!-- <security:intercept-url pattern="/goods/**" access="isAuthenticated()"/> -->
 		<!-- <security:intercept-url pattern="/sample/all" access="permitAll"/> -->
 		<security:form-login login-page="/login"
-		/>
+							login-processing-url=""
+										/>
 	</security:http>
 	<!-- AuthenticationManager 빈 생성 -->
 	<security:authentication-manager>

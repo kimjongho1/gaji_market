@@ -14,7 +14,9 @@
 	<header>
 		<div>
 			<a href="https://www.naver.com" target="_blank" class="logo_a_tag">
-				<img src="${pageContext.request.contextPath}/resources/img/gaji_logo.png" class="gaji_logo">
+				<img
+				src="${pageContext.request.contextPath}/resources/img/gaji_logo.png"
+				class="gaji_logo">
 			</a>
 		</div>
 	</header>
@@ -22,17 +24,6 @@
 		<div class="login_wrap">
 			<form id="frmNIDLogin" name="frmNIDLogin" target="_top"
 				AUTOCOMPLETE="off" action="#" method="POST">
-				<input type="hidden" id="localechange" name="localechange" value="">
-				<input type="hidden" name="dynamicKey" id="dynamicKey"
-					value="f-ZmGzfp39VjnxQ1q-FxEpwkwgpH92mORPHcj8CHsijmEDZ0YJvrKF5nZrQI_kLmWnOCz9hvWrVdwD6geSguZC7h8AIrNJdXaABJRzaOTPM">
-				<input type="hidden" name="encpw" id="encpw" value=""> <input
-					type="hidden" name="enctp" id="enctp" value="1"> <input
-					type="hidden" name="svctype" id="svctype" value="1"> <input
-					type="hidden" name="smart_LEVEL" id="smart_LEVEL" value="1">
-				<input type="hidden" name="bvsd" id="bvsd" value=""> <input
-					type="hidden" name="encnm" id="encnm" value=""> <input
-					type="hidden" name="locale" id="locale" value="ko_KR"> <input
-					type="hidden" name="url" id="url" value="#">
 				<ul class="panel_wrap">
 					<li class="panel_item" style="display: block;">
 						<div class="panel_inner" role="tabpanel" aria-controls="loinid">
@@ -44,11 +35,6 @@
 									</div>
 									<input type="text" id="id" name="id" placeholder="아이디"
 										title="아이디" class="input_text" maxlength="41" value="">
-									<span role="button" class="btn_delete" id="id_clear"
-										style="display: none;"> <span class="icon_delete">
-											<span class="blind">삭제</span>
-									</span>
-									</span>
 								</div>
 								<div class="input_row" id="pw_line">
 									<div class="icon_cell" id="pw_cell">
@@ -56,12 +42,7 @@
 										</span>
 									</div>
 									<input type="password" id="pw" name="pw" placeholder="비밀번호"
-										title="비밀번호" class="input_text" maxlength="16"> <span
-										role="button" class="btn_delete" id="pw_clear"
-										style="display: none;"> <span class="icon_delete">
-											<span class="blind">삭제</span>
-									</span>
-									</span>
+										title="비밀번호" class="input_text" maxlength="16"> 
 								</div>
 							</div>
 
@@ -69,7 +50,7 @@
 								<div class="keep_check">
 									<input type="checkbox" id="keep" name="nvlong"
 										class="input_keep" value="off"> <label for="keep"
-										class="keep_text">로그인 상태 유지</label>
+										class="keep_text">로그인  상태 유지</label>
 								</div>
 
 							</div>
