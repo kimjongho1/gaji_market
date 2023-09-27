@@ -14,8 +14,10 @@
 		<!-- <security:intercept-url pattern="/goods/**" access="isAuthenticated()"/> -->
 		<!-- <security:intercept-url pattern="/sample/all" access="permitAll"/> -->
 		<security:form-login login-page="/login"
-							login-processing-url=""
-										/>
+							username-parameter="userId"
+							password-parameter="password"
+							default-target-url="/"
+							authentication-failure-url="/login"/>
 	</security:http>
 	<!-- AuthenticationManager 빈 생성 -->
 	<security:authentication-manager>

@@ -22,7 +22,7 @@
 	</header>
 	<div class="content">
 		<div class="login_wrap">
-			<form id="frmNIDLogin" name="frmNIDLogin" target="_top"
+			<form id="login-form" name="frmNIDLogin" target="_top"
 				AUTOCOMPLETE="off" action="#" method="POST">
 				<ul class="panel_wrap">
 					<li class="panel_item" style="display: block;">
@@ -33,7 +33,7 @@
 										<span class="icon_id"> <span class="blind">아이디</span>
 										</span>
 									</div>
-									<input type="text" id="id" name="id" placeholder="아이디"
+									<input type="text" id="id" name="userId" placeholder="아이디"
 										title="아이디" class="input_text" maxlength="41" value="">
 								</div>
 								<div class="input_row" id="pw_line">
@@ -41,7 +41,7 @@
 										<span class="icon_pw"> <span class="blind">비밀번호</span>
 										</span>
 									</div>
-									<input type="password" id="pw" name="pw" placeholder="비밀번호"
+									<input type="password" id="pw" name="password" placeholder="비밀번호"
 										title="비밀번호" class="input_text" maxlength="16"> 
 								</div>
 							</div>
