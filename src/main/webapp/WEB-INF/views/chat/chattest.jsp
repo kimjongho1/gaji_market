@@ -136,6 +136,10 @@
 			</div>
 		</div>
 	</div>
+	
 	<script src="${pageContext.request.contextPath}/resources/js/chat.js"></script>
+	<script>
+		const username = "${pageContext.request.userPrincipal.name}"
+	</script>
 </body>
 </html>
