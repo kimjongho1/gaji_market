@@ -15,19 +15,20 @@ import kh.spring.gaji.report.model.service.ReportService;
 public class ReportController {
 	@Autowired
 	ReportService reportServiceImpl;
+	
 	@PostMapping("/report")
-	public String report(RedirectAttributes redirectAttr,int reportCategory,int refId,String content) {
+	public String report(RedirectAttributes redirectAttr,int reportCategory,int refId,String content,String url) {
 		Map<String,Object> map=new HashMap<String,Object>();
 		map.put("reportCategory", reportCategory);
 		map.put("refId", refId);
 		map.put("content", content);
 		map.put("reporterId", "qordmlgjs"); //이후 session을 통해 얻어온 아이디 작성
 		if(reportServiceImpl.reportGoods(map)==1) {
-			redirectAttr.addAttribute("msg","신고가 완료되었습니다");
+			redirectAttr.addFlashAttribute("msg","신고가 완료되었습니다"); 
 		}
 		else {
-			redirectAttr.addAttribute("msg","이미 신고된 상품글입니다.");
+			redirectAttr.addFlashAttribute("msg","이미 신고된 상품글입니다.");
 		}
-		return "redirect:/"; 	//왜안될까..
+		return "redirect:/"+url; 	// 왜안될까..
 	}
 }

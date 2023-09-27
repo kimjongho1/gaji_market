@@ -67,7 +67,7 @@
 <body>
 
 
-<c:if test="${not empty msg}">
+<c:if test="${not empty msg}">	<!-- 메세지가있다면 alert으로 알림 -->
 <script>
 	alert("${msg}");
 </script>
