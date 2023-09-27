@@ -25,7 +25,6 @@
 		<beans:property name="suffix" value=".jsp" />
 	</beans:bean>
 	
-	<context:component-scan base-package="kh.spring.gaji" />
 	
 	<aop:aspectj-autoproxy/>
 	
@@ -62,5 +61,6 @@
 		</websocket:handshake-interceptors>
 	</websocket:handlers>
 	
+	<context:component-scan base-package="kh.spring.gaji" />
 	
 </beans:beans>
