@@ -49,8 +49,7 @@ function setAciveChat(f) {
 
 
 $(function () {
-  const username = "${pageContext.request.userPrincipal.name}";
-  const websocket = new WebSocket("ws://localhost:8090/spring1/echo");
+  const websocket = new WebSocket("ws://localhost:8090/gaji/echo");
 
   websocket.onopen = function (e) {
     console.log('WebSocket 연결이 열렸습니다.');
@@ -89,6 +88,8 @@ $(function () {
       // 메시지가 비어있으면 전송하지 않음
       return;
     }
+    
+    const fullMessage = username + ":" + message;
 
     // 현재 활성화된 채팅 창을 찾음
     const activeChat = document.querySelector('.chat.active-chat');
@@ -109,7 +110,7 @@ $(function () {
     msgInput.value = '';
 
     // WebSocket을 통해 메시지 서버로 전송
-    websocket.send(username + ":" + message);
+    websocket.send(fullMessage);
   }
 
   // WebSocket을 통해 받은 메시지를 화면에 표시하는 함수
