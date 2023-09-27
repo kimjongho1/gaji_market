@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <!DOCTYPE html>
 <html>
@@ -146,7 +147,7 @@
         console.log(data);
         if(data.response.status=="cancelled"){
             alert("거래가 취소되었습니다");
-            window.location.href="${pageContext.request.contextPath}/mypage/orderstatus";
+            window.location.href="${pageContext.request.contextPath}/mypage/salesstatus";
         }
         else
             alert("거래 취소에 실패하였습니다.");
@@ -165,12 +166,12 @@
     var acceptCallback=(data)=>{
     	if(data=='1'){
     		alert('안전결제가 수락되었습니다.');
-    		window.location.href="${pageContext.request.contextPath}/mypage/deal/safe/seller?transcation="+${safePurchaseInfoDto.transactionId};
+    		window.location.href="${pageContext.request.contextPath}/mypage/deal/safe/seller?transactionId=${safePurchaseInfoDto.transactionId}";
     	}
     	else
     		alert("안전결제 수락에 실패했습니다.");
     }
-
+    
 </script>
 </body>
 </html>

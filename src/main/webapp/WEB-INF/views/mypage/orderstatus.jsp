@@ -78,11 +78,7 @@
                             <div class="card-body p-4">
                                 <div class="text-center">
                                     <!-- Product name-->
-                                    <h5 class="fw-bolder">${safePurchaseInfo.goodsTitle}</h5>
-                                    <!-- Product reviews-->
-                                    <div class="d-flex justify-content-center small text-warning mb-2">
-                                    ${safePurchaseInfo.tradingDate}
-                                    </div>
+                                    <h5 class="fw-bolder">${safePurchaseInfo.goodsTitle}<br>${safePurchaseInfo.tradingDate}</h5>
                                     <!-- Product price-->
                                     ${safePurchaseInfo.price}
                                 </div>

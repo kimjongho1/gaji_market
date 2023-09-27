@@ -1,6 +1,6 @@
 package kh.spring.gaji.report.model.service;
-import kh.spring.gaji.report.model.dto.ReportDto;
+import java.util.Map;
 
 public interface ReportService {
-    int reportGoods(ReportDto reportDto);
+    int reportGoods(Map<String,Object> map);
 }

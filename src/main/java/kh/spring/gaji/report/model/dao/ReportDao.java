@@ -24,7 +24,14 @@ public class ReportDao {
     @Autowired
      private SqlSession sqlSession;
 
-    public int reportGoods(ReportDto reportDto) {	// 상품신고 
-        return sqlSession.insert("reportGoods", reportDto);
+    public int reportGoods(Map<String,Object> map) {	// 상품신고 
+        int result=0;
+    	try {
+    	result= sqlSession.insert("reportGoods", map);
+        }
+        catch(Exception e) {
+        	e.printStackTrace();
+        }
+    	return result;
     }
 }

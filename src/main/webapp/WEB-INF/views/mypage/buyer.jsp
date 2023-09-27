@@ -2,6 +2,8 @@
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
 <!DOCTYPE html>
 <html>
 <head>
@@ -65,18 +67,62 @@
 </style>
 </head>
 <body>
+<c:if test="${not empty msg}">
+	<script>
+		alert("${msg}");
+	</script>
+</c:if>
+
 <h1>안전거래 상세조회</h1>
 <div class="container">
     <c:if test="${safePurchaseInfoDto.tradingStatus eq 1}">
-        <button onclick="cancel('${safePurchaseInfoDto.buyerId}','${safePurchaseInfoDto.transactionId}')">결제취소</button>
+        <button onclick="cancel('${safePurchaseInfoDto.buyerId}','${safePurchaseInfoDto.transactionId}')" class="btn btn-primary btn-lg">결제취소</button>
     </c:if>
 
-    <button onclick="report('${safePurchaseInfoDto.buyerId}','${safePurchaseInfoDto.transactionId}')">신고하기</button>
+    <%-- <button onclick="report('${safePurchaseInfoDto.buyerId}','${safePurchaseInfoDto.transactionId}')">신고하기</button> --%>
+
+<!-- 모달 트리거 버튼 -->
+<button type="button" id="showReportModalBtn" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#reportModal">
+  신고하기
+</button>
+
+<!-- 모달 -->
+<div class="modal fade" id="reportModal" tabindex="-1" role="dialog" aria-labelledby="reportModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="reportModalLabel">신고하기</h5>
+      </div>
+      <div class="modal-body">
+        <form action="${pageContext.request.contextPath}/report" method="post">
+          <div class="form-group">
+            <label for="reportCategory">신고 카테고리</label>
+            <select class="form-control" id="reportCategory" name="reportCategory">
+              <option value="1">광고</option>
+              <option value="2">욕설/비방</option>
+              <option value="3">음란물</option>
+              <option value="4">사기</option>
+              <option value="5">기타</option>
+            </select>
+          </div>
+          <input type="hidden" name="refId" value="${safePurchaseInfoDto.goodsId}">
+          <div class="form-group">
+            <label for="reportContent">신고 내용</label>
+            <textarea class="form-control" id="reportContent" name="content" rows="10"></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary">신고 제출</button>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
+      </div>
+    </div>
+  </div>
+</div>
 
     <c:if test="${safePurchaseInfoDto.tradingStatus eq 3}">
         <button onclick="closePay('${safePurchaseInfoDto.buyerId}','${safePurchaseInfoDto.transactionId}')">결제확정</button>
     </c:if>
-
     <a href="#"><p>상품명:${safePurchaseInfoDto.goodsTitle}</p></a>
     <p>판매자명:${safePurchaseInfoDto.sellerName}</p>
     <p>구매자명:${safePurchaseInfoDto.buyerName}</p>
@@ -127,7 +173,7 @@ var report=(userId,transactionId)=>{
 }
 var closePay=(userId1,transactionId1)=>{
 	$.ajax({
-		url:"${pageContext.request.contextPath}/payment/closePay",	//추후 테스트해봐야함.
+		url:"${pageContext.request.contextPath}/payment/closePay",
 		data:{userId:userId1, transactionId:transactionId1},
 		method: "post",
 		dataType:"text",
@@ -156,6 +202,24 @@ function closePayCallback(data){
 	else
 		alert("거래 확정에 실패하였습니다.");
 }
+</script>
+<script>
+$(document).ready(function () {
+    // Bootstrap 모달을 초기화합니다.
+    $('#reportModal').modal({
+        backdrop: 'static', // 모달 바깥을 클릭해도 모달이 닫히지 않도록 설정
+        show: false // 페이지 로드 시 모달을 표시하지 않도록 설정
+    });
+
+    // 신고하기 버튼을 클릭하면 모달을 표시합니다.
+    $('#showReportModalBtn').click(function () {
+        $('#reportModal').modal('show');
+    });
+    
+    $('.btn-secondary').click(function(){
+    	 $('#reportModal').modal('hide');
+    })
+});
 </script>
 </body>
 </html>
