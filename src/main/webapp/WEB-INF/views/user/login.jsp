@@ -5,12 +5,25 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Document</title>
+<title>Login-GaJi</title>
+
+<link rel="icon"
+	href="${pageContext.request.contextPath}/resources/img/favicon.ico">
+<link rel="shortcut icon"
+	href="${pageContext.request.contextPath}/resources/img/favicon.ico">
 <link rel="stylesheet" type="text/css"
 	href="${pageContext.request.contextPath}/resources/css/login.css">
 
+
 </head>
 <body>
+
+
+	<!-- Page Preloder -->
+	<div id="preloder">
+		<div class="loader"></div>
+	</div>
+
 	<header>
 		<div>
 			<a href="https://www.naver.com" target="_blank" class="logo_a_tag">
@@ -41,8 +54,9 @@
 										<span class="icon_pw"> <span class="blind">비밀번호</span>
 										</span>
 									</div>
-									<input type="password" id="pw" name="password" placeholder="비밀번호"
-										title="비밀번호" class="input_text" maxlength="16"> 
+									<input type="password" id="pw" name="password"
+										placeholder="비밀번호" title="비밀번호" class="input_text"
+										maxlength="16">
 								</div>
 							</div>
 
@@ -101,5 +115,10 @@
 		<!--배너-->
 		<div id="gladbanner" class="banner_wrap">&nbsp;</div>
 	</div>
+	<script
+		src="${pageContext.request.contextPath}/resources/js/jquery-3.3.1.min.js"></script>
+
+	<script src="${pageContext.request.contextPath}/resources/js/main.js"></script>
+
 </body>
 </html>
