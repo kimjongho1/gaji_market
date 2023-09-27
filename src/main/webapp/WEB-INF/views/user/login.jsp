@@ -36,7 +36,7 @@
 	<div class="content">
 		<div class="login_wrap">
 			<form id="login-form" name="frmNIDLogin" target="_top"
-				AUTOCOMPLETE="off" action="#" method="POST">
+				AUTOCOMPLETE="off" action="login-check" method="POST">
 				<ul class="panel_wrap">
 					<li class="panel_item" style="display: block;">
 						<div class="panel_inner" role="tabpanel" aria-controls="loinid">
