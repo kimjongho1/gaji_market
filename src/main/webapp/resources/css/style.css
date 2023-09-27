@@ -24,7 +24,13 @@
 8.  Latest Product Section
 9.  Contact
 10.  Footer Style
+
 -------------------------------------------------------------------*/
+/*
+
+11.add
+  */
+
 
 /*----------------------------------------*/
 /* Template default CSS
@@ -1397,6 +1403,9 @@ ol {
 .product__discount__slider .col-lg-4 {
 	max-width: 100%;
 }
+
+
+
 
 .product__discount__slider.owl-carousel .owl-dots {
 	text-align: center;
@@ -2904,8 +2913,9 @@ ol {
 
 @media only screen and (min-width: 1200px) {
 	.container {
-		max-width: 1170px;
+		max-width: 1700px;
 	}
+
 }
 
 /* Medium Device = 1200px */
@@ -3465,4 +3475,88 @@ ol {
 	.blog__details__hero__text h2 {
 		font-size: 24px;
 	}
+}	
+	
+	
+	 /*              */
+	/* add carousel */
+   /* 			   */
+	
+.ad__item {
+	height: 500px;
+	width: 500px;
+	position: relative;
+	flex-shrink: 0; /* 슬라이드가 컨테이너를 넘어가지 않게 합니다. */
+
+}
+
+.ad__item h5 {
+	position: absolute;
+	left: 0;
+	width: 100%;
+	padding: 0 20px;
+	bottom: 20px;
+	text-align: center;
+}
+
+.ad__item h5 a {
+	font-size: 18px;
+	color: #1c1c1c;
+	font-weight: 700;
+	text-transform: uppercase;
+	letter-spacing: 2px;
+	padding: 12px 0 10px;
+	background: #ffffff;
+	display: block;
+}
+
+.ad__banner .col-lg-3 {
+	max-width: 100%;
+	overflow: hidden; /* 오버플로우를 숨겨서 넘어가지 않게 합니다. */
+}
+
+.ad__banner.owl-carousel .owl-nav button {
+	font-size: 18px;
+	color: #1c1c1c;
+	height: 70px;
+	width: 30px;
+	line-height: 70px;
+	text-align: center;
+	border: 1px solid #ebebeb;
+	position: absolute;
+	left: -35px;
+	top: 50%;
+	-webkit-transform: translateY(-35px);
+	background: #ffffff;
+}
+
+.ad__banner.owl-carousel .owl-nav button.owl-next {
+	left: auto;
+	right: -35px;
+}
+
+/* 각 도트의 스타일 */
+.owl-dot {
+  display: inline-block;
+  margin: 0 5px; /* 도트 간격 설정 */
+  width: 10px; /* 도트의 너비 설정 */
+  height: 10px; /* 도트의 높이 설정 */
+  background-color: #008040; /* 도트의 배경색 설정 */
+  border-radius: 50%; /* 도트를 원 모양으로 만듭니다. */
+  cursor: pointer; /* 도트를 클릭 가능하게 만듭니다. */
+}
+
+/* 활성화된 도트의 스타일 */
+.owl-dot.active {
+  background-color: #800080; /* 활성화된 도트의 배경색 설정 */
+}
+
+.owl-dots {
+  text-align: center;
+}
+
+
+section {
+	padding: 30px;	
+	
 }

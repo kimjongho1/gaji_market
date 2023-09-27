@@ -42,45 +42,44 @@
 
    <!-- header start -->      
 <jsp:include page="header.jsp"></jsp:include>
-   <!-- header end -->      
-
-                    <div class="hero__item set-bg" data-setbg="${pageContext.request.contextPath}/resources/img/hero/banner.jpg">
+   <!-- header end -->   
+   			<section class="banner">  
+                     <div class="hero__item set-bg" data-setbg="${pageContext.request.contextPath}/resources/img/hero/banner.jpg">
                         <div class="hero__text">
                             <span>FRESH</span>
                             <h2>GaJi_Market <br />가지마켓</h2>
                             <p>설명</p>
                             <a href="#" class="primary-btn">상품 보기</a>
                         </div>
-                    </div>
-     
-
+                    </div> 
+			</section> 
 	<!-- ad Section Begin -->
 	<section class="ad">
         <div class="container">
             <div class="row">
                 <div class="ad__banner owl-carousel">
                     <div class="col-lg-3">
-                        <div class="categories__item set-bg" data-setbg="${pageContext.request.contextPath}/resources/img/categories/cat-1.jpg">
+                        <div class="ad__item set-bg" data-setbg="${pageContext.request.contextPath}/resources/img/categories/cat-1.jpg">
                             <h5><a href="#">Fresh Fruit</a></h5>
                         </div>
                     </div>
                     <div class="col-lg-3">
-                        <div class="categories__item set-bg" data-setbg="${pageContext.request.contextPath}/resources/img/categories/cat-2.jpg">
+                        <div class="ad__item set-bg" data-setbg="${pageContext.request.contextPath}/resources/img/categories/cat-2.jpg">
                             <h5><a href="#">Dried Fruit</a></h5>
                         </div>
                     </div>
                     <div class="col-lg-3">
-                        <div class="categories__item set-bg" data-setbg="${pageContext.request.contextPath}/resources/img/categories/cat-3.jpg">
+                        <div class="ad__item set-bg" data-setbg="${pageContext.request.contextPath}/resources/img/categories/cat-3.jpg">
                             <h5><a href="#">Vegetables</a></h5>
                         </div>
                     </div>
                     <div class="col-lg-3">
-                        <div class="categories__item set-bg" data-setbg="${pageContext.request.contextPath}/resources/img/categories/cat-4.jpg">
+                        <div class="ad__item set-bg" data-setbg="${pageContext.request.contextPath}/resources/img/categories/cat-4.jpg">
                             <h5><a href="#">drink fruits</a></h5>
                         </div>
                     </div>
                     <div class="col-lg-3">
-                        <div class="categories__item set-bg" data-setbg="${pageContext.request.contextPath}/resources/img/categories/cat-5.jpg">
+                        <div class="ad__item set-bg" data-setbg="${pageContext.request.contextPath}/resources/img/categories/cat-5.jpg">
                             <h5><a href="#">drink fruits</a></h5>
                         </div>
                     </div>
@@ -89,13 +88,32 @@
         </div>
     </section>
 	
+	<script>
+	$('.ad__banner').owlCarousel({
+	    items : 3, //화면에 표시 할 슬라이드 수
+	    animateOut : 'fadeOut', // 사라질때의 애니메이션
+	    margin : 1, // 슬라이드 간격
+	    dots : true, // Pagination 표시 여부
+	    autoplay : true, // 자동 슬라이드 여부
+	    autoplayTimeout : 3000, // 자동 슬라이드 시간 (예제는 3초)
+	    loop : true, // 무한 반복 여부
+	    autoWidth : true,
+	    center : true,
+	    freeDrag : true,
+	    stagePadding : 3,
+	    nav : true
+	    
+	    
+	  
+	})
+	</script>
 
 	<!-- ad Section end -->
 
 
 
 
-    <!-- Categories Section Begin -->
+    <!-- 최신Categories Section Begin -->
     <section class="categories">
         <div class="container">
             <div class="row">
@@ -130,6 +148,73 @@
         </div>
     </section>
     <!-- Categories Section End -->
+    <!-- 인기Categories Section Begin -->
+    <section class="categories">
+        <div class="container">
+            <div class="row">
+                <div class="categories__slider owl-carousel">
+                    <div class="col-lg-3">
+                        <div class="categories__item set-bg" data-setbg="${pageContext.request.contextPath}/resources/img/categories/cat-1.jpg">
+                            <h5><a href="#">Fresh Fruit</a></h5>
+                        </div>
+                    </div>
+                    <div class="col-lg-3">
+                        <div class="categories__item set-bg" data-setbg="${pageContext.request.contextPath}/resources/img/categories/cat-2.jpg">
+                            <h5><a href="#">Dried Fruit</a></h5>
+                        </div>
+                    </div>
+                    <div class="col-lg-3">
+                        <div class="categories__item set-bg" data-setbg="${pageContext.request.contextPath}/resources/img/categories/cat-3.jpg">
+                            <h5><a href="#">Vegetables</a></h5>
+                        </div>
+                    </div>
+                    <div class="col-lg-3">
+                        <div class="categories__item set-bg" data-setbg="${pageContext.request.contextPath}/resources/img/categories/cat-4.jpg">
+                            <h5><a href="#">drink fruits</a></h5>
+                        </div>
+                    </div>
+                    <div class="col-lg-3">
+                        <div class="categories__item set-bg" data-setbg="${pageContext.request.contextPath}/resources/img/categories/cat-5.jpg">
+                            <h5><a href="#">drink fruits</a></h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Categories Section End -->
+
+
+
+
+
+
+
+
+
+
+ 
+                     <div class="hero__item set-bg" data-setbg="${pageContext.request.contextPath}/resources/img/hero/banner.jpg"></div>
+       
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     <!-- Featured Section Begin -->
     <section class="featured spad">
@@ -560,6 +645,31 @@
     </section>
     <!-- Blog Section End -->
 
+
+
+
+
+
+
+
+
+
+<div class="hero__item set-bg" data-setbg="${pageContext.request.contextPath}/resources/img/hero/banner.jpg"></div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     <!-- Footer Section Begin -->
     <jsp:include page="footer.jsp"></jsp:include>
     <!-- Footer Section End -->
@@ -575,33 +685,7 @@
     <script src="${pageContext.request.contextPath}/resources/js/main.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
 
-    <!-- 슬라이더 설정 -->
-<!--     <script>
-
-const swiper = new Swiper('.swiper', {
-  // Optional parameters
-  direction: 'vertical',
-  loop: true,
-
-  // If we need pagination
-  pagination: {
-    el: '.swiper-pagination',
-  },
-
-  // Navigation arrows
-  navigation: {
-    nextEl: '.swiper-button-next',
-    prevEl: '.swiper-button-prev',
-  },
-
-  // And if we need scrollbar
-  scrollbar: {
-    el: '.swiper-scrollbar',
-  },
-});
-
-
-    </script> -->
+    
 
 </body>
 
