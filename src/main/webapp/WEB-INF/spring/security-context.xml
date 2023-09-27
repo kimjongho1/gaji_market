@@ -6,20 +6,37 @@
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 	<!-- spring-security -->
 	<!-- 컨테이너의 HTTP security 요소 -->
-	<security:http use-expressions="true">
+	<security:http>
+		<security:csrf disabled="true" />
 		<!-- isAuthenticated() 사용자가 인증된 경우 참 -->
 		<!-- permitAll() 항상 참으로 평가함 -->
 		<security:intercept-url pattern="/chat" access="isAuthenticated()"/>
 		<security:intercept-url pattern="/login" access="isAnonymous()"/>
 		<!-- <security:intercept-url pattern="/goods/**" access="isAuthenticated()"/> -->
 		<!-- <security:intercept-url pattern="/sample/all" access="permitAll"/> -->
+		
 		<security:form-login login-page="/login"
 							username-parameter="userId"
 							password-parameter="password"
+							login-processing-url="/login-check"
 							default-target-url="/"
-							authentication-failure-url="/login"/>
+							authentication-failure-url="/login/error"
+		/>
+		<security:remember-me data-source-ref="dataSource" token-validity-seconds="604800"/>
+		<security:session-management invalid-session-url="/login">
+			<security:concurrency-control max-sessions="1"
+										  expired-url="/login"
+										  error-if-maximum-exceeded="false"/>
+		</security:session-management>
 	</security:http>
 	<!-- AuthenticationManager 빈 생성 -->
 	<security:authentication-manager>
+		<security:authentication-provider>
+			<security:password-encoder hash="bcrypt"/>
+			<security:jdbc-user-service data-source-ref="dataSource"
+				users-by-username-query="SELECT USER_ID, PASSWORD, ENABLED FROM USERS WHERE USER_ID = ?"
+				authorities-by-username-query="SELECT USER_ID, ATHORITY FROM USERS WHERE USER_ID = ?"
+			/>
+		</security:authentication-provider>
 	</security:authentication-manager>
 </beans>
