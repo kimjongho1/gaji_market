@@ -67,11 +67,8 @@
 </style>
 </head>
 <body>
-<c:if test="${not empty msg}">
-	<script>
-		alert("${msg}");
-	</script>
-</c:if>
+
+
 
 <h1>안전거래 상세조회</h1>
 <div class="container">
@@ -105,6 +102,7 @@
               <option value="5">기타</option>
             </select>
           </div>
+          <input type="hidden" value="mypage/deal/safe/buyer?transactionId=${safePurchaseInfoDto.transactionId}" name="url">
           <input type="hidden" name="refId" value="${safePurchaseInfoDto.goodsId}">
           <div class="form-group">
             <label for="reportContent">신고 내용</label>
@@ -159,6 +157,11 @@
 
 </div>
 <script>
+
+<c:if test="${not empty msg}">
+	alert("${msg}");
+</c:if>
+
 var cancel=(userId1,transactionId1)=>{
 	$.ajax({
 		url:"${pageContext.request.contextPath}/payment/cancel",
