@@ -78,14 +78,15 @@
                             <div class="card-body p-4">
                                 <div class="text-center">
                                     <!-- Product name-->
-                                    <h5 class="fw-bolder">${safePurchaseInfo.goodsTitle}<br>${safePurchaseInfo.tradingDate}</h5>
+                                    <h5 class="fw-bolder">${safePurchaseInfo.goodsTitle}</h5>
                                     <!-- Product price-->
-                                    ${safePurchaseInfo.price}
+                                    거래일자:${safePurchaseInfo.tradingDate}<br>
+                                    가격:${safePurchaseInfo.price}
                                 </div>
                             </div>
                             <!-- Product actions-->
                             <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                                <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="${pageContext.request.contextPath}/mypage/deal/safe/buyer?transactionId=${safePurchaseInfo.transactionId}">상품정보</a></div> <!-- 추후${safePurchaseInfo.goodsTitle} 를 담아서 상세정보이동 -->
+                                <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="${pageContext.request.contextPath}/mypage/deal/safe/buyer?transactionId=${safePurchaseInfo.transactionId}">구매정보</a></div> <!-- 추후${safePurchaseInfo.goodsTitle} 를 담아서 상세정보이동 -->
                             </div>
                         </div>
                     </div>
@@ -168,12 +169,12 @@
 				html+="거래취소";
 			
 			html+="</div><img class='card-img-top' src='https://dummyimage.com/450x300/dee2e6/6c757d.jpg' alt=''...'' /><div class='card-body p-4'><div class='text-center'><h5 class='fw-bolder'>"
-			+item.goodsTitle+"</h5>";
+				+item.goodsTitle+"</h5>";
 			
-			html+="<div class='d-flex justify-content-center small text-warning mb-2'>"
-            +item.tradingDate+
-            "</div>"+item.price+"</div></div><div class='card-footer p-4 pt-0 border-top-0 bg-transparent'>"
-            +"<div class='text-center'><a class='btn btn-outline-dark mt-auto' href="+"${pageContext.request.contextPath}/mypage/deal/safe/buyer?transactionId="+item.transactionId+">상품정보</a></div></div></div></div>";
+			html+="거래일자:"
+		    +item.tradingDate+
+		    "<br>가격:"+item.price+"</div></div><div class='card-footer p-4 pt-0 border-top-0 bg-transparent'>"
+            +"<div class='text-center'><a class='btn btn-outline-dark mt-auto' href="+"${pageContext.request.contextPath}/mypage/deal/safe/buyer?transactionId="+item.goodsId+">상품정보</a></div></div></div></div>";
             table+=html;	
 		}
 		html+="</div>";
@@ -205,10 +206,11 @@
 			html+="</div><img class='card-img-top' src='https://dummyimage.com/450x300/dee2e6/6c757d.jpg' alt=''...'' /><div class='card-body p-4'><div class='text-center'><h5 class='fw-bolder'>"
 			+item.goodsTitle+"</h5>";
 			
-			html+="<div class='d-flex justify-content-center small text-warning mb-2'>"
-            +item.tradingDate+
-            "</div>"+item.price+"</div></div><div class='card-footer p-4 pt-0 border-top-0 bg-transparent'>"
-            +"<div class='text-center'><a class='btn btn-outline-dark mt-auto' href="+"${pageContext.request.contextPath}/mypage/deal/safe/buyer?transactionId="+item.transactionId+">상품정보</a></div></div></div></div>";
+			
+			html+="거래일자:"
+			+item.tradingDate+
+			"<br>가격:"+item.price+"</div></div><div class='card-footer p-4 pt-0 border-top-0 bg-transparent'>"
+            +"<div class='text-center'><a class='btn btn-outline-dark mt-auto' href="+"${pageContext.request.contextPath}/mypage/deal/safe/buyer?transactionId="+item.transactionId+">구매정보</a></div></div></div></div>";
             table+=html;
 		}
 		html+="</div>";

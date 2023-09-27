@@ -73,7 +73,7 @@
 <h1>안전거래 상세조회</h1>
 <div class="container">
     <c:if test="${safePurchaseInfoDto.tradingStatus eq 1}">
-        <button onclick="cancel('${safePurchaseInfoDto.buyerId}','${safePurchaseInfoDto.transactionId}')" class="btn btn-primary btn-lg">결제취소</button>
+        <button onclick="cancel('${safePurchaseInfoDto.buyerId}','${safePurchaseInfoDto.transactionId}',${safePurchaseInfoDto.goodsId}')" class="btn btn-primary btn-lg">결제취소</button>
     </c:if>
 
     <%-- <button onclick="report('${safePurchaseInfoDto.buyerId}','${safePurchaseInfoDto.transactionId}')">신고하기</button> --%>
@@ -119,7 +119,7 @@
 </div>
 
     <c:if test="${safePurchaseInfoDto.tradingStatus eq 3}">
-        <button onclick="closePay('${safePurchaseInfoDto.buyerId}','${safePurchaseInfoDto.transactionId}')">결제확정</button>
+        <button onclick="closePay('${safePurchaseInfoDto.buyerId}','${safePurchaseInfoDto.transactionId}','${safePurchaseInfoDto.goodsId}')">결제확정</button>
     </c:if>
     <a href="#"><p>상품명:${safePurchaseInfoDto.goodsTitle}</p></a>
     <p>판매자명:${safePurchaseInfoDto.sellerName}</p>
@@ -165,19 +165,16 @@
 var cancel=(userId1,transactionId1)=>{
 	$.ajax({
 		url:"${pageContext.request.contextPath}/payment/cancel",
-		data:{userId:userId1, transactionId:transactionId1},
+		data:{userId:userId1, transactionId:transactionId1,goodsId:goodsId},
 		method: "post",
 		dataType:"json",
 		success:cancelCallBack
 	});
 }
-var report=(userId,transactionId)=>{
-	
-}
-var closePay=(userId1,transactionId1)=>{
+var closePay=(userId1,transactionId1,goodsId)=>{
 	$.ajax({
-		url:"${pageContext.request.contextPath}/payment/closePay",
-		data:{userId:userId1, transactionId:transactionId1},
+		url:"${pageContext.request.contextPath}/payment/closepay",
+		data:{userId:userId1, transactionId:transactionId1, goodsId:goodsId},
 		method: "post",
 		dataType:"text",
 		success:closePayCallback

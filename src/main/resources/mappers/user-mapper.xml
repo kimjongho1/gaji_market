@@ -31,25 +31,26 @@
 		order by trading_date desc
 	</select>
 	<select id="getOnSaleList" parameterType="string" resultType="MyGoodsListDto">	<!--10P 판매중 + 예약중 불러오기 -->
-		select goods_id,title,price,status 
+		select to_char(refreshed_at, 'YYYY-MM-DD HH24:MI:SS') refreshed_at,goods_id,title,price,status 
 		from goods 
-		where user_id=#{userId} and status IN(1,2) and active_status="Y" 
+		where user_id=#{userId} and status IN(1,2) and active_status='Y' 
 		order by refreshed_at DESC
 	</select>
 	
 	<select id="getSoldOutList" parameterType="string" resultType="MyGoodsListDto">	<!--10P 거래완료 판매내역 가지고오기 -->
-		select goods_id,title,price,status 
+		select to_char(refreshed_at, 'YYYY-MM-DD HH24:MI:SS') refreshed_at,goods_id,title,price,status 
 		from goods 
-		where user_id=#{user_id} and status IN(3) and active_status="Y" 
+		where user_id=#{userId} and status IN(3) and active_status='Y'
 		order by refreshed_at DESC
 	</select>
 	
 	<select id="getHideList" parameterType="string" resultType="MyGoodsListDto">	<!--10P 숨김중인 판매내역 가져오기 -->
-		select goods_id,title,price,status 
+		select to_char(refreshed_at, 'YYYY-MM-DD HH24:MI:SS') refreshed_at,goods_id,title,price,status 
 		from goods 
-		where user_id=#{userId} and status IN(4) and active_status="Y" 
+		where user_id=#{userId} and status IN(4) and active_status='Y' 
 		order by refreshed_at DESC
 	</select>
+	
 	<insert id="insertWishList">	<!-- 23P 찜하기 -->	
 		insert into wishlist values(#{goodsId},#{userId},"")
 	</insert>

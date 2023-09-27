@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import kh.spring.gaji.goods.model.dto.MyGoodsListDto;
 import kh.spring.gaji.pay.model.dto.InFaceTradingDto;
 import kh.spring.gaji.pay.model.dto.SafePurchaseInfoDto;
 import kh.spring.gaji.user.model.dto.UserSafeTradingDto;
@@ -38,25 +39,45 @@ public class MyPageController {
 		return "mypage/orderstatus";
 	}
 	
-	@PostMapping("/getInFaceView")	// 직거래내역을 가져오는 ajax url
+	@GetMapping("/salesstatus")
+	public String salesStatus(Model model) {	// 나의 판매내역
+		List<MyGoodsListDto> myGoodsList = userService.getOnSaleList("cjsdudwns"); //추후 userId들어가야함
+		model.addAttribute("myGoodsList",myGoodsList);
+		return "mypage/salesstatus";
+	}
+	
+	@PostMapping("/getInFaceView")	// 직거래 구매내역을 가져오는 ajax url
 	@ResponseBody
 	public List<InFaceTradingDto> getInfaceView(){
 		System.out.println("MyPageController 직거래내역 url");
 		return userService.getInfacePurchaseList("qordmlgjs"); //이후 userId로 대체.
 	}
 	
-	@PostMapping("/getSafeTradingView")	// 안전거래내역을 가져오는 ajax url
+	@PostMapping("/getonsale")	// 판매내역(판매중) ajax 응답url
+	@ResponseBody
+	public List<MyGoodsListDto> getOnSale(Model model){
+		return userService.getOnSaleList("cjsdudwns");
+	}
+	
+	@PostMapping("/getclosed")
+	@ResponseBody
+	public List<MyGoodsListDto> getClosed(Model model){
+		return userService.getSoldOutList("cjsdudwns");
+	}
+	
+	@PostMapping("/gethide")
+	@ResponseBody
+	public List<MyGoodsListDto> getHide(Model model){
+		return userService.getHideList("cjsdudwns");
+	}
+	
+	@PostMapping("/getSafeTradingView")	// 안전거래 구매내역을 가져오는 ajax url
 	@ResponseBody
 	public List<UserSafeTradingDto> getSafeTradingView(){
 		System.out.println("MyPageController 안전거래내역 url");
 		return userService.getSafePurchaseList("qordmlgjs"); //이후 userId로 대체.
 	}
-	
-	@GetMapping("/salesstatus")
-	public String salesStatus() {	// 나의 판매내역
-		return "mypage/salesstatus";
-	}
-	
+
 	@GetMapping("/myinfo")
 	public String myInfo() {	// 회원정보
 			return "mypage/myinfo";

@@ -4,6 +4,11 @@
 <!DOCTYPE html>
 <html>
 <head>
+<script>
+<c:if test="${not empty msg}">
+	alert("${msg}");
+</c:if>
+</script>
 <meta charset="UTF-8">
 <title>메인페이지</title>
 </head>

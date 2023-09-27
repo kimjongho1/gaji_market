@@ -29,6 +29,6 @@ public class ReportController {
 		else {
 			redirectAttr.addFlashAttribute("msg","이미 신고된 상품글입니다.");
 		}
-		return "redirect:/"+url; 	// 왜안될까..
+		return "redirect:/"+url; 
 	}
 }
