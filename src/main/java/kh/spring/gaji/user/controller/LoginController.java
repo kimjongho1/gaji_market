@@ -17,12 +17,12 @@ public class LoginController {
 		return mv;
 	}
 	
-	@PostMapping("/logout")		//  로그아웃 -> 메인페이지로 이동
-	public ModelAndView logout(ModelAndView mv, HttpServletRequest request) {
-		mv.setViewName("redirect:/main");
-		request.getSession().invalidate();
-		return mv;
-	}
+//	@PostMapping("/logout")		//  로그아웃 -> 메인페이지로 이동
+//	public ModelAndView logout(ModelAndView mv, HttpServletRequest request) {
+//		mv.setViewName("redirect:/main");
+//		request.getSession().invalidate();
+//		return mv;
+//	}
 	
 	@GetMapping("/login/error")
 	public ModelAndView viewLoginError(ModelAndView mv) {
