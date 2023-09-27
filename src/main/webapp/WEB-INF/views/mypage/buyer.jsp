@@ -73,7 +73,7 @@
 <h1>안전거래 상세조회</h1>
 <div class="container">
     <c:if test="${safePurchaseInfoDto.tradingStatus eq 1}">
-        <button onclick="cancel('${safePurchaseInfoDto.buyerId}','${safePurchaseInfoDto.transactionId}',${safePurchaseInfoDto.goodsId}')" class="btn btn-primary btn-lg">결제취소</button>
+        <button onclick="cancel('${safePurchaseInfoDto.buyerId}','${safePurchaseInfoDto.transactionId}','${safePurchaseInfoDto.goodsId}')" class="btn btn-primary btn-lg">결제취소</button>
     </c:if>
 
     <%-- <button onclick="report('${safePurchaseInfoDto.buyerId}','${safePurchaseInfoDto.transactionId}')">신고하기</button> --%>
@@ -162,7 +162,7 @@
 	alert("${msg}");
 </c:if>
 
-var cancel=(userId1,transactionId1)=>{
+var cancel=(userId1,transactionId1,goodsId)=>{
 	$.ajax({
 		url:"${pageContext.request.contextPath}/payment/cancel",
 		data:{userId:userId1, transactionId:transactionId1,goodsId:goodsId},

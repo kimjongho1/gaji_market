@@ -56,7 +56,7 @@ public class PayController {
 		public String pay(Model model,RedirectAttributes attribute/* ,int goodsId */,HttpServletRequest request) {
 			/* String userId=(String)request.getSession().getAttribute("userId"); */
 			if(payServiceImpl.checkGoodsStatus(1)!=1) {	//추후 1은 goodsId로 대체
-				attribute.addFlashAttribute("Msg", "예약중인 상품입니다.");
+				attribute.addFlashAttribute("msg", "판매중인 상품이 아닙니다.");
 				return "redirect:/main";
 			}
 			GoodsPayInfoDto goodsInfo=payServiceImpl.getGoodsInfo(1);	//추후 1은 goodsId로 대체
@@ -69,7 +69,7 @@ public class PayController {
 			return "pay/pay";
 		}
 		
-		@PostMapping("payment/closePay")
+		@PostMapping("payment/closepay")
 		@ResponseBody
 		public int closePay(String transactionId,String userId,HttpServletRequest request) {
 			int result=0;
@@ -94,13 +94,18 @@ public class PayController {
 		
 	@PostMapping("payment/cancel")	//안전거래 후 취소처리를 위한 버튼
 	@ResponseBody
-	public IamportResponse<Payment> cancel(String userId,String transactionId,HttpServletRequest request) {
+	public IamportResponse<Payment> cancel(String userId,int goodsId,String transactionId,HttpServletRequest request) {
 		IamportResponse<Payment> result=null;
 		/* if(userId==(String)request.getSession().getAttribute(userId)) { */	//이후 세션생기면 활성화할것
 		try {
 			result = api.cancelPaymentByImpUid(cancelData=new CancelData(transactionId, true)); //가맹점 고유식별번호로 거래취소후 , 거래정보담은 객체반환
-			if(result.getResponse().getStatus().equals("cancelled"))
+			if(result.getResponse().getStatus().equals("cancelled")) {
 				payServiceImpl.cancelSafeTrading(transactionId);//데이터베이스에서 안전거래 취소로 변경. 상품 판매중으로 변경
+				Map<String,Object> map=new HashMap<String,Object>();
+				map.put("status",1);
+				map.put("goodsId",goodsId);
+				payServiceImpl.updateStatus(map);
+			}
 			return result;	// 거래정보담은 객체반환 이후 페이지에서 이에따른 처리함.
 		} catch (IamportResponseException | IOException e) {
 			e.printStackTrace();
@@ -134,7 +139,7 @@ public class PayController {
 				if(addResult==1) { // 가지 데이터베이스에 값이 정상적으로 들어갔다면
 					Map<String, Object> map=new HashMap<String, Object>();
 					map.put("status", 2);
-					map.put("goodsId",Integer.valueOf(2)); // 추후 goodsId로 변경해야함.
+					map.put("goodsId",1); // 추후 goodsId로 변경해야함.
 					if(payServiceImpl.updateStatus(map)==1);
 						return result;	// 거래정보 반환.
 				}

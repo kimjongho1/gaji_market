@@ -68,8 +68,6 @@
 								<c:choose>
 									<c:when test="${myGoodsDto.status eq 1}">판매중</c:when>
 									<c:when test="${myGoodsDto.status eq 2}">예약중</c:when>
-									<c:when test="${myGoodsDto.status eq 3}">판매완료</c:when>
-									<c:when test="${myGoodsDto.status eq 4}">숨김</c:when>
 								</c:choose>
 							</div>
                             <!-- Product image-->
