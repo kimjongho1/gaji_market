@@ -123,9 +123,6 @@
 
 		var roadAddress = addressParts[0];
 		var detailAddress = addressParts[1];
-
-		console.log(roadAddress);
-		console.log(detailAddress);
 		
 		IMP.request_pay( //IMP의 pay함수 실행 
 		{	
@@ -135,7 +132,6 @@
 			  buyer_name: "${payUserInfo.name}",	// 구매자
 		},
 		 rsp => {					//rsp를 인자로 받는 무명함수 실행
-			 alert(rsp.imp_uid+ ":" + rsp.merchant_uid);	
 			 console.log(rsp);
 			 $.ajax({
 			  url: "<%=request.getContextPath()%>/payment/callback" ,	
@@ -161,8 +157,6 @@
 		var roadAddress = addressParts[0];
 		var detailAddress = addressParts[1];
 
-		console.log(roadAddress);
-		console.log(detailAddress);
 		IMP.request_pay( //IMP의 pay함수 실행 
 		{		
 			  pg: "tosspay", // 카카오페이 결제창 호출
@@ -171,7 +165,6 @@
 			  buyer_name: "${payUserInfo.name}",	// 구매자
 		},
 		 rsp => {					//rsp를 인자로 받는 무명함수 실행
-			 alert(rsp.imp_uid+ ":" + rsp.merchant_uid);	
 			 $.ajax({
 			  url: "<%=request.getContextPath()%>/payment/callback" ,	
 			  method: "post",
@@ -206,7 +199,6 @@
 		  buyer_name: "${payUserInfo.name}",
 	},
 	 rsp => {	//rsp를 인자로 받는 무명함수 실행
-		 alert(rsp.imp_uid+ ":" + rsp.merchant_uid);
 		 $.ajax({
 		  url: "<%=request.getContextPath()%>/payment/callback",
 		  method: "post",

@@ -94,36 +94,6 @@
                 </div>
             </div>
         </section>
-        
-        <%-- <div class="pagingForSafe">	페이징 이전,번호,다음에 대한 코드 <!-- 안전거래일때 -->
-                안전<c:if test="${startPageNum!=1}">  <!-- 시작번호가 1이아니면 -->
-                	<button class="paging" onclick="changePage(${startPageNum-1},1)">이전</button>
-                </c:if>
-                
-        		<c:forEach begin="${startPageNum}" end="${endPageNum}" var="i"> 	<!-- 시작번호부터 끝번호까지 출력 -->
-        		<button class="changePage" onclick="changePage(${i},1)">${i}</button>
-                </c:forEach>
-                
-               	<c:if test="${endPageNum<totalPageNum}">												<!-- 끝번호가 총번호보다 작다면 -->
-               	<button class=changePage onclick="changePage(${endPageNum+1},1)">다음</button>
-               	</c:if>
-        </div>
-        
-        <div class="pagingForInface">	페이징 이전,번호,다음에 대한 코드 <!-- 직거래일때 -->
-                직거래<c:if test="${startPageNum!=1}">  <!-- 시작번호가 1이아니면 -->
-                	<button class="paging" onclick="changePage(${startPageNum-1},2)">이전</button>
-                </c:if>
-                
-        		<c:forEach begin="${startPageNum}" end="${endPageNum}" var="i"> 	<!-- 시작번호부터 끝번호까지 출력 -->
-        		<button class="changePage" onclick="changePage(${i},2)">${i}</button>
-                </c:forEach>
-                
-               	<c:if test="${endPageNum<totalPageNum}">												<!-- 끝번호가 총번호보다 작다면 -->
-               	<button class=changePage onclick="changePage(${endPageNum+1},2)">다음</button>
-               	</c:if>
-        </div> --%>
-
-        
         <!-- Bootstrap core JS-->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
         <!-- <script>$(".pagingForInface").hide();</script> 페이지 진입시에는 안전거래 페이지번호만 보이게하는코드 -->

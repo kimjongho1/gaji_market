@@ -77,10 +77,10 @@
 <h1>안전거래 상세조회</h1>
 <div class="container">
     <c:if test="${safePurchaseInfoDto.tradingStatus ne 5}">
-        <button onclick="cancel('${safePurchaseInfoDto.buyerId}','${safePurchaseInfoDto.transactionId}')">결제취소</button>
+        <button onclick="cancel('${safePurchaseInfoDto.buyerId}','${safePurchaseInfoDto.transactionId}','${safePurchaseInfoDto.goodsId }')">결제취소</button>
     </c:if>
     <c:if test="${safePurchaseInfoDto.tradingStatus eq 1}">
-    <button onclick="accept('${safePurchaseInfoDto.sellerId}','${safePurchaseInfoDto.transactionId}')">안전결제 수락</button>
+    <button onclick="accept('${safePurchaseInfoDto.sellerId}','${safePurchaseInfoDto.transactionId}','${safePurchaseInfoDto.goodsId }')">안전결제 수락</button>
 	</c:if>
     
 	<c:if test="${safePurchaseInfoDto.tradingStatus eq 2}">
@@ -133,10 +133,10 @@
 </div>
 
 <script>
-    var cancel=(userId1,transactionId1)=>{
+    var cancel=(userId1,transactionId1,goodsId)=>{
         $.ajax({
             url:"${pageContext.request.contextPath}/payment/cancel",
-            data:{userId:userId1, transactionId:transactionId1},
+            data:{userId:userId1, transactionId:transactionId1, goodsId:goodsId},
             method: "post",
             dataType:"json",
             success:cancelCallBack
