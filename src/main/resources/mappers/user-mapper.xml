@@ -48,12 +48,40 @@
 		)where rn between #{startRownum} and #{endRownum}
 	</select>
 	
+	<select id="getInfaceTotalCnt" parameterType="string" resultType="int">
+		select count(*) 
+		from in_face_trading
+		where buyer_id=#{buyerId}
+	</select>
+	
+	<select id="getSearchInfaceTotalCnt" parameterType="map" resultType="int">
+		select count(*) 
+		from in_face_trading
+		where buyer_id=#{buyerId} and goods_title like #{searchWord}
+	</select>
+	
 	<select id="getInfacePurchaseList" parameterType="map" resultType="InFaceTradingDto"> <!-- 9P 직거래 구매내역(회원) 불러오기 -->
-		select goods_id,in_face_trading_id,goods_title,trading_status,i.price,to_char(trading_date, 'YYYY-MM-DD HH24:MI:SS') trading_date
+		select * from
+		(select list.*, rownum rn from(
+		(select goods_id,in_face_trading_id,goods_title,trading_status,i.price,to_char(trading_date, 'YYYY-MM-DD HH24:MI:SS') trading_date
 		from in_face_trading i join goods g using (goods_id)
 		where buyer_id=#{buyerId} 
-		order by trading_date desc
+		order by trading_date desc) 
+		list)
+		)where rn between #{startRownum} and #{endRownum}
 	</select>
+	
+		<select id="getSearchInfacePurchaseList" parameterType="map" resultType="InFaceTradingDto"> <!-- 9P 직거래 구매내역(회원) 불러오기 -->
+		select * from
+		(select list.*, rownum rn from(
+		(select goods_id,in_face_trading_id,goods_title,trading_status,i.price,to_char(trading_date, 'YYYY-MM-DD HH24:MI:SS') trading_date
+		from in_face_trading i join goods g using (goods_id)
+		where buyer_id=#{buyerId} and goods_title like #{searchWord} 
+		order by trading_date desc) 
+		list)
+		)where rn between #{startRownum} and #{endRownum}
+	</select>
+	
 	<select id="getOnSaleList" parameterType="string" resultType="MyGoodsListDto">	<!--10P 판매중 + 예약중 불러오기 -->
 		select to_char(refreshed_at, 'YYYY-MM-DD HH24:MI:SS') refreshed_at,goods_id,title,price,status 
 		from goods 

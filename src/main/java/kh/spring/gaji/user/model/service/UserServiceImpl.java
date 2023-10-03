@@ -24,6 +24,7 @@ import kh.spring.gaji.user.model.dto.UserProfileDto;
 import kh.spring.gaji.user.model.dto.UserSafeTradingDto;
 
 @Service
+@Transactional
 public class UserServiceImpl implements UserService {
 
     @Autowired
@@ -63,8 +64,12 @@ public class UserServiceImpl implements UserService {
     }
     
     @Override
-    public List<InFaceTradingDto> getInfacePurchaseList(String buyerId) {
-        return userDao.getInfacePurchaseList(buyerId);
+    public Map<String,Object> getInfacePurchaseList(String buyerId,int currentPage,int PAGESIZE) {
+    	Map<String,Object> result=new HashMap<String,Object>();
+    	int totalCnt = userDao.getInfaceTotalCnt(buyerId);
+    	result.put("totalCnt",totalCnt);
+    	result.put("inFacePurchaseList",userDao.getInfacePurchaseList(buyerId,currentPage,PAGESIZE,totalCnt));
+        return result;
     }
 
     @Override

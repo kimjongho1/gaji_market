@@ -75,6 +75,18 @@ public class UserDao {
 		map.put("endRownum",endRownum);
         return sqlSession.selectList("user.getSafePurchaseList",map);
     }
+    
+    public int getInfaceTotalCnt(String buyerId) {
+    	return sqlSession.selectOne("user.getInfaceTotalCnt",buyerId);
+    }
+    
+    public int getSearchInfaceTotalCnt(String buyerId,String searchWord) {
+    	Map<String,Object> map=new HashMap<String,Object>();
+    	searchWord="%"+searchWord+"%";
+    	map.put("buyerId", buyerId);
+    	map.put("searchWord", searchWord);
+    	return sqlSession.selectOne("user.getSearchInfaceTotalCnt",map);
+    }
 
     public List<InFaceTradingDto> getInfacePurchaseList(String buyerId) {	//9P 직거래 구매내역(회원) 불러오기
         return sqlSession.selectList("user.getInfacePurchaseList", buyerId);

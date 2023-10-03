@@ -28,7 +28,7 @@ public interface UserService {
     
     public Map<String,Object> getSearchSafePurchaseList(String buyerId,int currentPage,int PAGESIZE,String searchWord);
 
-    public List<InFaceTradingDto> getInfacePurchaseList(String buyerId);
+    public Map<String,Object> getInfacePurchaseList(String buyerId,int currentPage,int PAGESIZE);
 
     public List<MyGoodsListDto> getOnSaleList(String userId);
 
