@@ -24,7 +24,9 @@ public interface UserService {
 
     public List<GoodsListDto> getFavoriteList(String userId);
 
-    public List<UserSafeTradingDto> getSafePurchaseList(String buyerId);
+    public Map<String,Object> getSafePurchaseList(String buyerId,int currentPage,int PAGESIZE);
+    
+    public Map<String,Object> getSearchSafePurchaseList(String buyerId,int currentPage,int PAGESIZE,String searchWord);
 
     public List<InFaceTradingDto> getInfacePurchaseList(String buyerId);
 

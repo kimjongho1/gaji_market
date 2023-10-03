@@ -17,14 +17,38 @@
 		where user_id IN(select target_id from favorite_user where user_id=#{userId}) and active_status="Y" and status!=4
 		order by created_at DESC
 	</select>
-	<select id="getSafePurchaseList" parameterType="string" resultType="UserSafeTradingDto">	<!-- 9P 안전거래 구매내역(회원) 불러오기 -->
-		select 	transaction_id,goods_title,trading_status,s.price,to_char(trading_date, 'YYYY-MM-DD HH24:MI:SS') trading_date
-		from safe_trading s join goods g using (goods_id)
-		where buyer_id=#{buyerId} 
-		order by trading_date desc
+	
+	<select id="getSafeTotalCnt" parameterType="string" resultType="int">	<!-- 9P 아이디에 해당하는 안전거래 구매 총갯수 -->
+		select count(*) from safe_trading where buyer_id=#{buyerId}
 	</select>
 	
-	<select id="getInfacePurchaseList" parameterType="string" resultType="InFaceTradingDto"> <!-- 9P 직거래 구매내역(회원) 불러오기 -->
+	<select id="getSearchSafeTotalCnt" parameterType="string" resultType="int">	<!-- 9P 아이디에 해당하며 검색어에 부합하는 안전거래 구매 총갯수  -->
+		select count(*) from safe_trading where buyer_id=#{buyerId} and goods_title like #{searchWord}
+	</select>
+	
+	<select id="getSafePurchaseList" parameterType="map" resultType="UserSafeTradingDto">	<!-- 9P 안전거래 구매내역(회원) 불러오기 -->
+		select * from 
+		(select list.*,rownum rn from(
+		(select transaction_id,goods_title,trading_status,s.price,to_char(trading_date, 'YYYY-MM-DD HH24:MI:SS') trading_date
+		from safe_trading s join goods g using (goods_id)
+		where buyer_id=#{buyerId} 
+		order by trading_date desc)
+		list)
+		)where rn between #{startRownum} and #{endRownum}
+	</select>
+	
+	<select id="getSearchSafePurchaseList" parameterType="map" resultType="UserSafeTradingDto">	<!-- 9P 안전거래 검색어에 따른 구매내역(회원) 불러오기 -->
+		select * from 
+		(select list.*,rownum rn from(
+		(select transaction_id,goods_title,trading_status,s.price,to_char(trading_date, 'YYYY-MM-DD HH24:MI:SS') trading_date
+		from safe_trading s join goods g using (goods_id)
+		where buyer_id=#{buyerId} and goods_title like #{searchWord}
+		order by trading_date desc)
+		list)
+		)where rn between #{startRownum} and #{endRownum}
+	</select>
+	
+	<select id="getInfacePurchaseList" parameterType="map" resultType="InFaceTradingDto"> <!-- 9P 직거래 구매내역(회원) 불러오기 -->
 		select goods_id,in_face_trading_id,goods_title,trading_status,i.price,to_char(trading_date, 'YYYY-MM-DD HH24:MI:SS') trading_date
 		from in_face_trading i join goods g using (goods_id)
 		where buyer_id=#{buyerId} 

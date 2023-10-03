@@ -1,6 +1,7 @@
 package kh.spring.gaji.user.model.service;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -44,10 +45,23 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<UserSafeTradingDto> getSafePurchaseList(String buyerId) {
-        return userDao.getSafePurchaseList(buyerId);
+    public Map<String,Object> getSafePurchaseList(String buyerId,int currentPage,int PAGESIZE) {
+    	Map<String,Object> result=new HashMap<String,Object>();
+    	int totalCnt=userDao.getSafeTotalCnt(buyerId);
+    	result.put("totalCnt",totalCnt);
+    	result.put("safePurchaseList",userDao.getSafePurchaseList(buyerId,currentPage,PAGESIZE,totalCnt));
+        return result;
     }
 
+    @Override
+    public Map<String,Object> getSearchSafePurchaseList(String buyerId,int currentPage,int PAGESIZE,String searchWord){
+    	Map<String,Object> result=new HashMap<String,Object>();
+    	int totalCnt=userDao.getSearchSafeTotalCnt(buyerId,searchWord);
+    	result.put("totalCnt",totalCnt);
+    	result.put("safePurchaseList",userDao.getSafePurchaseList(buyerId,currentPage,PAGESIZE,totalCnt));
+        return result;
+    }
+    
     @Override
     public List<InFaceTradingDto> getInfacePurchaseList(String buyerId) {
         return userDao.getInfacePurchaseList(buyerId);

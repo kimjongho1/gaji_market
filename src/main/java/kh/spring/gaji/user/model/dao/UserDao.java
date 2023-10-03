@@ -38,9 +38,42 @@ public class UserDao {
     public List<GoodsListDto> getFavoriteList(String userId) {	//6P 사진을 포함한 모아보기목록 가져옴
         return sqlSession.selectList("user.getFavoriteList", userId);
     }
+    
+    public int getSafeTotalCnt(String buyerId) {
+    	return sqlSession.selectOne("user.getSafeTotalCnt",buyerId);
+    }
+    
+    public int getSearchSafeTotalCnt(String buyerId,String searchWord) {
+    	Map<String,Object> map=new HashMap<String,Object>();
+    	searchWord="%"+searchWord+"%";
+    	map.put("buyerId", buyerId);
+    	map.put("searchWord", searchWord);
+    	return sqlSession.selectOne("user.getSearchSafeTotalCnt",map);
+    }
+    
+    public List<UserSafeTradingDto> getSearchSafePurchaseList(String buyerId,int currentPage,int PAGESIZE,String searchWord, int totalCnt) {	//9P 안전거래 구매내역(회원) 불러오기
+    	int startRownum = 0;
+		int endRownum = 0;
+		startRownum = (currentPage-1)*PAGESIZE +1;
+		endRownum = ((currentPage*PAGESIZE) > totalCnt) ? totalCnt: (currentPage*PAGESIZE);
+		Map<String, Object> map= new HashMap<String, Object>();
+		map.put("searchWord", searchWord);
+		map.put("buyerId", buyerId);
+		map.put("startRownum",startRownum);
+		map.put("endRownum",endRownum);
+		return sqlSession.selectList("user.getSearchSafePurchaseList",map);
+    }
 
-    public List<UserSafeTradingDto> getSafePurchaseList(String buyerId) {	//9P 안전거래 구매내역(회원) 불러오기
-        return sqlSession.selectList("user.getSafePurchaseList",buyerId);
+    public List<UserSafeTradingDto> getSafePurchaseList(String buyerId,int currentPage,int PAGESIZE, int totalCnt) {	//9P 안전거래 구매내역(회원) 불러오기
+    	int startRownum = 0;
+		int endRownum = 0;
+		startRownum = (currentPage-1)*PAGESIZE +1;
+		endRownum = ((currentPage*PAGESIZE) > totalCnt) ? totalCnt: (currentPage*PAGESIZE);
+		Map<String, Object> map= new HashMap<String, Object>();
+		map.put("buyerId", buyerId);
+		map.put("startRownum",startRownum);
+		map.put("endRownum",endRownum);
+        return sqlSession.selectList("user.getSafePurchaseList",map);
     }
 
     public List<InFaceTradingDto> getInfacePurchaseList(String buyerId) {	//9P 직거래 구매내역(회원) 불러오기

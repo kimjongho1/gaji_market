@@ -24,6 +24,9 @@ import kh.spring.gaji.user.model.service.UserService;
 @Controller
 @RequestMapping("/mypage")
 public class MyPageController {
+	static final int PAGESIZE=8;
+	static final int PAGEBLOCKSIZE=5;
+	
 	@Autowired
 	private UserService userService;
 	
@@ -32,12 +35,46 @@ public class MyPageController {
 		return "mypage/mypage";
 	}
 	
-	@GetMapping("/orderstatus")
-	public String orderStatus(Model model) {	// 나의 구매내역 안전거래.
-		List<UserSafeTradingDto> safePurchaseList= userService.getSafePurchaseList("qordmlgjs");	//추후 userId들어가야함
+	@GetMapping("/orderstatus/safe")
+	public String safeorderStatus(Model model,Integer currentPage,String searchWord) {	// 나의 구매내역 안전거래.
+		int totalCnt=0;
+		List<UserSafeTradingDto> safePurchaseList=null;
+		if(currentPage==null)	//현재 페이지가 들어온게 없다면 1페이지.
+			currentPage=1;
+		if(searchWord==null) {	// 검색어가 들어온게 없다면 그에 맞는 mapper 실행
+			Map<String,Object> map= userService.getSafePurchaseList("qordmlgjs",(int)currentPage,PAGESIZE);	//추후 userId들어가야함
+			safePurchaseList = (List<UserSafeTradingDto>)map.get("safePurchaseList");
+			totalCnt= (int)map.get("totalCnt");
+		}
+		else {
+			Map<String,Object> map= userService.getSearchSafePurchaseList("qordmlgjs",(int)currentPage,PAGESIZE,searchWord);
+			safePurchaseList = (List<UserSafeTradingDto>)map.get("safePurchaseList");
+			totalCnt= (int)map.get("totalCnt");
+			model.addAttribute("searchWord",searchWord);
+		}
+		int totalPageNum = totalCnt/PAGESIZE + (totalCnt%PAGESIZE == 0 ? 0 : 1);
+		int startPageNum = 1;
+		if((currentPage%PAGEBLOCKSIZE) == 0) {
+			startPageNum = ((currentPage/PAGEBLOCKSIZE)-1)*PAGEBLOCKSIZE +1;
+		} else {
+			startPageNum = ((currentPage/PAGEBLOCKSIZE))*PAGEBLOCKSIZE +1;
+		}
+		int endPageNum = (startPageNum+PAGEBLOCKSIZE > totalPageNum) ? totalPageNum : startPageNum+PAGEBLOCKSIZE-1;
+		model.addAttribute("totalPageNum", totalPageNum);
+		model.addAttribute("startPageNum", startPageNum);
+		model.addAttribute("endPageNum", endPageNum);
+		model.addAttribute("currentPage", currentPage);
 		model.addAttribute("safePurchaseList",safePurchaseList);
-		return "mypage/orderstatus";
+		model.addAttribute("totalCnt",totalCnt);
+		return "mypage/safeorderstatus";
 	}
+	
+//	@GetMapping("/orderstatus/inface")
+//	public String infaceorderStatus(Model model) {	// 나의 구매내역 직거래.
+//		List<UserSafeTradingDto> safePurchaseList= userService.getSafePurchaseList("qordmlgjs");	//추후 userId들어가야함
+//		model.addAttribute("safePurchaseList",safePurchaseList);
+//		return "mypage/infaceorderstatus";
+//	}
 	
 	@GetMapping("/salesstatus")
 	public String salesStatus(Model model) {	// 나의 판매내역
@@ -69,13 +106,6 @@ public class MyPageController {
 	@ResponseBody
 	public List<MyGoodsListDto> getHide(Model model){
 		return userService.getHideList("cjsdudwns");
-	}
-	
-	@PostMapping("/getSafeTradingView")	// 안전거래 구매내역을 가져오는 ajax url
-	@ResponseBody
-	public List<UserSafeTradingDto> getSafeTradingView(){
-		System.out.println("MyPageController 안전거래내역 url");
-		return userService.getSafePurchaseList("qordmlgjs"); //이후 userId로 대체.
 	}
 
 	@GetMapping("/myinfo")
