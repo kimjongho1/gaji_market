@@ -5,6 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>회원가입</title>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <style>
 * {
 	margin: 0px;
@@ -174,7 +175,7 @@ body {
 				<input name="userId" type="text" class="id" placeholder="아이디" id="userId"
 				required="required">
 				<button type="button" class="btn-id"
-				onclick="">중복확인</button>
+				id="checkDuplicateBtn">중복확인</button>
 			</span>
 		</div>
 		<div class="textForm">
@@ -425,6 +426,37 @@ body {
         // 유효성 문제가 없을 시 폼 제출
         document.joinForm.submit();
     }
+    
+    // 중복 확인을 수행하는 함수
+    $("#checkDuplicateBtn").click(function () {
+    	console.log("버튼클릭확인");
+        // 중복 확인할 아이디 값을 가져옴
+        var userId = $("#userId").val();
+
+        // 서버에 보낼 요청 URL (실제로는 서버 엔드포인트에 맞게 수정해야 함)
+        var apiUrl = "checkid"; // 예시 URL, 실제로는 서버의 URL로 수정
+
+     // AJAX를 사용하여 서버에 중복 확인 요청 보냄
+        $.ajax({
+            url: apiUrl,
+            type: "post",
+            data: { userId: userId },
+            success: function (data) {
+            	console.log(data);
+            	if (data !== ""){
+            		 // 아이디가 중복된 경우 처리 (예: 메시지 표시)
+            		alert("이미 사용 중인 아이디입니다.");
+            	}else {
+            		// 아이디가 중복되지 않은 경우 처리 (예: 메시지 표시)
+                    alert("사용 가능한 아이디입니다.");
+            	}
+            },
+            error: function (error) {
+                console.error("중복 확인 중 오류 발생:", error);
+            }
+        });
+    });
+    
 </script>
 
 </html>

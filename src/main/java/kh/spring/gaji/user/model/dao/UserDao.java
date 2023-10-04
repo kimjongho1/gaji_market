@@ -154,7 +154,7 @@ public class UserDao {
     	return sqlSession.update("user.updatePass", map);
     }
 
-    public int checkId(String userId) {	//아이디 중복검사
+    public String checkId(String userId) {	//아이디 중복검사
         return sqlSession.selectOne("user.checkId", userId);
     }
 
