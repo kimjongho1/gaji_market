@@ -13,6 +13,7 @@ import kh.spring.gaji.pay.model.dto.PayUserInfoDto;
 import kh.spring.gaji.user.model.dto.UserAddressDto;
 
 @Service
+@Transactional
 public class PayServiceImpl implements PayService {
 
     @Autowired
@@ -25,7 +26,6 @@ public class PayServiceImpl implements PayService {
   
 	
     @Override
-    @Transactional
     public int cancelSafeTrading(String transactionId) {
         return payDao.cancelSafeTrading(transactionId);
     }
@@ -67,6 +67,18 @@ public class PayServiceImpl implements PayService {
 	@Override
 	public int changeStatus(Map<String, Object> map) {
 		return payDao.changeStatus(map);
+	}
+
+
+	@Override
+	public String checkId(String transactionId) {
+		return payDao.checkId(transactionId);
+	}
+
+
+	@Override
+	public int getGoodsId(String transactionId) {
+		return payDao.getGoodsId(transactionId);
 	}
 
 }

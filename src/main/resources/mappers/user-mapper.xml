@@ -91,25 +91,98 @@
 		)where rn between #{startRownum} and #{endRownum}
 	</select>
 	
-	<select id="getOnSaleList" parameterType="string" resultType="MyGoodsListDto">	<!--10P 판매중 + 예약중 불러오기 -->
-		select to_char(refreshed_at, 'YYYY-MM-DD HH24:MI:SS') refreshed_at,goods_id,title,price,status 
+	<select id="getOnsaleTotalCnt" resultType="_int">
+		select count(*) from goods where user_Id=#{userId} and status IN(1,2)
+	</select>
+	
+	<select id="getSearchOnsaleTotalCnt" parameterType="map" resultType="_int">
+		select count(*) from goods where user_Id=#{userId} and title like #{searchWord} and status IN(1,2)
+	</select>
+	
+	
+	<select id="getOnsaleList" parameterType="map" resultType="MyGoodsListDto">	<!--10P 판매중 + 예약중 불러오기 -->
+		select * from
+		(select list.*,rownum rn from(
+		(select to_char(refreshed_at, 'YYYY-MM-DD HH24:MI:SS') refreshed_at,goods_id,title,price,status 
 		from goods 
 		where user_id=#{userId} and status IN(1,2) and active_status='Y' 
-		order by refreshed_at DESC
+		order by refreshed_at DESC) 
+		list)
+		) where rn between #{startRownum} and #{endRownum}
 	</select>
 	
-	<select id="getSoldOutList" parameterType="string" resultType="MyGoodsListDto">	<!--10P 거래완료 판매내역 가지고오기 -->
-		select to_char(refreshed_at, 'YYYY-MM-DD HH24:MI:SS') refreshed_at,goods_id,title,price,status 
+	<select id="getSearchOnsaleList" parameterType="map" resultType="MyGoodsListDto">	<!--10P 판매중 + 예약중 불러오기 -->
+		select * from
+		(select list.*,rownum rn from(
+		(select to_char(refreshed_at, 'YYYY-MM-DD HH24:MI:SS') refreshed_at,goods_id,title,price,status 
 		from goods 
-		where user_id=#{userId} and status IN(3) and active_status='Y'
-		order by refreshed_at DESC
+		where user_id=#{userId} and status IN(1,2) and active_status='Y' and title like #{searchWord}
+		order by refreshed_at DESC) 
+		list)
+		) where rn between #{startRownum} and #{endRownum}
 	</select>
 	
-	<select id="getHideList" parameterType="string" resultType="MyGoodsListDto">	<!--10P 숨김중인 판매내역 가져오기 -->
-		select to_char(refreshed_at, 'YYYY-MM-DD HH24:MI:SS') refreshed_at,goods_id,title,price,status 
+	<select id="getClosedTotalCnt" resultType="_int">
+		select count(*) from goods where user_Id=#{userId} and status IN(3)
+	</select>
+	
+	<select id="getSearchClosedTotalCnt" parameterType="map" resultType="_int">
+		select count(*) from goods where user_Id=#{userId} and title like #{searchWord} and status IN(3)
+	</select>
+	
+	
+	<select id="getClosedList" parameterType="map" resultType="MyGoodsListDto">	<!--거래완료 -->
+		select * from
+		(select list.*,rownum rn from(
+		(select to_char(refreshed_at, 'YYYY-MM-DD HH24:MI:SS') refreshed_at,goods_id,title,price,status 
+		from goods 
+		where user_id=#{userId} and status IN(3) and active_status='Y' 
+		order by refreshed_at DESC) 
+		list)
+		) where rn between #{startRownum} and #{endRownum}
+	</select>
+	
+	<select id="getSearchClosedList" parameterType="map" resultType="MyGoodsListDto">	<!--거래완료 -->
+		select * from
+		(select list.*,rownum rn from(
+		(select to_char(refreshed_at, 'YYYY-MM-DD HH24:MI:SS') refreshed_at,goods_id,title,price,status 
+		from goods 
+		where user_id=#{userId} and status IN(3) and active_status='Y' and title like #{searchWord}
+		order by refreshed_at DESC) 
+		list)
+		) where rn between #{startRownum} and #{endRownum}
+	</select>
+	
+	
+	<select id="getHideTotalCnt" resultType="_int">
+		select count(*) from goods where user_Id=#{userId} and status IN(4) <!--숨김 -->
+	</select>
+	
+	<select id="getSearchHideTotalCnt" parameterType="map" resultType="_int"> <!--숨김 -->
+		select count(*) from goods where user_Id=#{userId} and title like #{searchWord} and status IN(4)
+	</select>
+	
+	
+	<select id="getHideList" parameterType="map" resultType="MyGoodsListDto">	<!--숨김 -->
+		select * from
+		(select list.*,rownum rn from(
+		(select to_char(refreshed_at, 'YYYY-MM-DD HH24:MI:SS') refreshed_at,goods_id,title,price,status 
 		from goods 
 		where user_id=#{userId} and status IN(4) and active_status='Y' 
-		order by refreshed_at DESC
+		order by refreshed_at DESC) 
+		list)
+		) where rn between #{startRownum} and #{endRownum}
+	</select>
+	
+	<select id="getSearchHideList" parameterType="map" resultType="MyGoodsListDto">	<!--숨김 -->
+		select * from
+		(select list.*,rownum rn from(
+		(select to_char(refreshed_at, 'YYYY-MM-DD HH24:MI:SS') refreshed_at,goods_id,title,price,status 
+		from goods 
+		where user_id=#{userId} and status IN(4) and active_status='Y' and title like #{searchWord}
+		order by refreshed_at DESC) 
+		list)
+		) where rn between #{startRownum} and #{endRownum}
 	</select>
 	
 	<insert id="insertWishList">	<!-- 23P 찜하기 -->	

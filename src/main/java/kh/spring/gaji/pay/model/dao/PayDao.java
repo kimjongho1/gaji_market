@@ -17,6 +17,14 @@ public class PayDao {
     @Autowired
     private SqlSession sqlSession;
 
+    public String checkId(String transactionId) {
+    	return sqlSession.selectOne("pay.checkId",transactionId);
+    }
+    
+    public int getGoodsId(String transactionId) {
+    	return sqlSession.selectOne("pay.getGoodsId",transactionId);
+    }
+    
     public int checkGoodsStatus(int goodsId) {	//판매중 상품인지를 확인함.
     	return sqlSession.selectOne("pay.checkGoodsStatus",goodsId);
     }

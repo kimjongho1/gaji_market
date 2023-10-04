@@ -36,7 +36,17 @@ public interface UserService {
     
     public Map<String,Object> getSearchInfacePurchaseList(String buyerId,int currentPage,int PAGESIZE,String searchWord);
 
-    public List<MyGoodsListDto> getOnSaleList(String userId);
+    public Map<String,Object> getOnSaleList(String userId,int currentPage,int PAGESIZE);
+    
+    public Map<String,Object> getSearchOnSaleList(String userId,int currentPage,int PAGESIZE,String searchWord);
+    
+    public Map<String,Object> getClosedList(String userId,int currentPage,int PAGESIZE);
+    
+    public Map<String,Object> getSearchClosedList(String userId,int currentPage,int PAGESIZE,String searchWord);
+    
+    public Map<String,Object> getHideList(String userId,int currentPage,int PAGESIZE);
+    
+    public Map<String,Object> getSearchHideList(String userId,int currentPage,int PAGESIZE,String searchWord);
 
     public List<MyGoodsListDto> getSoldOutList(String userId);
 
