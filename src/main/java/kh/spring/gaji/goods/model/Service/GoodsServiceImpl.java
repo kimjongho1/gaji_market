@@ -3,11 +3,14 @@ package kh.spring.gaji.goods.model.Service;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import kh.spring.gaji.goods.model.dao.GoodsDao;
 import kh.spring.gaji.goods.model.dto.GoodsDto;
 import kh.spring.gaji.goods.model.dto.GoodsInfoDto;
 
+
+@Service
 public class GoodsServiceImpl implements GoodsService {
 	@Autowired
 	private GoodsDao goodsDao;
