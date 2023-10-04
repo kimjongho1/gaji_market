@@ -88,8 +88,8 @@
 				<p>
 					<em>지도를 클릭해주세요!</em>
 				</p>
-				<button id="cancelButton">취소</button>
-				<button id="confirmButton">확인</button>
+				<button id="cancelButton" type="button">취소</button>
+				<button id="confirmButton" type="button">확인</button>
 				<div id="clickLatlng"></div>
 			</div>
 		</div>
