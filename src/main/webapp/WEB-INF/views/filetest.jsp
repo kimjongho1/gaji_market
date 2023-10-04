@@ -27,7 +27,7 @@
 <body>
 <h1>이미지 업로드</h1>
      <form action="${pageContext.request.contextPath}/uploaded" method="post" enctype="multipart/form-data">
-        <input type="file" name="files" multiple="multiple" accept="image/*" required>
+        <input type="file" name="files" multiple="multiple" accept="image/*">
         <input type="submit" value="업로드">
     </form> 
     <form action="${pageContext.request.contextPath}/upload" method="post" enctype="multipart/form-data">
