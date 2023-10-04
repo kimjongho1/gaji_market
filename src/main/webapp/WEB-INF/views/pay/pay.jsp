@@ -218,7 +218,7 @@
 	function callback(data){
 		if(data.response.status=='paid') {
 			alert("결제완료")
-			window.location.href="${pageContext.request.contextPath}/mypage/orderstatus";
+			window.location.href="${pageContext.request.contextPath}/mypage/orderstatus/safe";
 		}
 		else{
 			console.log(data);

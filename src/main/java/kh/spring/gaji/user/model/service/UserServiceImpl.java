@@ -79,12 +79,58 @@ public class UserServiceImpl implements UserService {
     	result.put("inFacePurchaseList",userDao.getSearchInfacePurchaseList(buyerId,currentPage,PAGESIZE,totalCnt,searchWord));
     	return result;
     }
-
     @Override
-    public List<MyGoodsListDto> getOnSaleList(String userId) {
-        return userDao.getOnSaleList(userId);
+    public Map<String,Object> getOnSaleList(String userId,int currentPage,int PAGESIZE){
+    	Map<String,Object> result=new HashMap<String,Object>();
+    	int totalCnt = userDao.getOnsaleTotalCnt(userId);
+    	result.put("totalCnt",totalCnt);
+    	result.put("myGoodsList",userDao.getOnsaleList(userId,currentPage,PAGESIZE,totalCnt));
+    	return result;
     }
+    @Override
+    public Map<String,Object> getSearchOnSaleList(String userId,int currentPage,int PAGESIZE,String searchWord){
+    	Map<String,Object> result=new HashMap<String,Object>();
+    	int totalCnt = userDao.getSearchOnsaleTotalCnt(userId,searchWord);
+    	result.put("totalCnt",totalCnt);
+    	result.put("myGoodsList",userDao.getSearchOnsaleList(userId,currentPage,PAGESIZE,totalCnt,searchWord));
+    	return result;
+    }
+    
+    @Override
+    public Map<String,Object> getClosedList(String userId,int currentPage,int PAGESIZE){
+    	Map<String,Object> result=new HashMap<String,Object>();
+    	int totalCnt = userDao.getClosedTotalCnt(userId);
+    	result.put("totalCnt",totalCnt);
+    	result.put("myGoodsList",userDao.getClosedList(userId,currentPage,PAGESIZE,totalCnt));
+    	return result;
+    }
+    @Override
+    public Map<String,Object> getSearchClosedList(String userId,int currentPage,int PAGESIZE,String searchWord){
+    	Map<String,Object> result=new HashMap<String,Object>();
+    	int totalCnt = userDao.getSearchClosedTotalCnt(userId,searchWord);
+    	result.put("totalCnt",totalCnt);
+    	result.put("myGoodsList",userDao.getSearchClosedList(userId,currentPage,PAGESIZE,totalCnt,searchWord));
+    	return result;
+    }
+    
+	@Override
+	public Map<String, Object> getHideList(String userId, int currentPage, int PAGESIZE) {
+    	Map<String,Object> result=new HashMap<String,Object>();
+    	int totalCnt = userDao.getHideTotalCnt(userId);
+    	result.put("totalCnt",totalCnt);
+    	result.put("myGoodsList",userDao.getHideList(userId,currentPage,PAGESIZE,totalCnt));
+    	return result;
+	}
 
+	@Override
+	public Map<String, Object> getSearchHideList(String userId, int currentPage, int PAGESIZE, String searchWord) {
+    	Map<String,Object> result=new HashMap<String,Object>();
+    	int totalCnt = userDao.getSearchHideTotalCnt(userId,searchWord);
+    	result.put("totalCnt",totalCnt);
+    	result.put("myGoodsList",userDao.getSearchHideList(userId,currentPage,PAGESIZE,totalCnt,searchWord));
+    	return result;
+	}
+    
     @Override
     public List<MyGoodsListDto> getSoldOutList(String userId) {
         return userDao.getSoldOutList(userId);

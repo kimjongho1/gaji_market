@@ -71,10 +71,17 @@ public class PayController {
 		
 		@PostMapping("payment/closepay")
 		@ResponseBody
-		public int closePay(String transactionId,String userId,HttpServletRequest request) {
+		public int closePay(String transactionId,HttpServletRequest request) {
 			int result=0;
+			String userId= payServiceImpl.checkId(transactionId);
 			/* if(userId==(String)request.getSession().getAttribute(userId)) { */ //혹시 transactionId 변조할까봐 검사.
 				result = payServiceImpl.closeSafeTrading(transactionId);
+				if(result==1) {
+					Map<String,Object> map=new HashMap<String,Object>();
+					map.put("status",3);
+					map.put("goodsId",payServiceImpl.getGoodsId(transactionId));
+					payServiceImpl.updateStatus(map);
+				}
 				System.out.println("result:"+result);
 				/* } */
 			return result;

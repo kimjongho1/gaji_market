@@ -69,7 +69,6 @@ public class MyPageController {
 		model.addAttribute("endPageNum", endPageNum);
 		model.addAttribute("currentPage", currentPage);
 		model.addAttribute("safePurchaseList",safePurchaseList);
-		model.addAttribute("totalCnt",totalCnt);
 		return "mypage/safeorderstatus";
 	}
 	
@@ -104,22 +103,112 @@ public class MyPageController {
 		model.addAttribute("endPageNum", endPageNum);
 		model.addAttribute("currentPage", currentPage);
 		model.addAttribute("infacePurchaseList",infacePurchaseList);
-		model.addAttribute("totalCnt",totalCnt);
 		return "mypage/infaceorderstatus";
 	}
 	
-	@GetMapping("/salesstatus")
-	public String salesStatus(Model model) {	// 나의 판매내역
+	@GetMapping("/goods/onsale")	// 판매중 상품
+	public String onsaleGoods(Model model,Integer currentPage,String searchWord,HttpSession session) {	
+		int totalCnt=0;
+		List<MyGoodsListDto> myGoodsList=null;
 		//String userId=(String)session.getAttribute("userId"); 
-		List<MyGoodsListDto> myGoodsList = userService.getOnSaleList("cjsdudwns"); //추후 userId들어가야함
 		model.addAttribute("myGoodsList",myGoodsList);
-		return "mypage/salesstatus";
+		if(currentPage==null)	//현재 페이지가 들어온게 없다면 1페이지.
+			currentPage=1;
+		if(searchWord==null) {	// 검색어가 들어온게 없다면 검색어없는 mapper로 목록 가져오기
+			Map<String,Object> map= userService.getOnSaleList("cjsdudwns",(int)currentPage,PAGESIZE);	//추후 userId들어가야함
+			myGoodsList = (List<MyGoodsListDto>)map.get("myGoodsList");
+			totalCnt= (int)map.get("totalCnt");
+		}
+		else {					//검색어가 있다면 그에따른 mapper로 목록 가져오기
+			Map<String,Object> map= userService.getSearchOnSaleList("cjsdudwns",(int)currentPage,PAGESIZE,searchWord);//추후 userId들어가야함
+			myGoodsList = (List<MyGoodsListDto>)map.get("myGoodsList");
+			totalCnt= (int)map.get("totalCnt");
+			model.addAttribute("searchWord",searchWord);
+		}
+		int totalPageNum = totalCnt/PAGESIZE + (totalCnt%PAGESIZE == 0 ? 0 : 1);
+		int startPageNum = 1;
+		if((currentPage%PAGEBLOCKSIZE) == 0) {
+			startPageNum = ((currentPage/PAGEBLOCKSIZE)-1)*PAGEBLOCKSIZE +1;
+		} else {
+			startPageNum = ((currentPage/PAGEBLOCKSIZE))*PAGEBLOCKSIZE +1;
+		}
+		int endPageNum = (startPageNum+PAGEBLOCKSIZE > totalPageNum) ? totalPageNum : startPageNum+PAGEBLOCKSIZE-1;
+		model.addAttribute("totalPageNum", totalPageNum);
+		model.addAttribute("startPageNum", startPageNum);
+		model.addAttribute("endPageNum", endPageNum);
+		model.addAttribute("currentPage", currentPage);
+		model.addAttribute("myGoodsList",myGoodsList);
+		return "mypage/onsalegoods";
 	}
 	
-	@PostMapping("/getonsale")	// 판매내역(판매중) ajax 응답url
-	@ResponseBody
-	public List<MyGoodsListDto> getOnSale(Model model){
-		return userService.getOnSaleList("cjsdudwns");
+	@GetMapping("/goods/closed")	// 판매완료
+	public String closedGoods(Model model,Integer currentPage,String searchWord,HttpSession session) {	
+		int totalCnt=0;
+		List<MyGoodsListDto> myGoodsList=null;
+		//String userId=(String)session.getAttribute("userId"); 
+		model.addAttribute("myGoodsList",myGoodsList);
+		if(currentPage==null)	//현재 페이지가 들어온게 없다면 1페이지.
+			currentPage=1;
+		if(searchWord==null) {	// 검색어가 들어온게 없다면 검색어없는 mapper로 목록 가져오기
+			Map<String,Object> map= userService.getClosedList("cjsdudwns",(int)currentPage,PAGESIZE);	//추후 userId들어가야함
+			myGoodsList = (List<MyGoodsListDto>)map.get("myGoodsList");
+			totalCnt= (int)map.get("totalCnt");
+		}
+		else {					//검색어가 있다면 그에따른 mapper로 목록 가져오기
+			Map<String,Object> map= userService.getSearchClosedList("cjsdudwns",(int)currentPage,PAGESIZE,searchWord);//추후 userId들어가야함
+			myGoodsList = (List<MyGoodsListDto>)map.get("myGoodsList");
+			totalCnt= (int)map.get("totalCnt");
+			model.addAttribute("searchWord",searchWord);
+		}
+		int totalPageNum = totalCnt/PAGESIZE + (totalCnt%PAGESIZE == 0 ? 0 : 1);
+		int startPageNum = 1;
+		if((currentPage%PAGEBLOCKSIZE) == 0) {
+			startPageNum = ((currentPage/PAGEBLOCKSIZE)-1)*PAGEBLOCKSIZE +1;
+		} else {
+			startPageNum = ((currentPage/PAGEBLOCKSIZE))*PAGEBLOCKSIZE +1;
+		}
+		int endPageNum = (startPageNum+PAGEBLOCKSIZE > totalPageNum) ? totalPageNum : startPageNum+PAGEBLOCKSIZE-1;
+		model.addAttribute("totalPageNum", totalPageNum);
+		model.addAttribute("startPageNum", startPageNum);
+		model.addAttribute("endPageNum", endPageNum);
+		model.addAttribute("currentPage", currentPage);
+		model.addAttribute("myGoodsList",myGoodsList);
+		return "mypage/closedgoods";
+	}
+	
+	@GetMapping("/goods/hide")	// 판매완료
+	public String hideGoods(Model model,Integer currentPage,String searchWord,HttpSession session) {	
+		int totalCnt=0;
+		List<MyGoodsListDto> myGoodsList=null;
+		//String userId=(String)session.getAttribute("userId"); 
+		model.addAttribute("myGoodsList",myGoodsList);
+		if(currentPage==null)	//현재 페이지가 들어온게 없다면 1페이지.
+			currentPage=1;
+		if(searchWord==null) {	// 검색어가 들어온게 없다면 검색어없는 mapper로 목록 가져오기
+			Map<String,Object> map= userService.getHideList("cjsdudwns",(int)currentPage,PAGESIZE);	//추후 userId들어가야함
+			myGoodsList = (List<MyGoodsListDto>)map.get("myGoodsList");
+			totalCnt= (int)map.get("totalCnt");
+		}
+		else {					//검색어가 있다면 그에따른 mapper로 목록 가져오기
+			Map<String,Object> map= userService.getSearchHideList("cjsdudwns",(int)currentPage,PAGESIZE,searchWord);//추후 userId들어가야함
+			myGoodsList = (List<MyGoodsListDto>)map.get("myGoodsList");
+			totalCnt= (int)map.get("totalCnt");
+			model.addAttribute("searchWord",searchWord);
+		}
+		int totalPageNum = totalCnt/PAGESIZE + (totalCnt%PAGESIZE == 0 ? 0 : 1);
+		int startPageNum = 1;
+		if((currentPage%PAGEBLOCKSIZE) == 0) {
+			startPageNum = ((currentPage/PAGEBLOCKSIZE)-1)*PAGEBLOCKSIZE +1;
+		} else {
+			startPageNum = ((currentPage/PAGEBLOCKSIZE))*PAGEBLOCKSIZE +1;
+		}
+		int endPageNum = (startPageNum+PAGEBLOCKSIZE > totalPageNum) ? totalPageNum : startPageNum+PAGEBLOCKSIZE-1;
+		model.addAttribute("totalPageNum", totalPageNum);
+		model.addAttribute("startPageNum", startPageNum);
+		model.addAttribute("endPageNum", endPageNum);
+		model.addAttribute("currentPage", currentPage);
+		model.addAttribute("myGoodsList",myGoodsList);
+		return "mypage/closedgoods";
 	}
 	
 

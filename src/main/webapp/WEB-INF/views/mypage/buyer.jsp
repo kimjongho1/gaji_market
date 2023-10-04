@@ -185,7 +185,7 @@ function cancelCallBack(data){
 	console.log(data);
 	if(data.response.status=="cancelled"){
 		alert("거래가 취소되었습니다");
-		window.location.href="${pageContext.request.contextPath}/mypage/orderstatus";
+		window.location.href="${pageContext.request.contextPath}/mypage/orderstatus/safe";
 	}
 	else
 		alert("거래 취소에 실패하였습니다.");
@@ -196,7 +196,7 @@ function closePayCallback(data){
 	console.log(data);
 	if(data=='1'){
 		alert("거래가 확정되었습니다");
-		window.location.href="${pageContext.request.contextPath}/mypage/orderstatus";
+		window.location.href="${pageContext.request.contextPath}/mypage/orderstatus/safe";
 	}
 	else
 		alert("거래 확정에 실패하였습니다.");

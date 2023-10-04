@@ -18,6 +18,14 @@
 			where goods_id=#{goodsId}
 	</update>
 	
+	<select id="checkId" resultType="string" parameterType="string">
+		select buyer_id from safe_trading where transaction_id=#{transactionId}
+	</select>
+	
+	<select id="getGoodsId" parameterType="string" resultType="_int">
+		select goods_id from goods join safe_trading using (goods_id) where transaction_id=#{transactionId}
+	</select>
+	
 	<update id="closeSafeTrading" parameterType="string">		<!-- 11P 거래확정, 거래상태 업데이트 -->
 		update safe_trading set trading_status=4 
 		where transaction_id= #{transactionId}

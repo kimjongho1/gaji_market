@@ -3,7 +3,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 <head>
 <meta charset="utf-8" />
 <meta name="viewport"
@@ -20,11 +20,8 @@
 <!-- Core theme CSS (includes Bootstrap)-->
 
 
-<script
-	src="${pageContext.request.contextPath}/resources/js/orderstatus.js"></script>
-<link
-	href="${pageContext.request.contextPath}/resources/css/orderstatus.css"
-	rel='stylesheet' type='text/css'>
+<script src="${pageContext.request.contextPath}/resources/js/orderstatus.js"></script>
+<link href="${pageContext.request.contextPath}/resources/css/orderstatus.css" rel='stylesheet' type='text/css'>
 <style>
 .personal1 {
 	position: absolute;
@@ -147,33 +144,28 @@
 	<!-- Section-->
 	<div class="searchWord">
 		<form
-			action="${pageContext.request.contextPath}/mypage/orderstatus/safe" method="get">
+			action="${pageContext.request.contextPath}/mypage/goods/hide" method="get">
 			<input type="search" name="searchWord"> <input class="btn" type="submit" value="찾기">
 		</form>
 	</div>
 
 	<div class="buttons-container text-center margin10">
-		<a class="btn safeTrading" href="${pageContext.request.contextPath}/mypage/orderstatus/safe">안전거래</a>
-		<a class="btn infaceTrading" href="${pageContext.request.contextPath}/mypage/orderstatus/inface">직거래</a>
+		<a class="btn safeTrading" href="${pageContext.request.contextPath}/mypage/goods/onsale">판매중</a>
+		<a class="btn infaceTrading" href="${pageContext.request.contextPath}/mypage/goods/closed">판매완료</a>
+		<a class="btn infaceTrading" href="${pageContext.request.contextPath}/mypage/goods/hide">숨김</a>
 	</div>
 
 	<section class="py-1">
 		<div class="container px-4 px-lg-5 mt-5">
 			<div id="replacePoint"
 				class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
-				<c:forEach var="safePurchaseInfo" items="${safePurchaseList}">
+				<c:forEach var="myGoodsInfo" items="${myGoodsList}">
 					<div class="col mb-5">
 						<div class="card h-100">
 							<!-- Sale badge-->
 							<div class="badge bg-dark text-white position-absolute"
 								style="top: 0.5rem; right: 0.5rem">
-								<c:choose>
-									<c:when test="${safePurchaseInfo.tradingStatus eq 1}">입금완료</c:when>
-									<c:when test="${safePurchaseInfo.tradingStatus eq 2}">상품준비중</c:when>
-									<c:when test="${safePurchaseInfo.tradingStatus eq 3}">배송중</c:when>
-									<c:when test="${safePurchaseInfo.tradingStatus eq 4}">거래완료</c:when>
-									<c:when test="${safePurchaseInfo.tradingStatus eq 5}">결제취소</c:when>
-								</c:choose>
+								숨김
 							</div>
 							<!-- Product image-->
 							<img class="card-img-top"
@@ -182,19 +174,18 @@
 							<div class="card-body p-4">
 								<div class="text-center">
 									<!-- Product name-->
-									<h5 class="fw-bolder">${safePurchaseInfo.goodsTitle}</h5>
+									<h5 class="fw-bolder">${myGoodsInfo.title}</h5>
 									<!-- Product price-->
-									거래일자:${safePurchaseInfo.tradingDate}<br>
-									가격:${safePurchaseInfo.price}
+									끌올일자:${myGoodsInfo.refreshedAt}<br>
+                                    가격:${myGoodsInfo.price}
 								</div>
 							</div>
 							<!-- Product actions-->
 							<div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
 								<div class="text-center">
 									<a class="btn btn-outline-dark mt-auto"
-										href="${pageContext.request.contextPath}/mypage/deal/safe/buyer?transactionId=${safePurchaseInfo.transactionId}">구매정보</a>
+										href="${pageContext.request.contextPath}/goods/get?goodsId=${myGoodsDto.goodsId}">상품이동</a>
 								</div>
-								<!-- 추후${safePurchaseInfo.goodsTitle} 를 담아서 상세정보이동 -->
 							</div>
 						</div>
 					</div>
@@ -209,30 +200,30 @@
 				<c:if test="${startPageNum!=1}">
 					<%--페이징 이전,번호,다음에 대한 코드 --%>
 					<a
-						href="<%=request.getContextPath()%>/mypage/orderstatus/safe?currentPageNum=${startPageNum-1}&searchWord=${searchWord}">이전</a>
+						href="<%=request.getContextPath()%>/mypage/goods/hide?currentPageNum=${startPageNum-1}&searchWord=${searchWord}">이전</a>
 				</c:if>
 				<c:forEach begin="${startPageNum}" end="${endPageNum}" var="i">
 					<a
-						href="<%=request.getContextPath()%>/mypage/orderstatus/safe?currentPage=${i}&searchWord=${searchWord}"><span>${i}</span></a>
+						href="<%=request.getContextPath()%>/mypage/goods/hide?currentPage=${i}&searchWord=${searchWord}"><span>${i}</span></a>
 				</c:forEach>
 				<c:if test="${endPageNum<totalPageNum}">
 					<a
-						href="<%=request.getContextPath()%>/mypage/orderstatus/safe?currentPage=${endPageNum+1}&searchWord=${searchWord}">다음</a>
+						href="<%=request.getContextPath()%>/mypage/goods/hide?currentPage=${endPageNum+1}&searchWord=${searchWord}">다음</a>
 				</c:if>
 			</c:when>
 			<c:otherwise>
 				<c:if test="${startPageNum!=1}">
 					<a
-						href="<%=request.getContextPath()%>/mypage/orderstatus/safe?currentPageNum=${startPageNum-1}">이전</a>
+						href="<%=request.getContextPath()%>/mypage/goods/hide?currentPageNum=${startPageNum-1}">이전</a>
 				</c:if>
 				<c:forEach begin="${startPageNum}" end="${endPageNum}" var="i">
 					<a
-						href="<%=request.getContextPath()%>/mypage/orderstatus/safe?currentPage=${i}"><span>${i}
+						href="<%=request.getContextPath()%>/mypage/goods/hide?currentPage=${i}"><span>${i}
 					</span></a>
 				</c:forEach>
 				<c:if test="${endPageNum<totalPageNum}">
 					<a
-						href="<%=request.getContextPath()%>/mypage/orderstatus/safe?currentPage=${endPageNum+1}">다음</a>
+						href="<%=request.getContextPath()%>/mypage/goods/hide?currentPage=${endPageNum+1}">다음</a>
 				</c:if>
 			</c:otherwise>
 		</c:choose>
