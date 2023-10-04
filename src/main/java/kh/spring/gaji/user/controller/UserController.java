@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import kh.spring.gaji.user.model.dto.UserDto;
@@ -35,6 +36,13 @@ public class UserController {
 	        ra.addFlashAttribute("msg", "계정 생성이 실패하였습니다. 다시 시도해주십시오.");
 	        return "user/singup"; // 예외 발생 시 다시 회원 가입 페이지로 이동
 	    }
+	}
+	
+	@PostMapping("checkid")
+	@ResponseBody
+	public String checkId(String userId) {
+		String result = service.checkId(userId);
+		return result;
 	}
 
 	

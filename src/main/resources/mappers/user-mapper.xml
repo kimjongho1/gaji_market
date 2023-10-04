@@ -163,8 +163,8 @@
 		update user set password=#{password} where user_id=#{userId}
 	</update>
 	
-	<select id="checkId" parameterType="string" resultType="_int">	<!-- 아이디 중복검사 -->
-		select count(*) from user where user_id=#{userId}
+	<select id="checkId" parameterType="string" resultType="string">	<!-- 아이디 중복검사 -->
+		select user_id from users where user_id=#{userId}
 	</select>
 	
 	<select id="checkMobileNumber" parameterType="string" resultType="_int">	<!-- 7P 전화번호 중복검사 -->

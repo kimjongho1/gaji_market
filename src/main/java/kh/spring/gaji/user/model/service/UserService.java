@@ -66,7 +66,7 @@ public interface UserService {
 
     public int updatePass(Map<String, Object> map);
 
-    public int checkId(String userId);
+    public String checkId(String userId);
 
     public int checkMobileNumber(String mobileNumber);
 

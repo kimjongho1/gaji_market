@@ -156,7 +156,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public int checkId(String userId) {
+    public String checkId(String userId) {
         return userDao.checkId(userId);
     }
 

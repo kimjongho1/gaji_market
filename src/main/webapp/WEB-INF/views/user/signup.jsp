@@ -5,6 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>회원가입</title>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <style>
 * {
 	margin: 0px;
@@ -167,18 +168,18 @@ body {
 </head>
 <body>
 	<form action=signup method="POST" class="joinForm"
-		onsubmit="DoJoinForm__submit(this); return false;">
+		onsubmit="return Validation(); return false;">
 
 		<div class="textForm">
 			<span style="display: flex;">
-				<input name="userId" type="text" class="id" placeholder="아이디"
+				<input name="userId" type="text" class="id" placeholder="아이디" id="userId"
 				required="required">
 				<button type="button" class="btn-id"
-				onclick="">중복확인</button>
+				id="checkDuplicateBtn">중복확인</button>
 			</span>
 		</div>
 		<div class="textForm">
-			<input name="password" type="password" class="pw" placeholder="비밀번호"
+			<input name="password" type="password" class="pw" placeholder="비밀번호" id="password"
 				required="required">
 		</div>
 		<div class="textForm">
@@ -187,7 +188,7 @@ body {
 		</div>
 		<div class="textForm">
 			<span style="display: flex;">
-				<input name="email" type="text" class="email" placeholder="이메일"
+				<input name="email" type="text" class="email" placeholder="이메일" id="email"
 				required="required">
 				<button type="button" class="btn-email"
 				onclick="">인증번호 요청</button>
@@ -198,15 +199,15 @@ body {
 				placeholder="인증번호 확인" required="required">
 		</div>
 		<div class="textForm">
-			<input name="name" type="text" class="name" placeholder="이름"
+			<input name="name" type="text" class="name" placeholder="이름" id="name"
 				required="required">
 		</div>
 		<div class="textForm">
-			<input name="nickname" type="text" class="nickname" placeholder="닉네임"
+			<input name="nickname" type="text" class="nickname" placeholder="닉네임" id="nickname"
 				required="required">
 		</div>
 		<div class="textForm">
-			<input name="mobileNumber" type="text" class="cellphoneNo"
+			<input name="mobileNumber" type="text" class="cellphoneNo" id="mobileNumber"
 				placeholder="전화번호" required="required">
 		</div>
 		<div class="textForm">
@@ -235,7 +236,7 @@ body {
 			<input type="text" name="addressNickname" id="sample4_detailAddress"
 				placeholder="주소별칭" class="cellphoneNo">
 		</div>
-		<input type="submit" class="btn" value="J O I N" />
+		<input type="submit" onclick="Validation()" class="btn" value="J O I N" />
 	</form>
 </body>
 <script
@@ -302,4 +303,160 @@ body {
 				}).open();
 	}
 </script>
+<script>
+    // 유효성 검사 메서드
+    function Validation() {
+        // 변수에 저장
+        var userId = document.getElementById("userId");
+        var password = document.getElementById("password");
+        var loginPwConfirm = document.getElementById("loginPwConfirm");
+        var email = document.getElementById("email");
+        var name = document.getElementById("name");
+        var nickname = document.getElementById("nickname");
+        var mobileNumber = document.getElementById("mobileNumber");
+        var postCode = document.getElementById("sample4_postcode");
+        var roadAddress = document.getElementById("sample4_roadAddress");
+        var address = document.getElementById("sample4_jibunAddress");
+        var detailAddress = document.getElementById("sample4_detailAddress");
+        var addressNickname = document.getElementById("addressNickname");
+
+        // 정규식 패턴 정의
+        var idPattern = /^[a-zA-Z0-9]{4,10}$/; // 아이디는 4~10자의 영문 대소문자와 숫자만 허용
+        var passwordPattern = /^[a-zA-Z0-9!@#$%^&*()_+]{6,20}$/; // 비밀번호는 6~20자의 영문 대소문자, 숫자, 특수문자 허용
+        var emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/; // 이메일 주소 형식
+        var namePattern = /^[가-힣a-zA-Z]{2,30}$/; // 이름은 2~30자의 한글 또는 영문 허용
+        var nicknamePattern = /^[a-zA-Z0-9ㄱ-ㅎ가-힣]{4,30}$/; // 닉네임은 4~30자의 영문 대소문자, 숫자, 한글 허용
+        var mobileNumberPattern = /^[0-9]{10,11}$/; // 전화번호는 10자 또는 11자의 숫자만 허용
+        var postCodePattern = /^[0-9]{5}$/; // 우편번호는 5자리 숫자만 허용
+
+
+        // 아이디 확인
+        if (userId.value == "") {
+            alert("아이디를 입력하세요.");
+            userId.focus();
+            return false;
+        }
+        if (!idPattern.test(userId.value)) {
+            alert("아이디는 4~10자의 영문 대소문자와 숫자만 허용합니다.");
+            userId.focus();
+            return false;
+        }
+
+        // 비밀번호 확인
+        if (password.value == "") {
+            alert("비밀번호를 입력하세요.");
+            password.focus();
+            return false;
+        }
+        if (!passwordPattern.test(password.value)) {
+            alert("비밀번호는 6~20자의 영문 대소문자, 숫자, 특수문자를 허용합니다.");
+            password.focus();
+            return false;
+        }
+
+        // 비밀번호 확인
+        if (loginPwConfirm.value !== password.value) {
+            alert("비밀번호와 확인 비밀번호가 일치하지 않습니다.");
+            loginPwConfirm.focus();
+            return false;
+        }
+
+        // 이메일 확인
+        if (email.value == "") {
+            alert("이메일을 입력하세요.");
+            email.focus();
+            return false;
+        }
+        if (!emailPattern.test(email.value)) {
+            alert("올바른 이메일 주소 형식이 아닙니다.");
+            email.focus();
+            return false;
+        }
+
+        // 이름 확인
+        if (name.value == "") {
+            alert("이름을 입력하세요.");
+            name.focus();
+            return false;
+        }
+        if (!namePattern.test(name.value)) {
+            alert("이름은 2~15자의 한글 또는 영문만 허용합니다.");
+            name.focus();
+            return false;
+        }
+
+        // 닉네임 확인
+        if (nickname.value == "") {
+            alert("닉네임을 입력하세요.");
+            nickname.focus();
+            return false;
+        }
+        if (!nicknamePattern.test(nickname.value)) {
+            alert("닉네임은 4~30자의 영문 대소문자, 숫자, 한글만 허용합니다.");
+            nickname.focus();
+            return false;
+        }
+        
+     // 전화번호 확인
+        if (mobileNumber.value == "") {
+            alert("전화번호를 입력하세요.");
+            mobileNumber.focus();
+            return false;
+        }
+        if (!mobileNumberPattern.test(mobileNumber.value)) {
+            alert("전화번호는 10자 또는 11자의 숫자만 허용합니다.");
+            mobileNumber.focus();
+            return false;
+        }
+
+        // 우편번호 확인
+        if (postCode.value == "") {
+            alert("우편번호를 입력하세요.");
+            postCode.focus();
+            return false;
+        }
+        if (!postCodePattern.test(postCode.value)) {
+            alert("우편번호는 5자리 숫자만 허용합니다.");
+            postCode.focus();
+            return false;
+        }
+
+
+
+        // 유효성 문제가 없을 시 폼 제출
+        document.joinForm.submit();
+    }
+    
+    // 중복 확인을 수행하는 함수
+    $("#checkDuplicateBtn").click(function () {
+    	console.log("버튼클릭확인");
+        // 중복 확인할 아이디 값을 가져옴
+        var userId = $("#userId").val();
+
+        // 서버에 보낼 요청 URL (실제로는 서버 엔드포인트에 맞게 수정해야 함)
+        var apiUrl = "checkid"; // 예시 URL, 실제로는 서버의 URL로 수정
+
+     // AJAX를 사용하여 서버에 중복 확인 요청 보냄
+        $.ajax({
+            url: apiUrl,
+            type: "post",
+            data: { userId: userId },
+            success: function (data) {
+            	console.log(data);
+            	if (data !== ""){
+            		 // 아이디가 중복된 경우 처리 (예: 메시지 표시)
+            		alert("이미 사용 중인 아이디입니다.");
+            	}else {
+            		// 아이디가 중복되지 않은 경우 처리 (예: 메시지 표시)
+                    alert("사용 가능한 아이디입니다.");
+            	}
+            },
+            error: function (error) {
+                console.error("중복 확인 중 오류 발생:", error);
+            }
+        });
+    });
+    
+</script>
+
 </html>
