@@ -76,8 +76,6 @@
         <button onclick="cancel('${safePurchaseInfoDto.buyerId}','${safePurchaseInfoDto.transactionId}','${safePurchaseInfoDto.goodsId}')" class="btn btn-primary btn-lg">결제취소</button>
     </c:if>
 
-    <%-- <button onclick="report('${safePurchaseInfoDto.buyerId}','${safePurchaseInfoDto.transactionId}')">신고하기</button> --%>
-
 <!-- 모달 트리거 버튼 -->
 <button type="button" id="showReportModalBtn" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#reportModal">
   신고하기
@@ -118,8 +116,9 @@
   </div>
 </div>
 
+
     <c:if test="${safePurchaseInfoDto.tradingStatus eq 3}">
-        <button onclick="closePay('${safePurchaseInfoDto.buyerId}','${safePurchaseInfoDto.transactionId}','${safePurchaseInfoDto.goodsId}')">결제확정</button>
+        <button onclick="closePay('${safePurchaseInfoDto.buyerId}','${safePurchaseInfoDto.transactionId}','${safePurchaseInfoDto.goodsId}')"  class="btn btn-primary btn-lg">결제확정</button>
     </c:if>
     <a href="#"><p>상품명:${safePurchaseInfoDto.goodsTitle}</p></a>
     <p>판매자명:${safePurchaseInfoDto.sellerName}</p>
@@ -205,13 +204,12 @@ function closePayCallback(data){
 </script>
 <script>
 $(document).ready(function () {
-    // Bootstrap 모달을 초기화합니다.
     $('#reportModal').modal({
         backdrop: 'static', // 모달 바깥을 클릭해도 모달이 닫히지 않도록 설정
         show: false // 페이지 로드 시 모달을 표시하지 않도록 설정
     });
 
-    // 신고하기 버튼을 클릭하면 모달을 표시합니다.
+    // 신고하기 버튼을 클릭하면 모달을 표시
     $('#showReportModalBtn').click(function () {
         $('#reportModal').modal('show');
     });

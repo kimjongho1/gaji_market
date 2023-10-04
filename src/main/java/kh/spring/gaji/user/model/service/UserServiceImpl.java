@@ -71,6 +71,14 @@ public class UserServiceImpl implements UserService {
     	result.put("inFacePurchaseList",userDao.getInfacePurchaseList(buyerId,currentPage,PAGESIZE,totalCnt));
         return result;
     }
+    
+    public Map<String,Object> getSearchInfacePurchaseList(String buyerId,int currentPage,int PAGESIZE,String searchWord){
+    	Map<String,Object> result=new HashMap<String,Object>();
+    	int totalCnt = userDao.getSearchInfaceTotalCnt(buyerId,searchWord);
+    	result.put("totalCnt",totalCnt);
+    	result.put("inFacePurchaseList",userDao.getSearchInfacePurchaseList(buyerId,currentPage,PAGESIZE,totalCnt,searchWord));
+    	return result;
+    }
 
     @Override
     public List<MyGoodsListDto> getOnSaleList(String userId) {
@@ -209,4 +217,16 @@ public class UserServiceImpl implements UserService {
     public int updateRatingScore(Map<String, String> map) {
         return userDao.updateRatingScore(map);
     }
+
+	@Override
+	public String checkIdForSafe(String transactionId) {
+		return userDao.checkIdForSafe(transactionId);
+	}
+
+	@Override
+	public String checkIdForSafeSeller(String transactionId) {
+		return userDao.checkIdForSafeSeller(transactionId);
+	}
+
+
 }

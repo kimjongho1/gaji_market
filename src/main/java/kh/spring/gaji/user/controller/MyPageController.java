@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -37,6 +38,7 @@ public class MyPageController {
 	
 	@GetMapping("/orderstatus/safe")
 	public String safeorderStatus(Model model,Integer currentPage,String searchWord) {	// 나의 안전거래 구매내역 페이지.
+		//String userId=(String)session.getAttribute("userId"); 
 		int totalCnt=0;
 		List<UserSafeTradingDto> safePurchaseList=null;
 		if(currentPage==null)	//현재 페이지가 들어온게 없다면 1페이지.
@@ -72,19 +74,20 @@ public class MyPageController {
 	}
 	
 	@GetMapping("/orderstatus/inface")
-	public String infaceorderStatus(Model model,Integer currentPage,String searchWord) {	// 나의 직거래 구매내역 페이지.
+	public String infaceOrderStatus(Model model,Integer currentPage,String searchWord,HttpSession session) {	// 나의 직거래 구매내역 페이지.
+		//String userId=(String)session.getAttribute("userId"); 
 		int totalCnt=0;
 		List<InFaceTradingDto> infacePurchaseList=null;
 		if(currentPage==null)	//현재 페이지가 들어온게 없다면 1페이지.
 			currentPage=1;
 		if(searchWord==null) {	// 검색어가 들어온게 없다면 검색어없는 mapper로 목록 가져오기
 			Map<String,Object> map= userService.getInfacePurchaseList("qordmlgjs",(int)currentPage,PAGESIZE);	//추후 userId들어가야함
-			infacePurchaseList = (List<InFaceTradingDto>)map.get("inFaceTradingList");
+			infacePurchaseList = (List<InFaceTradingDto>)map.get("inFacePurchaseList");
 			totalCnt= (int)map.get("totalCnt");
 		}
 		else {					//검색어가 있다면 그에따른 mapper로 목록 가져오기
 			Map<String,Object> map= userService.getSearchInfacePurchaseList("qordmlgjs",(int)currentPage,PAGESIZE,searchWord);
-			infacePurchaseList = (List<InFaceTradingDto>)map.get("inFaceTradingList");
+			infacePurchaseList = (List<InFaceTradingDto>)map.get("inFacePurchaseList");
 			totalCnt= (int)map.get("totalCnt");
 			model.addAttribute("searchWord",searchWord);
 		}
@@ -107,16 +110,10 @@ public class MyPageController {
 	
 	@GetMapping("/salesstatus")
 	public String salesStatus(Model model) {	// 나의 판매내역
+		//String userId=(String)session.getAttribute("userId"); 
 		List<MyGoodsListDto> myGoodsList = userService.getOnSaleList("cjsdudwns"); //추후 userId들어가야함
 		model.addAttribute("myGoodsList",myGoodsList);
 		return "mypage/salesstatus";
-	}
-	
-	@PostMapping("/getInFaceView")	// 직거래 구매내역을 가져오는 ajax url
-	@ResponseBody
-	public List<InFaceTradingDto> getInfaceView(){
-		System.out.println("MyPageController 직거래내역 url");
-		return userService.getInfacePurchaseList("qordmlgjs"); //이후 userId로 대체.
 	}
 	
 	@PostMapping("/getonsale")	// 판매내역(판매중) ajax 응답url
@@ -125,17 +122,6 @@ public class MyPageController {
 		return userService.getOnSaleList("cjsdudwns");
 	}
 	
-	@PostMapping("/getclosed")
-	@ResponseBody
-	public List<MyGoodsListDto> getClosed(Model model){
-		return userService.getSoldOutList("cjsdudwns");
-	}
-	
-	@PostMapping("/gethide")
-	@ResponseBody
-	public List<MyGoodsListDto> getHide(Model model){
-		return userService.getHideList("cjsdudwns");
-	}
 
 	@GetMapping("/myinfo")
 	public String myInfo() {	// 회원정보
@@ -153,7 +139,12 @@ public class MyPageController {
 	}
 	
 	@GetMapping("/deal/safe/seller")
-	public String seller(Model model,String transactionId) {		// 안전 거래 상세조회 판매자 페이지
+	public String seller(Model model,String transactionId,RedirectAttributes redirectattr) { // 안전 거래 상세조회 판매자 페이지
+		if(!userService.checkIdForSafeSeller(transactionId).equals("cjsdudwns")) //session.getAttribute("userId")로 변경해야함.
+		{
+			redirectattr.addFlashAttribute("msg","잘못된 접근입니다.");
+			return "redirect:/main/main";
+		}
 		SafePurchaseInfoDto safePurchaseInfoDto = userService.getSafePurchaseInfo(transactionId);
 		model.addAttribute("safePurchaseInfoDto",safePurchaseInfoDto);
 		return "mypage/seller";
@@ -161,6 +152,11 @@ public class MyPageController {
 	
 	@PostMapping("/deal/safe/seller/insert/trackingnumber")
 	public String insertTrackingNumber(Model model,int shippingCompany,String trackingNumber,String transactionId,RedirectAttributes redirectattr) {
+		if(!userService.checkIdForSafeSeller(transactionId).equals("cjsdudwns")) //session.getAttribute("userId")로 변경해야함.
+		{
+			redirectattr.addFlashAttribute("msg","잘못된 접근입니다.");
+			return "redirect:/main/main";
+		}
 		Map<String,Object> map= new HashMap<String,Object>();
 		String msg=null;
 		map.put("shippingCompany",shippingCompany);
@@ -174,8 +170,14 @@ public class MyPageController {
 	}
 	
 	@GetMapping("/deal/safe/buyer")
-	public String buyer(Model model,String transactionId) {			// 안전 거래 상세조회 구매자 페이지
-		SafePurchaseInfoDto safePurchaseInfoDto = userService.getSafePurchaseInfo(transactionId);	//추후 transactionId를 받아와서 처리하게될것.
+	public String buyer(Model model,String transactionId,RedirectAttributes redirectattr,HttpSession session) {			// 안전 거래 상세조회 구매자 페이지
+		if(!userService.checkIdForSafe(transactionId).equals("qordmlgjs")) //session.getAttribute("userId")로 변경해야함.
+		{
+			redirectattr.addFlashAttribute("msg","잘못된 접근입니다.");
+			return "redirect:/main/main";
+		}
+		
+		SafePurchaseInfoDto safePurchaseInfoDto = userService.getSafePurchaseInfo(transactionId);
 		model.addAttribute("safePurchaseInfoDto",safePurchaseInfoDto);
 		return "mypage/buyer";
 	}

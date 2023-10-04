@@ -18,6 +18,15 @@
 		order by created_at DESC
 	</select>
 	
+	<select id="checkIdForSafeSeller" parameterType="string" resultType="string">
+		select user_id from goods join safe_trading using (goods_Id)
+		where transaction_Id=#{transactionId}
+	</select>
+	
+	<select id="checkIdForSafe" parameterType="string" resultType="string">
+		select buyer_id from safe_trading where transaction_id=#{transactionId}
+	</select>
+	
 	<select id="getSafeTotalCnt" parameterType="string" resultType="int">	<!-- 9P 아이디에 해당하는 안전거래 구매 총갯수 -->
 		select count(*) from safe_trading where buyer_id=#{buyerId}
 	</select>

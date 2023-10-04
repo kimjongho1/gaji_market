@@ -24,11 +24,17 @@ public interface UserService {
 
     public List<GoodsListDto> getFavoriteList(String userId);
 
+    public String checkIdForSafe(String transactionId);
+    
+    public String checkIdForSafeSeller(String transactionId);
+    
     public Map<String,Object> getSafePurchaseList(String buyerId,int currentPage,int PAGESIZE);
     
     public Map<String,Object> getSearchSafePurchaseList(String buyerId,int currentPage,int PAGESIZE,String searchWord);
 
     public Map<String,Object> getInfacePurchaseList(String buyerId,int currentPage,int PAGESIZE);
+    
+    public Map<String,Object> getSearchInfacePurchaseList(String buyerId,int currentPage,int PAGESIZE,String searchWord);
 
     public List<MyGoodsListDto> getOnSaleList(String userId);
 

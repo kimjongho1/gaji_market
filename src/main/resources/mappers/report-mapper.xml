@@ -2,6 +2,10 @@
 <!DOCTYPE mapper PUBLIC " -//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="report">
 
+	<select id="checkReport" parameterType="map" resultType="_int">
+		select count(*) from goods_report where reporter_Id=#{reporterId} and ref_Id=#{refId}
+	</select>
+	
 	<insert id="reportGoods" parameterType="map"> 	<!--11P 상품 신고하기 -->
 		insert into goods_report values(#{refId},#{reporterId},#{content},#{reportCategory},default,default) 
 	</insert>

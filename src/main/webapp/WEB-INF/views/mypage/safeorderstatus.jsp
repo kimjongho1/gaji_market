@@ -242,6 +242,5 @@
 	<!-- Bootstrap core JS-->
 	<script
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
-	<!-- <script>$(".pagingForInface").hide();</script> 페이지 진입시에는 안전거래 페이지번호만 보이게하는코드 -->
 </body>
 </html>

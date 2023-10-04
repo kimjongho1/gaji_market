@@ -26,12 +26,9 @@ public class ReportDao {
 
     public int reportGoods(Map<String,Object> map) {	// 상품신고 
         int result=0;
-    	try {
-    	result= sqlSession.insert("reportGoods", map);
-        }
-        catch(Exception e) {
-        	e.printStackTrace();
-        }
+        if((int)sqlSession.selectOne("report.checkReport",map)==1)
+        	return result;
+    	result= sqlSession.insert("report.reportGoods", map);
     	return result;
     }
 }
