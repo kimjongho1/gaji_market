@@ -178,6 +178,12 @@
 											<path stroke-linecap="round" stroke-linejoin="round"
 												stroke-width="2" d="M8 9l4-4 4 4m0 6l-4 4-4-4"></path></svg></span>
 								</button>
+								<ul class="absolute w-full py-1 mt-1 overflow-auto bg-white rounded-md shadow-lg max-h-60 ring-1 ring-black ring-opacity-5 focus:outline-none text-sm" aria-labelledby="headlessui-listbox-button-:r0:" aria-orientation="vertical" id="headlessui-listbox-options-:r1:" role="listbox" tabindex="0" data-headlessui-state="open" aria-activedescendant="headlessui-listbox-option-:r2:"><li class="text-amber-900 bg-gray-100
+                          cursor-default select-none relative py-2 ps-10 pe-4" id="headlessui-listbox-option-:r2:" role="option" tabindex="-1" aria-selected="true" data-headlessui-state="active selected"><span class="font-medium block truncate">추천순</span><span class="text-amber-600
+                                check-icon absolute inset-y-0 start-0 flex items-center ps-3"><svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 20 20" class="w-5 h-5" aria-hidden="true" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg></span></li><li class="text-gray-900
+                          cursor-default select-none relative py-2 ps-10 pe-4" id="headlessui-listbox-option-:r3:" role="option" tabindex="-1" aria-selected="false" data-headlessui-state=""><span class="font-normal block truncate">최신순</span></li><li class="text-gray-900
+                          cursor-default select-none relative py-2 ps-10 pe-4" id="headlessui-listbox-option-:r4:" role="option" tabindex="-1" aria-selected="false" data-headlessui-state=""><span class="font-normal block truncate">낮은가격순</span></li><li class="text-gray-900
+                          cursor-default select-none relative py-2 ps-10 pe-4" id="headlessui-listbox-option-:r5:" role="option" tabindex="-1" aria-selected="false" data-headlessui-state=""><span class="font-normal block truncate">높은가격순</span></li></ul>
 							</div>
 						</div>
 					</div>
@@ -350,6 +356,8 @@
 	<script
 		src="${pageContext.request.contextPath}/resources/js/bootstrap.min.js"></script>
 	<script src="${pageContext.request.contextPath}/resources/js/main.js"></script>
+	<script src="${pageContext.request.contextPath}/resources/js/goods/framework.js"></script>
+	<script src="${pageContext.request.contextPath}/resources/js/goods/app.js"></script>
 
 
 </body>
