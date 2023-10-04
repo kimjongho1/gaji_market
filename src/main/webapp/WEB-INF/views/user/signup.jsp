@@ -235,7 +235,7 @@ body {
 			<input type="text" name="addressNickname" id="sample4_detailAddress"
 				placeholder="주소별칭" class="cellphoneNo">
 		</div>
-		<input type="submit" class="btn" value="J O I N" />
+		<input type="submit" onclick="Validation()" class="btn" value="J O I N" />
 	</form>
 </body>
 <script
@@ -302,4 +302,102 @@ body {
 				}).open();
 	}
 </script>
+<script>
+    // 유효성 검사 메서드
+    function Validation() {
+        // 변수에 저장
+        var userId = document.getElementById("userId");
+        var password = document.getElementById("password");
+        var loginPwConfirm = document.getElementById("loginPwConfirm");
+        var email = document.getElementById("email");
+        var name = document.getElementById("name");
+        var nickname = document.getElementById("nickname");
+        var mobileNumber = document.getElementById("mobileNumber");
+        var postCode = document.getElementById("sample4_postcode");
+        var roadAddress = document.getElementById("sample4_roadAddress");
+        var address = document.getElementById("sample4_jibunAddress");
+        var detailAddress = document.getElementById("sample4_detailAddress");
+        var addressNickname = document.getElementById("addressNickname");
+
+        // 정규식 패턴 정의
+        var idPattern = /^[a-zA-Z0-9]{4,10}$/; // 아이디는 4~10자의 영문 대소문자와 숫자만 허용
+        var passwordPattern = /^[a-zA-Z0-9!@#$%^&*()_+]{6,20}$/; // 비밀번호는 6~20자의 영문 대소문자, 숫자, 특수문자 허용
+        var emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/; // 이메일 주소 형식
+        var namePattern = /^[가-힣a-zA-Z]{2,30}$/; // 이름은 2~30자의 한글 또는 영문 허용
+        var nicknamePattern = /^[a-zA-Z0-9ㄱ-ㅎ가-힣]{4,30}$/; // 닉네임은 4~30자의 영문 대소문자, 숫자, 한글 허용
+
+        // 아이디 확인
+        if (userId.value == "") {
+            alert("아이디를 입력하세요.");
+            userId.focus();
+            return false;
+        }
+        if (!idPattern.test(userId.value)) {
+            alert("아이디는 4~10자의 영문 대소문자와 숫자만 허용합니다.");
+            userId.focus();
+            return false;
+        }
+
+        // 비밀번호 확인
+        if (password.value == "") {
+            alert("비밀번호를 입력하세요.");
+            password.focus();
+            return false;
+        }
+        if (!passwordPattern.test(password.value)) {
+            alert("비밀번호는 6~20자의 영문 대소문자, 숫자, 특수문자를 허용합니다.");
+            password.focus();
+            return false;
+        }
+
+        // 비밀번호 확인
+        if (loginPwConfirm.value !== password.value) {
+            alert("비밀번호와 확인 비밀번호가 일치하지 않습니다.");
+            loginPwConfirm.focus();
+            return false;
+        }
+
+        // 이메일 확인
+        if (email.value == "") {
+            alert("이메일을 입력하세요.");
+            email.focus();
+            return false;
+        }
+        if (!emailPattern.test(email.value)) {
+            alert("올바른 이메일 주소 형식이 아닙니다.");
+            email.focus();
+            return false;
+        }
+
+        // 이름 확인
+        if (name.value == "") {
+            alert("이름을 입력하세요.");
+            name.focus();
+            return false;
+        }
+        if (!namePattern.test(name.value)) {
+            alert("이름은 2~15자의 한글 또는 영문만 허용합니다.");
+            name.focus();
+            return false;
+        }
+
+        // 닉네임 확인
+        if (nickname.value == "") {
+            alert("닉네임을 입력하세요.");
+            nickname.focus();
+            return false;
+        }
+        if (!nicknamePattern.test(nickname.value)) {
+            alert("닉네임은 4~30자의 영문 대소문자, 숫자, 한글만 허용합니다.");
+            nickname.focus();
+            return false;
+        }
+
+        // 나머지 필드에 대한 유효성 검사를 추가하세요.
+
+        // 유효성 문제가 없을 시 폼 제출
+        document.joinForm.submit();
+    }
+</script>
+
 </html>
