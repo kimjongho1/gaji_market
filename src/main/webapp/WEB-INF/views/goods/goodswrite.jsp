@@ -44,11 +44,33 @@
 	text-decoration: none;
 	cursor: pointer;
 }
+
+#container {
+	width: 1000px;
+	margin: 20px auto;
+}
+
+.ck-editor__editable[role="textbox"] {
+	/* editing area */
+	min-height: 200px;
+}
+
+.ck-content .image {
+	/* block images */
+	max-width: 80%;
+	margin: 20px auto;
+}
+
+.ck.ck-dropdown__panel {
+	max-height: 160px; /* or anything else, more likely ~300px or so */
+	overflow-y: auto;
+}
 </style>
 </head>
 <body>
 	<h2>중고 거래 게시판 글 작성</h2>
-	<form action="your_action_url" method="post">
+	<form action="${pageContext.request.contextPath}/goods/write.do"
+		method="post" enctype="multipart/form-data">
 		<input type="text" name="title" id="title" placeholder="제목"> <br>
 		<!-- 카테고리 선택 드롭다운 -->
 		<label for="selectedCategory">카테고리 선택:</label> <select
@@ -75,9 +97,16 @@
 			</c:forEach>
 		</select> <input type="text" id="price" name="price" placeholder="판매가격">
 		<br>
-
+		<div id="container">
+			<div id="editor"></div>
+		</div>
+		<label for="safeTradingYn">안전결제</label> <input type="checkbox"
+			name="safeTradingYn" id="safeTradingYn" value="N">
+		<!-- 모달 열기 버튼 -->
+		<br>
 		<!-- 모달 열기 버튼 -->
 		<button id="openMapModal" type="button">거래희망장소</button>
+		<input type="file" name="files" multiple="multiple" accept="image/*">
 
 		<!-- 모달 -->
 		<div id="mapModal" class="modal">
@@ -86,19 +115,204 @@
 				<!-- 카카오맵을 표시할 영역 -->
 				<div id="kakaoMap" style="width: 700px; height: 300px;"></div>
 				<p>
-					<em>지도를 클릭해주세요!</em>
+					<em>거래희망장소를 클릭해주세요!</em>
 				</p>
 				<button id="cancelButton" type="button">취소</button>
 				<button id="confirmButton" type="button">확인</button>
 				<div id="clickLatlng"></div>
 			</div>
 		</div>
-		<!-- 기존 확인 버튼은 숨김 처리 -->
-		<input type="submit" id="submitButton" value="확인" style="display: none;">
+		<input type="text" name="lat" id="latitudeInput" value=""> <input
+			type="text" name="lng" id="longitudeInput" value=""> <br>
+		<input type="submit" value="확인">
+
 	</form>
+	<!--
+            The "super-build" of CKEditor&nbsp;5 served via CDN contains a large set of plugins and multiple editor types.
+            See https://ckeditor.com/docs/ckeditor5/latest/installation/getting-started/quick-start.html#running-a-full-featured-editor-from-cdn
+        -->
+	<script
+		src="https://cdn.ckeditor.com/ckeditor5/39.0.2/super-build/ckeditor.js"></script>
+	<!--
+            Uncomment to load the Spanish translation
+        -->
+	<script
+		src="https://cdn.ckeditor.com/ckeditor5/39.0.2/super-build/translations/ko.js"></script>
+	<script>
+            // This sample still does not showcase all CKEditor&nbsp;5 features (!)
+            // Visit https://ckeditor.com/docs/ckeditor5/latest/features/index.html to browse all the features.
+            CKEDITOR.ClassicEditor.create(document.getElementById("editor"), {
+                // https://ckeditor.com/docs/ckeditor5/latest/features/toolbar/toolbar.html#extended-toolbar-configuration-format
+                toolbar: {
+                    items: [
+                        'exportPDF','exportWord', '|',
+                        'findAndReplace', 'selectAll', '|',
+                        'heading', '|',
+                        'bold', 'italic', 'strikethrough', 'underline', 'code', 'subscript', 'superscript', 'removeFormat', '|',
+                        'bulletedList', 'numberedList', 'todoList', '|',
+                        'outdent', 'indent', '|',
+                        'undo', 'redo',
+                        '-',
+                        'fontSize', 'fontFamily', 'fontColor', 'fontBackgroundColor', 'highlight', '|',
+                        'alignment', '|',
+                        'link', 'insertImage', 'blockQuote', 'insertTable', 'mediaEmbed', 'codeBlock', 'htmlEmbed', '|',
+                        'specialCharacters', 'horizontalLine', 'pageBreak', '|',
+                        'textPartLanguage', '|',
+                        'sourceEditing'
+                    ],
+                    shouldNotGroupWhenFull: true
+                },
+                // Changing the language of the interface requires loading the language file using the <script> tag.
+                 language: 'ko',
+                list: {
+                    properties: {
+                        styles: true,
+                        startIndex: true,
+                        reversed: true
+                    }
+                },
+                // https://ckeditor.com/docs/ckeditor5/latest/features/headings.html#configuration
+                heading: {
+                    options: [
+                        { model: 'paragraph', title: 'Paragraph', class: 'ck-heading_paragraph' },
+                        { model: 'heading1', view: 'h1', title: 'Heading 1', class: 'ck-heading_heading1' },
+                        { model: 'heading2', view: 'h2', title: 'Heading 2', class: 'ck-heading_heading2' },
+                        { model: 'heading3', view: 'h3', title: 'Heading 3', class: 'ck-heading_heading3' },
+                        { model: 'heading4', view: 'h4', title: 'Heading 4', class: 'ck-heading_heading4' },
+                        { model: 'heading5', view: 'h5', title: 'Heading 5', class: 'ck-heading_heading5' },
+                        { model: 'heading6', view: 'h6', title: 'Heading 6', class: 'ck-heading_heading6' }
+                    ]
+                },
+                // https://ckeditor.com/docs/ckeditor5/latest/features/editor-placeholder.html#using-the-editor-configuration
+                placeholder: 'Welcome to CKEditor&nbsp;5!',
+                // https://ckeditor.com/docs/ckeditor5/latest/features/font.html#configuring-the-font-family-feature
+                fontFamily: {
+                    options: [
+                        'default',
+                        'Arial, Helvetica, sans-serif',
+                        'Courier New, Courier, monospace',
+                        'Georgia, serif',
+                        'Lucida Sans Unicode, Lucida Grande, sans-serif',
+                        'Tahoma, Geneva, sans-serif',
+                        'Times New Roman, Times, serif',
+                        'Trebuchet MS, Helvetica, sans-serif',
+                        'Verdana, Geneva, sans-serif'
+                    ],
+                    supportAllValues: true
+                },
+                // https://ckeditor.com/docs/ckeditor5/latest/features/font.html#configuring-the-font-size-feature
+                fontSize: {
+                    options: [ 10, 11, 11.3514, 12, 13, 14, 15, 16,  'default', 17, 18, 19, 20, 21, 22 ],
+                    supportAllValues: true
+                },
+                // Be careful with the setting below. It instructs CKEditor to accept ALL HTML markup.
+                // https://ckeditor.com/docs/ckeditor5/latest/features/general-html-support.html#enabling-all-html-features
+                htmlSupport: {
+                    allow: [
+                        {
+                            name: /.*/,
+                            attributes: true,
+                            classes: true,
+                            styles: true
+                        }
+                    ]
+                },
+                // Be careful with enabling previews
+                // https://ckeditor.com/docs/ckeditor5/latest/features/html-embed.html#content-previews
+                htmlEmbed: {
+                    showPreviews: true
+                },
+                // https://ckeditor.com/docs/ckeditor5/latest/features/link.html#custom-link-attributes-decorators
+                link: {
+                    decorators: {
+                        addTargetToExternalLinks: true,
+                        defaultProtocol: 'https://',
+                        toggleDownloadable: {
+                            mode: 'manual',
+                            label: 'Downloadable',
+                            attributes: {
+                                download: 'file'
+                            }
+                        }
+                    }
+                },
+                // https://ckeditor.com/docs/ckeditor5/latest/features/mentions.html#configuration
+                mention: {
+                    feeds: [
+                        {
+                            marker: '@',
+                            feed: [
+                                '@apple', '@bears', '@brownie', '@cake', '@cake', '@candy', '@canes', '@chocolate', '@cookie', '@cotton', '@cream',
+                                '@cupcake', '@danish', '@donut', '@dragée', '@fruitcake', '@gingerbread', '@gummi', '@ice', '@jelly-o',
+                                '@liquorice', '@macaroon', '@marzipan', '@oat', '@pie', '@plum', '@pudding', '@sesame', '@snaps', '@soufflé',
+                                '@sugar', '@sweet', '@topping', '@wafer'
+                            ],
+                            minimumCharacters: 1
+                        }
+                    ]
+                },
+                // The "super-build" contains more premium features that require additional configuration, disable them below.
+                // Do not turn them on unless you read the documentation and know how to configure them and setup the editor.
+                removePlugins: [
+                    // These two are commercial, but you can try them out without registering to a trial.
+                    // 'ExportPdf',
+                    // 'ExportWord',
+                    'CKBox',
+                    'EasyImage',
+                    // This sample uses the Base64UploadAdapter to handle image uploads as it requires no configuration.
+                    // https://ckeditor.com/docs/ckeditor5/latest/features/images/image-upload/base64-upload-adapter.html
+                    // Storing images as Base64 is usually a very bad idea.
+                    // Replace it on production website with other solutions:
+                    // https://ckeditor.com/docs/ckeditor5/latest/features/images/image-upload/image-upload.html
+                    // 'Base64UploadAdapter',
+                    'RealTimeCollaborativeComments',
+                    'RealTimeCollaborativeTrackChanges',
+                    'RealTimeCollaborativeRevisionHistory',
+                    'PresenceList',
+                    'Comments',
+                    'TrackChanges',
+                    'TrackChangesData',
+                    'RevisionHistory',
+                    'Pagination',
+                    'WProofreader',
+                    // Careful, with the Mathtype plugin CKEditor will not load when loading this sample
+                    // from a local file system (file://) - load this site via HTTP server if you enable MathType.
+                    'MathType',
+                    // The following features are part of the Productivity Pack and require additional license.
+                    'SlashCommand',
+                    'Template',
+                    'DocumentOutline',
+                    'FormatPainter',
+                    'TableOfContents',
+                    'PasteFromOfficeEnhanced'
+                ],
+                ckfinder: {
+    				uploadUrl : '${pageContext.request.contextPath}/upload'
+    			}
+    		})
+    		.then(editor => {
+    			console.log('Editor was initialized');
+    		})
+    		.catch(error => {
+    			console.error(error);
+            });
+        </script>
 	<script
 		src="//dapi.kakao.com/v2/maps/sdk.js?appkey=aec5b89790015b44669217946b7e53f3"></script>
 	<script>
+	// 체크박스 요소 가져오기
+	const safeTradingCheckbox = document.getElementById("safeTradingYn");
+
+	// 체크박스 상태가 변경될 때 실행되는 함수
+	safeTradingCheckbox.addEventListener("change", function() {
+	    if (safeTradingCheckbox.checked) {
+	        // 체크되었을 때 'Y'로 설정
+	        safeTradingCheckbox.value = "Y";
+	    } else {
+	        // 체크 해제됐을 때 'N'로 설정
+	        safeTradingCheckbox.value = "N";
+	    }
+	});
     // 모달 열기 버튼 클릭 시 모달 열기
     document.getElementById("openMapModal").addEventListener("click", function () {
         document.getElementById("mapModal").style.display = "block";
@@ -158,12 +372,22 @@
             // 가져온 위치 정보를 활용하여 원하는 동작 수행
             console.log('선택한 마커의 위도: ' + lat + ', 경도: ' + lng);
             
+            
+            
+            // 폼에 위도와 경도 추가
+            document.getElementById('latitudeInput').value = lat.toFixed(6);
+			document.getElementById('longitudeInput').value = lng.toFixed(6);
+            
+           /*  document.getElementById('latitudeInput').value = lat;
+            document.getElementById('longitudeInput').value = lng;
+            lat = parseFloat(lat.toFixed(10)); // 위도를 소수점 10자리까지 저장
+            lng = parseFloat(lng.toFixed(10)); */
             // 모달 닫기
             document.getElementById('mapModal').style.display = 'none';
         });
     }
 </script>
-<script>
+	<script>
 	
     function updateDongDropdown() {
         const selectedGu = document.getElementById("selectedGu").value;

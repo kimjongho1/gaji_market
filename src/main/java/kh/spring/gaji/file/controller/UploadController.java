@@ -84,7 +84,7 @@ public class UploadController {
 	}
 	
 
-	private File convertMultipartFileToFile(MultipartFile file) throws IOException {
+	public File convertMultipartFileToFile(MultipartFile file) throws IOException {
 		File convertedFile = new File(file.getOriginalFilename());
 		file.transferTo(convertedFile);
 		return convertedFile;
