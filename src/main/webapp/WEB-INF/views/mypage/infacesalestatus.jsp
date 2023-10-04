@@ -10,7 +10,7 @@
 	content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 <meta name="description" content="" />
 <meta name="author" content="" />
-<title>구매내역</title>
+<title>직거래 판매내역</title>
 <!-- Favicon-->
 <!--         <link rel="icon" type="image/x-icon" href="assets/favicon.ico" /> -->
 <!-- Bootstrap icons-->
@@ -147,14 +147,14 @@
 	<!-- Section-->
 	<div class="searchWord">
 		<form
-			action="${pageContext.request.contextPath}/mypage/orderstatus/inface" method="get">
+			action="${pageContext.request.contextPath}/mypage/salestatus/inface" method="get">
 			<input type="search" name="searchWord"> <input class="btn" type="submit" value="찾기">
 		</form>
 	</div>
 
 	<div class="buttons-container text-center margin10">
-		<a class="btn safeTrading" href="${pageContext.request.contextPath}/mypage/orderstatus/safe">안전거래</a>
-		<a class="btn infaceTrading" href="${pageContext.request.contextPath}/mypage/orderstatus/inface">직거래</a>
+		<a class="btn safeTrading" href="${pageContext.request.contextPath}/mypage/salestatus/safe">안전거래</a>
+		<a class="btn infaceTrading" href="${pageContext.request.contextPath}/mypage/salestatus/inface">직거래</a>
 	</div>
 
 	<section class="py-1">
@@ -190,7 +190,7 @@
 							<div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
 								<div class="text-center">
 									<a class="btn btn-outline-dark mt-auto"
-										href="${pageContext.request.contextPath}/mypage/deal/inface/buyer?goodId=${infacePurchaseInfo.goodsId}">상품이동</a>
+										href="${pageContext.request.contextPath}/mypage/deal/inface/seller?goodId=${infacePurchaseInfo.goodsId}">상품이동</a>
 									</div>
 							</div>
 						</div>
@@ -206,30 +206,30 @@
 				<c:if test="${startPageNum!=1}">
 					<%--페이징 이전,번호,다음에 대한 코드 --%>
 					<a
-						href="<%=request.getContextPath()%>/mypage/orderstatus/inface?currentPageNum=${startPageNum-1}&searchWord=${searchWord}">이전</a>
+						href="<%=request.getContextPath()%>/mypage/salestatus/inface?currentPageNum=${startPageNum-1}&searchWord=${searchWord}">이전</a>
 				</c:if>
 				<c:forEach begin="${startPageNum}" end="${endPageNum}" var="i">
 					<a
-						href="<%=request.getContextPath()%>/mypage/orderstatus/inface?currentPage=${i}&searchWord=${searchWord}"><span>${i}</span></a>
+						href="<%=request.getContextPath()%>/mypage/salestatus/inface?currentPage=${i}&searchWord=${searchWord}"><span>${i}</span></a>
 				</c:forEach>
 				<c:if test="${endPageNum<totalPageNum}">
 					<a
-						href="<%=request.getContextPath()%>/mypage/orderstatus/inface?currentPage=${endPageNum+1}&searchWord=${searchWord}">다음</a>
+						href="<%=request.getContextPath()%>/mypage/salestatus/inface?currentPage=${endPageNum+1}&searchWord=${searchWord}">다음</a>
 				</c:if>
 			</c:when>
 			<c:otherwise>
 				<c:if test="${startPageNum!=1}">
 					<a
-						href="<%=request.getContextPath()%>/mypage/orderstatus/inface?currentPageNum=${startPageNum-1}">이전</a>
+						href="<%=request.getContextPath()%>/mypage/salestatus/inface?currentPageNum=${startPageNum-1}">이전</a>
 				</c:if>
 				<c:forEach begin="${startPageNum}" end="${endPageNum}" var="i">
 					<a
-						href="<%=request.getContextPath()%>/mypage/orderstatus/inface?currentPage=${i}"><span>${i}
+						href="<%=request.getContextPath()%>/mypage/salestatus/inface?currentPage=${i}"><span>${i}
 					</span></a>
 				</c:forEach>
 				<c:if test="${endPageNum<totalPageNum}">
 					<a
-						href="<%=request.getContextPath()%>/mypage/orderstatus/inface?currentPage=${endPageNum+1}">다음</a>
+						href="<%=request.getContextPath()%>/mypage/salestatus/inface?currentPage=${endPageNum+1}">다음</a>
 				</c:if>
 			</c:otherwise>
 		</c:choose>

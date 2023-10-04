@@ -57,6 +57,37 @@
 		)where rn between #{startRownum} and #{endRownum}
 	</select>
 	
+	
+	
+	<select id="getSellerSafeTotalCnt" parameterType="string" resultType="int">	<!-- 9P 아이디에 해당하는 안전거래 구매 총갯수 -->
+		select count(*) from safe_trading join goods using (goods_id) where user_id=#{userId}
+	</select>
+	
+	<select id="getSearchSellerSafeTotalCnt" parameterType="string" resultType="int">	<!-- 9P 아이디에 해당하며 검색어에 부합하는 안전거래 구매 총갯수  -->
+		select count(*) from safe_trading join goods using (goods_id) where user_id=#{userId} and goods_title like #{searchWord}
+	</select>
+	
+	<select id="getSellerSafePurchaseList" parameterType="map" resultType="UserSafeTradingDto">	<!-- 9P 안전거래 구매내역(회원) 불러오기 -->
+		select * from 
+		(select list.*,rownum rn from(
+		(select transaction_id,goods_title,trading_status,s.price,to_char(trading_date, 'YYYY-MM-DD HH24:MI:SS') trading_date
+		from safe_trading s join goods g using (goods_id)
+		where user_id=#{userId} 
+		order by trading_date desc)
+		list)
+		)where rn between #{startRownum} and #{endRownum}
+	</select>
+	<select id="getSearchSellerSafePurchaseList" parameterType="map" resultType="UserSafeTradingDto">	<!-- 9P 안전거래 검색어에 따른 구매내역(회원) 불러오기 -->
+		select * from 
+		(select list.*,rownum rn from(
+		(select transaction_id,goods_title,trading_status,s.price,to_char(trading_date, 'YYYY-MM-DD HH24:MI:SS') trading_date
+		from safe_trading s join goods g using (goods_id)
+		where user_Id=#{userId} and goods_title like #{searchWord}
+		order by trading_date desc)
+		list)
+		)where rn between #{startRownum} and #{endRownum}
+	</select>
+	
 	<select id="getInfaceTotalCnt" parameterType="string" resultType="int">
 		select count(*) 
 		from in_face_trading
@@ -68,7 +99,7 @@
 		from in_face_trading
 		where buyer_id=#{buyerId} and goods_title like #{searchWord}
 	</select>
-	
+
 	<select id="getInfacePurchaseList" parameterType="map" resultType="InFaceTradingDto"> <!-- 9P 직거래 구매내역(회원) 불러오기 -->
 		select * from
 		(select list.*, rownum rn from(
@@ -86,6 +117,40 @@
 		(select goods_id,in_face_trading_id,goods_title,trading_status,i.price,to_char(trading_date, 'YYYY-MM-DD HH24:MI:SS') trading_date
 		from in_face_trading i join goods g using (goods_id)
 		where buyer_id=#{buyerId} and goods_title like #{searchWord} 
+		order by trading_date desc) 
+		list)
+		)where rn between #{startRownum} and #{endRownum}
+	</select>
+	
+	<select id="getSellerInfaceTotalCnt" parameterType="string" resultType="int">
+		select count(*) 
+		from in_face_trading join goods using (goods_id)
+		where user_id=#{userId}
+	</select>
+	
+	<select id="getSearchSellerInfaceTotalCnt" parameterType="map" resultType="int">
+		select count(*) 
+		from in_face_trading join goods using (goods_id)
+		where user_id=#{userId} and goods_title like #{searchWord}
+	</select>
+
+	<select id="getSellerInfacePurchaseList" parameterType="map" resultType="InFaceTradingDto"> <!-- 9P 직거래 구매내역(회원) 불러오기 -->
+		select * from
+		(select list.*, rownum rn from(
+		(select goods_id,in_face_trading_id,goods_title,trading_status,i.price,to_char(trading_date, 'YYYY-MM-DD HH24:MI:SS') trading_date
+		from in_face_trading i join goods g using (goods_id)
+		where user_id=#{userId}
+		order by trading_date desc) 
+		list)
+		)where rn between #{startRownum} and #{endRownum}
+	</select>
+	
+	<select id="getSearchSellerInfacePurchaseList" parameterType="map" resultType="InFaceTradingDto"> <!-- 9P 직거래 구매내역(회원) 불러오기 -->
+		select * from
+		(select list.*, rownum rn from(
+		(select goods_id,in_face_trading_id,goods_title,trading_status,i.price,to_char(trading_date, 'YYYY-MM-DD HH24:MI:SS') trading_date
+		from in_face_trading i join goods g using (goods_id)
+		where user_id=#{userId} and goods_title like #{searchWord} 
 		order by trading_date desc) 
 		list)
 		)where rn between #{startRownum} and #{endRownum}
@@ -192,6 +257,7 @@
 	<select id="getProfile" parameterType="string" resultType="UserProfileDto">	<!-- 프로필을 가져올때 유저주소 전부를 가져옴 -->
 		select name,rating_score,nickname,mobile_number,role from user us where user_id=#{userId}
 	</select>
+	
 	<select id="getAddress" parameterType="string" resultType="UserAddressDto"> <!-- 사용자 주소를 가져옴 -->
 		select detatil_address,post_code,road_address,address,nickname,address_no
 		from user_address 

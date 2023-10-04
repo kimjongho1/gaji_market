@@ -39,9 +39,7 @@ public class UserDao {
         return sqlSession.selectList("user.getFavoriteList", userId);
     }
     
-    public int getSafeTotalCnt(String buyerId) {
-    	return sqlSession.selectOne("user.getSafeTotalCnt",buyerId);
-    }
+
     
     public String checkIdForSafe(String transactionId) {
     	return sqlSession.selectOne("user.checkIdForSafe",transactionId);
@@ -51,6 +49,9 @@ public class UserDao {
     	return sqlSession.selectOne("user.checkIdForSafeSeller",transactionId);
     }
     
+    public int getSafeTotalCnt(String buyerId) {
+    	return sqlSession.selectOne("user.getSafeTotalCnt",buyerId);
+    }
     
     public int getSearchSafeTotalCnt(String buyerId,String searchWord) {
     	Map<String,Object> map=new HashMap<String,Object>();
@@ -83,6 +84,43 @@ public class UserDao {
 		map.put("startRownum",startRownum);
 		map.put("endRownum",endRownum);
         return sqlSession.selectList("user.getSafePurchaseList",map);
+    }
+    
+    public int getSellerSafeTotalCnt(String userId) {
+    	return sqlSession.selectOne("user.getSellerSafeTotalCnt",userId);
+    }
+    
+    public int getSearchSellerSafeTotalCnt(String userId,String searchWord) {
+    	Map<String,Object> map=new HashMap<String,Object>();
+    	searchWord="%"+searchWord+"%";
+    	map.put("userId", userId);
+    	map.put("searchWord", searchWord);
+    	return sqlSession.selectOne("user.getSearchSellerSafeTotalCnt",map);
+    }
+    
+    public List<UserSafeTradingDto> getSearchSellerSafePurchaseList(String userId,int currentPage,int PAGESIZE,String searchWord, int totalCnt) {	//9P 안전거래 구매내역(회원) 불러오기
+    	int startRownum = 0;
+		int endRownum = 0;
+		startRownum = (currentPage-1)*PAGESIZE +1;
+		endRownum = ((currentPage*PAGESIZE) > totalCnt) ? totalCnt: (currentPage*PAGESIZE);
+		Map<String, Object> map= new HashMap<String, Object>();
+		map.put("searchWord", searchWord);
+		map.put("userId", userId);
+		map.put("startRownum",startRownum);
+		map.put("endRownum",endRownum);
+		return sqlSession.selectList("user.getSellerSearchSafePurchaseList",map);
+    }
+
+    public List<UserSafeTradingDto> getSellerSafePurchaseList(String userId,int currentPage,int PAGESIZE, int totalCnt) {	//9P 안전거래 구매내역(회원) 불러오기
+    	int startRownum = 0;
+		int endRownum = 0;
+		startRownum = (currentPage-1)*PAGESIZE +1;
+		endRownum = ((currentPage*PAGESIZE) > totalCnt) ? totalCnt: (currentPage*PAGESIZE);
+		Map<String, Object> map= new HashMap<String, Object>();
+		map.put("userId", userId);
+		map.put("startRownum",startRownum);
+		map.put("endRownum",endRownum);
+        return sqlSession.selectList("user.getSellerSafePurchaseList",map);
     }
     
     public int getInfaceTotalCnt(String buyerId) {
@@ -120,6 +158,43 @@ public class UserDao {
 		map.put("endRownum",endRownum);
 		map.put("searchWord", searchWord);
         return sqlSession.selectList("user.getSearchInfacePurchaseList", map);
+    }
+    
+    public int getSellerInfaceTotalCnt(String userId) {
+    	return sqlSession.selectOne("user.getSellerInfaceTotalCnt",userId);
+    }
+    
+    public int getSearchSellerInfaceTotalCnt(String userId,String searchWord) {
+    	Map<String,Object> map=new HashMap<String,Object>();
+    	searchWord="%"+searchWord+"%";
+    	map.put("userId", userId);
+    	map.put("searchWord", searchWord);
+    	return sqlSession.selectOne("user.getSearchSellerInfaceTotalCnt",map);
+    }
+
+    public List<InFaceTradingDto> getSellerInfacePurchaseList(String userId,int currentPage,int PAGESIZE,int totalCnt) {	//9P 직거래 구매내역(회원) 불러오기
+    	int startRownum = 0;
+		int endRownum = 0;
+		startRownum = (currentPage-1)*PAGESIZE +1;
+		endRownum = ((currentPage*PAGESIZE) > totalCnt) ? totalCnt: (currentPage*PAGESIZE);
+		Map<String, Object> map= new HashMap<String, Object>();
+		map.put("userId", userId);
+		map.put("startRownum",startRownum);
+		map.put("endRownum",endRownum);
+        return sqlSession.selectList("user.getSellerInfacePurchaseList", map);
+    }
+    
+    public List<InFaceTradingDto> getSearchSellerInfacePurchaseList(String userId,int currentPage,int PAGESIZE,int totalCnt,String searchWord) {	//9P 직거래 구매내역(회원) 불러오기
+    	int startRownum = 0;
+		int endRownum = 0;
+		startRownum = (currentPage-1)*PAGESIZE +1;
+		endRownum = ((currentPage*PAGESIZE) > totalCnt) ? totalCnt: (currentPage*PAGESIZE);
+		Map<String, Object> map= new HashMap<String, Object>();
+		map.put("userId", userId);
+		map.put("startRownum",startRownum);
+		map.put("endRownum",endRownum);
+		map.put("searchWord", searchWord);
+        return sqlSession.selectList("user.getSearchSellerInfacePurchaseList", map);
     }
     
    public int getOnsaleTotalCnt(String userId) {

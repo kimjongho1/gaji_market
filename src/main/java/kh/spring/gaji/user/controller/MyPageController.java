@@ -37,7 +37,7 @@ public class MyPageController {
 	}
 	
 	@GetMapping("/orderstatus/safe")
-	public String safeorderStatus(Model model,Integer currentPage,String searchWord) {	// 나의 안전거래 구매내역 페이지.
+	public String safeorderList(Model model,Integer currentPage,String searchWord) {	// 나의 안전거래 구매내역 페이지.
 		//String userId=(String)session.getAttribute("userId"); 
 		int totalCnt=0;
 		List<UserSafeTradingDto> safePurchaseList=null;
@@ -73,7 +73,7 @@ public class MyPageController {
 	}
 	
 	@GetMapping("/orderstatus/inface")
-	public String infaceOrderStatus(Model model,Integer currentPage,String searchWord,HttpSession session) {	// 나의 직거래 구매내역 페이지.
+	public String infaceOrderList(Model model,Integer currentPage,String searchWord,HttpSession session) {	// 나의 직거래 구매내역 페이지.
 		//String userId=(String)session.getAttribute("userId"); 
 		int totalCnt=0;
 		List<InFaceTradingDto> infacePurchaseList=null;
@@ -104,6 +104,76 @@ public class MyPageController {
 		model.addAttribute("currentPage", currentPage);
 		model.addAttribute("infacePurchaseList",infacePurchaseList);
 		return "mypage/infaceorderstatus";
+	}
+	
+	@GetMapping("/salestatus/inface")
+	public String infaceSellerOrderList(Model model,Integer currentPage,String searchWord,HttpSession session) {	// 나의 직거래 구매내역 페이지.
+		//String userId=(String)session.getAttribute("userId"); 
+		int totalCnt=0;
+		List<InFaceTradingDto> infacePurchaseList=null;
+		if(currentPage==null)	//현재 페이지가 들어온게 없다면 1페이지.
+			currentPage=1;
+		if(searchWord==null) {	// 검색어가 들어온게 없다면 검색어없는 mapper로 목록 가져오기
+			Map<String,Object> map= userService.getSellerInfacePurchaseList("cjsdudwns",(int)currentPage,PAGESIZE);	//추후 userId들어가야함
+			infacePurchaseList = (List<InFaceTradingDto>)map.get("inFacePurchaseList");
+			totalCnt= (int)map.get("totalCnt");
+		}
+		else {					//검색어가 있다면 그에따른 mapper로 목록 가져오기
+			Map<String,Object> map= userService.getSearchSellerInfacePurchaseList("cjsdudwns",(int)currentPage,PAGESIZE,searchWord);
+			infacePurchaseList = (List<InFaceTradingDto>)map.get("inFacePurchaseList");
+			totalCnt= (int)map.get("totalCnt");
+			model.addAttribute("searchWord",searchWord);
+		}
+		int totalPageNum = totalCnt/PAGESIZE + (totalCnt%PAGESIZE == 0 ? 0 : 1);
+		int startPageNum = 1;
+		if((currentPage%PAGEBLOCKSIZE) == 0) {
+			startPageNum = ((currentPage/PAGEBLOCKSIZE)-1)*PAGEBLOCKSIZE +1;
+		} else {
+			startPageNum = ((currentPage/PAGEBLOCKSIZE))*PAGEBLOCKSIZE +1;
+		}
+		int endPageNum = (startPageNum+PAGEBLOCKSIZE > totalPageNum) ? totalPageNum : startPageNum+PAGEBLOCKSIZE-1;
+		model.addAttribute("totalPageNum", totalPageNum);
+		model.addAttribute("startPageNum", startPageNum);
+		model.addAttribute("endPageNum", endPageNum);
+		model.addAttribute("currentPage", currentPage);
+		model.addAttribute("infacePurchaseList",infacePurchaseList);
+		return "mypage/infacesalestatus";
+	}
+	
+	@GetMapping("/salestatus/safe")
+	public String safeSaleList(Model model,Integer currentPage,String searchWord) {	// 나의 안전거래 판매내역 페이지.
+		//String userId=(String)session.getAttribute("userId"); 
+		int totalCnt=0;
+		List<UserSafeTradingDto> safePurchaseList=null;
+		if(currentPage==null)	//현재 페이지가 들어온게 없다면 1페이지.
+			currentPage=1;
+		if(searchWord==null) {	// 검색어가 들어온게 없다면 검색어없는 mapper로 목록 가져오기
+			Map<String,Object> map= userService.getSellerSafePurchaseList("cjsdudwns",(int)currentPage,PAGESIZE);	//추후 userId들어가야함
+			safePurchaseList = (List<UserSafeTradingDto>)map.get("safePurchaseList");
+			totalCnt= (int)map.get("totalCnt");
+		}
+		else {					//검색어가 있다면 그에따른 mapper로 목록 가져오기
+			Map<String,Object> map= userService.getSearchSellerSafePurchaseList("cjsdudwns",(int)currentPage,PAGESIZE,searchWord);
+			safePurchaseList = (List<UserSafeTradingDto>)map.get("safePurchaseList");
+			totalCnt= (int)map.get("totalCnt");
+			model.addAttribute("searchWord",searchWord);
+		}
+		
+		//구해온 목록으로 페이징번호들 구하고 JSP로 전송하기
+		int totalPageNum = totalCnt/PAGESIZE + (totalCnt%PAGESIZE == 0 ? 0 : 1);
+		int startPageNum = 1;
+		if((currentPage%PAGEBLOCKSIZE) == 0) {
+			startPageNum = ((currentPage/PAGEBLOCKSIZE)-1)*PAGEBLOCKSIZE +1;
+		} else {
+			startPageNum = ((currentPage/PAGEBLOCKSIZE))*PAGEBLOCKSIZE +1;
+		}
+		int endPageNum = (startPageNum+PAGEBLOCKSIZE > totalPageNum) ? totalPageNum : startPageNum+PAGEBLOCKSIZE-1;
+		model.addAttribute("totalPageNum", totalPageNum);
+		model.addAttribute("startPageNum", startPageNum);
+		model.addAttribute("endPageNum", endPageNum);
+		model.addAttribute("currentPage", currentPage);
+		model.addAttribute("safePurchaseList",safePurchaseList);
+		return "mypage/safesalestatus";
 	}
 	
 	@GetMapping("/goods/onsale")	// 판매중 상품

@@ -31,10 +31,19 @@ public interface UserService {
     public Map<String,Object> getSafePurchaseList(String buyerId,int currentPage,int PAGESIZE);
     
     public Map<String,Object> getSearchSafePurchaseList(String buyerId,int currentPage,int PAGESIZE,String searchWord);
+    
+    public Map<String,Object> getSellerSafePurchaseList(String buyerId,int currentPage,int PAGESIZE);
+    
+    public Map<String,Object> getSearchSellerSafePurchaseList(String buyerId,int currentPage,int PAGESIZE,String searchWord);
 
     public Map<String,Object> getInfacePurchaseList(String buyerId,int currentPage,int PAGESIZE);
     
     public Map<String,Object> getSearchInfacePurchaseList(String buyerId,int currentPage,int PAGESIZE,String searchWord);
+    
+    public Map<String,Object> getSellerInfacePurchaseList(String buyerId,int currentPage,int PAGESIZE);
+    
+    public Map<String,Object> getSearchSellerInfacePurchaseList(String buyerId,int currentPage,int PAGESIZE,String searchWord);
+
 
     public Map<String,Object> getOnSaleList(String userId,int currentPage,int PAGESIZE);
     

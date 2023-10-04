@@ -64,6 +64,24 @@ public class UserServiceImpl implements UserService {
     }
     
     @Override
+    public Map<String,Object> getSellerSafePurchaseList(String userId,int currentPage,int PAGESIZE) {
+    	Map<String,Object> result=new HashMap<String,Object>();
+    	int totalCnt=userDao.getSellerSafeTotalCnt(userId);
+    	result.put("totalCnt",totalCnt);
+    	result.put("safePurchaseList",userDao.getSellerSafePurchaseList(userId,currentPage,PAGESIZE,totalCnt));
+        return result;
+    }
+
+    @Override
+    public Map<String,Object> getSearchSellerSafePurchaseList(String userId,int currentPage,int PAGESIZE,String searchWord){
+    	Map<String,Object> result=new HashMap<String,Object>();
+    	int totalCnt=userDao.getSearchSellerSafeTotalCnt(userId,searchWord);
+    	result.put("totalCnt",totalCnt);
+    	result.put("safePurchaseList",userDao.getSearchSellerSafePurchaseList(userId,currentPage,PAGESIZE,searchWord,totalCnt));
+        return result;
+    }
+    
+    @Override
     public Map<String,Object> getInfacePurchaseList(String buyerId,int currentPage,int PAGESIZE) {
     	Map<String,Object> result=new HashMap<String,Object>();
     	int totalCnt = userDao.getInfaceTotalCnt(buyerId);
@@ -71,12 +89,30 @@ public class UserServiceImpl implements UserService {
     	result.put("inFacePurchaseList",userDao.getInfacePurchaseList(buyerId,currentPage,PAGESIZE,totalCnt));
         return result;
     }
-    
+    @Override
     public Map<String,Object> getSearchInfacePurchaseList(String buyerId,int currentPage,int PAGESIZE,String searchWord){
     	Map<String,Object> result=new HashMap<String,Object>();
     	int totalCnt = userDao.getSearchInfaceTotalCnt(buyerId,searchWord);
     	result.put("totalCnt",totalCnt);
     	result.put("inFacePurchaseList",userDao.getSearchInfacePurchaseList(buyerId,currentPage,PAGESIZE,totalCnt,searchWord));
+    	return result;
+    }
+    
+    @Override
+    public Map<String,Object> getSellerInfacePurchaseList(String userId,int currentPage,int PAGESIZE) {
+    	Map<String,Object> result=new HashMap<String,Object>();
+    	int totalCnt = userDao.getSellerInfaceTotalCnt(userId);
+    	result.put("totalCnt",totalCnt);
+    	result.put("inFacePurchaseList",userDao.getSellerInfacePurchaseList(userId,currentPage,PAGESIZE,totalCnt));
+        return result;
+    }
+    
+    @Override
+    public Map<String,Object> getSearchSellerInfacePurchaseList(String userId,int currentPage,int PAGESIZE,String searchWord){
+    	Map<String,Object> result=new HashMap<String,Object>();
+    	int totalCnt = userDao.getSearchSellerInfaceTotalCnt(userId,searchWord);
+    	result.put("totalCnt",totalCnt);
+    	result.put("inFacePurchaseList",userDao.getSearchSellerInfacePurchaseList(userId,currentPage,PAGESIZE,totalCnt,searchWord));
     	return result;
     }
     @Override
