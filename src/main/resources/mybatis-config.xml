@@ -34,6 +34,7 @@
 		<typeAlias type="kh.spring.gaji.user.model.dto.WishListDto" alias="WishListDto"/>
 		<typeAlias type="kh.spring.gaji.user.model.dto.UserSafeTradingDto" alias="UserSafeTradingDto"/>
 		
+		
 		<typeAlias type="kh.spring.gaji.user.model.dto.UserInsertAddressDto" alias="UserInsertAddressDto"/>
 		<typeAlias type="kh.spring.gaji.report.model.dto.ReportInfoDto" alias="ReportInfoDto"/>
 		<typeAlias type="kh.spring.gaji.pay.model.dto.SafePurchaseInfoDto" alias="SafePurchaseInfoDto"/>
@@ -54,7 +55,10 @@
 		<typeAlias type="kh.spring.gaji.goods.model.dto.GoodsReportCountDto" alias="GoodsReportCountDto"/>
 		<typeAlias type="kh.spring.gaji.report.model.dto.GoodsReportInfoDto" alias="GoodsReportInfoDto"/>
 		
-
+		<!-- 지역 region -->
+		<typeAlias type="kh.spring.gaji.region.model.dto.DongDto" alias="DongDto"/>
+		<typeAlias type="kh.spring.gaji.region.model.dto.GuDto" alias="GuDto"/>
+		
 		<!-- 커뮤니티 인덱스 -->
 		<!-- 		
 		<typeAlias type="kh.spring.gaji.community.model.dto.CommunityLikeDto" alias="CommunityLikeDto"/>
@@ -76,5 +80,6 @@
 		<mapper resource="mappers/report-mapper.xml"/>	<!-- 신고관련 쿼리문 -->
 		<mapper resource="mappers/user-mapper.xml"/> <!-- 유저 관련 쿼리문 -->
 		<mapper resource="mappers/goods-mapper.xml"/> <!-- 상품 관련 쿼리문 -->
+		<mapper resource="mappers/region-mapper.xml"/> <!-- 지역설정(구,동) -->
 	</mappers>
 </configuration>

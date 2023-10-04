@@ -16,7 +16,7 @@ import kh.spring.gaji.user.model.service.UserService;
 @Controller
 public class UserController {
 	@Autowired
-	UserService service; 
+	private UserService userService; 
 	
 	@GetMapping("/signup")
 	public String signup() {	// 개인회원가입
@@ -25,7 +25,7 @@ public class UserController {
 	@PostMapping("signup")
 	public String singupUser(UserDto userDto , RedirectAttributes ra, UserInsertAddressDto addressDto) {
 		try {
-	        if (service.signup(userDto, addressDto) > 0) {
+	        if (userService.signup(userDto, addressDto) > 0) {
 	            ra.addFlashAttribute("msg", "계정 생성이 성공하였습니다.");
 	            return "redirect:/main"; // 성공 시 메인 페이지로 리다이렉트
 	        } else {
@@ -41,7 +41,7 @@ public class UserController {
 	@PostMapping("checkid")
 	@ResponseBody
 	public String checkId(String userId) {
-		String result = service.checkId(userId);
+		String result = userService.checkId(userId);
 		return result;
 	}
 

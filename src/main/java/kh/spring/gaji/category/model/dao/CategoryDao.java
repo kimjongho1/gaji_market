@@ -10,6 +10,7 @@ import kh.spring.gaji.category.model.dto.CategoryDto;
 
 @Repository
 public class CategoryDao {
+	
 	@Autowired
 	private SqlSession sqlSession;
 	
