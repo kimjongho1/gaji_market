@@ -122,9 +122,9 @@
 				<div id="clickLatlng"></div>
 			</div>
 		</div>
-		<input type="text" name="lat" id="latitudeInput" value="">
-		<input type="text" name="lng" id="longitudeInput" value="">
-		<br> <input type="submit" value="확인">
+		<input type="text" name="lat" id="latitudeInput" value=""> <input
+			type="text" name="lng" id="longitudeInput" value=""> <br>
+		<input type="submit" value="확인">
 
 	</form>
 	<!--
@@ -372,10 +372,16 @@
             // 가져온 위치 정보를 활용하여 원하는 동작 수행
             console.log('선택한 마커의 위도: ' + lat + ', 경도: ' + lng);
             
-            // 폼에 위도와 경도 추가
-            document.getElementById('latitudeInput').value = lat;
-            document.getElementById('longitudeInput').value = lng;
             
+            
+            // 폼에 위도와 경도 추가
+            document.getElementById('latitudeInput').value = lat.toFixed(6);
+			document.getElementById('longitudeInput').value = lng.toFixed(6);
+            
+           /*  document.getElementById('latitudeInput').value = lat;
+            document.getElementById('longitudeInput').value = lng;
+            lat = parseFloat(lat.toFixed(10)); // 위도를 소수점 10자리까지 저장
+            lng = parseFloat(lng.toFixed(10)); */
             // 모달 닫기
             document.getElementById('mapModal').style.display = 'none';
         });
