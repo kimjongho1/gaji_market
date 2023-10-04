@@ -167,18 +167,18 @@ body {
 </head>
 <body>
 	<form action=signup method="POST" class="joinForm"
-		onsubmit="DoJoinForm__submit(this); return false;">
+		onsubmit="return Validation(); return false;">
 
 		<div class="textForm">
 			<span style="display: flex;">
-				<input name="userId" type="text" class="id" placeholder="아이디"
+				<input name="userId" type="text" class="id" placeholder="아이디" id="userId"
 				required="required">
 				<button type="button" class="btn-id"
 				onclick="">중복확인</button>
 			</span>
 		</div>
 		<div class="textForm">
-			<input name="password" type="password" class="pw" placeholder="비밀번호"
+			<input name="password" type="password" class="pw" placeholder="비밀번호" id="password"
 				required="required">
 		</div>
 		<div class="textForm">
@@ -187,7 +187,7 @@ body {
 		</div>
 		<div class="textForm">
 			<span style="display: flex;">
-				<input name="email" type="text" class="email" placeholder="이메일"
+				<input name="email" type="text" class="email" placeholder="이메일" id="email"
 				required="required">
 				<button type="button" class="btn-email"
 				onclick="">인증번호 요청</button>
@@ -198,15 +198,15 @@ body {
 				placeholder="인증번호 확인" required="required">
 		</div>
 		<div class="textForm">
-			<input name="name" type="text" class="name" placeholder="이름"
+			<input name="name" type="text" class="name" placeholder="이름" id="name"
 				required="required">
 		</div>
 		<div class="textForm">
-			<input name="nickname" type="text" class="nickname" placeholder="닉네임"
+			<input name="nickname" type="text" class="nickname" placeholder="닉네임" id="nickname"
 				required="required">
 		</div>
 		<div class="textForm">
-			<input name="mobileNumber" type="text" class="cellphoneNo"
+			<input name="mobileNumber" type="text" class="cellphoneNo" id="mobileNumber"
 				placeholder="전화번호" required="required">
 		</div>
 		<div class="textForm">
@@ -325,6 +325,9 @@ body {
         var emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/; // 이메일 주소 형식
         var namePattern = /^[가-힣a-zA-Z]{2,30}$/; // 이름은 2~30자의 한글 또는 영문 허용
         var nicknamePattern = /^[a-zA-Z0-9ㄱ-ㅎ가-힣]{4,30}$/; // 닉네임은 4~30자의 영문 대소문자, 숫자, 한글 허용
+        var mobileNumberPattern = /^[0-9]{10,11}$/; // 전화번호는 10자 또는 11자의 숫자만 허용
+        var postCodePattern = /^[0-9]{5}$/; // 우편번호는 5자리 숫자만 허용
+
 
         // 아이디 확인
         if (userId.value == "") {
@@ -392,8 +395,32 @@ body {
             nickname.focus();
             return false;
         }
+        
+     // 전화번호 확인
+        if (mobileNumber.value == "") {
+            alert("전화번호를 입력하세요.");
+            mobileNumber.focus();
+            return false;
+        }
+        if (!mobileNumberPattern.test(mobileNumber.value)) {
+            alert("전화번호는 10자 또는 11자의 숫자만 허용합니다.");
+            mobileNumber.focus();
+            return false;
+        }
 
-        // 나머지 필드에 대한 유효성 검사를 추가하세요.
+        // 우편번호 확인
+        if (postCode.value == "") {
+            alert("우편번호를 입력하세요.");
+            postCode.focus();
+            return false;
+        }
+        if (!postCodePattern.test(postCode.value)) {
+            alert("우편번호는 5자리 숫자만 허용합니다.");
+            postCode.focus();
+            return false;
+        }
+
+
 
         // 유효성 문제가 없을 시 폼 제출
         document.joinForm.submit();
