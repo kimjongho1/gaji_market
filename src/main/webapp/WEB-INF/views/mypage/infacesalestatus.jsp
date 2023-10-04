@@ -190,7 +190,7 @@
 							<div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
 								<div class="text-center">
 									<a class="btn btn-outline-dark mt-auto"
-										href="${pageContext.request.contextPath}/mypage/deal/inface/seller?goodId=${infacePurchaseInfo.goodsId}">상품이동</a>
+										href="${pageContext.request.contextPath}/goods/get?goodsId=${infacePurchaseInfo.goodsId}">상품이동</a>
 									</div>
 							</div>
 						</div>
