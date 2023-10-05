@@ -6,6 +6,7 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -59,19 +60,24 @@ public class GoodsController {
 		mv.addObject("guList",regionService.guList());
 		return mv;
 	}
-	
+	@Transactional
 	@PostMapping("/write.do")
-	public String wirteDo(GoodsDto goodsDto, RedirectAttributes ra, @RequestParam("files") MultipartFile[] files, FileDto fileDto) throws IOException {
+	public String wirteDo(GoodsDto goodsDto, RedirectAttributes ra, @RequestParam(value =  "files", required = false) MultipartFile[] files, FileDto fileDto) throws IOException {
 		if (goodsService.insertGoods(goodsDto) > 0) {
-			if(files != null) {
-				 Map params1 = ObjectUtils.asMap("use_filename", true, "unique_filename", false, "overwrite", true);
+			System.out.println(files.length);
+			if(files != null && files.length > 0) {
+				 Map params1 = ObjectUtils.asMap("use_filename", true, "unique_filename", true, "overwrite", false);
 				 for (MultipartFile file : files) {
+					 if(file.getSize() > 0) {
+					 	System.out.println(file.getName());
+					 	System.out.println(file.getSize());
 				        File imageFile = new UploadController().convertMultipartFileToFile(file);
 				        Map imageUrl2 = cloudinary.uploader().upload(imageFile, params1);
 				        String imageUrl = cloudinary.url().generate((String) imageUrl2.get("secure_url"));
 				        fileDto.setUrl(imageUrl);
 				        fileService.insertFile(fileDto);
 				    }
+				 }
 			}
             ra.addFlashAttribute("msg", "상품 등록이 성공하였습니다.");
             return "redirect:/goods/board"; // 성공 시 게시판으로 리다이렉트
