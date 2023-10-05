@@ -26,7 +26,7 @@
 
 	<header>
 		<div>
-			<a href="https://www.naver.com" target="_blank" class="logo_a_tag">
+			<a href="#" target="_blank" class="logo_a_tag">
 				<img
 				src="${pageContext.request.contextPath}/resources/img/gaji_logo.png"
 				class="gaji_logo">
@@ -107,9 +107,9 @@
 		</div>
 		<ul class="find_wrap" id="find_wrap">
 
-			<li><a target="_blank" href="#" class="find_text">비밀번호 찾기</a></li>
-			<li><a target="_blank" href="#" class="find_text">아이디 찾기</a></li>
-			<li><a target="_blank" href="#" class="find_text">회원가입</a></li>
+			<li><a target="_blank" href="/gaji/idInquiry" class="find_text">비밀번호 찾기</a></li>
+			<li><a target="_blank" href="./pwInquiry" class="find_text">아이디 찾기</a></li>
+			<li><a target="_blank" href="./signup" class="find_text">회원가입</a></li>
 
 		</ul>
 		<!--배너-->
