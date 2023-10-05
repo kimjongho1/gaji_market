@@ -149,26 +149,40 @@ fieldset {
 
 }
 
+#header{
+background: green;
+}
+
+a {
+  text-decoration: none;
+}
+
     </style>
 
 </head>
 <body>
     <header width="100%" id="header">
+    			<div class="row">
+					<div class="header__logo">
+						<a href="./"><img
+							src="${pageContext.request.contextPath}/resources/img/gaji_logo.png"
+							alt="GaJi" height="70" width="170"></a>
+					</div>
 		<div class="container">
+				
 			<div class="row">
-				<div class="header__logo">
-					<a href="./"><img src="img/logo.png" alt=""></a>
+			
 					
-				</div>
-
-				<div class="row">
-					<a href="">ID찾기</a>
-				</div>
-
-				<div class="row">
-					<a href="">비밀번호 찾기</a>
-				</div>
+					<img alt="" src="아이디">				
+					<a href="./idInquiry"> <h1>아이디 찾기</h1> </a>
+					
+					
+					<div>
+					<img alt="" src="비밀번호">	
+					<a href="./pwInquiry"> <h1>비밀번호 찾기</h1> </a>
+					</div>
 			</div>
+		</div>
 		</div>
 
     </header>

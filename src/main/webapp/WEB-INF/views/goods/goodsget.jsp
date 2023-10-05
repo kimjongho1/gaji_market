@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title> BD에서 가져옴</title>
 
 <!--favicon  -->
 <link rel="icon"
@@ -32,7 +32,11 @@
 	type="text/css">
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/css/goods/goods.css"
-	type="text/css"> 
+	type="text/css">
+<link rel="stylesheet"
+	href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
+	
+	
 </head>
 <body>
 
@@ -356,9 +360,32 @@
 				</div>
 			</div>
 		</div>
-		
+
 		<div class="Toastify"></div>
 	</main>
+	
+	<!-- swiper -->
+	<!-- Slider main container -->
+<div class="swiper">
+  <!-- Additional required wrapper -->
+  <div class="swiper-wrapper">
+    <!-- Slides -->
+    <div class="swiper-slide">Slide 1</div>
+    <div class="swiper-slide">Slide 2</div>
+    <div class="swiper-slide">Slide 3</div>
+    ...
+  </div>
+  <!-- If we need pagination -->
+  <div class="swiper-pagination"></div>
+
+  <!-- If we need navigation buttons -->
+  <div class="swiper-button-prev"></div>
+  <div class="swiper-button-next"></div>
+
+  <!-- If we need scrollbar -->
+  <div class="swiper-scrollbar"></div>
+</div>
+	
 
 
 	<!-- Footer Section Begin -->
@@ -372,6 +399,7 @@
 	<script
 		src="${pageContext.request.contextPath}/resources/js/bootstrap.min.js"></script>
 	<script src="${pageContext.request.contextPath}/resources/js/main.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
 
 
 </body>

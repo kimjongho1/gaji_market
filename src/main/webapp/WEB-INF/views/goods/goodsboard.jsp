@@ -22,9 +22,6 @@
 	href="${pageContext.request.contextPath}/resources/css/bootstrap.min.css"
 	type="text/css">
 <link rel="stylesheet"
-	href="${pageContext.request.contextPath}/resources/css/style.css"
-	type="text/css">
-<link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/css/elegant-icons.css"
 	type="text/css">
 <link rel="stylesheet"
@@ -33,6 +30,9 @@
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/css/goods/goods.css"
 	type="text/css"> 
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/resources/css/style.css"
+	type="text/css">
 	
 </head>
 <body>
@@ -356,8 +356,7 @@
 	<script
 		src="${pageContext.request.contextPath}/resources/js/bootstrap.min.js"></script>
 	<script src="${pageContext.request.contextPath}/resources/js/main.js"></script>
-	<script src="${pageContext.request.contextPath}/resources/js/goods/framework.js"></script>
-	<script src="${pageContext.request.contextPath}/resources/js/goods/app.js"></script>
+
 
 
 </body>

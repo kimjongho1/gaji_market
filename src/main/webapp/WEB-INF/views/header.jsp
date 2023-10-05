@@ -14,8 +14,8 @@ header {
 
 .rights {
 	position: fixed;
-	right: 100px;
-	padding: 15px;
+	right: 50px;
+	padding: 30px;
 }
 </style>
 <body>
