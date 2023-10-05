@@ -71,10 +71,11 @@
 	<h2>중고 거래 게시판 글 작성</h2>
 	<form action="${pageContext.request.contextPath}/goods/write.do"
 		method="post" enctype="multipart/form-data">
+		<input type="hidden" name="userId" value="cjsdudwns">
 		<input type="text" name="title" id="title" placeholder="제목"> <br>
 		<!-- 카테고리 선택 드롭다운 -->
 		<label for="selectedCategory">카테고리 선택:</label> <select
-			name="selectedCategory" id="selectedCategory">
+			name="categoryId" id="selectedCategory">
 			<option value="">카테고리를 선택하세요</option>
 			<c:forEach items="${categoryList}" var="category">
 				<option value="${category.categoryId}">${category.categoryName}</option>
@@ -89,19 +90,21 @@
 			</c:forEach>
 		</select>
 		<!-- 동 선택 드롭다운 -->
-		<label for="selectedDong">동 선택:</label> <select name="selectedDong"
+		<label for="selectedDong">동 선택:</label> <select name="dongId"
 			id="selectedDong">
 			<option value="">동을 선택하세요</option>
 			<c:forEach items="${dongList}" var="dong">
 				<option value="${dong.dongId}" data-gu="${dong.guId}">${dong.dongName}</option>
 			</c:forEach>
-		</select> <input type="text" id="price" name="price" placeholder="판매가격">
+		</select>
+		 <input type="text" id="price" name="price" placeholder="판매가격">
 		<br>
 		<div id="container">
-			<div id="editor"></div>
+			<textarea name="description" id="editor"></textarea>
 		</div>
-		<label for="safeTradingYn">안전결제</label> <input type="checkbox"
-			name="safeTradingYn" id="safeTradingYn" value="N">
+		<label for="safeTradingYn">안전결제</label>
+		<input type="checkbox" name="safeTradingYn" id="safeTradingYn" value="N">
+
 		<!-- 모달 열기 버튼 -->
 		<br>
 		<!-- 모달 열기 버튼 -->

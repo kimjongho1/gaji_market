@@ -10,8 +10,8 @@ public class GoodsDto {
 	private String title;
 	private int price;
 	private String description;
-	private char safeTradingYN;
-	private int lat;
-	private int lng;
+	private char safeTradingYn;
+	private double lat;
+	private double lng;
 	private int dongId;
 }

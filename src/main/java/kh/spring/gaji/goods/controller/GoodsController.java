@@ -60,7 +60,7 @@ public class GoodsController {
 		return mv;
 	}
 	
-	@PostMapping("/wirte.do")
+	@PostMapping("/write.do")
 	public String wirteDo(GoodsDto goodsDto, RedirectAttributes ra, @RequestParam("files") MultipartFile[] files, FileDto fileDto) throws IOException {
 		if (goodsService.insertGoods(goodsDto) > 0) {
 			if(files != null) {
@@ -69,6 +69,7 @@ public class GoodsController {
 				        File imageFile = new UploadController().convertMultipartFileToFile(file);
 				        Map imageUrl2 = cloudinary.uploader().upload(imageFile, params1);
 				        String imageUrl = cloudinary.url().generate((String) imageUrl2.get("secure_url"));
+				        fileDto.setUrl(imageUrl);
 				        fileService.insertFile(fileDto);
 				    }
 			}
