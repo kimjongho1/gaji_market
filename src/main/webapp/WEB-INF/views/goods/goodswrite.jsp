@@ -6,6 +6,12 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+
+<!--favicon  -->
+	<link rel="icon" href="${pageContext.request.contextPath}/resources/img/favicon.ico">
+	<link rel="shortcut icon" href="${pageContext.request.contextPath}/resources/img/favicon.ico">
+
+
 <style>
 /* 모달 스타일 */
 .modal {
@@ -68,6 +74,7 @@
 </style>
 </head>
 <body>
+<div id="container">
 	<h2>중고 거래 게시판 글 작성</h2>
 	<form action="${pageContext.request.contextPath}/goods/write.do"
 		method="post" enctype="multipart/form-data">
@@ -99,9 +106,9 @@
 		</select>
 		 <input type="text" id="price" name="price" placeholder="판매가격">
 		<br>
-		<div id="container">
+
 			<textarea name="description" id="editor"></textarea>
-		</div>
+		
 		<label for="safeTradingYn">안전결제</label>
 		<input type="checkbox" name="safeTradingYn" id="safeTradingYn" value="N">
 
@@ -128,19 +135,19 @@
 		<input type="text" name="lat" id="latitudeInput" value=""> <input
 			type="text" name="lng" id="longitudeInput" value=""> <br>
 		<input type="submit" value="확인">
-
+</div>
 	</form>
 	<!--
             The "super-build" of CKEditor&nbsp;5 served via CDN contains a large set of plugins and multiple editor types.
             See https://ckeditor.com/docs/ckeditor5/latest/installation/getting-started/quick-start.html#running-a-full-featured-editor-from-cdn
         -->
 	<script
-		src="https://cdn.ckeditor.com/ckeditor5/39.0.2/super-build/ckeditor.js"></script>
+		src="https://cdn.ckeditor.com/ckeditor5/37.0.0/super-build/ckeditor.js"></script>
 	<!--
             Uncomment to load the Spanish translation
         -->
 	<script
-		src="https://cdn.ckeditor.com/ckeditor5/39.0.2/super-build/translations/ko.js"></script>
+		src="https://cdn.ckeditor.com/ckeditor5/40.0.0/super-build/translations/ko.js"></script>
 	<script>
 	var msg = '${msg}';
 	if(msg){
@@ -191,7 +198,7 @@
                     ]
                 },
                 // https://ckeditor.com/docs/ckeditor5/latest/features/editor-placeholder.html#using-the-editor-configuration
-                placeholder: 'Welcome to CKEditor&nbsp;5!',
+                placeholder: '안녕하세요',
                 // https://ckeditor.com/docs/ckeditor5/latest/features/font.html#configuring-the-font-family-feature
                 fontFamily: {
                     options: [

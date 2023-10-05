@@ -26,7 +26,7 @@
 
 	<header>
 		<div>
-			<a href="#" target="_blank" class="logo_a_tag">
+			<a href="./" target="_blank" class="logo_a_tag">
 				<img
 				src="${pageContext.request.contextPath}/resources/img/gaji_logo.png"
 				class="gaji_logo">
