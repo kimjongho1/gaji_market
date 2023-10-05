@@ -338,7 +338,7 @@
 	</update>
 	
 	<select id="findId" parameterType="map" resultType="string"> <!-- 15P 아이디 찾기 -->
-		select user_id from user where name=#{name} and email=#{email}
+		select user_id from users where name=#{name} and email=#{email}
 	</select>
 	
 	<update id="findPass" parameterType="map"> <!-- 16P 비밀번호변경 --> <!-- 이메일인증처리 추가해야함 -->

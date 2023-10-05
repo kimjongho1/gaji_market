@@ -1,12 +1,16 @@
 package kh.spring.gaji.user.controller;
 
 import java.io.IOException;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import kh.spring.gaji.user.model.dto.UserDto;
@@ -41,14 +45,25 @@ public class UserController {
 	@PostMapping("checkid")
 	@ResponseBody
 	public String checkId(String userId) {
-		String result = userService.checkId(userId);
-		return result;
+		return userService.checkId(userId);
 	}
 
 	
 	@GetMapping("/idInquiry")
 	public String idInquiry() {		// 아이디찾기
 		return "user/idInquiry";
+	}
+	
+	@PostMapping("idInquiry")
+	public ModelAndView idFind(@RequestParam Map<String, String> map, ModelAndView mv) {
+		String foundId = userService.findId(map);
+		mv.setViewName("user/idfindresult");
+		mv.addObject("foundId",foundId);
+		return mv;
+	}
+	@GetMapping("idfind")
+	public String idFind() {
+	    return "user/idfindresult"; // 아이디 찾기 폼을 보여주는 뷰 이름
 	}
 	
 	
