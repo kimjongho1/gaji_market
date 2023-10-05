@@ -74,7 +74,7 @@ public class GoodsController {
 				    }
 			}
             ra.addFlashAttribute("msg", "상품 등록이 성공하였습니다.");
-            return "redirect:/board"; // 성공 시 게시판으로 리다이렉트
+            return "redirect:/goods/board"; // 성공 시 게시판으로 리다이렉트
         } else {
             ra.addFlashAttribute("msg", "상품 등록이 실패하였습니다. 다시 시도해주십시오.");
             return "goods/goodswrite"; // 실패 시 다시 글 작성 페이지로 이동

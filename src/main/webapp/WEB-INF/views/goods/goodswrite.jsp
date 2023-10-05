@@ -142,6 +142,10 @@
 	<script
 		src="https://cdn.ckeditor.com/ckeditor5/39.0.2/super-build/translations/ko.js"></script>
 	<script>
+	var msg = '${msg}';
+	if(msg){
+		alert(msg);
+	}
             // This sample still does not showcase all CKEditor&nbsp;5 features (!)
             // Visit https://ckeditor.com/docs/ckeditor5/latest/features/index.html to browse all the features.
             CKEDITOR.ClassicEditor.create(document.getElementById("editor"), {
