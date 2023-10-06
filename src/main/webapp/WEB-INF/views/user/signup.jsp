@@ -195,8 +195,11 @@ body {
 			</span>
 		</div>
 		<div class="textForm">
-			<input name="certification" type="text" class="mail-check-input"
-				placeholder="인증번호 확인" required="required">
+			<span style="display: flex;">
+				<input name="certification" type="text" class="mail-check-input" id="verificationCode"
+					placeholder="인증번호 확인" required="required">
+				<button type="button" class="btn" id="verify-button">인증번호 확인</button>
+			</span>
 		</div>
 		<div class="textForm">
 			<input name="name" type="text" class="name" placeholder="이름" id="name"
@@ -304,11 +307,14 @@ body {
 	}
 </script>
 <script>
+let code;
+
+
 $('#mail-Check-Btn').click(function() {
     const email = $('#email').val(); // 이메일 주소값 얻어오기
     console.log('완성된 이메일 : ' + email); // 이메일 확인
     const checkInput = $('.mail-check-input'); // 인증번호 입력하는 곳
-    let code;
+    /* let code; */
 
     $.ajax({
         type: 'get',
@@ -321,22 +327,21 @@ $('#mail-Check-Btn').click(function() {
             alert('인증번호가 전송되었습니다.');
         }
     }); // end ajax
-    // 인증번호 비교
-    // blur -> focus가 벗어나는 경우 발생
-    $('.mail-check-input').blur(function() {
-        const inputCode = $(this).val();
-        const $resultMsg = $('#mail-check-warn');
+    
+});
 
-        if (inputCode === code) {
-            $resultMsg.html('인증번호가 일치합니다.');
-            $resultMsg.css('color', 'green');
-            $('#mail-Check-Btn').prop('disabled', true);
-            $('#email').prop('readonly', true);
-        } else {
-            $resultMsg.html('인증번호가 불일치합니다. 다시 확인해주세요!');
-            $resultMsg.css('color', 'red');
-        }
-    });
+//인증번호 비교
+$('#verify-button').click(function() {
+    // 서버에서 받은 인증번호를 변수에 저장
+    const inputCode = $('#verificationCode').val(); // 입력한 인증번호를 가져옴
+
+    if (code === inputCode) {
+        alert('인증번호 확인 완료');
+        // 인증번호 확인이 성공한 경우 원하는 동작 수행
+    } else {
+        alert('인증번호를 다시 확인해주세요.');
+        // 인증번호 확인이 실패한 경우 사용자에게 알림
+    }
 });
 
     // 유효성 검사 메서드
