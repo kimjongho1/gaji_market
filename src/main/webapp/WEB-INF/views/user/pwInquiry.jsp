@@ -60,7 +60,10 @@
           <fieldset>
             <input placeholder="Your Email Address" type="email" tabindex="3" required>
           </fieldset>
-          <button>인증 하기</button> <h4></h4>
+        <h4 style="display: inline-block;">이메일 확인</h4> <button>인증 하기</button>
+          <fieldset>
+            <input placeholder="Your Email Verification Code" type="email" tabindex="3" required>
+          </fieldset> 
 		  <h4 style="display: inline-block;">새 비밀번호</h4> <button> 중복 검사 </button>
           <fieldset>
             <input placeholder="Your New Password" type="password" tabindex="4" required>
