@@ -10,7 +10,7 @@
 	content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 <meta name="description" content="" />
 <meta name="author" content="" />
-<title>구매내역</title>
+<title>숨김 상품</title>
 <!-- Favicon-->
 <!--         <link rel="icon" type="image/x-icon" href="assets/favicon.ico" /> -->
 <!-- Bootstrap icons-->
@@ -175,6 +175,11 @@
 								<div class="text-center">
 									<!-- Product name-->
 									<h5 class="fw-bolder">${myGoodsInfo.title}</h5>
+									<div class="d-flex justify-content-center small text-warning mb-2">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-bag-heart-fill" viewBox="0 0 16 16">
+  <path d="M11.5 4v-.5a3.5 3.5 0 1 0-7 0V4H1v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4h-3.5ZM8 1a2.5 2.5 0 0 1 2.5 2.5V4h-5v-.5A2.5 2.5 0 0 1 8 1Zm0 6.993c1.664-1.711 5.825 1.283 0 5.132-5.825-3.85-1.664-6.843 0-5.132Z"/>
+</svg>+${myGoodsInfo.wishCount}
+                                    </div>
 									<!-- Product price-->
 									끌올일자:${myGoodsInfo.refreshedAt}<br>
                                     가격:${myGoodsInfo.price}
@@ -184,7 +189,7 @@
 							<div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
 								<div class="text-center">
 									<a class="btn btn-outline-dark mt-auto"
-										href="${pageContext.request.contextPath}/goods/get?goodsId=${myGoodsDto.goodsId}">상품이동</a>
+										href="${pageContext.request.contextPath}/goods/get?goodsId=${myGoodsInfo.goodsId}">상품이동</a>
 								</div>
 							</div>
 						</div>

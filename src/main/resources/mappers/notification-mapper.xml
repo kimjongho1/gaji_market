@@ -14,11 +14,11 @@
 		insert into notification values(noti_id_sequence.nextval, #{userId}, #{message}, #{readYN},#{type}, #{referenceId}, "")
 	</insert>
 	
-	<select id="getTradeNotice" resultType="NotificationDto" > <!-- 18P해당계정의 거래알림 -->
+	<select id="getTradeNotice" resultType="NotificationDto" parameterType="string"> <!-- 18P해당계정의 거래알림 -->
 		select noti_id,message,read_yn,type,reference_id,created_at from notification where type=3 and user_id=#{userId}
 	</select>
+	
 </mapper>
-
 
 	<!-- <select id="getCommentNotice" resultType="NotificationDto" > 18P해당계정의 댓글알림
 		select noti_id,message,read_yn,type,reference_id,created_at from notification where type=1 and user_id=#{userId}

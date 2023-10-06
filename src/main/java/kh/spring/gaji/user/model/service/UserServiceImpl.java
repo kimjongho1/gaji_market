@@ -166,6 +166,42 @@ public class UserServiceImpl implements UserService {
     	result.put("myGoodsList",userDao.getSearchHideList(userId,currentPage,PAGESIZE,totalCnt,searchWord));
     	return result;
 	}
+	
+	@Override
+	public Map<String, Object> getKeepUsedList(String userId, int currentPage, int PAGESIZE) {	//찜목록
+    	Map<String,Object> result=new HashMap<String,Object>();
+    	int totalCnt = userDao.getKeepUsedTotalCnt(userId);
+    	result.put("totalCnt",totalCnt);
+    	result.put("myGoodsList",userDao.getKeepUsedList(userId,currentPage,PAGESIZE,totalCnt));
+    	return result;
+	}
+
+	@Override
+	public Map<String, Object> getSearchKeepUsedList(String userId, int currentPage, int PAGESIZE, String searchWord) { //찜목록 검색
+		Map<String,Object> result=new HashMap<String,Object>();
+    	int totalCnt = userDao.getSearchKeepUsedTotalCnt(userId,searchWord);
+    	result.put("totalCnt",totalCnt);
+    	result.put("myGoodsList",userDao.getSearchKeepUsedList(userId,currentPage,PAGESIZE,totalCnt,searchWord));
+    	return result;
+	}
+	
+	@Override
+	public Map<String, Object> getKeepUsersList(String userId, int currentPage, int PAGESIZE) {
+    	Map<String,Object> result=new HashMap<String,Object>();
+    	int totalCnt = userDao.getKeepUsersTotalCnt(userId);
+    	result.put("totalCnt",totalCnt);
+    	result.put("myGoodsList",userDao.getKeepUsersList(userId,currentPage,PAGESIZE,totalCnt));
+    	return result;
+	}
+
+	@Override
+	public Map<String, Object> getSearchKeepUsersList(String userId, int currentPage, int PAGESIZE, String searchWord) {
+		Map<String,Object> result=new HashMap<String,Object>();
+    	int totalCnt = userDao.getSearchKeepUsersTotalCnt(userId,searchWord);
+    	result.put("totalCnt",totalCnt);
+    	result.put("myGoodsList",userDao.getSearchKeepUsersList(userId,currentPage,PAGESIZE,totalCnt,searchWord));
+    	return result;
+	}
     
     @Override
     public List<MyGoodsListDto> getSoldOutList(String userId) {
@@ -309,6 +345,4 @@ public class UserServiceImpl implements UserService {
 	public String checkIdForSafeSeller(String transactionId) {
 		return userDao.checkIdForSafeSeller(transactionId);
 	}
-
-
 }

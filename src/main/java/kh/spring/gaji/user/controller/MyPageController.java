@@ -211,7 +211,7 @@ public class MyPageController {
 		return "mypage/onsalegoods";
 	}
 	
-	@GetMapping("/goods/closed")	// 판매완료
+	@GetMapping("/goods/closed")	// 판매완료 상품
 	public String closedGoods(Model model,Integer currentPage,String searchWord,HttpSession session) {	
 		int totalCnt=0;
 		List<MyGoodsListDto> myGoodsList=null;
@@ -246,7 +246,7 @@ public class MyPageController {
 		return "mypage/closedgoods";
 	}
 	
-	@GetMapping("/goods/hide")	// 판매완료
+	@GetMapping("/goods/hide")	// 숨김중 상품
 	public String hideGoods(Model model,Integer currentPage,String searchWord,HttpSession session) {	
 		int totalCnt=0;
 		List<MyGoodsListDto> myGoodsList=null;
@@ -288,12 +288,75 @@ public class MyPageController {
 		}
 	
 	@GetMapping("/keepuseds")
-	public String keepUseds() {		// 찜목록
+	public String keepuseds(Model model, Integer currentPage, String searchWord, HttpSession session) {
+		int totalCnt = 0;
+		List<MyGoodsListDto> myGoodsList = null;
+		// String userId=(String)session.getAttribute("userId");
+		model.addAttribute("myGoodsList", myGoodsList);
+		if (currentPage == null) // 현재 페이지가 들어온게 없다면 1페이지.
+			currentPage = 1;
+		if (searchWord == null) { // 검색어가 들어온게 없다면 검색어없는 mapper로 목록 가져오기
+			Map<String, Object> map = userService.getKeepUsedList("qordmlgjs", (int) currentPage, PAGESIZE); // 추후																								// userId들어가야함
+			myGoodsList = (List<MyGoodsListDto>) map.get("myGoodsList");
+			totalCnt = (int) map.get("totalCnt");
+		} else { // 검색어가 있다면 그에따른 mapper로 목록 가져오기
+			Map<String, Object> map = userService.getSearchKeepUsedList("qordmlgjs", (int) currentPage, PAGESIZE,
+					searchWord);// 추후 userId들어가야함
+			myGoodsList = (List<MyGoodsListDto>) map.get("myGoodsList");
+			totalCnt = (int) map.get("totalCnt");
+			model.addAttribute("searchWord", searchWord);
+		}
+		int totalPageNum = totalCnt / PAGESIZE + (totalCnt % PAGESIZE == 0 ? 0 : 1);
+		int startPageNum = 1;
+		if ((currentPage % PAGEBLOCKSIZE) == 0) {
+			startPageNum = ((currentPage / PAGEBLOCKSIZE) - 1) * PAGEBLOCKSIZE + 1;
+		} else {
+			startPageNum = ((currentPage / PAGEBLOCKSIZE)) * PAGEBLOCKSIZE + 1;
+		}
+		int endPageNum = (startPageNum + PAGEBLOCKSIZE > totalPageNum) ? totalPageNum
+				: startPageNum + PAGEBLOCKSIZE - 1;
+		model.addAttribute("totalPageNum", totalPageNum);
+		model.addAttribute("startPageNum", startPageNum);
+		model.addAttribute("endPageNum", endPageNum);
+		model.addAttribute("currentPage", currentPage);
+		model.addAttribute("myGoodsList", myGoodsList);
 		return "mypage/keepuseds";
 	}
 	
 	@GetMapping("/keepusers")
-	public String keepUsers() {		// 모아보기 - 즐겨찾기한 유저들의 상품들을 모아서 볼 수 있음 
+// 모아보기 - 즐겨찾기한 유저들의 상품들을 모아서 볼 수 있음 
+	public String keepusers(Model model, Integer currentPage, String searchWord, HttpSession session) {
+		int totalCnt = 0;
+		List<MyGoodsListDto> myGoodsList = null;
+		// String userId=(String)session.getAttribute("userId");
+		model.addAttribute("myGoodsList", myGoodsList);
+		if (currentPage == null) // 현재 페이지가 들어온게 없다면 1페이지.
+			currentPage = 1;
+		if (searchWord == null) { // 검색어가 들어온게 없다면 검색어없는 mapper로 목록 가져오기
+			Map<String, Object> map = userService.getKeepUsersList("qordmlgjs", (int) currentPage, PAGESIZE); // 추후 userId들어가야함																								
+			myGoodsList = (List<MyGoodsListDto>) map.get("myGoodsList");
+			totalCnt = (int) map.get("totalCnt");
+		} else { // 검색어가 있다면 그에따른 mapper로 목록 가져오기
+			Map<String, Object> map = userService.getSearchKeepUsersList("qordmlgjs", (int) currentPage, PAGESIZE,
+					searchWord);// 추후 userId들어가야함
+			myGoodsList = (List<MyGoodsListDto>) map.get("myGoodsList");
+			totalCnt = (int) map.get("totalCnt");
+			model.addAttribute("searchWord", searchWord);
+		}
+		int totalPageNum = totalCnt / PAGESIZE + (totalCnt % PAGESIZE == 0 ? 0 : 1);
+		int startPageNum = 1;
+		if ((currentPage % PAGEBLOCKSIZE) == 0) {
+			startPageNum = ((currentPage / PAGEBLOCKSIZE) - 1) * PAGEBLOCKSIZE + 1;
+		} else {
+			startPageNum = ((currentPage / PAGEBLOCKSIZE)) * PAGEBLOCKSIZE + 1;
+		}
+		int endPageNum = (startPageNum + PAGEBLOCKSIZE > totalPageNum) ? totalPageNum
+				: startPageNum + PAGEBLOCKSIZE - 1;
+		model.addAttribute("totalPageNum", totalPageNum);
+		model.addAttribute("startPageNum", startPageNum);
+		model.addAttribute("endPageNum", endPageNum);
+		model.addAttribute("currentPage", currentPage);
+		model.addAttribute("myGoodsList", myGoodsList);
 		return "mypage/keepusers";
 	}
 	

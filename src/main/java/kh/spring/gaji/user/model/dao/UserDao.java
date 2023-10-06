@@ -235,6 +235,87 @@ public class UserDao {
     	return sqlSession.selectList("user.getSearchOnsaleList", map);
     }
     
+  //찜목록
+    public int getKeepUsedTotalCnt(String userId) {		
+ 	   return sqlSession.selectOne("user.getKeepUsedTotalCnt",userId);
+    }
+    
+  //찜목록
+     public List<MyGoodsListDto> getKeepUsedList(String userId,int currentPage,int PAGESIZE,int totalCnt) {	//10P 판매중 + 예약중 불러오기
+     	int startRownum = 0;
+ 		int endRownum = 0;
+ 		startRownum = (currentPage-1)*PAGESIZE +1;
+ 		endRownum = ((currentPage*PAGESIZE) > totalCnt) ? totalCnt: (currentPage*PAGESIZE);
+ 		Map<String, Object> map= new HashMap<String, Object>();
+ 		map.put("userId", userId);
+ 		map.put("startRownum",startRownum);
+ 		map.put("endRownum",endRownum);
+     	return sqlSession.selectList("user.getKeepUsedList", map);
+     }
+   //찜목록
+     public int getSearchKeepUsedTotalCnt(String userId,String searchWord) {
+        Map<String, Object> map= new HashMap<String, Object>();
+        searchWord="%"+searchWord+"%";
+        map.put("userId", userId);
+        map.put("searchWord", searchWord);
+  	   return sqlSession.selectOne("user.getSearchKeepUsedTotalCnt",map);
+     }
+   //찜목록
+     public List<MyGoodsListDto> getSearchKeepUsedList(String userId,int currentPage,int PAGESIZE,int totalCnt,String searchWord) {	//10P 판매중 + 예약중 불러오기
+     	searchWord="%"+searchWord+"%";
+     	int startRownum = 0;
+ 		int endRownum = 0;
+ 		startRownum = (currentPage-1)*PAGESIZE +1;
+ 		endRownum = ((currentPage*PAGESIZE) > totalCnt) ? totalCnt: (currentPage*PAGESIZE);
+ 		Map<String, Object> map= new HashMap<String, Object>();
+ 		map.put("userId", userId);
+ 		map.put("startRownum",startRownum);
+ 		map.put("endRownum",endRownum);
+ 		map.put("searchWord", searchWord);
+     	return sqlSession.selectList("user.getSearchKeepUsedList", map);
+     }
+     
+    //모아보기
+     public int getKeepUsersTotalCnt(String userId) {		
+  	   return sqlSession.selectOne("user.getKeepUsersTotalCnt",userId);
+     }
+     
+   //모아보기
+      public List<MyGoodsListDto> getKeepUsersList(String userId,int currentPage,int PAGESIZE,int totalCnt) {	//10P 판매중 + 예약중 불러오기
+      	int startRownum = 0;
+  		int endRownum = 0;
+  		startRownum = (currentPage-1)*PAGESIZE +1;
+  		endRownum = ((currentPage*PAGESIZE) > totalCnt) ? totalCnt: (currentPage*PAGESIZE);
+  		Map<String, Object> map= new HashMap<String, Object>();
+  		map.put("userId", userId);
+  		map.put("startRownum",startRownum);
+  		map.put("endRownum",endRownum);
+      	return sqlSession.selectList("user.getKeepUsersList", map);
+      }
+    //모아보기
+      public int getSearchKeepUsersTotalCnt(String userId,String searchWord) {
+         Map<String, Object> map= new HashMap<String, Object>();
+         searchWord="%"+searchWord+"%";
+         map.put("userId", userId);
+         map.put("searchWord", searchWord);
+   	   return sqlSession.selectOne("user.getSearchKeepUsersTotalCnt",map);
+      }
+    //모아보기
+      public List<MyGoodsListDto> getSearchKeepUsersList(String userId,int currentPage,int PAGESIZE,int totalCnt,String searchWord) {	//10P 판매중 + 예약중 불러오기
+      	searchWord="%"+searchWord+"%";
+      	int startRownum = 0;
+  		int endRownum = 0;
+  		startRownum = (currentPage-1)*PAGESIZE +1;
+  		endRownum = ((currentPage*PAGESIZE) > totalCnt) ? totalCnt: (currentPage*PAGESIZE);
+  		Map<String, Object> map= new HashMap<String, Object>();
+  		map.put("userId", userId);
+  		map.put("startRownum",startRownum);
+  		map.put("endRownum",endRownum);
+  		map.put("searchWord", searchWord);
+      	return sqlSession.selectList("user.getSearchKeepUsersList", map);
+      }
+   
+    
     public int getClosedTotalCnt(String userId) {
  	   return sqlSession.selectOne("user.getClosedTotalCnt",userId);
     }

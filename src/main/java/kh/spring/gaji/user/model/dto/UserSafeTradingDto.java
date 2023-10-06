@@ -9,5 +9,7 @@ public class UserSafeTradingDto {
 	private String goodsTitle;
 	private int tradingStatus; 
 	private int price;
+	private int wishCount;
+	private int goodsId;
 	private String tradingDate;
 }

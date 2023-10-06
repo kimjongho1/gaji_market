@@ -9,5 +9,6 @@ public class MyGoodsListDto {
     private String title;
     private int price;
     private int status;
+    private int wishCount;
     private String refreshedAt;
 }

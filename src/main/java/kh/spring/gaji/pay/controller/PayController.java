@@ -81,6 +81,7 @@ public class PayController {
 					map.put("status",3);
 					map.put("goodsId",payServiceImpl.getGoodsId(transactionId));
 					payServiceImpl.updateStatus(map);
+//					payServiceImpt.insertClosePayNotice(transactionId);
 				}
 				System.out.println("result:"+result);
 				/* } */

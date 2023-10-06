@@ -9,6 +9,7 @@ public class InFaceTradingDto {
     private int goodsId; 	
     private String goodsTitle;
     private int price;
+    private int wishCount;
     private String buyerId;
     private String tradingDate; 
     private int tradingStatus; 
