@@ -13,4 +13,5 @@ public class InFaceTradingDto {
     private String buyerId;
     private String tradingDate; 
     private int tradingStatus; 
+    private String url;
 }

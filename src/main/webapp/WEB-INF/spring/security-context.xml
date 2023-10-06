@@ -21,7 +21,7 @@
 			password-parameter="password"
 			login-processing-url="/login-check"
 			default-target-url="/"
-			authentication-failure-url="/login/error"
+			authentication-failure-handler-ref="customAuthenticationFailure"
 		/>
 		<security:logout
 			logout-url="/logout" 
@@ -31,6 +31,7 @@
 		/>
 
 	</security:http>
+	<bean id="customAuthenticationFailure" class="kh.spring.gaji.user.controller.CustomAuthenticationFailure"/>
 	<!-- AuthenticationManager 빈 생성 -->
 	<security:authentication-manager>
 		<security:authentication-provider>
@@ -41,4 +42,7 @@
 			/>
 		</security:authentication-provider>
 	</security:authentication-manager>
+	
+	<bean id="bcrypt" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"/>
+	
 </beans>

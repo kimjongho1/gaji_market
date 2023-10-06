@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -25,6 +27,9 @@ public class UserController {
 	@Autowired
 	private MailSendService mailService;
 
+	@Autowired
+	private BCryptPasswordEncoder bCryptPasswordEncoder; 
+	
 	@GetMapping("/signup")
 	public String signup() { // 개인회원가입
 		return "user/signup";
@@ -33,6 +38,7 @@ public class UserController {
 	@PostMapping("signup")
 	public String singupUser(UserDto userDto, RedirectAttributes ra, UserInsertAddressDto addressDto) {
 		try {
+			userDto.setPassword(bCryptPasswordEncoder.encode(userDto.getPassword()));
 			if (userService.signup(userDto, addressDto) > 0) {
 				ra.addFlashAttribute("msg", "계정 생성이 성공하였습니다.");
 				return "redirect:/main"; // 성공 시 메인 페이지로 리다이렉트
