@@ -109,7 +109,7 @@
           <input type="hidden" name="refId" value="${safePurchaseInfoDto.goodsId}">
           <div class="form-group">
             <label for="reportContent">신고 내용</label>
-            <textarea class="form-control" id="reportContent" name="content" rows="10"></textarea>
+            <textarea class="form-control" id="reportContent" name="content" rows="10" required="required"></textarea>
           </div>
           <button type="submit" class="btn btn-primary">신고 제출</button>
         </form>
