@@ -172,7 +172,7 @@
 							</div>
 							<!-- Product image-->
 							<img class="card-img-top"
-								src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" alt="..." />
+								src="${myGoodsInfo.url}" alt="상품 이미지 없음"  width="268" height="179"/>
 							<!-- Product details-->
 							<div class="card-body p-4">
 								<div class="text-center">

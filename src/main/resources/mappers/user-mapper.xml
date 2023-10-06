@@ -1,22 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC " -//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="user">
-	<select id="getKeepList" parameterType="string" resultType="GoodsListDto"> <!--사진API로?-->
-		from goods
-		where goods_id IN(select goods_id from wishlist where user_id=#{userId}) and active_status="Y" and status!=4
-		order by created_at DESC
-	</select>
 	
 	<select id="updateViewCount"> <!-- 상품글 조회수 +1 -->
 		update goods set view_count=view_count+1
 	</select>
 	
-	<select id="getFavoriteList" parameterType="string" resultType="GoodsListDto"> <!-- 6P 사진을 포함한 모아보기목록 가져옴 -->
-		select goods_id,user_id,title,price,status,created_at 
-		from goods g
-		where user_id IN(select target_id from favorite_user where user_id=#{userId}) and active_status="Y" and status!=4
-		order by created_at DESC
-	</select>
 	
 	<select id="checkIdForSafeSeller" parameterType="string" resultType="string">
 		select user_id from goods join safe_trading using (goods_Id)
@@ -36,7 +25,8 @@
 	</select>
 	
 	<select id="getSafePurchaseList" parameterType="map" resultType="UserSafeTradingDto">	<!-- 9P 안전거래 구매내역(회원) 불러오기 -->
-		select list2.*,(select count(*) from wishlist w where w.goods_Id=list2.goods_Id) wishCount from 
+		select list2.*,(select count(*) from wishlist w where w.goods_Id=list2.goods_Id) wishCount
+		,(select url from goods_file f where f.goods_id=list2.goods_id and rownum between 0 and 1) url from 
 		(select list.*,rownum rn from(
 		(select goods_Id,transaction_id,goods_title,trading_status,s.price,to_char(trading_date, 'YYYY-MM-DD HH24:MI:SS') trading_date
 		from safe_trading s join goods g using (goods_id)
@@ -47,7 +37,8 @@
 	</select>
 	
 	<select id="getSearchSafePurchaseList" parameterType="map" resultType="UserSafeTradingDto">	<!-- 9P 안전거래 검색어에 따른 구매내역(회원) 불러오기 -->
-		select list2.*,(select count(*) from wishlist w where w.goods_Id=list2.goods_Id) wishCount from 
+		select list2.*,(select count(*) from wishlist w where w.goods_Id=list2.goods_Id) wishCount
+		,(select url from goods_file f where f.goods_id=list2.goods_id and rownum between 0 and 1) url from 
 		(select list.*,rownum rn from(
 		(select goods_Id,transaction_id,goods_title,trading_status,s.price,to_char(trading_date, 'YYYY-MM-DD HH24:MI:SS') trading_date
 		from safe_trading s join goods g using (goods_id)
@@ -68,7 +59,8 @@
 	</select>
 	
 	<select id="getSellerSafePurchaseList" parameterType="map" resultType="UserSafeTradingDto">	<!-- 9P 안전거래 구매내역(회원) 불러오기 -->
-		select list2.*,(select count(*) from wishlist w where w.goods_Id=list2.goods_Id) wishCount from 
+		select list2.*,(select count(*) from wishlist w where w.goods_Id=list2.goods_Id) wishCount
+		,(select url from goods_file f where f.goods_id=list2.goods_id and rownum between 0 and 1) url from 
 		(select list.*,rownum rn from(
 		(select goods_id,transaction_id,goods_title,trading_status,s.price,to_char(trading_date, 'YYYY-MM-DD HH24:MI:SS') trading_date
 		from safe_trading s join goods g using (goods_id)
@@ -78,7 +70,8 @@
 		) list2 where rn between #{startRownum} and #{endRownum}
 	</select>
 	<select id="getSearchSellerSafePurchaseList" parameterType="map" resultType="UserSafeTradingDto">	<!-- 9P 안전거래 검색어에 따른 구매내역(회원) 불러오기 -->
-		select list2.*,(select count(*) from wishlist w where w.goods_Id=list2.goods_Id) wishCount from 
+		select list2.*,(select count(*) from wishlist w where w.goods_Id=list2.goods_Id) wishCount
+		,(select url from goods_file f where f.goods_id=list2.goods_id and rownum between 0 and 1) url from 
 		(select list.*,rownum rn from(
 		(select g.goods_Id,transaction_id,goods_title,trading_status,s.price,to_char(trading_date, 'YYYY-MM-DD HH24:MI:SS') trading_date
 		from safe_trading s join goods g using (goods_id)
@@ -101,7 +94,8 @@
 	</select>
 
 	<select id="getInfacePurchaseList" parameterType="map" resultType="InFaceTradingDto"> <!-- 9P 직거래 구매내역(회원) 불러오기 -->
-		select list2.*,(select count(*) from wishlist w where w.goods_Id=list2.goods_Id) wishCount from
+		select list2.*,(select count(*) from wishlist w where w.goods_Id=list2.goods_Id) wishCount
+		,(select url from goods_file f where f.goods_id=list2.goods_id and rownum between 0 and 1) url from
 		(select list.*, rownum rn from(
 		(select goods_id,in_face_trading_id,goods_title,trading_status,i.price,to_char(trading_date, 'YYYY-MM-DD HH24:MI:SS') trading_date
 		from in_face_trading i join goods g using (goods_id)
@@ -112,7 +106,8 @@
 	</select>
 	
 		<select id="getSearchInfacePurchaseList" parameterType="map" resultType="InFaceTradingDto"> <!-- 9P 직거래 구매내역(회원) 불러오기 -->
-		select list2.*,(select count(*) from wishlist w where w.goods_Id=list2.goods_Id) wishCount from
+		select list2.*,(select count(*) from wishlist w where w.goods_Id=list2.goods_Id) wishCount
+		,(select url from goods_file f where f.goods_id=list2.goods_id and rownum between 0 and 1) url from
 		(select list.*, rownum rn from(
 		(select goods_id,in_face_trading_id,goods_title,trading_status,i.price,to_char(trading_date, 'YYYY-MM-DD HH24:MI:SS') trading_date
 		from in_face_trading i join goods g using (goods_id)
@@ -135,7 +130,8 @@
 	</select>
 
 	<select id="getSellerInfacePurchaseList" parameterType="map" resultType="InFaceTradingDto"> <!-- 9P 직거래 구매내역(회원) 불러오기 -->
-		select list2.*,(select count(*) from wishlist w where w.goods_Id=list2.goods_Id) wishCount from
+		select list2.*,(select count(*) from wishlist w where w.goods_Id=list2.goods_Id) wishCount 
+		,(select url from goods_file f where f.goods_id=list2.goods_id and rownum between 0 and 1) url from
 		(select list.*, rownum rn from(
 		(select goods_id,in_face_trading_id,goods_title,trading_status,i.price,to_char(trading_date, 'YYYY-MM-DD HH24:MI:SS') trading_date
 		from in_face_trading i join goods g using (goods_id)
@@ -146,7 +142,8 @@
 	</select>
 	
 	<select id="getSearchSellerInfacePurchaseList" parameterType="map" resultType="InFaceTradingDto"> <!-- 9P 직거래 구매내역(회원) 불러오기 -->
-		select list2.*,(select count(*) from wishlist w where w.goods_Id=list2.goods_Id) wishCount from
+		select list2.*,(select count(*) from wishlist w where w.goods_Id=list2.goods_Id) wishCount 
+		,(select url from goods_file f where f.goods_id=list2.goods_id and rownum between 0 and 1) url from
 		(select list.*, rownum rn from(
 		(select goods_id,in_face_trading_id,goods_title,trading_status,i.price,to_char(trading_date, 'YYYY-MM-DD HH24:MI:SS') trading_date
 		from in_face_trading i join goods g using (goods_id)
@@ -166,7 +163,9 @@
 	
 	
 	<select id="getOnsaleList" parameterType="map" resultType="MyGoodsListDto">	<!--10P 판매중 + 예약중 불러오기 -->
-		select list2.*,(select count(*) from wishlist w where w.goods_Id=list2.goods_Id) wishCount from
+		select list2.*,(select count(*) from wishlist w where w.goods_Id=list2.goods_Id) wishCount
+		,(select url from goods_file f where f.goods_id=list2.goods_id and rownum between 0 and 1) url
+		from
 		(select list.*,rownum rn from(
 		(select to_char(refreshed_at, 'YYYY-MM-DD HH24:MI:SS') refreshed_at,goods_id,title,price,status
 		from goods 
@@ -177,7 +176,8 @@
 	</select>
 	
 	<select id="getSearchOnsaleList" parameterType="map" resultType="MyGoodsListDto">	<!--10P 판매중 + 예약중 불러오기 -->
-		select list2.*,(select count(*) from wishlist w where w.goods_Id=list2.goods_Id) wishCount from
+		select list2.*,(select count(*) from wishlist w where w.goods_Id=list2.goods_Id) wishCount 
+		,(select url from goods_file f where f.goods_id=list2.goods_id and rownum between 0 and 1) from
 		(select list.*,rownum rn from(
 		(select to_char(refreshed_at, 'YYYY-MM-DD HH24:MI:SS') refreshed_at,goods_id,title,price,status 
 		from goods 
@@ -197,7 +197,8 @@
 	</select>
 	
 	<select id="getKeepUsedList" parameterType="map" resultType="MyGoodsListDto">	<!--찜 목록 가져오기 -->
-		select list2.*,(select count(*) from wishlist w where w.goods_Id=list2.goods_Id) wishCount from
+		select list2.*,(select count(*) from wishlist w where w.goods_Id=list2.goods_Id) wishCount 
+		,(select url from goods_file f where f.goods_id=list2.goods_id and rownum between 0 and 1) from
 		(select list.*,rownum rn from(
 		(select to_char(refreshed_at, 'YYYY-MM-DD HH24:MI:SS') refreshed_at,goods_id,title,price,status
 		from goods 
@@ -208,7 +209,8 @@
 	</select>
 	
 	<select id="getSearchKeepUsedList" parameterType="map" resultType="MyGoodsListDto">	<!--찜 목록 가져오기 -->
-		select list2.*,(select count(*) from wishlist w where w.goods_Id=list2.goods_Id) wishCount from
+		select list2.*,(select count(*) from wishlist w where w.goods_Id=list2.goods_Id) wishCount 
+		,(select url from goods_file f where f.goods_id=list2.goods_id and rownum between 0 and 1) from
 		(select list.*,rownum rn from(
 		(select to_char(refreshed_at, 'YYYY-MM-DD HH24:MI:SS') refreshed_at,goods_id,title,price,status 
 		from goods 
@@ -219,16 +221,17 @@
 	</select>
 	
 	<!--  -->
-	<select id="getKeepUsersTotalCnt" parameterType="string" resultType="_int"> 	<!--찜 목록 가져오기 -->
+	<select id="getKeepUsersTotalCnt" parameterType="string" resultType="_int"> 	<!--모아보기 목록 가져오기 -->
 		select count(*) from goods where user_id IN(select target_id from favorite_user where user_id=#{userId}) and status IN(1,2) order by created_at
 	</select>
 	
-	<select id="getSearchKeepUsersTotalCnt" parameterType="map" resultType="_int"> 	<!--찜 목록 가져오기 -->
+	<select id="getSearchKeepUsersTotalCnt" parameterType="map" resultType="_int"> 	<!--모아보기 목록 가져오기 -->
 		select count(*) from goods where user_id IN(select target_id from favorite_user where user_id=#{userId}) and title like #{searchWord} and status IN(1,2)
 	</select>
 	
-	<select id="getKeepUsersList" parameterType="map" resultType="MyGoodsListDto">	<!--찜 목록 가져오기 -->
-		select list2.*,(select count(*) from wishlist w where w.goods_Id=list2.goods_Id) wishCount from
+	<select id="getKeepUsersList" parameterType="map" resultType="MyGoodsListDto">	<!--모아보기 목록 가져오기 -->
+		select list2.*,(select count(*) from wishlist w where w.goods_Id=list2.goods_Id) wishCount 
+		,(select url from goods_file f where f.goods_id=list2.goods_id and rownum between 0 and 1) from
 		(select list.*,rownum rn from(
 		(select to_char(refreshed_at, 'YYYY-MM-DD HH24:MI:SS') refreshed_at,goods_id,title,price,status
 		from goods 
@@ -238,8 +241,9 @@
 		) list2 where rn between #{startRownum} and #{endRownum}
 	</select>
 	
-	<select id="getSearchKeepUsersList" parameterType="map" resultType="MyGoodsListDto">	<!--찜 목록 가져오기 -->
-		select list2.*,(select count(*) from wishlist w where w.goods_Id=list2.goods_Id) wishCount from
+	<select id="getSearchKeepUsersList" parameterType="map" resultType="MyGoodsListDto">	<!--모아보기 목록 가져오기 -->
+		select list2.*,(select count(*) from wishlist w where w.goods_Id=list2.goods_Id) wishCount 
+		,(select url from goods_file f where f.goods_id=list2.goods_id and rownum between 0 and 1) from
 		(select list.*,rownum rn from(
 		(select to_char(refreshed_at, 'YYYY-MM-DD HH24:MI:SS') refreshed_at,goods_id,title,price,status 
 		from goods 
@@ -261,7 +265,8 @@
 	
 	
 	<select id="getClosedList" parameterType="map" resultType="MyGoodsListDto">	<!--거래완료 -->
-		select list2.*,(select count(*) from wishlist w where w.goods_Id=list2.goods_Id) wishCount from
+		select list2.*,(select count(*) from wishlist w where w.goods_Id=list2.goods_Id) wishCount 
+		,(select url from goods_file f where f.goods_id=list2.goods_id and rownum between 0 and 1) url from
 		(select list.*,rownum rn from(
 		(select to_char(refreshed_at, 'YYYY-MM-DD HH24:MI:SS') refreshed_at,goods_id,title,price,status 
 		from goods 
@@ -272,7 +277,8 @@
 	</select>
 	
 	<select id="getSearchClosedList" parameterType="map" resultType="MyGoodsListDto">	<!--거래완료 -->
-		select list2.*,(select count(*) from wishlist w where w.goods_Id=list2.goods_Id) wishCount from
+		select list2.*,(select count(*) from wishlist w where w.goods_Id=list2.goods_Id) wishCount 
+		,(select url from goods_file f where f.goods_id=list2.goods_id and rownum between 0 and 1) url from
 		(select list.*,rownum rn from(
 		(select to_char(refreshed_at, 'YYYY-MM-DD HH24:MI:SS') refreshed_at,goods_id,title,price,status 
 		from goods 
@@ -293,7 +299,8 @@
 	
 	
 	<select id="getHideList" parameterType="map" resultType="MyGoodsListDto">	<!--숨김 -->
-		select list2.*,(select count(*) from wishlist w where w.goods_Id=list2.goods_Id) wishCount from
+		select list2.*,(select count(*) from wishlist w where w.goods_Id=list2.goods_Id) wishCount 
+		,(select url from goods_file f where f.goods_id=list2.goods_id and rownum between 0 and 1) url from
 		(select list.*,rownum rn from(
 		(select to_char(refreshed_at, 'YYYY-MM-DD HH24:MI:SS') refreshed_at,goods_id,title,price,status 
 		from goods 
@@ -304,7 +311,8 @@
 	</select>
 	
 	<select id="getSearchHideList" parameterType="map" resultType="MyGoodsListDto">	<!--숨김 -->
-		select list2.*,(select count(*) from wishlist w where w.goods_Id=list2.goods_Id) wishCount from
+		select list2.*,(select count(*) from wishlist w where w.goods_Id=list2.goods_Id) wishCount 
+		,(select url from goods_file f where f.goods_id=list2.goods_id and rownum between 0 and 1) url from
 		(select list.*,rownum rn from(
 		(select to_char(refreshed_at, 'YYYY-MM-DD HH24:MI:SS') refreshed_at,goods_id,title,price,status 
 		from goods 

@@ -12,4 +12,5 @@ public class UserSafeTradingDto {
 	private int wishCount;
 	private int goodsId;
 	private String tradingDate;
+	private String url;
 }

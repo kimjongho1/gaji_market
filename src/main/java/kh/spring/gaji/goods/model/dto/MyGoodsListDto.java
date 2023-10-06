@@ -11,4 +11,5 @@ public class MyGoodsListDto {
     private int status;
     private int wishCount;
     private String refreshedAt;
+    private String url;
 }
