@@ -5,30 +5,36 @@
 <head>
 <meta charset="UTF-8">
 <title>회원가입</title>
+
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<!--favicon  -->
+	<link rel="icon" href="${pageContext.request.contextPath}/resources/img/favicon.ico">
+	<link rel="shortcut icon" href="${pageContext.request.contextPath}/resources/img/favicon.ico">
+
 <style>
-* {
-	margin: 0px;
+.container-box {
+	position:relative;
+	margin: 50px;
 	padding: 0px;
 	text-decoration: none;
 	font-family: sans-serif;
+	vertical-align: middle;
+	min-height: 1500px;
 }
 
 body {
 	background-image: #34495e;
 }
 
+/* 640 */
 .joinForm {
-	position: absolute;
-	width: 400px;
+	width: 700px;
 	height: 400px;
-	padding: 30px, 20px;
 	background-color: #FFFFFF;
 	text-align: center;
-	top: 40%;
-	left: 50%;
-	transform: translate(-50%, -50%);
 	border-radius: 15px;
+	margin: auto;
 }
 
 .joinForm h2 {
@@ -38,7 +44,7 @@ body {
 
 .textForm {
 	border-bottom: 2px solid #adadad;
-	margin: 30px;
+	margin: 50px;
 	padding: 10px 10px;
 }
 
@@ -48,7 +54,7 @@ body {
 	outline: none;
 	color: #636e72;
 	font-size: 16px;
-	height: 25px;
+	height: 35px;
 	background: none;
 }
 
@@ -58,7 +64,7 @@ body {
 	outline: none;
 	color: #636e72;
 	font-size: 16px;
-	height: 25px;
+	height: 35px;
 	background: none;
 }
 
@@ -68,7 +74,7 @@ body {
 	outline: none;
 	color: #636e72;
 	font-size: 16px;
-	height: 25px;
+	height: 35px;
 	background: none;
 }
 
@@ -78,9 +84,20 @@ body {
 	outline: none;
 	color: #636e72;
 	font-size: 16px;
-	height: 25px;
+	height: 35px;
 	background: none;
 }
+
+.mail-check-input {
+	width: 100%;
+	border: none;
+	outline: none;
+	color: #636e72;
+	font-size: 16px;
+	height: 35px;
+	background: none;
+}
+
 
 .nickname {
 	width: 100%;
@@ -88,7 +105,7 @@ body {
 	outline: none;
 	color: #636e72;
 	font-size: 16px;
-	height: 25px;
+	height: 35px;
 	background: none;
 }
 
@@ -98,7 +115,7 @@ body {
 	outline: none;
 	color: #636e72;
 	font-size: 16px;
-	height: 25px;
+	height: 35px;
 	background: none;
 }
 
@@ -128,30 +145,40 @@ body {
 	background-color: #3498db;
 	color: #fff;
 	border: none;
-	padding: 5px 10px;
+	padding: 5px;
 	cursor: pointer;
 	border-radius: 5px;
-	width:150px;
+	width:200px;
 	margin-left: 5px;
 }
 .btn-email {
 	background-color: #3498db;
 	color: #fff;
 	border: none;
-	padding: 5px 10px;
+	padding: 5px;
 	cursor: pointer;
 	border-radius: 5px;
-	width:150px;
+	width:200px;
+	margin-left: 5px;
+}
+.btn-mail-check-input {
+	background-color: #3498db;
+	color: #fff;
+	border: none;
+	padding: 5px;
+	cursor: pointer;
+	border-radius: 5px;
+	width:200px;
 	margin-left: 5px;
 }
 .btn-id {
 	background-color: #3498db;
 	color: #fff;
 	border: none;
-	padding: 5px 10px;
+	padding: 5px;
 	cursor: pointer;
 	border-radius: 5px;
-	width:150px;
+	width:200px;
 	margin-left: 5px;
 }
 
@@ -164,9 +191,32 @@ body {
 .btn-id:hover {
 	background-color: #2980b9;
 }
+.btn-mail-check-input:hover {
+	background-color: #2980b9;
+}
+
 </style>
+
+<!-- Css Styles -->
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/bootstrap.min.css" type="text/css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/font-awesome.min.css" type="text/css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/elegant-icons.css" type="text/css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/nice-select.css" type="text/css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/jquery-ui.min.css" type="text/css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/owl.carousel.min.css" type="text/css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/slicknav.min.css" type="text/css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/style.css" type="text/css">
+
 </head>
 <body>
+
+ <!-- header start -->      
+ <jsp:include page="/WEB-INF/views/header.jsp"></jsp:include> 
+   <!-- header end --> 
+
+
+<div class="container-box">
+
 	<form action=signup method="POST" class="joinForm"
 		onsubmit="return Validation(); return false;">
 
@@ -179,12 +229,16 @@ body {
 			</span>
 		</div>
 		<div class="textForm">
+			<span style="display: flex;">
 			<input name="password" type="password" class="pw" placeholder="비밀번호" id="password"
 				required="required">
+			</span>
 		</div>
 		<div class="textForm">
+			<span style="display: flex;">
 			<input name="loginPwConfirm" type="password" class="pw"
 				placeholder="비밀번호 확인" required="required">
+			</span>
 		</div>
 		<div class="textForm">
 			<span style="display: flex;">
@@ -198,20 +252,26 @@ body {
 			<span style="display: flex;">
 				<input name="certification" type="text" class="mail-check-input" id="verificationCode"
 					placeholder="인증번호 확인" required="required">
-				<button type="button" class="btn" id="verify-button">인증번호 확인</button>
+				<button type="button" class="btn-mail-check-input" id="verify-button">인증번호 확인</button>
 			</span>
 		</div>
 		<div class="textForm">
+			<span style="display: flex;">	
 			<input name="name" type="text" class="name" placeholder="이름" id="name"
 				required="required">
+			</span>
 		</div>
 		<div class="textForm">
+			<span style="display: flex;">	
 			<input name="nickname" type="text" class="nickname" placeholder="닉네임" id="nickname"
 				required="required">
+			</span>
 		</div>
 		<div class="textForm">
+			<span style="display: flex;">	
 			<input name="mobileNumber" type="text" class="cellphoneNo" id="mobileNumber"
 				placeholder="전화번호" required="required">
+			</span>
 		</div>
 		<div class="textForm">
 			<span style="display: flex;">
@@ -221,27 +281,52 @@ body {
 				onclick="sample4_execDaumPostcode()">우편번호 찾기</button>
 				</span>
 		</div>
-		<br>
 		<div class="textForm">
+			<span style="display: flex;">
 			<input type="text" name="roadAddress" id="sample4_roadAddress"
 				placeholder="도로명주소" class="cellphoneNo">
+			</span>
 		</div>
 		<div class="textForm">
+		<span style="display: flex;">
 			<input type="text" name="address" id="sample4_jibunAddress"
 				placeholder="지번주소" class="cellphoneNo"> <span id="guide"
 				style="color: #999; display: none"></span>
+		</span>
 		</div>
 		<div class="textForm">
+		<span style="display: flex;">
 			<input type="text" name="detailAddress" id="sample4_detailAddress"
 				placeholder="상세주소" class="cellphoneNo">
+		</span>
 		</div>
 		<div class="textForm">
+		<span style="display: flex;">
 			<input type="text" name="addressNickname" id="sample4_detailAddress"
 				placeholder="주소별칭" class="cellphoneNo">
+		</span>
 		</div>
 		<input type="submit" onclick="Validation()" class="btn" value="J O I N" />
 	</form>
+</div>
+	
+	<!-- Footer Section Begin -->
+ <jsp:include page="/WEB-INF/views/footer.jsp"></jsp:include> 
+    <!-- Footer Section End -->
+	
 </body>
+
+<!-- Js Plugins -->
+    <script src="${pageContext.request.contextPath}/resources/js/jquery-3.3.1.min.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/js/bootstrap.min.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/js/jquery.nice-select.min.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/js/jquery-ui.min.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/js/jquery.slicknav.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/js/mixitup.min.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/js/owl.carousel.min.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/js/main.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
+
 <script
 	src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script>

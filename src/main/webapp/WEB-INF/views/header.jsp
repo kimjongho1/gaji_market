@@ -89,10 +89,10 @@ header {
 								<li><a href="#">취미/게임</a></li>
 								<li><a href="#">기타</a></li>
 							</ul></li>
-						<li class="active"><a href="#">상품</a></li>
+						<li><a href="#">상품</a></li>
 						<li><a href="${pageContext.request.contextPath}/chat">1:1채팅</a></li>
 					</ul>
-
+<!-- class="active" -->
 
 
 				</nav>
