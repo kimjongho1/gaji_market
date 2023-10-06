@@ -9,4 +9,6 @@ public class ChatRoomDao {
 
 	@Autowired
 	private SqlSession sqlSession;
+	
+	
 }

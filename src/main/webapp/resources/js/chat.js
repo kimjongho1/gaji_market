@@ -83,34 +83,31 @@ $(function () {
   function send() {
     const msgInput = document.getElementById("msg");
     const message = msgInput.value.trim(); // 입력된 메시지를 가져옴
-
+  
     if (message === "") {
       // 메시지가 비어있으면 전송하지 않음
       return;
     }
-    
-    const fullMessage = username + ":" + message;
-
-    // 현재 활성화된 채팅 창을 찾음
+  
+    // 메시지를 채팅 창에 추가 (자신이 보낸 메시지)
     const activeChat = document.querySelector('.chat.active-chat');
-
+  
     if (!activeChat) {
       // 현재 활성화된 채팅 창이 없으면 아무 작업도 수행하지 않음
       return;
     }
-
-    // 메시지를 채팅 창에 추가 (자신이 보낸 메시지)
+  
     const messageElement = document.createElement('div');
     messageElement.className = 'bubble me'; // 여기서는 자신이 보낸 메시지로 가정
     messageElement.textContent = message;
-
+  
     activeChat.appendChild(messageElement);
-
+  
     // 입력된 메시지 초기화
     msgInput.value = '';
-
+  
     // WebSocket을 통해 메시지 서버로 전송
-    websocket.send(fullMessage);
+    websocket.send(message); // 이 부분에서 수정이 이루어짐
   }
 
   // WebSocket을 통해 받은 메시지를 화면에 표시하는 함수
@@ -123,7 +120,7 @@ $(function () {
       return;
     }
 
-    // 메시지를 채팅 창에 추가 (상대방이 보낸 메시지)
+    // 메시지를 채팅 창에 추가 (상대방이 보낸 메시send지)
     const messageElement = document.createElement('div');
     messageElement.className = 'bubble you'; // 상대방이 보낸 메시지
     messageElement.textContent = message;
