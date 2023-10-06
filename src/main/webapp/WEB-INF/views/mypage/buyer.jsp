@@ -64,6 +64,11 @@
         display: flex;
         justify-content: center;
     }
+    
+    textarea{
+    resize: none;
+    }
+    
 </style>
 </head>
 <body>
