@@ -145,7 +145,7 @@
 	<div class="searchWord">
 		<form
 			action="${pageContext.request.contextPath}/mypage/keepuseds" method="get">
-			<input type="search" name="searchWord"> <input class="btn" type="submit" value="찾기">
+			<input type="search" name="searchWord"> <input class="btn" type="submit" value="검색">
 		</form>
 	</div>
 
