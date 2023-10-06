@@ -190,12 +190,12 @@ body {
 			<span style="display: flex;">
 				<input name="email" type="text" class="email" placeholder="이메일" id="email"
 				required="required">
-				<button type="button" class="btn-email"
-				onclick="">인증번호 요청</button>
+				<button type="button" class="btn-email" id="mail-Check-Btn"
+				>인증번호 요청</button>
 			</span>
 		</div>
 		<div class="textForm">
-			<input name="certification" type="text" class="email"
+			<input name="certification" type="text" class="mail-check-input"
 				placeholder="인증번호 확인" required="required">
 		</div>
 		<div class="textForm">
@@ -304,6 +304,41 @@ body {
 	}
 </script>
 <script>
+$('#mail-Check-Btn').click(function() {
+    const email = $('#email').val(); // 이메일 주소값 얻어오기
+    console.log('완성된 이메일 : ' + email); // 이메일 확인
+    const checkInput = $('.mail-check-input'); // 인증번호 입력하는 곳
+    let code;
+
+    $.ajax({
+        type: 'get',
+        url: '/gaji/user/mailcheck', // 수정된 URL
+        data: { email: email }, // 이메일을 데이터로 전달
+        success: function(data) {
+            console.log("data: " + data);
+            checkInput.prop('disabled', false);
+            code = data;
+            alert('인증번호가 전송되었습니다.');
+        }
+    }); // end ajax
+    // 인증번호 비교
+    // blur -> focus가 벗어나는 경우 발생
+    $('.mail-check-input').blur(function() {
+        const inputCode = $(this).val();
+        const $resultMsg = $('#mail-check-warn');
+
+        if (inputCode === code) {
+            $resultMsg.html('인증번호가 일치합니다.');
+            $resultMsg.css('color', 'green');
+            $('#mail-Check-Btn').prop('disabled', true);
+            $('#email').prop('readonly', true);
+        } else {
+            $resultMsg.html('인증번호가 불일치합니다. 다시 확인해주세요!');
+            $resultMsg.css('color', 'red');
+        }
+    });
+});
+
     // 유효성 검사 메서드
     function Validation() {
         // 변수에 저장
