@@ -186,7 +186,7 @@
         			<button id="deleteAddress" onclick="deleteAddress()">주소삭제</button>
         			<button id="alterPrimaryAddress" onclick="alterPrimaryAddress()">대표주소 변경</button>
         			
-					<form id="addressForm" onsubmit="addressRegist()">
+					<form id="addressForm">
 						<div class="textForm">
 							<span style="display: flex;"> <input type="text"
 								name="postCode" id="sample4_postcode" placeholder="우편번호" class="cellphoneNo" required="required" readonly>
@@ -200,7 +200,7 @@
 						</div>
 						<div class="textForm">
 							<span style="display: flex;"> <input type="text"
-								name="address" id="sample4_jibunAddress" placeholder="지번주소" class="cellphoneNo" required="required" readonly> <span id="guide" style="color: #999; display: none" ></span>
+								name="address" id="sample4_jibunAddress" placeholder="지번주소" class="cellphoneNo" required="required"> <span id="guide" style="color: #999; display: none" ></span>
 							</span>
 						</div>
 						<div class="textForm">
@@ -215,7 +215,7 @@
 								placeholder="주소별칭" class="cellphoneNo" required>
 							</span>
 						</div>
-						<button type="submit">주소 등록</button>
+						<button onclick="addressRegist()">주소 등록</button>
 					</form>
 					
 				</div>
@@ -434,10 +434,13 @@
 				item=data[i];
 				html+="<option value="+item.roadAddress+","+item.detailAddress+">";
 				html+=item.addressNickname+","+item.roadAddress+","+item.detailAddress+"</option>";
-				$("#addresses").replaceWith(html);
 				}
+				$("#addresses").replaceWith(html);
 			},
 			error: function(data){
+				if($("#modalAddresses option").length > 8)
+					alert("등록가능한 주소갯수를 초과하였습니다.");
+				else
 					alert("잘못된 접근입니다.");
 			}
 		});
