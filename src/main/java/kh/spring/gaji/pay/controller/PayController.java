@@ -40,7 +40,7 @@ public class PayController {
 	@Autowired
 	private IamportClient api;
 	
-	private PayServiceImpl payServiceImpl;
+	private PayService payServiceImpl;
 	
 	@Autowired
 	private InsertSafeTradingDto insertSafeTradingDto;
