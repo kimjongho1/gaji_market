@@ -47,7 +47,7 @@
 	</select>
 	
 	<select id="getUserAddressList" parameterType="string" resultType="UserAddressDto">	<!-- 48P 결제창 들어갈때 가지고 들어갈 유저주소들 -->
-		select detail_address, post_code, road_address, address_nickname
+		select detail_address, post_code, road_address, address_nickname,address_no
 			   from user_address
 			   where user_id=#{userId}
 			   order by address_no

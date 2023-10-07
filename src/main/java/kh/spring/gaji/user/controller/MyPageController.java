@@ -19,6 +19,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import kh.spring.gaji.goods.model.dto.MyGoodsListDto;
 import kh.spring.gaji.pay.model.dto.InFaceTradingDto;
 import kh.spring.gaji.pay.model.dto.SafePurchaseInfoDto;
+import kh.spring.gaji.user.model.dto.UserAddressDto;
+import kh.spring.gaji.user.model.dto.UserInsertAddressDto;
 import kh.spring.gaji.user.model.dto.UserSafeTradingDto;
 import kh.spring.gaji.user.model.service.UserService;
 
@@ -34,6 +36,19 @@ public class MyPageController {
 	@GetMapping("")
 	public String mypage() {	// 마이페이지
 		return "mypage/mypage";
+	}
+	
+	@GetMapping("/dealreview")
+	public String dealreview() {	//리뷰작성
+		return "mypage/dealreview";
+	}
+	
+	@PostMapping("/address/regist/do")
+	@ResponseBody
+	public List<UserAddressDto> addressRegist(UserInsertAddressDto address){
+		address.setUserId("qordmlgjs");
+		userService.insertAddress(address);
+		return userService.getAddress("qordmlgjs");
 	}
 	
 	@GetMapping("/orderstatus/safe")
