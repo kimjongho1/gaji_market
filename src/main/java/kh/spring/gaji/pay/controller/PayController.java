@@ -30,7 +30,6 @@ import kh.spring.gaji.pay.model.dto.GoodsPayInfoDto;
 import kh.spring.gaji.pay.model.dto.InsertSafeTradingDto;
 import kh.spring.gaji.pay.model.dto.PayUserInfoDto;
 import kh.spring.gaji.pay.model.service.PayService;
-import kh.spring.gaji.pay.model.service.PayServiceImpl;
 import kh.spring.gaji.user.model.dto.UserAddressDto;
 
 @Controller
@@ -39,9 +38,8 @@ public class PayController {
 	private static final Logger logger = LoggerFactory.getLogger(PayController.class);
 	@Autowired
 	private IamportClient api;
-	
+	@Autowired
 	private PayService payServiceImpl;
-	
 	@Autowired
 	private InsertSafeTradingDto insertSafeTradingDto;
 	
