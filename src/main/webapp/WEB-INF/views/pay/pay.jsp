@@ -123,7 +123,7 @@
         
         <!-- 모달 트리거 버튼 -->
         <button type="button" id="showReportModalBtn" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#reportModal">
-  			새로운 주소 입력
+  			주소변경
 		</button>
 		
         <table>
@@ -173,6 +173,19 @@
 					<h5 class="modal-title" id="reportModalLabel">주소등록</h5>
 				</div>
 				<div class="modal-body">
+			
+					 <select id="modalAddresses">
+            			<c:forEach var="address" items="${userAddress}">
+                			<option value="${address.roadAddress}, ${address.detailAddress}, ${address.addressNo}">
+                    			${address.addressNickname},  
+                    			${address.roadAddress},  
+                    			${address.detailAddress} 
+                			</option>
+            			</c:forEach>
+        			</select>
+        			<button id="deleteAddress" onclick="deleteAddress()">주소삭제</button>
+        			<button id="alterPrimaryAddress" onclick="alterPrimaryAddress()">대표주소 변경</button>
+        			
 					<form id="addressForm" onsubmit="addressRegist()">
 						<div class="textForm">
 							<span style="display: flex;"> <input type="text"
@@ -218,6 +231,7 @@
     <script src="https://cdn.iamport.kr/v1/iamport.js"></script>
 	<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script>
+
 	//카카오페이 호출함수
 	function kakaoPay(){			
 		IMP.init('${merchantIdentificationCode}');	//IMP를 가맹점 식별번호로 초기화
@@ -428,6 +442,47 @@
 			}
 		});
 	}
+	
+	var deleteAddress=()=>{
+		var selectedOption = $("#addresses > option:selected").val();
+		var addressParts = selectedOption.split(', ');
+		var selectedOption = $("#modalAddresses option:selected").val();
+		var addressParts = selectedOption.split(', ');
+		var addressNo = addressParts[2];
+		$.ajax({
+			type:"POST",
+			url:"${pageContext.request.contextPath}/mypage/address/delete",
+			data: { addressNo: addressNo },
+			success: function(data){
+				alert("주소를 삭제했습니다.");
+				window.location.href="${pageContext.request.contextPath}/payment/pay";
+			},
+			error: function(data){
+				alert("주소삭제에 실패했습니다.");
+			}
+		});
+	}
+	
+	var alterPrimaryAddress=()=>{
+		var selectedOption = $("#addresses > option:selected").val();
+		var addressParts = selectedOption.split(', ');
+		var selectedOption = $("#modalAddresses option:selected").val();
+		var addressParts = selectedOption.split(', ');
+		var addressNo = addressParts[2];
+		$.ajax({
+			type:"POST",
+			url:"${pageContext.request.contextPath}/mypage/address/alterPrimaryAddress",
+			data: { addressNo: addressNo },
+			success: function(data){
+				alert("대표주소가 변경되었습니다.");
+				window.location.href="${pageContext.request.contextPath}/payment/pay";
+			},
+			error: function(data){
+				alert("대표주소 변경에 실패했습니다.");
+			}
+		});
+	}
+	
 	</script>
 </body>
 </html>

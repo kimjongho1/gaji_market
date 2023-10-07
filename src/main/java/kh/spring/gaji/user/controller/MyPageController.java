@@ -9,6 +9,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -49,6 +50,26 @@ public class MyPageController {
 		address.setUserId("qordmlgjs");
 		userService.insertAddress(address);
 		return userService.getAddress("qordmlgjs");
+	}
+	@Transactional
+	@PostMapping("/address/delete")
+	@ResponseBody
+	public int addressdelete(int addressNo,HttpSession session){
+//		String userId=session.getAttribute("qordmlgjs");
+		Map<String, Object> map=new HashMap<String,Object>();
+		map.put("userId","qordmlgjs");	//이후 userId대체
+		map.put("addressNo", addressNo);
+		return userService.deleteAddress1(map);
+	}
+	
+	@PostMapping("/address/alterPrimaryAddress")
+	@ResponseBody
+	public int alterPrimaryAddress(int addressNo,HttpSession session){
+//		String userId=session.getAttribute("qordmlgjs");
+		Map<String, Object> map=new HashMap<String,Object>();
+		map.put("userId","qordmlgjs");	//이후 userId대체
+		map.put("addressNo", addressNo);
+		return userService.updateMainAddress(map);
 	}
 	
 	@GetMapping("/orderstatus/safe")

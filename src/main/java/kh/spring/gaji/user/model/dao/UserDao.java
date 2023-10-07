@@ -416,19 +416,25 @@ public class UserDao {
     	return sqlSession.update("user.updateMainAddressNo", userId);
     }
 
-    public int updateMainAddress(Map<String, String> map) {	//주소순서를 1로 바꿈으로써 대표주소 변경
+    public int updateMainAddress(Map<String, Object> map) {	//주소순서를 1로 바꿈으로써 대표주소 변경
     	return sqlSession.update("user.updateMainAddress", map);
+    }
+    
+    public int updateMainAddress2(Map<String, Object> map) {	//대표주소가 된 주소보다 높은순서들을 다시 1씩 내려주기.
+    	return sqlSession.update("user.updateMainAddress2", map);
     }
 
     public int insertAddress(UserInsertAddressDto addressDto) {	//새로입력된 주소를 count+1 주소순서에 추가한다
     	return sqlSession.insert("user.insertAddress", addressDto);
     }
 
-    public int deleteAddress1(int postCode) {	//주소삭제 1단계 작업
-    	return sqlSession.delete("user.deleteAddress1", postCode);
+    public int deleteAddress1(Map<String, Object> map) {	//주소삭제 1단계 작업
+    	return sqlSession.delete("user.deleteAddress1", map);
     }
     
-    //2단계 추후 추가예정 mapper파일에서 오류나서 주석처리해놓음.
+    public int deleteAddress2(Map<String, Object> map) {		//주소삭제 2단계 작업
+    	return sqlSession.update("user.deleteAddress2",map);
+    }
 
     public int checkNickname(String nickname) {	// 7P 닉네임 중복검사
         return sqlSession.selectOne("user.checkNickname", nickname);

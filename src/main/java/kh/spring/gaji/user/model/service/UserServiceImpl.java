@@ -234,8 +234,10 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public int updateMainAddress(Map<String, String> map) {
-        return userDao.updateMainAddress(map);
+    public int updateMainAddress(Map<String, Object> map) {
+    	userDao.updateMainAddressNo((String)map.get("userId"));
+    	userDao.updateMainAddress(map);
+    	return userDao.updateMainAddress2(map);
     }
 
     @Override
@@ -244,8 +246,9 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public int deleteAddress1(int postCode) {
-        return userDao.deleteAddress1(postCode);
+    public int deleteAddress1(Map<String, Object> map) {
+    	userDao.deleteAddress1(map);
+    	return userDao.deleteAddress2(map);
     }
 
     @Override

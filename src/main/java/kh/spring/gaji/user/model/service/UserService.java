@@ -77,11 +77,11 @@ public interface UserService {
 
     public int updateMainAddressNo(String userId);
 
-    public int updateMainAddress(Map<String, String> map);
+    public int updateMainAddress(Map<String, Object> map);
 
     public int insertAddress(UserInsertAddressDto addressDto);
 
-    public int deleteAddress1(int postCode);
+    public int deleteAddress1(Map<String,Object> map);
 
     public int checkNickname(String nickname);
 
