@@ -2,11 +2,13 @@ package kh.spring.gaji.goods.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,15 +27,19 @@ import kh.spring.gaji.file.model.dto.FileDto;
 import kh.spring.gaji.file.model.service.FileService;
 import kh.spring.gaji.goods.model.Service.GoodsService;
 import kh.spring.gaji.goods.model.dto.GoodsDto;
+import kh.spring.gaji.goods.model.dto.GoodsListDto;
 import kh.spring.gaji.region.model.service.RegionService;
+import kh.spring.gaji.user.model.dto.UserSafeTradingDto;
 
 @Controller
 @RequestMapping("/goods")
 public class GoodsController {
-
 	Dotenv dotenv = Dotenv.load();
 	Cloudinary cloudinary = new Cloudinary(dotenv.get("CLOUDINARY_URL"));
 
+	private final int PAGESIZE=20;
+	private final int PAGEBLOCKSIZE=5;
+	
 	@Autowired
 	private GoodsService goodsService;
 
@@ -46,10 +52,42 @@ public class GoodsController {
 	@Autowired
 	private FileService fileService;
 
-	@GetMapping("/board")
-	public String board() { // 중고거래 게시판
-		return "goods/goodsboard";
-	}
+//	@GetMapping("/board")
+//	public String board(Model model,Integer currentPage,String searchWord,Integer sort,Integer priceFloor, Integer priceCeiling,Integer category,Integer guId,Integer dongId) { // 중고거래 게시판
+//		int totalCnt=0;
+//		List<GoodsListDto> goodsListDto=null;
+//		if(currentPage==null)	//현재 페이지가 들어온게 없다면 1페이지.
+//			currentPage=1;
+//		if(searchWord==null) {	// 검색어가 들어온게 없다면 검색어없는 mapper로 목록 가져오기
+//			Map<String,Object> map= goodsService.getGoodsList((int)currentPage,PAGESIZE,sort,priceFloor,priceCeiling,category,guId,dongId);	//추후 userId들어가야함
+//			goodsListDto = (List<GoodsListDto>)map.get("safePurchaseList");
+//			totalCnt= (int)map.get("totalCnt");
+//		}
+//		else {					//검색어가 있다면 그에따른 mapper로 목록 가져오기
+//			Map<String,Object> map= goodsService.getSearchGoodsList((int)currentPage,PAGESIZE,sort,priceFloor,priceCeiling,category,guId,dongId,searchWord);
+//			goodsListDto = (List<GoodsListDto>)map.get("goodsListDto");
+//			totalCnt= (int)map.get("totalCnt");
+//			model.addAttribute("searchWord",searchWord);
+//		}
+//		
+//		//구해온 목록으로 페이징번호들 구하고 JSP로 전송하기
+//		int totalPageNum = totalCnt/PAGESIZE + (totalCnt%PAGESIZE == 0 ? 0 : 1);
+//		int startPageNum = 1;
+//		if((currentPage%PAGEBLOCKSIZE) == 0) {
+//			startPageNum = ((currentPage/PAGEBLOCKSIZE)-1)*PAGEBLOCKSIZE +1;
+//		} else {
+//			startPageNum = ((currentPage/PAGEBLOCKSIZE))*PAGEBLOCKSIZE +1;
+//		}
+//		int endPageNum = (startPageNum+PAGEBLOCKSIZE > totalPageNum) ? totalPageNum : startPageNum+PAGEBLOCKSIZE-1;
+//		model.addAttribute("totalPageNum", totalPageNum);
+//		model.addAttribute("startPageNum", startPageNum);
+//		model.addAttribute("endPageNum", endPageNum);
+//		model.addAttribute("currentPage", currentPage);
+//		model.addAttribute("goodsListDto",goodsListDto);
+//		model.addAttribute("totalCnt",totalCnt);
+//		
+//		return "goods/goodsboard";
+//	}
 
 	@GetMapping("/write")
 	public ModelAndView write(ModelAndView mv) { // 중고거래 게시판 글 작성
