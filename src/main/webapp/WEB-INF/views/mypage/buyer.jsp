@@ -123,7 +123,7 @@
 
 
     <c:if test="${safePurchaseInfoDto.tradingStatus eq 3}">
-        <button onclick="closePay('${safePurchaseInfoDto.buyerId}','${safePurchaseInfoDto.transactionId}','${safePurchaseInfoDto.goodsId}')"  class="btn btn-primary btn-lg">결제확정</button>
+        <button onclick="closePay('${safePurchaseInfoDto.transactionId}','${safePurchaseInfoDto.goodsId}')"  class="btn btn-primary btn-lg">결제확정</button>
     </c:if>
     <a href="{pageContext.request.contextPath}/goods/get?goodsId=${safePurchaseInfoDto.goodsId}"><p>상품명:${safePurchaseInfoDto.goodsTitle}</p></a>
     <p>판매자명:${safePurchaseInfoDto.sellerName}</p>
@@ -175,10 +175,10 @@ var cancel=(userId1,transactionId1,goodsId)=>{
 		success:cancelCallBack
 	});
 }
-var closePay=(userId1,transactionId1,goodsId)=>{
+var closePay=(transactionId1,goodsId)=>{
 	$.ajax({
 		url:"${pageContext.request.contextPath}/payment/closepay",
-		data:{userId:userId1, transactionId:transactionId1, goodsId:goodsId},
+		data:{transactionId:transactionId1, goodsId:goodsId},
 		method: "post",
 		dataType:"text",
 		success:closePayCallback
@@ -201,7 +201,7 @@ function closePayCallback(data){
 	console.log(data);
 	if(data=='1'){
 		alert("거래가 확정되었습니다");
-		window.location.href="${pageContext.request.contextPath}/mypage/orderstatus/safe";
+		window.location.href="${pageContext.request.contextPath}/mypage/dealreview?transactionId=${safePurchaseInfoDto.transactionId}";
 	}
 	else
 		alert("거래 확정에 실패하였습니다.");

@@ -73,9 +73,9 @@ public class PayController {
 		@ResponseBody
 		public int closePay(String transactionId,HttpServletRequest request) {
 			int result=0;
-			String userId= payServiceImpl.checkId(transactionId);
-			/* if(userId==(String)request.getSession().getAttribute(userId)) { */ //혹시 transactionId 변조할까봐 검사.
-				result = payServiceImpl.closeSafeTrading(transactionId);
+			String userId= payServiceImpl.checkId(transactionId);	// 거래번호를 이용해 userId를 가져온다.
+			/* userId==(String)request.getSession().getAttribute(userId)  */
+				result = payServiceImpl.closeSafeTrading(transactionId,userId);	 // session에 저장된 아이디와 일치하면 거래확정을 실행한다.
 				if(result==1) {
 					Map<String,Object> map=new HashMap<String,Object>();
 					map.put("status",3);
@@ -84,7 +84,6 @@ public class PayController {
 //					payServiceImpt.insertClosePayNotice(transactionId);
 				}
 				System.out.println("result:"+result);
-				/* } */
 			return result;
 		}
 		

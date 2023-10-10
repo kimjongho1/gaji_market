@@ -31,8 +31,8 @@ public class PayServiceImpl implements PayService {
     }
     
     @Override
-    public int closeSafeTrading(String transactionId) {
-        return payDao.closeSafeTrading(transactionId);
+    public int closeSafeTrading(String transactionId,String userId) {
+        return payDao.closeSafeTrading(transactionId,userId);
     }
     
     @Override

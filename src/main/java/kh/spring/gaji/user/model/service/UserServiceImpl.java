@@ -348,4 +348,10 @@ public class UserServiceImpl implements UserService {
 	public String checkIdForSafeSeller(String transactionId) {
 		return userDao.checkIdForSafeSeller(transactionId);
 	}
+
+	@Override
+	public int checkTradingStatus(String transactionId,String userId) {
+		String goodsId=userDao.checkTradingStatus(transactionId,userId);
+		return userDao.checkReview(goodsId, userId);
+	}
 }

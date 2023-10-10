@@ -28,6 +28,8 @@ public interface UserService {
     
     public String checkIdForSafeSeller(String transactionId);
     
+    public int checkTradingStatus(String transactionId,String userId);
+    
     public Map<String,Object> getSafePurchaseList(String buyerId,int currentPage,int PAGESIZE);
     
     public Map<String,Object> getSearchSafePurchaseList(String buyerId,int currentPage,int PAGESIZE,String searchWord);

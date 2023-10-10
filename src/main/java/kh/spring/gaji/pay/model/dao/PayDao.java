@@ -1,5 +1,6 @@
 package kh.spring.gaji.pay.model.dao;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -45,8 +46,11 @@ public class PayDao {
     	return sqlSession.update("pay.updateGoodsToSelling",goodsId);
     }
 
-    public int closeSafeTrading(String transactionId) {	//거래확정
-        return sqlSession.update("pay.closeSafeTrading", transactionId);
+    public int closeSafeTrading(String transactionId,String userId) {	//거래확정
+    	Map<String,Object> map=new HashMap<String,Object>();
+    	map.put("transactionId", transactionId);
+     	map.put("userId", userId);
+        return sqlSession.update("pay.closeSafeTrading", map);
     }
 
     public int addSafeTrading(InsertSafeTradingDto insertSafeTradingDto) {	//안전거래 생성 

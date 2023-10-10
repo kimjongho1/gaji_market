@@ -39,6 +39,19 @@ public class UserDao {
         return sqlSession.selectList("user.getFavoriteList", userId);
     }
     
+    public String checkTradingStatus(String transactionId,String userId) {
+    	Map<String,Object> map = new HashMap<String,Object>();
+    	map.put("transactionId", transactionId);
+      	map.put("userId", userId);
+    	return sqlSession.selectOne("user.checkTradingStatus",map);
+    }
+    
+    public int checkReview(String goodsId,String userId) {
+    	Map<String,Object> map = new HashMap<String,Object>();
+    	map.put("goodsId", goodsId);
+      	map.put("userId", userId);
+    	return sqlSession.selectOne("user.checkReview",map);
+    }
 
     
     public String checkIdForSafe(String transactionId) {

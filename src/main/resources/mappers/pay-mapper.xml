@@ -28,7 +28,7 @@
 	
 	<update id="closeSafeTrading" parameterType="string">		<!-- 11P 거래확정, 거래상태 업데이트 -->
 		update safe_trading set trading_status=4 
-		where transaction_id= #{transactionId}
+		where transaction_id= #{transactionId} and buyer_id=#{userId}
 	</update>
 	
 	<update id="changeStatus" parameterType="map">	<!-- 안전거래 거래상태 변경 -->

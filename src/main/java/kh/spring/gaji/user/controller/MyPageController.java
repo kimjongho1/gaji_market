@@ -40,8 +40,14 @@ public class MyPageController {
 	}
 	
 	@GetMapping("/dealreview")
-	public String dealreview() {	//리뷰작성
-		return "mypage/dealreview";
+	public String dealreview(Model model,String transactionId,RedirectAttributes rattr,HttpSession session) {	//리뷰작성
+//		String userId=(String)session.getAttribute("userId");
+		if(userService.checkTradingStatus(transactionId,"qordmlgjs")==0) {	//거래에 해당하는 상품의 해당유저 리뷰가 아직 존재하지 않으면
+			model.addAttribute("transactionId", transactionId);
+			return "mypage/dealreview";
+		}
+			rattr.addAttribute("msg", "잘못된 접근입니다.");
+		return "redirect:/main/main";
 	}
 	
 	@PostMapping("/address/regist/do")
