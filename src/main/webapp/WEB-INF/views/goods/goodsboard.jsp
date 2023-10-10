@@ -19,7 +19,7 @@
 
 <!-- Css Styles -->
 <link rel="stylesheet"
-	href="${pageContext.request.contextPath}/resources/css/bootstrap.min.css"
+	href="${pageContext.request.contextPath}/resources/css/bootstrap.css"
 	type="text/css">
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/css/elegant-icons.css"
@@ -34,6 +34,8 @@
 	href="${pageContext.request.contextPath}/resources/css/style.css"
 	type="text/css">
 	
+
+
 </head>
 <body>
 
@@ -119,7 +121,7 @@
 				</div>
 			</div>
 			<div class="w-full lg:-ms-9">
-				<div class="mb-4">
+				<div class="flex justify-between items-center mb-4">
 					<div class="chawkbazarBreadcrumb w-full flex items-center">
 						<ol class="flex items-center w-full">
 							<li
@@ -132,9 +134,49 @@
 								class="false" href="/search">검색</a></li>
 						</ol>
 					</div>
+					
+					
+							<div class="relative ms-2 z-10 min-w-[180px]">
+								<button
+									class="border border-gray-300 text-heading text-[13px] md:text-sm font-semibold relative w-full py-2 ps-3 pe-10 text-start bg-white rounded-lg shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-opacity-75 focus-visible:ring-white focus-visible:ring-offset-orange-300 focus-visible:ring-offset-2 focus-visible:border-indigo-500 sm:text-sm cursor-pointer"
+									id="headlessui-listbox-button-:r0:" type="button"
+									aria-haspopup="listbox" aria-expanded="false"
+									data-headlessui-state>
+									<span class="block truncate">구</span><span
+										class="absolute inset-y-0 end-0 flex items-center pe-2 pointer-events-none"><svg
+											stroke="currentColor" fill="none" stroke-width="0"
+											viewBox="0 0 24 24" class="w-5 h-5 text-gray-400"
+											aria-hidden="true" height="1em" width="1em"
+											xmlns="http://www.w3.org/2000/svg">
+											<path stroke-linecap="round" stroke-linejoin="round"
+												stroke-width="2" d="M8 9l4-4 4 4m0 6l-4 4-4-4"></path></svg></span>
+								</button>
+							</div>
+							<div class="relative ms-2 z-10 min-w-[180px]">
+								<button
+									class="border border-gray-300 text-heading text-[13px] md:text-sm font-semibold relative w-full py-2 ps-3 pe-10 text-start bg-white rounded-lg shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-opacity-75 focus-visible:ring-white focus-visible:ring-offset-orange-300 focus-visible:ring-offset-2 focus-visible:border-indigo-500 sm:text-sm cursor-pointer"
+									id="headlessui-listbox-button-:r0:" type="button"
+									aria-haspopup="listbox" aria-expanded="false"
+									data-headlessui-state>
+									<span class="block truncate">동</span><span
+										class="absolute inset-y-0 end-0 flex items-center pe-2 pointer-events-none"><svg
+											stroke="currentColor" fill="none" stroke-width="0"
+											viewBox="0 0 24 24" class="w-5 h-5 text-gray-400"
+											aria-hidden="true" height="1em" width="1em"
+											xmlns="http://www.w3.org/2000/svg">
+											<path stroke-linecap="round" stroke-linejoin="round"
+												stroke-width="2" d="M8 9l4-4 4 4m0 6l-4 4-4-4"></path></svg></span>
+								</button>
+							</div>
+								
+								
+					
+					
+					
 				</div>
+				
 				<div
-					class="sticky top-16 sm:top-20 lg:top-36 xl:top-40 bg-white z-10 pb-2 pt-2 mb-2">
+					class=" top-16 sm:top-20 lg:top-36 xl:top-40 bg-white z-10 pb-2 pt-2 mb-2">
 					<div class="flex justify-between items-center mb-1 mt-1">
 						<h1
 							class="text-heading text-2xl font-bold hidden lg:inline-flex pb-1">검색
@@ -168,7 +210,7 @@
 									class="border border-gray-300 text-heading text-[13px] md:text-sm font-semibold relative w-full py-2 ps-3 pe-10 text-start bg-white rounded-lg shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-opacity-75 focus-visible:ring-white focus-visible:ring-offset-orange-300 focus-visible:ring-offset-2 focus-visible:border-indigo-500 sm:text-sm cursor-pointer"
 									id="headlessui-listbox-button-:r0:" type="button"
 									aria-haspopup="listbox" aria-expanded="false"
-									data-headlessui-state="">
+									data-headlessui-state>
 									<span class="block truncate">추천순</span><span
 										class="absolute inset-y-0 end-0 flex items-center pe-2 pointer-events-none"><svg
 											stroke="currentColor" fill="none" stroke-width="0"
@@ -178,12 +220,28 @@
 											<path stroke-linecap="round" stroke-linejoin="round"
 												stroke-width="2" d="M8 9l4-4 4 4m0 6l-4 4-4-4"></path></svg></span>
 								</button>
-								<ul class="absolute w-full py-1 mt-1 overflow-auto bg-white rounded-md shadow-lg max-h-60 ring-1 ring-black ring-opacity-5 focus:outline-none text-sm" aria-labelledby="headlessui-listbox-button-:r0:" aria-orientation="vertical" id="headlessui-listbox-options-:r1:" role="listbox" tabindex="0" data-headlessui-state="open" aria-activedescendant="headlessui-listbox-option-:r2:"><li class="text-amber-900 bg-gray-100
-                          cursor-default select-none relative py-2 ps-10 pe-4" id="headlessui-listbox-option-:r2:" role="option" tabindex="-1" aria-selected="true" data-headlessui-state="active selected"><span class="font-medium block truncate">추천순</span><span class="text-amber-600
-                                check-icon absolute inset-y-0 start-0 flex items-center ps-3"><svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 20 20" class="w-5 h-5" aria-hidden="true" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg></span></li><li class="text-gray-900
-                          cursor-default select-none relative py-2 ps-10 pe-4" id="headlessui-listbox-option-:r3:" role="option" tabindex="-1" aria-selected="false" data-headlessui-state=""><span class="font-normal block truncate">최신순</span></li><li class="text-gray-900
-                          cursor-default select-none relative py-2 ps-10 pe-4" id="headlessui-listbox-option-:r4:" role="option" tabindex="-1" aria-selected="false" data-headlessui-state=""><span class="font-normal block truncate">낮은가격순</span></li><li class="text-gray-900
-                          cursor-default select-none relative py-2 ps-10 pe-4" id="headlessui-listbox-option-:r5:" role="option" tabindex="-1" aria-selected="false" data-headlessui-state=""><span class="font-normal block truncate">높은가격순</span></li></ul>
+								
+								<!-- 
+								<ul class="absolute w-full py-1 mt-1 overflow-auto bg-white rounded-md shadow-lg max-h-60 ring-1 ring-black ring-opacity-5 focus:outline-none text-sm" aria-labelledby="headlessui-listbox-button-:r0:" aria-orientation="vertical" id="headlessui-listbox-options-:r1:" role="listbox" tabindex="0" data-headlessui-state="open" aria-activedescendant="headlessui-listbox-option-:r2:">
+									
+									
+									<li class="text-amber-900 bg-gray-100 cursor-default select-none relative py-2 ps-10 pe-4" id="headlessui-listbox-option-:r2:" role="option" tabindex="-1" aria-selected="true" data-headlessui-state="active selected">
+										<span class="font-medium block truncate">추천순</span>
+										<span class="text-amber-600 check-icon absolute inset-y-0 start-0 flex items-center ps-3">
+											<svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 20 20" class="w-5 h-5" aria-hidden="true" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg></span>
+									</li>
+									
+									<li class="text-gray-900 cursor-default select-none relative py-2 ps-10 pe-4" id="headlessui-listbox-option-:r10:" role="option" tabindex="-1" aria-selected="false" data-headlessui-state="">
+                          				<span class="font-normal block truncate">추천순</span></li>
+									<li class="text-gray-900 cursor-default select-none relative py-2 ps-10 pe-4" id="headlessui-listbox-option-:r3:" role="option" tabindex="-1" aria-selected="false" data-headlessui-state="">
+										<span class="font-normal block truncate">최신순</span></li>
+									<li class="text-gray-900 cursor-default select-none relative py-2 ps-10 pe-4" id="headlessui-listbox-option-:r4:" role="option" tabindex="-1" aria-selected="false" data-headlessui-state="">
+										<span class="font-normal block truncate">낮은가격순</span></li>
+									<li class="text-gray-900 cursor-default select-none relative py-2 ps-10 pe-4" id="headlessui-listbox-option-:r5:" role="option" tabindex="-1" aria-selected="false" data-headlessui-state="">
+										<span class="font-normal block truncate">높은가격순</span></li>
+								</ul>
+								 -->
+								
 							</div>
 						</div>
 					</div>
@@ -354,7 +412,7 @@
 
 	<!-- Js Plugins -->
 	<script
-		src="${pageContext.request.contextPath}/resources/js/bootstrap.min.js"></script>
+		src="${pageContext.request.contextPath}/resources/js/bootstrap.js"></script>
 	<script src="${pageContext.request.contextPath}/resources/js/main.js"></script>
 
 

@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import kh.spring.gaji.goods.model.dao.GoodsDao;
 import kh.spring.gaji.goods.model.dto.GoodsDto;
 import kh.spring.gaji.goods.model.dto.GoodsInfoDto;
+import kh.spring.gaji.goods.model.dto.GoodsListDto;
 
 
 @Service
@@ -38,6 +39,18 @@ public class GoodsServiceImpl implements GoodsService {
 	@Override
 	public int deleteGoods(int goodsId) {
 		return goodsDao.deleteGoods(goodsId);
+	}
+
+	@Override
+	public GoodsListDto getGoodsList(int currentPage, int PAGESIZE, int sort, int priceFloor, int priceCeiling,
+	int category, int guId, int dongId) {
+		return null;
+	}
+
+	@Override
+	public GoodsListDto getGoodsList(int currentPage, int PAGESIZE, int sort, int priceFloor, int priceCeiling,
+	int category, int guId, int dongId, String searchWord) {
+		return null;
 	}
 
 }
