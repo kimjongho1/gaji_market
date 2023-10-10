@@ -3560,3 +3560,7 @@ section {
 	padding: 30px;	
 	
 }
+.row > * {
+
+    width: auto;
+
