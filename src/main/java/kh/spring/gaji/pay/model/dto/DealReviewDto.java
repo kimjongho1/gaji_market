@@ -5,7 +5,7 @@ import lombok.Data;
 @Component
 @Data
 public class DealReviewDto {
-    private int goodsId;
+    private String goodsId;
     private String userId;
     private String message;
     private int mannerPoint;

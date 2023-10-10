@@ -2,18 +2,14 @@ package kh.spring.gaji.user.model.service;
 import java.io.IOException;
 import java.util.List;
 import java.util.Map;
-import kh.spring.gaji.goods.model.dto.GoodsDto;
 import kh.spring.gaji.goods.model.dto.GoodsListDto;
 import kh.spring.gaji.goods.model.dto.MyGoodsListDto;
 import kh.spring.gaji.pay.model.dto.DealReviewDto;
-import kh.spring.gaji.pay.model.dto.InFaceTradingDto;
 import kh.spring.gaji.pay.model.dto.SafePurchaseInfoDto;
-import kh.spring.gaji.pay.model.dto.SafeTradingDto;
 import kh.spring.gaji.user.model.dto.UserAddressDto;
 import kh.spring.gaji.user.model.dto.UserDto;
 import kh.spring.gaji.user.model.dto.UserInsertAddressDto;
 import kh.spring.gaji.user.model.dto.UserProfileDto;
-import kh.spring.gaji.user.model.dto.UserSafeTradingDto;
 
 
 public interface UserService {
@@ -29,6 +25,8 @@ public interface UserService {
     public String checkIdForSafeSeller(String transactionId);
     
     public int checkTradingStatus(String transactionId,String userId);
+    
+    public int doDealreview(DealReviewDto dealReviewDto,String trasactionId);
     
     public Map<String,Object> getSafePurchaseList(String buyerId,int currentPage,int PAGESIZE);
     
@@ -114,8 +112,4 @@ public interface UserService {
     public int addAccount(Map<String, String> map);
 
     public int addFavoriteUser(Map<String, String> map);
-
-    public int addDealReview(DealReviewDto dealReviewDto);
-
-    public int updateRatingScore(Map<String, String> map);
 }

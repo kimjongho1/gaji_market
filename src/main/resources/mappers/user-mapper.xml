@@ -427,7 +427,7 @@
 	</select>
 	
 	<update id="findPass" parameterType="map"> <!-- 16P 비밀번호변경 --> <!-- 이메일인증처리 추가해야함 -->
-		update user 
+		update users 
 		set password=#{password} 
 		where user_id=#{userId} and name=#{name} and email=#{email}
 	</update>
@@ -449,11 +449,12 @@
 	</update>
 	
 	<insert id="addDealReview" parameterType="DealReviewDto"> <!-- 거래후기넣기 아직 화면설계없음. -->
-		insert into deal_review values(#{goodsId},#{buyerId},#{message},#{mannerPoint},#{timePoint},#{goodsPoint})
+		insert into deal_review values(#{goodsId},#{userId},#{message},#{mannerPoint},#{timePoint},#{goodsPoint})
 	</insert>
 	
 	<update id="updateRatingScore" parameterType="map"> <!-- trade-mapper의 거래후기에따른 매너온도 업데이트 -->
-		update user set rating_score= rating_score + (#{mannerPoint}+#{timePoint}+#{goodsPoint}-11)/5
+		update users set rating_score= rating_score + (#{mannerPoint}+#{timePoint}+#{goodsPoint}-11)/5 
+		where user_Id=(select user_Id from goods join safe_trading using (goods_id) where transaction_Id=#{transactionId})
 	</update>
 	
 </mapper>

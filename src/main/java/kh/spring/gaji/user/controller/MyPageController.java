@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import kh.spring.gaji.goods.model.dto.MyGoodsListDto;
+import kh.spring.gaji.pay.model.dto.DealReviewDto;
 import kh.spring.gaji.pay.model.dto.InFaceTradingDto;
 import kh.spring.gaji.pay.model.dto.SafePurchaseInfoDto;
 import kh.spring.gaji.user.model.dto.UserAddressDto;
@@ -35,19 +36,39 @@ public class MyPageController {
 	private UserService userService;
 	
 	@GetMapping("")
-	public String mypage() {	// 마이페이지
+	public String mypage(String msg) {	// 마이페이지
 		return "mypage/mypage";
 	}
 	
 	@GetMapping("/dealreview")
 	public String dealreview(Model model,String transactionId,RedirectAttributes rattr,HttpSession session) {	//리뷰작성
 //		String userId=(String)session.getAttribute("userId");
-		if(userService.checkTradingStatus(transactionId,"qordmlgjs")==0) {	//거래에 해당하는 상품의 해당유저 리뷰가 아직 존재하지 않으면
-			model.addAttribute("transactionId", transactionId);
-			return "mypage/dealreview";
+		if(userService.checkTradingStatus(transactionId,"qordmlgjs")==0) {	//거래번호에 해당하는 안전거래가 거래완료이면서,  해당상품번호의 해당유저 리뷰가 아직 존재하지 않으면
+			model.addAttribute("transactionId", transactionId);	//	거래번호를 가지고
+			return "mypage/dealreview";							// 리뷰작성 페이지로 이동
 		}
-			rattr.addAttribute("msg", "잘못된 접근입니다.");
+			rattr.addFlashAttribute("msg", "잘못된 접근입니다.");
 		return "redirect:/main/main";
+	}
+	
+	@PostMapping("/dealreview.do")
+	public String doDealreview(Model model,DealReviewDto dealReviewDto,String transactionId,RedirectAttributes rattr,HttpSession session) {
+
+		if(1<=dealReviewDto.getMannerPoint() && dealReviewDto.getMannerPoint()<=5&&		//들어온 평점이 정상 범주에 있는지를 체크함.
+		   1<=dealReviewDto.getTimePoint() && dealReviewDto.getTimePoint()<=5&&
+		   1<=dealReviewDto.getGoodsPoint() && dealReviewDto.getGoodsPoint()<=5
+		) {
+//			String userId=(String)session.getAttribute("userId");
+			dealReviewDto.setUserId("qordmlgjs");//추후 userId
+			if(userService.doDealreview(dealReviewDto,transactionId)==1) {
+				rattr.addFlashAttribute("msg","리뷰가 정상적으로 등록되었습니다.");
+				return "redirect:/mypage";
+			}
+			rattr.addFlashAttribute("msg","잘못된 접근입니다1.");
+			return "redirect:/mypage";
+		}
+		rattr.addFlashAttribute("msg","잘못된 접근입니다2.");
+		return "redirect:/mypage";
 	}
 	
 	@PostMapping("/address/regist/do")
@@ -57,6 +78,7 @@ public class MyPageController {
 		userService.insertAddress(address);
 		return userService.getAddress("qordmlgjs");
 	}
+	
 	@Transactional
 	@PostMapping("/address/delete")
 	@ResponseBody

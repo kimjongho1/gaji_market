@@ -518,7 +518,12 @@ public class UserDao {
     	return sqlSession.insert("user.addDealReview", dealReviewDto);
     }
 
-    public int updateRatingScore(Map<String, String> map) {	// trade-mapper의 거래후기에따른 매너온도 업데이트
+    public int updateRatingScore(String transactionId,DealReviewDto dealReviewDto) {	// trade-mapper의 거래후기에따른 매너온도 업데이트
+    	Map<String,Object> map=new HashMap<String,Object>();
+    	map.put("transactionId", transactionId);
+    	map.put("goodsPoint", dealReviewDto.getGoodsPoint());
+    	map.put("timePoint", dealReviewDto.getTimePoint());
+    	map.put("mannerPoint", dealReviewDto.getMannerPoint());
     	return sqlSession.update("user.updateRatingScore", map);
     }
 }

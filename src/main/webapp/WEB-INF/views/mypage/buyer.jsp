@@ -125,6 +125,7 @@
     <c:if test="${safePurchaseInfoDto.tradingStatus eq 3}">
         <button onclick="closePay('${safePurchaseInfoDto.transactionId}','${safePurchaseInfoDto.goodsId}')"  class="btn btn-primary btn-lg">결제확정</button>
     </c:if>
+    
     <a href="{pageContext.request.contextPath}/goods/get?goodsId=${safePurchaseInfoDto.goodsId}"><p>상품명:${safePurchaseInfoDto.goodsTitle}</p></a>
     <p>판매자명:${safePurchaseInfoDto.sellerName}</p>
     <p>구매자명:${safePurchaseInfoDto.buyerName}</p>
@@ -206,6 +207,7 @@ function closePayCallback(data){
 	else
 		alert("거래 확정에 실패하였습니다.");
 }
+
 </script>
 <script>
 $(document).ready(function () {

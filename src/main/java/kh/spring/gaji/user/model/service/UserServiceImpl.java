@@ -330,15 +330,6 @@ public class UserServiceImpl implements UserService {
         return userDao.addFavoriteUser(map);
     }
 
-    @Override
-    public int addDealReview(DealReviewDto dealReviewDto) {
-        return userDao.addDealReview(dealReviewDto);
-    }
-    @Override
-    public int updateRatingScore(Map<String, String> map) {
-        return userDao.updateRatingScore(map);
-    }
-
 	@Override
 	public String checkIdForSafe(String transactionId) {
 		return userDao.checkIdForSafe(transactionId);
@@ -353,5 +344,19 @@ public class UserServiceImpl implements UserService {
 	public int checkTradingStatus(String transactionId,String userId) {
 		String goodsId=userDao.checkTradingStatus(transactionId,userId);
 		return userDao.checkReview(goodsId, userId);
+	}
+
+	@Override
+	public int doDealreview(DealReviewDto dealReviewDto,String transactionId) {
+		String userId=dealReviewDto.getUserId();
+		dealReviewDto.setGoodsId(userDao.checkTradingStatus(transactionId,userId));
+		if(userDao.addDealReview(dealReviewDto)==1) {
+			System.out.println("111");
+			return userDao.updateRatingScore(transactionId,dealReviewDto);
+		}
+		else {
+			System.out.println("222");
+			return 0;
+		}
 	}
 }
