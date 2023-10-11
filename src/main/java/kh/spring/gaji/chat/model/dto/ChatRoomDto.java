@@ -12,4 +12,5 @@ public class ChatRoomDto {
 	private String sellerId;			//회원 아이디 10자이내 영어로만
 	private String buyerId;				//회원 아이디 10자이내 영어로만
 	private String createdAt;	//채팅방 생성일자
+	private String nickname;	
 }

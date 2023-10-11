@@ -1,109 +1,141 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"    pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+	<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
- <html>
+<html>
 <head>
-<script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="${pageContext.request.contextPath}/resources/js/jquery-3.3.1.min.js"></script>
+<link href="${pageContext.request.contextPath}/resources/css/chat.css" rel='stylesheet' type='text/css'>
+<link rel="icon" href="favicon.ico" type="image/x-icon">
 </head>
 <body>
-        <div class="container">
-            <div class="col-6">
-                <label><b>채팅방</b></label>
-            </div>
-            <div>
-                <div id="msgArea" class="col"></div>
-                <div class="col-6">
-                    <div class="input-group mb-3">
-                        <input type="text" id="msg" class="form-control" aria-label="Recipient's username" aria-describedby="button-addon2">
-                        <div class="input-group-append">
-                            <button class="btn btn-outline-secondary" type="button" id="button-send">전송</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        
-</body>    
+	<div class="wrapper">
+		<div class="container">
+			<div class="left">
+				<div class="top">
+					<!-- 채팅중인 회원 검색 기능 -->
+					<input type="text" placeholder="Search" /> <a href="javascript:;"
+						class="search"></a>
+				</div>
+				<!-- 채팅중인 회원 list -->
+				<ul class="people">
+					<li class="person" data-chat="person1"><img
+						src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/382994/thomas.jpg"
+						src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/382994/dog.png"
+						alt="" /> <span class="name">Thomas Bangalter</span> <span
+						class="time">2:09 PM</span> <span class="preview">I was
+							wondering...</span></li>
+					<li class="person" data-chat="person2"><img
+						src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/382994/dog.png"
+						alt="" /> <span class="name">Dog Woofson</span> <span
+						class="time">1:44 PM</span> <span class="preview">I've
+							forgotten how it felt before</span></li>
+					<li class="person" data-chat="person3"><img
+						src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/382994/louis-ck.jpeg"
+						alt="" /> <span class="name">${pageContext.request.userPrincipal.name}</span> <span class="time">2:09
+							PM</span> <span class="preview">But weâre probably gonna need a
+							new carpet.</span></li>
+					<c:forEach var="item" items="${chatRoomList}" varStatus="status">
+						<li class="person" data-chat="person${status.count + 3}">
+					    <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/382994/dog.png" alt="" />
+					    <span class="name">${item.nickname}</span>
+					    </li>
+				  	</c:forEach>
+				</ul>
+			</div>
+			<div class="right">
+				<div class="top">
+					<!-- 현재 채팅중인 회원 이름 정보 -->
+					<span>To: <span class="name">Dog Woofson</span></span>
+				</div>
+				<div class="chat" data-chat="person1">
+					<div class="conversation-start">
+						<span>Today, 6:48 AM</span>
+					</div>
+					<div class="bubble you">Hello,</div>
+					<div class="bubble you">it's me.</div>
+					<div class="bubble you">I was wondering...</div>
+				</div>
+				<div class="chat" data-chat="person2">
+					<div class="conversation-start">
+						<span>Today, 5:38 PM</span>
+					</div>
+					<div class="bubble you">Hello, can you hear me?</div>
+					<div class="bubble you">I'm in California dreaming</div>
+					<div class="bubble me">... about who we used to be.</div>
+					<div class="bubble me">Are you serious?</div>
+					<div class="bubble you">When we were younger and free...</div>
+					<div class="bubble you">I've forgotten how it felt before</div>
+					<div class="bubble me">I've forgotten how it felt before</div>
+				</div>
+				<div class="chat" data-chat="person3">
+					<div class="conversation-start">
+						<span>Today, 3:38 AM</span>
+					</div>
+					<div class="bubble you">Hey human!</div>
+					<div class="bubble you">Umm... Someone took a shit in the
+						hallway.</div>
+					<div class="bubble me">... what.</div>
+					<div class="bubble me">Are you serious?</div>
+					<div class="bubble you">I mean...</div>
+					<div class="bubble you">Itâs not that bad...</div>
+					<div class="bubble you">But weâre probably gonna need a new
+						carpet.</div>
+					<div class="bubble you">But weâre probably gonna need a new
+						carpet.</div>
+					<div class="bubble you">But weâre probably gonna need a new
+						carpet.</div>
+					<div class="bubble you">But weâre probably gonna need a new
+						carpet.</div>
+				</div>
+				<div class="chat" data-chat="person4">
+					<div class="conversation-start">
+						<span>Yesterday, 4:20 PM</span>
+					</div>
+					<div class="bubble me">Hey human!</div>
+					<div class="bubble me">Umm... Someone took a shit in the
+						hallway.</div>
+					<div class="bubble you">... what.</div>
+					<div class="bubble you">Are you serious?</div>
+					<div class="bubble me">I mean...</div>
+					<div class="bubble me">Itâs not that bad...</div>
+				</div>
+				<div class="chat" data-chat="person5">
+					<div class="conversation-start">
+						<span>Today, 6:28 AM</span>
+					</div>
+					<div class="bubble you">Wasup</div>
+					<div class="bubble you">Wasup</div>
+					<div class="bubble you">
+						Wasup for the third time like is <br />you blind bitch
+					</div>
 
+				</div>
+				<div class="chat" data-chat="person6">
+					<div class="conversation-start">
+						<span>Monday, 1:27 PM</span>
+					</div>
+					<div class="bubble you">So, how's your new phone?</div>
+					<div class="bubble you">You finally have a smartphone :D</div>
+					<div class="bubble me">Drake?</div>
+					<div class="bubble me">Why aren't you answering?</div>
+					<div class="bubble you">howdoyoudoaspace</div>
+				</div>
+				<div class="write">
+					<a href="javascript:;" class="write-link attach"></a> <input
+						type="text" id="msg"/> <a href="javascript:;" class="write-link smiley"></a>
+					<button class="write-link send" type="button" id="button-send"></button>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<script src="${pageContext.request.contextPath}/resources/js/chat.js"></script>
+	<script>
+		const username = "${pageContext.request.userPrincipal.name}"
+		
+	</script>
+</body>
 </html>
-<script>
-            $(document).ready(function(){
-
-            // username 은 로그인 화면에서 user에 입력한 값
-			const username="${pageContext.request.userPrincipal.name}";
-			
-			// 접속 끊기
-			/* $("#disconn").on("click", (e) => {
-                disconnect();
-            }) */
-            
-            $("#button-send").on("click", (e) => {
-                send();
-            });
-
-            const websocket = new WebSocket("ws://localhost:8090/spring1/echo");
-
-            websocket.onmessage = onMessage;
-            websocket.onopen = onOpen;
-            websocket.onclose = onClose;
-
-            function send(){
-
-                let msg = document.getElementById("msg");
-
-                console.log(username + ":" + msg.value);
-                websocket.send(username + ":" + msg.value);
-                msg.value = '';
-            }
-            
-            //채팅창에서 나갔을 때 방 폭파 없어도 됨
-            function onClose(evt) {
-                var str = username + ": 님이 방을 나가셨습니다.";
-                websocket.send(str);
-            }
-            
-            //채팅창에 들어왔을 때 없어도 됨
-            function onOpen(evt) {
-                var str = username + ": 님이 입장하셨습니다.";
-                websocket.send(str);
-            }
-
-            function onMessage(msg) {
-                var data = msg.data;
-                var sessionId = null;
-                //데이터를 보낸 사람
-                var message = null;
-                var arr = data.split(":");
-
-                for(var i=0; i<arr.length; i++){
-                    console.log('arr[' + i + ']: ' + arr[i]);
-                }
-
-                var cur_session = username;
-
-                //현재 세션에 로그인 한 사람
-                console.log("cur_session : " + cur_session);
-                sessionId = arr[0];
-                message = arr[1];
-
-                console.log("sessionID : " + sessionId);
-                console.log("cur_session : " + cur_session);
-
-                //로그인 한 클라이언트와 타 클라이언트를 분류하기 위함
-                if(sessionId == cur_session){
-                    var str = "<div class='col-6'>";
-                    str += "<div class='alert alert-secondary'>";
-                    str += "<b>" + sessionId + " : " + message + "</b>";
-                    str += "</div></div>";
-                    $("#msgArea").append(str);
-                }
-                else{
-                    var str = "<div class='col-6'>";
-                    str += "<div class='alert alert-warning'>";
-                    str += "<b>" + sessionId + " : " + message + "</b>";
-                    str += "</div></div>";
-                    $("#msgArea").append(str);
-                }
-            }
-            })
-</script>

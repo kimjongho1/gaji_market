@@ -14,6 +14,7 @@ import org.springframework.web.socket.WebSocketSession;
 import org.springframework.web.socket.handler.TextWebSocketHandler;
 
 import kh.spring.gaji.chat.model.dto.ChatRoomDto;
+import kh.spring.gaji.chat.model.service.ChatService;
 import kh.spring.gaji.user.model.dto.UserDto;
 import lombok.extern.slf4j.Slf4j;
 
@@ -21,8 +22,8 @@ import lombok.extern.slf4j.Slf4j;
 //@RequestMapping("/echo")
 public class EchoHandler extends TextWebSocketHandler {
 	
-//	@Autowired
-//	private ChatRoom;
+	@Autowired
+	private ChatService chatServiceImpl;
 	
 	// 세션 리스트
 	private List<WebSocketSession> sessionList = new ArrayList<WebSocketSession>();
@@ -69,20 +70,5 @@ public class EchoHandler extends TextWebSocketHandler {
 		sessionList.remove(session);
 		log.info("{} 연결 끊김", session.getId());
 	}
-	
-	//채팅 홈 화면
-//	@GetMapping("/chat")
-//	public ModelAndView selectChatHome(
-//			ModelAndView mv,
-//			HttpServletRequest req) {
-//		// 로그인한 사람의 UserDto 가져오기
-//		UserDto users = (UserDto)req.getSession().getAttribute("userId");
-//		// userId 값으로 조회하기 때문에 변수 선언
-//		String userId = users.getUserId();
-//		
-//		List<ChatRoomDto> result = 
-//		
-//		return mv;
-//	}
 
 }
