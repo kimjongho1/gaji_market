@@ -217,8 +217,8 @@ body {
 
 <div class="container-box">
 
-	<form action=signup method="POST" class="joinForm"
-		onsubmit="return Validation(); return false;">
+	<form action="${pageContext.request.contextPath}/signup" method="POST" class="joinForm"
+		onsubmit="return Validation();">
 
 		<div class="textForm">
 			<span style="display: flex;">
@@ -236,7 +236,7 @@ body {
 		</div>
 		<div class="textForm">
 			<span style="display: flex;">
-			<input name="loginPwConfirm" type="password" class="pw"
+			<input name="loginPwConfirm" type="password" class="pw" id="passwordVerification"
 				placeholder="비밀번호 확인" required="required">
 			</span>
 		</div>
@@ -307,7 +307,7 @@ body {
 				placeholder="주소별칭" class="cellphoneNo">
 		</span>
 		</div>
-		<input type="submit" onclick="return Validation()" class="btn" value="J O I N" />
+		<input type="submit" class="btn" value="J O I N" />
 	</form>
 </div>
 	
@@ -407,7 +407,7 @@ $('#mail-Check-Btn').click(function() {
 
     $.ajax({
         type: 'get',
-        url: '/gaji/user/mailcheck', // 수정된 URL
+        url: '${pageContext.request.contextPath}/mailcheck', // 수정된 URL
         data: { email: email }, // 이메일을 데이터로 전달
         success: function(data) {
             console.log("data: " + data);
@@ -426,6 +426,7 @@ $('#verify-button').click(function() {
     if (code === inputCode) {
         alert('인증번호 확인 완료');
         verificationChecked = true;
+        
         // 인증번호 확인이 성공한 경우 원하는 동작 수행
     } else {
         alert('인증번호를 다시 확인해주세요.');
@@ -464,8 +465,10 @@ $('#verify-button').click(function() {
 
         // 비밀번호와 비밀번호 확인란 값이 일치하지 않을 때
         const password1 = $('#password').val();
-        const confirmPassword = $('#loginPwConfirm').val();
-        if (password1 !== confirmPassword) {
+        const confirmPassword = $('#passwordVerification').val();
+        console.log(password1);
+        console.log(confirmPassword);
+        if (password1 != confirmPassword) {
             alert('비밀번호와 비밀번호 확인이 일치하지 않습니다.');
             return false;
         }
@@ -479,7 +482,7 @@ $('#verify-button').click(function() {
         if (!idPattern.test(userId.value)) {
             alert("아이디는 4~10자의 영문 대소문자와 숫자만 허용합니다.");
             userId.focus();
-            return false;
+            return false;	
         }
 
         // 비밀번호 확인
@@ -564,7 +567,9 @@ $('#verify-button').click(function() {
 
 
         // 유효성 문제가 없을 시 폼 제출
-        document.joinForm.submit();
+        /* document.joinForm.submit(); */
+        return true;
+        
         }
         else {
             // 중복 확인 또는 인증 번호 확인이 실패한 경우 사용자에게 알림
@@ -579,7 +584,7 @@ $('#verify-button').click(function() {
         var userId = $("#userId").val();
 
         // 서버에 보낼 요청 URL (실제로는 서버 엔드포인트에 맞게 수정해야 함)
-        var apiUrl = "checkid"; // 예시 URL, 실제로는 서버의 URL로 수정
+        var apiUrl = "${pageContext.request.contextPath}/checkid"; // 예시 URL, 실제로는 서버의 URL로 수정
         
      // AJAX를 사용하여 서버에 중복 확인 요청 보냄
         $.ajax({
@@ -609,7 +614,7 @@ $('#verify-button').click(function() {
         var nickname = $("#nickname").val();
 
         // 서버에 보낼 요청 URL (실제로는 서버 엔드포인트에 맞게 수정해야 함)
-        var url = "checknickname"; // 예시 URL, 실제로는 서버의 URL로 수정
+        var url = "${pageContext.request.contextPath}/checknickname"; // 예시 URL, 실제로는 서버의 URL로 수정
         
      // AJAX를 사용하여 서버에 중복 확인 요청 보냄
         $.ajax({
@@ -634,7 +639,7 @@ $('#verify-button').click(function() {
     });
     
     var msg = '${msg}';
-	if(msg){
+	if(msg ){
 		alert(msg);
 	}
 </script>

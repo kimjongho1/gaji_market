@@ -36,7 +36,7 @@ public class UserController {
 		return "user/signup";
 	}
 
-	@PostMapping("signup")
+	@PostMapping("/signup")
 	public String singupUser(UserDto userDto, RedirectAttributes ra, UserInsertAddressDto addressDto) {
 		try {
 			userDto.setPassword(bCryptPasswordEncoder.encode(userDto.getPassword()));
@@ -54,14 +54,19 @@ public class UserController {
 	}
 
 	// 이메일 인증
-	@GetMapping("/user/mailcheck")
+	@GetMapping("/mailcheck")
 	@ResponseBody
 	public String mailCheck(String email) {
 		System.out.println("이메일 인증 요청이 들어옴!");
 		System.out.println("이메일 인증 이메일 : " + email);
 		return mailService.joinEmail(email);
 	}
-
+	
+	@GetMapping("idfind")
+	public String idFind() {
+		return "user/idfindresult"; // 아이디 찾기 폼을 보여주는 뷰 이름
+	}
+	
 	@PostMapping("checkid")
 	@ResponseBody
 	public String checkId(String userId) {
@@ -79,22 +84,35 @@ public class UserController {
 		return "user/idInquiry";
 	}
 
-	@PostMapping("idInquiry")
+	@PostMapping("/idInquiry")
 	public ModelAndView idFind(@RequestParam Map<String, String> map, ModelAndView mv) {
-		String foundId = userService.findId(map);
+		String findId = userService.findId(map);
 		mv.setViewName("user/idfindresult");
-		mv.addObject("foundId", foundId);
+		mv.addObject("foundId", findId);
 		return mv;
 	}
 
-	@GetMapping("idfind")
-	public String idFind() {
-		return "user/idfindresult"; // 아이디 찾기 폼을 보여주는 뷰 이름
-	}
 
 	@GetMapping("/pwInquiry")
 	public String pwInquiry() { // 비밀번호찾기
 		return "user/pwInquiry";
+	}
+	
+	@PostMapping("/pwInquiry")
+	public ModelAndView pwFind(@RequestParam Map<String, String> map, ModelAndView mv, RedirectAttributes ra, UserDto userDto) {
+		map.replace("password", bCryptPasswordEncoder.encode(map.get("password")));
+		int chagePassword = userService.findPass(map);
+		if(chagePassword == 1) {
+			ra.addFlashAttribute("msg", "비밀번호 변경 완료");
+			mv.setViewName("redirect:/login");
+		}	else {
+			
+			ra.addFlashAttribute("msg", "비밀번호 변경 실패");
+			mv.setViewName("redirect:/pwInquiry");
+		}
+		
+		return mv;
+		
 	}
 	
 	@ExceptionHandler

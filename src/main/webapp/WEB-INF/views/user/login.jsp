@@ -14,7 +14,12 @@
 <link rel="stylesheet" type="text/css"
 	href="${pageContext.request.contextPath}/resources/css/login.css">
 
-
+<script>
+var msg = '${msg}';
+if(msg ){
+	alert(msg);
+}
+</script>
 </head>
 <body>
 
