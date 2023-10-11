@@ -139,7 +139,13 @@
             data:{userId:userId1, transactionId:transactionId1, goodsId:goodsId},
             method: "post",
             dataType:"json",
-            success:cancelCallBack
+            success:cancelCallBack,
+    		error : (request,status,error)=>{
+    			console.log(request);
+    			console.log(status);
+    			console.log(error);
+    			alert("code:"+request.status+"\n"+"message"+request.responseText+"\n"+error+":error");
+    		}
         });
     }
     function cancelCallBack(data){
@@ -159,7 +165,13 @@
              data:{userId:sellerId, transactionId:transactionId , status:2},
              method: "post",
              dataType:"json",
-             success:acceptCallback
+             success:acceptCallback,
+     		error : (request,status,error)=>{
+    			console.log(request);
+    			console.log(status);
+    			console.log(error);
+    			alert("code:"+request.status+"\n"+"message"+request.responseText+"\n"+error+":error");
+    		}
          });
     }
     

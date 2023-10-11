@@ -260,7 +260,13 @@
 				  	roadAddress: roadAddress,
 				  	detailAddress:detailAddress
 			  		},
-		  	  success: callback	
+		  	  success: callback	,
+				error : (request,status,error)=>{
+					console.log(request);
+					console.log(status);
+					console.log(error);
+					alert("code:"+request.status+"\n"+"message"+request.responseText+"\n"+error+":error");
+				}
 			  });
 		 });	
 	}
@@ -292,7 +298,13 @@
 				  	roadAddress: roadAddress,
 				  	detailAddress:detailAddress
 			  		},
-		  	  success: callback	
+		  	  success: callback	,
+				error : (request,status,error)=>{
+					console.log(request);
+					console.log(status);
+					console.log(error);
+					alert("code:"+request.status+"\n"+"message"+request.responseText+"\n"+error+":error");
+				}
 			  });
 		 });	
 	}
@@ -326,7 +338,13 @@
 			  	roadAddress: roadAddress,
 			  	detailAddress:detailAddress
 		  		},
-		  		success: callback	
+		  		success: callback,
+				error : (request,status,error)=>{
+					console.log(request);
+					console.log(status);
+					console.log(error);
+					alert("code:"+request.status+"\n"+"message"+request.responseText+"\n"+error+":error");
+				}	
 		    });
 	 });
 	}
@@ -460,8 +478,11 @@
 				alert("주소를 삭제했습니다.");
 				window.location.href="${pageContext.request.contextPath}/payment/pay";
 			},
-			error: function(data){
-				alert("주소삭제에 실패했습니다.");
+			error : (request,status,error)=>{
+				console.log(request);
+				console.log(status);
+				console.log(error);
+				alert("code:"+request.status+"\n"+"message"+request.responseText+"\n"+error+":error");
 			}
 		});
 	}
@@ -480,8 +501,11 @@
 				alert("대표주소가 변경되었습니다.");
 				window.location.href="${pageContext.request.contextPath}/payment/pay";
 			},
-			error: function(data){
-				alert("대표주소 변경에 실패했습니다.");
+			error : (request,status,error)=>{
+				console.log(request);
+				console.log(status);
+				console.log(error);
+				alert("code:"+request.status+"\n"+"message"+request.responseText+"\n"+error+":error");
 			}
 		});
 	}
