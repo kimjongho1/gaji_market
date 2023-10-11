@@ -306,7 +306,7 @@ body {
 				placeholder="주소별칭" class="cellphoneNo">
 		</span>
 		</div>
-		<input type="submit" onclick="Validation()" class="btn" value="J O I N" />
+		<input type="submit" onclick="return Validation()" class="btn" value="J O I N" />
 	</form>
 </div>
 	
@@ -362,13 +362,13 @@ body {
 						document.getElementById("sample4_roadAddress").value = roadAddr;
 						document.getElementById("sample4_jibunAddress").value = data.jibunAddress;
 
-						// 참고항목 문자열이 있을 경우 해당 필드에 넣는다.
-						/* if (roadAddr !== '') {
+						/* // 참고항목 문자열이 있을 경우 해당 필드에 넣는다.
+						 if (roadAddr !== '') {
 							document.getElementById("sample4_extraAddress").value = extraRoadAddr;
 						} else {
 							document.getElementById("sample4_extraAddress").value = '';
-						} */
-
+						}  */
+						 
 						var guideTextBox = document.getElementById("guide");
 						// 사용자가 '선택 안함'을 클릭한 경우, 예상 주소라는 표시를 해준다.
 						if (data.autoRoadAddress) {
@@ -393,7 +393,8 @@ body {
 </script>
 <script>
 let code;
-
+var duplicateChecked = false;
+var verificationChecked = false;
 
 $('#mail-Check-Btn').click(function() {
     const email = $('#email').val(); // 이메일 주소값 얻어오기
@@ -419,9 +420,9 @@ $('#mail-Check-Btn').click(function() {
 $('#verify-button').click(function() {
     // 서버에서 받은 인증번호를 변수에 저장
     const inputCode = $('#verificationCode').val(); // 입력한 인증번호를 가져옴
-
     if (code === inputCode) {
         alert('인증번호 확인 완료');
+        verificationChecked = true;
         // 인증번호 확인이 성공한 경우 원하는 동작 수행
     } else {
         alert('인증번호를 다시 확인해주세요.');
@@ -454,7 +455,18 @@ $('#verify-button').click(function() {
         var mobileNumberPattern = /^[0-9]{10,11}$/; // 전화번호는 10자 또는 11자의 숫자만 허용
         var postCodePattern = /^[0-9]{5}$/; // 우편번호는 5자리 숫자만 허용
 
+       
+        
+        if (duplicateChecked && verificationChecked){
 
+        // 비밀번호와 비밀번호 확인란 값이 일치하지 않을 때
+        const password1 = $('#password').val();
+        const confirmPassword = $('#loginPwConfirm').val();
+        if (password1 !== confirmPassword) {
+            alert('비밀번호와 비밀번호 확인이 일치하지 않습니다.');
+            return false;
+        }
+	
         // 아이디 확인
         if (userId.value == "") {
             alert("아이디를 입력하세요.");
@@ -550,6 +562,11 @@ $('#verify-button').click(function() {
 
         // 유효성 문제가 없을 시 폼 제출
         document.joinForm.submit();
+        }
+        else {
+            // 중복 확인 또는 인증 번호 확인이 실패한 경우 사용자에게 알림
+            alert('아이디 중복확인과 인증번호 확인을 먼저 해주세요.');
+        }
     }
     
     // 중복 확인을 수행하는 함수
@@ -560,7 +577,7 @@ $('#verify-button').click(function() {
 
         // 서버에 보낼 요청 URL (실제로는 서버 엔드포인트에 맞게 수정해야 함)
         var apiUrl = "checkid"; // 예시 URL, 실제로는 서버의 URL로 수정
-
+        
      // AJAX를 사용하여 서버에 중복 확인 요청 보냄
         $.ajax({
             url: apiUrl,
@@ -574,6 +591,7 @@ $('#verify-button').click(function() {
             	}else {
             		// 아이디가 중복되지 않은 경우 처리 (예: 메시지 표시)
                     alert("사용 가능한 아이디입니다.");
+                    duplicateChecked = true;
             	}
             },
             error: function (error) {

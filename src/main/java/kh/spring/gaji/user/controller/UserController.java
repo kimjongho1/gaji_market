@@ -5,8 +5,8 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -41,7 +41,7 @@ public class UserController {
 			userDto.setPassword(bCryptPasswordEncoder.encode(userDto.getPassword()));
 			if (userService.signup(userDto, addressDto) > 0) {
 				ra.addFlashAttribute("msg", "계정 생성이 성공하였습니다.");
-				return "redirect:/main"; // 성공 시 메인 페이지로 리다이렉트
+				return "redirect:/"; // 성공 시 메인 페이지로 리다이렉트
 			} else {
 				ra.addFlashAttribute("msg", "계정 생성이 실패하였습니다. 다시 시도해주십시오.");
 				return "user/singup"; // 실패 시 다시 회원 가입 페이지로 이동
@@ -88,5 +88,11 @@ public class UserController {
 	@GetMapping("/pwInquiry")
 	public String pwInquiry() { // 비밀번호찾기
 		return "user/pwInquiry";
+	}
+	
+	@ExceptionHandler
+	public String exception(RedirectAttributes ra) {
+		ra.addFlashAttribute("msg", "예기치않은 오류로 메인페이지로 이동합니다.");
+		return "redirect:/";
 	}
 }
