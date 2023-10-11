@@ -252,7 +252,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public int checkNickname(String nickname) {
+    public String checkNickname(String nickname) {
         return userDao.checkNickname(nickname);
     }
 

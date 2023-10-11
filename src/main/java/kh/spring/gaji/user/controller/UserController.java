@@ -6,6 +6,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -66,6 +67,12 @@ public class UserController {
 	public String checkId(String userId) {
 		return userService.checkId(userId);
 	}
+	
+	@PostMapping("checknickname")
+	@ResponseBody
+	public String checkNickName(String nickname) {
+		return userService.checkNickname(nickname);
+	}
 
 	@GetMapping("/idInquiry")
 	public String idInquiry() { // 아이디찾기
@@ -91,7 +98,7 @@ public class UserController {
 	}
 	
 	@ExceptionHandler
-	public String exception(RedirectAttributes ra) {
+	public String exception(Exception e, RedirectAttributes ra) {
 		ra.addFlashAttribute("msg", "예기치않은 오류로 메인페이지로 이동합니다.");
 		return "redirect:/";
 	}

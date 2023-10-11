@@ -263,8 +263,9 @@ body {
 		</div>
 		<div class="textForm">
 			<span style="display: flex;">	
-			<input name="nickname" type="text" class="nickname" placeholder="닉네임" id="nickname"
-				required="required">
+				<input name="nickname" type="text" class="nickname" placeholder="닉네임" id="nickname"
+					required="required">
+				<button type="button" class="btn-id" id="checkNickName">중복확인</button>
 			</span>
 		</div>
 		<div class="textForm">
@@ -395,6 +396,8 @@ body {
 let code;
 var duplicateChecked = false;
 var verificationChecked = false;
+var buttonNickName = false;
+
 
 $('#mail-Check-Btn').click(function() {
     const email = $('#email').val(); // 이메일 주소값 얻어오기
@@ -457,7 +460,7 @@ $('#verify-button').click(function() {
 
        
         
-        if (duplicateChecked && verificationChecked){
+        if (duplicateChecked && verificationChecked && buttonNickName){
 
         // 비밀번호와 비밀번호 확인란 값이 일치하지 않을 때
         const password1 = $('#password').val();
@@ -565,7 +568,7 @@ $('#verify-button').click(function() {
         }
         else {
             // 중복 확인 또는 인증 번호 확인이 실패한 경우 사용자에게 알림
-            alert('아이디 중복확인과 인증번호 확인을 먼저 해주세요.');
+            alert('중복확인과 인증번호 확인을 먼저 해주세요.');
         }
     }
     
@@ -599,6 +602,37 @@ $('#verify-button').click(function() {
             }
         });
     });
+    
+    $("#checkNickName").click(function () {
+    	console.log("버튼클릭확인");
+        // 중복 확인할 아이디 값을 가져옴
+        var nickname = $("#nickname").val();
+
+        // 서버에 보낼 요청 URL (실제로는 서버 엔드포인트에 맞게 수정해야 함)
+        var url = "checknickname"; // 예시 URL, 실제로는 서버의 URL로 수정
+        
+     // AJAX를 사용하여 서버에 중복 확인 요청 보냄
+        $.ajax({
+            url: url,
+            type: "post",
+            data: { nickname: nickname },
+            success: function (name) {
+            	console.log(name);
+            	if (name !== ""){
+            		 // 아이디가 중복된 경우 처리 (예: 메시지 표시)
+            		alert("이미 사용 중인 닉네임입니다.");
+            	}else {
+            		// 아이디가 중복되지 않은 경우 처리 (예: 메시지 표시)
+                    alert("사용 가능한 닉네임입니다.");
+                    buttonNickName = true;
+            	}
+            },
+            error: function (error) {
+                console.error("중복 확인 중 오류 발생:", error);
+            }
+        });
+    });
+    
     var msg = '${msg}';
 	if(msg){
 		alert(msg);

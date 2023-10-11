@@ -449,7 +449,7 @@ public class UserDao {
     	return sqlSession.update("user.deleteAddress2",map);
     }
 
-    public int checkNickname(String nickname) {	// 7P 닉네임 중복검사
+    public String checkNickname(String nickname) {	// 7P 닉네임 중복검사
         return sqlSession.selectOne("user.checkNickname", nickname);
     }
 

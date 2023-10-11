@@ -83,7 +83,7 @@ public interface UserService {
 
     public int deleteAddress1(Map<String,Object> map);
 
-    public int checkNickname(String nickname);
+    public String checkNickname(String nickname);
 
     public int checkEmail(String email);
 

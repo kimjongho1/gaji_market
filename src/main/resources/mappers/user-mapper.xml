@@ -369,8 +369,8 @@
 		update user_address set Address_no=Address_no-1 where Address_no &gt; #{addressNo} and user_id=#{userId}
 	</update>
 
-	<select id="checkNickname" parameterType="string" resultType="_int">	<!-- 7P 닉네임 중복검사 -->
-		select count(*) from user where nickname=#{nickname}
+	<select id="checkNickname" parameterType="string" resultType="string">	<!-- 7P 닉네임 중복검사 -->
+		select nickname from users where nickname=#{nickname}
 	</select>
 	
 	<select id="checkEmail" parameterType="string" resultType="_int">		<!-- 7P 이메일 중복검사 -->
