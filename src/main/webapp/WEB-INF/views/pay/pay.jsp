@@ -475,7 +475,10 @@
 			url:"${pageContext.request.contextPath}/mypage/address/delete",
 			data: { addressNo: addressNo },
 			success: function(data){
-				alert("주소를 삭제했습니다.");
+				if(data=='1')
+					alert("주소를 삭제했습니다.");
+				else
+					alert("주소 삭제에 실패했습니다.");
 				window.location.href="${pageContext.request.contextPath}/payment/pay";
 			},
 			error : (request,status,error)=>{

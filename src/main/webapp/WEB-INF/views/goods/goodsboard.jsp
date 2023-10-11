@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <!DOCTYPE html>
 <html>
 <head>
@@ -45,7 +47,7 @@
 	</header>
 	<!-- header end -->
 	<h2>중고 거래 게시판</h2>
-
+	
 	<main class="relative flex-grow border-b-2"
 		style="min-height: -webkit-fill-available; -webkit-overflow-scrolling: touch">
 		<div
@@ -68,9 +70,29 @@
 							<ul class="flex flex-col mt-2 space-y-4">
 								<li><div class="relative flex items-center justify-between">
 										<label
+											class="flex items-center text-sm cursor-pointer group text-heading">
+											<a href="${pageContext.request.contextPath}/goods/board?category=1"><span
+												class="relative text-sm ms-2 text-heading font-normal">가구/인테리어</span></a></label></li> 
+											<li><label
 											class="flex items-center text-sm cursor-pointer group text-heading"><a
-											href="/search?page=1&amp;category=1"><span
-												class="relative text-sm ms-2 text-heading font-normal">수입명품</span></a></label>
+											href="${pageContext.request.contextPath}/goods/board?category=2"><span
+												class="relative text-sm ms-2 text-heading font-normal">생활가정</span></a></label> </li>
+													<li><label
+											class="flex items-center text-sm cursor-pointer group text-heading"><a
+											href="${pageContext.request.contextPath}/goods/board?category=3"><span
+												class="relative text-sm ms-2 text-heading font-normal">생활/주방</span></a></label></li>
+													<li><label
+											class="flex items-center text-sm cursor-pointer group text-heading"><a
+											href="${pageContext.request.contextPath}/goods/board?category=4"><span
+												class="relative text-sm ms-2 text-heading font-normal">디지털기기</span></a></label></li>
+													<li><label
+											class="flex items-center text-sm cursor-pointer group text-heading"><a
+											href="${pageContext.request.contextPath}/goods/board?category=5"><span
+												class="relative text-sm ms-2 text-heading font-normal">취미/게임</span></a></label></li>
+											<li><label
+											class="flex items-center text-sm cursor-pointer group text-heading"><a
+											href="${pageContext.request.contextPath}/goods/board?category=6"><span
+												class="relative text-sm ms-2 text-heading font-normal">기타</span></a></label></li>
 							</ul>
 						</div>
 						<div class="block border-b border-gray-300 pb-7 mb-7">
@@ -78,41 +100,38 @@
 							<ul class="mt-2 flex flex-col space-y-4">
 								<li><div class="relative flex items-center justify-between">
 										<label
-											class="flex items-center text-sm cursor-pointer group text-heading"><a
-											href="/search?page=1&amp;minPrice=0&amp;maxPrice=100000"><input
-												type="radio"
+											class="flex items-center text-sm cursor-pointer group text-heading"><input
+												type="radio" id="priceOption1" onclick="priceOptionF1()"
 												class="w-5 h-5 transition duration-500 ease-in-out border border-gray-300 rounded-full cursor-pointer form-radio text-heading focus:ring-offset-0 hover:border-heading focus:outline-none focus:ring-0 focus-visible:outline-none checked:bg-heading"
-												readonly="" name="price" value=""><span
-												class="relative text-sm ms-2 text-heading">10만원 이하</span></a></label>
+												readonly="" name="price" value=""
+												><span
+												class="relative text-sm ms-2 text-heading">10만원 이하</span></label>
 									</div></li>
 								<li><div class="relative flex items-center justify-between">
 										<label
-											class="flex items-center text-sm cursor-pointer group text-heading"><a
-											href="/search?page=1&amp;minPrice=100000&amp;maxPrice=300000"><input
-												type="radio"
+											class="flex items-center text-sm cursor-pointer group text-heading"><input
+												type="radio" id="priceOption2" onclick="priceOptionF2()"
 												class="w-5 h-5 transition duration-500 ease-in-out border border-gray-300 rounded-full cursor-pointer form-radio text-heading focus:ring-offset-0 hover:border-heading focus:outline-none focus:ring-0 focus-visible:outline-none checked:bg-heading"
 												readonly="" name="price" value=""><span
 												class="relative text-sm ms-2 text-heading">10만원 -
-													30만원 이하</span></a></label>
+													30만원 이하</span></label>
 									</div></li>
 								<li><div class="relative flex items-center justify-between">
 										<label
-											class="flex items-center text-sm cursor-pointer group text-heading"><a
-											href="/search?page=1&amp;minPrice=300000&amp;maxPrice=500000"><input
-												type="radio"
+											class="flex items-center text-sm cursor-pointer group text-heading"><input
+												type="radio" id="priceOption3" onclick="priceOptionF3()"
 												class="w-5 h-5 transition duration-500 ease-in-out border border-gray-300 rounded-full cursor-pointer form-radio text-heading focus:ring-offset-0 hover:border-heading focus:outline-none focus:ring-0 focus-visible:outline-none checked:bg-heading"
 												readonly="" name="price" value=""><span
 												class="relative text-sm ms-2 text-heading">30만원 -
-													50만원 이하</span></a></label>
+													50만원 이하</span></label>
 									</div></li>
 								<li><div class="relative flex items-center justify-between">
 										<label
-											class="flex items-center text-sm cursor-pointer group text-heading"><a
-											href="/search?page=1&amp;minPrice=500000&amp;maxPrice=2000000000"><input
-												type="radio"
+											class="flex items-center text-sm cursor-pointer group text-heading"><input
+												type="radio" id="priceOption4" onclick="priceOptionF4()"
 												class="w-5 h-5 transition duration-500 ease-in-out border border-gray-300 rounded-full cursor-pointer form-radio text-heading focus:ring-offset-0 hover:border-heading focus:outline-none focus:ring-0 focus-visible:outline-none checked:bg-heading"
 												readonly="" name="price" value=""><span
-												class="relative text-sm ms-2 text-heading">50만원 이상</span></a></label>
+												class="relative text-sm ms-2 text-heading">50만원 이상</span></label>
 									</div></li>
 							</ul>
 						</div>
@@ -203,7 +222,7 @@
 						</button>
 						<div class="flex items-center justify-end">
 							<div
-								class="flex-shrink-0 text-body text-xs md:text-sm leading-4 pe-4 md:me-6 ps-2 hidden lg:block">26,901,720
+								class="flex-shrink-0 text-body text-xs md:text-sm leading-4 pe-4 md:me-6 ps-2 hidden lg:block">${totalCnt}
 								개의 상품</div>
 							<div class="relative ms-2 z-10 min-w-[180px]">
 								<button
@@ -263,7 +282,7 @@
     max-[599px]:text-sm ">평균 가격이에요</span><span
 								tabindex="0"><span class="mr-1">평균</span><span
 								class="font-bold text-2xl mr-1
-    max-[599px]:text-xl">348,154</span>원</span>
+    max-[599px]:text-xl">${averagePrice}</span>원</span>
 						</div>
 						<div class="flex flex-col flex-1"
 							aria-labelledby="product-item-price-title-2" tabindex="0">
@@ -273,7 +292,7 @@
 								가격이에요</span><span tabindex="0" class="text-red-400"><span
 								class="mr-1">최고</span><span
 								class="font-bold text-2xl mr-1
-    max-[599px]:text-xl">2,600,000</span>원</span>
+    max-[599px]:text-xl">${topPrice}</span>원</span>
 						</div>
 						<div class="flex flex-col flex-1"
 							aria-labelledby="product-item-price-title-3" tabindex="0">
@@ -283,7 +302,7 @@
 								가격이에요</span><span tabindex="0" class="text-blue-500"><span
 								class="mr-1">최저</span><span
 								class="font-bold text-2xl mr-1
-    max-[599px]:text-xl">1,000</span>원</span>
+    max-[599px]:text-xl">${bottomPrice}</span>원</span>
 						</div>
 					</div>
 				</div>
@@ -315,7 +334,7 @@
 								<div
 									class="font-semibold space-s-2 mt-0.5 text-heading lg:text-lg lg:mt-1.5">1,300,000원</div>
 								<div class="my-1">
-									<span class="text-sm text-gray-400">온천제2동</span><span
+									<span class="text-sm text-gray-400">${guName},${dongName}</span><span
 										class="text-sm text-gray-400 mx-1">|</span><span
 										class="text-sm text-gray-400">7초 전</span>
 								</div>
@@ -400,8 +419,29 @@
 			</div>
 		</div>
 		<div class="Toastify"></div>
+		
+		
+	<form action="${pageContext.request.contextPath}/goods/board" id="condition">
+	<c:if test="${not empty priceCeiling}">
+    	<input type="hidden" name="priceCeiling" id="priceCeiling" value="${priceCeiling}">
+    </c:if>
+    
+    <c:if test="${not empty priceFloor}">
+    	<input type="hidden" name="priceFloor" id="priceFloor" value="${priceFloor}">
+    </c:if>
+    
+    <c:if test="${not empty category}">
+    	<input type="hidden" name="category" id="category" value="${category}">
+    </c:if>
+    
+     <c:if test="${not empty searchWord}">
+    	<input type="hidden" name="searchWord" id="searchWord" value="${searchWord}">
+    </c:if>
+    </form>
+    
+    <input type="hidden" name="currentPage" id="currentPage" value="${currentPage}">
+	
 	</main>
-
 
 	<!-- Footer Section Begin -->
 	<footer>
@@ -412,10 +452,59 @@
 
 	<!-- Js Plugins -->
 	<script
-		src="${pageContext.request.contextPath}/resources/js/bootstrap.js"></script>
+		src="${pageContext.request.contextPath}/resources/js/bootstrap.min.js"></script>
 	<script src="${pageContext.request.contextPath}/resources/js/main.js"></script>
-
-
+	<script>
+	function priceOptionF1(){
+		alert("실행됨1");
+		$("#priceFloor").val(-1);
+		$("#priceCeiling").val(100000);
+		var data=$("#condition").serialize();
+		$("#condition").submit();
+		console.log(data);
+		
+	}
+	
+	function priceOptionF2(){
+		alert("실행됨2");
+		$("#priceFloor").val(100000);
+		$("#priceCeiling").val(300000);
+		var data=$("#condition").serialize();
+		$("#condition").submit();
+	}
+	
+	function priceOptionF3(){
+		alert("실행됨3");
+		$("#priceFloor").val(300000);
+		$("#priceCeiling").val(500000);
+		var data=$("#condition").serialize();
+		$("#condition").submit();
+	}
+	
+	function priceOptionF4(){
+		alert("실행됨4");
+		$("#priceFloor").val(500000);
+		$("#priceCeiling").val(-1);
+		var data=$("#condition").serialize();
+		$("#condition").submit();
+	}
+	
+	function searchButton1(){
+		var tmp=$(".searchButton").val();
+		alert("searchButton1 실행");
+		$("#searchWord").val(tmp);
+		var data=$("#condition").serialize();
+		$("#condition").submit();
+	}
+	
+	function pageMove(i){
+		alert(i);
+		$("#currentPage").val(i);
+		var data=$("#condition").serialize();
+		$("#condition").submit();
+	}
+	</script>
+	
 
 </body>
 </html>

@@ -44,11 +44,8 @@ header {
 
 					<div class="hero__search">
 						<div class="hero__search__form">
-							<form action="#">
-
 								<input type="text" placeholder="What do yo u need?">
-								<button type="submit" class="site-btn">SEARCH</button>
-							</form>
+								<button type="submit" class="site-btn searchButton" onclick="searchButton1()">SEARCH</button>
 						</div>
 					</div>
 

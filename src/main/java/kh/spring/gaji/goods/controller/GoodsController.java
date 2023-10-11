@@ -54,6 +54,8 @@ public class GoodsController {
 
 	@GetMapping("/board")
 	public String board(Model model,Integer currentPage,String searchWord,Integer sort,Integer priceFloor, Integer priceCeiling,Integer category,Integer guId,Integer dongId) { // 중고거래 게시판
+		model.addAttribute("dongList", regionService.dongList());
+		model.addAttribute("guList", regionService.guList());
 //		int totalCnt=0;
 //		List<GoodsListDto> goodsListDto=null;
 //		if(currentPage==null)	//현재 페이지가 들어온게 없다면 1페이지.
@@ -85,7 +87,10 @@ public class GoodsController {
 //		model.addAttribute("currentPage", currentPage);
 //		model.addAttribute("goodsListDto",goodsListDto);
 //		model.addAttribute("totalCnt",totalCnt);
-		
+		model.addAttribute("category",category);
+		model.addAttribute("priceFloor",priceFloor);
+		model.addAttribute("priceCeiling",priceCeiling);
+		model.addAttribute("searchWord",searchWord);
 		return "goods/goodsboard";
 	}
 
