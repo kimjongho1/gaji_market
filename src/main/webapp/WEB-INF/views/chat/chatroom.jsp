@@ -21,26 +21,38 @@
 				</div>
 				<!-- 채팅중인 회원 list -->
 				<ul class="people">
-					<li class="person" data-chat="person1"><img
-						src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/382994/thomas.jpg"
-						src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/382994/dog.png"
-						alt="" /> <span class="name">Thomas Bangalter</span> <span
-						class="time">2:09 PM</span> <span class="preview">I was
-							wondering...</span></li>
-					<li class="person" data-chat="person2"><img
-						src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/382994/dog.png"
-						alt="" /> <span class="name">Dog Woofson</span> <span
-						class="time">1:44 PM</span> <span class="preview">I've
-							forgotten how it felt before</span></li>
-					<li class="person" data-chat="person3"><img
-						src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/382994/louis-ck.jpeg"
-						alt="" /> <span class="name">${pageContext.request.userPrincipal.name}</span> <span class="time">2:09
-							PM</span> <span class="preview">But weâre probably gonna need a
-							new carpet.</span></li>
-					<c:forEach var="item" items="${chatRoomList}" varStatus="status">
-						<li class="person" data-chat="person${status.count + 3}">
+					<c:forEach var="item1" items="${chatRoomList}" varStatus="status">
+						<li class="person" data-chat="person${status.count}">
 					    <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/382994/dog.png" alt="" />
-					    <span class="name">${item.nickname}</span>
+					    <span class="name">${item1.nickname}</span>
+					    <c:forEach var="item2" items="${item1.chatInfo}">
+			    	 		<span class="time">
+			    	 			<script>
+							       var dateString = "${item2.createAt}";
+							       var date = new Date(dateString);
+							       var today = new Date();
+							       
+							       var year = date.getFullYear();
+							       var month = date.getMonth() + 1;
+							       var day = date.getDate();
+							       var hours = date.getHours();
+							       var minutes = date.getMinutes();
+							       
+								   if(today.getMonth() == month){
+									   if(today.getDate() == day){
+										   if(hours > 12){
+											   document.write("오후 " + (hours - 12) + ":" + minutes);
+										   } else {
+											   document.write("오전 " + hours + ":" + minutes);
+										   }
+									   }
+								   } else {
+									   document.write(month + 1 + "월 " + day + "일");
+								   }
+							    </script>
+			    	 		</span>
+						    <span class="preview">${item2.message }</span>
+					    </c:forEach>
 					    </li>
 				  	</c:forEach>
 				</ul>
@@ -136,6 +148,42 @@
 	<script>
 		const username = "${pageContext.request.userPrincipal.name}"
 		
+			$(document).ready(function() {
+				function formatDate(dateString) {
+				    var date = new Date(dateString);
+				    var today = new Date();
+
+				    var year = date.getFullYear();
+				    var month = date.getMonth() + 1;
+				    var day = date.getDate();
+				    var hours = date.getHours();
+				    var minutes = date.getMinutes();
+
+				    if (today.getMonth() == month) {
+				        if (today.getDate() == day) {
+				            if (hours > 12) {
+				                return "오후 " + (hours - 12) + ":" + minutes;
+				            } else {
+				                return "오전 " + hours + ":" + minutes;
+				            }
+				        }
+				    } else {
+				        return month + 1 + "월 " + day + "일";
+				    }
+				}
+				// 스크롤 컨테이너 선택
+			    var chatContainer = $(".chat.active-chat");
+			    // 스크롤을 가장 아래로 이동
+			    chatContainer.scrollTop(chatContainer[0].scrollHeight);
+			    // 새로운 메시지를 추가할 때 스크롤을 자동으로 아래로 이동
+			    function scrollToBottom() {
+			        chatContainer.scrollTop(chatContainer[0].scrollHeight);
+			    }
+			    // 예를 들어, 새 메시지를 추가하는 코드
+			    // ...
+			    // 메시지를 추가한 후
+			    scrollToBottom();
+			}			
 	</script>
 </body>
 </html>

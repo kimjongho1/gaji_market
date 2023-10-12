@@ -6,18 +6,27 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import kh.spring.gaji.chat.model.dao.ChatDao;
+import kh.spring.gaji.chat.model.dto.ChatMessageDto;
 import kh.spring.gaji.chat.model.dto.ChatRoomDto;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 @Service
 public class ChatServiceImpl implements ChatService{
 	
 	@Autowired
 	private ChatDao chatDao;
-
+	
 	@Override
 	public List<ChatRoomDto> getChatRoom(String userId) {
-		System.out.println(userId);
+//		System.out.println(userId);
 		return chatDao.getChatRoomList(userId);
+	}
+
+	@Override
+	public List<ChatMessageDto> getChatInfo(int chatNo) {
+		//log.info("getChatInfo para" + chatNo);
+		return chatDao.getChatInfo(chatNo);
 	}
 	
 }

@@ -13,4 +13,14 @@
 		WHERE c.buyer_id = #{userId}
 		ORDER BY created_at
 	</select>
+	<select id="selectChatMessageByChatNo" parameterType="_int" resultType="ChatMessageDto">
+		SELECT *
+		FROM (
+		    SELECT *
+		    FROM chat_message
+		    where chat_id = #{chatNo}
+		    ORDER BY chatting_id DESC
+		) 
+		WHERE ROWNUM = 1
+	</select>
 </mapper>
