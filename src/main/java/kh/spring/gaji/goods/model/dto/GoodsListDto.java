@@ -5,9 +5,7 @@ import lombok.Data;
 @Data
 @Component
 public class GoodsListDto {
-	private int avgPrice;
-	private int topPrice;
-	private int bottomPrice;
+	private String url;
 	private String title;
 	private int price;
 	private String created_at;

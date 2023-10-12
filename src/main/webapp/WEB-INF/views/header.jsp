@@ -44,8 +44,10 @@ header {
 
 					<div class="hero__search">
 						<div class="hero__search__form">
-								<input type="text" placeholder="What do yo u need?">
-								<button type="submit" class="site-btn searchButton" onclick="searchButton1()">SEARCH</button>
+							<form action="${pageContext.request.contextPath}/goods/board">
+								<input type="text" placeholder="What do yo u need?" name="searchWord">
+								<button type="submit" class="site-btn searchButton">SEARCH</button>
+							</form>
 						</div>
 					</div>
 
@@ -79,12 +81,12 @@ header {
 					<ul>
 						<li><a href="#">카테고리</a>
 							<ul class="header__menu__dropdown">
-								<li><a href="#">가구/인테리어</a></li>
-								<li><a href="#">생활가전</a></li>
-								<li><a href="#">생활/주방</a></li>
-								<li><a href="#">디지털 기기</a></li>
-								<li><a href="#">취미/게임</a></li>
-								<li><a href="#">기타</a></li>
+								<li><a href="${pageContext.request.contextPath}/goods/board?category=1">디지털기기</a></li>
+								<li><a href="${pageContext.request.contextPath}/goods/board?category=2">가구/인테리어</a></li>
+								<li><a href="${pageContext.request.contextPath}/goods/board?category=3">생활가전</a></li>
+								<li><a href="${pageContext.request.contextPath}/goods/board?category=4">생활/주방</a></li>
+								<li><a href="${pageContext.request.contextPath}/goods/board?category=5">취미/게임</a></li>
+								<li><a href="${pageContext.request.contextPath}/goods/board?category=6">기타</a></li>
 							</ul></li>
 						<li><a href="#">상품</a></li>
 						<li><a href="${pageContext.request.contextPath}/chat">1:1채팅</a></li>

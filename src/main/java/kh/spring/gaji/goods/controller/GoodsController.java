@@ -56,41 +56,55 @@ public class GoodsController {
 	public String board(Model model,Integer currentPage,String searchWord,Integer sort,Integer priceFloor, Integer priceCeiling,Integer category,Integer guId,Integer dongId) { // 중고거래 게시판
 		model.addAttribute("dongList", regionService.dongList());
 		model.addAttribute("guList", regionService.guList());
-//		int totalCnt=0;
-//		List<GoodsListDto> goodsListDto=null;
-//		if(currentPage==null)	//현재 페이지가 들어온게 없다면 1페이지.
-//			currentPage=1;
-//		if(searchWord==null) {	// 검색어가 들어온게 없다면 검색어없는 mapper로 목록 가져오기
-//			Map<String,Object> map= goodsService.getGoodsList((int)currentPage,PAGESIZE,sort,priceFloor,priceCeiling,category,guId,dongId);	//추후 userId들어가야함
-//			goodsListDto = (List<GoodsListDto>)map.get("safePurchaseList");
-//			totalCnt= (int)map.get("totalCnt");
-//		}
-//		else {					//검색어가 있다면 그에따른 mapper로 목록 가져오기
-//			Map<String,Object> map= goodsService.getSearchGoodsList((int)currentPage,PAGESIZE,sort,priceFloor,priceCeiling,category,guId,dongId,searchWord);
-//			goodsListDto = (List<GoodsListDto>)map.get("goodsListDto");
-//			totalCnt= (int)map.get("totalCnt");
-//			model.addAttribute("searchWord",searchWord);
-//		}
-//		
-//		//구해온 목록으로 페이징번호들 구하고 JSP로 전송하기
-//		int totalPageNum = totalCnt/PAGESIZE + (totalCnt%PAGESIZE == 0 ? 0 : 1);
-//		int startPageNum = 1;
-//		if((currentPage%PAGEBLOCKSIZE) == 0) {
-//			startPageNum = ((currentPage/PAGEBLOCKSIZE)-1)*PAGEBLOCKSIZE +1;
-//		} else {
-//			startPageNum = ((currentPage/PAGEBLOCKSIZE))*PAGEBLOCKSIZE +1;
-//		}
-//		int endPageNum = (startPageNum+PAGEBLOCKSIZE > totalPageNum) ? totalPageNum : startPageNum+PAGEBLOCKSIZE-1;
-//		model.addAttribute("totalPageNum", totalPageNum);
-//		model.addAttribute("startPageNum", startPageNum);
-//		model.addAttribute("endPageNum", endPageNum);
-//		model.addAttribute("currentPage", currentPage);
-//		model.addAttribute("goodsListDto",goodsListDto);
-//		model.addAttribute("totalCnt",totalCnt);
+		int totalCnt=0;
+		List<GoodsListDto> goodsListDto=null;
+		
+		if(currentPage==null)	//현재 페이지가 들어온게 없다면 1페이지.
+			currentPage=1;
+		
+		if(searchWord!=null)
+			searchWord="%"+searchWord+"%";	
+		else
+			searchWord="-1";
+		if(priceCeiling==null)
+			priceCeiling=-1;		
+		if(priceFloor==null)
+			priceFloor=-1;		
+		if(category==null)
+			category=-1;
+		if(sort==null)
+			sort=-1;
+		if(dongId==null)
+			dongId=-1;
+		
+		
+		Map<String,Object> map= goodsService.getGoodsList((int)currentPage,PAGESIZE,sort,priceFloor,priceCeiling,category,dongId,searchWord);
+		goodsListDto = (List<GoodsListDto>)map.get("goodsListDto");
+		
+		totalCnt= (int)map.get("totalCnt");	
+		//구해온 목록으로 페이징번호들 구하고 JSP로 전송하기
+		int totalPageNum = totalCnt/PAGESIZE + (totalCnt%PAGESIZE == 0 ? 0 : 1);
+		int startPageNum = 1;
+		if((currentPage%PAGEBLOCKSIZE) == 0) {
+			startPageNum = ((currentPage/PAGEBLOCKSIZE)-1)*PAGEBLOCKSIZE +1;
+		} else {
+			startPageNum = ((currentPage/PAGEBLOCKSIZE))*PAGEBLOCKSIZE +1;
+		}
+		int endPageNum = (startPageNum+PAGEBLOCKSIZE > totalPageNum) ? totalPageNum : startPageNum+PAGEBLOCKSIZE-1;
+		model.addAttribute("totalPageNum", totalPageNum);
+		model.addAttribute("startPageNum", startPageNum);
+		model.addAttribute("endPageNum", endPageNum);
+		model.addAttribute("currentPage", currentPage);
+		model.addAttribute("goodsListDto",goodsListDto);
+		model.addAttribute("totalCnt",totalCnt);
 		model.addAttribute("category",category);
 		model.addAttribute("priceFloor",priceFloor);
 		model.addAttribute("priceCeiling",priceCeiling);
 		model.addAttribute("searchWord",searchWord);
+		model.addAttribute("goodsListDto",goodsListDto);
+		model.addAttribute("topPrice",(int)map.get("topPrice"));
+		model.addAttribute("averagePrice",(int)map.get("averagePrice"));
+		model.addAttribute("bottomPrice",(int)map.get("bottomPrice"));
 		return "goods/goodsboard";
 	}
 

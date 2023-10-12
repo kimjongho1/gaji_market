@@ -2,27 +2,162 @@
 <!DOCTYPE mapper PUBLIC " -//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="goods">
 	
+	<select id="getTotalCnt" parameterType="map" resultType="_int">	<!-- 검색된 상품 총갯수 -->
+		select count(*) from goods where 1=1
+		<if test="category!=-1">
+			and category_id=#{category}
+		</if>
+		<if test="searchWord!=-1">
+			and title=#{searchWord}
+		</if>
+		<choose>
+		<when test="priceCeiling==100000">
+			and price &lt; 100000
+		</when>
+		<when test="priceFloor==100000">
+			and price &gt; 100000 and price &lt; 300000
+		</when>
+		<when test="priceFloor==500000">
+			and price &gt; 300000 and price &lt; 500000
+		</when>
+		<when test="priceFloor==500000">
+			and price &gt; 500000
+		</when>
+		</choose>
+		<if test="dongId!=-1">
+			and dong_id=#{dongId}
+		</if>
+	</select>
 	
-<!-- 	<select id="get">		카테고리별 상품글 
-		goods_id,user_id,title,status,price,view_count,description,safe_trading_yn,created_at from goods
-		where category_id=1 and active_status="Y" and and status!=4
-</select> -->
-
-<!-- 	<select id="get">		카테고리별 검색 상품글 dao에서 '%'처리하여 가져오기
-		goods_id,user_id,title,status,price,view_count,description,safe_trading_yn,created_at from goods
-		where category_id=1 and title like #{searchWord} and active_status="Y" and and status!=4
-</select> -->
-
-<!-- 	<select id="get">		카테고리별 상품글 + 가격범위
-		goods_id,user_id,title,status,price,view_count,description,safe_trading_yn,created_at from goods
-		where category_id=1 and active_status="Y" and and status!=4
-</select> -->
-
-<!-- 	<select id="get">		카테고리별 검색 상품글 dao에서 '%'처리하여 가져오기 + 가격범위
-		goods_id,user_id,title,status,price,view_count,description,safe_trading_yn,created_at
-		,dong_id,lat,lng from goods
-		where category_id=1 and title like #{searchWord} and active_status="Y" and and status!=4
-</select> -->
+	<select id="getAveragePrice" parameterType="map" resultType="_int">
+		select avg(price) from goods where 1=1
+		<if test="category!=-1">
+			and category_id=#{category}
+		</if>
+		<if test="searchWord!=-1">
+			and title=#{searchWord}
+		</if>
+		<choose>
+		<when test="priceCeiling==100000">
+			and price &lt; 100000
+		</when>
+		<when test="priceFloor==100000">
+			and price &gt; 100000 and price &lt; 300000
+		</when>
+		<when test="priceFloor==300000">
+			and price &gt; 300000 and price &lt; 500000
+		</when>
+		<when test="priceFloor==500000">
+			and price &gt; 500000
+		</when>
+		</choose>
+		<if test="dongId!=-1">
+			and dong_id=#{dongId}
+		</if>
+	</select>
+	
+	<select id="getTopPrice" parameterType="map" resultType="_int">
+		select max(price) from goods where 1=1
+		<if test="category!=-1">
+			and category_id=#{category}
+		</if>
+		<if test="searchWord!=-1">
+			and title=#{searchWord}
+		</if>
+		<choose>
+		<when test="priceCeiling==100000">
+			and price &lt; 100000
+		</when>
+		<when test="priceFloor==100000">
+			and price &gt; 100000 and price &lt; 300000
+		</when>
+		<when test="priceFloor==300000">
+			and price &gt; 300000 and price &lt; 500000
+		</when>
+		<when test="priceFloor==500000">
+			and price &gt; 500000
+		</when>
+		</choose>
+		<if test="dongId!=-1">
+			and dong_id=#{dongId}
+		</if>
+	</select>
+	
+	<select id="getBottomPrice" parameterType="map" resultType="_int">
+		select min(price) from goods where 1=1
+		<if test="category!=-1">
+			and category_id=#{category}
+		</if>
+		<if test="searchWord!=-1">
+			and title=#{searchWord}
+		</if>
+		<choose>
+		<when test="priceCeiling=100000">
+			and price &lt; 100000
+		</when>
+		<when test="priceFloor=100000">
+			and price &gt; 100000 and price &lt; 300000
+		</when>
+		<when test="priceFloor=300000">
+			and price &gt; 300000 and price &lt; 500000
+		</when>
+		<when test="priceFloor=500000">
+			and price &gt; 500000
+		</when>
+		</choose>
+		<if test="dongId!=-1">
+			and dong_id=#{dongId}
+		</if>
+	</select>
+	
+	<select id="getGoodsList" parameterType="string" resultType="GoodsListDto">
+		select list2.*,
+		(select url from goods_file f where f.goods_id=list2.goods_id and rownum between 0 and 1) url from
+		(select list.*,rownum rn from(
+		(select title,price,goods_Id,nickname,status,safe_Trading_Yn,dong_Name,refreshed_at,created_at
+		(select count(*) from wishList w where g.goods_id=w.goods_id) likeCount
+		from goods g join users using(user_id) join dong using (dong_Id)
+		where 1=1
+		<if test="category!=-1">
+			and category_id=#{category}
+		</if>
+		<if test="searchWord!=-1">
+			and title=#{searchWord}
+		</if>
+		<choose>
+		<when test="priceCeiling=100000">
+			and price &lt; 100000
+		</when>
+		<when test="priceFloor=100000">
+			and price &gt; 100000 and price &lt; 300000
+		</when>
+		<when test="priceFloor=300000">
+			and price &gt; 300000 and price &lt; 500000
+		</when>
+		<when test="priceFloor=500000">
+			and price &gt; 500000
+		</when>
+		</choose>
+		<if test="dongId!=-1">
+			and dong_id=#{dongId}
+		</if>
+		<choose>
+			<when test="sort=1">
+				order by likeCount desc
+			</when>
+			<when test="sort=3">
+				order by price asc
+			</when>
+			<when test="sort=4">
+				order by price desc
+			</when>
+			<otherwise>
+				order by refreshed_at desc
+			</otherwise>
+		</choose>
+		) list)
+		)list2 where rn between #{startRownum} and #{endRownum}
+	</select>
 
 		<insert id="insertGoods" parameterType="GoodsDto">	<!-- 24P 상품글 등록 -->
 			insert into goods 

@@ -61,7 +61,7 @@
 								<h2 class="font-semibold text-heading text-xl md:text-2xl">필터</h2>
 								<button
 									class="flex-shrink text-xs mt-0.5 transition duration-150 ease-in focus:outline-none hover:text-heading"
-									aria-label="Clear All">초기화</button>
+									aria-label="Clear All" onclick="clearAll()">초기화</button>
 							</div>
 							<div class="flex flex-wrap -m-1.5 pt-2"></div>
 						</div>
@@ -72,19 +72,19 @@
 										<label
 											class="flex items-center text-sm cursor-pointer group text-heading">
 											<a href="${pageContext.request.contextPath}/goods/board?category=1"><span
-												class="relative text-sm ms-2 text-heading font-normal">가구/인테리어</span></a></label></li> 
+												class="relative text-sm ms-2 text-heading font-normal">디지털기기</span></a></label></li> 
 											<li><label
 											class="flex items-center text-sm cursor-pointer group text-heading"><a
 											href="${pageContext.request.contextPath}/goods/board?category=2"><span
-												class="relative text-sm ms-2 text-heading font-normal">생활가정</span></a></label> </li>
+												class="relative text-sm ms-2 text-heading font-normal">가구/인테리어</span></a></label> </li>
 													<li><label
 											class="flex items-center text-sm cursor-pointer group text-heading"><a
 											href="${pageContext.request.contextPath}/goods/board?category=3"><span
-												class="relative text-sm ms-2 text-heading font-normal">생활/주방</span></a></label></li>
+												class="relative text-sm ms-2 text-heading font-normal">생활가전</span></a></label></li>
 													<li><label
 											class="flex items-center text-sm cursor-pointer group text-heading"><a
 											href="${pageContext.request.contextPath}/goods/board?category=4"><span
-												class="relative text-sm ms-2 text-heading font-normal">디지털기기</span></a></label></li>
+												class="relative text-sm ms-2 text-heading font-normal">생활/주방</span></a></label></li>
 													<li><label
 											class="flex items-center text-sm cursor-pointer group text-heading"><a
 											href="${pageContext.request.contextPath}/goods/board?category=5"><span
@@ -145,18 +145,12 @@
 						<ol class="flex items-center w-full">
 							<li
 								class="text-sm text-body px-2.5 transition duration-200 ease-in first:ps-0 last:pe-0 hover:text-heading"><a
-								class="false" href="/">홈</a></li>
-							<li
-								class="text-sm leading-5 text-body min-[480px]:px-1 max-[480px]:px-0">&gt;</li>
-							<li
-								class="text-sm text-body px-2.5 transition duration-200 ease-in first:ps-0 last:pe-0 hover:text-heading"><a
-								class="false" href="/search">검색</a></li>
+								class="false" href="${pageContext.request.contextPath}/goods/board">홈</a></li>
 						</ol>
 					</div>
 					
-					
 							<div class="relative ms-2 z-10 min-w-[180px]">
-								<button
+										<button
 									class="border border-gray-300 text-heading text-[13px] md:text-sm font-semibold relative w-full py-2 ps-3 pe-10 text-start bg-white rounded-lg shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-opacity-75 focus-visible:ring-white focus-visible:ring-offset-orange-300 focus-visible:ring-offset-2 focus-visible:border-indigo-500 sm:text-sm cursor-pointer"
 									id="headlessui-listbox-button-:r0:" type="button"
 									aria-haspopup="listbox" aria-expanded="false"
@@ -374,38 +368,19 @@
 				
 				<div class="bottom-0 py-3 m-auto text-center bg-white">
 					<ul class="flex justify-center space-x-2 space-x-reverse">
-						<a class="mr-2 w-4" href="/search?page=0"><svg
-								stroke="currentColor" fill="currentColor" stroke-width="0"
-								viewBox="0 0 24 24" class="hidden h-full" height="1em"
-								width="1em" xmlns="http://www.w3.org/2000/svg">
-								<path d="M15.41 16.09l-4.58-4.59 4.58-4.59L14 5.5l-6 6 6 6z"></path></svg></a>
-						<li class="w-10 h-10 rounded-md shrink-0 bg-jngreen/80 text-white"><a
-							class="block leading-10" href="/search?page=1">1</a></li>
-						<li class="w-10 h-10 rounded-md shrink-0"><a
-							class="block leading-10" href="/search?page=2">2</a></li>
-						<li class="w-10 h-10 rounded-md shrink-0"><a
-							class="block leading-10" href="/search?page=3">3</a></li>
-						<li class="w-10 h-10 rounded-md shrink-0"><a
-							class="block leading-10" href="/search?page=4">4</a></li>
-						<li class="w-10 h-10 rounded-md shrink-0"><a
-							class="block leading-10" href="/search?page=5">5</a></li>
-						<li class="w-10 h-10 rounded-md shrink-0"><a
-							class="block leading-10" href="/search?page=6">6</a></li>
-						<li class="w-10 h-10 rounded-md shrink-0"><a
-							class="block leading-10" href="/search?page=7">7</a></li>
-						<li class="w-10 h-10 rounded-md shrink-0"><a
-							class="block leading-10" href="/search?page=8">8</a></li>
-						<li class="w-10 h-10 rounded-md shrink-0"><a
-							class="block leading-10" href="/search?page=9">9</a></li>
-						<li class="w-10 h-10 rounded-md shrink-0"><a
-							class="block leading-10" href="/search?page=10">10</a></li>
-						<li class="w-10 h-10 rounded-md shrink-0"><a
-							class="block leading-10" href="/search?page=11">11</a></li>
-						<a href="/search?page=2"><svg stroke="currentColor"
-								fill="currentColor" stroke-width="0" viewBox="0 0 24 24"
-								class="h-full block" height="1em" width="1em"
-								xmlns="http://www.w3.org/2000/svg">
-								<path d="M8.59 16.34l4.58-4.59-4.58-4.59L10 5.75l6 6-6 6z"></path></svg></a>
+						
+						<c:if test="${startPageNum!=1}">
+						<button onclick="pageMove(${endPageNum}+1)">이전</button>
+						</c:if>
+						
+						<c:forEach begin="${startPageNum}" end="${endPageNum}">
+						<button onclick="pageMove(${i})">i</button>
+						</c:forEach>
+						
+						<c:if test="${endPageNum<totalPageNum}">
+						<button onclick="pageMove(${endPageNum}+1)">다음</button>
+						</c:if>
+						</li>
 					</ul>
 				</div>
 				<div class="invisible w-full h-1"></div>
@@ -422,24 +397,41 @@
 		
 		
 	<form action="${pageContext.request.contextPath}/goods/board" id="condition">
-	<c:if test="${not empty priceCeiling}">
-    	<input type="hidden" name="priceCeiling" id="priceCeiling" value="${priceCeiling}">
-    </c:if>
+			
+    	<input type="hidden" name="priceCeiling" id="priceCeiling" 
+    	<c:if test="${not empty priceCeiling}">
+    	value="${priceCeiling}"
+    	 </c:if>
+    	>
+   
     
-    <c:if test="${not empty priceFloor}">
-    	<input type="hidden" name="priceFloor" id="priceFloor" value="${priceFloor}">
-    </c:if>
     
-    <c:if test="${not empty category}">
-    	<input type="hidden" name="category" id="category" value="${category}">
-    </c:if>
+    	<input type="hidden" name="priceFloor" id="priceFloor" 
+    	<c:if test="${not empty priceFloor}">
+    	value="${priceFloor}"
+    	 </c:if>
+    	>
+   
     
-     <c:if test="${not empty searchWord}">
-    	<input type="hidden" name="searchWord" id="searchWord" value="${searchWord}">
-    </c:if>
-    </form>
     
+    	<input type="hidden" name="category" id="category" 
+    	<c:if test="${not empty category}">
+    	value="${category}"
+    	</c:if>
+    	>
+    
+    
+     
+    	<input type="hidden" name="searchWord" id="searchWord" 
+    	<c:if test="${not empty searchWord}">
+    	value="${searchWord}"
+    	</c:if>
+    	>
+    
+  
     <input type="hidden" name="currentPage" id="currentPage" value="${currentPage}">
+    
+	</form>
 	
 	</main>
 
@@ -456,36 +448,27 @@
 	<script src="${pageContext.request.contextPath}/resources/js/main.js"></script>
 	<script>
 	function priceOptionF1(){
-		alert("실행됨1");
 		$("#priceFloor").val(-1);
 		$("#priceCeiling").val(100000);
-		var data=$("#condition").serialize();
 		$("#condition").submit();
 		console.log(data);
-		
 	}
 	
 	function priceOptionF2(){
-		alert("실행됨2");
 		$("#priceFloor").val(100000);
 		$("#priceCeiling").val(300000);
-		var data=$("#condition").serialize();
 		$("#condition").submit();
 	}
 	
 	function priceOptionF3(){
-		alert("실행됨3");
 		$("#priceFloor").val(300000);
 		$("#priceCeiling").val(500000);
-		var data=$("#condition").serialize();
 		$("#condition").submit();
 	}
 	
 	function priceOptionF4(){
-		alert("실행됨4");
 		$("#priceFloor").val(500000);
 		$("#priceCeiling").val(-1);
-		var data=$("#condition").serialize();
 		$("#condition").submit();
 	}
 	
@@ -493,16 +476,34 @@
 		var tmp=$(".searchButton").val();
 		alert("searchButton1 실행");
 		$("#searchWord").val(tmp);
-		var data=$("#condition").serialize();
 		$("#condition").submit();
 	}
 	
 	function pageMove(i){
 		alert(i);
 		$("#currentPage").val(i);
-		var data=$("#condition").serialize();
 		$("#condition").submit();
 	}
+	
+	function clearAll(){
+		window.location.href="${pageContext.request.contextPath}/goods/board";
+	}
+	
+	 function checking() {
+		 if ($("#priceFloor").val() === "-1" && $("#priceCeiling").val()==="100000") 
+			    $("#priceOption1").prop("checked", true);
+			
+		 else if($("#priceFloor").val() === "100000" && $("#priceCeiling").val()==="300000")
+			 $("#priceOption2").prop("checked", true);
+		 
+		 else if($("#priceFloor").val() === "300000" && $("#priceCeiling").val()==="500000")
+			 $("#priceOption3").prop("checked", true);
+		 
+		 else if($("#priceFloor").val() === "500000" && $("#priceCeiling").val()==="-1")
+			 $("#priceOption4").prop("checked", true);
+     }
+
+     window.onload = checking; // Attach the function to the window's onload event
 	</script>
 	
 

@@ -1,5 +1,6 @@
 package kh.spring.gaji.goods.model.Service;
 
+import java.util.HashMap;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,15 +43,20 @@ public class GoodsServiceImpl implements GoodsService {
 	}
 
 	@Override
-	public GoodsListDto getGoodsList(int currentPage, int PAGESIZE, int sort, int priceFloor, int priceCeiling,
-	int category, int guId, int dongId) {
-		return null;
+	public Map<String,Object> getGoodsList(int currentPage, int PAGESIZE, int sort, int priceFloor, int priceCeiling,
+	int category, int dongId, String searchWord) {
+		Map<String,Object> result=new HashMap<String,Object>();
+		int totalCnt=goodsDao.getTotalCnt(priceFloor,priceCeiling,category,dongId,searchWord);
+		int averagePrice=goodsDao.getAveragePrice(priceFloor,priceCeiling,category,dongId,searchWord);
+		int topPrice=goodsDao.getTopPrice(priceFloor,priceCeiling,category,dongId,searchWord);
+		int bottomPrice=goodsDao.getBottomPrice(priceFloor,priceCeiling,category,dongId,searchWord);
+		result.put("totalCnt",totalCnt);
+		result.put("averagePrice",averagePrice);
+		result.put("topPrice",topPrice);
+		result.put("bottomPrice",bottomPrice);
+		result.put("totalCnt",totalCnt);
+		result.put("goodsListDto", goodsDao.getGoodsList(currentPage,PAGESIZE,sort,priceFloor,priceCeiling,
+				category,dongId,searchWord,totalCnt));
+		return result;
 	}
-
-	@Override
-	public GoodsListDto getGoodsList(int currentPage, int PAGESIZE, int sort, int priceFloor, int priceCeiling,
-	int category, int guId, int dongId, String searchWord) {
-		return null;
-	}
-
 }
