@@ -34,7 +34,8 @@
 	
 	<select id="getSafePurchaseList" parameterType="map" resultType="UserSafeTradingDto">	<!-- 9P 안전거래 구매내역(회원) 불러오기 -->
 		select list2.*,(select count(*) from wishlist w where w.goods_Id=list2.goods_Id) wishCount
-		,(select url from goods_file f where f.goods_id=list2.goods_id and rownum between 0 and 1) url from 
+		,(select url from goods_file f where f.goods_id=list2.goods_id and rownum between 0 and 1) url 
+		from 
 		(select list.*,rownum rn from(
 		(select goods_Id,transaction_id,goods_title,trading_status,s.price,to_char(trading_date, 'YYYY-MM-DD HH24:MI:SS') trading_date
 		from safe_trading s join goods g using (goods_id)

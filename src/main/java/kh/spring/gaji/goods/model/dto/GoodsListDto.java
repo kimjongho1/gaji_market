@@ -8,7 +8,7 @@ public class GoodsListDto {
 	private String url;
 	private String title;
 	private int price;
-	private String created_at;
+	private String pastDate;
 	private int goodsId;
 	private String userId;
 	private String nickname;

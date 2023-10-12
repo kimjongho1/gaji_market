@@ -17,19 +17,17 @@ public class GoodsDao  {
     @Autowired
     private SqlSession sqlSession;
 
-    public int getTotalCnt(int priceFloor,int priceCeiling,int category,int dongId,String searchWord) {
+    public int getTotalCnt(int priceCeiling,int category,int dongId,String searchWord) {
     	Map<String,Object> map=new HashMap<String,Object>();
-    	  map.put("priceFloor", priceFloor);
           map.put("priceCeiling", priceCeiling);
           map.put("category", category);
           map.put("dongId", dongId);
           map.put("searchWord", searchWord);
-    	return sqlSession.selectOne("goods.getTotalCnt",map);
+          return sqlSession.selectOne("goods.getTotalCnt",map);
     }
     
-    public int getAveragePrice(int priceFloor,int priceCeiling,int category,int dongId,String searchWord) {
+    public int getAveragePrice(int priceCeiling,int category,int dongId,String searchWord) {
     	Map<String,Object> map=new HashMap<String,Object>();
-  	    map.put("priceFloor", priceFloor);
         map.put("priceCeiling", priceCeiling);
         map.put("category", category);
         map.put("dongId", dongId);
@@ -39,9 +37,8 @@ public class GoodsDao  {
         return sqlSession.selectOne("goods.getAveragePrice",map);
     }
     
-    public int getTopPrice(int priceFloor,int priceCeiling,int category,int dongId,String searchWord) {
+    public int getTopPrice(int priceCeiling,int category,int dongId,String searchWord) {
     	Map<String,Object> map=new HashMap<String,Object>();
-  	  	map.put("priceFloor", priceFloor);
         map.put("priceCeiling", priceCeiling);
         map.put("category", category);
         map.put("dongId", dongId);
@@ -51,9 +48,8 @@ public class GoodsDao  {
         return sqlSession.selectOne("goods.getTopPrice",map);
     }
     
-    public int getBottomPrice(int priceFloor,int priceCeiling,int category,int dongId,String searchWord) {
+    public int getBottomPrice(int priceCeiling,int category,int dongId,String searchWord) {
     	Map<String,Object> map=new HashMap<String,Object>();
-  	  	map.put("priceFloor", priceFloor);
         map.put("priceCeiling", priceCeiling);
         map.put("category", category);
         map.put("dongId", dongId);
@@ -63,14 +59,13 @@ public class GoodsDao  {
         return sqlSession.selectOne("goods.getBottomPrice",map);
     }
     
-    public List<GoodsListDto> getGoodsList(int currentPage, int PAGESIZE, int sort, int priceFloor, int priceCeiling,
+    public List<GoodsListDto> getGoodsList(int currentPage, int PAGESIZE, int sort, int priceCeiling,
 	int category, int dongId, String searchWord,int totalCnt){
     	Map<String,Object> map=new HashMap<String,Object>();
     	int startRownum = 0;
 		int endRownum = 0;
 		startRownum = (currentPage-1)*PAGESIZE +1;
 		endRownum = ((currentPage*PAGESIZE) > totalCnt) ? totalCnt: (currentPage*PAGESIZE);
-  	  	map.put("priceFloor", priceFloor);
         map.put("priceCeiling", priceCeiling);
         map.put("category", category);
         map.put("dongId", dongId);

@@ -62,14 +62,14 @@ public class GoodsController {
 		if(currentPage==null)	//현재 페이지가 들어온게 없다면 1페이지.
 			currentPage=1;
 		
-		if(searchWord!=null)
-			searchWord="%"+searchWord+"%";	
-		else
-			searchWord="-1";
+		if(searchWord==null||searchWord.equals("")) {
+			searchWord="";
+		}	
+		else if(searchWord.charAt(0)!='%')
+			searchWord="%"+searchWord+"%";
+		
 		if(priceCeiling==null)
-			priceCeiling=-1;		
-		if(priceFloor==null)
-			priceFloor=-1;		
+			priceCeiling=-1;			
 		if(category==null)
 			category=-1;
 		if(sort==null)
@@ -78,10 +78,10 @@ public class GoodsController {
 			dongId=-1;
 		
 		
-		Map<String,Object> map= goodsService.getGoodsList((int)currentPage,PAGESIZE,sort,priceFloor,priceCeiling,category,dongId,searchWord);
+		Map<String,Object> map= goodsService.getGoodsList((int)currentPage,PAGESIZE,sort,priceCeiling,category,dongId,searchWord);
 		goodsListDto = (List<GoodsListDto>)map.get("goodsListDto");
-		
 		totalCnt= (int)map.get("totalCnt");	
+
 		//구해온 목록으로 페이징번호들 구하고 JSP로 전송하기
 		int totalPageNum = totalCnt/PAGESIZE + (totalCnt%PAGESIZE == 0 ? 0 : 1);
 		int startPageNum = 1;
@@ -98,7 +98,6 @@ public class GoodsController {
 		model.addAttribute("goodsListDto",goodsListDto);
 		model.addAttribute("totalCnt",totalCnt);
 		model.addAttribute("category",category);
-		model.addAttribute("priceFloor",priceFloor);
 		model.addAttribute("priceCeiling",priceCeiling);
 		model.addAttribute("searchWord",searchWord);
 		model.addAttribute("goodsListDto",goodsListDto);

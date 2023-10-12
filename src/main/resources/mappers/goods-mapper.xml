@@ -7,21 +7,21 @@
 		<if test="category!=-1">
 			and category_id=#{category}
 		</if>
-		<if test="searchWord!=-1">
-			and title=#{searchWord}
+		<if test='searchWord!=""'>
+			and title like #{searchWord}
 		</if>
 		<choose>
 		<when test="priceCeiling==100000">
-			and price &lt; 100000
+			and price &lt;= 100000
 		</when>
-		<when test="priceFloor==100000">
-			and price &gt; 100000 and price &lt; 300000
+		<when test="priceCeiling==300000">
+			and price &gt;= 100000 and price &lt;= 300000
 		</when>
-		<when test="priceFloor==500000">
-			and price &gt; 300000 and price &lt; 500000
+		<when test="priceCeiling==500000">
+			and price &gt;= 300000 and price &lt;= 500000
 		</when>
-		<when test="priceFloor==500000">
-			and price &gt; 500000
+		<when test="priceCeiling==700000">
+			and price &gt;= 500000
 		</when>
 		</choose>
 		<if test="dongId!=-1">
@@ -34,21 +34,21 @@
 		<if test="category!=-1">
 			and category_id=#{category}
 		</if>
-		<if test="searchWord!=-1">
-			and title=#{searchWord}
+		<if test='searchWord!=""'>
+			and title like #{searchWord}
 		</if>
 		<choose>
 		<when test="priceCeiling==100000">
-			and price &lt; 100000
+			and price &lt;= 100000
 		</when>
-		<when test="priceFloor==100000">
-			and price &gt; 100000 and price &lt; 300000
+		<when test="priceCeiling==300000">
+			and price &gt;= 100000 and price &lt;= 300000
 		</when>
-		<when test="priceFloor==300000">
-			and price &gt; 300000 and price &lt; 500000
+		<when test="priceCeiling==500000">
+			and price &gt;= 300000 and price &lt;= 500000
 		</when>
-		<when test="priceFloor==500000">
-			and price &gt; 500000
+		<when test="priceCeiling==700000">
+			and price &gt;= 500000
 		</when>
 		</choose>
 		<if test="dongId!=-1">
@@ -61,21 +61,21 @@
 		<if test="category!=-1">
 			and category_id=#{category}
 		</if>
-		<if test="searchWord!=-1">
-			and title=#{searchWord}
+		<if test='searchWord!=""'>
+			and title like #{searchWord}
 		</if>
 		<choose>
 		<when test="priceCeiling==100000">
-			and price &lt; 100000
+			and price &lt;= 100000
 		</when>
-		<when test="priceFloor==100000">
-			and price &gt; 100000 and price &lt; 300000
+		<when test="priceCeiling==300000">
+			and price &gt;= 100000 and price &lt;= 300000
 		</when>
-		<when test="priceFloor==300000">
-			and price &gt; 300000 and price &lt; 500000
+		<when test="priceCeiling==500000">
+			and price &gt;= 300000 and price &lt;= 500000
 		</when>
-		<when test="priceFloor==500000">
-			and price &gt; 500000
+		<when test="priceCeiling==700000">
+			and price &gt;= 500000
 		</when>
 		</choose>
 		<if test="dongId!=-1">
@@ -88,21 +88,21 @@
 		<if test="category!=-1">
 			and category_id=#{category}
 		</if>
-		<if test="searchWord!=-1">
-			and title=#{searchWord}
+		<if test='searchWord!=""'>
+			and title like #{searchWord}
 		</if>
 		<choose>
-		<when test="priceCeiling=100000">
-			and price &lt; 100000
+		<when test="priceCeiling==100000">
+			and price &lt;= 100000
 		</when>
-		<when test="priceFloor=100000">
-			and price &gt; 100000 and price &lt; 300000
+		<when test="priceCeiling==300000">
+			and price &gt;= 100000 and price &lt;= 300000
 		</when>
-		<when test="priceFloor=300000">
-			and price &gt; 300000 and price &lt; 500000
+		<when test="priceCeiling==500000">
+			and price &gt;= 300000 and price &lt;= 500000
 		</when>
-		<when test="priceFloor=500000">
-			and price &gt; 500000
+		<when test="priceCeiling==700000">
+			and price &gt;= 500000
 		</when>
 		</choose>
 		<if test="dongId!=-1">
@@ -110,32 +110,33 @@
 		</if>
 	</select>
 	
-	<select id="getGoodsList" parameterType="string" resultType="GoodsListDto">
-		select list2.*,
-		(select url from goods_file f where f.goods_id=list2.goods_id and rownum between 0 and 1) url from
+	<select id="getGoodsList" parameterType="map" resultType="GoodsListDto">
+		select list2.*,(select f.url from goods_file f where f.goods_id=list2.goods_id and rownum between 0 and 1) url from
 		(select list.*,rownum rn from(
-		(select title,price,goods_Id,nickname,status,safe_Trading_Yn,dong_Name,refreshed_at,created_at
+		(select g.title,g.price,g.goods_Id,u.nickname,g.status,g.safe_Trading_Yn,d.dong_Name,g.refreshed_at,
+		<!-- to_char(systimestamp - g.created_at, 'YYYY-MM-DD HH24:MI:SS') AS pastDate, -->
+
 		(select count(*) from wishList w where g.goods_id=w.goods_id) likeCount
-		from goods g join users using(user_id) join dong using (dong_Id)
+		from goods g join users u using(user_id) join dong d on g.dong_id=d.dong_id
 		where 1=1
 		<if test="category!=-1">
 			and category_id=#{category}
 		</if>
-		<if test="searchWord!=-1">
-			and title=#{searchWord}
+		<if test='searchWord!=""'>
+			and title like #{searchWord}
 		</if>
 		<choose>
-		<when test="priceCeiling=100000">
-			and price &lt; 100000
+		<when test="priceCeiling==100000">
+			and price &lt;= 100000
 		</when>
-		<when test="priceFloor=100000">
-			and price &gt; 100000 and price &lt; 300000
+		<when test="priceCeiling==300000">
+			and price &gt;= 100000 and price &lt;= 300000
 		</when>
-		<when test="priceFloor=300000">
-			and price &gt; 300000 and price &lt; 500000
+		<when test="priceCeiling==500000">
+			and price &gt;= 300000 and price &lt;= 500000
 		</when>
-		<when test="priceFloor=500000">
-			and price &gt; 500000
+		<when test="priceCeiling==700000">
+			and price &gt;= 500000
 		</when>
 		</choose>
 		<if test="dongId!=-1">
@@ -152,11 +153,12 @@
 				order by price desc
 			</when>
 			<otherwise>
-				order by refreshed_at desc
+				order by g.refreshed_at desc
 			</otherwise>
 		</choose>
-		) list)
-		)list2 where rn between #{startRownum} and #{endRownum}
+		) 
+		list)
+		)list2 where list2.rn between #{startRownum} and #{endRownum}
 	</select>
 
 		<insert id="insertGoods" parameterType="GoodsDto">	<!-- 24P 상품글 등록 -->
@@ -175,13 +177,6 @@
 		<update id="updateStatus" parameterType="map"> <!-- 23P 상품상태변경 -->
 			update goods set status=#{status} where goods_id=#{goodsId}
 		</update>
-		
-<!-- 		<select id="getFourGoodsList">	22P 해당 계정의 상품글을 등록일자 내림차순으로 4개까지 가져오기
-			select goods_id, title, price from 
-			(select goods_id, title, price from goods where user_id = #{userId} order by created_at desc)
-			and and status!=4
-			where ROWNUM <=4	
-		</select> -->
 	
 
 		

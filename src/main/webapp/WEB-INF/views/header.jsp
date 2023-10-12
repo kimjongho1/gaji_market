@@ -44,7 +44,7 @@ header {
 
 					<div class="hero__search">
 						<div class="hero__search__form">
-							<form action="${pageContext.request.contextPath}/goods/board">
+							<form  id="searchForm" action="${pageContext.request.contextPath}/goods/board" method="get" onsubmit="searching(event)">
 								<input type="text" placeholder="What do yo u need?" name="searchWord">
 								<button type="submit" class="site-btn searchButton">SEARCH</button>
 							</form>
@@ -88,7 +88,7 @@ header {
 								<li><a href="${pageContext.request.contextPath}/goods/board?category=5">취미/게임</a></li>
 								<li><a href="${pageContext.request.contextPath}/goods/board?category=6">기타</a></li>
 							</ul></li>
-						<li><a href="#">상품</a></li>
+						<li><a href="${pageContext.request.contextPath}/goods/board">상품</a></li>
 						<li><a href="${pageContext.request.contextPath}/chat">1:1채팅</a></li>
 					</ul>
 <!-- class="active" -->

@@ -2,6 +2,9 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/locale/ko.js"></script>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -312,25 +315,33 @@
 				
 				<ul
 					class="grid grid-cols-2 sm:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-x-3 lg:gap-x-5 xl:gap-x-7 gap-y-3 xl:gap-y-5 2xl:gap-y-8 search-results">
-					<li class=""><a
-						class="group box-border overflow-hidden flex rounded-md cursor-pointer pe-0 pb-2 lg:pb-3 flex-col items-start transition duration-200 ease-in-out transform hover:-translate-y-1 md:hover:-translate-y-1.5 hover:shadow-product bg-white"
-						title="레이싱휠 풀세트 팝니다" href="/product/133570391"><div
+					<c:forEach items="${goodsListDto}" var="item">
+					<li class="">
+					<a class="group box-border overflow-hidden flex rounded-md cursor-pointer pe-0 pb-2 lg:pb-3 flex-col items-start transition duration-200 ease-in-out transform hover:-translate-y-1 md:hover:-translate-y-1.5 hover:shadow-product bg-white"
+						title="레이싱휠 풀세트 팝니다" href="${pageContext.request.contextPath}/goods/get?goodsId=${item.goodsId}"><div
 								class="relative w-full rounded-md overflow-hidden pt-[100%] mb-3 md:mb-3.5">
 								<img alt="레이싱휠 풀세트 팝니다" referrerpolicy="no-referrer"
-									src="https://img2.joongna.com/media/original/2023/09/26/16957188091476Q2_NZ4JF.jpg?impolicy=thumb&amp;size=150"
+									src="${item.url}"
 									decoding="async" data-nimg="fill"
 									class="bg-gray-300 object-cover w-full transition duration-200 ease-in rounded-md group-hover:rounded-b-none"
 									style="position: absolute; height: 100%; width: 100%; inset: 0px; color: transparent;">
 							</div>
 							<div class="w-full overflow-hidden p-2 md:px-2.5 xl:px-4">
-								<h2 class="line-clamp-2 text-sm md:text-base text-heading">레이싱휠
-									풀세트 팝니다</h2>
+								<h2 class="line-clamp-2 text-sm md:text-base text-heading">${item.title}</h2>
 								<div
-									class="font-semibold space-s-2 mt-0.5 text-heading lg:text-lg lg:mt-1.5">1,300,000원</div>
+									class="font-semibold space-s-2 mt-0.5 text-heading lg:text-lg lg:mt-1.5">${item.price}</div>
 								<div class="my-1">
-									<span class="text-sm text-gray-400">${guName},${dongName}</span><span
-										class="text-sm text-gray-400 mx-1">|</span><span
-										class="text-sm text-gray-400">7초 전</span>
+								
+									<span class="text-sm text-gray-400">${item.dongName}</span><span
+										class="text-sm text-gray-400 mx-1"></span><span
+										class="text-sm text-gray-400">
+
+										<script>
+        									var pastDate = "${item.pastDate}";
+        									var formattedPastDate = moment(pastDate).fromNow();
+        									document.write(formattedPastDate); // 또는 다른 출력 방식
+    										</script>
+										</span>
 								</div>
 								<div class="flex items-center">
 									<svg width="30" height="17" viewBox="0 0 30 17" fill="none"
@@ -347,23 +358,10 @@
 											d="M25.7083 5.35356H23.8123L22.4083 9.73356L20.9443 5.35356H19.0123L21.5323 11.8096C21.3763 12.1336 21.2083 12.2296 20.8963 12.2296C20.6563 12.2296 20.3563 12.1216 20.1163 11.9776L19.5043 13.2976C19.9723 13.5736 20.4643 13.7416 21.1243 13.7416C22.2163 13.7416 22.7443 13.2496 23.2363 11.9416L25.7083 5.35356Z"
 											fill="white"></path></svg>
 								</div>
-							</div></a></li>
+							</div></a>
+							</li>
+						</c:forEach>
 				</ul>
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
 				
 				
 				<div class="bottom-0 py-3 m-auto text-center bg-white">
@@ -373,8 +371,8 @@
 						<button onclick="pageMove(${endPageNum}+1)">이전</button>
 						</c:if>
 						
-						<c:forEach begin="${startPageNum}" end="${endPageNum}">
-						<button onclick="pageMove(${i})">i</button>
+						<c:forEach begin="${startPageNum}" end="${endPageNum}" var="i">
+						<button onclick="pageMove(${i})">${i}</button>
 						</c:forEach>
 						
 						<c:if test="${endPageNum<totalPageNum}">
@@ -406,22 +404,13 @@
    
     
     
-    	<input type="hidden" name="priceFloor" id="priceFloor" 
-    	<c:if test="${not empty priceFloor}">
-    	value="${priceFloor}"
-    	 </c:if>
-    	>
-   
-    
-    
     	<input type="hidden" name="category" id="category" 
     	<c:if test="${not empty category}">
     	value="${category}"
     	</c:if>
     	>
     
-    
-     
+
     	<input type="hidden" name="searchWord" id="searchWord" 
     	<c:if test="${not empty searchWord}">
     	value="${searchWord}"
@@ -448,27 +437,23 @@
 	<script src="${pageContext.request.contextPath}/resources/js/main.js"></script>
 	<script>
 	function priceOptionF1(){
-		$("#priceFloor").val(-1);
 		$("#priceCeiling").val(100000);
 		$("#condition").submit();
 		console.log(data);
 	}
 	
 	function priceOptionF2(){
-		$("#priceFloor").val(100000);
 		$("#priceCeiling").val(300000);
 		$("#condition").submit();
 	}
 	
 	function priceOptionF3(){
-		$("#priceFloor").val(300000);
 		$("#priceCeiling").val(500000);
 		$("#condition").submit();
 	}
 	
 	function priceOptionF4(){
-		$("#priceFloor").val(500000);
-		$("#priceCeiling").val(-1);
+		$("#priceCeiling").val(700000);
 		$("#condition").submit();
 	}
 	
@@ -490,18 +475,24 @@
 	}
 	
 	 function checking() {
-		 if ($("#priceFloor").val() === "-1" && $("#priceCeiling").val()==="100000") 
+		 if ($("#priceCeiling").val()==="100000") 
 			    $("#priceOption1").prop("checked", true);
 			
-		 else if($("#priceFloor").val() === "100000" && $("#priceCeiling").val()==="300000")
+		 else if($("#priceCeiling").val()==="300000")
 			 $("#priceOption2").prop("checked", true);
 		 
-		 else if($("#priceFloor").val() === "300000" && $("#priceCeiling").val()==="500000")
+		 else if($("#priceCeiling").val()==="500000")
 			 $("#priceOption3").prop("checked", true);
 		 
-		 else if($("#priceFloor").val() === "500000" && $("#priceCeiling").val()==="-1")
+		 else if($("#priceCeiling").val()==="700000")
 			 $("#priceOption4").prop("checked", true);
      }
+	 
+	function searching(event){
+		event.preventDefault();
+		$("#searchWord").val($("#searchForm input[name='searchWord']").val());
+		$("#condition").submit();	 
+	 }
 
      window.onload = checking; // Attach the function to the window's onload event
 	</script>
