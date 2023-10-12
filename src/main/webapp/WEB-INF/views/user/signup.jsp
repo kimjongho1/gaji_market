@@ -449,7 +449,7 @@ $('#verify-button').click(function() {
         var address = document.getElementById("sample4_jibunAddress");
         var detailAddress = document.getElementById("sample4_detailAddress");
         var addressNickname = document.getElementById("addressNickname");
-
+		
         // 정규식 패턴 정의
         var idPattern = /^[a-zA-Z0-9]{4,10}$/; // 아이디는 4~10자의 영문 대소문자와 숫자만 허용
         var passwordPattern = /^[a-zA-Z0-9!@#$%^&*()_+]{6,20}$/; // 비밀번호는 6~20자의 영문 대소문자, 숫자, 특수문자 허용
@@ -458,7 +458,7 @@ $('#verify-button').click(function() {
         var nicknamePattern = /^[a-zA-Z0-9ㄱ-ㅎ가-힣]{4,30}$/; // 닉네임은 4~30자의 영문 대소문자, 숫자, 한글 허용
         var mobileNumberPattern = /^[0-9]{10,11}$/; // 전화번호는 10자 또는 11자의 숫자만 허용
         var postCodePattern = /^[0-9]{5}$/; // 우편번호는 5자리 숫자만 허용
-
+		
        
         
         if (duplicateChecked && verificationChecked && buttonNickName){

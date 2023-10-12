@@ -142,7 +142,7 @@ public class GoodsController {
 			return "redirect:/goods/board"; // 성공 시 게시판으로 리다이렉트
 		} else {
 			ra.addFlashAttribute("msg", "상품 등록이 실패하였습니다. 다시 시도해주십시오.");
-			return "goods/goodswrite"; // 실패 시 다시 글 작성 페이지로 이동
+			return "redirect:/goods/goodswrite"; // 실패 시 다시 글 작성 페이지로 이동
 		}
 	}
 
@@ -156,8 +156,8 @@ public class GoodsController {
 		return "goods/goodsget";
 	}
 
-	@GetMapping("/get/map")
-	public String map() { // 중고거래 게시판에서 위치 설정 기능 -- 모달을 사용할 예정이라 페이지를 만들지 글 작성 페이지에 넣을지 고민 -천
-		return "goods/goodsmap";
-	}
+//	@GetMapping("/get/map")
+//	public String map() { // 중고거래 게시판에서 위치 설정 기능 -- 모달을 사용할 예정이라 페이지를 만들지 글 작성 페이지에 넣을지 고민 -천
+//		return "goods/goodsmap";
+//	}
 }
