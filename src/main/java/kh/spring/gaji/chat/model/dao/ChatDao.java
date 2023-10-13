@@ -30,6 +30,9 @@ public class ChatDao {
 	}
 	
 	public List<ChatMessageDto> getChatInfo(int chatNo) {
-		return sqlSession.selectList("chat.selectChatMessageByChatNo", chatNo);
+		return sqlSession.selectList("chat.selectChatInfoByChatNo", chatNo);
+	}
+	public List<ChatMessageDto> getChatMessage(int chatNo) {
+		return sqlSession.selectList("chat.selectChatMessageByChatNo", chatNo); // 수정
 	}
 }

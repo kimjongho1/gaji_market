@@ -19,14 +19,17 @@ public class ChatServiceImpl implements ChatService{
 	
 	@Override
 	public List<ChatRoomDto> getChatRoom(String userId) {
-//		System.out.println(userId);
 		return chatDao.getChatRoomList(userId);
 	}
 
 	@Override
 	public List<ChatMessageDto> getChatInfo(int chatNo) {
-		//log.info("getChatInfo para" + chatNo);
 		return chatDao.getChatInfo(chatNo);
+	}
+
+	@Override
+	public List<ChatMessageDto> getChatMessage(int chatId) {
+		return chatDao.getChatMessage(chatId);
 	}
 	
 }

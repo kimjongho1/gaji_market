@@ -9,4 +9,5 @@ public interface ChatService {
 	
 	List<ChatRoomDto> getChatRoom(String userId);
 	List<ChatMessageDto> getChatInfo(int chatNo);
+	List<ChatMessageDto> getChatMessage(int chatId);
 }

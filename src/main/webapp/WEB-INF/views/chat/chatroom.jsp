@@ -64,13 +64,23 @@
 					<!-- 현재 채팅중인 회원 이름 정보 -->
 					<span>To: <span class="name">Dog Woofson</span></span>
 				</div>
+				
 				<div class="chat" data-chat="person1">
 					<div class="conversation-start">
-						<span>Today, 6:48 AM</span>
+						<span>Today, 5:38 PM</span>
 					</div>
-					<div class="bubble you">Hello,</div>
-					<div class="bubble you">it's me.</div>
-					<div class="bubble you">I was wondering...</div>
+					<c:forEach var="item1" items="${chatMessage}">
+						<div class="bubble you">${item1.senderId }</div>
+						<c:choose>
+							<c:when test="${item1.senderId eq pageContext.request.userPrincipal.name}">
+								<div class="bubble me">${item1.message}</div>
+							</c:when>
+							<c:otherwise>
+								<div class="bubble you">${item1.message}</div>
+							</c:otherwise>
+						</c:choose>
+						<!-- <div class="bubble you">${item1.senderId }</div> -->
+					</c:forEach>
 				</div>
 				<div class="chat" data-chat="person2">
 					<div class="conversation-start">
@@ -201,6 +211,14 @@
 	
 	  // 채팅 활성화 및 비활성화
 	  function setAciveChat(f, chatId) {
+		  
+	  	$.ajax({
+	  		type:'get',
+	  		url:'${pageContext.request.contextPath}/selectRoom',
+	  		data: {"chatId" : chatId},
+	  		dataType:"json",
+	  		success : function(result) { // 결과 성공 콜백함수
+	  			console.log(result);
 	    friends.list.querySelector('.active').classList.remove('active');
 	    f.classList.add('active');
 	    chat.current = chat.container.querySelector('.active-chat');
@@ -209,16 +227,28 @@
 	    chat.container.querySelector('[data-chat="' + chat.person + '"]').classList.add('active-chat');
 	    friends.name = f.querySelector('.name').innerText;
 	    chat.name.innerHTML = friends.name;
-	  	$.ajax({
-	  		type:'get',
-	  		url:'${pageContext.request.contextPath}/selectRoom',
-	  		data: {"chatId" : chatId},
-	  		success : function(result) { // 결과 성공 콜백함수
-	  	    },
+
+	    //<div class="chat" data-chat="person1">
+	    htmlVal = '		<div class="conversation-start"><span>Today, 5:38 PM</span> </div>';
+		for(var i=0; i<result.length; i++) {
+			var item1 = result[i];
+			if(item1.senderId == '${pageContext.request.userPrincipal.name}'){
+				htmlVal +=  `					<div class="bubble me">\${item1.message}</div>`;
+			} else{
+				htmlVal +=  `					<div class="bubble you">\${item1.message}</div>`;
+			}
+		}
+		//</div>
+	    chat.container.querySelector('[data-chat="' + chat.person + '"]').innerHTML= htmlVal;
+	    
+	    
+	    
+	  		},
 	  	    error : function(request, status, error) { // 결과 에러 콜백함수
 	  	        console.log(error)
 	  	    }
 	  	})
+	  	
 	  }
 	
 	  $(function () {
