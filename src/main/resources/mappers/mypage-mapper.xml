@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="mypage">
+
+	<select id="userMypage" resultType="MypageDto"
+		parameterType="string">
+		SELECT * FROM users JOIN USER_ADDRESS USING
+		(user_id) WHERE USER_ID = #{userId}
+	</select>
+
+	<update id="updateName" parameterType="map">
+		update users
+		set name = #{name}
+		where user_id=#{userId}
+	</update>
+
+	<update id="updateNickname" parameterType="map">
+		update users
+		set nickname=#{nickname}
+		where user_id=#{userId}
+	</update>
+
+	<update id="updateEmail" parameterType="map">
+		update users
+		set email=#{email}
+		where user_id=#{userId}
+	</update>
+
+	<update id="updateMobileNumber" parameterType="map">
+		update users
+		set mobile_number=#{mobileNumber}
+		where user_id=#{userId}
+	</update>
+
+	<select id="checkName" resultType="string"
+		parameterType="string">
+		select name from users where name = #{name}
+	</select>
+
+	<select id="checkNickname" resultType="string"
+		parameterType="string">
+		select nickname from users where nickname = #{nickname}
+	</select>
+
+	<select id="checkEmail" resultType="string"
+		parameterType="string">
+		select email from users where email = #{email}
+	</select>
+
+	<select id="checkMobilNumber" resultType="string"
+		parameterType="string">
+		select mobile_number from users where mobile_number =
+		#{mobileNumber}
+	</select>
+
+</mapper>

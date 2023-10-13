@@ -14,10 +14,13 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import kh.spring.gaji.goods.model.dto.MyGoodsListDto;
+import kh.spring.gaji.mypage.model.service.MypageService;
 import kh.spring.gaji.pay.model.dto.DealReviewDto;
 import kh.spring.gaji.pay.model.dto.InFaceTradingDto;
 import kh.spring.gaji.pay.model.dto.SafePurchaseInfoDto;
@@ -35,10 +38,100 @@ public class MyPageController {
 	@Autowired
 	private UserService userService;
 	
+	@Autowired
+	private MypageService myPageService;
+	
 	@GetMapping("")
-	public String mypage(String msg) {	// 마이페이지
-		return "mypage/mypage";
+	public ModelAndView mypage(@RequestParam(name = "userId", required = false, defaultValue = "asdf") String userId, ModelAndView mv) {	// 마이페이지
+		mv.setViewName("mypage/mypage");
+		mv.addObject("userMypage",myPageService.userMypage(userId));
+		return mv;
 	}
+	
+	@PostMapping("/updatename")
+	@ResponseBody
+	public Map<String, Object> updateName(@RequestParam Map<String, String> map) {
+	    Map<String, Object> response = new HashMap<>();
+	        int updateResult = myPageService.updateName(map);
+	        if (updateResult == 1) {
+	            response.put("status", "1"); // 성공
+	            response.put("message", "이름이 변경되었습니다.");
+	        } else {
+	            response.put("status", "0"); // 업데이트 오류
+	            response.put("message", "이름 업데이트 중 오류가 발생했습니다.");
+	        }
+	    return response;
+	}
+	
+	@PostMapping("/updatenickname")
+	@ResponseBody
+	public Map<String, Object> updateNickname(@RequestParam Map<String, String> map,String nickname) {
+		 Map<String, Object> response = new HashMap<>();
+		    String result = myPageService.checkNickname(nickname);
+		    
+		    if (result != null) {
+		        response.put("status", -1); // 중복 닉네임 오류
+		        response.put("message", "중복된 닉네임입니다.");
+		    } else {
+		        int updateResult = myPageService.updateNickname(map);
+		        if (updateResult == 1) {
+		            response.put("status", 1); // 성공
+		            response.put("message", "닉네임이 변경되었습니다.");
+		        } else {
+		            response.put("status", 0); // 업데이트 오류
+		            response.put("message", "닉네임 변경 중 오류가 발생했습니다.");
+		        }
+		    }
+		    return response;
+		}
+	
+	@PostMapping("/updateemail")
+	@ResponseBody
+	public Map<String, Object> updateEmail(@RequestParam Map<String, String> map, String email) {
+		 Map<String, Object> response = new HashMap<>();
+		    String result = myPageService.checkEmail(email);
+		    
+		    if (result != null) {
+		        response.put("status", -1); // 중복 이메일 오류
+		        response.put("message", "중복된 이메일입니다.");
+		    } else {
+		        int updateResult = myPageService.updateEmail(map);
+		        if (updateResult == 1) {
+		            response.put("status", 1); // 성공
+		            response.put("message", "이메일이 업데이트되었습니다.");
+		        } else {
+		            response.put("status", 0); // 업데이트 오류
+		            response.put("message", "이메일 변경 중 오류가 발생했습니다.");
+		        }
+		    }
+		    return response;
+		}
+	
+	@PostMapping("/updatemobilenumber")
+	@ResponseBody
+	public Map<String, Object> updateMobileNumber(@RequestParam Map<String, String> map,String mobileNumber) {
+		 Map<String, Object> response = new HashMap<>();
+		    String result = myPageService.checkMobilNumber(mobileNumber);
+		    
+		    if (result != null) {
+		        response.put("status", -1); // 중복 핸드폰번호 오류
+		        response.put("message", "중복된 핸드폰 번호입니다.");
+		    } else {
+		        int updateResult = myPageService.updateMobileNumber(map);
+		        if (updateResult == 1) {
+		            response.put("status", 1); // 성공
+		            response.put("message", "이름이 업데이트되었습니다.");
+		        } else {
+		            response.put("status", 0); // 업데이트 오류
+		            response.put("message", "이름 업데이트 중 오류가 발생했습니다.");
+		        }
+		    }
+		    return response;
+		}
+	
+	
+	
+
 	
 	@GetMapping("/dealreview")
 	public String dealreview(Model model,String transactionId,RedirectAttributes rattr,HttpSession session) {	//리뷰작성

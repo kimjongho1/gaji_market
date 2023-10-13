@@ -135,8 +135,9 @@
 		<input type="text" name="lat" id="latitudeInput" value=""> <input
 			type="text" name="lng" id="longitudeInput" value=""> <br>
 		<input type="submit" value="확인">
+		</form>
 </div>
-	</form>
+	
 	<!--
             The "super-build" of CKEditor&nbsp;5 served via CDN contains a large set of plugins and multiple editor types.
             See https://ckeditor.com/docs/ckeditor5/latest/installation/getting-started/quick-start.html#running-a-full-featured-editor-from-cdn
