@@ -374,7 +374,7 @@
 	    
 	    $('.btn-secondary').click(function(){
 	    	 $('#AddressModal').modal('hide');
-	    })
+	    });
 	});
 	
 

@@ -24,6 +24,7 @@ import kh.spring.gaji.mypage.model.service.MypageService;
 import kh.spring.gaji.pay.model.dto.DealReviewDto;
 import kh.spring.gaji.pay.model.dto.InFaceTradingDto;
 import kh.spring.gaji.pay.model.dto.SafePurchaseInfoDto;
+import kh.spring.gaji.pay.model.service.PayService;
 import kh.spring.gaji.user.model.dto.UserAddressDto;
 import kh.spring.gaji.user.model.dto.UserInsertAddressDto;
 import kh.spring.gaji.user.model.dto.UserSafeTradingDto;
@@ -41,10 +42,14 @@ public class MyPageController {
 	@Autowired
 	private MypageService myPageService;
 	
+	@Autowired
+	private PayService payServiceImpl;
+	
 	@GetMapping("")
 	public ModelAndView mypage(@RequestParam(name = "userId", required = false, defaultValue = "asdf") String userId, ModelAndView mv) {	// 마이페이지
 		mv.setViewName("mypage/mypage");
 		mv.addObject("userMypage",myPageService.userMypage(userId));
+		mv.addObject("userAddress",payServiceImpl.getUserAddressList(userId));
 		return mv;
 	}
 	
