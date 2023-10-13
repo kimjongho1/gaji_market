@@ -367,7 +367,7 @@
 	        show: false // 페이지 로드 시 모달을 표시하지 않도록 설정
 	    });
 
-	    // 신고하기 버튼을 클릭하면 모달을 표시
+	    // 주소변경 버튼을 클릭하면 모달을 표시
 	    $('#showAddressModalBtn').click(function () {
 	        $('#AddressModal').modal('show');
 	    });
