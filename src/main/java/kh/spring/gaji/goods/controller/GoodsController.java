@@ -53,9 +53,23 @@ public class GoodsController {
 	private FileService fileService;
 
 	@GetMapping("/board")
-	public String board(Model model,Integer currentPage,String searchWord,Integer sort,Integer priceFloor, Integer priceCeiling,Integer category,Integer guId,Integer dongId) { // 중고거래 게시판
-		model.addAttribute("dongList", regionService.dongList());
+	public String board(Model model,Integer currentPage,String searchWord,Integer sort,Integer priceFloor, Integer priceCeiling,Integer category,Integer guId,String guName,String dongName,Integer dongId) { // 중고거래 게시판
+		
 		model.addAttribute("guList", regionService.guList());
+		if(guId!=null) {
+			model.addAttribute("guId",guId);
+			model.addAttribute("dongList", regionService.dongList(guId));
+		}
+		if(guName!=null&&!guName.equals("")) {
+			model.addAttribute("guName",guName);
+		}
+		if(dongName!=null&&!dongName.equals("")) {
+			model.addAttribute("dongName",dongName);
+		}
+		if(dongId!=null) {
+			model.addAttribute("dongId", dongId);
+		}
+		
 		int totalCnt=0;
 		List<GoodsListDto> goodsListDto=null;
 		
@@ -101,6 +115,7 @@ public class GoodsController {
 		model.addAttribute("priceCeiling",priceCeiling);
 		model.addAttribute("searchWord",searchWord);
 		model.addAttribute("goodsListDto",goodsListDto);
+		model.addAttribute("sort",sort);
 		model.addAttribute("topPrice",(int)map.get("topPrice"));
 		model.addAttribute("averagePrice",(int)map.get("averagePrice"));
 		model.addAttribute("bottomPrice",(int)map.get("bottomPrice"));

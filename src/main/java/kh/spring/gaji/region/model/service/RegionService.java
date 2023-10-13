@@ -9,5 +9,7 @@ public interface RegionService {
 	
 	public List<DongDto> dongList();
 	
+	public List<DongDto> dongList(int guId);
+	
 	public List<GuDto> guList();
 }

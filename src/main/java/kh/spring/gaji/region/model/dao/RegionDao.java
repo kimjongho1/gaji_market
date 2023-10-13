@@ -18,6 +18,11 @@ public class RegionDao {
 	public List<DongDto> dongList(){
 		return sqlSession.selectList("region.dongList");
 	}
+	
+	public List<DongDto> dongList(int guId){
+		return sqlSession.selectList("region.dongListUsingGuId",guId);
+	}
+	
 	public List<GuDto> guList(){
 		return sqlSession.selectList("region.guList");
 	}

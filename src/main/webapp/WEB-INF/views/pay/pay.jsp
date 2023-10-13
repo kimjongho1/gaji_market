@@ -122,7 +122,7 @@
         </select>
         
         <!-- 모달 트리거 버튼 -->
-        <button type="button" id="showReportModalBtn" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#reportModal">
+        <button type="button" id="showAddressModalBtn" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#AddressModal">
   			주소변경
 		</button>
 		
@@ -165,12 +165,12 @@
         <button onclick="nicePay()">카드결제</button>
     </div>
 
-	<div class="modal fade" id="reportModal" tabindex="-1" role="dialog"
-		aria-labelledby="reportModalLabel" aria-hidden="true">
+	<div class="modal fade" id="AddressModal" tabindex="-1" role="dialog"
+		aria-labelledby="AddressModalLabel" aria-hidden="true">
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
 				<div class="modal-header">
-					<h5 class="modal-title" id="reportModalLabel">주소등록</h5>
+					<h5 class="modal-title" id="AddressModalLabel">주소등록</h5>
 				</div>
 				<div class="modal-body">
 			
@@ -362,18 +362,18 @@
 	}
 
 	$(document).ready(function () {
-	    $('#reportModal').modal({
+	    $('#AddressModal').modal({
 	        backdrop: 'static', // 모달 바깥을 클릭해도 모달이 닫히지 않도록 설정
 	        show: false // 페이지 로드 시 모달을 표시하지 않도록 설정
 	    });
 
 	    // 신고하기 버튼을 클릭하면 모달을 표시
-	    $('#showReportModalBtn').click(function () {
-	        $('#reportModal').modal('show');
+	    $('#showAddressModalBtn').click(function () {
+	        $('#AddressModal').modal('show');
 	    });
 	    
 	    $('.btn-secondary').click(function(){
-	    	 $('#reportModal').modal('hide');
+	    	 $('#AddressModal').modal('hide');
 	    })
 	});
 	

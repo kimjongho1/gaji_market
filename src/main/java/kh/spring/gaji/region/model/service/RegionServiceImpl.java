@@ -24,6 +24,11 @@ public class RegionServiceImpl implements RegionService{
 	public List<GuDto> guList() {
 		return regionDao.guList();
 	}
+
+	@Override
+	public List<DongDto> dongList(int guId) {
+		return regionDao.dongList(guId);
+	}
 	
 	
 }

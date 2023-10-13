@@ -38,9 +38,17 @@
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/css/style.css"
 	type="text/css">
-	
+<style>
+.mys{
+cursor: pointer;
+}
 
-
+.sortList,
+.guList,
+.dongList {
+    display: none;
+}
+</style>
 </head>
 <body>
 
@@ -148,17 +156,17 @@
 						<ol class="flex items-center w-full">
 							<li
 								class="text-sm text-body px-2.5 transition duration-200 ease-in first:ps-0 last:pe-0 hover:text-heading"><a
-								class="false" href="${pageContext.request.contextPath}/goods/board">홈</a></li>
+								class="false" href="${pageContext.request.contextPath}/goods/board"></a></li>
 						</ol>
 					</div>
 					
 							<div class="relative ms-2 z-10 min-w-[180px]">
 										<button
 									class="border border-gray-300 text-heading text-[13px] md:text-sm font-semibold relative w-full py-2 ps-3 pe-10 text-start bg-white rounded-lg shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-opacity-75 focus-visible:ring-white focus-visible:ring-offset-orange-300 focus-visible:ring-offset-2 focus-visible:border-indigo-500 sm:text-sm cursor-pointer"
-									id="headlessui-listbox-button-:r0:" type="button"
-									aria-haspopup="listbox" aria-expanded="false"
+									id="headlessui-listbox-button-:r0:" type="button" onclick="showGu()"
+									aria-haspopup="listbox" aria-expanded="false" 
 									data-headlessui-state>
-									<span class="block truncate">구</span><span
+									<span class="block truncate">${guName}   (구)</span><span
 										class="absolute inset-y-0 end-0 flex items-center pe-2 pointer-events-none"><svg
 											stroke="currentColor" fill="none" stroke-width="0"
 											viewBox="0 0 24 24" class="w-5 h-5 text-gray-400"
@@ -167,14 +175,25 @@
 											<path stroke-linecap="round" stroke-linejoin="round"
 												stroke-width="2" d="M8 9l4-4 4 4m0 6l-4 4-4-4"></path></svg></span>
 								</button>
+							<ul class="absolute w-full py-1 mt-1 overflow-auto bg-white rounded-md shadow-lg max-h-60 ring-1 ring-black ring-opacity-5 focus:outline-none text-sm" aria-labelledby="headlessui-listbox-button-:r0:" aria-orientation="vertical" id="headlessui-listbox-options-:r1:" role="listbox" tabindex="0" data-headlessui-state="open" aria-activedescendant="headlessui-listbox-option-:r2:" >
+									
+								<div class="guList">
+								<c:forEach items="${guList}" var="item">
+									<li class="text-gray-900 cursor-default select-none relative py-2 ps-10 pe-4 mys" id="headlessui-listbox-option-:r10:" role="option" tabindex="-1" aria-selected="false" data-headlessui-state="">
+                          				<span class="font-normal block truncate" onclick="selectGu('${item.guId}','${item.guName}')">${item.guName}</span>
+                          			</li>
+                          		</c:forEach>
+								</div>
+								</ul>
 							</div>
+									
 							<div class="relative ms-2 z-10 min-w-[180px]">
 								<button
 									class="border border-gray-300 text-heading text-[13px] md:text-sm font-semibold relative w-full py-2 ps-3 pe-10 text-start bg-white rounded-lg shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-opacity-75 focus-visible:ring-white focus-visible:ring-offset-orange-300 focus-visible:ring-offset-2 focus-visible:border-indigo-500 sm:text-sm cursor-pointer"
 									id="headlessui-listbox-button-:r0:" type="button"
-									aria-haspopup="listbox" aria-expanded="false"
+									aria-haspopup="listbox" aria-expanded="false" onclick="showDong()"
 									data-headlessui-state>
-									<span class="block truncate">동</span><span
+									<span class="block truncate">${dongName}  (동)</span><span
 										class="absolute inset-y-0 end-0 flex items-center pe-2 pointer-events-none"><svg
 											stroke="currentColor" fill="none" stroke-width="0"
 											viewBox="0 0 24 24" class="w-5 h-5 text-gray-400"
@@ -183,14 +202,18 @@
 											<path stroke-linecap="round" stroke-linejoin="round"
 												stroke-width="2" d="M8 9l4-4 4 4m0 6l-4 4-4-4"></path></svg></span>
 								</button>
+								<ul class="absolute w-full py-1 mt-1 overflow-auto bg-white rounded-md shadow-lg max-h-60 ring-1 ring-black ring-opacity-5 focus:outline-none text-sm" aria-labelledby="headlessui-listbox-button-:r0:" aria-orientation="vertical" id="headlessui-listbox-options-:r1:" role="listbox" tabindex="0" data-headlessui-state="open" aria-activedescendant="headlessui-listbox-option-:r2:" >
+									
+								<div class="dongList">
+								<c:forEach items="${dongList}" var="item">
+									<li class="text-gray-900 cursor-default select-none relative py-2 ps-10 pe-4 mys" id="headlessui-listbox-option-:r10:" role="option" tabindex="-1" aria-selected="false" data-headlessui-state="">
+                          				<span class="font-normal block truncate" onclick="selectDong('${item.dongId}','${item.dongName}')">${item.dongName}</span>
+                          			</li>
+                          		</c:forEach>
+								</div>
+								</ul>
 							</div>
-								
-								
-					
-					
-					
-				</div>
-				
+				</div>	
 				<div
 					class=" top-16 sm:top-20 lg:top-36 xl:top-40 bg-white z-10 pb-2 pt-2 mb-2">
 					<div class="flex justify-between items-center mb-1 mt-1">
@@ -226,7 +249,7 @@
 									class="border border-gray-300 text-heading text-[13px] md:text-sm font-semibold relative w-full py-2 ps-3 pe-10 text-start bg-white rounded-lg shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-opacity-75 focus-visible:ring-white focus-visible:ring-offset-orange-300 focus-visible:ring-offset-2 focus-visible:border-indigo-500 sm:text-sm cursor-pointer"
 									id="headlessui-listbox-button-:r0:" type="button"
 									aria-haspopup="listbox" aria-expanded="false"
-									data-headlessui-state>
+									data-headlessui-state onclick="showSort()">
 									<span class="block truncate">추천순</span><span
 										class="absolute inset-y-0 end-0 flex items-center pe-2 pointer-events-none"><svg
 											stroke="currentColor" fill="none" stroke-width="0"
@@ -237,26 +260,20 @@
 												stroke-width="2" d="M8 9l4-4 4 4m0 6l-4 4-4-4"></path></svg></span>
 								</button>
 								
-								<!-- 
-								<ul class="absolute w-full py-1 mt-1 overflow-auto bg-white rounded-md shadow-lg max-h-60 ring-1 ring-black ring-opacity-5 focus:outline-none text-sm" aria-labelledby="headlessui-listbox-button-:r0:" aria-orientation="vertical" id="headlessui-listbox-options-:r1:" role="listbox" tabindex="0" data-headlessui-state="open" aria-activedescendant="headlessui-listbox-option-:r2:">
+								
+								<ul class="absolute w-full py-1 mt-1 overflow-auto bg-white rounded-md shadow-lg max-h-60 ring-1 ring-black ring-opacity-5 focus:outline-none text-sm" aria-labelledby="headlessui-listbox-button-:r0:" aria-orientation="vertical" id="headlessui-listbox-options-:r1:" role="listbox" tabindex="0" data-headlessui-state="open" aria-activedescendant="headlessui-listbox-option-:r2:" >
 									
-									
-									<li class="text-amber-900 bg-gray-100 cursor-default select-none relative py-2 ps-10 pe-4" id="headlessui-listbox-option-:r2:" role="option" tabindex="-1" aria-selected="true" data-headlessui-state="active selected">
-										<span class="font-medium block truncate">추천순</span>
-										<span class="text-amber-600 check-icon absolute inset-y-0 start-0 flex items-center ps-3">
-											<svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 20 20" class="w-5 h-5" aria-hidden="true" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg></span>
-									</li>
-									
-									<li class="text-gray-900 cursor-default select-none relative py-2 ps-10 pe-4" id="headlessui-listbox-option-:r10:" role="option" tabindex="-1" aria-selected="false" data-headlessui-state="">
-                          				<span class="font-normal block truncate">추천순</span></li>
-									<li class="text-gray-900 cursor-default select-none relative py-2 ps-10 pe-4" id="headlessui-listbox-option-:r3:" role="option" tabindex="-1" aria-selected="false" data-headlessui-state="">
-										<span class="font-normal block truncate">최신순</span></li>
-									<li class="text-gray-900 cursor-default select-none relative py-2 ps-10 pe-4" id="headlessui-listbox-option-:r4:" role="option" tabindex="-1" aria-selected="false" data-headlessui-state="">
-										<span class="font-normal block truncate">낮은가격순</span></li>
-									<li class="text-gray-900 cursor-default select-none relative py-2 ps-10 pe-4" id="headlessui-listbox-option-:r5:" role="option" tabindex="-1" aria-selected="false" data-headlessui-state="">
-										<span class="font-normal block truncate">높은가격순</span></li>
+									<div class="sortList">
+									<li class="text-gray-900 cursor-default select-none relative py-2 ps-10 pe-4 mys" id="headlessui-listbox-option-:r10:" role="option" tabindex="-1" aria-selected="false" data-headlessui-state="">
+                          				<span class="font-normal block truncate" onclick="selectSort(1)">추천순</span></li>
+									<li class="text-gray-900 cursor-default select-none relative py-2 ps-10 pe-4 mys" id="headlessui-listbox-option-:r3:" role="option" tabindex="-1" aria-selected="false" data-headlessui-state="">
+										<span class="font-normal block truncate" onclick="selectSort(2)">최신순</span></li>
+									<li class="text-gray-900 cursor-default select-none relative py-2 ps-10 pe-4 mys" id="headlessui-listbox-option-:r4:" role="option" tabindex="-1" aria-selected="false" data-headlessui-state="">
+										<span class="font-normal block truncate" onclick="selectSort(3)">낮은가격순</span></li>
+									<li class="text-gray-900 cursor-default select-none relative py-2 ps-10 pe-4 mys" id="headlessui-listbox-option-:r5:" role="option" tabindex="-1" aria-selected="false" data-headlessui-state="">
+										<span class="font-normal block truncate" onclick="selectSort(4)">높은가격순</span></li>
+									</div>
 								</ul>
-								 -->
 								
 							</div>
 						</div>
@@ -337,9 +354,9 @@
 										class="text-sm text-gray-400">
 
 										<script>
-        									var pastDate = "${item.pastDate}";
-        									var formattedPastDate = moment(pastDate).fromNow();
-        									document.write(formattedPastDate); // 또는 다른 출력 방식
+        									var createdAt = "${item.createdAt}";
+        									var formattedPastDate = moment(createdAt).fromNow();
+        									document.write(formattedPastDate); 
     										</script>
 										</span>
 								</div>
@@ -416,9 +433,22 @@
     	value="${searchWord}"
     	</c:if>
     	>
+    	
+    	<input type="hidden" name="sort" id="sort"
+    	<c:if test="${not empty sort}">
+    	value="${sort}"
+    	</c:if>
+    	>
     
-  
     <input type="hidden" name="currentPage" id="currentPage" value="${currentPage}">
+    
+    <input type="hidden" name="guId" id="guId" value="${guId}">
+    
+    <input type="hidden" name="guName" id="guName" value="${guName}">
+    
+    <input type="hidden" name="dongId" id="dongId" value="${dongId}">
+    
+    <input type="hidden" name="dongName" id="dongName" value="${dongName}">
     
 	</form>
 	
@@ -436,6 +466,18 @@
 		src="${pageContext.request.contextPath}/resources/js/bootstrap.min.js"></script>
 	<script src="${pageContext.request.contextPath}/resources/js/main.js"></script>
 	<script>
+	function selectGu(guId,guName){
+		$("#guId").val(guId);
+		$("#guName").val(guName);
+		$("#condition").submit();
+	}
+	
+	function selectDong(dongId,dongName){
+		$("#dongId").val(dongId);
+		$("#dongName").val(dongName);
+		$("#condition").submit();
+	}
+	
 	function priceOptionF1(){
 		$("#priceCeiling").val(100000);
 		$("#condition").submit();
@@ -457,15 +499,7 @@
 		$("#condition").submit();
 	}
 	
-	function searchButton1(){
-		var tmp=$(".searchButton").val();
-		alert("searchButton1 실행");
-		$("#searchWord").val(tmp);
-		$("#condition").submit();
-	}
-	
 	function pageMove(i){
-		alert(i);
 		$("#currentPage").val(i);
 		$("#condition").submit();
 	}
@@ -488,15 +522,44 @@
 			 $("#priceOption4").prop("checked", true);
      }
 	 
+	function showSort(){
+	    var sortList = $(".sortList");
+	    if (sortList.is(":hidden")) {
+	        sortList.show();
+	    } else {
+	        sortList.hide();
+	    }
+	}
+	
+	function showGu(){
+		var guList = $(".guList");
+	    if (guList.is(":hidden")) {
+	    	guList.show();
+	    } else {
+	    	guList.hide();
+	    }
+	}
+	
+	function showDong(){
+		var DongList = $(".DongList");
+	    if (DongList.is(":hidden")) {
+	    	DongList.show();
+	    } else {
+	    	DongList.hide();
+	    }
+	}
+	
 	function searching(event){
 		event.preventDefault();
 		$("#searchWord").val($("#searchForm input[name='searchWord']").val());
 		$("#condition").submit();	 
 	 }
-
-     window.onload = checking; // Attach the function to the window's onload event
-	</script>
 	
-
+	function selectSort(select){
+		$("#sort").val(select);
+		$("#condition").submit();
+	}
+     window.onload = checking; //가격범위에 따라 라디오 버튼 체크상태로 바꾸기위한 코드.
+	</script>
 </body>
 </html>

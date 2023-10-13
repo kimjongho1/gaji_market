@@ -30,7 +30,7 @@
 	</select>
 	
 	<select id="getAveragePrice" parameterType="map" resultType="_int">
-		select avg(price) from goods where 1=1
+		select avg(price) from goods where status!=4 and active_status='Y'
 		<if test="category!=-1">
 			and category_id=#{category}
 		</if>
@@ -57,7 +57,7 @@
 	</select>
 	
 	<select id="getTopPrice" parameterType="map" resultType="_int">
-		select max(price) from goods where 1=1
+		select max(price) from goods where status!=4 and active_status='Y'
 		<if test="category!=-1">
 			and category_id=#{category}
 		</if>
@@ -84,7 +84,7 @@
 	</select>
 	
 	<select id="getBottomPrice" parameterType="map" resultType="_int">
-		select min(price) from goods where 1=1
+		select min(price) from goods where status!=4 and active_status='Y'
 		<if test="category!=-1">
 			and category_id=#{category}
 		</if>
@@ -114,11 +114,11 @@
 		select list2.*,(select f.url from goods_file f where f.goods_id=list2.goods_id and rownum between 0 and 1) url from
 		(select list.*,rownum rn from(
 		(select g.title,g.price,g.goods_Id,u.nickname,g.status,g.safe_Trading_Yn,d.dong_Name,g.refreshed_at,
-		<!-- to_char(systimestamp - g.created_at, 'YYYY-MM-DD HH24:MI:SS') AS pastDate, -->
+		g.created_at,
 
 		(select count(*) from wishList w where g.goods_id=w.goods_id) likeCount
 		from goods g join users u using(user_id) join dong d on g.dong_id=d.dong_id
-		where 1=1
+		where status!=4 and active_status='Y'
 		<if test="category!=-1">
 			and category_id=#{category}
 		</if>
@@ -140,17 +140,17 @@
 		</when>
 		</choose>
 		<if test="dongId!=-1">
-			and dong_id=#{dongId}
+			and g.dong_id=#{dongId}
 		</if>
 		<choose>
-			<when test="sort=1">
-				order by likeCount desc
+			<when test="sort==1">
+				order by likeCount desc, g.refreshed_at desc
 			</when>
-			<when test="sort=3">
-				order by price asc
+			<when test="sort==3">
+				order by price asc, g.refreshed_at desc
 			</when>
-			<when test="sort=4">
-				order by price desc
+			<when test="sort==4">
+				order by price desc, g.refreshed_at desc
 			</when>
 			<otherwise>
 				order by g.refreshed_at desc
@@ -158,7 +158,7 @@
 		</choose>
 		) 
 		list)
-		)list2 where list2.rn between #{startRownum} and #{endRownum}
+		)list2 where list2.rn between #{startRownum} and #{endRownum} 
 	</select>
 
 		<insert id="insertGoods" parameterType="GoodsDto">	<!-- 24P 상품글 등록 -->

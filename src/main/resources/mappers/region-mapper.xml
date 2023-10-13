@@ -7,4 +7,8 @@
 	<select id="dongList" resultType="DongDto">
 		select * from dong
 	</select>
+	
+	<select id="dongListUsingGuId" resultType="DongDto">
+		select * from dong where gu_id=#{guId}
+	</select>
 </mapper>
