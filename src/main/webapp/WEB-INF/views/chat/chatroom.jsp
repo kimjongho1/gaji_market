@@ -1,13 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-	<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<script src="${pageContext.request.contextPath}/resources/js/jquery-3.3.1.min.js"></script>
-<link href="${pageContext.request.contextPath}/resources/css/chat.css" rel='stylesheet' type='text/css'>
+<script
+	src="${pageContext.request.contextPath}/resources/js/jquery-3.3.1.min.js"></script>
+<link href="${pageContext.request.contextPath}/resources/css/chat.css"
+	rel='stylesheet' type='text/css'>
 <link rel="icon" href="favicon.ico" type="image/x-icon">
 </head>
 <body>
@@ -22,12 +24,13 @@
 				<!-- 채팅중인 회원 list -->
 				<ul class="people">
 					<c:forEach var="item1" items="${chatRoomList}" varStatus="status">
-						<li class="person" data-chat="person${status.count}">
-					    <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/382994/dog.png" alt="" />
-					    <span class="name">${item1.nickname}</span>
-					    <c:forEach var="item2" items="${item1.chatInfo}">
-			    	 		<span class="time">
-			    	 			<script>
+						<input type="hidden" id="${item1.chatId }" value="${item1.chatId }">
+						<li class="person" data-chat="person${status.count}" data-chatid="${item1.chatId}">
+						<img
+							src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/382994/dog.png"
+							alt="" /> <span class="name">${item1.nickname}</span> <c:forEach
+								var="item2" items="${item1.chatInfo}">
+								<span class="time"> <script>
 							       var dateString = "${item2.createAt}";
 							       var date = new Date(dateString);
 							       var today = new Date();
@@ -50,11 +53,10 @@
 									   document.write(month + 1 + "월 " + day + "일");
 								   }
 							    </script>
-			    	 		</span>
-						    <span class="preview">${item2.message }</span>
-					    </c:forEach>
-					    </li>
-				  	</c:forEach>
+								</span>
+								<span class="preview">${item2.message }</span>
+							</c:forEach></li>
+					</c:forEach>
 				</ul>
 			</div>
 			<div class="right">
@@ -137,53 +139,178 @@
 				</div>
 				<div class="write">
 					<a href="javascript:;" class="write-link attach"></a> <input
-						type="text" id="msg"/> <a href="javascript:;" class="write-link smiley"></a>
+						type="text" id="msg" /> <a href="javascript:;"
+						class="write-link smiley"></a>
 					<button class="write-link send" type="button" id="button-send"></button>
 				</div>
 			</div>
 		</div>
 	</div>
-	
-	<script src="${pageContext.request.contextPath}/resources/js/chat.js"></script>
+
 	<script>
-		const username = "${pageContext.request.userPrincipal.name}"
+	$(document).ready(function() {
+		// 리스트에서 메시지 시간 체크
+		function formatDate(dateString) {
+		    var date = new Date(dateString);
+		    var today = new Date();
+		    var year = date.getFullYear();
+		    var month = date.getMonth() + 1;
+		    var day = date.getDate();
+		    var hours = date.getHours();
+		    var minutes = date.getMinutes();
 		
-			$(document).ready(function() {
-				function formatDate(dateString) {
-				    var date = new Date(dateString);
-				    var today = new Date();
-
-				    var year = date.getFullYear();
-				    var month = date.getMonth() + 1;
-				    var day = date.getDate();
-				    var hours = date.getHours();
-				    var minutes = date.getMinutes();
-
-				    if (today.getMonth() == month) {
-				        if (today.getDate() == day) {
-				            if (hours > 12) {
-				                return "오후 " + (hours - 12) + ":" + minutes;
-				            } else {
-				                return "오전 " + hours + ":" + minutes;
-				            }
-				        }
-				    } else {
-				        return month + 1 + "월 " + day + "일";
-				    }
-				}
-				// 스크롤 컨테이너 선택
-			    var chatContainer = $(".chat.active-chat");
-			    // 스크롤을 가장 아래로 이동
-			    chatContainer.scrollTop(chatContainer[0].scrollHeight);
-			    // 새로운 메시지를 추가할 때 스크롤을 자동으로 아래로 이동
-			    function scrollToBottom() {
-			        chatContainer.scrollTop(chatContainer[0].scrollHeight);
-			    }
-			    // 예를 들어, 새 메시지를 추가하는 코드
-			    // ...
-			    // 메시지를 추가한 후
-			    scrollToBottom();
-			}			
+	    	if (today.getMonth() == month) {
+	     		if (today.getDate() == day) {
+	        		if (hours > 12) {
+	          			return "오후 " + (hours - 12) + ":" + minutes;
+			        } else {
+			          return "오전 " + hours + ":" + minutes;
+			        }
+	      		}
+		    } else {
+		      return month + 1 + "월 " + day + "일";
+		    }
+	  	}
+	
+	  	// 활성 채팅 설정 및 friends, chat 객체 생성
+	  	document.querySelector('.chat[data-chat=person2]').classList.add('active-chat');
+	  	document.querySelector('.person[data-chat=person2]').classList.add('active');
+	
+	  	let friends = {
+		    list: document.querySelector('ul.people'),
+		    all: document.querySelectorAll('.left .person'),
+			name: ''
+		},
+	    chat = {
+	      container: document.querySelector('.container .right'),
+	      current: null,
+	      person: null,
+	      name: document.querySelector('.container .right .top .name')
+	    };
+	
+	  // 친구 클릭 이벤트 처리
+	  friends.all.forEach(f => {
+	    f.addEventListener('mousedown', () => {
+	    	// 클릭한 noRoom값 전달
+	   		const chatId = f.getAttribute('data-chatid');
+	      	if (!f.classList.contains('active')) {
+	    		setAciveChat(f, chatId)
+	      	}
+	    });
+	  });
+	
+	  // 채팅 활성화 및 비활성화
+	  function setAciveChat(f, chatId) {
+	    friends.list.querySelector('.active').classList.remove('active');
+	    f.classList.add('active');
+	    chat.current = chat.container.querySelector('.active-chat');
+	    chat.person = f.getAttribute('data-chat');
+	    chat.current.classList.remove('active-chat');
+	    chat.container.querySelector('[data-chat="' + chat.person + '"]').classList.add('active-chat');
+	    friends.name = f.querySelector('.name').innerText;
+	    chat.name.innerHTML = friends.name;
+	  	$.ajax({
+	  		type:'get',
+	  		url:'${pageContext.request.contextPath}/selectRoom',
+	  		data: {"chatId" : chatId},
+	  		success : function(result) { // 결과 성공 콜백함수
+	  	    },
+	  	    error : function(request, status, error) { // 결과 에러 콜백함수
+	  	        console.log(error)
+	  	    }
+	  	})
+	  }
+	
+	  $(function () {
+	    const websocketConnections = {};
+	    const username = "${pageContext.request.userPrincipal.name}";
+	
+	    // WebSocket 연결 생성 함수
+	    function createWebSocketConnection(person) {
+	      const ws = new WebSocket("ws://localhost:8090/gaji/echo");
+	
+	      ws.onopen = function (e) {
+	        console.log('WebSocket 연결이 열렸습니다.');
+	      };
+	
+	      ws.onmessage = function (e) {
+	        console.log('WebSocket 메시지 수신:', e.data);
+	        displayReceivedMessage(e.data);
+	      };
+	
+	      ws.onclose = function (e) {
+	        console.log('WebSocket 연결이 닫혔습니다.');
+	      };
+	
+	      ws.onerror = function (e) {
+	        console.error('WebSocket 오류:', e);
+	      };
+	
+	      return ws;
+	    }
+	
+	    $("#button-send").on("click", (e) => {
+	      send();
+	    });
+	
+	    // 엔터 키 입력시 send() 실행
+	    $("#msg").on("keydown", (e) => {
+	      if (e.key === "Enter") {
+	        send();
+	      }
+	    });
+	
+	    function send() {
+	      const activeChat = document.querySelector('.chat.active-chat');
+	
+	      if (!activeChat) {
+	        return;
+	      }
+	
+	      const msgInput = document.getElementById("msg");
+	      const message = msgInput.value.trim();
+	      if (message === "") {
+	        return;
+	      }
+	
+	      const websocket = websocketConnections[activeChat.getAttribute('data-chat')];
+	      if (websocket) {
+	        websocket.send(message);
+	      }
+	
+	      const messageElement = document.createElement('div');
+	      messageElement.className = 'bubble me';
+	      messageElement.textContent = message;
+	
+	      activeChat.appendChild(messageElement);
+	
+	      msgInput.value = '';
+	    }
+	
+	    function displayReceivedMessage(message) {
+	      const activeChat = document.querySelector('.chat.active-chat');
+	
+	      if (!activeChat) {
+	        return;
+	      }
+	
+	      const messageElement = document.createElement('div');
+	      messageElement.className = 'bubble you';
+	      messageElement.textContent = message;
+	
+	      activeChat.appendChild(messageElement);
+	    }
+	  });
+	});
 	</script>
+
+	<!-- ajax -->
+	<script>
+	/* 채팅 리스트에서 방 눌렀을 때 */
+
+	</script>
+	
+	
+
 </body>
 </html>
