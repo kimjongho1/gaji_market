@@ -4,7 +4,9 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/locale/ko.js"></script>
-
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css"
+	rel="stylesheet" />
 <!DOCTYPE html>
 <html>
 <head>
@@ -47,6 +49,10 @@ cursor: pointer;
 .guList,
 .dongList {
     display: none;
+}
+
+#flex1{
+	display:inline-block;
 }
 </style>
 </head>
@@ -244,7 +250,7 @@ cursor: pointer;
 							<div
 								class="flex-shrink-0 text-body text-xs md:text-sm leading-4 pe-4 md:me-6 ps-2 hidden lg:block">${totalCnt}
 								개의 상품</div>
-							<div class="relative ms-2 z-10 min-w-[180px]">
+							<div class="relative ms-2 z-10 min-w-[180px]" id="sortId">
 								<button
 									class="border border-gray-300 text-heading text-[13px] md:text-sm font-semibold relative w-full py-2 ps-3 pe-10 text-start bg-white rounded-lg shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-opacity-75 focus-visible:ring-white focus-visible:ring-offset-orange-300 focus-visible:ring-offset-2 focus-visible:border-indigo-500 sm:text-sm cursor-pointer"
 									id="headlessui-listbox-button-:r0:" type="button"
@@ -259,7 +265,6 @@ cursor: pointer;
 											<path stroke-linecap="round" stroke-linejoin="round"
 												stroke-width="2" d="M8 9l4-4 4 4m0 6l-4 4-4-4"></path></svg></span>
 								</button>
-								
 								
 								<ul class="absolute w-full py-1 mt-1 overflow-auto bg-white rounded-md shadow-lg max-h-60 ring-1 ring-black ring-opacity-5 focus:outline-none text-sm" aria-labelledby="headlessui-listbox-button-:r0:" aria-orientation="vertical" id="headlessui-listbox-options-:r1:" role="listbox" tabindex="0" data-headlessui-state="open" aria-activedescendant="headlessui-listbox-option-:r2:" >
 									
@@ -344,9 +349,12 @@ cursor: pointer;
 									style="position: absolute; height: 100%; width: 100%; inset: 0px; color: transparent;">
 							</div>
 							<div class="w-full overflow-hidden p-2 md:px-2.5 xl:px-4">
-								<h2 class="line-clamp-2 text-sm md:text-base text-heading">${item.title}</h2>
+								<h2 class="line-clamp-2 text-sm md:text-base text-heading">${item.title} <svg id="flex1" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-bag-heart-fill" viewBox="0 0 16 16">
+  <path d="M11.5 4v-.5a3.5 3.5 0 1 0-7 0V4H1v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4h-3.5ZM8 1a2.5 2.5 0 0 1 2.5 2.5V4h-5v-.5A2.5 2.5 0 0 1 8 1Zm0 6.993c1.664-1.711 5.825 1.283 0 5.132-5.825-3.85-1.664-6.843 0-5.132Z"/>
+</svg>${item.likeCount}</h2>
 								<div
-									class="font-semibold space-s-2 mt-0.5 text-heading lg:text-lg lg:mt-1.5">${item.price}</div>
+									class="font-semibold space-s-2 mt-0.5 text-heading lg:text-lg lg:mt-1.5">${item.price}<br>${item.nickname}
+									</div>
 								<div class="my-1">
 								
 									<span class="text-sm text-gray-400">${item.dongName}</span><span
@@ -419,8 +427,7 @@ cursor: pointer;
     	 </c:if>
     	>
    
-    
-    
+
     	<input type="hidden" name="category" id="category" 
     	<c:if test="${not empty category}">
     	value="${category}"
@@ -469,6 +476,8 @@ cursor: pointer;
 	function selectGu(guId,guName){
 		$("#guId").val(guId);
 		$("#guName").val(guName);
+		$("#dongId").val("");
+		$("#dongName").val("");
 		$("#condition").submit();
 	}
 	
@@ -542,10 +551,13 @@ cursor: pointer;
 	
 	function showDong(){
 		var DongList = $(".DongList");
+		var sortId=$("#sortId");
 	    if (DongList.is(":hidden")) {
 	    	DongList.show();
+	    	sortId.hide();
 	    } else {
 	    	DongList.hide();
+	    	sortId.show();
 	    }
 	}
 	
