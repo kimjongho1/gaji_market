@@ -33,6 +33,7 @@
 		<typeAlias type="kh.spring.gaji.user.model.dto.UserAddressDto" alias="UserAddressDto"/>
 		<typeAlias type="kh.spring.gaji.user.model.dto.WishListDto" alias="WishListDto"/>
 		<typeAlias type="kh.spring.gaji.user.model.dto.UserSafeTradingDto" alias="UserSafeTradingDto"/>
+		<typeAlias type="kh.spring.gaji.mypage.model.dto.MypageDto" alias="MypageDto"/>
 		
 		
 		<typeAlias type="kh.spring.gaji.user.model.dto.UserInsertAddressDto" alias="UserInsertAddressDto"/>
@@ -79,6 +80,7 @@
 		<mapper resource="mappers/pay-mapper.xml"/>	<!-- 거래 관련 쿼리문 -->
 		<mapper resource="mappers/report-mapper.xml"/>	<!-- 신고관련 쿼리문 -->
 		<mapper resource="mappers/user-mapper.xml"/> <!-- 유저 관련 쿼리문 -->
+		<mapper resource="mappers/mypage-mapper.xml"/><!-- 마이페이지 관련 쿼리문 -->
 		<mapper resource="mappers/goods-mapper.xml"/> <!-- 상품 관련 쿼리문 -->
 		<mapper resource="mappers/region-mapper.xml"/> <!-- 지역설정(구,동) -->
 	</mappers>
