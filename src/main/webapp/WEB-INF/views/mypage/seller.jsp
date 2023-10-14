@@ -97,7 +97,7 @@
     </form>
     </c:if>
     
-    <a href="#"><p>상품명:${safePurchaseInfoDto.goodsTitle}</p></a>
+    <a href="${pageContext.request.contextPath}/goods/get?goodsId=${safePurchaseInfoDto.goodsId}"><p>상품명:${safePurchaseInfoDto.goodsTitle}</p></a>
     <p>판매자명:${safePurchaseInfoDto.sellerName}</p>
     <p>구매자명:${safePurchaseInfoDto.buyerName}</p>
     <p>휴대폰번호:${safePurchaseInfoDto.mobileNumber}</p>

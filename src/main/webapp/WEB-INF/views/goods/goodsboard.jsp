@@ -54,6 +54,25 @@ cursor: pointer;
 #flex1{
 	display:inline-block;
 }
+
+  .pagination-container {
+    text-align: center;
+    margin: 10px 0;
+  }
+
+  .pagination-button {
+    background-color: gray;
+    color: #fff;
+    border: none;
+    padding: 8px 16px;
+    margin: 2px;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+
+  .pagination-button:hover {
+    background-color:black;
+  }
 </style>
 </head>
 <body>
@@ -389,23 +408,22 @@ cursor: pointer;
 				</ul>
 				
 				
-				<div class="bottom-0 py-3 m-auto text-center bg-white">
-					<ul class="flex justify-center space-x-2 space-x-reverse">
-						
-						<c:if test="${startPageNum!=1}">
-						<button onclick="pageMove(${endPageNum}+1)">이전</button>
-						</c:if>
-						
-						<c:forEach begin="${startPageNum}" end="${endPageNum}" var="i">
-						<button onclick="pageMove(${i})">${i}</button>
-						</c:forEach>
-						
-						<c:if test="${endPageNum<totalPageNum}">
-						<button onclick="pageMove(${endPageNum}+1)">다음</button>
-						</c:if>
-						</li>
-					</ul>
-				</div>
+				<div class="bottom-0 py-3 m-auto text-center bg-white pagination-container">
+  <ul class="flex justify-center space-x-2 space-x-reverse">
+
+    <c:if test="${startPageNum!=1}">
+      <button class="pagination-button" onclick="pageMove(${endPageNum}+1)">이전</button>
+    </c:if>
+
+    <c:forEach begin="${startPageNum}" end="${endPageNum}" var="i">
+      <button class="pagination-button" onclick="pageMove(${i})">${i}</button>
+    </c:forEach>
+
+    <c:if test="${endPageNum<totalPageNum}">
+      <button class="pagination-button" onclick="pageMove(${endPageNum}+1)">다음</button>
+    </c:if>
+  </ul>
+</div>
 				<div class="invisible w-full h-1"></div>
 				<div class="pb-10 pt-10">
 					<ul
