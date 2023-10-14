@@ -258,6 +258,9 @@ cursor: pointer;
 									<c:when test="${sort==4}">
 										높은가격순
 									</c:when>
+									<c:otherwise>
+										최신순
+									</c:otherwise>
 									</c:choose>
 									</span><span
 										class="absolute inset-y-0 end-0 flex items-center pe-2 pointer-events-none"><svg
@@ -543,7 +546,7 @@ cursor: pointer;
 		$("#dongId").val(dongId);
 		$("#currentPage").val(1);
 		$("#dongName").val(dongName);
-		$("#sort").val(1);
+		$("#sort").val(2);
 		$("#condition").submit();
 	}
 	
