@@ -244,8 +244,9 @@
 								type: 'get',
 								url: '${pageContext.request.contextPath}/insultChat',
 								data: {
-									"msg": message,
-									"chatId": chatId
+									"senderId": username,
+									"chatNo": chatId,
+									"msg": message
 									},
 								datatype: "json",
 								susccess: function (result) { // 반드시 msg를 보내서 controller 작업 해야함

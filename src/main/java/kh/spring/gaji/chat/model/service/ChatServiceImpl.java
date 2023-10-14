@@ -1,6 +1,7 @@
 package kh.spring.gaji.chat.model.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -30,6 +31,11 @@ public class ChatServiceImpl implements ChatService{
 	@Override
 	public List<ChatMessageDto> getChatMessage(int chatId) {
 		return chatDao.getChatMessage(chatId);
+	}
+
+	@Override
+	public int insertChatMessage(Map<String, Object> map) {
+		return chatDao.insertMessage(map);
 	}
 	
 }

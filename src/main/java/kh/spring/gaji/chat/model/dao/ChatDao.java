@@ -1,6 +1,7 @@
 package kh.spring.gaji.chat.model.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,4 +28,7 @@ public class ChatDao {
 	public List<ChatMessageDto> getChatMessage(int chatNo) {
 		return sqlSession.selectList("chat.selectChatMessageByChatNo", chatNo);
 	}
+	public int insertMessage(Map<String, Object> map) {
+		return 0;
+	};
 }

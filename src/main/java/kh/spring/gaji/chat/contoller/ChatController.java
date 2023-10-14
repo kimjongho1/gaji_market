@@ -3,7 +3,9 @@ package kh.spring.gaji.chat.contoller;
 import java.io.Console;
 import java.security.Principal;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -57,8 +59,18 @@ public class ChatController {
 
 	@GetMapping("/insultChat")
 	@ResponseBody
-	public void selectRoom(String msg, String chatId) {
-		System.out.println(msg);
-		System.out.println(chatId);
+	public String insertMessage(String senderId, String chatNo, String msg) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("senderId", senderId);
+		map.put("chatNo", Integer.parseInt(chatNo));
+		map.put("message", msg);
+		int result1 = chatServiceImpl.insertChatMessage(map);
+		String result2 = null;
+		if(result1 != 1) {
+			result2="메시지 DB 저장 실패";
+		} else {
+			result2="메시지 DB 저장 성공";
+		}
+		return new Gson().toJson(result2);
 	}
 }

@@ -28,4 +28,8 @@
 		FROM chat_message
 		where chat_id = #{chatNo}
 	</select>
+	<insert id="insertMessage" parameterType="hashMap">
+		insert into chat_message
+		values (CHATTING_ID_SEQUENCE.nextval, #{chatId}, #{senderId}, #{message}, default, default)
+	</insert>
 </mapper>
