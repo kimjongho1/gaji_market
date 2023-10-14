@@ -45,6 +45,7 @@
     button:hover {
         background-color: #0056b3;
     }
+    
 
     p {
         margin: 10px 0;
@@ -85,6 +86,9 @@
 <button type="button" id="showReportModalBtn" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#reportModal">
   신고하기
 </button>
+ <c:if test="${reviewYN eq 0}">
+        <button onclick="redirectReview()" class="btn btn-primary btn-lg">리뷰작성</button>
+ </c:if>
 
 <!-- 모달 -->
 <div class="modal fade" id="reportModal" tabindex="-1" role="dialog" aria-labelledby="reportModalLabel" aria-hidden="true">
@@ -221,6 +225,9 @@ function closePayCallback(data){
 		alert("거래 확정에 실패하였습니다.");
 }
 
+function redirectReview(){
+	window.location.href="${pageContext.request.contextPath}/mypage/dealreview?transactionId=${safePurchaseInfoDto.transactionId}";
+}
 </script>
 <script>
 $(document).ready(function () {

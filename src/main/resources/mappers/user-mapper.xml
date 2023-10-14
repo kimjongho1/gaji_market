@@ -198,11 +198,11 @@
 	
 	
 	<select id="getKeepUsedTotalCnt" parameterType="string" resultType="_int"> 	<!--찜 목록 가져오기 -->
-		select count(*) from goods where goods_id=(select goods_id from wishlist where user_id=#{userId}) and status IN(1,2) order by created_at
+		select count(*) from goods where goods_id IN(select goods_id from wishlist where user_id=#{userId}) and status IN(1,2) order by created_at
 	</select>
 	
 	<select id="getSearchKeepUsedTotalCnt" parameterType="map" resultType="_int"> 	<!--찜 목록 가져오기 -->
-		select count(*) from goods where goods_id=(select goods_id from wishlist where user_id=#{userId}) and title like #{searchWord} and status IN(1,2)
+		select count(*) from goods where goods_id IN(select goods_id from wishlist where user_id=#{userId}) and title like #{searchWord} and status IN(1,2)
 	</select>
 	
 	<select id="getKeepUsedList" parameterType="map" resultType="MyGoodsListDto">	<!--찜 목록 가져오기 -->
@@ -211,7 +211,7 @@
 		(select list.*,rownum rn from(
 		(select to_char(refreshed_at, 'YYYY-MM-DD HH24:MI:SS') refreshed_at,goods_id,title,price,status
 		from goods 
-		where goods_id=(select goods_id from wishlist where user_id=#{userId}) and status IN(1,2) and active_status='Y' 
+		where goods_id IN(select goods_id from wishlist where user_id=#{userId}) and status IN(1,2) and active_status='Y' 
 		order by refreshed_at DESC) 
 		list)
 		) list2 where rn between #{startRownum} and #{endRownum}
@@ -223,7 +223,7 @@
 		(select list.*,rownum rn from(
 		(select to_char(refreshed_at, 'YYYY-MM-DD HH24:MI:SS') refreshed_at,goods_id,title,price,status 
 		from goods 
-		where goods_id=(select goods_id from wishlist where user_id=#{userId}) and status IN(1,2) and active_status='Y' and title like #{searchWord}
+		where goods_id IN(select goods_id from wishlist where user_id=#{userId}) and status IN(1,2) and active_status='Y' and title like #{searchWord}
 		order by refreshed_at DESC) 
 		list)
 		) list2 where rn between #{startRownum} and #{endRownum}

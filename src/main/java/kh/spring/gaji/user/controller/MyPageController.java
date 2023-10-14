@@ -560,7 +560,7 @@ public class MyPageController {
 			redirectattr.addFlashAttribute("msg","잘못된 접근입니다.");
 			return "redirect:/main/main";
 		}
-		
+		model.addAttribute("reviewYN",userService.checkTradingStatus(transactionId, "qordmlgjs"));
 		SafePurchaseInfoDto safePurchaseInfoDto = userService.getSafePurchaseInfo(transactionId);
 		model.addAttribute("safePurchaseInfoDto",safePurchaseInfoDto);
 		return "mypage/buyer";

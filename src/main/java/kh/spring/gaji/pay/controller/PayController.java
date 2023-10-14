@@ -53,7 +53,7 @@ public class PayController {
 	}
 	
 		@GetMapping("payment/pay")
-		public String pay(Model model,RedirectAttributes attribute/* ,int goodsId */,HttpServletRequest request) {
+		public String pay(Model model,RedirectAttributes attribute,Integer goodsId,HttpServletRequest request) {
 			/* String userId=(String)request.getSession().getAttribute("userId"); */
 			if(payServiceImpl.checkGoodsStatus(1)!=1) {	//추후 1은 goodsId로 대체
 				attribute.addFlashAttribute("msg", "판매중인 상품이 아닙니다.");
