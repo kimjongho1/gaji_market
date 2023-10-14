@@ -6,6 +6,7 @@ import org.springframework.stereotype.Repository;
 import kh.spring.gaji.goods.model.dto.GoodsDto;
 import kh.spring.gaji.goods.model.dto.GoodsInfoDto;
 import kh.spring.gaji.goods.model.dto.GoodsListDto;
+import kh.spring.gaji.goods.model.dto.GoodsListInfoDto;
 
 import java.util.HashMap;
 import java.util.List;
@@ -16,47 +17,14 @@ public class GoodsDao  {
 
     @Autowired
     private SqlSession sqlSession;
-
-    public int getTotalCnt(int priceCeiling,int category,int dongId,String searchWord) {
-    	Map<String,Object> map=new HashMap<String,Object>();
-          map.put("priceCeiling", priceCeiling);
-          map.put("category", category);
-          map.put("dongId", dongId);
-          map.put("searchWord", searchWord);
-          return sqlSession.selectOne("goods.getTotalCnt",map);
-    }
     
-    public int getAveragePrice(int priceCeiling,int category,int dongId,String searchWord) {
+    public GoodsListInfoDto getGoodsListInfo(int priceCeiling,int category,int dongId,String searchWord) {
     	Map<String,Object> map=new HashMap<String,Object>();
         map.put("priceCeiling", priceCeiling);
         map.put("category", category);
         map.put("dongId", dongId);
         map.put("searchWord", searchWord);
-        if(sqlSession.selectOne("goods.getAveragePrice",map)==null)
-        	return 0;
-        return sqlSession.selectOne("goods.getAveragePrice",map);
-    }
-    
-    public int getTopPrice(int priceCeiling,int category,int dongId,String searchWord) {
-    	Map<String,Object> map=new HashMap<String,Object>();
-        map.put("priceCeiling", priceCeiling);
-        map.put("category", category);
-        map.put("dongId", dongId);
-        map.put("searchWord", searchWord);
-        if(sqlSession.selectOne("goods.getTopPrice",map)==null)
-        	return 0;
-        return sqlSession.selectOne("goods.getTopPrice",map);
-    }
-    
-    public int getBottomPrice(int priceCeiling,int category,int dongId,String searchWord) {
-    	Map<String,Object> map=new HashMap<String,Object>();
-        map.put("priceCeiling", priceCeiling);
-        map.put("category", category);
-        map.put("dongId", dongId);
-        map.put("searchWord", searchWord);
-        if(sqlSession.selectOne("goods.getBottomPrice",map)==null)
-        	return 0;
-        return sqlSession.selectOne("goods.getBottomPrice",map);
+        return sqlSession.selectOne("goods.getGoodsListInfo",map);
     }
     
     public List<GoodsListDto> getGoodsList(int currentPage, int PAGESIZE, int sort, int priceCeiling,

@@ -2,89 +2,10 @@
 <!DOCTYPE mapper PUBLIC " -//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="goods">
 	
-	<select id="getTotalCnt" parameterType="map" resultType="_int">	<!-- 검색된 상품 총갯수 -->
-		select count(*) from goods where 1=1
-		<if test="category!=-1">
-			and category_id=#{category}
-		</if>
-		<if test='searchWord!=""'>
-			and title like #{searchWord}
-		</if>
-		<choose>
-		<when test="priceCeiling==100000">
-			and price &lt;= 100000
-		</when>
-		<when test="priceCeiling==300000">
-			and price &gt;= 100000 and price &lt;= 300000
-		</when>
-		<when test="priceCeiling==500000">
-			and price &gt;= 300000 and price &lt;= 500000
-		</when>
-		<when test="priceCeiling==700000">
-			and price &gt;= 500000
-		</when>
-		</choose>
-		<if test="dongId!=-1">
-			and dong_id=#{dongId}
-		</if>
-	</select>
+
 	
-	<select id="getAveragePrice" parameterType="map" resultType="_int">
-		select avg(price) from goods where status!=4 and active_status='Y'
-		<if test="category!=-1">
-			and category_id=#{category}
-		</if>
-		<if test='searchWord!=""'>
-			and title like #{searchWord}
-		</if>
-		<choose>
-		<when test="priceCeiling==100000">
-			and price &lt;= 100000
-		</when>
-		<when test="priceCeiling==300000">
-			and price &gt;= 100000 and price &lt;= 300000
-		</when>
-		<when test="priceCeiling==500000">
-			and price &gt;= 300000 and price &lt;= 500000
-		</when>
-		<when test="priceCeiling==700000">
-			and price &gt;= 500000
-		</when>
-		</choose>
-		<if test="dongId!=-1">
-			and dong_id=#{dongId}
-		</if>
-	</select>
-	
-	<select id="getTopPrice" parameterType="map" resultType="_int">
-		select max(price) from goods where status!=4 and active_status='Y'
-		<if test="category!=-1">
-			and category_id=#{category}
-		</if>
-		<if test='searchWord!=""'>
-			and title like #{searchWord}
-		</if>
-		<choose>
-		<when test="priceCeiling==100000">
-			and price &lt;= 100000
-		</when>
-		<when test="priceCeiling==300000">
-			and price &gt;= 100000 and price &lt;= 300000
-		</when>
-		<when test="priceCeiling==500000">
-			and price &gt;= 300000 and price &lt;= 500000
-		</when>
-		<when test="priceCeiling==700000">
-			and price &gt;= 500000
-		</when>
-		</choose>
-		<if test="dongId!=-1">
-			and dong_id=#{dongId}
-		</if>
-	</select>
-	
-	<select id="getBottomPrice" parameterType="map" resultType="_int">
-		select min(price) from goods where status!=4 and active_status='Y'
+	<select id="getGoodsListInfo" parameterType="map" resultType="kh.spring.gaji.goods.model.dto.GoodsListInfoDto">
+		select count(*) totalCnt,min(price) bottomPrice,avg(price) averagePrice,max(price) topPrice from goods where status!=4 and active_status='Y'
 		<if test="category!=-1">
 			and category_id=#{category}
 		</if>

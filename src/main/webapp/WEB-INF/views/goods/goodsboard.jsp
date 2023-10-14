@@ -219,6 +219,36 @@ cursor: pointer;
 								</div>
 								</ul>
 							</div>
+							<div class="relative ms-2 z-10 min-w-[180px] mycss1 " id="sortId">
+								<button
+									class="border border-gray-300text-heading text-[13px] md:text-sm font-semibold relative w-full py-2 ps-3 pe-10 text-start bg-white rounded-lg shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-opacity-75 focus-visible:ring-white focus-visible:ring-offset-orange-300 focus-visible:ring-offset-2 focus-visible:border-indigo-500 sm:text-sm cursor-pointer"
+									id="headlessui-listbox-button-:r0:" type="button"
+									aria-haspopup="listbox" aria-expanded="false"
+									data-headlessui-state onclick="showSort()">
+									<span class="block truncate">추천순</span><span
+										class="absolute inset-y-0 end-0 flex items-center pe-2 pointer-events-none"><svg
+											stroke="currentColor" fill="none" stroke-width="0"
+											viewBox="0 0 24 24" class="w-5 h-5 text-gray-400"
+											aria-hidden="true" height="1em" width="1em"
+											xmlns="http://www.w3.org/2000/svg">
+											<path stroke-linecap="round" stroke-linejoin="round"
+												stroke-width="2" d="M8 9l4-4 4 4m0 6l-4 4-4-4"></path></svg></span>
+								</button>
+								
+								<ul class="absolute w-full py-1 mt-1 overflow-auto bg-white rounded-md shadow-lg max-h-60 ring-1 ring-black ring-opacity-5 focus:outline-none text-sm" aria-labelledby="headlessui-listbox-button-:r0:" aria-orientation="vertical" id="headlessui-listbox-options-:r1:" role="listbox" tabindex="0" data-headlessui-state="open" aria-activedescendant="headlessui-listbox-option-:r2:" >
+									
+									<div class="sortList">
+									<li class="text-gray-900 cursor-default select-none relative py-2 ps-10 pe-4 mys" id="headlessui-listbox-option-:r10:" role="option" tabindex="-1" aria-selected="false" data-headlessui-state="">
+                          				<span class="font-normal block truncate" onclick="selectSort(1)">추천순</span></li>
+									<li class="text-gray-900 cursor-default select-none relative py-2 ps-10 pe-4 mys" id="headlessui-listbox-option-:r3:" role="option" tabindex="-1" aria-selected="false" data-headlessui-state="">
+										<span class="font-normal block truncate" onclick="selectSort(2)">최신순</span></li>
+									<li class="text-gray-900 cursor-default select-none relative py-2 ps-10 pe-4 mys" id="headlessui-listbox-option-:r4:" role="option" tabindex="-1" aria-selected="false" data-headlessui-state="">
+										<span class="font-normal block truncate" onclick="selectSort(3)">낮은가격순</span></li>
+									<li class="text-gray-900 cursor-default select-none relative py-2 ps-10 pe-4 mys" id="headlessui-listbox-option-:r5:" role="option" tabindex="-1" aria-selected="false" data-headlessui-state="">
+										<span class="font-normal block truncate" onclick="selectSort(4)">높은가격순</span></li>
+									</div>
+								</ul>
+							</div>
 				</div>	
 				<div
 					class=" top-16 sm:top-20 lg:top-36 xl:top-40 bg-white z-10 pb-2 pt-2 mb-2">
@@ -250,37 +280,7 @@ cursor: pointer;
 							<div
 								class="flex-shrink-0 text-body text-xs md:text-sm leading-4 pe-4 md:me-6 ps-2 hidden lg:block">${totalCnt}
 								개의 상품</div>
-							<div class="relative ms-2 z-10 min-w-[180px]" id="sortId">
-								<button
-									class="border border-gray-300 text-heading text-[13px] md:text-sm font-semibold relative w-full py-2 ps-3 pe-10 text-start bg-white rounded-lg shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-opacity-75 focus-visible:ring-white focus-visible:ring-offset-orange-300 focus-visible:ring-offset-2 focus-visible:border-indigo-500 sm:text-sm cursor-pointer"
-									id="headlessui-listbox-button-:r0:" type="button"
-									aria-haspopup="listbox" aria-expanded="false"
-									data-headlessui-state onclick="showSort()">
-									<span class="block truncate">추천순</span><span
-										class="absolute inset-y-0 end-0 flex items-center pe-2 pointer-events-none"><svg
-											stroke="currentColor" fill="none" stroke-width="0"
-											viewBox="0 0 24 24" class="w-5 h-5 text-gray-400"
-											aria-hidden="true" height="1em" width="1em"
-											xmlns="http://www.w3.org/2000/svg">
-											<path stroke-linecap="round" stroke-linejoin="round"
-												stroke-width="2" d="M8 9l4-4 4 4m0 6l-4 4-4-4"></path></svg></span>
-								</button>
-								
-								<ul class="absolute w-full py-1 mt-1 overflow-auto bg-white rounded-md shadow-lg max-h-60 ring-1 ring-black ring-opacity-5 focus:outline-none text-sm" aria-labelledby="headlessui-listbox-button-:r0:" aria-orientation="vertical" id="headlessui-listbox-options-:r1:" role="listbox" tabindex="0" data-headlessui-state="open" aria-activedescendant="headlessui-listbox-option-:r2:" >
-									
-									<div class="sortList">
-									<li class="text-gray-900 cursor-default select-none relative py-2 ps-10 pe-4 mys" id="headlessui-listbox-option-:r10:" role="option" tabindex="-1" aria-selected="false" data-headlessui-state="">
-                          				<span class="font-normal block truncate" onclick="selectSort(1)">추천순</span></li>
-									<li class="text-gray-900 cursor-default select-none relative py-2 ps-10 pe-4 mys" id="headlessui-listbox-option-:r3:" role="option" tabindex="-1" aria-selected="false" data-headlessui-state="">
-										<span class="font-normal block truncate" onclick="selectSort(2)">최신순</span></li>
-									<li class="text-gray-900 cursor-default select-none relative py-2 ps-10 pe-4 mys" id="headlessui-listbox-option-:r4:" role="option" tabindex="-1" aria-selected="false" data-headlessui-state="">
-										<span class="font-normal block truncate" onclick="selectSort(3)">낮은가격순</span></li>
-									<li class="text-gray-900 cursor-default select-none relative py-2 ps-10 pe-4 mys" id="headlessui-listbox-option-:r5:" role="option" tabindex="-1" aria-selected="false" data-headlessui-state="">
-										<span class="font-normal block truncate" onclick="selectSort(4)">높은가격순</span></li>
-									</div>
-								</ul>
-								
-							</div>
+	
 						</div>
 					</div>
 				</div>
@@ -554,10 +554,8 @@ cursor: pointer;
 		var sortId=$("#sortId");
 	    if (DongList.is(":hidden")) {
 	    	DongList.show();
-	    	sortId.hide();
 	    } else {
 	    	DongList.hide();
-	    	sortId.show();
 	    }
 	}
 	

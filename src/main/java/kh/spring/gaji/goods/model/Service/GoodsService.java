@@ -1,7 +1,6 @@
 package kh.spring.gaji.goods.model.Service;
 import kh.spring.gaji.goods.model.dto.GoodsDto;
 import kh.spring.gaji.goods.model.dto.GoodsInfoDto;
-import kh.spring.gaji.goods.model.dto.GoodsListDto;
 
 import java.util.Map;
 
