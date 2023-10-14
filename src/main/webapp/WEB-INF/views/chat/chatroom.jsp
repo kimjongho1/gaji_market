@@ -97,6 +97,8 @@
 
 			<script>
 				$(document).ready(function () {
+					let chatId; // chatId를 많이 사용하므로 전역변수 선언					
+					
 					// 리스트에서 메시지 시간 체크
 					function formatDate(dateString) {
 						var date = new Date(dateString);
@@ -135,20 +137,20 @@
 							person: null,
 							name: document.querySelector('.container .right .top .name')
 						};
-
+					
 					// 친구 클릭 이벤트 처리
 					friends.all.forEach(f => {
 						f.addEventListener('mousedown', () => {
 							// 클릭한 noRoom값 전달
-							const chatId = f.getAttribute('data-chatid');
+							chatId = f.getAttribute('data-chatid');
 							if (!f.classList.contains('active')) {
-								setAciveChat(f, chatId)
+								setAciveChat(f)
 							}
 						});
 					});
 
 					// 채팅 활성화 및 비활성화
-					function setAciveChat(f, chatId) {
+					function setAciveChat(f) {
 
 						$.ajax({
 							type: 'get',
@@ -186,7 +188,6 @@
 								console.log(error)
 							}
 						})
-
 					}
 
 					$(function () {
@@ -242,10 +243,13 @@
 							$.ajax({
 								type: 'get',
 								url: '${pageContext.request.contextPath}/insultChat',
-								data: {"msg": message},
-								datatype: "String",
+								data: {
+									"msg": message,
+									"chatId": chatId
+									},
+								datatype: "json",
 								susccess: function (result) { // 반드시 msg를 보내서 controller 작업 해야함
-									console.log(result);									
+									console.log("insult 메시지" + result);									
 								},
 								error: function (request, status, error) { // 결과 에러 콜백함수
 									console.log(error)
