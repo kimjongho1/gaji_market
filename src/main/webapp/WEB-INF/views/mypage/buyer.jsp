@@ -213,7 +213,8 @@ function closePayCallback(data){
 	console.log("ClosePayCallback들어옴");
 	console.log(data);
 	if(data=='1'){
-		alert("거래가 확정되었습니다");
+		alert("거래가 확정되었습니다.");
+		alert("리뷰를 작성페이지로 이동합니다.");
 		window.location.href="${pageContext.request.contextPath}/mypage/dealreview?transactionId=${safePurchaseInfoDto.transactionId}";
 	}
 	else

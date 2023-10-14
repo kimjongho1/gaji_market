@@ -17,7 +17,7 @@
 	</select>
 	
 	<select id="checkTradingStatus" parameterType="map" resultType="string">	<!-- 리뷰를 위한 안전거래상태 체크 -->
-		select goods_id from safe_trading where transaction_id=#{transactionId} and buyer_id=#{userId} and trading_status=4 
+		select goods_id from safe_trading where transaction_id=#{transactionId} and buyer_id=#{userId} and trading_status=4
 	</select>
 	
 	<select id="checkReview" parameterType="map" resultType="_int">	<!-- 해당 상품에대한 리뷰가 존재하는지를 체크함 -->

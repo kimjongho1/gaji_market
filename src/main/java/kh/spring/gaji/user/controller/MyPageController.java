@@ -146,7 +146,7 @@ public class MyPageController {
 			return "mypage/dealreview";							// 리뷰작성 페이지로 이동
 		}
 			rattr.addFlashAttribute("msg", "잘못된 접근입니다.");
-		return "redirect:/main/main";
+		return "redirect:/";
 	}
 	
 	@PostMapping("/dealreview.do")
@@ -160,13 +160,13 @@ public class MyPageController {
 			dealReviewDto.setUserId("qordmlgjs");//추후 userId
 			if(userService.doDealreview(dealReviewDto,transactionId)==1) {
 				rattr.addFlashAttribute("msg","리뷰가 정상적으로 등록되었습니다.");
-				return "redirect:/mypage";
+				return "redirect:/";
 			}
 			rattr.addFlashAttribute("msg","잘못된 접근입니다1.");
-			return "redirect:/mypage";
+			return "redirect:/";
 		}
 		rattr.addFlashAttribute("msg","잘못된 접근입니다2.");
-		return "redirect:/mypage";
+		return "redirect:/";
 	}
 	
 	@PostMapping("/address/regist/do")

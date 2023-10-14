@@ -343,7 +343,10 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public int checkTradingStatus(String transactionId,String userId) {
 		String goodsId=userDao.checkTradingStatus(transactionId,userId);
-		return userDao.checkReview(goodsId, userId);
+		if(goodsId!=null)
+			return userDao.checkReview(goodsId, userId);
+		else
+			return 1;
 	}
 
 	@Override
