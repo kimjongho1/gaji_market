@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -28,6 +29,7 @@ import kh.spring.gaji.file.model.service.FileService;
 import kh.spring.gaji.goods.model.Service.GoodsService;
 import kh.spring.gaji.goods.model.dto.GoodsDto;
 import kh.spring.gaji.goods.model.dto.GoodsListDto;
+import kh.spring.gaji.region.model.dto.DongDto;
 import kh.spring.gaji.region.model.service.RegionService;
 import kh.spring.gaji.user.model.dto.UserSafeTradingDto;
 
@@ -168,6 +170,12 @@ public class GoodsController {
 	@GetMapping("/get")
 	public String get() { // 중고거래 게시판 글 상세보기
 		return "goods/goodsget";
+	}
+	
+	@PostMapping("/getdong")
+	@ResponseBody
+	public List<DongDto> getdong(int guId) {
+		return regionService.dongList(guId);
 	}
 
 //	@GetMapping("/get/map")

@@ -474,37 +474,65 @@ cursor: pointer;
 	<script src="${pageContext.request.contextPath}/resources/js/main.js"></script>
 	<script>
 	function selectGu(guId,guName){
+		var item;
+		var html="";
 		$("#guId").val(guId);
 		$("#guName").val(guName);
 		$("#dongId").val("");
 		$("#dongName").val("");
-		$("#condition").submit();
+		$.ajax({
+			url:"${pageContext.request.contextPath}/goods/getdong",
+			method: "post",
+			dataType:"json",
+			data:{guId:guId},
+			success: (data)=>{
+				$(".guList").hide();
+				html+="<div class='dongList'>";
+				for(var i=0; i<data.length; i++){
+					item=data[i];
+					html+="<li class='text-gray-900 cursor-default select-none relative py-2 ps-10 pe-4 mys' id='headlessui-listbox-option-:r10:' role='option' tabindex='-1' aria-selected='false' data-headlessui-state=''>";
+      				html+="<span class='font-normal block truncate' onclick='selectDong(" + item.dongId + ", \"" + item.dongName + "\")'>" + item.dongName + "</span></li>";
+				}
+				$(".dongList").replaceWith(html);
+			},
+			error : (request,status,error)=>{
+				console.log(request);
+				console.log(status);
+				console.log(error);
+				alert("code:"+request.status+"\n"+"message"+request.responseText+"\n"+error+":error");
+			}
+		});
 	}
 	
 	function selectDong(dongId,dongName){
 		$("#dongId").val(dongId);
+		$("#currentPage").val(1);
 		$("#dongName").val(dongName);
 		$("#condition").submit();
 	}
 	
 	function priceOptionF1(){
 		$("#priceCeiling").val(100000);
+		$("#currentPage").val(1);
 		$("#condition").submit();
 		console.log(data);
 	}
 	
 	function priceOptionF2(){
 		$("#priceCeiling").val(300000);
+		$("#currentPage").val(1);
 		$("#condition").submit();
 	}
 	
 	function priceOptionF3(){
 		$("#priceCeiling").val(500000);
+		$("#currentPage").val(1);
 		$("#condition").submit();
 	}
 	
 	function priceOptionF4(){
 		$("#priceCeiling").val(700000);
+		$("#currentPage").val(1);
 		$("#condition").submit();
 	}
 	
@@ -550,22 +578,24 @@ cursor: pointer;
 	}
 	
 	function showDong(){
-		var DongList = $(".DongList");
+		var DongList = $(".dongList");
 		var sortId=$("#sortId");
 	    if (DongList.is(":hidden")) {
 	    	DongList.show();
 	    } else {
 	    	DongList.hide();
-	    }
+	    } 
 	}
 	
 	function searching(event){
 		event.preventDefault();
+		$("#currentPage").val(1);
 		$("#searchWord").val($("#searchForm input[name='searchWord']").val());
 		$("#condition").submit();	 
 	 }
 	
 	function selectSort(select){
+		$("#currentPage").val(1);
 		$("#sort").val(select);
 		$("#condition").submit();
 	}
