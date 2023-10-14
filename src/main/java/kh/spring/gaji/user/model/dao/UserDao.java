@@ -114,6 +114,7 @@ public class UserDao {
     public List<UserSafeTradingDto> getSearchSellerSafePurchaseList(String userId,int currentPage,int PAGESIZE,String searchWord, int totalCnt) {	//9P 안전거래 구매내역(회원) 불러오기
     	int startRownum = 0;
 		int endRownum = 0;
+		searchWord="%"+searchWord+"%";
 		startRownum = (currentPage-1)*PAGESIZE +1;
 		endRownum = ((currentPage*PAGESIZE) > totalCnt) ? totalCnt: (currentPage*PAGESIZE);
 		Map<String, Object> map= new HashMap<String, Object>();
@@ -121,7 +122,7 @@ public class UserDao {
 		map.put("userId", userId);
 		map.put("startRownum",startRownum);
 		map.put("endRownum",endRownum);
-		return sqlSession.selectList("user.getSellerSearchSafePurchaseList",map);
+		return sqlSession.selectList("user.getSearchSellerSafePurchaseList",map);
     }
 
     public List<UserSafeTradingDto> getSellerSafePurchaseList(String userId,int currentPage,int PAGESIZE, int totalCnt) {	//9P 안전거래 구매내역(회원) 불러오기
@@ -163,6 +164,7 @@ public class UserDao {
     public List<InFaceTradingDto> getSearchInfacePurchaseList(String buyerId,int currentPage,int PAGESIZE,int totalCnt,String searchWord) {	//9P 직거래 구매내역(회원) 불러오기
     	int startRownum = 0;
 		int endRownum = 0;
+		searchWord="%"+searchWord+"%";
 		startRownum = (currentPage-1)*PAGESIZE +1;
 		endRownum = ((currentPage*PAGESIZE) > totalCnt) ? totalCnt: (currentPage*PAGESIZE);
 		Map<String, Object> map= new HashMap<String, Object>();
@@ -197,7 +199,8 @@ public class UserDao {
         return sqlSession.selectList("user.getSellerInfacePurchaseList", map);
     }
     
-    public List<InFaceTradingDto> getSearchSellerInfacePurchaseList(String userId,int currentPage,int PAGESIZE,int totalCnt,String searchWord) {	//9P 직거래 구매내역(회원) 불러오기
+    public List<InFaceTradingDto> getSearchSellerInfacePurchaseList(String userId,int currentPage,int PAGESIZE,int totalCnt,String searchWord) {	//9P 직거래 구매내역(판매자) 불러오기
+    	searchWord="%"+searchWord+"%";
     	int startRownum = 0;
 		int endRownum = 0;
 		startRownum = (currentPage-1)*PAGESIZE +1;
