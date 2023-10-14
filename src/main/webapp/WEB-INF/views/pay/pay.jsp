@@ -440,17 +440,18 @@
 	
 	var addressRegist=()=>{
 		var formData = $('#addressForm').serialize();
+		var item;
 		$.ajax({
 			type:"POST",
 			url:"${pageContext.request.contextPath}/mypage/address/regist/do",
 			data:formData,
+			dataType:"json",
 			success: function(data){
-				var item;
 				alert("주소 등록에 성공했습니다.");
 				var html="<select id='addresses' items='${userAddress}'>";
 				for(var i=0; i<data.length; i++){
 				item=data[i];
-				html+="<option value="+item.roadAddress+","+item.detailAddress+">";
+				html+="<option value='"+item.roadAddress+","+item.detailAddress+"'>";
 				html+=item.addressNickname+","+item.roadAddress+","+item.detailAddress+"</option>";
 				}
 				$("#addresses").replaceWith(html);
@@ -473,6 +474,7 @@
 		$.ajax({
 			type:"POST",
 			url:"${pageContext.request.contextPath}/mypage/address/delete",
+			dataType:"json",
 			data: { addressNo: addressNo },
 			success: function(data){
 				if(data=='1')
@@ -500,6 +502,7 @@
 			type:"POST",
 			url:"${pageContext.request.contextPath}/mypage/address/alterPrimaryAddress",
 			data: { addressNo: addressNo },
+			dataType:"json",
 			success: function(data){
 				alert("대표주소가 변경되었습니다.");
 				window.location.href="${pageContext.request.contextPath}/payment/pay";

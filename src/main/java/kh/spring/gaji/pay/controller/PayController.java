@@ -57,7 +57,7 @@ public class PayController {
 			/* String userId=(String)request.getSession().getAttribute("userId"); */
 			if(payServiceImpl.checkGoodsStatus(1)!=1) {	//추후 1은 goodsId로 대체
 				attribute.addFlashAttribute("msg", "판매중인 상품이 아닙니다.");
-				return "redirect:/main";
+				return "redirect:/";
 			}
 			GoodsPayInfoDto goodsInfo=payServiceImpl.getGoodsInfo(1);	//추후 1은 goodsId로 대체
 			List<UserAddressDto> userAddress = payServiceImpl.getUserAddressList("qordmlgjs");	 //추후대체 userId =qordmlgjs

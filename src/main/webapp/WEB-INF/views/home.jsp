@@ -32,9 +32,12 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/style.css" type="text/css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css"/>
    
+   <script>
    <c:if test="${not empty msg}">
 	alert("${msg}");
 	</c:if>
+   </script>
+ 
 </head>
 
 <body>

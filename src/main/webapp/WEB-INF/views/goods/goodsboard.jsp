@@ -191,7 +191,7 @@ cursor: pointer;
 									id="headlessui-listbox-button-:r0:" type="button" onclick="showGu()"
 									aria-haspopup="listbox" aria-expanded="false" 
 									data-headlessui-state>
-									<span class="block truncate">${guName}   (구)</span><span
+									<span class="block truncate" id="selectedGuName">${guName}(구)</span><span
 										class="absolute inset-y-0 end-0 flex items-center pe-2 pointer-events-none"><svg
 											stroke="currentColor" fill="none" stroke-width="0"
 											viewBox="0 0 24 24" class="w-5 h-5 text-gray-400"
@@ -218,7 +218,7 @@ cursor: pointer;
 									id="headlessui-listbox-button-:r0:" type="button"
 									aria-haspopup="listbox" aria-expanded="false" onclick="showDong()"
 									data-headlessui-state>
-									<span class="block truncate">${dongName}  (동)</span><span
+									<span class="block truncate" id="selectedDongName">${dongName}  (동)</span><span
 										class="absolute inset-y-0 end-0 flex items-center pe-2 pointer-events-none"><svg
 											stroke="currentColor" fill="none" stroke-width="0"
 											viewBox="0 0 24 24" class="w-5 h-5 text-gray-400"
@@ -244,7 +244,22 @@ cursor: pointer;
 									id="headlessui-listbox-button-:r0:" type="button"
 									aria-haspopup="listbox" aria-expanded="false"
 									data-headlessui-state onclick="showSort()">
-									<span class="block truncate">추천순</span><span
+									<span class="block truncate">
+									<c:choose>
+									<c:when test="${sort==1}">
+										추천순
+									</c:when>
+									<c:when test="${sort==2}">
+										최신순
+									</c:when>
+									<c:when test="${sort==3}">
+										낮은가격순
+									</c:when>
+									<c:when test="${sort==4}">
+										높은가격순
+									</c:when>
+									</c:choose>
+									</span><span
 										class="absolute inset-y-0 end-0 flex items-center pe-2 pointer-events-none"><svg
 											stroke="currentColor" fill="none" stroke-width="0"
 											viewBox="0 0 24 24" class="w-5 h-5 text-gray-400"
@@ -492,6 +507,8 @@ cursor: pointer;
 	<script src="${pageContext.request.contextPath}/resources/js/main.js"></script>
 	<script>
 	function selectGu(guId,guName){
+		$("#selectedGuName").text(guName+"(구)");
+		$("#selectedDongName").text("(동)");
 		var item;
 		var html="";
 		$("#guId").val(guId);
@@ -526,6 +543,7 @@ cursor: pointer;
 		$("#dongId").val(dongId);
 		$("#currentPage").val(1);
 		$("#dongName").val(dongName);
+		$("#sort").val(1);
 		$("#condition").submit();
 	}
 	
