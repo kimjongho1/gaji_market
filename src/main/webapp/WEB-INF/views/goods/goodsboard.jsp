@@ -430,7 +430,7 @@ cursor: pointer;
   <ul class="flex justify-center space-x-2 space-x-reverse">
 
     <c:if test="${startPageNum!=1}">
-      <button class="pagination-button" onclick="pageMove(${endPageNum}+1)">이전</button>
+      <button class="pagination-button" onclick="pageMove(${endPageNum}-1)">이전</button>
     </c:if>
 
     <c:forEach begin="${startPageNum}" end="${endPageNum}" var="i">
