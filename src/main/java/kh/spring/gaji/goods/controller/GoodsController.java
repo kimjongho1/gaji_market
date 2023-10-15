@@ -179,10 +179,6 @@ public class GoodsController {
 		return "goods/goodsupdate";
 	}
 
-	@GetMapping("/get")
-	public String get() { // 중고거래 게시판 글 상세보기
-		return "goods/goodsget";
-	}
 	
 	@PostMapping("/getdong")
 	@ResponseBody
