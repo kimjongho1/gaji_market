@@ -28,6 +28,7 @@ import kh.spring.gaji.file.model.dto.FileDto;
 import kh.spring.gaji.file.model.service.FileService;
 import kh.spring.gaji.goods.model.Service.GoodsService;
 import kh.spring.gaji.goods.model.dto.GoodsDto;
+import kh.spring.gaji.goods.model.dto.GoodsInfoDto;
 import kh.spring.gaji.goods.model.dto.GoodsListDto;
 import kh.spring.gaji.region.model.dto.DongDto;
 import kh.spring.gaji.region.model.service.RegionService;
@@ -161,7 +162,18 @@ public class GoodsController {
 			return "redirect:/goods/goodswrite"; // 실패 시 다시 글 작성 페이지로 이동
 		}
 	}
-
+	
+	@GetMapping("/get")
+	public ModelAndView getBoard(ModelAndView mv,@RequestParam(name = "goodsId", defaultValue = "1") int goodsId, GoodsInfoDto goodsDto) {	// 중고거래 게시판 글 상세보기
+		
+		
+		mv.setViewName("goods/goodsget");
+		mv.addObject("goodsWishNum",goodsService.goodsWishNum(goodsId));
+		mv.addObject("goodsDto",goodsService.getGoodsInfo(goodsId));
+		
+		return mv;
+	}
+	
 	@GetMapping("/update")
 	public String update() { // 중고거래 게시판 글 수정
 		return "goods/goodsupdate";

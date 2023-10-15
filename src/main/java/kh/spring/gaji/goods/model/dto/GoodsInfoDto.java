@@ -20,4 +20,5 @@ public class GoodsInfoDto{
     private double lng;
     private String nickname;
     private double ratingScore;
+    private int wishCount;
 }

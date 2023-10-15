@@ -59,7 +59,7 @@
 	
 	
 	
-	<select id="getSellerSafeTotalCnt" parameterType="string" resultType="int">	<!-- 9P 아이디에 해당하는 안전거래 구매 총갯수 -->
+	<select id="getSellerSafeTotalCnt" parameterType="string" resultType="int">	<!-- 9P 아이디에 해당하는 안전거래 구매 총갯수 goodsget-->
 		select count(*) from safe_trading join goods using (goods_id) where user_id=#{userId}
 	</select>
 	

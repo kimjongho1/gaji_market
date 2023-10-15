@@ -61,4 +61,8 @@ public class GoodsServiceImpl implements GoodsService {
 				category,dongId,searchWord,totalCnt));
 		return result;
 	}
+	
+	public int goodsWishNum(int goodsId) {
+		return goodsDao.goodsWishNum(goodsId);
+	}
 }

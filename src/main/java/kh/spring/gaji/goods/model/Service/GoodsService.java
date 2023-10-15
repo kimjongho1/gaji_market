@@ -17,4 +17,6 @@ public interface GoodsService {
     int updateGoods(GoodsDto goodsDto);
 
     int deleteGoods(int goodsId);
+    
+    int goodsWishNum(int goodsId);
 }

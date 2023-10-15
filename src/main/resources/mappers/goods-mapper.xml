@@ -89,16 +89,26 @@
 		</insert>
 
 		<select id="getGoodsInfo" parameterType="_int" resultType="GoodsInfoDto"> <!--23P 상품글 상세조회  -->
-			select goods_id,user_id,category_id,title,status,price,view_count,description,created_at,safe_trading_yn
-			,dong_id,lat,lng,nickname,rating_score
-			from goods join user using (user_id) 
-			where goods_id=#{goodsId} and active_status='Y'
+			select goods_id,user_id,category_id,title,status,price,view_count,description,g.created_at,safe_trading_yn
+			,g.dong_id,lat,lng,nickname,rating_score, (select count(user_id) from wishlist w where w.goods_id = g.goods_d) wishCount
+			from goods g join users u using (user_id) 
+			where goods_id=#{goodsId} and active_status='Y'and status != 4
 		</select>
+		
+		<select id="goodsWishNum" parameterType="_int" resultType="_int">
+			select count(user_id) from wishlist where goods_id = #{goodsId}
+		</select>
+		
+		<select id="goodsListUser">
+			select * from goods join goods_file on (goods_id) join users on (user_id) 
+		</select>
+		
 		
 		<update id="updateStatus" parameterType="map"> <!-- 23P 상품상태변경 -->
 			update goods set status=#{status} where goods_id=#{goodsId}
 		</update>
-	
+		
+		
 
 		
 		<update id="updateGoods" parameterType="GoodsDto"> <!-- 25P 상품글 수정 -->

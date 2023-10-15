@@ -567,7 +567,7 @@ $('#verify-button').click(function() {
 
 
         // 유효성 문제가 없을 시 폼 제출
-        /* document.joinForm.submit(); */
+         document.joinForm.submit();
         return true;
         
         }
