@@ -211,7 +211,7 @@
 				<c:if test="${startPageNum!=1}">
 					<%--페이징 이전,번호,다음에 대한 코드 --%>
 					<a
-						href="<%=request.getContextPath()%>/mypage/salestatus/inface?currentPageNum=${endPageNum-1}&searchWord=${searchWord}">이전</a>
+						href="<%=request.getContextPath()%>/mypage/salestatus/inface?currentPage=${startPageNum-1}&searchWord=${searchWord}">이전</a>
 				</c:if>
 				<c:forEach begin="${startPageNum}" end="${endPageNum}" var="i">
 					<a
@@ -225,7 +225,7 @@
 			<c:otherwise>
 				<c:if test="${startPageNum!=1}">
 					<a
-						href="<%=request.getContextPath()%>/mypage/salestatus/inface?currentPageNum=${endPageNum-1}">이전</a>
+						href="<%=request.getContextPath()%>/mypage/salestatus/inface?currentPage=${startPageNum-1}">이전</a>
 				</c:if>
 				<c:forEach begin="${startPageNum}" end="${endPageNum}" var="i">
 					<a
