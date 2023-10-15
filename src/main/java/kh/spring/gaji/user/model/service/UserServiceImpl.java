@@ -247,8 +247,12 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public int deleteAddress1(Map<String, Object> map) {
-    	userDao.deleteAddress1(map);
-    	return userDao.deleteAddress2(map);
+    	int result=0;
+    	if(userDao.deleteAddress1(map)==1) {
+    		userDao.deleteAddress2(map);
+    		return 1;
+    	}
+    	else return 0;
     }
 
     @Override

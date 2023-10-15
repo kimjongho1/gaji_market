@@ -357,7 +357,10 @@
 		}
 		else{
 			console.log(data);
-			alert(data.response.failReason);
+			if(data.response.failReason==null||data.response.failReason=="알 수 없는 이유로 결제가 중단되었습니다. 나이스페이로 문의(1661-0808)하세요.")
+				alert("[결제포기] 사용자가 결제를 취소하셨습니다");
+			else
+				alert(data.response.failReason);
 		}
 	}
 
@@ -446,7 +449,7 @@
 			url:"${pageContext.request.contextPath}/mypage/address/regist/do",
 			data:formData,
 			dataType:"json",
-			success: function(data){
+			success: (data)=>{
 				alert("주소 등록에 성공했습니다.");
 				var html="<select id='addresses' items='${userAddress}'>";
 				for(var i=0; i<data.length; i++){
@@ -454,9 +457,10 @@
 				html+="<option value='"+item.roadAddress+","+item.detailAddress+"'>";
 				html+=item.addressNickname+","+item.roadAddress+","+item.detailAddress+"</option>";
 				}
+				html+="</select>";
 				$("#addresses").replaceWith(html);
 			},
-			error: function(data){
+			error: (data)=>{
 				if($("#modalAddresses option").length > 8)
 					alert("등록가능한 주소갯수를 초과하였습니다.");
 				else
@@ -476,7 +480,7 @@
 			url:"${pageContext.request.contextPath}/mypage/address/delete",
 			dataType:"json",
 			data: { addressNo: addressNo },
-			success: function(data){
+			success:  (data)=>{
 				if(data=='1')
 					alert("주소를 삭제했습니다.");
 				else
@@ -503,7 +507,7 @@
 			url:"${pageContext.request.contextPath}/mypage/address/alterPrimaryAddress",
 			data: { addressNo: addressNo },
 			dataType:"json",
-			success: function(data){
+			success:  (data)=>{
 				alert("대표주소가 변경되었습니다.");
 				window.location.href="${pageContext.request.contextPath}/payment/pay";
 			},
