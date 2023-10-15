@@ -90,7 +90,7 @@
 
 		<select id="getGoodsInfo" parameterType="_int" resultType="GoodsInfoDto"> <!--23P 상품글 상세조회  -->
 			select goods_id,user_id,category_id,title,status,price,view_count,description,g.created_at,safe_trading_yn
-			,g.dong_id,lat,lng,nickname,rating_score, (select count(user_id) from wishlist w where w.goods_id = g.goods_d) wishCount
+			,g.dong_id,lat,lng,nickname,rating_score, (select count(user_id) from wishlist w where w.goods_id = g.goods_id) wishCount
 			from goods g join users u using (user_id) 
 			where goods_id=#{goodsId} and active_status='Y'and status != 4
 		</select>
