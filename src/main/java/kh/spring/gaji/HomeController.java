@@ -29,4 +29,9 @@ public class HomeController {
 		return "/mypage/side";
 	}
 	
+	@GetMapping("/testg")
+	public String testg() { //메인 페이지
+		return "/test";
+	}
+	
 }

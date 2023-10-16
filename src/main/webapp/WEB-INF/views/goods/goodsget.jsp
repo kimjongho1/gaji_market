@@ -101,9 +101,8 @@
 							
 						</div>
 						<div
-							class="swiper-pagination swiper-pagination-clickable swiper-pagination-bullets swiper-pagination-horizontal <!-- swiper-pagination-lock -->">
-							<span
-								class="swiper-pagination-bullet swiper-pagination-bullet-active"></span>
+							class="swiper-pagination swiper-pagination-clickable swiper-pagination-bullets swiper-pagination-horizontal" >
+								
 						</div>
 					</div>
 					<div class="flex items-center w-full absolute top-2/4 z-10 hidden">
@@ -301,7 +300,7 @@
 							<div class="h-full rounded bg-[#0DCC5A]" style="width: 25%;"></div>
 						</div>
 					</div>
-					<div class="pt-5">
+					 <div class="pt-5">
 						<div class="mb-10 2xl:pt-2">
 							<div class="flex items-center justify-between w-full mb-4">
 								<p
@@ -317,7 +316,7 @@
 									dir="ltr">
 									<div class="swiper-wrapper"
 										style="transform: translate3d(0px, 0px, 0px);">
-										<div class="swiper-slide swiper-slide-active"
+										<div class="card"
 											style="width: 117px; margin-right: 4px;">
 											<a
 												class="group box-border overflow-hidden flex rounded-md cursor-pointer bg-white pe-0 md:pb-1 flex-col items-start"
@@ -337,7 +336,7 @@
 														class="font-semibold space-s-2 mt-0.5 text-heading text-sm">무료나눔</div>
 												</div></a>
 										</div>
-										<div class="swiper-slide swiper-slide-next"
+										<div class="card"
 											style="width: 117px; margin-right: 4px;">
 											<a
 												class="group box-border overflow-hidden flex rounded-md cursor-pointer bg-white pe-0 md:pb-1 flex-col items-start"
@@ -358,7 +357,7 @@
 														class="font-semibold space-s-2 mt-0.5 text-heading text-sm">22,000원</div>
 												</div></a>
 										</div>
-										<div class="swiper-slide"
+										<div class="card"
 											style="width: 117px; margin-right: 4px;">
 											<a
 												class="group box-border overflow-hidden flex rounded-md cursor-pointer bg-white pe-0 md:pb-1 flex-col items-start"
@@ -380,14 +379,11 @@
 												</div></a>
 										</div>
 									</div>
-									<div
-										class="swiper-button-prev swiper-button-disabled swiper-button-lock"></div>
-									<div
-										class="swiper-button-next swiper-button-disabled swiper-button-lock"></div>
+									
 								</div>
 							</div>
 						</div>
-					</div>
+					</div> 
 				</div>
 			</div>
 		</div>
@@ -420,13 +416,12 @@
 			  pagination: {
 			    el: '.swiper-pagination',
 			    clickable: true,
+			    createElements: true,
 			  },
-
+			
+			  slidesPerView: 1,
 			  // Navigation arrows
-			  navigation: {
-			    nextEl: '.swiper-button-next',
-			    prevEl: '.swiper-button-prev',
-			  },
+			 
 			  
 			}	  
   );
