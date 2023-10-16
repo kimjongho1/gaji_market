@@ -312,7 +312,7 @@
 							</div>
 							<div class="carouselWrapper relative    ">
 								<div
-									class="swiper swiper-initialized swiper-horizontal swiper-pointer-events swiper-backface-hidden"
+									class="swiper-initialized swiper-horizontal swiper-pointer-events swiper-backface-hidden"
 									dir="ltr">
 									<div class="swiper-wrapper"
 										style="transform: translate3d(0px, 0px, 0px);">
