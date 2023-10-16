@@ -106,7 +106,7 @@ table {
 .footer .footer_copy .footer_logo,
 .header .logo,
 .reconfirm_top .logo {
-    background-image: url(https://ssl.pstatic.net/static/nid/login/m_sp_00_common_978240a6.png);
+    background-image: url("${pageContext.request.contextPath}/resources/img/gaji_logo.png");
     background-size: 244px 107px;
     background-repeat: no-repeat
 }

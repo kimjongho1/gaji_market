@@ -12,6 +12,7 @@
 	integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
 	crossorigin="anonymous">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/sign/sign.css" type="text/css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/sign/header_footer.css" type="text/css">
 
 <!--favicon  -->
 	<link rel="icon" href="${pageContext.request.contextPath}/resources/img/favicon.ico">
@@ -64,5 +65,20 @@
 	<script>
 		
 	</script>
+	
+	<div id="footer">
+		<ul class="guides fl">
+		<li class="first"><a href="#" target="_blank" onclick="clickcr(this,'fot.ecommerce','','',event);">전자금융거래 이용약관</a></li>
+		<li><a href="#" target="_blank" onclick="clickcr(this,'fot.privacy','','',event);">개인정보처리방침</a></li>
+		<li><a href="#" target="_blank" onclick="clickcr(this,'fot.disclaimer','','',event);">책임의 한계와 법적고지</a></li>
+		</ul>
+		<address class="copyright">
+		Copyright <em>©</em> <a href="#" target="_blank" onclick="clickcr(this,'fot.gajicorp','','',event);"><strong>GaJi Corp.</strong></a> All Rights Reserved.
+		</address>
+		<ul class="guides fr">
+		<li><a href="#" target="_blank" title="새창" onclick="clickcr(this,'fot.help','','',event);"> 회원정보 고객센터 </a></li>
+		</ul>
+	</div>
+	
 </body>
 </html>

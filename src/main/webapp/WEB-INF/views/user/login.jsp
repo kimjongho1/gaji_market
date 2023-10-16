@@ -120,6 +120,25 @@ if(msg ){
 		<!--배너-->
 		<div id="gladbanner" class="banner_wrap">&nbsp;</div>
 	</div>
+	<div class="footer">
+        <div class="footer_inner">
+            <!--[주]고객센터,제휴문의,서비스안내-->
+            <ul class="footer_link" id="footer_link">
+                <li><a target="_blank" class="footer_item" href="#" id="fot.agreement"><span class="text">이용약관</span></a></li>
+                <li><a target="_blank" class="footer_item" href="#" id="fot.privacy"><span class="text">개인정보처리방침</span></a></li>
+                <li><a target="_blank" class="footer_item" href="#" id="fot.disclaimer"><span class="text">책임의 한계와 법적고지</span></a></li>
+                <li><a target="_blank" class="footer_item" href="#" id="fot.help"><span class="text">회원정보 고객센터</span></a></li>
+            </ul>
+            <div class="footer_copy">
+                <a id="fot.gaji" target="_blank" href="#">
+                    <span class="footer_logo"><span class="blind">가지마켓</span></span>
+                </a>
+                <span class="text">Copyright</span>
+                <span class="corp">© GaJi Corp.</span>
+                <span class="text">All Rights Reserved.</span>
+            </div>
+        </div>
+    </div>
 	<script
 		src="${pageContext.request.contextPath}/resources/js/jquery-3.3.1.min.js"></script>
 
