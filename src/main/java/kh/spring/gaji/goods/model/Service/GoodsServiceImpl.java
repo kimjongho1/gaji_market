@@ -63,9 +63,6 @@ public class GoodsServiceImpl implements GoodsService {
 		return result;
 	}
 	
-	public int goodsWishNum(int goodsId) {
-		return goodsDao.goodsWishNum(goodsId);
-	}
 
 	@Override
 	public GuDongInfoDto getGuDongInfo(String userId) {
