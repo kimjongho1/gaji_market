@@ -7,6 +7,7 @@ import kh.spring.gaji.goods.model.dto.GoodsDto;
 import kh.spring.gaji.goods.model.dto.GoodsInfoDto;
 import kh.spring.gaji.goods.model.dto.GoodsListDto;
 import kh.spring.gaji.goods.model.dto.GoodsListInfoDto;
+import kh.spring.gaji.goods.model.dto.GuDongInfoDto;
 
 import java.util.HashMap;
 import java.util.List;
@@ -66,4 +67,8 @@ public class GoodsDao  {
     public int goodsWishNum(int goodsId) {
     	return sqlSession.selectOne("goods.goodsWishNum",goodsId);
     }
+
+	public GuDongInfoDto getGuDongInfo(String userId) {
+		return sqlSession.selectOne("goods.getGuDongInfo",userId);
+	}
 }

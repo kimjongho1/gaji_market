@@ -2,6 +2,7 @@ package kh.spring.gaji.goods.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.security.Principal;
 import java.util.List;
 import java.util.Map;
 
@@ -30,6 +31,7 @@ import kh.spring.gaji.goods.model.Service.GoodsService;
 import kh.spring.gaji.goods.model.dto.GoodsDto;
 import kh.spring.gaji.goods.model.dto.GoodsInfoDto;
 import kh.spring.gaji.goods.model.dto.GoodsListDto;
+import kh.spring.gaji.goods.model.dto.GuDongInfoDto;
 import kh.spring.gaji.region.model.dto.DongDto;
 import kh.spring.gaji.region.model.service.RegionService;
 import kh.spring.gaji.user.model.dto.UserSafeTradingDto;
@@ -56,21 +58,27 @@ public class GoodsController {
 	private FileService fileService;
 
 	@GetMapping("/board")
-	public String board(Model model,Integer currentPage,String searchWord,Integer sort,Integer priceFloor, Integer priceCeiling,Integer category,Integer guId,String guName,String dongName,Integer dongId) { // 중고거래 게시판
-		
+	public String board(Model model,Integer currentPage,String searchWord,Integer sort,Integer priceFloor, Integer priceCeiling,Integer category,Integer guId,String guName,String dongName,Integer dongId,Principal principal) { // 중고거래 게시판
+		String userId=principal.getName();
 		model.addAttribute("guList", regionService.guList());
+		if(guId==null && dongId==null) {
+			GuDongInfoDto guDongInfo=goodsService.getGuDongInfo(userId);
+			model.addAttribute("guId",guId=guDongInfo.getGuId());
+			model.addAttribute("guName",guName=guDongInfo.getGuName());
+			model.addAttribute("dongId",dongId=guDongInfo.getDongId());
+			model.addAttribute("dongName",guName=guDongInfo.getDongName());
+		}
+		else {
 		if(guId!=null) {
 			model.addAttribute("guId",guId);
+			model.addAttribute("guName",guName);
 			model.addAttribute("dongList", regionService.dongList(guId));
 		}
-		if(guName!=null&&!guName.equals("")) {
-			model.addAttribute("guName",guName);
-		}
+
 		if(dongName!=null&&!dongName.equals("")) {
 			model.addAttribute("dongName",dongName);
-		}
-		if(dongId!=null) {
 			model.addAttribute("dongId", dongId);
+		}
 		}
 		
 		int totalCnt=0;
