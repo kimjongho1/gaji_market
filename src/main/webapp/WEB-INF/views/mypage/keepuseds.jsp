@@ -181,7 +181,8 @@
 									<!-- Product price-->
 									끌올일자:${myGoodsInfo.refreshedAt}<br>
                                     가격:${myGoodsInfo.price}<br>
-                                    조회수:${myGoodsInfo.viewCount}
+                                    ${myGoodsInfo.dongName} 조회수:${myGoodsInfo.viewCount}<br>
+                                    판매자:${myGoodsInfo.nickname}
 								</div>
 							</div>
 							<!-- Product actions-->

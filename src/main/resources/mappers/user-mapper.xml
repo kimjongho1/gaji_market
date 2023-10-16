@@ -176,8 +176,9 @@
 		,(select url from goods_file f where f.goods_id=list2.goods_id and rownum between 0 and 1) url
 		from
 		(select list.*,rownum rn from(
-		(select to_char(refreshed_at, 'YYYY-MM-DD HH24:MI:SS') refreshed_at,goods_id,title,price,status,view_Count
-		from goods 
+		(select to_char(refreshed_at, 'YYYY-MM-DD HH24:MI:SS') refreshed_at,goods_id,title,price,status,view_Count,(select dong_name from dong d where d.dong_Id=g.dong_Id) dong_name
+		,(select nickname from users u where u.user_id=g.user_id) nickname
+		from goods g
 		where user_id=#{userId} and status IN(1,2) and active_status='Y' 
 		order by refreshed_at DESC) 
 		list)
@@ -188,14 +189,14 @@
 		select list2.*,(select count(*) from wishlist w where w.goods_Id=list2.goods_Id) wishCount 
 		,(select url from goods_file f where f.goods_id=list2.goods_id and rownum between 0 and 1) from
 		(select list.*,rownum rn from(
-		(select to_char(refreshed_at, 'YYYY-MM-DD HH24:MI:SS') refreshed_at,goods_id,title,price,status,view_Count 
-		from goods 
+		(select to_char(refreshed_at, 'YYYY-MM-DD HH24:MI:SS') refreshed_at,goods_id,title,price,status,view_Count,(select dong_name from dong d where d.dong_Id=g.dong_Id) dong_name
+		,(select nickname from users u where u.user_id=g.user_id) nickname
+		from goods g
 		where user_id=#{userId} and status IN(1,2) and active_status='Y' and title like #{searchWord}
 		order by refreshed_at DESC) 
 		list)
 		) list2 where rn between #{startRownum} and #{endRownum}
 	</select>
-	
 	
 	<select id="getKeepUsedTotalCnt" parameterType="string" resultType="_int"> 	<!--찜 목록 가져오기 -->
 		select count(*) from goods where goods_id IN(select goods_id from wishlist where user_id=#{userId}) and status IN(1,2) order by created_at
@@ -209,8 +210,9 @@
 		select list2.*,(select count(*) from wishlist w where w.goods_Id=list2.goods_Id) wishCount 
 		,(select url from goods_file f where f.goods_id=list2.goods_id and rownum between 0 and 1) from
 		(select list.*,rownum rn from(
-		(select to_char(refreshed_at, 'YYYY-MM-DD HH24:MI:SS') refreshed_at,goods_id,title,price,status,view_Count
-		from goods 
+		(select to_char(refreshed_at, 'YYYY-MM-DD HH24:MI:SS') refreshed_at,goods_id,title,price,status,view_Count,(select dong_name from dong d where d.dong_Id=g.dong_Id) dong_name
+		,(select nickname from users u where u.user_id=g.user_id) nickname
+		from goods g
 		where goods_id IN(select goods_id from wishlist where user_id=#{userId}) and status IN(1,2) and active_status='Y' 
 		order by refreshed_at DESC) 
 		list)
@@ -221,8 +223,9 @@
 		select list2.*,(select count(*) from wishlist w where w.goods_Id=list2.goods_Id) wishCount 
 		,(select url from goods_file f where f.goods_id=list2.goods_id and rownum between 0 and 1) from
 		(select list.*,rownum rn from(
-		(select to_char(refreshed_at, 'YYYY-MM-DD HH24:MI:SS') refreshed_at,goods_id,title,price,status,view_Count
-		from goods 
+		(select to_char(refreshed_at, 'YYYY-MM-DD HH24:MI:SS') refreshed_at,goods_id,title,price,status,view_Count,(select dong_name from dong d where d.dong_Id=g.dong_Id) dong_name
+		,(select nickname from users u where u.user_id=g.user_id) nickname
+		from goods g
 		where goods_id IN(select goods_id from wishlist where user_id=#{userId}) and status IN(1,2) and active_status='Y' and title like #{searchWord}
 		order by refreshed_at DESC) 
 		list)
@@ -242,8 +245,9 @@
 		select list2.*,(select count(*) from wishlist w where w.goods_Id=list2.goods_Id) wishCount 
 		,(select url from goods_file f where f.goods_id=list2.goods_id and rownum between 0 and 1) from
 		(select list.*,rownum rn from(
-		(select to_char(refreshed_at, 'YYYY-MM-DD HH24:MI:SS') refreshed_at,goods_id,title,price,status,view_Count
-		from goods 
+		(select to_char(refreshed_at, 'YYYY-MM-DD HH24:MI:SS') refreshed_at,goods_id,title,price,status,view_Count,(select dong_name from dong d where d.dong_Id=g.dong_Id) dong_name
+		,(select nickname from users u where u.user_id=g.user_id) nickname
+		from goods g
 		where user_id IN(select target_id from favorite_user where user_id=#{userId}) and status IN(1,2) and active_status='Y' 
 		order by refreshed_at DESC) 
 		list)
@@ -254,8 +258,9 @@
 		select list2.*,(select count(*) from wishlist w where w.goods_Id=list2.goods_Id) wishCount 
 		,(select url from goods_file f where f.goods_id=list2.goods_id and rownum between 0 and 1) from
 		(select list.*,rownum rn from(
-		(select to_char(refreshed_at, 'YYYY-MM-DD HH24:MI:SS') refreshed_at,goods_id,title,price,status,view_Count 
-		from goods 
+		(select to_char(refreshed_at, 'YYYY-MM-DD HH24:MI:SS') refreshed_at,goods_id,title,price,status,view_Count,(select dong_name from dong d where d.dong_Id=g.dong_Id) dong_name 
+		,(select nickname from users u where u.user_id=g.user_id) nickname
+		from goods g
 		where user_id IN(select target_id from favorite_user where user_id=#{userId}) and status IN(1,2) and active_status='Y' and title like #{searchWord}
 		order by refreshed_at DESC) 
 		list)
@@ -277,8 +282,9 @@
 		select list2.*,(select count(*) from wishlist w where w.goods_Id=list2.goods_Id) wishCount 
 		,(select url from goods_file f where f.goods_id=list2.goods_id and rownum between 0 and 1) url from
 		(select list.*,rownum rn from(
-		(select to_char(refreshed_at, 'YYYY-MM-DD HH24:MI:SS') refreshed_at,goods_id,title,price,status,view_Count 
-		from goods 
+		(select to_char(refreshed_at, 'YYYY-MM-DD HH24:MI:SS') refreshed_at,goods_id,title,price,status,view_Count,(select dong_name from dong d where d.dong_Id=g.dong_Id) dong_name 
+		,(select nickname from users u where u.user_id=g.user_id) nickname
+		from goods g
 		where user_id=#{userId} and status IN(3) and active_status='Y' 
 		order by refreshed_at DESC) 
 		list)
@@ -289,8 +295,9 @@
 		select list2.*,(select count(*) from wishlist w where w.goods_Id=list2.goods_Id) wishCount 
 		,(select url from goods_file f where f.goods_id=list2.goods_id and rownum between 0 and 1) url from
 		(select list.*,rownum rn from(
-		(select to_char(refreshed_at, 'YYYY-MM-DD HH24:MI:SS') refreshed_at,goods_id,title,price,status,view_Count 
-		from goods 
+		(select to_char(refreshed_at, 'YYYY-MM-DD HH24:MI:SS') refreshed_at,goods_id,title,price,status,view_Count,(select dong_name from dong d where d.dong_Id=g.dong_Id) dong_name 
+		,(select nickname from users u where u.user_id=g.user_id) nickname
+		from goods g
 		where user_id=#{userId} and status IN(3) and active_status='Y' and title like #{searchWord}
 		order by refreshed_at DESC) 
 		list)
@@ -311,8 +318,9 @@
 		select list2.*,(select count(*) from wishlist w where w.goods_Id=list2.goods_Id) wishCount 
 		,(select url from goods_file f where f.goods_id=list2.goods_id and rownum between 0 and 1) url from
 		(select list.*,rownum rn from(
-		(select to_char(refreshed_at, 'YYYY-MM-DD HH24:MI:SS') refreshed_at,goods_id,title,price,status,view_Count 
-		from goods 
+		(select to_char(refreshed_at, 'YYYY-MM-DD HH24:MI:SS') refreshed_at,goods_id,title,price,status,view_Count,(select dong_name from dong d where d.dong_Id=g.dong_Id) dong_name 
+		,(select nickname from users u where u.user_id=g.user_id) nickname
+		from goods g
 		where user_id=#{userId} and status IN(4) and active_status='Y' 
 		order by refreshed_at DESC) 
 		list)
@@ -323,8 +331,9 @@
 		select list2.*,(select count(*) from wishlist w where w.goods_Id=list2.goods_Id) wishCount 
 		,(select url from goods_file f where f.goods_id=list2.goods_id and rownum between 0 and 1) url from
 		(select list.*,rownum rn from(
-		(select to_char(refreshed_at, 'YYYY-MM-DD HH24:MI:SS') refreshed_at,goods_id,title,price,status,view_Count 
-		from goods 
+		(select to_char(refreshed_at, 'YYYY-MM-DD HH24:MI:SS') refreshed_at,goods_id,title,price,status,view_Count,(select dong_name from dong d where d.dong_Id=g.dong_Id) dong_name 
+		,(select nickname from users u where u.user_id=g.user_id) nickname
+		from goods g
 		where user_id=#{userId} and status IN(4) and active_status='Y' and title like #{searchWord}
 		order by refreshed_at DESC) 
 		list)
