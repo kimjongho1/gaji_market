@@ -61,10 +61,10 @@ public class MyPageController {
 	        int updateResult = myPageService.updateName(map);
 	        if (updateResult == 1) {
 	            response.put("status", "1"); // 성공
-	            response.put("message", "이름이 변경되었습니다.");
+	            response.put("msg1", "이름이 변경되었습니다.");
 	        } else {
 	            response.put("status", "0"); // 업데이트 오류
-	            response.put("message", "이름 업데이트 중 오류가 발생했습니다.");
+	            response.put("msg1", "이름 업데이트 중 오류가 발생했습니다.");
 	        }
 	    return response;
 	}
@@ -77,15 +77,15 @@ public class MyPageController {
 		    
 		    if (result != null) {
 		        response.put("status", -1); // 중복 닉네임 오류
-		        response.put("message", "중복된 닉네임입니다.");
+		        response.put("msg2", "중복된 닉네임입니다.");
 		    } else {
 		        int updateResult = myPageService.updateNickname(map);
 		        if (updateResult == 1) {
 		            response.put("status", 1); // 성공
-		            response.put("message", "닉네임이 변경되었습니다.");
+		            response.put("msg2", "닉네임이 변경되었습니다.");
 		        } else {
 		            response.put("status", 0); // 업데이트 오류
-		            response.put("message", "닉네임 변경 중 오류가 발생했습니다.");
+		            response.put("msg2", "닉네임 변경 중 오류가 발생했습니다.");
 		        }
 		    }
 		    return response;
@@ -99,15 +99,15 @@ public class MyPageController {
 		    
 		    if (result != null) {
 		        response.put("status", -1); // 중복 이메일 오류
-		        response.put("message", "중복된 이메일입니다.");
+		        response.put("msg3", "중복된 이메일입니다.");
 		    } else {
 		        int updateResult = myPageService.updateEmail(map);
 		        if (updateResult == 1) {
 		            response.put("status", 1); // 성공
-		            response.put("message", "이메일이 업데이트되었습니다.");
+		            response.put("msg3", "이메일이 업데이트되었습니다.");
 		        } else {
 		            response.put("status", 0); // 업데이트 오류
-		            response.put("message", "이메일 변경 중 오류가 발생했습니다.");
+		            response.put("msg3", "이메일 변경 중 오류가 발생했습니다.");
 		        }
 		    }
 		    return response;
@@ -121,15 +121,15 @@ public class MyPageController {
 		    
 		    if (result != null) {
 		        response.put("status", -1); // 중복 핸드폰번호 오류
-		        response.put("message", "중복된 핸드폰 번호입니다.");
+		        response.put("msg4", "중복된 핸드폰 번호입니다.");
 		    } else {
 		        int updateResult = myPageService.updateMobileNumber(map);
 		        if (updateResult == 1) {
 		            response.put("status", 1); // 성공
-		            response.put("message", "이름이 업데이트되었습니다.");
+		            response.put("msg4", "핸드폰번호가 업데이트되었습니다.");
 		        } else {
 		            response.put("status", 0); // 업데이트 오류
-		            response.put("message", "이름 업데이트 중 오류가 발생했습니다.");
+		            response.put("msg4", "핸드폰 번호 수정중 오류가 발생했습니다.");
 		        }
 		    }
 		    return response;

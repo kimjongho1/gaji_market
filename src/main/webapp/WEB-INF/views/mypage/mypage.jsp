@@ -202,7 +202,22 @@
 	    $("#nameUpdate").click(function() {
 	    	console.log("버튼클릭확인");
 	        var userId = "asdf"; // 사용자 아이디
-	        var name = $("#name").val(); // 입력된 이름
+	        var nameInput = $("#name"); // 이름 입력란
+	        var name = nameInput.val(); // 입력된 이름
+	        var namePattern = /^[가-힣a-zA-Z]{2,30}$/; // 이름은 2~30자의 한글 또는 영문 허용
+
+	        // 이름 유효성 검사
+	        if (name.trim() === "") {
+	            alert("이름을 입력하세요.");
+	            nameInput.focus();
+	            return;
+	        }
+
+	        if (!namePattern.test(name)) {
+	            alert("이름은 2~30자의 한글 또는 영문만 허용합니다.");
+	            nameInput.focus();
+	            return;
+	        }
 	        $.ajax({
 	            url: "${pageContext.request.contextPath}/mypage/updatename",
 	            type: "POST",
@@ -213,10 +228,10 @@
 	            success: function(data) {
 	                if (data.status === "1") {
 	                    // 성공 메시지를 alert 창으로 표시
-	                    alert(data.message);
+	                    alert(data.msg1);
 	                } else {
 	                    // 오류 메시지를 alert 창으로 표시
-	                    alert(data.message);
+	                    alert(data.msg1);
 	                }
 	            },
 	            error: function() {
@@ -226,11 +241,24 @@
 	        });
 	    });
 	    
-	 // 버튼 클릭 시 서버에 이름 업데이트 요청 보내기
+	 // 버튼 클릭 시 서버에 닉네임 업데이트 요청 보내기
 	    $("#nicknameUpdate").click(function() {
 	    	console.log("버튼클릭확인");
 	        var userId = "asdf"; // 사용자 아이디
 	        var nickname = $("#nickname").val(); // 입력된 닉네임
+	        var nicknamePattern = /^[a-zA-Z0-9ㄱ-ㅎ가-힣]{4,30}$/; // 닉네임은 4~30자의 영문 대소문자, 숫자, 한글 허용
+	     // 닉네임 확인
+	        if (nickname == "") {
+	            alert("닉네임을 입력하세요.");
+	            $("#nickname").focus();
+	            return;
+	        }
+	        if (!nicknamePattern.test(nickname)) {
+	            alert("닉네임은 4~30자의 영문 대소문자, 숫자, 한글만 허용합니다.");
+	            $("#nickname").focus();
+	            return;
+	        }
+	        
 	        $.ajax({
 	            url: "${pageContext.request.contextPath}/mypage/updatenickname",
 	            type: "POST",
@@ -241,13 +269,13 @@
 	            success: function(data) {
 	                if (data.status === 1) {
 	                    // 성공 메시지를 alert 창으로 표시
-	                    alert(data.message);
+	                    alert(data.msg2);
 	                } else if (data.status === -1) {
 	                    // 중복 메시지를 alert 창으로 표시
-	                    alert(data.message);
+	                    alert(data.msg2);
 	                } else {
 	                    // 오류 메시지를 alert 창으로 표시
-	                    alert(data.message);
+	                    alert(data.msg2);
 	                }
 	            },
 	            error: function() {
@@ -257,11 +285,24 @@
 	        });
 	    });
 	 
-	 // 버튼 클릭 시 서버에 이름 업데이트 요청 보내기
+	 // 버튼 클릭 시 서버에 이메일 업데이트 요청 보내기
 	    $("#emailUpdate").click(function() {
 	    	console.log("버튼클릭확인");
 	        var userId = "asdf"; // 사용자 아이디
 	        var email = $("#email").val(); // 입력된 이름
+	        var emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/; // 이메일 주소 형식
+	     // 이메일 확인
+	        if (email == "") {
+	            alert("이메일을 입력하세요.");
+	            $("#email").focus();
+	            return;
+	        }
+	        if (!emailPattern.test(email)) {
+	            alert("올바른 이메일 주소 형식이 아닙니다.");
+	            $("#email").focus();
+	            return;
+	        }
+	        
 	        $.ajax({
 	            url: "${pageContext.request.contextPath}/mypage/updateemail",
 	            type: "POST",
@@ -272,13 +313,13 @@
 	            success: function(data) {
 	                if (data.status === 1) {
 	                    // 성공 메시지를 alert 창으로 표시
-	                    alert(data.message);
+	                    alert(data.msg3);
 	                } else if (data.status === -1) {
 	                    // 중복 메시지를 alert 창으로 표시
-	                    alert(data.message);
+	                    alert(data.msg3);
 	                } else {
 	                    // 오류 메시지를 alert 창으로 표시
-	                    alert(data.message);
+	                    alert(data.msg3);
 	                }
 	            },
 	            error: function() {
@@ -288,11 +329,23 @@
 	        });
 	    });
 	    
-	 // 버튼 클릭 시 서버에 이름 업데이트 요청 보내기
+	 // 버튼 클릭 시 서버에 핸드폰번호 업데이트 요청 보내기
 	    $("#mobileNumberUpdate").click(function() {
 	    	console.log("버튼클릭확인");
 	        var userId = "asdf"; // 사용자 아이디
 	        var mobileNumber = $("#mobileNumber").val(); // 입력된 이름
+	        var mobileNumberPattern = /^[0-9]{10,11}$/; // 전화번호는 10자 또는 11자의 숫자만 허용
+	     // 전화번호 확인
+	        if (mobileNumber == "") {
+	            alert("전화번호를 입력하세요.");
+	            $("#mobileNumber").focus();
+	            return;
+	        }
+	        if (!mobileNumberPattern.test(mobileNumber)) {
+	            alert("전화번호는 10자 또는 11자의 숫자만 허용합니다.");
+	            $("#mobileNumber").focus();
+	            return;
+	        }
 	        $.ajax({
 	            url: "${pageContext.request.contextPath}/mypage/updatemobilenumber",
 	            type: "POST",
@@ -303,13 +356,13 @@
 	            success: function(data) {
 	                if (data.status === 1) {
 	                    // 성공 메시지를 alert 창으로 표시
-	                    alert(data.message);
+	                    alert(data.msg4);
 	                } else if (data.status === -1) {
 	                    // 중복 메시지를 alert 창으로 표시
-	                    alert(data.message);
+	                    alert(data.msg4);
 	                } else {
 	                    // 오류 메시지를 alert 창으로 표시
-	                    alert(data.message);
+	                    alert(data.msg4);
 	                }
 	            },
 	            error: function() {
