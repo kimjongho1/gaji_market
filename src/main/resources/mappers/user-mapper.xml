@@ -171,8 +171,7 @@
 	
 	<select id="getOnsaleList" parameterType="map" resultType="MyGoodsListDto">	<!--10P 판매중 + 예약중 불러오기 -->
 		select list2.*,(select count(*) from wishlist w where w.goods_Id=list2.goods_Id) wishCount
-		,(select url from goods_file f where f.goods_id=list2.goods_id and rownum between 0 and 1) url
-		from
+		,(select url from goods_file f where f.goods_id=list2.goods_id and rownum between 0 and 1) url from
 		(select list.*,rownum rn from(
 		(select to_char(refreshed_at, 'YYYY-MM-DD HH24:MI:SS') refreshed_at,goods_id,title,price,status,view_Count,(select dong_name from dong d where d.dong_Id=g.dong_Id) dong_name
 		,(select nickname from users u where u.user_id=g.user_id) nickname
@@ -185,7 +184,7 @@
 	
 	<select id="getSearchOnsaleList" parameterType="map" resultType="MyGoodsListDto">	<!--10P 판매중 + 예약중 불러오기 -->
 		select list2.*,(select count(*) from wishlist w where w.goods_Id=list2.goods_Id) wishCount 
-		,(select url from goods_file f where f.goods_id=list2.goods_id and rownum between 0 and 1) from
+		,(select url from goods_file f where f.goods_id=list2.goods_id and rownum between 0 and 1) url from
 		(select list.*,rownum rn from(
 		(select to_char(refreshed_at, 'YYYY-MM-DD HH24:MI:SS') refreshed_at,goods_id,title,price,status,view_Count,(select dong_name from dong d where d.dong_Id=g.dong_Id) dong_name
 		,(select nickname from users u where u.user_id=g.user_id) nickname
@@ -206,7 +205,7 @@
 	
 	<select id="getKeepUsedList" parameterType="map" resultType="MyGoodsListDto">	<!--찜 목록 가져오기 -->
 		select list2.*,(select count(*) from wishlist w where w.goods_Id=list2.goods_Id) wishCount 
-		,(select url from goods_file f where f.goods_id=list2.goods_id and rownum between 0 and 1) from
+		,(select url from goods_file f where f.goods_id=list2.goods_id and rownum between 0 and 1) url from
 		(select list.*,rownum rn from(
 		(select to_char(refreshed_at, 'YYYY-MM-DD HH24:MI:SS') refreshed_at,goods_id,title,price,status,view_Count,(select dong_name from dong d where d.dong_Id=g.dong_Id) dong_name
 		,(select nickname from users u where u.user_id=g.user_id) nickname
@@ -219,7 +218,7 @@
 	
 	<select id="getSearchKeepUsedList" parameterType="map" resultType="MyGoodsListDto">	<!--찜 목록 가져오기 -->
 		select list2.*,(select count(*) from wishlist w where w.goods_Id=list2.goods_Id) wishCount 
-		,(select url from goods_file f where f.goods_id=list2.goods_id and rownum between 0 and 1) from
+		,(select url from goods_file f where f.goods_id=list2.goods_id and rownum between 0 and 1) url from
 		(select list.*,rownum rn from(
 		(select to_char(refreshed_at, 'YYYY-MM-DD HH24:MI:SS') refreshed_at,goods_id,title,price,status,view_Count,(select dong_name from dong d where d.dong_Id=g.dong_Id) dong_name
 		,(select nickname from users u where u.user_id=g.user_id) nickname
@@ -241,7 +240,7 @@
 	
 	<select id="getKeepUsersList" parameterType="map" resultType="MyGoodsListDto">	<!--모아보기 목록 가져오기 -->
 		select list2.*,(select count(*) from wishlist w where w.goods_Id=list2.goods_Id) wishCount 
-		,(select url from goods_file f where f.goods_id=list2.goods_id and rownum between 0 and 1) from
+		,(select url from goods_file f where f.goods_id=list2.goods_id and rownum between 0 and 1) url from
 		(select list.*,rownum rn from(
 		(select to_char(refreshed_at, 'YYYY-MM-DD HH24:MI:SS') refreshed_at,goods_id,title,price,status,view_Count,(select dong_name from dong d where d.dong_Id=g.dong_Id) dong_name
 		,(select nickname from users u where u.user_id=g.user_id) nickname
@@ -254,7 +253,7 @@
 	
 	<select id="getSearchKeepUsersList" parameterType="map" resultType="MyGoodsListDto">	<!--모아보기 목록 가져오기 -->
 		select list2.*,(select count(*) from wishlist w where w.goods_Id=list2.goods_Id) wishCount 
-		,(select url from goods_file f where f.goods_id=list2.goods_id and rownum between 0 and 1) from
+		,(select url from goods_file f where f.goods_id=list2.goods_id and rownum between 0 and 1) url from
 		(select list.*,rownum rn from(
 		(select to_char(refreshed_at, 'YYYY-MM-DD HH24:MI:SS') refreshed_at,goods_id,title,price,status,view_Count,(select dong_name from dong d where d.dong_Id=g.dong_Id) dong_name 
 		,(select nickname from users u where u.user_id=g.user_id) nickname
