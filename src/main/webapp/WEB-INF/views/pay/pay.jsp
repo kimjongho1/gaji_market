@@ -449,6 +449,7 @@
 			url:"${pageContext.request.contextPath}/mypage/address/regist/do",
 			data:formData,
 			dataType:"json",
+			async:false,
 			success: (data)=>{
 				alert("주소 등록에 성공했습니다.");
 				var html="<select id='addresses'>";

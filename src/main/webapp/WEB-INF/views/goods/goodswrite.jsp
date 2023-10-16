@@ -89,7 +89,8 @@
 			</c:forEach>
 		</select>
 		<!-- 구 선택 드롭다운 -->
-		<label for="selectedGu">구 선택:</label> <select name="selectedGu"
+		<label for="selectedGu">구 선택:</label>
+		 <select name="selectedGu"
 			id="selectedGu" onchange="updateDongDropdown()">
 			<option value="">구를 선택하세요</option>
 			<c:forEach items="${guList}" var="gu">
@@ -97,7 +98,8 @@
 			</c:forEach>
 		</select>
 		<!-- 동 선택 드롭다운 -->
-		<label for="selectedDong">동 선택:</label> <select name="dongId"
+		<label for="selectedDong">동 선택:</label> 
+		<select name="dongId"
 			id="selectedDong">
 			<option value="">동을 선택하세요</option>
 			<c:forEach items="${dongList}" var="dong">

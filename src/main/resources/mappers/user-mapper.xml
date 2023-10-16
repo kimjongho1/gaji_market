@@ -176,7 +176,7 @@
 		,(select url from goods_file f where f.goods_id=list2.goods_id and rownum between 0 and 1) url
 		from
 		(select list.*,rownum rn from(
-		(select to_char(refreshed_at, 'YYYY-MM-DD HH24:MI:SS') refreshed_at,goods_id,title,price,status
+		(select to_char(refreshed_at, 'YYYY-MM-DD HH24:MI:SS') refreshed_at,goods_id,title,price,status,view_Count
 		from goods 
 		where user_id=#{userId} and status IN(1,2) and active_status='Y' 
 		order by refreshed_at DESC) 
@@ -188,7 +188,7 @@
 		select list2.*,(select count(*) from wishlist w where w.goods_Id=list2.goods_Id) wishCount 
 		,(select url from goods_file f where f.goods_id=list2.goods_id and rownum between 0 and 1) from
 		(select list.*,rownum rn from(
-		(select to_char(refreshed_at, 'YYYY-MM-DD HH24:MI:SS') refreshed_at,goods_id,title,price,status 
+		(select to_char(refreshed_at, 'YYYY-MM-DD HH24:MI:SS') refreshed_at,goods_id,title,price,status,view_Count 
 		from goods 
 		where user_id=#{userId} and status IN(1,2) and active_status='Y' and title like #{searchWord}
 		order by refreshed_at DESC) 
@@ -209,7 +209,7 @@
 		select list2.*,(select count(*) from wishlist w where w.goods_Id=list2.goods_Id) wishCount 
 		,(select url from goods_file f where f.goods_id=list2.goods_id and rownum between 0 and 1) from
 		(select list.*,rownum rn from(
-		(select to_char(refreshed_at, 'YYYY-MM-DD HH24:MI:SS') refreshed_at,goods_id,title,price,status
+		(select to_char(refreshed_at, 'YYYY-MM-DD HH24:MI:SS') refreshed_at,goods_id,title,price,status,view_Count
 		from goods 
 		where goods_id IN(select goods_id from wishlist where user_id=#{userId}) and status IN(1,2) and active_status='Y' 
 		order by refreshed_at DESC) 
@@ -221,7 +221,7 @@
 		select list2.*,(select count(*) from wishlist w where w.goods_Id=list2.goods_Id) wishCount 
 		,(select url from goods_file f where f.goods_id=list2.goods_id and rownum between 0 and 1) from
 		(select list.*,rownum rn from(
-		(select to_char(refreshed_at, 'YYYY-MM-DD HH24:MI:SS') refreshed_at,goods_id,title,price,status 
+		(select to_char(refreshed_at, 'YYYY-MM-DD HH24:MI:SS') refreshed_at,goods_id,title,price,status,view_Count
 		from goods 
 		where goods_id IN(select goods_id from wishlist where user_id=#{userId}) and status IN(1,2) and active_status='Y' and title like #{searchWord}
 		order by refreshed_at DESC) 
@@ -242,7 +242,7 @@
 		select list2.*,(select count(*) from wishlist w where w.goods_Id=list2.goods_Id) wishCount 
 		,(select url from goods_file f where f.goods_id=list2.goods_id and rownum between 0 and 1) from
 		(select list.*,rownum rn from(
-		(select to_char(refreshed_at, 'YYYY-MM-DD HH24:MI:SS') refreshed_at,goods_id,title,price,status
+		(select to_char(refreshed_at, 'YYYY-MM-DD HH24:MI:SS') refreshed_at,goods_id,title,price,status,view_Count
 		from goods 
 		where user_id IN(select target_id from favorite_user where user_id=#{userId}) and status IN(1,2) and active_status='Y' 
 		order by refreshed_at DESC) 
@@ -254,7 +254,7 @@
 		select list2.*,(select count(*) from wishlist w where w.goods_Id=list2.goods_Id) wishCount 
 		,(select url from goods_file f where f.goods_id=list2.goods_id and rownum between 0 and 1) from
 		(select list.*,rownum rn from(
-		(select to_char(refreshed_at, 'YYYY-MM-DD HH24:MI:SS') refreshed_at,goods_id,title,price,status 
+		(select to_char(refreshed_at, 'YYYY-MM-DD HH24:MI:SS') refreshed_at,goods_id,title,price,status,view_Count 
 		from goods 
 		where user_id IN(select target_id from favorite_user where user_id=#{userId}) and status IN(1,2) and active_status='Y' and title like #{searchWord}
 		order by refreshed_at DESC) 
@@ -277,7 +277,7 @@
 		select list2.*,(select count(*) from wishlist w where w.goods_Id=list2.goods_Id) wishCount 
 		,(select url from goods_file f where f.goods_id=list2.goods_id and rownum between 0 and 1) url from
 		(select list.*,rownum rn from(
-		(select to_char(refreshed_at, 'YYYY-MM-DD HH24:MI:SS') refreshed_at,goods_id,title,price,status 
+		(select to_char(refreshed_at, 'YYYY-MM-DD HH24:MI:SS') refreshed_at,goods_id,title,price,status,view_Count 
 		from goods 
 		where user_id=#{userId} and status IN(3) and active_status='Y' 
 		order by refreshed_at DESC) 
@@ -289,7 +289,7 @@
 		select list2.*,(select count(*) from wishlist w where w.goods_Id=list2.goods_Id) wishCount 
 		,(select url from goods_file f where f.goods_id=list2.goods_id and rownum between 0 and 1) url from
 		(select list.*,rownum rn from(
-		(select to_char(refreshed_at, 'YYYY-MM-DD HH24:MI:SS') refreshed_at,goods_id,title,price,status 
+		(select to_char(refreshed_at, 'YYYY-MM-DD HH24:MI:SS') refreshed_at,goods_id,title,price,status,view_Count 
 		from goods 
 		where user_id=#{userId} and status IN(3) and active_status='Y' and title like #{searchWord}
 		order by refreshed_at DESC) 
@@ -311,7 +311,7 @@
 		select list2.*,(select count(*) from wishlist w where w.goods_Id=list2.goods_Id) wishCount 
 		,(select url from goods_file f where f.goods_id=list2.goods_id and rownum between 0 and 1) url from
 		(select list.*,rownum rn from(
-		(select to_char(refreshed_at, 'YYYY-MM-DD HH24:MI:SS') refreshed_at,goods_id,title,price,status 
+		(select to_char(refreshed_at, 'YYYY-MM-DD HH24:MI:SS') refreshed_at,goods_id,title,price,status,view_Count 
 		from goods 
 		where user_id=#{userId} and status IN(4) and active_status='Y' 
 		order by refreshed_at DESC) 
@@ -323,7 +323,7 @@
 		select list2.*,(select count(*) from wishlist w where w.goods_Id=list2.goods_Id) wishCount 
 		,(select url from goods_file f where f.goods_id=list2.goods_id and rownum between 0 and 1) url from
 		(select list.*,rownum rn from(
-		(select to_char(refreshed_at, 'YYYY-MM-DD HH24:MI:SS') refreshed_at,goods_id,title,price,status 
+		(select to_char(refreshed_at, 'YYYY-MM-DD HH24:MI:SS') refreshed_at,goods_id,title,price,status,view_Count 
 		from goods 
 		where user_id=#{userId} and status IN(4) and active_status='Y' and title like #{searchWord}
 		order by refreshed_at DESC) 
@@ -397,7 +397,7 @@
 	</select>
 	
 	<insert id="signup"> <!-- 회원가입 -->
-		insert into users (user_id,name,password,mobile_number,nickname,email) values (#{userId},#{name},#{password},#{mobileNumber},#{nickname},#{email})
+		insert into users (user_id,name,password,mobile_number,nickname,email,dong_id) values (#{userId},#{name},#{password},#{mobileNumber},#{nickname},#{email},#{dongId})
 	</insert>
 
 	<select id="getSafePurchaseInfo" parameterType="string" resultType="SafePurchaseInfoDto">	<!-- 11P 안전거래 상세정보 가져오기 -->

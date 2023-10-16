@@ -16,6 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import kh.spring.gaji.common.MailSendService;
+import kh.spring.gaji.region.model.service.RegionService;
 import kh.spring.gaji.user.model.dto.UserDto;
 import kh.spring.gaji.user.model.dto.UserInsertAddressDto;
 import kh.spring.gaji.user.model.service.UserService;
@@ -27,13 +28,19 @@ public class UserController {
 
 	@Autowired
 	private MailSendService mailService;
+	
+	@Autowired
+	private RegionService regionService;
 
 	@Autowired
 	private BCryptPasswordEncoder bCryptPasswordEncoder; 
 	
 	@GetMapping("/signup")
-	public String signup() { // 개인회원가입
-		return "user/signup";
+	public ModelAndView signup(ModelAndView mv) { // 개인회원가입
+		mv.setViewName("user/signup");
+		mv.addObject("dongList", regionService.dongList());
+		mv.addObject("guList", regionService.guList());
+		return mv;
 	}
 
 	@PostMapping("/signup")
