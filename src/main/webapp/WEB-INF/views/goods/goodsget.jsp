@@ -6,8 +6,9 @@
 <meta charset="UTF-8">
 <title>BD에서 가져옴</title>
 	<!-- Swiper -->
+
 <link rel="stylesheet"
-	href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
+	href="https://unpkg.com/swiper/swiper-bundle.min.css" />
 
 <!--favicon  -->
 <link rel="icon"
@@ -36,8 +37,7 @@
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/css/goods/goods.css"
 	type="text/css">
-<link rel="stylesheet"
-	href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
+
 
 
 </head>
@@ -75,9 +75,33 @@
 										style="position: absolute; height: 100%; width: 100%; inset: 0px; color: transparent;">
 								</div>
 							</div>
+							
+							<div class="swiper-slide swiper-slide-next" style="width: 612px;">
+								<div class="col-span-1 transition duration-150 ease-in hover:opacity-90 w-full relative pt-[100%]">
+									<img alt="산사나무--1" referrerpolicy="no-referrer" src="https://img2.joongna.com/media/original/2021/04/25/1619320661901btB_EsWFt.jpg?impolicy=resizeWatermark3&amp;ftext=원주사람24" decoding="async" data-nimg="fill" class="object-cover w-full h-full rounded-lg top-1/2 left-1/2" loading="lazy" style="position: absolute; height: 100%; width: 100%; inset: 0px; color: transparent;">
+								</div>
+							</div>
+							
+							<div class="swiper-slide" style="width: 612px;">
+								<div class="col-span-1 transition duration-150 ease-in hover:opacity-90 w-full relative pt-[100%]">
+									<img alt="산사나무--2" referrerpolicy="no-referrer" src="https://img2.joongna.com/media/original/2021/04/25/1619320661897ggN_U4VRB.jpg?impolicy=resizeWatermark3&amp;ftext=원주사람24" decoding="async" data-nimg="fill" class="object-cover w-full h-full rounded-lg top-1/2 left-1/2" loading="lazy" style="position: absolute; height: 100%; width: 100%; inset: 0px; color: transparent;">
+								</div>
+							</div>
+							<div class="swiper-slide" style="width: 612px;">
+								<div class="col-span-1 transition duration-150 ease-in hover:opacity-90 w-full relative pt-[100%]">
+									<img alt="산사나무--3" referrerpolicy="no-referrer" src="https://img2.joongna.com/media/original/2021/04/25/1619320661903Vyf_3KV0n.jpg?impolicy=resizeWatermark3&amp;ftext=원주사람24" decoding="async" data-nimg="fill" class="object-cover w-full h-full rounded-lg top-1/2 left-1/2" loading="lazy" style="position: absolute; height: 100%; width: 100%; inset: 0px; color: transparent;">
+								</div>
+							</div>
+							<div class="swiper-slide" style="width: 612px;">
+								<div class="col-span-1 transition duration-150 ease-in hover:opacity-90 w-full relative pt-[100%]">
+									<img alt="산사나무--4" referrerpolicy="no-referrer" src="https://img2.joongna.com/media/original/2021/04/25/1619320661906oyS_B0vck.jpg?impolicy=resizeWatermark3&amp;ftext=원주사람24" decoding="async" data-nimg="fill" class="object-cover w-full h-full rounded-lg top-1/2 left-1/2" loading="lazy" style="position: absolute; height: 100%; width: 100%; inset: 0px; color: transparent;">
+								</div>
+							</div>
+					
+							
 						</div>
 						<div
-							class="swiper-pagination swiper-pagination-clickable swiper-pagination-bullets swiper-pagination-horizontal swiper-pagination-lock">
+							class="swiper-pagination swiper-pagination-clickable swiper-pagination-bullets swiper-pagination-horizontal <!-- swiper-pagination-lock -->">
 							<span
 								class="swiper-pagination-bullet swiper-pagination-bullet-active"></span>
 						</div>
@@ -210,7 +234,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="z-[15]" style="position: sticky; top: 80px;">
+			<div class="z-[15]" style=" top: 80px;">
 				<div
 					class="mb-2 grid grid-cols-2 lg:grid-cols-5 list-none pl-0 w-full bg-white"
 					data-nav-ref="true">
@@ -371,29 +395,7 @@
 		<div class="Toastify"></div>
 	</main>
 
-	<!-- swiper -->
-	<!-- Slider main container -->
-	<div class="swiper">
-		<!-- Additional required wrapper -->
-		<div class="swiper-wrapper">
-			<!-- Slides -->
-			<div class="swiper-slide">Slide 1</div>
-			<div class="swiper-slide">Slide 2</div>
-			<div class="swiper-slide">Slide 3</div>
-			...
-		</div>
-		<!-- If we need pagination -->
-		<div class="swiper-pagination"></div>
-
-		<!-- If we need navigation buttons -->
-		<div class="swiper-button-prev"></div>
-		<div class="swiper-button-next"></div>
-
-		<!-- If we need scrollbar -->
-		<div class="swiper-scrollbar"></div>
-	</div>
-
-
+	
 
 	<!-- Footer Section Begin -->
 	<footer>
@@ -406,9 +408,32 @@
 	<script
 		src="${pageContext.request.contextPath}/resources/js/bootstrap.min.js"></script>
 	<script src="${pageContext.request.contextPath}/resources/js/main.js"></script>
-	<script
-		src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
+  <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+    <script>
+  new Swiper('.swiper'
+		  , {
+			  // Optional parameters
+			 
+			  
 
+			  // If we need pagination
+			  pagination: {
+			    el: '.swiper-pagination',
+			    clickable: true,
+			  },
+
+			  // Navigation arrows
+			  navigation: {
+			    nextEl: '.swiper-button-next',
+			    prevEl: '.swiper-button-prev',
+			  },
+			  
+			}	  
+  );
+  </script>
+	
+	
+	</script>
 
 </body>
 </html>
