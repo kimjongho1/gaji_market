@@ -257,6 +257,17 @@
 			<artifactId>jackson-databind</artifactId>
 			<version>${com.fasterxml.jackson.core-version}</version>
 		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-messaging</artifactId>
+			<version>${org.springframework-version}</version>
+		</dependency>
+		<!-- stomp -->
+		<dependency>
+			<groupId>org.springframework.integration</groupId>
+			<artifactId>spring-integration-stomp</artifactId>
+			<version>5.3.2.RELEASE</version>
+		</dependency>
 		<!-- jackson core 추가 백의헌(20230902) -->
 		<dependency>
 			<groupId>com.fasterxml.jackson.core</groupId>
@@ -288,7 +299,7 @@
 		</dependency>
 
 
-			<!-- 이메일 인증 추가 -->
+		<!-- 이메일 인증 추가 -->
 		<!-- https://mvnrepository.com/artifact/javax.mail/mail -->
 		<dependency>
 			<groupId>javax.mail</groupId>
