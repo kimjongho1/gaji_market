@@ -6,7 +6,6 @@ import java.math.BigDecimal;
 @Component
 @Data
 public class CommunityDto {
-	
     private int boardId;
     private String writer;
     private int dongId;

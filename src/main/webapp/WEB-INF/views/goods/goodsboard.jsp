@@ -73,6 +73,14 @@ cursor: pointer;
   .pagination-button:hover {
     background-color:black;
   }
+  
+  .writeBoard{
+  	position:absolute;
+  	right:320px;	
+  }
+  .pagination-button{
+  	margin:2px 8px 2px 8px;
+  }
 </style>
 </head>
 <body>
@@ -402,14 +410,17 @@ cursor: pointer;
         									var createdAt = "${item.createdAt}";
         									var formattedPastDate = moment(createdAt).fromNow();
         									document.write(formattedPastDate); 
-    										</script>
+    									</script>
 										</span>
+										<div>조회수 ${item.viewCount}</div>
 								</div>
 								<div class="flex items-center">
 									<svg width="30" height="17" viewBox="0 0 30 17" fill="none"
 										xmlns="http://www.w3.org/2000/svg" class="mr-1">
+										<c:if test="${item.safeTradingYn eq 'Y'}">
 										<rect y="-0.00012207" width="30" height="16.2857" rx="2.25"
 											fill="#0DCC5A"></rect>
+										</c:if>
 										<path
 											d="M11.6626 6.31356V6.28956C11.6626 4.57356 10.4506 3.38556 8.44665 3.38556H5.01465V11.7856H6.86265V9.26556H8.26665C10.1506 9.26556 11.6626 8.25756 11.6626 6.31356ZM9.79065 6.34956C9.79065 7.06956 9.25065 7.62156 8.32665 7.62156H6.86265V5.05356H8.29065C9.21465 5.05356 9.79065 5.49756 9.79065 6.32556V6.34956Z"
 											fill="white"></path>
@@ -439,6 +450,9 @@ cursor: pointer;
 
     <c:if test="${endPageNum<totalPageNum}">
       <button class="pagination-button" onclick="pageMove(${endPageNum}+1)">다음</button>
+    </c:if>
+        <c:if test="${not empty userId}">
+    	<button class="pagination-button writeBoard" onclick="writeHref()">글 작성</button>
     </c:if>
   </ul>
 </div>
@@ -638,6 +652,11 @@ cursor: pointer;
 		$("#sort").val(select);
 		$("#condition").submit();
 	}
+	
+	function writeHref(){
+		window.location.href="${pageContext.request.contextPath}/goods/write";
+	}
+	
      window.onload = checking; //가격범위에 따라 라디오 버튼 체크상태로 바꾸기위한 코드.
 	</script>
 </body>

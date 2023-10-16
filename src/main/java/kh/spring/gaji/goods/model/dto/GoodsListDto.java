@@ -14,8 +14,9 @@ public class GoodsListDto {
 	private String nickname;
 	private char status;
 	private int likeCount;
-	private char SafeTradingYn;
+	private String safeTradingYn;
 	private String dongName;
 	private int guId;
 	private int dongId;
+	private int viewCount;
 }
