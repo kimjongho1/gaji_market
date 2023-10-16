@@ -63,6 +63,7 @@ public class GoodsController {
 		String userId=null;
 		try{
 		if((userId=principal.getName())!=null) {
+			model.addAttribute("userId",userId);
 		if(guId==null && dongId==null) {
 			GuDongInfoDto guDongInfo=goodsService.getGuDongInfo(userId);
 			model.addAttribute("guId",guId=guDongInfo.getGuId());

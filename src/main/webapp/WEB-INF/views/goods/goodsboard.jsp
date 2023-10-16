@@ -73,6 +73,14 @@ cursor: pointer;
   .pagination-button:hover {
     background-color:black;
   }
+  
+  .writeBoard{
+  	position:absolute;
+  	right:320px;	
+  }
+  .pagination-button{
+  	margin:2px 8px 2px 8px;
+  }
 </style>
 </head>
 <body>
@@ -443,8 +451,8 @@ cursor: pointer;
     <c:if test="${endPageNum<totalPageNum}">
       <button class="pagination-button" onclick="pageMove(${endPageNum}+1)">다음</button>
     </c:if>
-    <c:if test="${not empty userId}">
-    	<a href="${pageContext.request.contextPath}/goods/write">글작성</a>
+        <c:if test="${not empty userId}">
+    	<button class="pagination-button writeBoard" onclick="writeHref()">글 작성</button>
     </c:if>
   </ul>
 </div>
@@ -644,6 +652,11 @@ cursor: pointer;
 		$("#sort").val(select);
 		$("#condition").submit();
 	}
+	
+	function writeHref(){
+		window.location.href="${pageContext.request.contextPath}/goods/write";
+	}
+	
      window.onload = checking; //가격범위에 따라 라디오 버튼 체크상태로 바꾸기위한 코드.
 	</script>
 </body>
