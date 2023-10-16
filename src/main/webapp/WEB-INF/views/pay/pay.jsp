@@ -173,7 +173,7 @@
 					<h5 class="modal-title" id="AddressModalLabel">주소등록</h5>
 				</div>
 				<div class="modal-body">
-			
+
 					 <select id="modalAddresses">
             			<c:forEach var="address" items="${userAddress}">
                 			<option value="${address.roadAddress}, ${address.detailAddress}, ${address.addressNo}">
@@ -441,7 +441,7 @@
 				}).open();
 	}
 	
-	var addressRegist=()=>{
+	var addressRegist=()=> {
 		var formData = $('#addressForm').serialize();
 		var item;
 		$.ajax({
@@ -451,7 +451,7 @@
 			dataType:"json",
 			success: (data)=>{
 				alert("주소 등록에 성공했습니다.");
-				var html="<select id='addresses' items='${userAddress}'>";
+				var html="<select id='addresses'>";
 				for(var i=0; i<data.length; i++){
 				item=data[i];
 				html+="<option value='"+item.roadAddress+","+item.detailAddress+"'>";
@@ -459,10 +459,27 @@
 				}
 				html+="</select>";
 				$("#addresses").replaceWith(html);
+				
+				html="<select id='modalAddresses'>";
+				for(var i=0; i<date.length; i++){
+					item=data[i];
+					html+="<option value="+item.roadAddress+","+item.detailAddress+","+item.addressNo+">";
+					html+=item.addressNickname+","+item.roadAddress+","+item.detailAddress+"</option>";
+				}
+				html+="</select>";
+				$("#modalAddresses").replaceWith(html);
 			},
 			error: (data)=>{
 				if($("#modalAddresses option").length > 8)
 					alert("등록가능한 주소갯수를 초과하였습니다.");
+				else if($(".textForm input[name=postCode]").val()==="")
+					alert("우편번호를 입력해주세요.");
+				else if($(".textForm input[name=address]").val()==="")
+					alert("지번주소를 입력해주세요.");
+				else if($(".textForm input[name=detailAddress]").val()==="")
+					alert("상세주소를 입력해주세요.");
+				else if($(".textForm input[name=addressNickname]").val()==="")
+					alert("주소별칭을 입력해주세요.");
 				else
 					alert("잘못된 접근입니다.");
 			}
