@@ -95,12 +95,9 @@
 			where goods_id=#{goodsId} and active_status='Y'and status != 4
 		</select>
 		
-		<select id="goodsWishNum" parameterType="_int" resultType="_int">
-			select count(user_id) from wishlist where goods_id = #{goodsId}
-		</select>
 		
 		<select id="goodsListUser">
-			select * from goods join goods_file on (goods_id) join users on (user_id) 
+			select * from goods join goods_file on (goods_id) join users on (user_id) where goods_id = #{goodsId}
 		</select>
 		
 		
