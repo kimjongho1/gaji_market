@@ -59,14 +59,17 @@ public class GoodsController {
 
 	@GetMapping("/board")
 	public String board(Model model,Integer currentPage,String searchWord,Integer sort,Integer priceFloor, Integer priceCeiling,Integer category,Integer guId,String guName,String dongName,Integer dongId,Principal principal) { // 중고거래 게시판
-		String userId=principal.getName();
 		model.addAttribute("guList", regionService.guList());
+		String userId=null;
+		try{
+		if((userId=principal.getName())!=null) {
 		if(guId==null && dongId==null) {
 			GuDongInfoDto guDongInfo=goodsService.getGuDongInfo(userId);
 			model.addAttribute("guId",guId=guDongInfo.getGuId());
 			model.addAttribute("guName",guName=guDongInfo.getGuName());
 			model.addAttribute("dongId",dongId=guDongInfo.getDongId());
 			model.addAttribute("dongName",guName=guDongInfo.getDongName());
+		}
 		}
 		else {
 		if(guId!=null) {
@@ -79,6 +82,9 @@ public class GoodsController {
 			model.addAttribute("dongName",dongName);
 			model.addAttribute("dongId", dongId);
 		}
+		}
+		}catch(NullPointerException e) {
+			e.printStackTrace();
 		}
 		
 		int totalCnt=0;

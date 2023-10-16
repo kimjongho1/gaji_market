@@ -443,6 +443,9 @@ cursor: pointer;
     <c:if test="${endPageNum<totalPageNum}">
       <button class="pagination-button" onclick="pageMove(${endPageNum}+1)">다음</button>
     </c:if>
+    <c:if test="${not empty userId}">
+    	<a href="${pageContext.request.contextPath}/goods/write">글작성</a>
+    </c:if>
   </ul>
 </div>
 				<div class="invisible w-full h-1"></div>
