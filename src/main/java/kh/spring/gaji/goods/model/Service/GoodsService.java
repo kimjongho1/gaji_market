@@ -19,7 +19,6 @@ public interface GoodsService {
 
     int deleteGoods(int goodsId);
     
-    int goodsWishNum(int goodsId);
     
     GuDongInfoDto getGuDongInfo(String userId);
 }

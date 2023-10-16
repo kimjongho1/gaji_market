@@ -2,9 +2,7 @@
 <!DOCTYPE mapper PUBLIC " -//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="user">
 	
-	<select id="updateViewCount"> <!-- 상품글 조회수 +1 -->
-		update goods set view_count=view_count+1
-	</select>
+	
 	
 	
 	<select id="checkIdForSafeSeller" parameterType="string" resultType="string">
@@ -406,7 +404,7 @@
 	</select>
 	
 	<insert id="signup"> <!-- 회원가입 -->
-		insert into users (user_id,name,password,mobile_number,nickname,email) values (#{userId},#{name},#{password},#{mobileNumber},#{nickname},#{email})
+		insert into users (user_id,name,password,mobile_number,nickname,email,dong_id) values (#{userId},#{name},#{password},#{mobileNumber},#{nickname},#{email},#{dongId})
 	</insert>
 
 	<select id="getSafePurchaseInfo" parameterType="string" resultType="SafePurchaseInfoDto">	<!-- 11P 안전거래 상세정보 가져오기 -->

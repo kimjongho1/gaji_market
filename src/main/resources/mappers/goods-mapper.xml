@@ -1,11 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC " -//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="goods">
-	
 
-	
-	<select id="getGoodsListInfo" parameterType="map" resultType="kh.spring.gaji.goods.model.dto.GoodsListInfoDto">
-		select count(*) totalCnt,min(price) bottomPrice,avg(price) averagePrice,max(price) topPrice from goods where status!=4 and active_status='Y'
+
+
+	<select id="getGoodsListInfo" parameterType="map"
+		resultType="kh.spring.gaji.goods.model.dto.GoodsListInfoDto">
+		select count(*) totalCnt,min(price) bottomPrice,avg(price)
+		averagePrice,max(price) topPrice from goods where status!=4 and
+		active_status='Y'
 		<if test="category!=-1">
 			and category_id=#{category}
 		</if>
@@ -13,33 +16,40 @@
 			and title like #{searchWord}
 		</if>
 		<choose>
-		<when test="priceCeiling==100000">
-			and price &lt;= 100000
-		</when>
-		<when test="priceCeiling==300000">
-			and price &gt;= 100000 and price &lt;= 300000
-		</when>
-		<when test="priceCeiling==500000">
-			and price &gt;= 300000 and price &lt;= 500000
-		</when>
-		<when test="priceCeiling==700000">
-			and price &gt;= 500000
-		</when>
+			<when test="priceCeiling==100000">
+				and price &lt;= 100000
+			</when>
+			<when test="priceCeiling==300000">
+				and price &gt;= 100000 and price &lt;= 300000
+			</when>
+			<when test="priceCeiling==500000">
+				and price &gt;= 300000 and price &lt;= 500000
+			</when>
+			<when test="priceCeiling==700000">
+				and price &gt;= 500000
+			</when>
 		</choose>
 		<if test="dongId!=-1">
 			and dong_id=#{dongId}
 		</if>
 	</select>
-	
-	<select id="getGoodsList" parameterType="map" resultType="GoodsListDto">
-		select list2.*,(select f.url from goods_file f where f.goods_id=list2.goods_id and rownum between 0 and 1) url from
-		(select list.*,rownum rn from(
-		(select g.view_count,g.title,g.price,g.goods_Id,u.nickname,g.status,g.safe_Trading_Yn,d.dong_Name,g.refreshed_at,
+
+	<select id="getGoodsList" parameterType="map"
+		resultType="GoodsListDto">
+		select list2.*,(select f.url from goods_file f where
+		f.goods_id=list2.goods_id and rownum between 0 and 1) url from
+		(select
+		list.*,rownum rn from(
+		(select
+		g.view_count,g.title,g.price,g.goods_Id,u.nickname,g.status,g.safe_Trading_Yn,d.dong_Name,g.refreshed_at,
 		g.created_at,
 
-		(select count(*) from wishList w where g.goods_id=w.goods_id) likeCount
-		from goods g join users u using(user_id) join dong d on g.dong_id=d.dong_id
-		where status!=4 and active_status='Y'
+		(select count(*) from wishList w where
+		g.goods_id=w.goods_id) likeCount
+		from goods g join users u
+		using(user_id) join dong d on g.dong_id=d.dong_id
+		where status!=4 and
+		active_status='Y'
 		<if test="category!=-1">
 			and category_id=#{category}
 		</if>
@@ -47,18 +57,18 @@
 			and title like #{searchWord}
 		</if>
 		<choose>
-		<when test="priceCeiling==100000">
-			and price &lt;= 100000
-		</when>
-		<when test="priceCeiling==300000">
-			and price &gt;= 100000 and price &lt;= 300000
-		</when>
-		<when test="priceCeiling==500000">
-			and price &gt;= 300000 and price &lt;= 500000
-		</when>
-		<when test="priceCeiling==700000">
-			and price &gt;= 500000
-		</when>
+			<when test="priceCeiling==100000">
+				and price &lt;= 100000
+			</when>
+			<when test="priceCeiling==300000">
+				and price &gt;= 100000 and price &lt;= 300000
+			</when>
+			<when test="priceCeiling==500000">
+				and price &gt;= 300000 and price &lt;= 500000
+			</when>
+			<when test="priceCeiling==700000">
+				and price &gt;= 500000
+			</when>
 		</choose>
 		<if test="dongId!=-1">
 			and g.dong_id=#{dongId}
@@ -77,56 +87,62 @@
 				order by g.refreshed_at desc
 			</otherwise>
 		</choose>
-		) 
+		)
 		list)
-		)list2 where list2.rn between #{startRownum} and #{endRownum} 
+		)list2 where list2.rn between #{startRownum} and #{endRownum}
 	</select>
 
-		<insert id="insertGoods" parameterType="GoodsDto">	<!-- 24P 상품글 등록 -->
-			insert into goods 
-			(goods_id,user_id,category_id,title,dong_id,price,description,safe_trading_yn,lat,lng) 
-			values(goods_id_sequence.nextval,#{userId},#{categoryId},#{title},#{dongId},#{price},#{description},#{safeTradingYn},#{lat},#{lng})
-		</insert>
+	<insert id="insertGoods" parameterType="GoodsDto">	<!-- 24P 상품글 등록 -->
+		insert into goods
+		(goods_id,user_id,category_id,title,dong_id,price,description,safe_trading_yn,lat,lng)
+		values(goods_id_sequence.nextval,#{userId},#{categoryId},#{title},#{dongId},#{price},#{description},#{safeTradingYn},#{lat},#{lng})
+	</insert>
 
-		<select id="getGoodsInfo" parameterType="_int" resultType="GoodsInfoDto"> <!--23P 상품글 상세조회  -->
-			select goods_id,user_id,category_id,title,status,price,view_count,description,g.created_at,safe_trading_yn
-			,g.dong_id,lat,lng,nickname,rating_score, (select count(user_id) from wishlist w where w.goods_id = g.goods_id) wishCount
-			from goods g join users u using (user_id) 
-			where goods_id=#{goodsId} and active_status='Y'and status != 4
-		</select>
-		
-		<select id="goodsWishNum" parameterType="_int" resultType="_int">
-			select count(user_id) from wishlist where goods_id = #{goodsId}
-		</select>
-		
-		<select id="goodsListUser">
-			select * from goods join goods_file on (goods_id) join users on (user_id) 
-		</select>
-		
-		
-		<update id="updateStatus" parameterType="map"> <!-- 23P 상품상태변경 -->
-			update goods set status=#{status} where goods_id=#{goodsId}
-		</update>
-		
-		
-		<select id="getGuDongInfo" parameterType="string" resultType="kh.spring.gaji.goods.model.dto.GuDongInfoDto">
-			select u.dong_id, d.dong_name, g.gu_id, g.gu_name
-			from users u join dong d on u.dong_Id=d.dong_Id join gu g on d.gu_Id=g.gu_Id
-			where user_id=#{userId}
-		</select>
-		
-		<update id="updateGoods" parameterType="GoodsDto"> <!-- 25P 상품글 수정 -->
-			update goods 
-			set title=#{title},category_id=#{category_id},
-			price=#{price},description=#{description}
-			,safe_trading_yn=#{safeTradingYN}
-			,dong_id=#{dong_id},lat=#{lat},lng=#{lng}
-			where goods_id=#{goodsId}
-		</update>
+	<select id="getGoodsInfo" parameterType="_int"
+		resultType="GoodsInfoDto"> <!--23P 상품글 상세조회 -->
+		select
+		goods_id,user_id,category_id,title,status,price,view_count,description,g.created_at,safe_trading_yn
+		,g.dong_id,lat,lng,nickname,rating_score, (select count(user_id) from
+		wishlist w where w.goods_id = g.goods_id) wishCount
+		from goods g join users u using (user_id)
+		where goods_id=#{goodsId} and active_status='Y'and status != 4
+	</select>
 
-		<delete id="deleteGoods" parameterType="_int"> <!-- 상품글 삭제는 active_status='N'으로 처리함. -->
-			update goods set active_status="N" 
-			where goods_id=#{goodsId}
-		</delete>
-		
+
+	<select id="goodsListUser">
+		select * from goods join goods_file on (goods_id) join users on (user_id)
+		where goods_id = #{goodsId}
+	</select>
+
+	<select id="updateViewCount"> <!-- 상품글 조회수 +1 -->
+		update goods set view_count=view_count+1 where goods_id = #{goodsId}
+	</select>
+
+	<update id="updateStatus" parameterType="map"> <!-- 23P 상품상태변경 -->
+		update goods set status=#{status} where goods_id=#{goodsId}
+	</update>
+
+
+	<select id="getGuDongInfo" parameterType="string"
+		resultType="kh.spring.gaji.goods.model.dto.GuDongInfoDto">
+		select u.dong_id, d.dong_name, g.gu_id, g.gu_name
+		from users u join dong d on u.dong_Id=d.dong_Id join gu g on
+		d.gu_Id=g.gu_Id
+		where user_id=#{userId}
+	</select>
+
+	<update id="updateGoods" parameterType="GoodsDto"> <!-- 25P 상품글 수정 -->
+		update goods
+		set title=#{title},category_id=#{category_id},
+		price=#{price},description=#{description}
+		,safe_trading_yn=#{safeTradingYN}
+		,dong_id=#{dong_id},lat=#{lat},lng=#{lng}
+		where goods_id=#{goodsId}
+	</update>
+
+	<delete id="deleteGoods" parameterType="_int"> <!-- 상품글 삭제는 active_status='N'으로 처리함. -->
+		update goods set active_status="N"
+		where goods_id=#{goodsId}
+	</delete>
+
 </mapper>

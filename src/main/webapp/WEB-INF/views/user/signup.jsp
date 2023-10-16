@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,12 +10,14 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 <!--favicon  -->
-	<link rel="icon" href="${pageContext.request.contextPath}/resources/img/favicon.ico">
-	<link rel="shortcut icon" href="${pageContext.request.contextPath}/resources/img/favicon.ico">
+<link rel="icon"
+	href="${pageContext.request.contextPath}/resources/img/favicon.ico">
+<link rel="shortcut icon"
+	href="${pageContext.request.contextPath}/resources/img/favicon.ico">
 
 <style>
 .container-box {
-	position:relative;
+	position: relative;
 	margin: 50px;
 	padding: 0px;
 	text-decoration: none;
@@ -98,7 +101,6 @@ body {
 	background: none;
 }
 
-
 .nickname {
 	width: 100%;
 	border: none;
@@ -148,9 +150,10 @@ body {
 	padding: 5px;
 	cursor: pointer;
 	border-radius: 5px;
-	width:200px;
+	width: 200px;
 	margin-left: 5px;
 }
+
 .btn-email {
 	background-color: #3498db;
 	color: #fff;
@@ -158,9 +161,10 @@ body {
 	padding: 5px;
 	cursor: pointer;
 	border-radius: 5px;
-	width:200px;
+	width: 200px;
 	margin-left: 5px;
 }
+
 .btn-mail-check-input {
 	background-color: #3498db;
 	color: #fff;
@@ -168,9 +172,10 @@ body {
 	padding: 5px;
 	cursor: pointer;
 	border-radius: 5px;
-	width:200px;
+	width: 200px;
 	margin-left: 5px;
 }
+
 .btn-id {
 	background-color: #3498db;
 	color: #fff;
@@ -178,155 +183,200 @@ body {
 	padding: 5px;
 	cursor: pointer;
 	border-radius: 5px;
-	width:200px;
+	width: 200px;
 	margin-left: 5px;
 }
 
 .btn-postcode:hover {
 	background-color: #2980b9;
 }
+
 .btn-email:hover {
 	background-color: #2980b9;
 }
+
 .btn-id:hover {
 	background-color: #2980b9;
 }
+
 .btn-mail-check-input:hover {
 	background-color: #2980b9;
 }
 
+
+
 </style>
 
 <!-- Css Styles -->
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/bootstrap.min.css" type="text/css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/font-awesome.min.css" type="text/css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/elegant-icons.css" type="text/css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/nice-select.css" type="text/css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/jquery-ui.min.css" type="text/css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/owl.carousel.min.css" type="text/css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/slicknav.min.css" type="text/css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/style.css" type="text/css">
-
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/resources/css/bootstrap.min.css"
+	type="text/css">
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/resources/css/font-awesome.min.css"
+	type="text/css">
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/resources/css/elegant-icons.css"
+	type="text/css">
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/resources/css/nice-select.css"
+	type="text/css">
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/resources/css/jquery-ui.min.css"
+	type="text/css">
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/resources/css/owl.carousel.min.css"
+	type="text/css">
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/resources/css/slicknav.min.css"
+	type="text/css">
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/resources/css/style.css"
+	type="text/css">
 </head>
 <body>
 
- <!-- header start -->      
- <jsp:include page="/WEB-INF/views/header.jsp"></jsp:include> 
-   <!-- header end --> 
+	<!-- header start -->
+	<jsp:include page="/WEB-INF/views/header.jsp"></jsp:include>
+	<!-- header end -->
 
 
-<div class="container-box">
+	<div class="container-box">
 
-	<form action="${pageContext.request.contextPath}/signup" method="POST" class="joinForm"
-		onsubmit="return Validation(); return false;">
+		<form action="${pageContext.request.contextPath}/signup" method="POST"
+			class="joinForm" onsubmit="return Validation(); return false;">
 
-		<div class="textForm">
-			<span style="display: flex;">
-				<input name="userId" type="text" class="id" placeholder="아이디" id="userId"
-				required="required">
-				<button type="button" class="btn-id"
-				id="checkDuplicateBtn">중복확인</button>
-			</span>
-		</div>
-		<div class="textForm">
-			<span style="display: flex;">
-			<input name="password" type="password" class="pw" placeholder="비밀번호" id="password"
-				required="required">
-			</span>
-		</div>
-		<div class="textForm">
-			<span style="display: flex;">
-			<input name="loginPwConfirm" type="password" class="pw" id="passwordVerification"
-				placeholder="비밀번호 확인" required="required">
-			</span>
-		</div>
-		<div class="textForm">
-			<span style="display: flex;">
-				<input name="email" type="text" class="email" placeholder="이메일" id="email"
-				required="required">
-				<button type="button" class="btn-email" id="mail-Check-Btn"
-				>인증번호 요청</button>
-			</span>
-		</div>
-		<div class="textForm">
-			<span style="display: flex;">
-				<input name="certification" type="text" class="mail-check-input" id="verificationCode"
-					placeholder="인증번호 확인" required="required">
-				<button type="button" class="btn-mail-check-input" id="verify-button">인증번호 확인</button>
-			</span>
-		</div>
-		<div class="textForm">
-			<span style="display: flex;">	
-			<input name="name" type="text" class="name" placeholder="이름" id="name"
-				required="required">
-			</span>
-		</div>
-		<div class="textForm">
-			<span style="display: flex;">	
-				<input name="nickname" type="text" class="nickname" placeholder="닉네임" id="nickname"
+			<div class="textForm">
+				<span style="display: flex;"> <input name="userId"
+					type="text" class="id" placeholder="아이디" id="userId"
 					required="required">
-				<button type="button" class="btn-id" id="checkNickName">중복확인</button>
-			</span>
-		</div>
-		<div class="textForm">
-			<span style="display: flex;">	
-			<input name="mobileNumber" type="text" class="cellphoneNo" id="mobileNumber"
-				placeholder="전화번호" required="required">
-			</span>
-		</div>
-		<div class="textForm">
-			<span style="display: flex;">
-			<input type="text" name="postCode" id="sample4_postcode"
-				placeholder="우편번호" required="required" class="cellphoneNo">
-			<button type="button" class="btn-postcode"
-				onclick="sample4_execDaumPostcode()">우편번호 찾기</button>
+					<button type="button" class="btn-id" id="checkDuplicateBtn">중복확인</button>
 				</span>
-		</div>
-		<div class="textForm">
-			<span style="display: flex;">
-			<input type="text" name="roadAddress" id="sample4_roadAddress"
-				placeholder="도로명주소" class="cellphoneNo">
-			</span>
-		</div>
-		<div class="textForm">
-		<span style="display: flex;">
-			<input type="text" name="address" id="sample4_jibunAddress"
-				placeholder="지번주소" class="cellphoneNo"> <span id="guide"
-				style="color: #999; display: none"></span>
-		</span>
-		</div>
-		<div class="textForm">
-		<span style="display: flex;">
-			<input type="text" name="detailAddress" id="sample4_detailAddress"
-				placeholder="상세주소" class="cellphoneNo">
-		</span>
-		</div>
-		<div class="textForm">
-		<span style="display: flex;">
-			<input type="text" name="addressNickname" id="sample4_detailAddress"
-				placeholder="주소별칭" class="cellphoneNo">
-		</span>
-		</div>
-		<input type="submit" class="btn" value="J O I N" />
-	</form>
-</div>
-	
+			</div>
+			<div class="textForm">
+				<span style="display: flex;"> <input name="password"
+					type="password" class="pw" placeholder="비밀번호" id="password"
+					required="required">
+				</span>
+			</div>
+			<div class="textForm">
+				<span style="display: flex;"> <input name="loginPwConfirm"
+					type="password" class="pw" id="passwordVerification"
+					placeholder="비밀번호 확인" required="required">
+				</span>
+			</div>
+			<div class="textForm">
+				<span style="display: flex;"> <input name="email" type="text"
+					class="email" placeholder="이메일" id="email" required="required">
+					<button type="button" class="btn-email" id="mail-Check-Btn">인증번호
+						요청</button>
+				</span>
+			</div>
+			<div class="textForm">
+				<span style="display: flex;"> <input name="certification"
+					type="text" class="mail-check-input" id="verificationCode"
+					placeholder="인증번호 확인" required="required">
+					<button type="button" class="btn-mail-check-input"
+						id="verify-button">인증번호 확인</button>
+				</span>
+			</div>
+			<div class="textForm">
+				<span style="display: flex;"> <input name="name" type="text"
+					class="name" placeholder="이름" id="name" required="required">
+				</span>
+			</div>
+			<div class="textForm">
+				<span style="display: flex;"> <input name="nickname"
+					type="text" class="nickname" placeholder="닉네임" id="nickname"
+					required="required">
+					<button type="button" class="btn-id" id="checkNickName">중복확인</button>
+				</span>
+			</div>
+			<div class="textForm">
+				<span style="display: flex;"> <input name="mobileNumber"
+					type="text" class="cellphoneNo" id="mobileNumber"
+					placeholder="전화번호" required="required">
+				</span>
+			</div>
+			<div class="textForm">
+				<span style="display: flex;"> <input type="text"
+					name="postCode" id="sample4_postcode" placeholder="우편번호"
+					required="required" class="cellphoneNo">
+					<button type="button" class="btn-postcode"
+						onclick="sample4_execDaumPostcode()">우편번호 찾기</button>
+				</span>
+			</div>
+			<div class="textForm">
+				<span style="display: flex;"> <input type="text"
+					name="roadAddress" id="sample4_roadAddress" placeholder="도로명주소"
+					class="cellphoneNo">
+				</span>
+			</div>
+			<div class="textForm">
+				<span style="display: flex;"> <input type="text"
+					name="address" id="sample4_jibunAddress" placeholder="지번주소"
+					class="cellphoneNo"> <span id="guide"
+					style="color: #999; display: none"></span>
+				</span>
+			</div>
+			<div class="textForm">
+				<span style="display: flex;"> <input type="text"
+					name="detailAddress" id="sample4_detailAddress" placeholder="상세주소"
+					class="cellphoneNo">
+				</span>
+			</div>
+			<div class="textForm">
+				<span style="display: flex;"> <input type="text"
+					name="addressNickname" id="sample4_detailAddress"
+					placeholder="주소별칭" class="cellphoneNo">
+				</span>
+			</div>
+			<div>
+			<!-- 구 선택 드롭다운 -->
+			<label for="selectedGu">구 선택:</label> <select name="selectedGu"
+				id="selectedGu" onchange="updateDongDropdown()">
+				<option value="">구를 선택하세요</option>
+				<c:forEach items="${guList}" var="gu">
+					<option value="${gu.guId}">${gu.guName}</option>
+				</c:forEach>
+			</select>
+
+			<!-- 동 선택 드롭다운 -->
+			<label for="selectedDong">동 선택:</label> <select name="dongId"
+				id="selectedDong">
+				<option value="">동을 선택하세요</option>
+				<c:forEach items="${dongList}" var="dong">
+					<option value="${dong.dongId}" data-gu="${dong.guId}">${dong.dongName}</option>
+				</c:forEach>
+			</select> 
+			</div>
+			<input type="submit" class="btn" value="J O I N" />
+		</form>
+	</div>
+
 	<!-- Footer Section Begin -->
- <jsp:include page="/WEB-INF/views/footer.jsp"></jsp:include> 
-    <!-- Footer Section End -->
-	
+	<jsp:include page="/WEB-INF/views/footer.jsp"></jsp:include>
+	<!-- Footer Section End -->
+
 </body>
 
 <!-- Js Plugins -->
-    <script src="${pageContext.request.contextPath}/resources/js/jquery-3.3.1.min.js"></script>
-    <script src="${pageContext.request.contextPath}/resources/js/bootstrap.min.js"></script>
-    <script src="${pageContext.request.contextPath}/resources/js/jquery.nice-select.min.js"></script>
-    <script src="${pageContext.request.contextPath}/resources/js/jquery-ui.min.js"></script>
-    <script src="${pageContext.request.contextPath}/resources/js/jquery.slicknav.js"></script>
-    <script src="${pageContext.request.contextPath}/resources/js/mixitup.min.js"></script>
-    <script src="${pageContext.request.contextPath}/resources/js/owl.carousel.min.js"></script>
-    <script src="${pageContext.request.contextPath}/resources/js/main.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
+<script
+	src="${pageContext.request.contextPath}/resources/js/jquery-3.3.1.min.js"></script>
+<script
+	src="${pageContext.request.contextPath}/resources/js/bootstrap.min.js"></script>
+<%-- <script
+	src="${pageContext.request.contextPath}/resources/js/jquery.nice-select.min.js"></script> --%>
+<script
+	src="${pageContext.request.contextPath}/resources/js/jquery-ui.min.js"></script>
+<script
+	src="${pageContext.request.contextPath}/resources/js/jquery.slicknav.js"></script>
+<script
+	src="${pageContext.request.contextPath}/resources/js/mixitup.min.js"></script>
+<script
+	src="${pageContext.request.contextPath}/resources/js/owl.carousel.min.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/main.js"></script>
+<script
+	src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
 
 <script
 	src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
@@ -449,6 +499,9 @@ $('#verify-button').click(function() {
         var address = document.getElementById("sample4_jibunAddress");
         var detailAddress = document.getElementById("sample4_detailAddress");
         var addressNickname = document.getElementById("addressNickname");
+        var selectedGu = document.getElementById("selectedGu").value;
+        var selectedDong = document.getElementById("selectedDong").value;
+
 		
         // 정규식 패턴 정의
         var idPattern = /^[a-zA-Z0-9]{4,10}$/; // 아이디는 4~10자의 영문 대소문자와 숫자만 허용
@@ -563,6 +616,11 @@ $('#verify-button').click(function() {
             postCode.focus();
             return false;
         }
+     // 선택되지 않은 경우, 경고 메시지를 표시하고 제출을 막습니다.
+        if (selectedGu === "" || selectedDong === "") {
+            alert("구와 동을 선택하세요.");
+            return false;
+        }
 
 
 
@@ -642,6 +700,29 @@ $('#verify-button').click(function() {
 	if(msg ){
 		alert(msg);
 	}
-</script>
+	
+	
+	
+	</script>
+<script>
+function updateDongDropdown() {
+    const selectedGu = document.getElementById("selectedGu").value;
+    const dongDropdown = document.getElementById("selectedDong");
+	
+    // 모든 동 옵션 숨기기
+    Array.from(dongDropdown.options).forEach(option => {
+        option.style.display = "none";
+    });
 
+    // 선택한 구에 맞는 동 옵션 보이기
+    Array.from(dongDropdown.options).forEach(option => {
+        if (option.getAttribute("data-gu") === selectedGu || option.value === "") {
+            option.style.display = "block";
+        }
+    });
+}
+
+// 페이지 로드 시 호출하여 초기화
+updateDongDropdown();
+</script>
 </html>

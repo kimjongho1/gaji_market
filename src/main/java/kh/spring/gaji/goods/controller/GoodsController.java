@@ -183,7 +183,6 @@ public class GoodsController {
 		
 		
 		mv.setViewName("goods/goodsget");
-		mv.addObject("goodsWishNum",goodsService.goodsWishNum(goodsId));
 		mv.addObject("goodsDto",goodsService.getGoodsInfo(goodsId));
 		
 		return mv;

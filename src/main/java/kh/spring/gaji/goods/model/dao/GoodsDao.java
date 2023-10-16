@@ -64,9 +64,6 @@ public class GoodsDao  {
     public int deleteGoods(int goodsId) {
         return sqlSession.update("goods.deleteGoods", goodsId); // 상품삭제 
     }
-    public int goodsWishNum(int goodsId) {
-    	return sqlSession.selectOne("goods.goodsWishNum",goodsId);
-    }
 
 	public GuDongInfoDto getGuDongInfo(String userId) {
 		return sqlSession.selectOne("goods.getGuDongInfo",userId);
