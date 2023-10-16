@@ -1,6 +1,7 @@
 package kh.spring.gaji.pay.controller;
 
 import java.io.IOException;
+import java.security.Principal;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -53,15 +54,15 @@ public class PayController {
 	}
 	
 		@GetMapping("payment/pay")
-		public String pay(Model model,RedirectAttributes attribute,Integer goodsId,HttpServletRequest request) {
-			/* String userId=(String)request.getSession().getAttribute("userId"); */
+		public String pay(Model model,RedirectAttributes attribute,Integer goodsId,HttpServletRequest request,Principal principal) {
+			String userId=principal.getName();
 			if(payServiceImpl.checkGoodsStatus(1)!=1) {	//추후 1은 goodsId로 대체
 				attribute.addFlashAttribute("msg", "판매중인 상품이 아닙니다.");
 				return "redirect:/";
 			}
 			GoodsPayInfoDto goodsInfo=payServiceImpl.getGoodsInfo(1);	//추후 1은 goodsId로 대체
-			List<UserAddressDto> userAddress = payServiceImpl.getUserAddressList("qordmlgjs");	 //추후대체 userId =qordmlgjs
-			PayUserInfoDto payUserInfo= payServiceImpl.getUserInfo("qordmlgjs");			 //추후대체 userId =qordmlgjs 
+			List<UserAddressDto> userAddress = payServiceImpl.getUserAddressList(userId);	 
+			PayUserInfoDto payUserInfo= payServiceImpl.getUserInfo("userId");			  
 			model.addAttribute("merchantIdentificationCode",merchantIdentificationCode);
 			model.addAttribute("goodsInfo",goodsInfo);		//상품정보
 			model.addAttribute("userAddress",userAddress);	//유저주소들
@@ -71,17 +72,16 @@ public class PayController {
 		
 		@PostMapping("payment/closepay")
 		@ResponseBody
-		public int closePay(String transactionId,HttpServletRequest request) {
+		public int closePay(String transactionId,HttpServletRequest request,Principal principal) {
 			int result=0;
-			String userId= payServiceImpl.checkId(transactionId);	// 거래번호를 이용해 userId를 가져온다.
-			/* userId==(String)request.getSession().getAttribute(userId)  */
+			String userId=principal.getName();
 				result = payServiceImpl.closeSafeTrading(transactionId,userId);	 // session에 저장된 아이디와 일치하면 거래확정을 실행한다.
 				if(result==1) {
 					Map<String,Object> map=new HashMap<String,Object>();
 					map.put("status",3);
 					map.put("goodsId",payServiceImpl.getGoodsId(transactionId));
 					payServiceImpl.updateStatus(map);
-//					payServiceImpt.insertClosePayNotice(transactionId);
+//					payServiceImpl.insertClosePayNotice(transactionId);
 				}
 				System.out.println("result:"+result);
 			return result;
@@ -89,9 +89,9 @@ public class PayController {
 		
 	@PostMapping("payment/changestatus")
 	@ResponseBody
-	public int changeStatus(String transactionId,String userId,int status,HttpServletRequest request) {
+	public int changeStatus(String transactionId,int status,HttpServletRequest request,Principal principal) {
 		Map<String,Object> map=new HashMap<String,Object>();
-	/*	if(userId=request.getSession().getAttribute(userId)) {*/
+		String userId=principal.getName();
 		map.put("userId", userId);
 		map.put("status", status);
 		map.put("transactionId",transactionId);
@@ -101,9 +101,9 @@ public class PayController {
 		
 	@PostMapping("payment/cancel")	//안전거래 후 취소처리를 위한 버튼
 	@ResponseBody
-	public IamportResponse<Payment> cancel(String userId,int goodsId,String transactionId,HttpServletRequest request) {
+	public IamportResponse<Payment> cancel(int goodsId,String transactionId,HttpServletRequest request,Principal principal) {
 		IamportResponse<Payment> result=null;
-		/* if(userId==(String)request.getSession().getAttribute(userId)) { */	//이후 세션생기면 활성화할것
+		String userId=principal.getName();
 		try {
 			result = api.cancelPaymentByImpUid(cancelData=new CancelData(transactionId, true)); //가맹점 고유식별번호로 거래취소후 , 거래정보담은 객체반환
 			if(result.getResponse().getStatus().equals("cancelled")) {
@@ -125,8 +125,9 @@ public class PayController {
 	@PostMapping("payment/callback")
 	@ResponseBody
 	public IamportResponse<Payment> callback(String impUid, String detailAddress,
-			String roadAddress,int goodsId,HttpServletRequest request) {
+			String roadAddress,Integer goodsId,HttpServletRequest request,Principal principal) {
 		IamportResponse<Payment> result=null;
+		String userId=principal.getName();
 		try {
 			result= api.paymentByImpUid(impUid);
 			int amount =(int)Math.round(payServiceImpl.getAmount(1) * 1.035);	//goodsId =1
@@ -139,7 +140,7 @@ public class PayController {
 				insertSafeTradingDto.setPurchaseMethod(result.getResponse().getPayMethod());
 				insertSafeTradingDto.setDetailAddress(detailAddress);
 				insertSafeTradingDto.setRoadAddress(roadAddress);
-				insertSafeTradingDto.setBuyerId("qordmlgjs");	 //userId =qordmlgjs
+				insertSafeTradingDto.setBuyerId(userId);	 //userId =qordmlgjs
 				
 				int addResult = payServiceImpl.addSafeTrading(insertSafeTradingDto); //데이터베이스에 안전거래에 대한 데이터를 넣음
 				

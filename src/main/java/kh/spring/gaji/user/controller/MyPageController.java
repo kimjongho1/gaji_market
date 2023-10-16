@@ -1,5 +1,6 @@
 package kh.spring.gaji.user.controller;
 
+import java.security.Principal;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -139,9 +140,9 @@ public class MyPageController {
 
 	
 	@GetMapping("/dealreview")
-	public String dealreview(Model model,String transactionId,RedirectAttributes rattr,HttpSession session) {	//리뷰작성
-//		String userId=(String)session.getAttribute("userId");
-		if(userService.checkTradingStatus(transactionId,"qordmlgjs")==0) {	//거래번호에 해당하는 안전거래가 거래완료이면서,  해당상품번호의 해당유저 리뷰가 아직 존재하지 않으면
+	public String dealreview(Model model,String transactionId,RedirectAttributes rattr,Principal principal) {	//리뷰작성
+		String userId=principal.getName();
+		if(userService.checkTradingStatus(transactionId,userId)==0) {	//거래번호에 해당하는 안전거래가 거래완료이면서,  해당상품번호의 해당유저 리뷰가 아직 존재하지 않으면
 			model.addAttribute("transactionId", transactionId);	//	거래번호를 가지고
 			return "mypage/dealreview";							// 리뷰작성 페이지로 이동
 		}
@@ -150,14 +151,14 @@ public class MyPageController {
 	}
 	
 	@PostMapping("/dealreview.do")
-	public String doDealreview(Model model,DealReviewDto dealReviewDto,String transactionId,RedirectAttributes rattr,HttpSession session) {
+	public String doDealreview(Model model,DealReviewDto dealReviewDto,String transactionId,RedirectAttributes rattr, Principal principal) {
 
 		if(1<=dealReviewDto.getMannerPoint() && dealReviewDto.getMannerPoint()<=5&&		//들어온 평점이 정상 범주에 있는지를 체크함.
 		   1<=dealReviewDto.getTimePoint() && dealReviewDto.getTimePoint()<=5&&
 		   1<=dealReviewDto.getGoodsPoint() && dealReviewDto.getGoodsPoint()<=5
 		) {
-//			String userId=(String)session.getAttribute("userId");
-			dealReviewDto.setUserId("qordmlgjs");//추후 userId
+			String userId=principal.getName();
+			dealReviewDto.setUserId(userId);
 			if(userService.doDealreview(dealReviewDto,transactionId)==1) {
 				rattr.addFlashAttribute("msg","리뷰가 정상적으로 등록되었습니다.");
 				return "redirect:/";
@@ -171,47 +172,48 @@ public class MyPageController {
 	
 	@PostMapping("/address/regist/do")
 	@ResponseBody
-	public List<UserAddressDto> addressRegist(UserInsertAddressDto address){
-		address.setUserId("qordmlgjs");
+	public List<UserAddressDto> addressRegist(UserInsertAddressDto address,Principal principal){
+		String userId=principal.getName();
+		address.setUserId(userId);
 		userService.insertAddress(address);
-		return userService.getAddress("qordmlgjs");
+		return userService.getAddress(userId);
 	}
 	
 	@Transactional
 	@PostMapping("/address/delete")
 	@ResponseBody
-	public int addressdelete(int addressNo,HttpSession session){
-//		String userId=session.getAttribute("qordmlgjs");
+	public int addressdelete(int addressNo,Principal principal){
+		String userId=principal.getName();
 		Map<String, Object> map=new HashMap<String,Object>();
-		map.put("userId","qordmlgjs");	//이후 userId대체
+		map.put("userId",userId);	//이후 userId대체
 		map.put("addressNo", addressNo);
 		return userService.deleteAddress1(map);
 	}
 	
 	@PostMapping("/address/alterPrimaryAddress")
 	@ResponseBody
-	public int alterPrimaryAddress(int addressNo,HttpSession session){
-//		String userId=session.getAttribute("qordmlgjs");
+	public int alterPrimaryAddress(int addressNo,Principal principal){
+		String userId=principal.getName();
 		Map<String, Object> map=new HashMap<String,Object>();
-		map.put("userId","qordmlgjs");	//이후 userId대체
+		map.put("userId",userId);	//이후 userId대체
 		map.put("addressNo", addressNo);
 		return userService.updateMainAddress(map);
 	}
 	
 	@GetMapping("/orderstatus/safe")
-	public String safeorderList(Model model,Integer currentPage,String searchWord) {	// 나의 안전거래 구매내역 페이지.
-		//String userId=(String)session.getAttribute("userId"); 
+	public String safeorderList(Model model,Integer currentPage,String searchWord,Principal principal) {	// 나의 안전거래 구매내역 페이지.
+		String userId=principal.getName();
 		int totalCnt=0;
 		List<UserSafeTradingDto> safePurchaseList=null;
 		if(currentPage==null)	//현재 페이지가 들어온게 없다면 1페이지.
 			currentPage=1;
 		if(searchWord==null) {	// 검색어가 들어온게 없다면 검색어없는 mapper로 목록 가져오기
-			Map<String,Object> map= userService.getSafePurchaseList("qordmlgjs",(int)currentPage,PAGESIZE);	//추후 userId들어가야함
+			Map<String,Object> map= userService.getSafePurchaseList(userId,(int)currentPage,PAGESIZE);	//추후 userId들어가야함
 			safePurchaseList = (List<UserSafeTradingDto>)map.get("safePurchaseList");
 			totalCnt= (int)map.get("totalCnt");
 		}
 		else {					//검색어가 있다면 그에따른 mapper로 목록 가져오기
-			Map<String,Object> map= userService.getSearchSafePurchaseList("qordmlgjs",(int)currentPage,PAGESIZE,searchWord);
+			Map<String,Object> map= userService.getSearchSafePurchaseList(userId,(int)currentPage,PAGESIZE,searchWord);
 			safePurchaseList = (List<UserSafeTradingDto>)map.get("safePurchaseList");
 			totalCnt= (int)map.get("totalCnt");
 			model.addAttribute("searchWord",searchWord);
@@ -235,19 +237,19 @@ public class MyPageController {
 	}
 	
 	@GetMapping("/orderstatus/inface")
-	public String infaceOrderList(Model model,Integer currentPage,String searchWord,HttpSession session) {	// 나의 직거래 구매내역 페이지.
-		//String userId=(String)session.getAttribute("userId"); 
+	public String infaceOrderList(Model model,Integer currentPage,String searchWord,Principal principal) {	// 나의 직거래 구매내역 페이지.
+		String userId=principal.getName();
 		int totalCnt=0;
 		List<InFaceTradingDto> infacePurchaseList=null;
 		if(currentPage==null)	//현재 페이지가 들어온게 없다면 1페이지.
 			currentPage=1;
 		if(searchWord==null) {	// 검색어가 들어온게 없다면 검색어없는 mapper로 목록 가져오기
-			Map<String,Object> map= userService.getInfacePurchaseList("qordmlgjs",(int)currentPage,PAGESIZE);	//추후 userId들어가야함
+			Map<String,Object> map= userService.getInfacePurchaseList(userId,(int)currentPage,PAGESIZE);	//추후 userId들어가야함
 			infacePurchaseList = (List<InFaceTradingDto>)map.get("inFacePurchaseList");
 			totalCnt= (int)map.get("totalCnt");
 		}
 		else {					//검색어가 있다면 그에따른 mapper로 목록 가져오기
-			Map<String,Object> map= userService.getSearchInfacePurchaseList("qordmlgjs",(int)currentPage,PAGESIZE,searchWord);
+			Map<String,Object> map= userService.getSearchInfacePurchaseList(userId,(int)currentPage,PAGESIZE,searchWord);
 			infacePurchaseList = (List<InFaceTradingDto>)map.get("inFacePurchaseList");
 			totalCnt= (int)map.get("totalCnt");
 			model.addAttribute("searchWord",searchWord);
@@ -269,19 +271,19 @@ public class MyPageController {
 	}
 	
 	@GetMapping("/salestatus/inface")
-	public String infaceSellerOrderList(Model model,Integer currentPage,String searchWord,HttpSession session) {	// 나의 직거래 구매내역 페이지.
-		//String userId=(String)session.getAttribute("userId"); 
+	public String infaceSellerOrderList(Model model,Integer currentPage,String searchWord,Principal principal) {	// 나의 직거래 구매내역 페이지.
+		String userId=principal.getName();
 		int totalCnt=0;
 		List<InFaceTradingDto> infacePurchaseList=null;
 		if(currentPage==null)	//현재 페이지가 들어온게 없다면 1페이지.
 			currentPage=1;
 		if(searchWord==null) {	// 검색어가 들어온게 없다면 검색어없는 mapper로 목록 가져오기
-			Map<String,Object> map= userService.getSellerInfacePurchaseList("cjsdudwns",(int)currentPage,PAGESIZE);	//추후 userId들어가야함
+			Map<String,Object> map= userService.getSellerInfacePurchaseList(userId,(int)currentPage,PAGESIZE);	
 			infacePurchaseList = (List<InFaceTradingDto>)map.get("inFacePurchaseList");
 			totalCnt= (int)map.get("totalCnt");
 		}
 		else {					//검색어가 있다면 그에따른 mapper로 목록 가져오기
-			Map<String,Object> map= userService.getSearchSellerInfacePurchaseList("cjsdudwns",(int)currentPage,PAGESIZE,searchWord);
+			Map<String,Object> map= userService.getSearchSellerInfacePurchaseList(userId,(int)currentPage,PAGESIZE,searchWord);
 			infacePurchaseList = (List<InFaceTradingDto>)map.get("inFacePurchaseList");
 			totalCnt= (int)map.get("totalCnt");
 			model.addAttribute("searchWord",searchWord);
@@ -303,19 +305,19 @@ public class MyPageController {
 	}
 	
 	@GetMapping("/salestatus/safe")
-	public String safeSaleList(Model model,Integer currentPage,String searchWord) {	// 나의 안전거래 판매내역 페이지.
-		//String userId=(String)session.getAttribute("userId"); 
+	public String safeSaleList(Model model,Integer currentPage,String searchWord,Principal principal) {	// 나의 안전거래 판매내역 페이지.
+		String userId=principal.getName(); 
 		int totalCnt=0;
 		List<UserSafeTradingDto> safePurchaseList=null;
 		if(currentPage==null)	//현재 페이지가 들어온게 없다면 1페이지.
 			currentPage=1;
 		if(searchWord==null) {	// 검색어가 들어온게 없다면 검색어없는 mapper로 목록 가져오기
-			Map<String,Object> map= userService.getSellerSafePurchaseList("cjsdudwns",(int)currentPage,PAGESIZE);	//추후 userId들어가야함
+			Map<String,Object> map= userService.getSellerSafePurchaseList(userId,(int)currentPage,PAGESIZE);	//추후 userId들어가야함
 			safePurchaseList = (List<UserSafeTradingDto>)map.get("safePurchaseList");
 			totalCnt= (int)map.get("totalCnt");
 		}
 		else {					//검색어가 있다면 그에따른 mapper로 목록 가져오기
-			Map<String,Object> map= userService.getSearchSellerSafePurchaseList("cjsdudwns",(int)currentPage,PAGESIZE,searchWord);
+			Map<String,Object> map= userService.getSearchSellerSafePurchaseList(userId,(int)currentPage,PAGESIZE,searchWord);
 			safePurchaseList = (List<UserSafeTradingDto>)map.get("safePurchaseList");
 			totalCnt= (int)map.get("totalCnt");
 			model.addAttribute("searchWord",searchWord);
@@ -339,20 +341,20 @@ public class MyPageController {
 	}
 	
 	@GetMapping("/goods/onsale")	// 판매중 상품
-	public String onsaleGoods(Model model,Integer currentPage,String searchWord,HttpSession session) {	
+	public String onsaleGoods(Model model,Integer currentPage,String searchWord,Principal principal) {	
 		int totalCnt=0;
 		List<MyGoodsListDto> myGoodsList=null;
-		//String userId=(String)session.getAttribute("userId"); 
+		String userId=principal.getName();
 		model.addAttribute("myGoodsList",myGoodsList);
 		if(currentPage==null)	//현재 페이지가 들어온게 없다면 1페이지.
 			currentPage=1;
 		if(searchWord==null) {	// 검색어가 들어온게 없다면 검색어없는 mapper로 목록 가져오기
-			Map<String,Object> map= userService.getOnSaleList("cjsdudwns",(int)currentPage,PAGESIZE);	//추후 userId들어가야함
+			Map<String,Object> map= userService.getOnSaleList(userId,(int)currentPage,PAGESIZE);	//추후 userId들어가야함
 			myGoodsList = (List<MyGoodsListDto>)map.get("myGoodsList");
 			totalCnt= (int)map.get("totalCnt");
 		}
 		else {					//검색어가 있다면 그에따른 mapper로 목록 가져오기
-			Map<String,Object> map= userService.getSearchOnSaleList("cjsdudwns",(int)currentPage,PAGESIZE,searchWord);//추후 userId들어가야함
+			Map<String,Object> map= userService.getSearchOnSaleList(userId,(int)currentPage,PAGESIZE,searchWord);//추후 userId들어가야함
 			myGoodsList = (List<MyGoodsListDto>)map.get("myGoodsList");
 			totalCnt= (int)map.get("totalCnt");
 			model.addAttribute("searchWord",searchWord);
@@ -374,20 +376,20 @@ public class MyPageController {
 	}
 	
 	@GetMapping("/goods/closed")	// 판매완료 상품
-	public String closedGoods(Model model,Integer currentPage,String searchWord,HttpSession session) {	
+	public String closedGoods(Model model,Integer currentPage,String searchWord,Principal principal) {	
 		int totalCnt=0;
 		List<MyGoodsListDto> myGoodsList=null;
-		//String userId=(String)session.getAttribute("userId"); 
+		String userId=principal.getName();
 		model.addAttribute("myGoodsList",myGoodsList);
 		if(currentPage==null)	//현재 페이지가 들어온게 없다면 1페이지.
 			currentPage=1;
 		if(searchWord==null) {	// 검색어가 들어온게 없다면 검색어없는 mapper로 목록 가져오기
-			Map<String,Object> map= userService.getClosedList("cjsdudwns",(int)currentPage,PAGESIZE);	//추후 userId들어가야함
+			Map<String,Object> map= userService.getClosedList(userId,(int)currentPage,PAGESIZE);	//추후 userId들어가야함
 			myGoodsList = (List<MyGoodsListDto>)map.get("myGoodsList");
 			totalCnt= (int)map.get("totalCnt");
 		}
 		else {					//검색어가 있다면 그에따른 mapper로 목록 가져오기
-			Map<String,Object> map= userService.getSearchClosedList("cjsdudwns",(int)currentPage,PAGESIZE,searchWord);//추후 userId들어가야함
+			Map<String,Object> map= userService.getSearchClosedList(userId,(int)currentPage,PAGESIZE,searchWord);//추후 userId들어가야함
 			myGoodsList = (List<MyGoodsListDto>)map.get("myGoodsList");
 			totalCnt= (int)map.get("totalCnt");
 			model.addAttribute("searchWord",searchWord);
@@ -409,20 +411,20 @@ public class MyPageController {
 	}
 	
 	@GetMapping("/goods/hide")	// 숨김중 상품
-	public String hideGoods(Model model,Integer currentPage,String searchWord,HttpSession session) {	
+	public String hideGoods(Model model,Integer currentPage,String searchWord,Principal principal) {	
 		int totalCnt=0;
 		List<MyGoodsListDto> myGoodsList=null;
-		//String userId=(String)session.getAttribute("userId"); 
+		String userId=principal.getName();
 		model.addAttribute("myGoodsList",myGoodsList);
 		if(currentPage==null)	//현재 페이지가 들어온게 없다면 1페이지.
 			currentPage=1;
 		if(searchWord==null) {	// 검색어가 들어온게 없다면 검색어없는 mapper로 목록 가져오기
-			Map<String,Object> map= userService.getHideList("cjsdudwns",(int)currentPage,PAGESIZE);	//추후 userId들어가야함
+			Map<String,Object> map= userService.getHideList(userId,(int)currentPage,PAGESIZE);	//추후 userId들어가야함
 			myGoodsList = (List<MyGoodsListDto>)map.get("myGoodsList");
 			totalCnt= (int)map.get("totalCnt");
 		}
 		else {					//검색어가 있다면 그에따른 mapper로 목록 가져오기
-			Map<String,Object> map= userService.getSearchHideList("cjsdudwns",(int)currentPage,PAGESIZE,searchWord);//추후 userId들어가야함
+			Map<String,Object> map= userService.getSearchHideList(userId,(int)currentPage,PAGESIZE,searchWord);//추후 userId들어가야함
 			myGoodsList = (List<MyGoodsListDto>)map.get("myGoodsList");
 			totalCnt= (int)map.get("totalCnt");
 			model.addAttribute("searchWord",searchWord);
@@ -450,19 +452,19 @@ public class MyPageController {
 		}
 	
 	@GetMapping("/keepuseds")
-	public String keepuseds(Model model, Integer currentPage, String searchWord, HttpSession session) {
+	public String keepuseds(Model model, Integer currentPage, String searchWord,Principal principal) {
 		int totalCnt = 0;
 		List<MyGoodsListDto> myGoodsList = null;
-		// String userId=(String)session.getAttribute("userId");
+		String userId=principal.getName();
 		model.addAttribute("myGoodsList", myGoodsList);
 		if (currentPage == null) // 현재 페이지가 들어온게 없다면 1페이지.
 			currentPage = 1;
 		if (searchWord == null) { // 검색어가 들어온게 없다면 검색어없는 mapper로 목록 가져오기
-			Map<String, Object> map = userService.getKeepUsedList("qordmlgjs", (int) currentPage, PAGESIZE); // 추후																								// userId들어가야함
+			Map<String, Object> map = userService.getKeepUsedList(userId, (int) currentPage, PAGESIZE);																							// userId들어가야함
 			myGoodsList = (List<MyGoodsListDto>) map.get("myGoodsList");
 			totalCnt = (int) map.get("totalCnt");
 		} else { // 검색어가 있다면 그에따른 mapper로 목록 가져오기
-			Map<String, Object> map = userService.getSearchKeepUsedList("qordmlgjs", (int) currentPage, PAGESIZE,
+			Map<String, Object> map = userService.getSearchKeepUsedList(userId, (int) currentPage, PAGESIZE,
 					searchWord);// 추후 userId들어가야함
 			myGoodsList = (List<MyGoodsListDto>) map.get("myGoodsList");
 			totalCnt = (int) map.get("totalCnt");
@@ -487,19 +489,19 @@ public class MyPageController {
 	
 	@GetMapping("/keepusers")
 // 모아보기 - 즐겨찾기한 유저들의 상품들을 모아서 볼 수 있음 
-	public String keepusers(Model model, Integer currentPage, String searchWord, HttpSession session) {
+	public String keepusers(Model model, Integer currentPage, String searchWord,Principal principal) {
 		int totalCnt = 0;
 		List<MyGoodsListDto> myGoodsList = null;
-		// String userId=(String)session.getAttribute("userId");
+		String userId=principal.getName();
 		model.addAttribute("myGoodsList", myGoodsList);
 		if (currentPage == null) // 현재 페이지가 들어온게 없다면 1페이지.
 			currentPage = 1;
 		if (searchWord == null) { // 검색어가 들어온게 없다면 검색어없는 mapper로 목록 가져오기
-			Map<String, Object> map = userService.getKeepUsersList("qordmlgjs", (int) currentPage, PAGESIZE); // 추후 userId들어가야함																								
+			Map<String, Object> map = userService.getKeepUsersList(userId, (int) currentPage, PAGESIZE); // 추후 userId들어가야함																								
 			myGoodsList = (List<MyGoodsListDto>) map.get("myGoodsList");
 			totalCnt = (int) map.get("totalCnt");
 		} else { // 검색어가 있다면 그에따른 mapper로 목록 가져오기
-			Map<String, Object> map = userService.getSearchKeepUsersList("qordmlgjs", (int) currentPage, PAGESIZE,
+			Map<String, Object> map = userService.getSearchKeepUsersList(userId, (int) currentPage, PAGESIZE,
 					searchWord);// 추후 userId들어가야함
 			myGoodsList = (List<MyGoodsListDto>) map.get("myGoodsList");
 			totalCnt = (int) map.get("totalCnt");
@@ -523,8 +525,9 @@ public class MyPageController {
 	}
 	
 	@GetMapping("/deal/safe/seller")
-	public String seller(Model model,String transactionId,RedirectAttributes redirectattr) { // 안전 거래 상세조회 판매자 페이지
-		if(!userService.checkIdForSafeSeller(transactionId).equals("cjsdudwns")) //session.getAttribute("userId")로 변경해야함.
+	public String seller(Model model,String transactionId,RedirectAttributes redirectattr,Principal principal) { // 안전 거래 상세조회 판매자 페이지
+		String userId=principal.getName();
+		if(!userService.checkIdForSafeSeller(transactionId).equals(userId)) //session.getAttribute("userId")로 변경해야함.
 		{
 			redirectattr.addFlashAttribute("msg","잘못된 접근입니다.");
 			return "redirect:/main/main";
@@ -535,11 +538,10 @@ public class MyPageController {
 	}
 	
 	@PostMapping("/deal/safe/seller/insert/trackingnumber")
-	public String insertTrackingNumber(Model model,int shippingCompany,String trackingNumber,String transactionId,RedirectAttributes redirectattr) {
-		if(!userService.checkIdForSafeSeller(transactionId).equals("cjsdudwns")) //session.getAttribute("userId")로 변경해야함.
-		{
+	public String insertTrackingNumber(Model model,int shippingCompany,String trackingNumber,String transactionId,RedirectAttributes redirectattr,Principal principal) {
+		if(!userService.checkIdForSafeSeller(transactionId).equals(principal.getName())) {
 			redirectattr.addFlashAttribute("msg","잘못된 접근입니다.");
-			return "redirect:/main/main";
+			return "redirect:/";
 		}
 		Map<String,Object> map= new HashMap<String,Object>();
 		String msg=null;
@@ -554,8 +556,8 @@ public class MyPageController {
 	}
 	
 	@GetMapping("/deal/safe/buyer")
-	public String buyer(Model model,String transactionId,RedirectAttributes redirectattr,HttpSession session) {			// 안전 거래 상세조회 구매자 페이지
-		if(!userService.checkIdForSafe(transactionId).equals("qordmlgjs")) //session.getAttribute("userId")로 변경해야함.
+	public String buyer(Model model,String transactionId,RedirectAttributes redirectattr,Principal principal) {			// 안전 거래 상세조회 구매자 페이지
+		if(!userService.checkIdForSafe(transactionId).equals(principal.getName())) 
 		{
 			redirectattr.addFlashAttribute("msg","잘못된 접근입니다.");
 			return "redirect:/main/main";
