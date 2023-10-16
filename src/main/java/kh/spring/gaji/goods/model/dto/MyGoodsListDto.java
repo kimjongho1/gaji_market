@@ -10,6 +10,7 @@ public class MyGoodsListDto {
     private int price;
     private int status;
     private int wishCount;
+    private int viewCount;
     private String refreshedAt;
     private String url;
 }

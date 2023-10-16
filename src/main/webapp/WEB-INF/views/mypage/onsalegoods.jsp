@@ -188,7 +188,8 @@
                                     </div>
 									<!-- Product price-->
 									끌올일자:${myGoodsInfo.refreshedAt}<br>
-                                    가격:${myGoodsInfo.price}
+                                    가격:${myGoodsInfo.price}<br>
+                                    조회수:${myGoodsInfo.viewCount}
 								</div>
 							</div>
 							<!-- Product actions-->
