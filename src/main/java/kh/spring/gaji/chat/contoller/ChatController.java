@@ -67,9 +67,9 @@ public class ChatController {
 		int result1 = chatServiceImpl.insertChatMessage(map);
 		String result2 = null;
 		if(result1 != 1) {
-			result2="메시지 DB 저장 실패";
+			result2 ="메시지 DB 저장 실패";
 		} else {
-			result2="메시지 DB 저장 성공";
+			result2 ="메시지 DB 저장 성공";
 		}
 		return new Gson().toJson(result2);
 	}
