@@ -218,7 +218,7 @@ body {
 <div class="container-box">
 
 	<form action="${pageContext.request.contextPath}/signup" method="POST" class="joinForm"
-		onsubmit="return Validation();">
+		onsubmit="return Validation(); return false;">
 
 		<div class="textForm">
 			<span style="display: flex;">
