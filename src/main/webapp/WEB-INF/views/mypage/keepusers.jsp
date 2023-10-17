@@ -10,7 +10,7 @@
 	content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 <meta name="description" content="" />
 <meta name="author" content="" />
-<title>모아보기</title>
+<title>모아보기 상품</title>
 <!-- Favicon-->
 <!--         <link rel="icon" type="image/x-icon" href="assets/favicon.ico" /> -->
 <!-- Bootstrap icons-->

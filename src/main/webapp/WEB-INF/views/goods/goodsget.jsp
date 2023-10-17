@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>BD에서 가져옴</title>
+<title>중고 게시판 상세보기</title>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 	<!-- Swiper -->
 
