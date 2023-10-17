@@ -59,6 +59,7 @@
 		<!-- 지역 region -->
 		<typeAlias type="kh.spring.gaji.region.model.dto.DongDto" alias="DongDto"/>
 		<typeAlias type="kh.spring.gaji.region.model.dto.GuDto" alias="GuDto"/>
+		<typeAlias type="kh.spring.gaji.goods.model.dto.MainGoodsDto" alias="MainGoodsDto"/>
 		
 		<!-- 커뮤니티 인덱스 -->
 		<!-- 		

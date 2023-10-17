@@ -2,6 +2,7 @@ package kh.spring.gaji.goods.model.Service;
 import kh.spring.gaji.goods.model.dto.GoodsDto;
 import kh.spring.gaji.goods.model.dto.GoodsInfoDto;
 import kh.spring.gaji.goods.model.dto.GuDongInfoDto;
+import kh.spring.gaji.goods.model.dto.MainGoodsDto;
 
 import java.util.List;
 import java.util.Map;
@@ -27,4 +28,6 @@ public interface GoodsService {
     int updateViewCount(int goodsId);
     
     GuDongInfoDto getGuDongInfo(String userId);
+    
+    public List<MainGoodsDto> getMainGoods(int category);
 }

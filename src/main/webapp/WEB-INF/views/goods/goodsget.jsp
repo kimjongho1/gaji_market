@@ -392,7 +392,7 @@
 
 	<!-- Footer Section Begin -->
 	<footer>
-		<jsp:include page="/WEB-INF/views/footer.jsp"></jsp:include>
+		<%-- <jsp:include page="/WEB-INF/views/footer.jsp"></jsp:include> --%>
 	</footer>
 	<!-- Footer Section End -->
 
@@ -420,12 +420,14 @@
 	    var lng = parseFloat("${goodsDto.lng}");
 	   /*  var lat = 37.566826; // 위도
 		var lng = 126.978656; // 경도 */
-
-	    var mapContainer = document.getElementById('kakaoMap'); // 지도를 표시할 div
-	    var mapOption = {
-	        center: new kakao.maps.LatLng(lat, lng), // 지도 중심 좌표
-	        level: 1 // 지도 확대 레벨
-	    };
+		
+		if (lat > -90 && lat < 90 && lng > -180 && lng < 180) {
+	        var mapContainer = document.getElementById('kakaoMap'); // 지도를 표시할 div
+	        var mapOption = {
+	            center: new kakao.maps.LatLng(lat, lng), // 지도 중심 좌표
+	            level: 1 // 지도 확대 레벨
+	        };
+	   
 
 	    // 지도를 표시할 div와 지도 옵션으로 지도를 생성
 	    var map = new kakao.maps.Map(mapContainer, mapOption);
