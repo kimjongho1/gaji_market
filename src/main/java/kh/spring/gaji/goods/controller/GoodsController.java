@@ -64,6 +64,7 @@ public class GoodsController {
 	@GetMapping("/board")
 	public String board(Model model,Integer currentPage,String searchWord,Integer sort,Integer priceFloor, Integer priceCeiling,Integer category,Integer guId,String guName,String dongName,Integer dongId,Principal principal) { // 중고거래 게시판
 		model.addAttribute("guList", regionService.guList());
+	
 		String userId=null;
 		try{
 		if((userId=principal.getName())!=null) {
@@ -194,19 +195,21 @@ public class GoodsController {
 	}
 	
 	@GetMapping("/get")
-	public ModelAndView getBoard(ModelAndView mv,@RequestParam(name = "goodsId", defaultValue = "106") int goodsId, GoodsInfoDto goodsDto) {	// 중고거래 게시판 글 상세보기
-		goodsService.updateViewCount(goodsId);
+	public ModelAndView getBoard(ModelAndView mv,int goodsId, GoodsInfoDto goodsDto) {	// 중고거래 게시판 글 상세보기
+		
+		System.out.println("getBoard진입확인");
 		mv.setViewName("goods/goodsget");
 		mv.addObject("goodsDto",goodsService.getGoodsInfo(goodsId)); //상품글 정보와 해당 상품 등록한 사용자의 정보
 		mv.addObject("userInfo",goodsService.goodsUserInfo(goodsId));
 		mv.addObject("userGoodsList", goodsService.userGoodsList(goodsId));
+		goodsService.updateViewCount(goodsId);
 		return mv;
 	}
 	
-	@GetMapping("/update")
-	public String update() { // 중고거래 게시판 글 수정
-		return "goods/goodsupdate";
-	}
+//	@GetMapping("/update")
+//	public String update() { // 중고거래 게시판 글 수정
+//		return "goods/goodsupdate";
+//	}
 	
 	@PostMapping("/wish")
 	@ResponseBody

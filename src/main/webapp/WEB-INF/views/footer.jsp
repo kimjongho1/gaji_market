@@ -12,7 +12,7 @@
 
         <div class="container">
             <div class="footer__about__logo">
-                <a href="./index.html"><img width="120" height="50" src="${pageContext.request.contextPath}/resources/img/gaji_logo.png" alt=""></a>
+                <a href="./index.html"><img width="120" height="50" src="${pageContext.request.contextPath}/resources/img/gaji_logo.png" alt="그래"></a>
             </div>
             <div class="row">
                 <div class="col-lg-3 col-md-6 col-sm-6">
