@@ -1,41 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
- <style>
-.btn_top_animation {
-    position: relative;
-    z-index: 200
-    
-}
 
-#btn_top {
-    color: brown;
-    bottom: 100px;
-    /* display: none; */
-    /* display: block; */
-    left: 50%;
-    margin-left: 750px;
-    position: fixed;
-    right: 500px;
-    z-index: 200
-    /* z-index: 50 */
-}
-
-.cxRRkY {
-        position: absolute;
-        padding: 0px;
-        width: 68px;
-        opacity: 1;
-        visibility: visible;
-        transition: opacity 0.5s ease 0s, visibility 0.5s ease 0s;
-    }
-</style> 
 
 <footer class="footer spad">
 
     <div width="1200px" class="">
         <button type="button" id="btn_top" class="cxRRkY btn_top_animation">
             
-            <img src="/#" alt="TOP" loading="eager" width="68" height="68">
+            <img src="#" alt="TOP" loading="eager" width="68" height="68">
         </button>
 
         <div class="container">
