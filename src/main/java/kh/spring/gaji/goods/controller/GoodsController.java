@@ -67,6 +67,7 @@ public class GoodsController {
 		if(guId==null && dongId==null) {
 			GuDongInfoDto guDongInfo=goodsService.getGuDongInfo(userId);
 			model.addAttribute("guId",guId=guDongInfo.getGuId());
+			model.addAttribute("dongList", regionService.dongList(guId));
 			model.addAttribute("guName",guName=guDongInfo.getGuName());
 			model.addAttribute("dongId",dongId=guDongInfo.getDongId());
 			model.addAttribute("dongName",guName=guDongInfo.getDongName());
