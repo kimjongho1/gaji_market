@@ -3,74 +3,14 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+<link href="${pageContext.request.contextPath}/resources/css/mypage/buyer.css" rel='stylesheet' type='text/css'>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>안전거래 상세조회</title>
-<style>
-    body {
-        font-family: Arial, sans-serif;
-        margin: 0;
-        padding: 0;
-        background-color: #f5f5f5;
-    }
 
-    h1 {
-        background-color: #007bff;
-        color: white;
-        padding: 10px;
-        text-align: center;
-    }
-
-    .container {
-        text-align: center; /* Center align content */
-        padding: 20px;
-        background-color: white;
-        border-radius: 5px;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    }
-
-    button {
-        background-color: #007bff;
-        color: white;
-        padding: 10px 20px;
-        border: none;
-        border-radius: 5px;
-        cursor: pointer;
-        margin: 10px; /* Add margin around buttons */
-    }
-
-    button:hover {
-        background-color: #0056b3;
-    }
-    
-
-    p {
-        margin: 10px 0;
-    }
-
-    a {
-        text-decoration: none;
-        color: #007bff;
-    }
-
-    a:hover {
-        text-decoration: underline;
-    }
-
-    /* Arrange buttons horizontally */
-    .button-container {
-        display: flex;
-        justify-content: center;
-    }
-    
-    textarea{
-    resize: none;
-    }
-    
-</style>
 </head>
 <body>
 
