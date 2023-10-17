@@ -17,6 +17,12 @@ header {
 	right: 50px;
 	padding: 30px;
 }
+
+.btn {
+	display: inline; !important;
+	color: #ffffff; !important
+}
+
 </style>
 <body>
 
@@ -63,7 +69,7 @@ header {
 								<!-- 사용자가 로그인한 경우에만 로그아웃 링크 표시 -->
 								<li>
 									<form class="form-signin" method="post" action="${pageContext.request.contextPath}/logout">
-										<button type="submit">
+										<button type="submit" class="log-btn">
 											<span class="btn logout">로그아웃</span>
 										</button>
 									</form>
@@ -90,6 +96,7 @@ header {
 							</ul></li>
 						<li><a href="${pageContext.request.contextPath}/goods/board">상품</a></li>
 						<li><a href="${pageContext.request.contextPath}/chat">1:1채팅</a></li>
+						<li><a href="${pageContext.request.contextPath}/mypage">마이페이지</a></li>
 					</ul>
 <!-- class="active" -->
 

@@ -3598,3 +3598,20 @@ section {
 	margin:auto;
 	width: 90%;
 }
+
+.log-btn{
+	height:30px;
+	padding:6px;
+	background-color: #7fad39;
+	border: 0;
+	color: #ffffff;
+	font-size: 14px; !important
+}
+
+.logout{
+	vertical-align: middle;
+}
+
+.log-btn:hover{
+	
+}
