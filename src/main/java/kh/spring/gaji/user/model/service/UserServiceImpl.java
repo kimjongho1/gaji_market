@@ -35,10 +35,6 @@ public class UserServiceImpl implements UserService {
         return userDao.getKeepList(userId);
     }
 
-    @Override
-    public int updateViewCount() {
-        return userDao.updateViewCount();
-    }
 
     @Override
     public List<GoodsListDto> getFavoriteList(String userId) {
@@ -217,6 +213,11 @@ public class UserServiceImpl implements UserService {
     public int insertWishList(Map<String, String> map) {
         return userDao.insertWishList(map);
     }
+    
+    @Override
+	public int deleteWishList(Map<String, String> map) {
+		return userDao.deleteWishList(map);
+	}
 
     @Override
     public UserProfileDto getProfile(String userId) {
@@ -366,4 +367,7 @@ public class UserServiceImpl implements UserService {
 			return 0;
 		}
 	}
+
+
+	
 }

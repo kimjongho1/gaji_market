@@ -16,7 +16,6 @@ public interface UserService {
 
     public List<GoodsListDto> getKeepList(String userId);
 
-    public int updateViewCount();
 
     public List<GoodsListDto> getFavoriteList(String userId);
 
@@ -71,6 +70,8 @@ public interface UserService {
 
     public int insertWishList(Map<String, String> map);
 
+    public int deleteWishList(Map<String,String> map);
+    
     public UserProfileDto getProfile(String userId);
 
     public List<UserAddressDto> getAddress(String userId);
