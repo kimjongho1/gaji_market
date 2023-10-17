@@ -109,7 +109,7 @@
 		 <input type="text" id="price" name="price" placeholder="판매가격" required="required">
 		<br>
 
-			<textarea name="description" id="editor" required="required"></textarea>
+			<textarea name="description" id="editor"></textarea>
 		
 		<label for="safeTradingYn">안전결제</label>
 		<input type="checkbox" name="safeTradingYn" id="safeTradingYn" value="N">
