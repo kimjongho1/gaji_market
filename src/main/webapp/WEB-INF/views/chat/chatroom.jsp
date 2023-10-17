@@ -97,7 +97,118 @@
 
 			<script>
 				$(document).ready(function () {
-					let chatId; // chatId를 많이 사용하므로 전역변수 선언					
+					// 활성 채팅 설정 및 friends, chat 객체 생성
+					document.querySelector('.chat[data-chat=person2]').classList.add('active-chat');
+					document.querySelector('.person[data-chat=person2]').classList.add('active');
+
+					var chatId; // chatId를 많이 사용하므로 전역변수 선언
+					var username = "${username}";
+					
+					$(function () {
+						// socket들을 담을 객체 생성
+						const websocketConnections = {};
+						// socket 생성
+						var ws = new SockJS("${pageContext.request.contextPath}/chat");
+						var stomp = Stomp.over(sock);
+						
+						createWebSocketConnection(username);
+						// WebSocket 연결 생성 함수
+						 /* function createWebSocketConnection(person) {
+							const ws = new WebSocket("ws://127.0.0.1:8090/gaji/echo");
+							websocketConnections.person = ws;
+							
+							ws.onopen = function (e) {
+								console.log('WebSocket 연결이 열렸습니다.');
+								//websocketConnections.s.df.ds.f.dsf = dsfsdfds;
+							};
+
+							ws.onmessage = function (e) {
+								console.log('WebSocket 메시지 수신:', e.data);
+								displayReceivedMessage(e.data);
+							};
+
+							ws.onclose = function (e) {
+								console.log('WebSocket 연결이 닫혔습니다.');
+							};
+
+							ws.onerror = function (e) {
+								console.error('WebSocket 오류:', e);
+							};
+
+							return ws; 
+						}  */
+
+						$("#button-send").on("click", (e) => {
+							send();
+						});	
+
+						// 엔터 키 입력시 send() 실행
+						$("#msg").on("keydown", (e) => {
+							if (e.key === "Enter") {
+								send();
+							}
+						});
+
+						// 메시지 보내기
+						function send() {
+							const activeChat = document.querySelector('.chat.active-chat');
+							
+							if (!activeChat) {
+								return;
+							}
+							// 메시지 내용 message 변수에 저장
+							const msgInput = document.getElementById("msg");
+							const message = msgInput.value.trim();
+							
+							$.ajax({
+								type: 'get',
+								url: '${pageContext.request.contextPath}/insultChat',
+								data: {
+									"senderId": username,
+									"chatNo": chatId,
+									"msg": message
+									},
+								datatype: "json",
+								susccess: function (result) { // 반드시 msg를 보내서 controller 작업 해야함
+									console.log("insult 메시지" + result);									
+								},
+								error: function (request, status, error) { // 결과 에러 콜백함수
+									console.log(error)
+								}
+							})
+							
+							if (message === "") {
+								return;
+							}
+
+							//const websocket = websocketConnections[activeChat.getAttribute('data-chat')];
+							//if (websocket) {
+								websocketConnections.person.send(message);
+							//}
+
+							const messageElement = document.createElement('div');
+							messageElement.className = 'bubble me';
+							messageElement.textContent = message;
+
+							activeChat.appendChild(messageElement);
+
+							msgInput.value = '';
+						}
+
+						function displayReceivedMessage(message) {
+							const activeChat = document.querySelector('.chat.active-chat');
+
+							if (!activeChat) {
+								return;
+							}
+
+							const messageElement = document.createElement('div');
+							messageElement.className = 'bubble you';
+							messageElement.textContent = message;
+
+							activeChat.appendChild(messageElement);
+						}
+					});
 					
 					// 리스트에서 메시지 시간 체크
 					function formatDate(dateString) {
@@ -121,11 +232,7 @@
 							return month + 1 + "월 " + day + "일";
 						}
 					}
-
-					// 활성 채팅 설정 및 friends, chat 객체 생성
-					document.querySelector('.chat[data-chat=person2]').classList.add('active-chat');
-					document.querySelector('.person[data-chat=person2]').classList.add('active');
-
+					
 					let friends = {
 						list: document.querySelector('ul.people'),
 						all: document.querySelectorAll('.left .person'),
@@ -144,13 +251,13 @@
 							// 클릭한 noRoom값 전달
 							chatId = f.getAttribute('data-chatid');
 							if (!f.classList.contains('active')) {
-								setAciveChat(f)
+								setActiveChat(f)
 							}
 						});
 					});
 
 					// 채팅 활성화 및 비활성화
-					function setAciveChat(f) {
+					function setActiveChat(f) {
 
 						$.ajax({
 							type: 'get',
@@ -180,9 +287,6 @@
 								}
 								//</div>
 								chat.container.querySelector('[data-chat="' + chat.person + '"]').innerHTML = htmlVal;
-
-
-
 							},
 							error: function (request, status, error) { // 결과 에러 콜백함수
 								console.log(error)
@@ -190,116 +294,14 @@
 						})
 					}
 
-					$(function () {
-						const websocketConnections = {};
-						const username = "${pageContext.request.userPrincipal.name}";
-
-						// WebSocket 연결 생성 함수
-						function createWebSocketConnection(person) {
-							const ws = new WebSocket("ws://localhost:8090/gaji/echo");
-
-							ws.onopen = function (e) {
-								console.log('WebSocket 연결이 열렸습니다.');
-							};
-
-							ws.onmessage = function (e) {
-								console.log('WebSocket 메시지 수신:', e.data);
-								displayReceivedMessage(e.data);
-							};
-
-							ws.onclose = function (e) {
-								console.log('WebSocket 연결이 닫혔습니다.');
-							};
-
-							ws.onerror = function (e) {
-								console.error('WebSocket 오류:', e);
-							};
-
-							return ws;
-						}
-
-						$("#button-send").on("click", (e) => {
-							send();
-						});
-
-						// 엔터 키 입력시 send() 실행
-						$("#msg").on("keydown", (e) => {
-							if (e.key === "Enter") {
-								send();
-							}
-						});
-
-						// 메시지 보내기
-						function send() {
-							const activeChat = document.querySelector('.chat.active-chat');
-
-							if (!activeChat) {
-								return;
-							}
-							// 메시지 내용 message 변수에 저장
-							const msgInput = document.getElementById("msg");
-							const message = msgInput.value.trim();
-							
-							$.ajax({
-								type: 'get',
-								url: '${pageContext.request.contextPath}/insultChat',
-								data: {
-									"senderId": username,
-									"chatNo": chatId,
-									"msg": message
-									},
-								datatype: "json",
-								susccess: function (result) { // 반드시 msg를 보내서 controller 작업 해야함
-									console.log("insult 메시지" + result);									
-								},
-								error: function (request, status, error) { // 결과 에러 콜백함수
-									console.log(error)
-								}
-							})
-							
-							if (message === "") {
-								return;
-							}
-
-							const websocket = websocketConnections[activeChat.getAttribute('data-chat')];
-							if (websocket) {
-								websocket.send(message);
-							}
-
-							const messageElement = document.createElement('div');
-							messageElement.className = 'bubble me';
-							messageElement.textContent = message;
-
-							activeChat.appendChild(messageElement);
-
-							msgInput.value = '';
-						}
-
-						function displayReceivedMessage(message) {
-							const activeChat = document.querySelector('.chat.active-chat');
-
-							if (!activeChat) {
-								return;
-							}
-
-							const messageElement = document.createElement('div');
-							messageElement.className = 'bubble you';
-							messageElement.textContent = message;
-
-							activeChat.appendChild(messageElement);
-						}
-					});
-				});
+					
+				});  // document ready
 			</script>
 
-			<!-- ajax -->
-			<script>
-				/* 채팅 리스트에서 방 눌렀을 때 */
-
-			</script>
+		
 
 
 
 		</body>
 
-		</html>
+</html>
