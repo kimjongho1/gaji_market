@@ -71,18 +71,18 @@ public class GoodsController {
 			model.addAttribute("dongId",dongId=guDongInfo.getDongId());
 			model.addAttribute("dongName",guName=guDongInfo.getDongName());
 		}
-		}
 		else {
-		if(guId!=null) {
-			model.addAttribute("guId",guId);
-			model.addAttribute("guName",guName);
-			model.addAttribute("dongList", regionService.dongList(guId));
-		}
+			if(guId!=null) {
+				model.addAttribute("guId",guId);
+				model.addAttribute("guName",guName);
+				model.addAttribute("dongList", regionService.dongList(guId));
+			}
 
-		if(dongName!=null&&!dongName.equals("")) {
-			model.addAttribute("dongName",dongName);
-			model.addAttribute("dongId", dongId);
-		}
+			if(dongName!=null&&!dongName.equals("")) {
+				model.addAttribute("dongName",dongName);
+				model.addAttribute("dongId", dongId);
+			}
+			}
 		}
 		}catch(NullPointerException e) {
 			e.printStackTrace();
