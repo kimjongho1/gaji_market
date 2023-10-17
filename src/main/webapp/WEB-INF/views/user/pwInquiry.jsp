@@ -32,13 +32,13 @@
 			<div class="row">
 			
 					
-					<!-- <img alt="d" src="아이디"> -->				
-					<a href="./idInquiry"> <h1>아이디 찾기</h1> </a>
+									
+					<a class="menu-item " href="./idInquiry"> <h1>아이디 찾기</h1> </a>
 					
 					
 					<div>
-					<!-- <img alt="d" src="비밀번호"> -->	
-					<a href="./pwInquiry"> <h1>비밀번호 찾기</h1> </a>
+					
+					<a class="menu-item active" href="./pwInquiry"> <h1>비밀번호 찾기</h1> </a>
 					</div>
 			</div>
 		</div>
@@ -46,7 +46,7 @@
 
     </header>
     
-    <div class="container">  
+    <div class="container" style="height: 900px;">  
         <form id="contact" action="${pageContext.request.contextPath}/pwInquiry" method="post" onsubmit="return Validation();">
             <div id="search">
                 <h2>비밀번호 재설정</h2>
@@ -60,11 +60,11 @@
         <fieldset>
             <input placeholder="Your name" type="text" tabindex="2" name="name" id="name" >
         </fieldset>
-        <h4 style="display: inline-block;">이메일 주소</h4> <button type="button" id="mail-Check-Btn">인증번호 발송</button>
+        <h4 style="display: inline-block;">이메일 주소</h4> <button type="button" class="ibtn" id="mail-Check-Btn">인증번호 발송</button>
           <fieldset>
             <input placeholder="Your Email Address" type="email" id="email" name="email" tabindex="3" >
           </fieldset>
-        <h4 style="display: inline-block;">인증번호 확인</h4> <button type="button" id="btn-mail-check-input">인증 하기</button>
+        <h4 style="display: inline-block;">인증번호 확인</h4> <button type="button" class="ibtn" id="btn-mail-check-input">인증 하기</button>
           <fieldset>
             <input placeholder="Your Email Verification Code" type="text" id="mail-check-input" tabindex="3" >
           </fieldset> 
@@ -233,6 +233,7 @@
 		<li><a href="#" target="_blank" title="새창" onclick="clickcr(this,'fot.help','','',event);"> 회원정보 고객센터 </a></li>
 		</ul>
 	</div>
+        
         
 </body>
 </html>

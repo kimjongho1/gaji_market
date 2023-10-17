@@ -39,11 +39,26 @@ body {
     border: solid 1px;
 }
 
+.menu-item {
+	color:#946B98;
+	font-family: fantasy;
+}
+
+.menu-item:hover {
+	color:#9DED58;
+	text-decoration:none
+}
+
+.menu-item.active {
+	color:#58ed74b0
+}
+
 #contact h2 {
 	color: black;
 	display: block;
-    font: bold;
+    font-family: fantasy;
     font-size: 26px;
+
 }
 
 #contact h4 {
@@ -130,15 +145,28 @@ fieldset {
 }
 
 .row>* {
-
+	
 	width:auto
 
 }
 
+.row {
+	
+	align-items: center;
+
+}
+
 #header{
-background: green;
+background: #7fad39ba;
 }
 
 a {
   text-decoration: none;
+}
+
+.ibtn {
+	border-radius: 3px;
+	padding:1px;
+	border: 0px;
+	font-family: auto;
 }

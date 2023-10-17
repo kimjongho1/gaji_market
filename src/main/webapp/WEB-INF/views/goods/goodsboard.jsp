@@ -26,7 +26,7 @@
 
 <!-- Css Styles -->
 <link rel="stylesheet"
-	href="${pageContext.request.contextPath}/resources/css/bootstrap.css"
+	href="${pageContext.request.contextPath}/resources/css/bootstrap.min.css"
 	type="text/css">
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/css/elegant-icons.css"

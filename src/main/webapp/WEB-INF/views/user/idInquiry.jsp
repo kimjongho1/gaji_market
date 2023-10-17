@@ -28,11 +28,11 @@
 			</div>
 			<div class="container">
 				<div class="row">
-					<img alt="" src="아이디"> <a href="./idInquiry">
+					<a class="menu-item active" href="./idInquiry">
 						<h1>아이디 찾기</h1>
 					</a>
 					<div>
-						<img alt="" src="비밀번호"> <a href="./pwInquiry">
+					<a class="menu-item" href="./pwInquiry">
 							<h1>비밀번호 찾기</h1>
 						</a>
 					</div>
@@ -40,7 +40,7 @@
 			</div>
 		</div>
 	</header>
-	<div class="container">
+	<div class="container" style="height: 900px;">
 		<form id="contact" action="${pageContext.request.contextPath}/idInquiry" method="post">
 			<div id="search">
 				<h2>아이디 찾기</h2>
