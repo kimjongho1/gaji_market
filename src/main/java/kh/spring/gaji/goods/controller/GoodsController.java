@@ -89,7 +89,17 @@ public class GoodsController {
 			}
 			}
 		}
+
 		}catch(NullPointerException e) {
+			if(guId!=null) {
+				model.addAttribute("guId",guId);
+				model.addAttribute("guName",guName);
+				model.addAttribute("dongList", regionService.dongList(guId));
+			}
+			if(dongName!=null&&!dongName.equals("")) {
+				model.addAttribute("dongName",dongName);
+				model.addAttribute("dongId", dongId);
+			}
 			e.printStackTrace();
 		}
 		
