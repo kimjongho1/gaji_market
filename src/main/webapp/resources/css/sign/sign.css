@@ -166,7 +166,22 @@ a {
 
 .ibtn {
 	border-radius: 3px;
-	padding:1px;
-	border: 0px;
+	height:25px;
+	padding:2px;
+	border: 1px solid #bbb1d6 ;
 	font-family: auto;
+	color: #777;
+	box-shadow: 1px 1px 1px 1px gray;
+	float: right;
+	line-height: normal;
+	
+	
+}
+.ibtn:hover {
+	border-radius: 3px;
+	padding:2px;
+	border: 1px solid #bbb1d6 ;
+	color: #999;
+	font-family: auto;
+	
 }

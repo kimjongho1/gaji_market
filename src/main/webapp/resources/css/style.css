@@ -3563,4 +3563,33 @@ section {
 .row > * {
 
     width: auto;
+}
+/* plus */
 
+.btn_top_animation {
+    position: relative;
+    z-index: 200
+    
+}
+
+#btn_top {
+    color: brown;
+    bottom: 100px;
+    /* display: none; */
+    /* display: block; */
+    left: 50%;
+    margin-left: 750px;
+    position: fixed;
+    right: 500px;
+    z-index: 200
+    /* z-index: 50 */
+}
+
+.cxRRkY {
+        position: absolute;
+        padding: 0px;
+        width: 68px;
+        opacity: 1;
+        visibility: visible;
+        transition: opacity 0.5s ease 0s, visibility 0.5s ease 0s;
+    }
