@@ -70,38 +70,23 @@
 								<c:set var="firstUserInfo" value="${userInfo[0]}" />
 								<div
 									class="col-span-1 transition duration-150 ease-in hover:opacity-90 w-full relative pt-[100%]">
-									<img alt="조경수 산사나무--0" referrerpolicy="no-referrer"
-										src="https://img2.joongna.com/media/original/2023/09/29/1695995207352dff_rPg3K.jpg?impolicy=resizeWatermark3&amp;ftext=중고나라#7579923"
+									<img alt="${goodsDto.title }" referrerpolicy="no-referrer"
+										src="${firstUserInfo.url}"
 										decoding="async" data-nimg="fill"
 										class="object-cover w-full h-full rounded-lg top-1/2 left-1/2"
 										loading="lazy"
 										style="position: absolute; height: 100%; width: 100%; inset: 0px; color: transparent;">
 								</div>
 							</div>
-							
+							<c:forEach var="user" items="${userInfo}" varStatus="loop">
+        					<c:if test="${loop.index > 0}">
 							<div class="swiper-slide swiper-slide-next" style="width: 612px;">
 								<div class="col-span-1 transition duration-150 ease-in hover:opacity-90 w-full relative pt-[100%]">
-									<img alt="산사나무--1" referrerpolicy="no-referrer" src="https://img2.joongna.com/media/original/2021/04/25/1619320661901btB_EsWFt.jpg?impolicy=resizeWatermark3&amp;ftext=원주사람24" decoding="async" data-nimg="fill" class="object-cover w-full h-full rounded-lg top-1/2 left-1/2" loading="lazy" style="position: absolute; height: 100%; width: 100%; inset: 0px; color: transparent;">
+									<img alt="${goodsDto.title }" referrerpolicy="no-referrer" src="${user.url }" decoding="async" data-nimg="fill" class="object-cover w-full h-full rounded-lg top-1/2 left-1/2" loading="lazy" style="position: absolute; height: 100%; width: 100%; inset: 0px; color: transparent;">
 								</div>
 							</div>
-							
-							<div class="swiper-slide" style="width: 612px;">
-								<div class="col-span-1 transition duration-150 ease-in hover:opacity-90 w-full relative pt-[100%]">
-									<img alt="산사나무--2" referrerpolicy="no-referrer" src="https://img2.joongna.com/media/original/2021/04/25/1619320661897ggN_U4VRB.jpg?impolicy=resizeWatermark3&amp;ftext=원주사람24" decoding="async" data-nimg="fill" class="object-cover w-full h-full rounded-lg top-1/2 left-1/2" loading="lazy" style="position: absolute; height: 100%; width: 100%; inset: 0px; color: transparent;">
-								</div>
-							</div>
-							<div class="swiper-slide" style="width: 612px;">
-								<div class="col-span-1 transition duration-150 ease-in hover:opacity-90 w-full relative pt-[100%]">
-									<img alt="산사나무--3" referrerpolicy="no-referrer" src="https://img2.joongna.com/media/original/2021/04/25/1619320661903Vyf_3KV0n.jpg?impolicy=resizeWatermark3&amp;ftext=원주사람24" decoding="async" data-nimg="fill" class="object-cover w-full h-full rounded-lg top-1/2 left-1/2" loading="lazy" style="position: absolute; height: 100%; width: 100%; inset: 0px; color: transparent;">
-								</div>
-							</div>
-							<div class="swiper-slide" style="width: 612px;">
-								<div class="col-span-1 transition duration-150 ease-in hover:opacity-90 w-full relative pt-[100%]">
-									<img alt="산사나무--4" referrerpolicy="no-referrer" src="https://img2.joongna.com/media/original/2021/04/25/1619320661906oyS_B0vck.jpg?impolicy=resizeWatermark3&amp;ftext=원주사람24" decoding="async" data-nimg="fill" class="object-cover w-full h-full rounded-lg top-1/2 left-1/2" loading="lazy" style="position: absolute; height: 100%; width: 100%; inset: 0px; color: transparent;">
-								</div>
-							</div>
-					
-							
+							 </c:if>
+    						</c:forEach>
 						</div>
 						<div
 							class="swiper-pagination swiper-pagination-clickable swiper-pagination-bullets swiper-pagination-horizontal" >
@@ -146,7 +131,7 @@
 								<li
 									class="text-sm text-body px-2.5 transition duration-200 ease-in first:ps-0 last:pe-0 hover:text-heading"><a
 									class="capitalize font-semibold text-heading text-xs sm:text-sm"
-									href="/product/133947645">${goodsDto.title}</a></li>
+									href="#">${goodsDto.title}</a></li>
 							</ol>
 						</div>
 					</div>
@@ -170,7 +155,7 @@
 						</h1>
 						<div class="flex items-center justify-between">
 							<div
-								class="text-jnGreen font-bold text-[40px] pe-2 md:pe-0 lg:pe-2 2xl:pe-0 mr-2">${goodsDto.price}</div>
+								class="text-jnGreen font-bold text-[40px] pe-2 md:pe-0 lg:pe-2 2xl:pe-0 mr-2">${goodsDto.price}원</div>
 						</div>
 						<!-- <a
 							href="/search-price/%EC%A1%B0%EA%B2%BD%EC%88%98%20%EC%82%B0%EC%82%AC%EB%82%98%EB%AC%B4?seq=133947645&amp;actionDetailType=MARKET_PRICE_PRODUCT_DETAIL"><span
@@ -180,7 +165,7 @@
 					<div class="py-4 border-b border-gray-300 space-s-4">
 						<div class="pb-1 space-y-5 text-sm">
 							<div class="flex justify-between text-body">
-								<span>4일 전 · 조회 ${goodsDto.viewCount} · 찜 ${goodsDto.wishcount}</span><a href="/fraud"><div
+								<span>4일 전 · 조회 ${goodsDto.viewCount} · 찜 ${goodsDto.wishcount}</span><a href="https://thecheat.co.kr/"><div
 										class="flex items-center hover:text-gray-400">
 										<svg stroke="currentColor" fill="currentColor"
 											stroke-width="0" viewBox="0 0 16 16" height="1em" width="1em"
@@ -433,8 +418,8 @@
 	kakao.maps.load(function() {
 	    var lat = parseFloat("${goodsDto.lat}");
 	    var lng = parseFloat("${goodsDto.lng}");
-	    var lat = 37.566826; // 위도
-		var lng = 126.978656; // 경도
+	   /*  var lat = 37.566826; // 위도
+		var lng = 126.978656; // 경도 */
 
 	    var mapContainer = document.getElementById('kakaoMap'); // 지도를 표시할 div
 	    var mapOption = {

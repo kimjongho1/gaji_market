@@ -79,10 +79,10 @@
 	<form action="${pageContext.request.contextPath}/goods/write.do"
 		method="post" enctype="multipart/form-data">
 		<input type="hidden" name="userId" value="qordmlgjs">
-		<input type="text" name="title" id="title" placeholder="제목"> <br>
+		<input type="text" name="title" id="title" placeholder="제목" required="required"> <br>
 		<!-- 카테고리 선택 드롭다운 -->
 		<label for="selectedCategory">카테고리 선택:</label> <select
-			name="categoryId" id="selectedCategory">
+			name="categoryId" id="selectedCategory" required="required">
 			<option value="">카테고리를 선택하세요</option>
 			<c:forEach items="${categoryList}" var="category">
 				<option value="${category.categoryId}">${category.categoryName}</option>
@@ -91,7 +91,7 @@
 		<!-- 구 선택 드롭다운 -->
 		<label for="selectedGu">구 선택:</label>
 		 <select name="selectedGu"
-			id="selectedGu" onchange="updateDongDropdown()">
+			id="selectedGu" onchange="updateDongDropdown()" required="required">
 			<option value="">구를 선택하세요</option>
 			<c:forEach items="${guList}" var="gu">
 				<option value="${gu.guId}">${gu.guName}</option>
@@ -100,16 +100,16 @@
 		<!-- 동 선택 드롭다운 -->
 		<label for="selectedDong">동 선택:</label> 
 		<select name="dongId"
-			id="selectedDong">
+			id="selectedDong" required="required">
 			<option value="">동을 선택하세요</option>
 			<c:forEach items="${dongList}" var="dong">
 				<option value="${dong.dongId}" data-gu="${dong.guId}">${dong.dongName}</option>
 			</c:forEach>
 		</select>
-		 <input type="text" id="price" name="price" placeholder="판매가격">
+		 <input type="text" id="price" name="price" placeholder="판매가격" required="required">
 		<br>
 
-			<textarea name="description" id="editor"></textarea>
+			<textarea name="description" id="editor" required="required"></textarea>
 		
 		<label for="safeTradingYn">안전결제</label>
 		<input type="checkbox" name="safeTradingYn" id="safeTradingYn" value="N">
@@ -134,8 +134,8 @@
 				<div id="clickLatlng"></div>
 			</div>
 		</div>
-		<input type="text" name="lat" id="latitudeInput" value=""> <input
-			type="text" name="lng" id="longitudeInput" value=""> <br>
+		<input type="hidden" name="lat" id="latitudeInput"> <input
+			type="hidden" name="lng" id="longitudeInput"> <br>
 		<input type="submit" value="확인">
 		</form>
 </div>
@@ -156,6 +156,7 @@
 	if(msg){
 		alert(msg);
 	}
+	
             // This sample still does not showcase all CKEditor&nbsp;5 features (!)
             // Visit https://ckeditor.com/docs/ckeditor5/latest/features/index.html to browse all the features.
             CKEDITOR.ClassicEditor.create(document.getElementById("editor"), {
@@ -318,6 +319,10 @@
 		src="//dapi.kakao.com/v2/maps/sdk.js?appkey=aec5b89790015b44669217946b7e53f3"></script>
 	<script>
 	// 체크박스 요소 가져오기
+	document.getElementById('latitudeInput').value = '91';
+	document.getElementById('longitudeInput').value = '181';
+	
+	
 	const safeTradingCheckbox = document.getElementById("safeTradingYn");
 
 	// 체크박스 상태가 변경될 때 실행되는 함수
