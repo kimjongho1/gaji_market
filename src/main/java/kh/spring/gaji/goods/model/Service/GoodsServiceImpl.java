@@ -13,6 +13,7 @@ import kh.spring.gaji.goods.model.dto.GoodsInfoDto;
 import kh.spring.gaji.goods.model.dto.GoodsListDto;
 import kh.spring.gaji.goods.model.dto.GoodsListInfoDto;
 import kh.spring.gaji.goods.model.dto.GuDongInfoDto;
+import kh.spring.gaji.goods.model.dto.MainGoodsDto;
 
 
 @Service
@@ -85,7 +86,8 @@ public class GoodsServiceImpl implements GoodsService {
 		return goodsDao.updateViewCount(goodsId);
 	}
 
-	
-
-	
+	@Override
+	public List<MainGoodsDto> getMainGoods(int category) {
+		return goodsDao.getMainGoods(category);
+	}
 }
