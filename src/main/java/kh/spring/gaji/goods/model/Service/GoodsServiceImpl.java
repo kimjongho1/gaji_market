@@ -1,6 +1,7 @@
 package kh.spring.gaji.goods.model.Service;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +28,16 @@ public class GoodsServiceImpl implements GoodsService {
 	@Override
 	public GoodsInfoDto getGoodsInfo(int goodsId) {
 		return goodsDao.getGoodsInfo(goodsId);
+	}
+	
+	@Override
+	public List<GoodsInfoDto> goodsUserInfo(int goodsId) {
+		return goodsDao.goodsUserInfo(goodsId);
+	}
+	
+	@Override
+	public List<GoodsInfoDto> userGoodsList(int goodsId) {
+		return goodsDao.userGoodsList(goodsId);
 	}
 
 	@Override
@@ -68,4 +79,13 @@ public class GoodsServiceImpl implements GoodsService {
 	public GuDongInfoDto getGuDongInfo(String userId) {
 		return goodsDao.getGuDongInfo(userId);
 	}
+
+	@Override
+	public int updateViewCount(int goodsId) {
+		return goodsDao.updateViewCount(goodsId);
+	}
+
+	
+
+	
 }

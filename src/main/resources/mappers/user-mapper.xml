@@ -337,9 +337,13 @@
 		) list2 where rn between #{startRownum} and #{endRownum}
 	</select>
 	
-	<insert id="insertWishList">	<!-- 23P 찜하기 -->	
+	<insert id="insertWishList" parameterType="map">	<!-- 23P 찜하기 -->	
 		insert into wishlist values(#{goodsId},#{userId},"")
 	</insert>
+	
+	<delete id="deleteWishList" parameterType="map">	<!-- 찜해제 -->
+		DELETE FROM wishlist WHERE user_id = #{userId} AND goods_id = #{goodsId}
+	</delete>
 
 	<select id="getProfile" parameterType="string" resultType="UserProfileDto">	<!-- 프로필을 가져올때 유저주소 전부를 가져옴 -->
 		select name,rating_score,nickname,mobile_number,role from user us where user_id=#{userId}

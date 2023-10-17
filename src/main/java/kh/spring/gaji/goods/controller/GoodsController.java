@@ -35,6 +35,7 @@ import kh.spring.gaji.goods.model.dto.GuDongInfoDto;
 import kh.spring.gaji.region.model.dto.DongDto;
 import kh.spring.gaji.region.model.service.RegionService;
 import kh.spring.gaji.user.model.dto.UserSafeTradingDto;
+import kh.spring.gaji.user.model.service.UserService;
 
 @Controller
 @RequestMapping("/goods")
@@ -56,6 +57,9 @@ public class GoodsController {
 
 	@Autowired
 	private FileService fileService;
+	
+	@Autowired
+	private UserService userService;
 
 	@GetMapping("/board")
 	public String board(Model model,Integer currentPage,String searchWord,Integer sort,Integer priceFloor, Integer priceCeiling,Integer category,Integer guId,String guName,String dongName,Integer dongId,Principal principal) { // 중고거래 게시판
@@ -179,18 +183,33 @@ public class GoodsController {
 	}
 	
 	@GetMapping("/get")
-	public ModelAndView getBoard(ModelAndView mv,@RequestParam(name = "goodsId", defaultValue = "1") int goodsId, GoodsInfoDto goodsDto) {	// 중고거래 게시판 글 상세보기
-		
-		
+	public ModelAndView getBoard(ModelAndView mv,@RequestParam(name = "goodsId", defaultValue = "106") int goodsId, GoodsInfoDto goodsDto) {	// 중고거래 게시판 글 상세보기
+		goodsService.updateViewCount(goodsId);
 		mv.setViewName("goods/goodsget");
-		mv.addObject("goodsDto",goodsService.getGoodsInfo(goodsId));
-		
+		mv.addObject("goodsDto",goodsService.getGoodsInfo(goodsId)); //상품글 정보와 해당 상품 등록한 사용자의 정보
+		mv.addObject("userInfo",goodsService.goodsUserInfo(goodsId));
+		mv.addObject("userGoodsList", goodsService.userGoodsList(goodsId));
 		return mv;
 	}
 	
 	@GetMapping("/update")
 	public String update() { // 중고거래 게시판 글 수정
 		return "goods/goodsupdate";
+	}
+	
+	@PostMapping("/wish")
+	@ResponseBody
+	public String likeButton(@RequestParam Map<String, String> map) {
+		
+		
+		try {
+	        userService.insertWishList(map);
+	        return "added"; // 찜하기 추가 성공
+	    } catch (Exception e) {
+	        userService.deleteWishList(map);
+	        return "removed"; // 찜하기 제거 성공
+	    }
+		
 	}
 
 	
