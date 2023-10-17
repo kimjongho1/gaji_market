@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -28,6 +29,8 @@ public class ChatController {
 
 	@Autowired
 	private ChatService chatServiceImpl;
+	@Autowired
+	private SimpMessagingTemplate template; // *****
 
 	@GetMapping("/chat")
 	public ModelAndView selectChatHome(ModelAndView mv, Principal principal) {
@@ -38,6 +41,7 @@ public class ChatController {
 		for (int i = 0; i < result1.size(); i++) {
 			result1.get(i).setChatInfo(chatServiceImpl.getChatInfo(result1.get(i).getChatId()));
 		}
+		mv.addObject("username", userId);
 		mv.addObject("chatRoomList", result1);
 		mv.setViewName("chat/chatroom");
 		log.info("getChatRoom 실행");
