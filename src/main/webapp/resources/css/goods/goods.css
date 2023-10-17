@@ -10783,12 +10783,6 @@ dd ul li p {
 cursor: pointer;
 }
 
-.sortList,
-.guList,
-.dongList {
-    display: none;
-}
-
 #flex1{
 	display:inline-block;
 }

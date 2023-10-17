@@ -38,6 +38,7 @@ public class HomeController {
 		model.addAttribute("cateGoods3",GoodsServiceImpl.getMainGoods(3));
 		model.addAttribute("cateGoods4",GoodsServiceImpl.getMainGoods(4));
 		model.addAttribute("cateGoods5",GoodsServiceImpl.getMainGoods(5));
+		model.addAttribute("cateGoods6",GoodsServiceImpl.getMainGoods(6));
 		return "/home";
 	}
 	@GetMapping("/test")

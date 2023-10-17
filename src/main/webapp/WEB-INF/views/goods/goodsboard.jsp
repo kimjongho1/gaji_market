@@ -40,6 +40,13 @@
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/css/style.css"
 	type="text/css">
+<style>
+.sortList,
+.guList,
+.dongList {
+    display: none;
+}
+</style>
 </head>
 <body>
 

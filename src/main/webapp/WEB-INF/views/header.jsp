@@ -59,8 +59,8 @@ header {
 
 					<div class="header__cart rights">
 						<ul>
-							<li><a href="${pageContext.request.contextPath}/mypage/keepuseds"><i class="fa fa-heart"></i> <span>1</span></a></li>
-							<li><a href="${pageContext.request.contextPath}/mypage/keepusers"><i class="fa fa-shopping-bag"></i> <span>3</span></a></li>
+							<li><a href="${pageContext.request.contextPath}/mypage/keepuseds"><i class="fa fa-heart"></i></a></li>
+							<li><a href="${pageContext.request.contextPath}/mypage/keepusers"><i class="fa fa-shopping-bag"></i></a></li>
 							<sec:authorize access="isAnonymous()">
 								<!-- 사용자가 로그인하지 않은 경우에만 로그인 링크 표시 -->
 								<li><a href="${pageContext.request.contextPath}/login">로그인</a></li>
