@@ -3593,3 +3593,8 @@ section {
         visibility: visible;
         transition: opacity 0.5s ease 0s, visibility 0.5s ease 0s;
     }
+    
+.gajibanner {
+	margin:auto;
+	width: 90%;
+}
