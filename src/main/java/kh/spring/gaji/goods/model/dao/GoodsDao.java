@@ -52,6 +52,14 @@ public class GoodsDao  {
     public GoodsInfoDto getGoodsInfo(int goodsId) {// 상품글 상세조회  
         return sqlSession.selectOne("goods.getGoodsInfo", goodsId);
     }
+    
+    public List<GoodsInfoDto> goodsUserInfo(int goodsId) { // 상품글 사진 url, 상품후기, 판매상품개수, 안전거래횟수
+    	return sqlSession.selectList("goods.goodsUserInfo", goodsId);
+    }
+    
+    public List<GoodsInfoDto> userGoodsList(int goodsId) { // 등록한 사용자의 상품리스트
+    	return sqlSession.selectList("goods.userGoodsList", goodsId);
+    }
 
     public int updateStatus(Map<String, Object> map) { //23P 상품상태변경 
         return sqlSession.update("goods.updateStatus", map);
@@ -65,6 +73,10 @@ public class GoodsDao  {
         return sqlSession.update("goods.deleteGoods", goodsId); // 상품삭제 
     }
 
+    public int updateViewCount(int goodsId) {
+    	return sqlSession.update("goods.updateViewCount", goodsId);
+    }
+    
 	public GuDongInfoDto getGuDongInfo(String userId) {
 		return sqlSession.selectOne("goods.getGuDongInfo",userId);
 	}

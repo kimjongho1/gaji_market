@@ -8,6 +8,7 @@ public class GoodsInfoDto{
     private int goodsId;
     private String userId;
     private int categoryId;
+    private String categoryName;
     private String title;
     private String status;
     private int price;
@@ -20,5 +21,9 @@ public class GoodsInfoDto{
     private double lng;
     private String nickname;
     private double ratingScore;
-    private int wishCount;
+    private int wishcount;
+    private String url;
+    private int reviewcount;
+    private int sellgoods;
+    private int safetradecount;
 }

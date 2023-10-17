@@ -1,10 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>BD에서 가져옴</title>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 	<!-- Swiper -->
 
 <link rel="stylesheet"
@@ -49,7 +51,7 @@
 	</header>
 	<!-- header end -->
 	<h2>중고 거래 게시판 상세보기</h2>
-
+	
 	<main class="relative flex-grow border-b-2"
 		style="min-height: -webkit-fill-available; -webkit-overflow-scrolling: touch">
 		<div
@@ -65,6 +67,7 @@
 							style="transform: translate3d(0px, 0px, 0px);">
 							<div class="swiper-slide swiper-slide-active"
 								style="width: 612px;">
+								<c:set var="firstUserInfo" value="${userInfo[0]}" />
 								<div
 									class="col-span-1 transition duration-150 ease-in hover:opacity-90 w-full relative pt-[100%]">
 									<img alt="조경수 산사나무--0" referrerpolicy="no-referrer"
@@ -132,18 +135,18 @@
 							<ol class="flex items-center w-full">
 								<li
 									class="text-sm text-body px-2.5 transition duration-200 ease-in first:ps-0 last:pe-0 hover:text-heading"><a
-									href="/">홈</a></li>
+									href="${pageContext.request.contextPath}/goods/board">홈</a></li>
 								<li
 									class="text-sm leading-5 text-body min-[480px]:px-1 max-[480px]:px-0">&gt;</li>
 								<li
 									class="text-sm text-body px-2.5 transition duration-200 ease-in first:ps-0 last:pe-0 hover:text-heading"><a
-									class="capitalize" href="/search?category=21">무료나눔</a></li>
+									class="capitalize" href="${pageContext.request.contextPath}/goods/board?category=${goodsDto.categoryId}">${goodsDto.categoryName}</a></li>
 								<li
 									class="text-sm leading-5 text-body min-[480px]:px-1 max-[480px]:px-0">&gt;</li>
 								<li
 									class="text-sm text-body px-2.5 transition duration-200 ease-in first:ps-0 last:pe-0 hover:text-heading"><a
 									class="capitalize font-semibold text-heading text-xs sm:text-sm"
-									href="/product/133947645">조경수 산사나무</a></li>
+									href="/product/133947645">${goodsDto.title}</a></li>
 							</ol>
 						</div>
 					</div>
@@ -153,7 +156,7 @@
 							조경수 산사나무
 
 							<div>
-								<i class="fa fa-heart"></i>
+								<button class="fa fa-heart" id="wishButton"></button>
 								<button type="button" aria-label="공유하기" class="ml-2 text-lg">
 									<svg stroke="currentColor" fill="currentColor" stroke-width="0"
 										viewBox="0 0 24 24" height="1em" width="1em"
@@ -167,17 +170,17 @@
 						</h1>
 						<div class="flex items-center justify-between">
 							<div
-								class="text-jnGreen font-bold text-[40px] pe-2 md:pe-0 lg:pe-2 2xl:pe-0 mr-2">무료나눔</div>
+								class="text-jnGreen font-bold text-[40px] pe-2 md:pe-0 lg:pe-2 2xl:pe-0 mr-2">${goodsDto.price}</div>
 						</div>
-						<a
+						<!-- <a
 							href="/search-price/%EC%A1%B0%EA%B2%BD%EC%88%98%20%EC%82%B0%EC%82%AC%EB%82%98%EB%AC%B4?seq=133947645&amp;actionDetailType=MARKET_PRICE_PRODUCT_DETAIL"><span
 							class="text-sm underline underline-offset-4">이 상품 시세조회하러
-								가기</span></a>
+								가기</span></a> -->
 					</div>
 					<div class="py-4 border-b border-gray-300 space-s-4">
 						<div class="pb-1 space-y-5 text-sm">
 							<div class="flex justify-between text-body">
-								<span>4일 전 · 조회 30 · 찜 0</span><a href="/fraud"><div
+								<span>4일 전 · 조회 ${goodsDto.viewCount} · 찜 ${goodsDto.wishcount}</span><a href="/fraud"><div
 										class="flex items-center hover:text-gray-400">
 										<svg stroke="currentColor" fill="currentColor"
 											stroke-width="0" viewBox="0 0 16 16" height="1em" width="1em"
@@ -185,7 +188,7 @@
 											<path fill-rule="evenodd"
 												d="M1 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H1zm5-6a3 3 0 100-6 3 3 0 000 6zm7 1.5a.5.5 0 01.5-.5h2a.5.5 0 010 1h-2a.5.5 0 01-.5-.5zm-2-3a.5.5 0 01.5-.5h4a.5.5 0 010 1h-4a.5.5 0 01-.5-.5zm0-3a.5.5 0 01.5-.5h4a.5.5 0 010 1h-4a.5.5 0 01-.5-.5zm2 9a.5.5 0 01.5-.5h2a.5.5 0 010 1h-2a.5.5 0 01-.5-.5z"
 												clip-rule="evenodd"></path></svg>
-										<span class="ml-2 ">사기조회</span>
+										<span class="ml-2 ">사기조회</span> <!-- 더치트사이트로전송 -->
 									</div></a>
 							</div>
 							<div>
@@ -193,8 +196,15 @@
 								별도
 							</div>
 							<div>
-								<span class="inline-block font-semibold text-heading pe-2">중고나라
-									페이:</span>미사용
+								<span class="inline-block font-semibold text-heading pe-2">안전결제 :</span>
+								<c:choose>
+ 									<c:when test="${goodsDto.safeTradingYn eq 'Y'}">
+    								사용
+  									</c:when>
+  									<c:otherwise>
+   									미사용
+  									</c:otherwise>
+								</c:choose>
 							</div>
 							<div class="flex">
 								<span class="inline-block font-semibold text-heading pe-2">결제혜택:</span>
@@ -218,9 +228,13 @@
 								</div>
 							</div>
 							<div class="flex flex-wrap">
-								<span class="inline-block font-semibold text-heading pe-2">거래방법:</span><span
-									class="px-2 py-1 mr-2 text-xs pointer-events-none bg-gray-150 rounded-xl">직거래</span><span
-									class="px-2 py-1 mr-2 text-xs pointer-events-none bg-gray-150 rounded-xl">중고</span>
+								<span class="inline-block font-semibold text-heading pe-2">거래방법:</span>
+								<span class="px-2 py-1 mr-2 text-xs pointer-events-none bg-gray-150 rounded-xl">직거래</span>
+								<c:choose>
+       							 <c:when test="${goodsDto.safeTradingYn eq 'Y'}">
+            					<span class="px-2 py-1 mr-2 text-xs pointer-events-none bg-gray-150 rounded-xl">안전거래</span>
+            					</c:when>
+            					</c:choose>
 							</div>
 						</div>
 					</div>
@@ -238,15 +252,14 @@
 					class="mb-2 grid grid-cols-2 lg:grid-cols-5 list-none pl-0 w-full bg-white"
 					data-nav-ref="true">
 					<div class="col-span-1 lg:col-span-3 w-full">
-						<a
-							class="text-base py-2 px-4 border-b-[4px] border-b-transparent text-jnblack w-full lg:w-auto justify-center flex lg:block cursor-pointer false"
-							aria-label="상품내용탭" aria-roledescription="상품내용탭" href="#">상품내용</a>
+						<a class="text-base py-2 px-4 border-b-[4px] border-b-transparent text-jnblack w-full lg:w-auto justify-center flex lg:block cursor-pointer false"
+							aria-label="상품내용탭" aria-roledescription="상품내용탭" href="#">${goodsDto.description}</a>
 					</div>
 					<div role="presentation" class="col-span-1 lg:col-span-2 w-full">
-						<a
-							class="text-base py-2 px-4 border-b-[4px] border-b-transparent text-jnblack w-full justify-center flex lg:block cursor-pointer border-b-jnblack transition duration-300 ease-in lg:border-b-transparent"
-							aria-label="가게정보탭" aria-roledescription="가게정보탭" href="#">가게정보</a>
+						<a class="text-base py-2 px-4 border-b-[4px] border-b-transparent text-jnblack w-full justify-center flex lg:block cursor-pointer border-b-jnblack transition duration-300 ease-in lg:border-b-transparent"
+							aria-label="가게정보탭" aria-roledescription="가게정보탭" href="#">유저정보</a>
 					</div>
+					<div id="kakaoMap" style="width: 768px; height: 200px;"></div>
 				</div>
 			</div>
 			<div class="block grid-cols-5 lg:grid lg:mb-10">
@@ -280,10 +293,9 @@
 					class="col-span-2 w-full py-10 lg:py-2 px-4">
 					<div class="flex">
 						<div class="flex w-full flex-col justify-around lg:ml-4">
-							<a class="font-semibold text-base text-jnblack"
-								href="/store/7579731">중고나라#75799...</a><span
-								class="font-medium text-sm flex text-jnGray-500">판매상품 3 ·
-								안전거래 0 · 후기 0</span>
+							<a class="font-semibold text-base text-jnblack" href="/store/7579731">${goodsDto.nickname}</a>
+							
+							<span class="font-medium text-sm flex text-jnGray-500">판매상품 ${firstUserInfo.sellgoods} · 안전거래 ${firstUserInfo.safetradecount} · 후기 ${firstUserInfo.reviewcount}</span>
 						</div>
 						<a class="flex items-center translate-x-4" href="/store/7579731"><img
 							alt="프로파일"
@@ -294,7 +306,7 @@
 					</div>
 					<div class="lg:ml-4">
 						<div class="flex justify-between mt-2 text-[#0CB650] font-medium">
-							<strong>신뢰지수 250</strong><span class="text-jnGray-500 text-sm">1,000</span>
+							<strong>신뢰지수 ${goodsDto.ratingScore}</strong><span class="text-jnGray-500 text-sm">100</span>	<!-- 추가 신뢰지수값에 따라 게이지 조정 -->
 						</div>
 						<div class="w-full h-1.5 bg-[#CCF4DC] rounded overflow-hidden">
 							<div class="h-full rounded bg-[#0DCC5A]" style="width: 25%;"></div>
@@ -305,10 +317,10 @@
 							<div class="flex items-center justify-between w-full mb-4">
 								<p
 									class="font-semibold text-lg text-jnblack [&amp;>span]:text-jnGreen">
-									중고나라#75799...님의 판매 상품 <span>3</span>
+									${goodsDto.nickname} <span>${firstUserInfo.sellgoods}</span>
 								</p>
 								<a class="text-sm font-medium text-gray-600"
-									href="/store/7579731">더 보기 &gt;</a>
+									href="/store/7579731">더 보기 &gt;</a> <!-- 해당 유저의 상품 모아보기 -->
 							</div>
 							<div class="carouselWrapper relative    ">
 								<div
@@ -405,6 +417,47 @@
 		src="${pageContext.request.contextPath}/resources/js/bootstrap.min.js"></script>
 	<script src="${pageContext.request.contextPath}/resources/js/main.js"></script>
   <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+  <script src="//dapi.kakao.com/v2/maps/sdk.js?appkey=aec5b89790015b44669217946b7e53f3"></script>
+  
+  <script>
+    // 페이지가 로드될 때 실행되는 함수
+    /* console.log(typeof ${goodsDto.lat}); // goodsDto.lat의 타입 확인
+	console.log(typeof ${goodsDto.lng}); // goodsDto.lng의 타입 확인
+
+	var lat = 37.566826; // 위도
+	var lng = 126.978656; // 경도
+	console.log(typeof lat); // lat의 타입 확인
+	console.log(typeof lng); // lng의 타입 확인 */
+    
+    
+	kakao.maps.load(function() {
+	    var lat = parseFloat("${goodsDto.lat}");
+	    var lng = parseFloat("${goodsDto.lng}");
+	    var lat = 37.566826; // 위도
+		var lng = 126.978656; // 경도
+
+	    var mapContainer = document.getElementById('kakaoMap'); // 지도를 표시할 div
+	    var mapOption = {
+	        center: new kakao.maps.LatLng(lat, lng), // 지도 중심 좌표
+	        level: 1 // 지도 확대 레벨
+	    };
+
+	    // 지도를 표시할 div와 지도 옵션으로 지도를 생성
+	    var map = new kakao.maps.Map(mapContainer, mapOption);
+
+	    // 마커의 좌표를 설정
+	    var markerPosition = new kakao.maps.LatLng(lat, lng);
+
+
+	    // 마커를 생성
+	    var marker = new kakao.maps.Marker({
+	        position: markerPosition,
+	    });
+
+	    // 마커를 지도에 표시
+	    marker.setMap(map);
+	});
+    </script>
     <script>
   new Swiper('.swiper'
 		  , {
@@ -426,9 +479,33 @@
 			}	  
   );
   </script>
+<script>
+$("#wishButton").click(function() {
+    var goodsId = $(this).data("goodsId");
+    var userId = "사용자의 ID"; // 로그인된 사용자의 ID 또는 세션에서 가져온 ID
+
+    // AJAX 요청 설정
+    $.ajax({
+        type: "POST",
+        url: "${pageContext.request.contextPath}/goods/wish", // 처리할 컨트롤러 경로
+        data: {
+            goodsId: goodsId,
+            userId: userId
+        },
+        success: function(data) {
+            // 요청이 성공했을 때 실행할 코드 (예: 버튼 텍스트 변경)
+            if (data === "added") {
+                // 찜하기 버튼을 "찜됨"으로 변경
+               alert("해당 상품을 찜목록에 추가하였습니다.");
+            } else if (data === "removed") {
+                // 찜하기 버튼을 "찜하기"로 변경
+            	alert("해당 상품을 찜목록에 제거하였습니다.");
+            }
+        }
+    });
+});
+</script>
 	
-	
-	</script>
 
 </body>
 </html>

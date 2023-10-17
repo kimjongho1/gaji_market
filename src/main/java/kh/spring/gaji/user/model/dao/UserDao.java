@@ -31,9 +31,6 @@ public class UserDao {
         return sqlSession.selectList("user.getKeepList", userId);
     }
 
-    public int updateViewCount() {	//상품글 조회수 +1
-        return sqlSession.update("user.updateViewCount");
-    }
 
     public List<GoodsListDto> getFavoriteList(String userId) {	//6P 사진을 포함한 모아보기목록 가져옴
         return sqlSession.selectList("user.getFavoriteList", userId);
@@ -418,6 +415,10 @@ public class UserDao {
 
     public int insertWishList(Map<String,String> map) {	//23P 찜하기
     	return sqlSession.insert("user.insertWishList",map);
+    }
+    
+    public int deleteWishList(Map<String,String> map) { // 찜해제
+    	return sqlSession.delete("user.deleteWishList",map);
     }
 
     public UserProfileDto getProfile(String userId) {	//프로필을 가져올때 유저주소 전부를 가져옴

@@ -11605,6 +11605,50 @@ dd ul li p {
     margin-bottom: 42px;
     line-height: 1.5rem
 }
+.mys{
+cursor: pointer;
+}
+
+.sortList,
+.guList,
+.dongList {
+    display: none;
+}
+
+#flex1{
+	display:inline-block;
+}
+
+  .pagination-container {
+    text-align: center;
+    margin: 10px 0;
+  }
+
+  .pagination-button {
+    background-color: gray;
+    color: #fff;
+    border: none;
+    padding: 8px 16px;
+    margin: 2px;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+
+  .pagination-button:hover {
+    background-color:black;
+  }
+  
+  .writeBoard{
+  	position:absolute;
+  	right:320px;	
+  }
+  .pagination-button{
+  	margin:2px 8px 2px 8px;
+  }
+    .fa{
+  	position:relative;
+  	top:10px;
+  }
 
 .month5Price,
 .textStyle {

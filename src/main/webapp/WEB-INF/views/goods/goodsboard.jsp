@@ -26,7 +26,7 @@
 
 <!-- Css Styles -->
 <link rel="stylesheet"
-	href="${pageContext.request.contextPath}/resources/css/bootstrap.min.css"
+	href="${pageContext.request.contextPath}/resources/css/bootstrap.css"
 	type="text/css">
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/css/elegant-icons.css"
@@ -40,48 +40,6 @@
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/css/style.css"
 	type="text/css">
-<style>
-.mys{
-cursor: pointer;
-}
-
-.sortList,
-.guList,
-.dongList {
-    display: none;
-}
-
-#flex1{
-	display:inline-block;
-}
-
-  .pagination-container {
-    text-align: center;
-    margin: 10px 0;
-  }
-
-  .pagination-button {
-    background-color: gray;
-    color: #fff;
-    border: none;
-    padding: 8px 16px;
-    margin: 2px;
-    border-radius: 4px;
-    cursor: pointer;
-  }
-
-  .pagination-button:hover {
-    background-color:black;
-  }
-  
-  .writeBoard{
-  	position:absolute;
-  	right:320px;	
-  }
-  .pagination-button{
-  	margin:2px 8px 2px 8px;
-  }
-</style>
 </head>
 <body>
 
@@ -89,8 +47,6 @@ cursor: pointer;
 	<header>
 		<jsp:include page="/WEB-INF/views/header.jsp"></jsp:include>
 	</header>
-	<!-- header end -->
-	<h2>중고 거래 게시판</h2>
 	
 	<main class="relative flex-grow border-b-2"
 		style="min-height: -webkit-fill-available; -webkit-overflow-scrolling: touch">

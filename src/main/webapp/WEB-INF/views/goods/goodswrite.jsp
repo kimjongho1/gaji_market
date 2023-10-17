@@ -78,7 +78,7 @@
 	<h2>중고 거래 게시판 글 작성</h2>
 	<form action="${pageContext.request.contextPath}/goods/write.do"
 		method="post" enctype="multipart/form-data">
-		<input type="hidden" name="userId" value="cjsdudwns">
+		<input type="hidden" name="userId" value="qordmlgjs">
 		<input type="text" name="title" id="title" placeholder="제목"> <br>
 		<!-- 카테고리 선택 드롭다운 -->
 		<label for="selectedCategory">카테고리 선택:</label> <select
