@@ -6,6 +6,8 @@
 		<head>
 			<meta charset="UTF-8">
 			<title>Insert title here</title>
+			<script src="https://cdn.jsdelivr.net/npm/sockjs-client@1/dist/sockjs.min.js"></script>
+			<script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
 			<script src="${pageContext.request.contextPath}/resources/js/jquery-3.3.1.min.js"></script>
 			<link href="${pageContext.request.contextPath}/resources/css/chat.css" rel='stylesheet' type='text/css'>
 			<link rel="icon" href="favicon.ico" type="image/x-icon">
@@ -101,43 +103,25 @@
 					document.querySelector('.chat[data-chat=person2]').classList.add('active-chat');
 					document.querySelector('.person[data-chat=person2]').classList.add('active');
 
-					var chatId; // chatId를 많이 사용하므로 전역변수 선언
+					// chatId를 많이 사용하므로 전역변수 선언
+					var chatId;
+					// 현제 접속 된 계정
 					var username = "${username}";
-					
-					$(function () {
-						// socket들을 담을 객체 생성
-						const websocketConnections = {};
-						// socket 생성
-						var ws = new SockJS("${pageContext.request.contextPath}/chat");
-						var stomp = Stomp.over(sock);
+					// socket들을 담을 객체 생성
+					const websocketConnections = {};
+					var endPoint = "${pageContext.request.contextPath}/chat";
+					// socket 생성
+					function createWebSocketConnection(person) {
+						var ws = new SockJS(endPoint);
+						websocketConnections.person = ws;
+						var stomp = Stomp.over(ws);
 						
-						createWebSocketConnection(username);
-						// WebSocket 연결 생성 함수
-						 /* function createWebSocketConnection(person) {
-							const ws = new WebSocket("ws://127.0.0.1:8090/gaji/echo");
-							websocketConnections.person = ws;
-							
-							ws.onopen = function (e) {
-								console.log('WebSocket 연결이 열렸습니다.');
-								//websocketConnections.s.df.ds.f.dsf = dsfsdfds;
-							};
-
-							ws.onmessage = function (e) {
-								console.log('WebSocket 메시지 수신:', e.data);
-								displayReceivedMessage(e.data);
-							};
-
-							ws.onclose = function (e) {
-								console.log('WebSocket 연결이 닫혔습니다.');
-							};
-
-							ws.onerror = function (e) {
-								console.error('WebSocket 오류:', e);
-							};
-
-							return ws; 
-						}  */
-
+						stomp.connect({}, function(frame) {
+							console.log('Connected: ' + frame);
+							stomp.subscribe("sub/chat/room/" + chatId, function(chat){
+								printMessage(JSON.parse(msg.body).Message);
+							});
+						});
 						$("#button-send").on("click", (e) => {
 							send();
 						});	
@@ -157,10 +141,19 @@
 								return;
 							}
 							// 메시지 내용 message 변수에 저장
-							const msgInput = document.getElementById("msg");
-							const message = msgInput.value.trim();
+							const message = $("#msg").val().trim();
+							sendChat();
+							function sendChat(){
+								stomp.send("/pub/send/", {},
+										JSON.stringify({
+											'senderId':username,
+											"chatNo": chatId,
+											'msg':message
+										}))
+									console.log("보내짐");
+							}
 							
-							$.ajax({
+						/* 	$.ajax({
 								type: 'get',
 								url: '${pageContext.request.contextPath}/insultChat',
 								data: {
@@ -175,16 +168,13 @@
 								error: function (request, status, error) { // 결과 에러 콜백함수
 									console.log(error)
 								}
-							})
+							}) */
 							
 							if (message === "") {
 								return;
 							}
 
-							//const websocket = websocketConnections[activeChat.getAttribute('data-chat')];
-							//if (websocket) {
-								websocketConnections.person.send(message);
-							//}
+							websocketConnections.person.send(message);
 
 							const messageElement = document.createElement('div');
 							messageElement.className = 'bubble me';
@@ -192,7 +182,7 @@
 
 							activeChat.appendChild(messageElement);
 
-							msgInput.value = '';
+							$('#msg').val('');
 						}
 
 						function displayReceivedMessage(message) {
@@ -208,7 +198,7 @@
 
 							activeChat.appendChild(messageElement);
 						}
-					});
+					}
 					
 					// 리스트에서 메시지 시간 체크
 					function formatDate(dateString) {
@@ -274,8 +264,9 @@
 								chat.container.querySelector('[data-chat="' + chat.person + '"]').classList.add('active-chat');
 								friends.name = f.querySelector('.name').innerText;
 								chat.name.innerHTML = friends.name;
-
-								//
+								// WebSocket 연결 생성 함수
+								createWebSocketConnection(username);
+								
 								htmlVal = '		<div class="conversation-start"><span></div>'; // TODO(1013 김종호 날짜 기록)
 								for (var i = 0; i < result.length; i++) {
 									var item1 = result[i];
@@ -293,15 +284,7 @@
 							}
 						})
 					}
-
-					
 				});  // document ready
 			</script>
-
-		
-
-
-
 		</body>
-
 </html>

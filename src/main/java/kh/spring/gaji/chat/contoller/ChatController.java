@@ -1,17 +1,15 @@
 package kh.spring.gaji.chat.contoller;
 
-import java.io.Console;
 import java.security.Principal;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.messaging.handler.annotation.DestinationVariable;
+import org.springframework.messaging.handler.annotation.MessageMapping;
+import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -32,6 +30,7 @@ public class ChatController {
 	@Autowired
 	private SimpMessagingTemplate template; // *****
 
+	
 	@GetMapping("/chat")
 	public ModelAndView selectChatHome(ModelAndView mv, Principal principal) {
 		// userId 값으로 조회하기 때문에 변수 선언
@@ -47,6 +46,8 @@ public class ChatController {
 		log.info("getChatRoom 실행");
 		return mv;
 	}
+	
+	//채팅 방 만들기
 
 	// 채팅 선택
 	@GetMapping("/selectRoom")
@@ -60,21 +61,34 @@ public class ChatController {
 //		return result1;
 		return new Gson().toJson(result1);
 	}
+	
+	
 
-	@GetMapping("/insultChat")
-	@ResponseBody
-	public String insertMessage(String senderId, String chatNo, String msg) {
-		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("senderId", senderId);
-		map.put("chatNo", Integer.parseInt(chatNo));
-		map.put("message", msg);
-		int result1 = chatServiceImpl.insertChatMessage(map);
-		String result2 = null;
-		if(result1 != 1) {
-			result2 ="메시지 DB 저장 실패";
-		} else {
-			result2 ="메시지 DB 저장 성공";
-		}
-		return new Gson().toJson(result2);
+//	@GetMapping("/insultChat")
+//	@ResponseBody
+//	public String insertMessage(String senderId, String chatNo, String msg) {
+//		Map<String, Object> map = new HashMap<String, Object>();
+//		map.put("senderId", senderId);
+//		map.put("chatNo", Integer.parseInt(chatNo));
+//		map.put("message", msg);
+//		int result1 = chatServiceImpl.insertChatMessage(map);
+//		String result2 = null;
+//		if(result1 != 1) {
+//			result2 ="메시지 DB 저장 실패";
+//		} else {
+//			result2 ="메시지 DB 저장 성공";
+//		}
+//		return new Gson().toJson(result2);
+//	}
+	
+	@MessageMapping("/message")
+	public void receiveMessage(ChatMessageDto message) {
+		System.out.println();
+	}
+	@MessageMapping("/{chatId}")
+	@SendTo("/send")
+	public ChatMessageDto broadcasting(@DestinationVariable String chatId, ChatMessageDto message){
+		System.out.println("여기 들어오나 message : " + chatId + message.getMessage());
+		return message;
 	}
 }
