@@ -684,7 +684,6 @@ progress {
 }
 .row > * {
   flex-shrink: 0;
-  width: 100%;
   max-width: 100%;
   padding-right: calc(var(--bs-gutter-x) * 0.5);
   padding-left: calc(var(--bs-gutter-x) * 0.5);
@@ -10961,4 +10960,12 @@ textarea.form-control-lg {
 .fa-shopping-bag, .fa-heart{
 	position:relative;
 	top:0px;
+}
+.explain {
+    text-align: center;
+    background-color: #0074d9;
+    color: white;
+    padding: 10px;
+    font-size: 24px;
+    border-radius: 5px;
 }

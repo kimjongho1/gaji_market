@@ -10,6 +10,7 @@
 	content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 <meta name="description" content="" />
 <meta name="author" content="" />
+<title>찜 목록</title>
 <!-- Favicon-->
 <!--         <link rel="icon" type="image/x-icon" href="assets/favicon.ico" /> -->
 <!-- Bootstrap icons-->
@@ -41,8 +42,8 @@
 	<header>
 		<jsp:include page="/WEB-INF/views/header.jsp"></jsp:include>
 	</header>
-<div style="text-align: center">
-    <h1>찜 목록</h1>
+<div>
+    <h1 class="explain">찜 목록</h1>
   </div>
 	<!-- Section-->
 	<div class="searchWord">

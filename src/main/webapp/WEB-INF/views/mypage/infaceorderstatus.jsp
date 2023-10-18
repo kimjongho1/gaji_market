@@ -42,6 +42,9 @@
 		<jsp:include page="/WEB-INF/views/header.jsp"></jsp:include>
 	</header>
 	<!-- Section-->
+	<div>
+    <h1 class="explain">직거래 구매목록</h1>
+  	</div>
 	<div class="searchWord">
 		<form
 			action="${pageContext.request.contextPath}/mypage/orderstatus/inface" method="get">

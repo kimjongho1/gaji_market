@@ -43,9 +43,9 @@
 		<jsp:include page="/WEB-INF/views/header.jsp"></jsp:include>
 	</header>
 	<!-- Section-->
-	<div style="text-align: center">
-    <h1>모아보기 목록</h1>
-  </div>
+	<div>
+		<h1 class="explain">모아보기 목록</h1>
+  	</div>
 	<!-- Section-->
 	<div class="searchWord">
 		<form

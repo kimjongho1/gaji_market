@@ -41,7 +41,10 @@
 	<header>
 		<jsp:include page="/WEB-INF/views/header.jsp"></jsp:include>
 	</header>
-	<!-- Section-->
+	<div>
+    <h1 class="explain">안전거래 판매목록</h1>
+  	</div>
+  	<!-- Section-->
 	<div class="searchWord">
 		<form
 			action="${pageContext.request.contextPath}/mypage/salestatus/safe" method="get">

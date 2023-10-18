@@ -39,10 +39,13 @@
 	<header>
 		<jsp:include page="/WEB-INF/views/header.jsp"></jsp:include>
 	</header>
+	<div>
+    	<h1 class="explain">판매 중 상품</h1>
+  	</div>
 	<div class="searchWord">
 		<form
 			action="${pageContext.request.contextPath}/mypage/goods/onsale" method="get">
-			<input type="search" name="searchWord"> <input class="btn1" type="submit" value="검색">
+			<input type="search" name="searchWord" placeholder="제목 검색"> <input class="btn1" type="submit" value="검색">
 		</form>
 	</div>
 

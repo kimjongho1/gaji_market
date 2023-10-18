@@ -41,6 +41,9 @@
 	<header>
 		<jsp:include page="/WEB-INF/views/header.jsp"></jsp:include>
 	</header>
+	<div>
+    	<h1 class="explain">직거래 판매목록</h1>
+  	</div>
 	<!-- Section-->
 	<div class="searchWord">
 		<form

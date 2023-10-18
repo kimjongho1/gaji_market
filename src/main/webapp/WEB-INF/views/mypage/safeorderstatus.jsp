@@ -44,7 +44,9 @@
 	<header>
 		<jsp:include page="/WEB-INF/views/header.jsp"></jsp:include>
 	</header>
-
+	<div>
+    <h1 class="explain">안전거래 구매목록</h1>
+  	</div>
 	<!-- Section-->
 	<div class="searchWord">
 		<form
