@@ -3613,5 +3613,26 @@ section {
 }
 
 .log-btn:hover{
+	color: #835995;
+	
+}
+
+.log-btn a:visited{
+	color:#ffffff;
+}
+
+.log-btn a:hover{
+	color:#835995;
+}
+
+.dbanner{
+	text-align: center;
+}
+
+.dbanner img{
+	width: 1200px;
+	height: 500px;
+	border-radius: 10px;
+	
 	
 }

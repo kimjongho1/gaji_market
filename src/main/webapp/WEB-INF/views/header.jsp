@@ -19,8 +19,8 @@ header {
 }
 
 .btn {
-	display: inline; !important;
-	color: #ffffff; !important
+	display: inline;
+
 }
 
 </style>
@@ -63,14 +63,14 @@ header {
 							<li><a href="${pageContext.request.contextPath}/mypage/keepusers"><i class="fa fa-shopping-bag"></i></a></li>
 							<sec:authorize access="isAnonymous()">
 								<!-- 사용자가 로그인하지 않은 경우에만 로그인 링크 표시 -->
-								<li><a href="${pageContext.request.contextPath}/login">로그인</a></li>
+								<li class="log-btn"><a href="${pageContext.request.contextPath}/login">로그인</a></li>
 							</sec:authorize>
 							<sec:authorize access="isAuthenticated()">
 								<!-- 사용자가 로그인한 경우에만 로그아웃 링크 표시 -->
 								<li>
 									<form class="form-signin" method="post" action="${pageContext.request.contextPath}/logout">
 										<button type="submit" class="log-btn">
-											<span class="btn logout">로그아웃</span>
+											로그아웃
 										</button>
 									</form>
 								</li>
