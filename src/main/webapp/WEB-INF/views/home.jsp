@@ -114,10 +114,6 @@
     </div>
     <!-- !swiper slides -->
     
-    <!-- next / prev arrows -->
-    <div class="swiper-button-next"></div>
-    <div class="swiper-button-prev"></div>
-    <!-- !next / prev arrows -->
     
     <!-- pagination dots -->
     <div class="swiper-pagination"></div>
@@ -337,7 +333,12 @@
     </section>
     <!-- Latest Product Section End -->
 
-
+	<section >
+	<div class="dbanner">
+	<img src="https://source.unsplash.com/random?sig=11">
+	
+	</div>
+	</section>
 
 
     <!-- Footer Section Begin -->
