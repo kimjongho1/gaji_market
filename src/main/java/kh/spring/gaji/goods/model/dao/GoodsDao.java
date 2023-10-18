@@ -9,6 +9,7 @@ import kh.spring.gaji.goods.model.dto.GoodsListDto;
 import kh.spring.gaji.goods.model.dto.GoodsListInfoDto;
 import kh.spring.gaji.goods.model.dto.GuDongInfoDto;
 import kh.spring.gaji.goods.model.dto.MainGoodsDto;
+import kh.spring.gaji.goods.model.dto.MyGoodsListDto;
 
 import java.util.HashMap;
 import java.util.List;
@@ -90,4 +91,42 @@ public class GoodsDao  {
 	public GuDongInfoDto getGuDongInfo(String userId) {
 		return sqlSession.selectOne("goods.getGuDongInfo",userId);
 	}
+	public int getOnsaleTotalCnt(String userId) {
+		   return sqlSession.selectOne("goods.getOnsaleTotalCnt",userId);
+	   }
+
+	    public List<MyGoodsListDto> getOnsaleList(String userId,int currentPage,int PAGESIZE,int totalCnt) {	//10P 판매중 + 예약중 불러오기
+	    	int startRownum = 0;
+			int endRownum = 0;
+			startRownum = (currentPage-1)*PAGESIZE +1;
+			endRownum = ((currentPage*PAGESIZE) > totalCnt) ? totalCnt: (currentPage*PAGESIZE);
+			Map<String, Object> map= new HashMap<String, Object>();
+			map.put("userId", userId);
+			map.put("startRownum",startRownum);
+			map.put("endRownum",endRownum);
+	    	return sqlSession.selectList("goods.getOnsaleList", map);
+	    }
+	    
+	    public int getSearchOnsaleTotalCnt(String userId,String searchWord) {
+	       Map<String, Object> map= new HashMap<String, Object>();
+	       searchWord="%"+searchWord+"%";
+	       map.put("userId", userId);
+	       map.put("searchWord", searchWord);
+	 	   return sqlSession.selectOne("goods.getSearchOnsaleTotalCnt",map);
+	    }
+	    
+	    public List<MyGoodsListDto> getSearchOnsaleList(String userId,int currentPage,int PAGESIZE,int totalCnt,String searchWord) {	//10P 판매중 + 예약중 불러오기
+	    	searchWord="%"+searchWord+"%";
+	    	int startRownum = 0;
+			int endRownum = 0;
+			startRownum = (currentPage-1)*PAGESIZE +1;
+			endRownum = ((currentPage*PAGESIZE) > totalCnt) ? totalCnt: (currentPage*PAGESIZE);
+			Map<String, Object> map= new HashMap<String, Object>();
+			map.put("userId", userId);
+			map.put("startRownum",startRownum);
+			map.put("endRownum",endRownum);
+			map.put("searchWord", searchWord);
+	    	return sqlSession.selectList("goods.getSearchOnsaleList", map);
+	    }
+	    
 }

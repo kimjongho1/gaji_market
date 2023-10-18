@@ -32,6 +32,7 @@ import kh.spring.gaji.goods.model.dto.GoodsDto;
 import kh.spring.gaji.goods.model.dto.GoodsInfoDto;
 import kh.spring.gaji.goods.model.dto.GoodsListDto;
 import kh.spring.gaji.goods.model.dto.GuDongInfoDto;
+import kh.spring.gaji.goods.model.dto.MyGoodsListDto;
 import kh.spring.gaji.region.model.dto.DongDto;
 import kh.spring.gaji.region.model.service.RegionService;
 import kh.spring.gaji.user.model.dto.UserSafeTradingDto;
@@ -232,6 +233,41 @@ public class GoodsController {
 	@ResponseBody
 	public List<DongDto> getdong(int guId) {
 		return regionService.dongList(guId);
+	}
+	
+	@GetMapping("/usergoods")	// 판매중 상품
+	public String onsaleGoods(Model model,Integer currentPage,String searchWord,String userId) {	
+		int totalCnt=0;
+		int pageSize1=8;
+		List<MyGoodsListDto> myGoodsList=null;
+		model.addAttribute("myGoodsList",myGoodsList);
+		if(currentPage==null)	//현재 페이지가 들어온게 없다면 1페이지.
+			currentPage=1;
+		if(searchWord==null) {	// 검색어가 들어온게 없다면 검색어없는 mapper로 목록 가져오기
+			Map<String,Object> map= userService.getOnSaleList(userId,(int)currentPage,pageSize1);	//추후 userId들어가야함
+			myGoodsList = (List<MyGoodsListDto>)map.get("myGoodsList");
+			totalCnt= (int)map.get("totalCnt");
+		}
+		else {					//검색어가 있다면 그에따른 mapper로 목록 가져오기
+			Map<String,Object> map= userService.getSearchOnSaleList(userId,(int)currentPage,pageSize1,searchWord);//추후 userId들어가야함
+			myGoodsList = (List<MyGoodsListDto>)map.get("myGoodsList");
+			totalCnt= (int)map.get("totalCnt");
+			model.addAttribute("searchWord",searchWord);
+		}
+		int totalPageNum = totalCnt/PAGESIZE + (totalCnt%pageSize1 == 0 ? 0 : 1);
+		int startPageNum = 1;
+		if((currentPage%PAGEBLOCKSIZE) == 0) {
+			startPageNum = ((currentPage/PAGEBLOCKSIZE)-1)*PAGEBLOCKSIZE +1;
+		} else {
+			startPageNum = ((currentPage/PAGEBLOCKSIZE))*PAGEBLOCKSIZE +1;
+		}
+		int endPageNum = (startPageNum+PAGEBLOCKSIZE > totalPageNum) ? totalPageNum : startPageNum+PAGEBLOCKSIZE-1;
+		model.addAttribute("totalPageNum", totalPageNum);
+		model.addAttribute("startPageNum", startPageNum);
+		model.addAttribute("endPageNum", endPageNum);
+		model.addAttribute("currentPage", currentPage);
+		model.addAttribute("myGoodsList",myGoodsList);
+		return "mypage/onsalegoods";
 	}
 
 //	@GetMapping("/get/map")

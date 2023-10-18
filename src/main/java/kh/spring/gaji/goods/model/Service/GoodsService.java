@@ -17,6 +17,10 @@ public interface GoodsService {
     
     List<GoodsInfoDto> userGoodsList(int goodsId);
     
+    public Map<String,Object> getOnSaleList(String userId,int currentPage,int PAGESIZE);
+    
+    public Map<String,Object> getSearchOnSaleList(String userId,int currentPage,int PAGESIZE,String searchWord);
+    
     GoodsInfoDto goodsUserInfo(int goodsId);
     
     Map<String,Object> getGoodsList(int currentPage,int PAGESIZE,int sort,int priceCeiling,int category,int dongId,String searchWord);

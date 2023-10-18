@@ -95,6 +95,23 @@ public class GoodsServiceImpl implements GoodsService {
 	public List<MainGoodsDto> getMainGoods(int category) {
 		return goodsDao.getMainGoods(category);
 	}
+	
+	 @Override
+	    public Map<String,Object> getOnSaleList(String userId,int currentPage,int PAGESIZE){
+	    	Map<String,Object> result=new HashMap<String,Object>();
+	    	int totalCnt = goodsDao.getOnsaleTotalCnt(userId);
+	    	result.put("totalCnt",totalCnt);
+	    	result.put("myGoodsList",goodsDao.getOnsaleList(userId,currentPage,PAGESIZE,totalCnt));
+	    	return result;
+	    }
+	    @Override
+	    public Map<String,Object> getSearchOnSaleList(String userId,int currentPage,int PAGESIZE,String searchWord){
+	    	Map<String,Object> result=new HashMap<String,Object>();
+	    	int totalCnt = goodsDao.getSearchOnsaleTotalCnt(userId,searchWord);
+	    	result.put("totalCnt",totalCnt);
+	    	result.put("myGoodsList",goodsDao.getSearchOnsaleList(userId,currentPage,PAGESIZE,totalCnt,searchWord));
+	    	return result;
+	    }
 
 	
 }

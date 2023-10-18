@@ -199,5 +199,42 @@
 		active_status='Y'
 		order by created_at desc) list1) list2) where rn &lt; 7
 	</select>
+	
+	<!--해당유저 상품조회-->
+	<select id="getOnsaleTotalCnt" resultType="_int">
+		select count(*) from goods where user_Id=#{userId} and status!=4
+	</select>
+	
+	<select id="getSearchOnsaleTotalCnt" parameterType="map" resultType="_int">
+		select count(*) from goods where user_Id=#{userId} and title like #{searchWord} and status!=4
+	</select>
+	
+	
+	<select id="getOnsaleList" parameterType="map" resultType="MyGoodsListDto">	<!--10P 판매중 + 예약중 불러오기 -->
+		select list2.*,(select count(*) from wishlist w where w.goods_Id=list2.goods_Id) wishCount
+		,(select url from goods_file f where f.goods_id=list2.goods_id and rownum between 0 and 1) url from
+		(select list.*,rownum rn from(
+		(select to_char(refreshed_at, 'YYYY-MM-DD HH24:MI:SS') refreshed_at,goods_id,title,price,status,view_Count,(select dong_name from dong d where d.dong_Id=g.dong_Id) dong_name
+		,(select nickname from users u where u.user_id=g.user_id) nickname
+		from goods g
+		where user_id=#{userId} and status!=4 and active_status='Y' 
+		order by refreshed_at DESC) 
+		list)
+		) list2 where rn between #{startRownum} and #{endRownum}
+	</select>
+	
+	<select id="getSearchOnsaleList" parameterType="map" resultType="MyGoodsListDto">	<!--10P 판매중 + 예약중 불러오기 -->
+		select list2.*,(select count(*) from wishlist w where w.goods_Id=list2.goods_Id) wishCount 
+		,(select url from goods_file f where f.goods_id=list2.goods_id and rownum between 0 and 1) url from
+		(select list.*,rownum rn from(
+		(select to_char(refreshed_at, 'YYYY-MM-DD HH24:MI:SS') refreshed_at,goods_id,title,price,status,view_Count,(select dong_name from dong d where d.dong_Id=g.dong_Id) dong_name
+		,(select nickname from users u where u.user_id=g.user_id) nickname
+		from goods g
+		where user_id=#{userId} and status!=4 and active_status='Y' and title like #{searchWord}
+		order by refreshed_at DESC) 
+		list)
+		) list2 where rn between #{startRownum} and #{endRownum}
+	</select>
+	<!--  -->
 
 </mapper>
