@@ -196,10 +196,12 @@ public class GoodsController {
 	}
 	
 	@GetMapping("/get")
-	public ModelAndView getBoard(ModelAndView mv,int goodsId, GoodsInfoDto goodsDto) {	// 중고거래 게시판 글 상세보기
-		
-		System.out.println("getBoard진입확인");
+	public ModelAndView getBoard(ModelAndView mv,int goodsId, GoodsInfoDto goodsDto,Principal principal) {	// 중고거래 게시판 글 상세보기
 		mv.setViewName("goods/goodsget");
+		if(principal != null) {
+			String userId = principal.getName();
+			mv.addObject("loginId", userId);
+		}
 		mv.addObject("goodsDto",goodsService.getGoodsInfo(goodsId)); //상품글 정보와 해당 상품 등록한 사용자의 정보
 		mv.addObject("goodsUrl",goodsService.goodsUrl(goodsId)); // 상품 url값만 리스트형태로
 		mv.addObject("goodsUserInfo",goodsService.goodsUserInfo(goodsId)); // 상품 등록한 사용자의 후기 수 안전거래 횟수 상품 수
@@ -216,7 +218,6 @@ public class GoodsController {
 	@PostMapping("/wish")
 	@ResponseBody
 	public String likeButton(@RequestParam Map<String, String> map) {
-		
 		
 		try {
 	        userService.insertWishList(map);

@@ -131,7 +131,7 @@
 	<select id="userGoodsList" parameterType="_int" resultType="GoodsInfoDto"> <!-- 해당 글의 작성자의 상품리스트 -->
 		SELECT g.goods_id, g.title, (SELECT gf.url FROM goods_file gf WHERE gf.goods_id = g.goods_id AND ROWNUM = 1) AS url, g.price
 		FROM goods g
-		WHERE g.goods_id = #{goodsId}
+		WHERE g.user_id = (SELECT user_id FROM goods WHERE goods_id = #{goodsId})
 	</select>
 
 	<update id="updateViewCount" parameterType="_int"> <!-- 상품글 조회수 +1 -->

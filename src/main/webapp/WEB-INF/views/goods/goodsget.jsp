@@ -141,7 +141,7 @@
 							${goodsDto.title}
 							<div>
 								<!-- <button class="fa fa-heart" id="wishButton">찜해제하기</button> -->
-								<button class="fa fa-heart-o" id="wishButton">찜하기</button>
+								<button class="fa fa-heart-o" id="wishButton"></button>
 							</div>
 						</h1>
 						<div class="flex items-center justify-between">
@@ -310,7 +310,7 @@
 									${goodsDto.nickname} <span>${goodsUserInfo.sellgoods}</span>
 								</p>
 								<a class="text-sm font-medium text-gray-600"
-									href="/store/7579731">더 보기 &gt;</a> <!-- 해당 유저의 상품 모아보기 -->
+									href="${pageContext.request.contextPath}/goods/usergoods?userId=${goodsDto.userId}">더 보기 &gt;</a> <!-- 해당 유저의 상품 모아보기 -->
 							</div>
 							<div class="carouselWrapper relative    ">
 								<div
@@ -486,7 +486,7 @@
 	
 $("#wishButton").click(function() {
     var goodsId = ${goodsDto.goodsId};
-    var userId = "사용자의 ID"; // 로그인된 사용자의 ID 또는 세션에서 가져온 ID
+    var userId ="${loginId}"; // 로그인된 사용자의 ID 또는 세션에서 가져온 ID
 
     $.ajax({
         type: "POST",
@@ -512,8 +512,8 @@ $("#wishButton").click(function() {
 //찜 여부 확인 및 버튼 초기화
 function checkWishlist() {
     var goodsId = ${goodsDto.goodsId}; // 해당 상품의 ID
-    var userId = "사용자의 ID"; // 로그인된 사용자의 ID 또는 세션에서 가져온 ID
-
+    var userId = "${loginId}"; // 로그인된 사용자의 ID 또는 세션에서 가져온 ID
+	
     // AJAX 요청 설정
     $.ajax({
         type: "POST",
@@ -534,7 +534,7 @@ function checkWishlist() {
         }
     });
 }
-
+console.log("${loginId}");
 
 var msg = '${msg}';
 if(msg){

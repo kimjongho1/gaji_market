@@ -338,7 +338,7 @@
 	</select>
 	
 	<insert id="insertWishList" parameterType="map">	<!-- 23P 찜하기 -->	
-		insert into wishlist values(#{goodsId},#{userId},"")
+		insert into wishlist values(#{goodsId},#{userId},default)
 	</insert>
 	
 	<delete id="deleteWishList" parameterType="map">	<!-- 찜해제 -->
