@@ -10,6 +10,7 @@ import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -46,8 +47,28 @@ public class ChatController {
 		return mv;
 	}
 
+	
+	
+//	@PostMapping(value = "/member/room")
+//	public String create(@RequestParam String roomName, @RequestParam String member, Principal principal,
+//	RedirectAttributes rttr) {
+//	     log.info("# Create Chat Room, roomName: " + roomName + ", userId: " + userId);
+//	String userId = principal.getName();
+//	service.AddChatRoom(roomName, userId);
+//	service.memberInsert(member);
+//	rttr.addFlashAttribute("roomName1", roomName);
+//	rttr.addFlashAttribute("member", member);
+//	return "redirect:/member/rooms";
+//	}
+	
+	// 채팅방 개설
+	@GetMapping("/chat/insertRoom")
+	public String createRoom (@RequestParam String sellerId) {
+	    System.out.println("createRoom " + sellerId);
+	    return "redirect:/chat";
+	}
 	// 채팅 선택
-	@GetMapping("/selectRoom")
+	@GetMapping("/chat/selectRoom")
 	@ResponseBody
 	public String selectRoom(Principal principal, int chatId) {
 		String userId = principal.getName();
@@ -76,10 +97,17 @@ public class ChatController {
 //		return new Gson().toJson(result2);
 //	}
 
-	@MessageMapping("/chat/send")
+	// JSP로 메시지 출력
+	@MessageMapping("/chat/room")
 	public void receiveMessage(ChatMessageDto message) {
-		System.out.println("제발 나와라" + message);
 		template.convertAndSend("/sub/chat/room/" + message.getChatNo(), message);
-		log.debug("receiveMessage");
 	}
+	
+	// DB 저장
+	@MessageMapping("/chat/message")
+	public void message(ChatMessageDto message){
+		//insert 명령어
+		template.convertAndSend("/sub/chat/room/" + message.getChatNo(), message);
+	}
+	
 }
