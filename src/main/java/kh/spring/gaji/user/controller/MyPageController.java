@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCrypt;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
@@ -46,6 +48,48 @@ public class MyPageController {
 	
 	@Autowired
 	private PayService payServiceImpl;
+	
+	@Autowired
+	private BCryptPasswordEncoder bCryptPasswordEncoder; 
+	
+	@GetMapping("/changepwd")
+	public String changPwd(Principal principal,RedirectAttributes ra, Model model) {
+		String userId = principal.getName();
+		if (userId == null) {
+			ra.addFlashAttribute("msg", "로그인 먼저 해주세요");
+			return "redirect:/";
+		} else {
+		model.addAttribute("userId",userId);
+		return "mypage/passwordchange";
+		}
+	}
+	
+	@PostMapping("/changepassword")
+	public ModelAndView changepassword(@RequestParam Map<String, String> map, ModelAndView mv){
+		String userId = map.get("userId");
+		String searchPassword = myPageService.searchPassword(userId);
+		String currentPassword = map.get("password");
+		
+		boolean isPasswordMatch = bCryptPasswordEncoder.matches(currentPassword, searchPassword);
+		
+		if(isPasswordMatch == true) {
+			 String newPassword = bCryptPasswordEncoder.encode(map.get("newPassword"));
+			 map.put("newPassword", newPassword);
+			int updatePassword = myPageService.changePassword(map);
+			if (updatePassword == 1) {
+				 mv.addObject("message", "비밀번호가 성공적으로 변경되었습니다.");
+				 mv.setViewName("redirect:/");
+			} else {
+				mv.addObject("error", "비밀번호 변경에 실패했습니다. 다시 시도해 주세요.");
+				mv.setViewName("mypage/passwordchange");
+			}
+		}else {
+			mv.addObject("error", "현재 비밀번호가 일치하지 않습니다.");
+		    mv.setViewName("mypage/passwordchange");
+		}
+		
+		return mv;
+	}
 	
 	@GetMapping("")
 	public ModelAndView mypage(@RequestParam(name = "userId", required = false, defaultValue = "asdf") String userId, ModelAndView mv) {	// 마이페이지

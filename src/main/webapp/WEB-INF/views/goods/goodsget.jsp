@@ -246,12 +246,13 @@
 					<div class="col-span-1 lg:col-span-3 w-full">
 						<a class="text-base py-2 px-4 border-b-[4px] border-b-transparent text-jnblack w-full lg:w-auto justify-center flex lg:block cursor-pointer false"
 							aria-label="상품내용탭" aria-roledescription="상품내용탭" href="#">${goodsDto.description}</a>
+							<div th:utext="${goodsDto.description}"></div>
 					</div>
 					<div role="presentation" class="col-span-1 lg:col-span-2 w-full">
 						<a class="text-base py-2 px-4 border-b-[4px] border-b-transparent text-jnblack w-full justify-center flex lg:block cursor-pointer border-b-jnblack transition duration-300 ease-in lg:border-b-transparent"
 							aria-label="가게정보탭" aria-roledescription="가게정보탭" href="#">유저정보</a>
 					</div>
-					<div id="kakaoMap" style="width: 768px; height: 200px;"></div>
+					<div id="kakaoMap" style="width: 300%; height: 200px;"></div>
 				</div>
 			</div>
 			<div class="block grid-cols-5 lg:grid lg:mb-10">

@@ -21,6 +21,16 @@ public class MypageServiceImpl implements MypageService{
 	public List<MypageDto> userMypage(String userId) {
 		return mypageDao.userMypage(userId);
 	}
+	
+	@Override
+	public int changePassword(Map<String, String> map) { // 비밀번호 업데이트
+		return mypageDao.changePassword(map);
+	}
+	
+	@Override
+	public String searchPassword(String userId) { // 해당 유저의 password값확인
+		return mypageDao.searchPassword(userId);
+	}
 
 	@Override
 	public int updateName(Map<String, String> map) {
@@ -61,6 +71,10 @@ public class MypageServiceImpl implements MypageService{
 	public String checkMobilNumber(String mobileNumber) {
 		return mypageDao.checkMobilNumber(mobileNumber);
 	}
+
+	
+
+	
 	
 	
 }

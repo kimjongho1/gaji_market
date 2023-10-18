@@ -19,6 +19,14 @@ public class MypageDao {
 		return sqlSession.selectList("mypage.userMypage",userId);
 	}
 	
+	public String searchPassword(String userId) {
+		return sqlSession.selectOne("mypage.searchPassword",userId);
+	}
+	
+	public int changePassword(Map<String, String> map) {
+		return sqlSession.update("mypage.updateNmae",map);
+	}
+	
 	public int updateName(Map<String, String> map) {
 		return sqlSession.update("mypage.updateName",map);
 	}

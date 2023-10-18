@@ -9,6 +9,10 @@ public interface MypageService {
 	
 	public List<MypageDto> userMypage(String userId);
 	
+	public int changePassword(Map<String, String> map);
+	
+	public String searchPassword(String userId);
+	
 	public int updateName(Map<String, String> map);
 	
 	public int updateNickname(Map<String, String> map);
