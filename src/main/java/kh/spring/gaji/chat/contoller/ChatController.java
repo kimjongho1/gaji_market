@@ -30,7 +30,6 @@ public class ChatController {
 	@Autowired
 	private SimpMessagingTemplate template; // *****
 
-	
 	@GetMapping("/chat")
 	public ModelAndView selectChatHome(ModelAndView mv, Principal principal) {
 		// userId 값으로 조회하기 때문에 변수 선언
@@ -46,8 +45,6 @@ public class ChatController {
 		log.info("getChatRoom 실행");
 		return mv;
 	}
-	
-	//채팅 방 만들기
 
 	// 채팅 선택
 	@GetMapping("/selectRoom")
@@ -61,8 +58,6 @@ public class ChatController {
 //		return result1;
 		return new Gson().toJson(result1);
 	}
-	
-	
 
 //	@GetMapping("/insultChat")
 //	@ResponseBody
@@ -80,15 +75,21 @@ public class ChatController {
 //		}
 //		return new Gson().toJson(result2);
 //	}
-	
-	@MessageMapping("/message")
+
+	@MessageMapping("/chat/send")
 	public void receiveMessage(ChatMessageDto message) {
-		System.out.println();
+		System.out.println(message);
+		template.convertAndSend("/sub/chat/room/" + message.getChatNo(), message);
+		log.debug("receiveMessage");
 	}
-	@MessageMapping("/{chatId}")
-	@SendTo("/send")
-	public ChatMessageDto broadcasting(@DestinationVariable String chatId, ChatMessageDto message){
-		System.out.println("여기 들어오나 message : " + chatId + message.getMessage());
-		return message;
-	}
+
+	/*
+	 * @MessageMapping("/{chatId}")
+	 * 
+	 * @SendTo("/send") public ChatMessageDto broadcasting(@DestinationVariable
+	 * String chatId, ChatMessageDto message) {
+	 * System.out.println("여기 들어오나 message : " + chatId + message.getMessage());
+	 * return message; }
+	 */
+
 }
