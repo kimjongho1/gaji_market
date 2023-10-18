@@ -41,6 +41,7 @@
 	<header>
 		<jsp:include page="/WEB-INF/views/header.jsp"></jsp:include>
 	</header>
+		<jsp:include page="/WEB-INF/views/mypage/side.jsp"></jsp:include>
 	<div>
     <h1 class="explain">안전거래 판매목록</h1>
   	</div>
