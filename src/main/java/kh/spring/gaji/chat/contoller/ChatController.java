@@ -78,18 +78,8 @@ public class ChatController {
 
 	@MessageMapping("/chat/send")
 	public void receiveMessage(ChatMessageDto message) {
-		System.out.println(message);
+		System.out.println("제발 나와라" + message);
 		template.convertAndSend("/sub/chat/room/" + message.getChatNo(), message);
 		log.debug("receiveMessage");
 	}
-
-	/*
-	 * @MessageMapping("/{chatId}")
-	 * 
-	 * @SendTo("/send") public ChatMessageDto broadcasting(@DestinationVariable
-	 * String chatId, ChatMessageDto message) {
-	 * System.out.println("여기 들어오나 message : " + chatId + message.getMessage());
-	 * return message; }
-	 */
-
 }
