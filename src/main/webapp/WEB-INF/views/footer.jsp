@@ -12,7 +12,7 @@
 
         <div class="container">
             <div class="footer__about__logo">
-                <a href="./index.html"><img width="120" height="50" src="${pageContext.request.contextPath}/resources/img/gaji_logo.png" alt="그래"></a>
+                <a href="${pageContext.request.contextPath}/"><img width="120" height="50" src="${pageContext.request.contextPath}/resources/img/gaji_logo.png" alt="그래"></a>
             </div>
             <div class="row">
                 <div class="col-lg-3 col-md-6 col-sm-6">
@@ -28,27 +28,27 @@
                 <div class="col-lg-4 col-md-6 col-sm-6 offset-lg-1">
                     <div class="footer__widget">
                         <ul>
-                            <li><a href="#">제휴문의</a></li>
-                            <li><a href="#">광고문의</a></li>
-                            <li><a href="#">PR문의</a></li>
-                            <li><a href="#">IR문의</a></li>
+                            <li><a href="${pageContext.request.contextPath}/preparing">제휴문의</a></li>
+                            <li><a href="${pageContext.request.contextPath}/preparing">광고문의</a></li>
+                            <li><a href="${pageContext.request.contextPath}/preparing">PR문의</a></li>
+                            <li><a href="${pageContext.request.contextPath}/preparing">IR문의</a></li>
                         </ul>
                         <ul>
-                            <li><a href="#">이용약관</a></li>
-                            <li><a href="#">개인정보처리방침</a></li>
-                            <li><a href="#">위치기반서비스 이용약관</a></li>
-                            <li><a href="#">이용자보호 비전과 계획</a></li>
-                            <li><a href="#">청소년 보호정책</a></li>
+                            <li><a href="${pageContext.request.contextPath}/preparing">이용약관</a></li>
+                            <li><a href="${pageContext.request.contextPath}/preparing">개인정보처리방침</a></li>
+                            <li><a href="${pageContext.request.contextPath}/preparing">위치기반서비스 이용약관</a></li>
+                            <li><a href="${pageContext.request.contextPath}/preparing">이용자보호 비전과 계획</a></li>
+                            <li><a href="${pageContext.request.contextPath}/preparing">청소년 보호정책</a></li>
                         </ul>
                     </div>
                 </div>
                 <div class="col-lg-4 col-md-12">
                     <div class="footer__widget">
                         <div class="footer__widget__social">
-                            <a href="#"><i class="fa fa-facebook"></i></a>
-                            <a href="#"><i class="fa fa-instagram"></i></a>
-                            <a href="#"><i class="fa fa-twitter"></i></a>
-                            <a href="#"><i class="fa fa-pinterest"></i></a>
+                            <a href="https://www.facebook.com/?locale=ko_KR"><i class="fa fa-facebook"></i></a>
+                            <a href="https://www.instagram.com/sem/campaign/emailsignup/?campaign_id=13530338586&extra_1=s%7Cc%7C547419126947%7Ce%7Cinstagram%20c%7C&placement=&creative=547419126947&keyword=instagram%20c&partner_id=googlesem&extra_2=campaignid%3D13530338586%26adgroupid%3D126262419014%26matchtype%3De%26network%3Dg%26source%3Dnotmobile%26search_or_content%3Ds%26device%3Dc%26devicemodel%3D%26adposition%3D%26target%3D%26targetid%3Dkwd-1321618852491%26loc_physical_ms%3D1009871%26loc_interest_ms%3D%26feeditemid%3D%26param1%3D%26param2%3D&gclid=Cj0KCQjw4bipBhCyARIsAFsieCzO1fXhuLRPDEAGdXczBmRho7JRP024oU5erYHQdsrNWCqqXtJj4JgaAnQ8EALw_wcB"><i class="fa fa-instagram"></i></a>
+                            <a href="https://twitter.com/?lang=ko"><i class="fa fa-twitter"></i></a>
+                            <a href="https://www.pinterest.co.kr/"><i class="fa fa-pinterest"></i></a>
                         </div>
                     </div>
                 </div>

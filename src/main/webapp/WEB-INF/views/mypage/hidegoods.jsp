@@ -20,17 +20,32 @@
 <!-- Core theme CSS (includes Bootstrap)-->
 
 
-<script src="${pageContext.request.contextPath}/resources/js/orderstatus.js"></script>
-<link href="${pageContext.request.contextPath}/resources/css/orderstatus.css" rel='stylesheet' type='text/css'>
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/resources/css/bootstrap.min.css"
+	type="text/css">
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/resources/css/font-awesome.min.css"
+	type="text/css">
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/resources/css/style.css"
+	type="text/css">
+<script
+	src="${pageContext.request.contextPath}/resources/js/orderstatus.js"></script>
+<link
+	href="${pageContext.request.contextPath}/resources/css/orderstatus.css"
+	rel='stylesheet' type='text/css'>
 <link href="${pageContext.request.contextPath}/resources/css/mypage/mygoods.css" rel='stylesheet' type='text/css'>
 </head>
 
+
 <body>
-	<!-- Section-->
+	<header>
+		<jsp:include page="/WEB-INF/views/header.jsp"></jsp:include>
+	</header>
 	<div class="searchWord">
 		<form
 			action="${pageContext.request.contextPath}/mypage/goods/hide" method="get">
-			<input type="search" name="searchWord"> <input class="btn" type="submit" value="검색">
+			<input type="search" name="searchWord"> <input class="btn1" type="submit" value="검색">
 		</form>
 	</div>
 
@@ -75,7 +90,7 @@
 							<!-- Product actions-->
 							<div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
 								<div class="text-center">
-									<a class="btn btn-outline-dark mt-auto"
+									<a class="btn1 btn-outline-dark mt-auto"
 										href="${pageContext.request.contextPath}/goods/get?goodsId=${myGoodsInfo.goodsId}">상품이동</a>
 								</div>
 							</div>
@@ -121,6 +136,18 @@
 		</c:choose>
 	</div>
 
+		</div>
+	<!-- Footer Section Begin -->
+	<footer>
+		<jsp:include page="/WEB-INF/views/footer.jsp"></jsp:include>
+	</footer>
+	<!-- Footer Section End -->
+
+
+	<!-- Js Plugins -->
+	<script
+		src="${pageContext.request.contextPath}/resources/js/bootstrap.min.js"></script>
+	<script src="${pageContext.request.contextPath}/resources/js/main.js"></script>
 	<!-- Bootstrap core JS-->
 	<script
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>

@@ -10,7 +10,6 @@
 <head>
 <meta charset="UTF-8">
 <title>안전거래 상세조회</title>
-
 </head>
 <body>
 

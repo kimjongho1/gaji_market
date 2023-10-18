@@ -45,7 +45,7 @@ textarea {
 }
 
 /* 버튼 스타일링 */
-button[type="submit"] {
+button{
     background-color: #007bff;
     color: #fff;
     border: none;
@@ -54,6 +54,6 @@ button[type="submit"] {
     cursor: pointer;
 }
 
-button[type="submit"]:hover {
+button:hover {
     background-color: #0056b3;
 }
