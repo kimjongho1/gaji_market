@@ -10817,7 +10817,10 @@ cursor: pointer;
   	position:relative;
   	top:10px;
   }
-
+.fa-heart,.fa-shopping-bag{
+	position:relative;
+	top:0px;		
+}
 .month5Price,
 .textStyle {
     font-size: 1.5rem

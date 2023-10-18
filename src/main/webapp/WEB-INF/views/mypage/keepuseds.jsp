@@ -10,7 +10,6 @@
 	content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 <meta name="description" content="" />
 <meta name="author" content="" />
-<title>찜 상품</title>
 <!-- Favicon-->
 <!--         <link rel="icon" type="image/x-icon" href="assets/favicon.ico" /> -->
 <!-- Bootstrap icons-->
@@ -20,19 +19,36 @@
 <!-- Core theme CSS (includes Bootstrap)-->
 
 
-<script src="${pageContext.request.contextPath}/resources/js/orderstatus.js"></script>
-<link href="${pageContext.request.contextPath}/resources/css/orderstatus.css" rel='stylesheet' type='text/css'>
-<link href="${pageContext.request.contextPath}/resources/css/mypage/keepusers.css" rel='stylesheet' type='text/css'>
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/resources/css/bootstrap.min.css"
+	type="text/css">
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/resources/css/font-awesome.min.css"
+	type="text/css">
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/resources/css/style.css"
+	type="text/css">
+<script
+	src="${pageContext.request.contextPath}/resources/js/orderstatus.js"></script>
+<link
+	href="${pageContext.request.contextPath}/resources/css/orderstatus.css"
+	rel='stylesheet' type='text/css'>
+<link href="${pageContext.request.contextPath}/resources/css/mypage/mygoods.css" rel='stylesheet' type='text/css'>
 </head>
 
+
 <body>
-	
-	<h1 id="title">찜 목록</h1>
+	<header>
+		<jsp:include page="/WEB-INF/views/header.jsp"></jsp:include>
+	</header>
+<div style="text-align: center">
+    <h1>찜 목록</h1>
+  </div>
 	<!-- Section-->
 	<div class="searchWord">
 		<form
 			action="${pageContext.request.contextPath}/mypage/keepuseds" method="get">
-			<input type="search" name="searchWord"> <input class="btn" type="submit" value="검색">
+			<input type="search" name="searchWord" placeholder="제목 검색"> <input class="btn" type="submit" value="검색">
 		</form>
 	</div>
 
@@ -54,7 +70,7 @@
 							</div>
 							<!-- Product image-->
 							<img class="card-img-top"
-								src="${myGoodsInfo.url}" alt="..." width="268" height="179"/>
+								src="${myGoodsInfo.url}" alt="사진없음" width="268" height="179"/>
 							<!-- Product details-->
 							<div class="card-body p-4">
 								<div class="text-center">
@@ -75,7 +91,7 @@
 							<!-- Product actions-->
 							<div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
 								<div class="text-center">
-									<a class="btn btn-outline-dark mt-auto"
+									<a class="btn1 btn-outline-dark mt-auto"
 										href="${pageContext.request.contextPath}/goods/get?goodsId=${myGoodsInfo.goodsId}">상품이동</a>
 								</div>
 							</div>
@@ -92,7 +108,7 @@
 				<c:if test="${startPageNum!=1}">
 					<%--페이징 이전,번호,다음에 대한 코드 --%>
 					<a
-						href="<%=request.getContextPath()%>/mypage/keepuseds?currentPage=${startPageNum-1}&searchWord=${searchWord}">이전</a>
+						href="<%=request.getContextPath()%>/mypage/keepuseds?currentPage=${startPageNum-1}&searchWord=${searchWord}"><span>이전</span></a>
 				</c:if>
 				<c:forEach begin="${startPageNum}" end="${endPageNum}" var="i">
 					<a
@@ -100,13 +116,13 @@
 				</c:forEach>
 				<c:if test="${endPageNum<totalPageNum}">
 					<a
-						href="<%=request.getContextPath()%>/mypage/keepuseds?currentPage=${endPageNum+1}&searchWord=${searchWord}">다음</a>
+						href="<%=request.getContextPath()%>/mypage/keepuseds?currentPage=${endPageNum+1}&searchWord=${searchWord}"><span>다음</span></a>
 				</c:if>
 			</c:when>
 			<c:otherwise>
 				<c:if test="${startPageNum!=1}">
 					<a
-						href="<%=request.getContextPath()%>/mypage/keepuseds?currentPage=${startPageNum-1}">이전</a>
+						href="<%=request.getContextPath()%>/mypage/keepuseds?currentPage=${startPageNum-1}"><span>이전</span></a>
 				</c:if>
 				<c:forEach begin="${startPageNum}" end="${endPageNum}" var="i">
 					<a
@@ -115,12 +131,22 @@
 				</c:forEach>
 				<c:if test="${endPageNum<totalPageNum}">
 					<a
-						href="<%=request.getContextPath()%>/mypage/keepuseds?currentPage=${endPageNum+1}">다음</a>
+						href="<%=request.getContextPath()%>/mypage/keepuseds?currentPage=${endPageNum+1}"><span>다음</span></a>
 				</c:if>
 			</c:otherwise>
 		</c:choose>
 	</div>
+<!-- Footer Section Begin -->
+	<footer>
+		<jsp:include page="/WEB-INF/views/footer.jsp"></jsp:include>
+	</footer>
+	<!-- Footer Section End -->
 
+
+	<!-- Js Plugins -->
+	<script
+		src="${pageContext.request.contextPath}/resources/js/bootstrap.min.js"></script>
+	<script src="${pageContext.request.contextPath}/resources/js/main.js"></script>
 	<!-- Bootstrap core JS-->
 	<script
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>

@@ -111,7 +111,7 @@
 				<c:if test="${startPageNum!=1}">
 					<%--페이징 이전,번호,다음에 대한 코드 --%>
 					<a
-						href="<%=request.getContextPath()%>/mypage/salestatus/safe?currentPage=${startPageNum-1}&searchWord=${searchWord}">이전</a>
+						href="<%=request.getContextPath()%>/mypage/salestatus/safe?currentPage=${startPageNum-1}&searchWord=${searchWord}"><span>이전</span></a>
 				</c:if>
 				<c:forEach begin="${startPageNum}" end="${endPageNum}" var="i">
 					<a
@@ -119,13 +119,13 @@
 				</c:forEach>
 				<c:if test="${endPageNum<totalPageNum}">
 					<a
-						href="<%=request.getContextPath()%>/mypage/salestatus/safe?currentPage=${endPageNum+1}&searchWord=${searchWord}">다음</a>
+						href="<%=request.getContextPath()%>/mypage/salestatus/safe?currentPage=${endPageNum+1}&searchWord=${searchWord}"><span>다음</span></a>
 				</c:if>
 			</c:when>
 			<c:otherwise>
 				<c:if test="${startPageNum!=1}">
 					<a
-						href="<%=request.getContextPath()%>/mypage/salestatus/safe?currentPage=${startPageNum-1}">이전</a>
+						href="<%=request.getContextPath()%>/mypage/salestatus/safe?currentPage=${startPageNum-1}"><span>이전</span></a>
 				</c:if>
 				<c:forEach begin="${startPageNum}" end="${endPageNum}" var="i">
 					<a
@@ -134,7 +134,7 @@
 				</c:forEach>
 				<c:if test="${endPageNum<totalPageNum}">
 					<a
-						href="<%=request.getContextPath()%>/mypage/salestatus/safe?currentPage=${endPageNum+1}">다음</a>
+						href="<%=request.getContextPath()%>/mypage/salestatus/safe?currentPage=${endPageNum+1}"><span>다음</span></a>
 				</c:if>
 			</c:otherwise>
 		</c:choose>
