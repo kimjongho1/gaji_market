@@ -108,12 +108,10 @@
 					// 현제 접속 된 계정
 					var username = "${username}";
 					// socket들을 담을 객체 생성
-					const websocketConnections = {};
 					var endPoint = "${pageContext.request.contextPath}/chat";
 					// socket 생성
 					function createWebSocketConnection(person) {
 						var ws = new SockJS(endPoint);
-						websocketConnections.person = ws;
 						var stomp = Stomp.over(ws);
 						
 						stomp.connect({}, function(frame) {
@@ -142,15 +140,14 @@
 							}
 							// 메시지 내용 message 변수에 저장
 							const message = $("#msg").val().trim();
-							sendChat();
-							function sendChat(){
-								stomp.send("/pub/send/", {},
-										JSON.stringify({
-											'senderId':username,
-											"chatNo": chatId,
-											'msg':message
-										}))
-									console.log("보내짐");
+							
+							if (message !== "") {
+							stomp.send("/pub/chat/send", {							}, JSON.stringify({
+										'senderId':username,
+										'chatNo': chatId,
+										'message':message
+									}))
+								console.log("보내짐");
 							}
 							
 						/* 	$.ajax({
@@ -173,8 +170,6 @@
 							if (message === "") {
 								return;
 							}
-
-							websocketConnections.person.send(message);
 
 							const messageElement = document.createElement('div');
 							messageElement.className = 'bubble me';
