@@ -129,17 +129,18 @@
 	</select>
 	
 	<select id="userGoodsList" parameterType="_int" resultType="GoodsInfoDto"> <!-- 해당 글의 작성자의 상품리스트 -->
-		SELECT g.goods_id, g.title, gf.url, g.price
+		SELECT g.goods_id, g.title, (SELECT gf.url FROM goods_file gf WHERE gf.goods_id = g.goods_id AND ROWNUM = 1) AS url, g.price
 		FROM goods g
-		LEFT JOIN goods_file gf ON g.goods_id = gf.goods_id
-		WHERE g.user_id = (SELECT user_id FROM goods WHERE goods_id = #{goodsID})
+		WHERE g.goods_id = #{goodsId}
 	</select>
 
 	<update id="updateViewCount" parameterType="_int"> <!-- 상품글 조회수 +1 -->
 		update goods set view_count=view_count+1 where goods_id = #{goodsId}
 	</update>
 
-
+	<select id="checkWiskList" parameterType="map" resultType="WishListDto">
+		select GOODS_ID, USER_ID, CREATED_AT from wishlist where user_id = #{userId} and goods_id = #{goodsId}
+	</select>
 
 	<update id="updateStatus" parameterType="map"> <!-- 23P 상품상태변경 -->
 		update goods set status=#{status} where goods_id=#{goodsId}

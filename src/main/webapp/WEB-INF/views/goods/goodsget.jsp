@@ -323,7 +323,7 @@
 											style="width: 117px; margin-right: 4px;">
 											<a
 												class="group box-border overflow-hidden flex rounded-md cursor-pointer bg-white pe-0 md:pb-1 flex-col items-start"
-												title="${userGoods.title}" href="${pageContext.request.contextPath}/goods/get?goodsId=${goodsDto.categoryId}"><div
+												title="${userGoods.title}" href="${pageContext.request.contextPath}/goods/get?goodsId=${userGoods.goodsId}"><div
 													class="relative w-full rounded-md overflow-hidden pt-[100%] mb-3 pb-0">
 													<img alt="${userGoods.title}" referrerpolicy="no-referrer"
 														src="${userGoods.url}"
@@ -485,7 +485,7 @@
 	
 	
 $("#wishButton").click(function() {
-    var goodsId = $(this).data("goodsId");
+    var goodsId = ${goodsDto.goodsId};
     var userId = "사용자의 ID"; // 로그인된 사용자의 ID 또는 세션에서 가져온 ID
 
     $.ajax({
@@ -511,7 +511,7 @@ $("#wishButton").click(function() {
 });
 //찜 여부 확인 및 버튼 초기화
 function checkWishlist() {
-    var goodsId = "상품의 ID"; // 해당 상품의 ID
+    var goodsId = ${goodsDto.goodsId}; // 해당 상품의 ID
     var userId = "사용자의 ID"; // 로그인된 사용자의 ID 또는 세션에서 가져온 ID
 
     // AJAX 요청 설정
