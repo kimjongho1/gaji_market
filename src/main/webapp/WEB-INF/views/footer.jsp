@@ -7,7 +7,7 @@
     <div width="1200px" class="">
         <button type="button" id="btn_top" class="cxRRkY btn_top_animation">
             
-            <img src="#" alt="TOP" loading="eager" width="68" height="68">
+            <img src="${pageContext.request.contextPath}/resources/img/gaji_logo.png" alt="TOP" loading="eager" width="68" height="68">
         </button>
 
         <div class="container">

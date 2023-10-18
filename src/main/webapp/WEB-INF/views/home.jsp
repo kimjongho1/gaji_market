@@ -60,6 +60,73 @@
                     </div> 
 			</section> 
 
+	<!-- banner -->
+	<section>
+	
+
+<div class="swiper">
+    
+    <!-- swiper slides -->
+    <div class="swiper-wrapper">
+        <div class="swiper-slide">
+            <img src="https://source.unsplash.com/random?sig=24">
+        </div>
+        
+        <div class="swiper-slide"> 
+            <img src="https://source.unsplash.com/random?sig=53">
+        </div>
+        
+        <div class="swiper-slide">
+            <img src="https://source.unsplash.com/random?sig=52">
+        </div>
+        
+        <div class="swiper-slide">
+            <img src="https://source.unsplash.com/random?sig=21">
+        </div>
+        
+        <div class="swiper-slide">
+            <img src="https://source.unsplash.com/random?sig=53">
+        </div>
+        
+        <div class="swiper-slide">
+            <img src="https://source.unsplash.com/random?sig=57">
+        </div>
+        
+        <div class="swiper-slide">
+            <img src="https://source.unsplash.com/random?sig=26">
+        </div>
+        
+        <div class="swiper-slide">
+            <img src="https://source.unsplash.com/random?sig=29">
+        </div>
+        
+        <div class="swiper-slide">
+            <img src="https://source.unsplash.com/random?sig=30">
+        </div>
+        
+        <div class="swiper-slide">
+            <img src="https://source.unsplash.com/random?sig=35">
+        </div>
+        
+        <div class="swiper-slide">
+            <img src="https://source.unsplash.com/random?sig=31">
+        </div>
+    </div>
+    <!-- !swiper slides -->
+    
+    <!-- next / prev arrows -->
+    <div class="swiper-button-next"></div>
+    <div class="swiper-button-prev"></div>
+    <!-- !next / prev arrows -->
+    
+    <!-- pagination dots -->
+    <div class="swiper-pagination"></div>
+    <!-- !pagination dots -->
+</div>
+	
+	</section>
+
+
     <!-- Latest Product Section Begin -->
     <section class="latest-product spad">
         <div class="container">
