@@ -254,7 +254,7 @@ public class GoodsController {
 			totalCnt= (int)map.get("totalCnt");
 			model.addAttribute("searchWord",searchWord);
 		}
-		int totalPageNum = totalCnt/PAGESIZE + (totalCnt%pageSize1 == 0 ? 0 : 1);
+		int totalPageNum = totalCnt/pageSize1 + (totalCnt%pageSize1 == 0 ? 0 : 1);
 		int startPageNum = 1;
 		if((currentPage%PAGEBLOCKSIZE) == 0) {
 			startPageNum = ((currentPage/PAGEBLOCKSIZE)-1)*PAGEBLOCKSIZE +1;
@@ -267,7 +267,8 @@ public class GoodsController {
 		model.addAttribute("endPageNum", endPageNum);
 		model.addAttribute("currentPage", currentPage);
 		model.addAttribute("myGoodsList",myGoodsList);
-		return "mypage/onsalegoods";
+		model.addAttribute("userId",userId);
+		return "goods/usergoods";
 	}
 
 //	@GetMapping("/get/map")

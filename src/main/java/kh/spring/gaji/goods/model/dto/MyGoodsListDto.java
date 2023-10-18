@@ -14,5 +14,6 @@ public class MyGoodsListDto {
     private String dongName;
     private String nickname;
     private String refreshedAt;
+    private String createdAt;
     private String url;
 }

@@ -15,7 +15,8 @@
 	href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css"
 	rel="stylesheet" />
 <!-- Core theme CSS (includes Bootstrap)-->
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/locale/ko.js"></script>
 
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/css/bootstrap.min.css"
@@ -44,15 +45,10 @@
   	</div>
 	<div class="searchWord">
 		<form
-			action="${pageContext.request.contextPath}/mypage/goods/onsale" method="get">
+			action="${pageContext.request.contextPath}/goods/usergoods" method="get">
+			<input type="hidden" name="userId" value="${userId}"> 
 			<input type="search" name="searchWord" placeholder="제목 검색"> <input class="btn1" type="submit" value="검색">
 		</form>
-	</div>
-
-	<div class="buttons-container text-center margin10">
-		<a class="btn safeTrading" href="${pageContext.request.contextPath}/mypage/goods/onsale">판매중</a>
-		<a class="btn infaceTrading" href="${pageContext.request.contextPath}/mypage/goods/closed">판매완료</a>
-		<a class="btn infaceTrading" href="${pageContext.request.contextPath}/mypage/goods/hide">숨김</a>
 	</div>
 
 	<section class="py-1">
@@ -84,7 +80,13 @@
 </svg>+${myGoodsInfo.wishCount}
                                     </div>
 									<!-- Product price-->
-									끌올일자:${myGoodsInfo.refreshedAt}<br>
+									끌올:
+									<script>
+                                   var createdAt = "${myGoodsInfo.refreshedAt}";
+                                   var formattedPastDate = moment(createdAt).fromNow();
+                                   document.write(formattedPastDate); 
+                               		</script>
+									<br>
                                     가격:${myGoodsInfo.price}<br>
                                     ${myGoodsInfo.dongName} 조회수:${myGoodsInfo.viewCount}<br>
                                     판매자:${myGoodsInfo.nickname}
@@ -110,30 +112,30 @@
 				<c:if test="${startPageNum!=1}">
 					<%--페이징 이전,번호,다음에 대한 코드 --%>
 					<a
-						href="<%=request.getContextPath()%>/mypage/goods/onsale?currentPage=${startPageNum-1}&searchWord=${searchWord}"><span>이전</span></a>
+						href="<%=request.getContextPath()%>/goods/usergoods?currentPage=${startPageNum-1}&searchWord=${searchWord}&userId=${userId}"><span>이전</span></a>
 				</c:if>
 				<c:forEach begin="${startPageNum}" end="${endPageNum}" var="i">
 					<a
-						href="<%=request.getContextPath()%>/mypage/goods/onsale?currentPage=${i}&searchWord=${searchWord}"><span>${i}</span></a>
+						href="<%=request.getContextPath()%>/goods/usergoods?currentPage=${i}&searchWord=${searchWord}&userId=${userId}"><span>${i}</span></a>
 				</c:forEach>
 				<c:if test="${endPageNum<totalPageNum}">
 					<a
-						href="<%=request.getContextPath()%>/mypage/goods/onsale?currentPage=${endPageNum+1}&searchWord=${searchWord}"><span>다음</span></a>
+						href="<%=request.getContextPath()%>/goods/usergoods?currentPage=${endPageNum+1}&searchWord=${searchWord}&userId=${userId}"><span>다음</span></a>
 				</c:if>
 			</c:when>
 			<c:otherwise>
 				<c:if test="${startPageNum!=1}">
 					<a
-						href="<%=request.getContextPath()%>/mypage/goods/onsale?currentPage=${startPageNum-1}"><span>이전</span></a>
+						href="<%=request.getContextPath()%>/goods/usergoods?currentPage=${startPageNum-1}&userId=${userId}"><span>이전</span></a>
 				</c:if>
 				<c:forEach begin="${startPageNum}" end="${endPageNum}" var="i">
 					<a
-						href="<%=request.getContextPath()%>/mypage/goods/onsale?currentPage=${i}"><span>${i}
+						href="<%=request.getContextPath()%>/goods/usergoods?currentPage=${i}&userId=${userId}"><span>${i}
 					</span></a>
 				</c:forEach>
 				<c:if test="${endPageNum<totalPageNum}">
 					<a
-						href="<%=request.getContextPath()%>/mypage/goods/onsale?currentPage=${endPageNum+1}"><span>다음</span></a>
+						href="<%=request.getContextPath()%>/goods/usergoods?currentPage=${endPageNum+1}&userId=${userId}"><span>다음</span></a>
 				</c:if>
 			</c:otherwise>
 		</c:choose>

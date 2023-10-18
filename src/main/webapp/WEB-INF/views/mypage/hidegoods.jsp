@@ -2,6 +2,8 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/locale/ko.js"></script>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -84,7 +86,18 @@
 </svg>+${myGoodsInfo.wishCount}
                                     </div>
 									<!-- Product price-->
-									끌올일자:${myGoodsInfo.refreshedAt}<br>
+									끌올:
+								   <script>
+                                   var refreshedAt = "${myGoodsInfo.refreshedAt}";
+                                   var formattedPastDate = moment(refreshedAt).fromNow();
+                                   document.write(formattedPastDate); 
+                               	   </script><br>
+									작성일:
+								   <script>
+                                   var createdAt = "${myGoodsInfo.createdAt}";
+                                   var formattedPastDate = moment(createdAt).fromNow();
+                                   document.write(formattedPastDate); 
+                               	   </script><br>
                                     가격:${myGoodsInfo.price}<br>
                                     ${myGoodsInfo.dongName} 조회수:${myGoodsInfo.viewCount}<br>
                                     판매자:${myGoodsInfo.nickname}
