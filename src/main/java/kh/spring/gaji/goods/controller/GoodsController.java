@@ -200,8 +200,9 @@ public class GoodsController {
 		System.out.println("getBoard진입확인");
 		mv.setViewName("goods/goodsget");
 		mv.addObject("goodsDto",goodsService.getGoodsInfo(goodsId)); //상품글 정보와 해당 상품 등록한 사용자의 정보
-		mv.addObject("userInfo",goodsService.goodsUserInfo(goodsId));
-		mv.addObject("userGoodsList", goodsService.userGoodsList(goodsId));
+		mv.addObject("goodsUrl",goodsService.goodsUrl(goodsId)); // 상품 url값만 리스트형태로
+		mv.addObject("goodsUserInfo",goodsService.goodsUserInfo(goodsId)); // 상품 등록한 사용자의 후기 수 안전거래 횟수 상품 수
+		mv.addObject("userGoodsList", goodsService.userGoodsList(goodsId)); // 해당 상품 등록자의 상품 리스트
 		goodsService.updateViewCount(goodsId);
 		return mv;
 	}

@@ -101,30 +101,38 @@
 	<select id="getGoodsInfo" parameterType="_int" resultType="GoodsInfoDto"> <!--23P 상품글 상세조회 -->
 		select
 		goods_id,user_id,category_id,category_name,title,status,price,view_count,description,g.created_at,safe_trading_yn
-		,g.dong_id,lat,lng,nickname,rating_score, (select count(user_id) from
-		wishlist w where w.goods_id = g.goods_id) wishcount
+		,g.dong_id,lat,lng,nickname,rating_score,
+		 (select count(user_id) from wishlist w where w.goods_id = g.goods_id) wishcount
 		from goods g join
 		users u using (user_id)
 		JOIN CATEGORY c USING (category_id)
 		where goods_id=#{goodsId} and
 		active_status='Y'and status != 4
 	</select>
+	
+	<select id="goodsUserInfo" parameterType="_int" resultType="GoodsInfoDto"> <!-- 해당 상품작성자의 후기수, 안전거래횟수, 판매상품수 -->
+		select 
+   	 (SELECT COUNT(dr.goods_id) FROM deal_review dr WHERE dr.user_id = g.user_id) reviewcount,
+   	 (SELECT COUNT(*) FROM safe_trading st WHERE st.goods_id IN (SELECT goods_id
+   	 FROM goods WHERE user_id = g.user_id)) safetradecount,
+   	 (select Count(goods_id) from goods where user_id = g.user_id) sellgoods
+   	 from goods g
+   	 join users u on u.user_id = g.user_id
+    where g.goods_id = #{goodsId}
+	</select>
 
-
-	<select id="goodsUserInfo" parameterType="_int" resultType="GoodsInfoDto"> <!-- 상품 이미지 swiper적용할부분과 후기 , 판매상품갯수, 안전거래횟수 -->
-		SELECT url,
-		(SELECT COUNT(dr.goods_id) FROM deal_review dr WHERE dr.user_id = g.user_id) reviewcount,
-		(SELECT COUNT(*) FROM safe_trading st WHERE st.goods_id IN (SELECT goods_id
-		FROM goods WHERE user_id = g.user_id)) safetradecount ,
-		(select Count(goods_id) from goods where u.user_id = g.user_id) sellgoods
+	<select id="goodsUrl" parameterType="_int" resultType="GoodsInfoDto"> <!-- 상품 이미지 swiper적용할부분과 후기 , 판매상품갯수, 안전거래횟수 -->
+		SELECT url
 		FROM goods g
 		JOIN goods_file gf ON g.goods_id = gf.goods_id
-		JOIN users u ON g.user_id = u.user_id
 		WHERE g.goods_id = #{goodsId}
 	</select>
 	
 	<select id="userGoodsList" parameterType="_int" resultType="GoodsInfoDto"> <!-- 해당 글의 작성자의 상품리스트 -->
-		SELECT url, price, TITLE, g.USER_ID  FROM USERS u JOIN GOODS g ON g.USER_ID = u.USER_ID JOIN GOODS_FILE gf ON g.GOODS_ID = gf.GOODS_ID WHERE g.GOODS_ID  = ${goodsId}
+		SELECT g.goods_id, g.title, gf.url, g.price
+		FROM goods g
+		LEFT JOIN goods_file gf ON g.goods_id = gf.goods_id
+		WHERE g.user_id = (SELECT user_id FROM goods WHERE goods_id = #{goodsID})
 	</select>
 
 	<update id="updateViewCount" parameterType="_int"> <!-- 상품글 조회수 +1 -->

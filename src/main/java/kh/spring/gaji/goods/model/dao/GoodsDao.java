@@ -54,9 +54,14 @@ public class GoodsDao  {
         return sqlSession.selectOne("goods.getGoodsInfo", goodsId);
     }
     
-    public List<GoodsInfoDto> goodsUserInfo(int goodsId) { // 상품글 사진 url, 상품후기, 판매상품개수, 안전거래횟수
-    	return sqlSession.selectList("goods.goodsUserInfo", goodsId);
+    public List<GoodsInfoDto> goodsUrl(int goodsId) { // 상품글 사진 url
+    	return sqlSession.selectList("goods.goodsUrl", goodsId);
     }
+    
+    public GoodsInfoDto goodsUserInfo(int goodsId) { // 상품글 작성자의 후기 안전거래횟수 상풍개수
+    	return sqlSession.selectOne("goods.goodsUserInfo",goodsId);
+    }
+    
     
     public List<GoodsInfoDto> userGoodsList(int goodsId) { // 등록한 사용자의 상품리스트
     	return sqlSession.selectList("goods.userGoodsList", goodsId);

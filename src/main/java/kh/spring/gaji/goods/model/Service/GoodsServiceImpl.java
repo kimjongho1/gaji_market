@@ -32,7 +32,12 @@ public class GoodsServiceImpl implements GoodsService {
 	}
 	
 	@Override
-	public List<GoodsInfoDto> goodsUserInfo(int goodsId) {
+	public List<GoodsInfoDto> goodsUrl(int goodsId) {
+		return goodsDao.goodsUrl(goodsId);
+	}
+	
+	@Override
+	public GoodsInfoDto goodsUserInfo(int goodsId) {
 		return goodsDao.goodsUserInfo(goodsId);
 	}
 	
@@ -90,4 +95,6 @@ public class GoodsServiceImpl implements GoodsService {
 	public List<MainGoodsDto> getMainGoods(int category) {
 		return goodsDao.getMainGoods(category);
 	}
+
+	
 }

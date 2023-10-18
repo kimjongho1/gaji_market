@@ -13,9 +13,11 @@ public interface GoodsService {
 
     GoodsInfoDto getGoodsInfo(int goodsId);
     
-    List<GoodsInfoDto> goodsUserInfo(int goodsID);
+    List<GoodsInfoDto> goodsUrl(int goodsID);
     
     List<GoodsInfoDto> userGoodsList(int goodsId);
+    
+    GoodsInfoDto goodsUserInfo(int goodsId);
     
     Map<String,Object> getGoodsList(int currentPage,int PAGESIZE,int sort,int priceCeiling,int category,int dongId,String searchWord);
 

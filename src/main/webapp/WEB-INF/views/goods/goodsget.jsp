@@ -7,6 +7,8 @@
 <meta charset="UTF-8">
 <title>중고 게시판 상세보기</title>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/locale/ko.js"></script>
 	<!-- Swiper -->
 
 <link rel="stylesheet"
@@ -67,22 +69,22 @@
 							style="transform: translate3d(0px, 0px, 0px);">
 							<div class="swiper-slide swiper-slide-active"
 								style="width: 612px;">
-								<c:set var="firstUserInfo" value="${userInfo[0]}" />
+								<c:set var="firstgoodsUrl" value="${goodsUrl[0]}" />
 								<div
 									class="col-span-1 transition duration-150 ease-in hover:opacity-90 w-full relative pt-[100%]">
 									<img alt="${goodsDto.title }" referrerpolicy="no-referrer"
-										src="${firstUserInfo.url}"
+										src="${firstgoodsUrl.url}"
 										decoding="async" data-nimg="fill"
 										class="object-cover w-full h-full rounded-lg top-1/2 left-1/2"
 										loading="lazy"
 										style="position: absolute; height: 100%; width: 100%; inset: 0px; color: transparent;">
 								</div>
 							</div>
-							<c:forEach var="user" items="${userInfo}" varStatus="loop">
+							<c:forEach var="url" items="${goodsUrl}" varStatus="loop">
         					<c:if test="${loop.index > 0}">
 							<div class="swiper-slide swiper-slide-next" style="width: 612px;">
 								<div class="col-span-1 transition duration-150 ease-in hover:opacity-90 w-full relative pt-[100%]">
-									<img alt="${goodsDto.title }" referrerpolicy="no-referrer" src="${user.url }" decoding="async" data-nimg="fill" class="object-cover w-full h-full rounded-lg top-1/2 left-1/2" loading="lazy" style="position: absolute; height: 100%; width: 100%; inset: 0px; color: transparent;">
+									<img alt="${goodsDto.title }" referrerpolicy="no-referrer" src="${url.url }" decoding="async" data-nimg="fill" class="object-cover w-full h-full rounded-lg top-1/2 left-1/2" loading="lazy" style="position: absolute; height: 100%; width: 100%; inset: 0px; color: transparent;">
 								</div>
 							</div>
 							 </c:if>
@@ -138,7 +140,7 @@
 					<div class="pb-5 border-b border-gray-300">
 						<h1
 							class="flex justify-between mb-1 text-lg font-bold align-middle text-heading lg:text-xl 2xl:text-2xl hover:text-black">
-							조경수 산사나무
+							${goodsDto.title}
 
 							<div>
 								<button class="fa fa-heart" id="wishButton"></button>
@@ -165,7 +167,13 @@
 					<div class="py-4 border-b border-gray-300 space-s-4">
 						<div class="pb-1 space-y-5 text-sm">
 							<div class="flex justify-between text-body">
-								<span>4일 전 · 조회 ${goodsDto.viewCount} · 찜 ${goodsDto.wishcount}</span><a href="https://thecheat.co.kr/"><div
+							
+								<span><script>
+                                   var createdAt = "${goodsDto.createdAt}";
+                                   var formattedPastDate = moment(createdAt).fromNow();
+                                   document.write(formattedPastDate); 
+                               </script>
+								· 조회 ${goodsDto.viewCount} · 찜 ${goodsDto.wishcount}</span><a href="https://thecheat.co.kr/"><div
 										class="flex items-center hover:text-gray-400">
 										<svg stroke="currentColor" fill="currentColor"
 											stroke-width="0" viewBox="0 0 16 16" height="1em" width="1em"
@@ -277,9 +285,7 @@
 							고객센터로 신고해주시기 바랍니다.</span>
 					</div>
 					<article>
-						<p
-							class="px-4 py-10 break-words break-all whitespace-pre-line lg:py-2">산사나무
-							20년생 필요하신분 그냥 드립니다. 필요 하신분 연락주세요 홍천군 영귀미면 입니다.</p>
+						<p class="px-4 py-10 break-words break-all whitespace-pre-line lg:py-2"></p>
 					</article>
 				</div>
 				<div name="product-store"
@@ -288,7 +294,7 @@
 						<div class="flex w-full flex-col justify-around lg:ml-4">
 							<a class="font-semibold text-base text-jnblack" href="/store/7579731">${goodsDto.nickname}</a>
 							
-							<span class="font-medium text-sm flex text-jnGray-500">판매상품 ${firstUserInfo.sellgoods} · 안전거래 ${firstUserInfo.safetradecount} · 후기 ${firstUserInfo.reviewcount}</span>
+							<span class="font-medium text-sm flex text-jnGray-500">판매상품 ${goodsUserInfo.sellgoods} · 안전거래 ${goodsUserInfo.safetradecount} · 후기 ${goodsUserInfo.reviewcount}</span>
 						</div>
 						<a class="flex items-center translate-x-4" href="/store/7579731"><img
 							alt="프로파일"
@@ -310,7 +316,7 @@
 							<div class="flex items-center justify-between w-full mb-4">
 								<p
 									class="font-semibold text-lg text-jnblack [&amp;>span]:text-jnGreen">
-									${goodsDto.nickname} <span>${firstUserInfo.sellgoods}</span>
+									${goodsDto.nickname} <span>${goodsUserInfo.sellgoods}</span>
 								</p>
 								<a class="text-sm font-medium text-gray-600"
 									href="/store/7579731">더 보기 &gt;</a> <!-- 해당 유저의 상품 모아보기 -->
@@ -321,27 +327,28 @@
 									dir="ltr">
 									<div class="swiper-wrapper"
 										style="transform: translate3d(0px, 0px, 0px);">
+										<c:forEach items="${userGoodsList}" var="userGoods"  begin="0" end="3">
 										<div class="card"
 											style="width: 117px; margin-right: 4px;">
 											<a
 												class="group box-border overflow-hidden flex rounded-md cursor-pointer bg-white pe-0 md:pb-1 flex-col items-start"
-												title="조경수 산사나무" href="/product/133947645"><div
+												title="${userGoods.title}" href="${pageContext.request.contextPath}/goods/get?goodsId=${goodsDto.categoryId}"><div
 													class="relative w-full rounded-md overflow-hidden pt-[100%] mb-3 pb-0">
-													<img alt="조경수 산사나무" referrerpolicy="no-referrer"
-														src="https://img2.joongna.com/media/original/2023/09/29/1695995207352dff_rPg3K.jpg"
+													<img alt="${userGoods.title}" referrerpolicy="no-referrer"
+														src="${userGoods.url}"
 														decoding="async" data-nimg="fill"
 														class="bg-gray-300 object-cover w-full transition duration-200 ease-in rounded-md duration-150 ease-linear transform group-hover:scale-105"
 														loading="lazy"
 														style="position: absolute; height: 100%; width: 100%; inset: 0px; color: transparent;">
 												</div>
 												<div class="w-full overflow-hidden p-2 ps-0">
-													<h2 class="line-clamp-2 text-sm h-10 text-heading">조경수
-														산사나무</h2>
+													<h2 class="line-clamp-2 text-sm h-10 text-heading">${userGoods.title}</h2>
 													<div
-														class="font-semibold space-s-2 mt-0.5 text-heading text-sm">무료나눔</div>
+														class="font-semibold space-s-2 mt-0.5 text-heading text-sm">${userGoods.price}</div>
 												</div></a>
 										</div>
-										<div class="card"
+										</c:forEach>
+										<!-- <div class="card"
 											style="width: 117px; margin-right: 4px;">
 											<a
 												class="group box-border overflow-hidden flex rounded-md cursor-pointer bg-white pe-0 md:pb-1 flex-col items-start"
@@ -382,7 +389,7 @@
 													<div
 														class="font-semibold space-s-2 mt-0.5 text-heading text-sm">25,000원</div>
 												</div></a>
-										</div>
+										</div> -->
 									</div>
 									
 								</div>
@@ -400,7 +407,7 @@
 
 	<!-- Footer Section Begin -->
 	<footer>
-		<%-- <jsp:include page="/WEB-INF/views/footer.jsp"></jsp:include> --%>
+		 <jsp:include page="/WEB-INF/views/footer.jsp"></jsp:include>
 	</footer>
 	<!-- Footer Section End -->
 
@@ -422,21 +429,24 @@
 	console.log(typeof lat); // lat의 타입 확인
 	console.log(typeof lng); // lng의 타입 확인 */
     
+	 var lat = parseFloat("${goodsDto.lat}");
+	 var lng = parseFloat("${goodsDto.lng}");
     
+	 if (lat > -90 && lat < 90 && lng > -180 && lng < 180) {
+	 
 	kakao.maps.load(function() {
-	    var lat = parseFloat("${goodsDto.lat}");
-	    var lng = parseFloat("${goodsDto.lng}");
+	   
 	   /*  var lat = 37.566826; // 위도
 		var lng = 126.978656; // 경도 */
 		
-		if (lat > -90 && lat < 90 && lng > -180 && lng < 180) {
+		
 	        var mapContainer = document.getElementById('kakaoMap'); // 지도를 표시할 div
 	        var mapOption = {
 	            center: new kakao.maps.LatLng(lat, lng), // 지도 중심 좌표
 	            level: 1 // 지도 확대 레벨
 	        };
-	   
-
+		
+	
 	    // 지도를 표시할 div와 지도 옵션으로 지도를 생성
 	    var map = new kakao.maps.Map(mapContainer, mapOption);
 
@@ -452,6 +462,8 @@
 	    // 마커를 지도에 표시
 	    marker.setMap(map);
 	});
+	
+	 }
     </script>
     <script>
   new Swiper('.swiper'
@@ -473,6 +485,17 @@
 			  
 			}	  
   );
+  
+  // JavaScript를 사용하여 이미지가 없을 때 대체 텍스트를 추가
+  var images = document.querySelectorAll(".swiper-slide img");
+  images.forEach(function(image) {
+    image.addEventListener("error", function() {
+      image.style.display = "none"; // 이미지를 숨김
+      var altText = document.createElement("p");
+      altText.textContent = "이미지 없음";
+      image.parentNode.appendChild(altText);
+    });
+  });
   </script>
 <script>
 $("#wishButton").click(function() {
