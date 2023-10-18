@@ -80,9 +80,8 @@
 </svg>+${myGoodsInfo.wishCount}
                                     </div>
 									<!-- Product price-->
-									끌올:
 									<script>
-                                   var createdAt = "${myGoodsInfo.refreshedAt}";
+                                   var createdAt = "${myGoodsInfo.createdAt}";
                                    var formattedPastDate = moment(createdAt).fromNow();
                                    document.write(formattedPastDate); 
                                		</script>

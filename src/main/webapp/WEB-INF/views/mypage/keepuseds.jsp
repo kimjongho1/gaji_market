@@ -85,7 +85,6 @@
 </svg>+${myGoodsInfo.wishCount}
                                     </div>
 									<!-- Product price-->
-									작성일:
 									<script>
                                    var createdAt = "${myGoodsInfo.createdAt}";
                                    var formattedPastDate = moment(createdAt).fromNow();
