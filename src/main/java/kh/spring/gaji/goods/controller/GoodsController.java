@@ -227,6 +227,18 @@ public class GoodsController {
 	    }
 		
 	}
+	
+	@PostMapping("/checkWishlist")
+	@ResponseBody
+	public String checkWiskList(@RequestParam Map<String, String> map) {
+		
+		if (goodsService.checkWiskList(map) != null) {
+	        return "added"; // 찜한 상품임
+	    } else {
+	        return "removed"; // 찜하지 않은 상품임
+	    }
+		
+	}
 
 	
 	@PostMapping("/getdong")
