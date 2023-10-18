@@ -51,4 +51,9 @@ public class HomeController {
 		return "/test";
 	}
 	
+	@GetMapping("/preparing")
+	public String preparing() {
+		return "preparing";
+	}
+	
 }
