@@ -37,13 +37,13 @@
 	</update>
 	
 	<select id="getAmount" parameterType="_int" resultType="_int">	<!-- 결제시 가격확인을 위한 쿼리문 -->
-		select price from goods where goods_id=#{goodsId}
+		select price from goods where goods_id=#{goodsId} and status!=4 and active_status='Y'
 	</select>
 	
 	<select id="getGoodsInfo" parameterType="_int" resultType="GoodsPayInfoDto"> 		<!-- 48P 결제창 들어갈때 가지고 들어갈 상품정보 -->
 		select goods_id, title, price	
 			   from goods
-			   where goods_id=#{goodsId}
+			   where goods_id=#{goodsId} and status!=4 and active_status='Y'
 	</select>
 	
 	<select id="getUserAddressList" parameterType="string" resultType="UserAddressDto">	<!-- 48P 결제창 들어갈때 가지고 들어갈 유저주소들 -->

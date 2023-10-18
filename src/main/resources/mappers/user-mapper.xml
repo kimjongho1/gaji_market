@@ -196,7 +196,7 @@
 	</select>
 	
 	<select id="getKeepUsedTotalCnt" parameterType="string" resultType="_int"> 	<!--찜 목록 가져오기 -->
-		select count(*) from goods where goods_id IN(select goods_id from wishlist where user_id=#{userId}) and status IN(1,2) order by created_at
+		select count(*) from goods where goods_id IN(select goods_id from wishlist where user_id=#{userId}) and status IN(1,2) and active_status='Y' order by created_at
 	</select>
 	
 	<select id="getSearchKeepUsedTotalCnt" parameterType="map" resultType="_int"> 	<!--찜 목록 가져오기 -->
@@ -231,11 +231,11 @@
 	
 	<!--  -->
 	<select id="getKeepUsersTotalCnt" parameterType="string" resultType="_int"> 	<!--모아보기 목록 가져오기 -->
-		select count(*) from goods where user_id IN(select target_id from favorite_user where user_id=#{userId}) and status IN(1,2) order by created_at
+		select count(*) from goods where user_id IN(select target_id from favorite_user where user_id=#{userId}) and status IN(1,2) and active_status='Y' order by created_at
 	</select>
 	
 	<select id="getSearchKeepUsersTotalCnt" parameterType="map" resultType="_int"> 	<!--모아보기 목록 가져오기 -->
-		select count(*) from goods where user_id IN(select target_id from favorite_user where user_id=#{userId}) and title like #{searchWord} and status IN(1,2)
+		select count(*) from goods where user_id IN(select target_id from favorite_user where user_id=#{userId}) and title like #{searchWord} and status IN(1,2) and active_status='Y'
 	</select>
 	
 	<select id="getKeepUsersList" parameterType="map" resultType="MyGoodsListDto">	<!--모아보기 목록 가져오기 -->
@@ -267,11 +267,11 @@
 	
 	
 	<select id="getClosedTotalCnt" resultType="_int">
-		select count(*) from goods where user_Id=#{userId} and status IN(3)
+		select count(*) from goods where user_Id=#{userId} and status IN(3) and active_status='Y'
 	</select>
 	
 	<select id="getSearchClosedTotalCnt" parameterType="map" resultType="_int">
-		select count(*) from goods where user_Id=#{userId} and title like #{searchWord} and status IN(3)
+		select count(*) from goods where user_Id=#{userId} and title like #{searchWord} and status IN(3) and active_status='Y'
 	</select>
 	
 	
@@ -303,11 +303,11 @@
 	
 	
 	<select id="getHideTotalCnt" resultType="_int">
-		select count(*) from goods where user_Id=#{userId} and status IN(4) <!--숨김 -->
+		select count(*) from goods where user_Id=#{userId} and status IN(4) and active_status='Y' <!--숨김 -->
 	</select>
 	
 	<select id="getSearchHideTotalCnt" parameterType="map" resultType="_int"> <!--숨김 -->
-		select count(*) from goods where user_Id=#{userId} and title like #{searchWord} and status IN(4)
+		select count(*) from goods where user_Id=#{userId} and title like #{searchWord} and status IN(4) and active_status='Y'
 	</select>
 	
 	
