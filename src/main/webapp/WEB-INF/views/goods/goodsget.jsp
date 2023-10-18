@@ -52,7 +52,6 @@
 		<jsp:include page="/WEB-INF/views/header.jsp"></jsp:include>
 	</header>
 	<!-- header end -->
-	<h2>중고 거래 게시판 상세보기</h2>
 	
 	<main class="relative flex-grow border-b-2"
 		style="min-height: -webkit-fill-available; -webkit-overflow-scrolling: touch">
@@ -138,31 +137,17 @@
 						</div>
 					</div>
 					<div class="pb-5 border-b border-gray-300">
-						<h1
-							class="flex justify-between mb-1 text-lg font-bold align-middle text-heading lg:text-xl 2xl:text-2xl hover:text-black">
+						<h1 class="flex justify-between mb-1 text-lg font-bold align-middle text-heading lg:text-xl 2xl:text-2xl hover:text-black">
 							${goodsDto.title}
-
 							<div>
-								<button class="fa fa-heart" id="wishButton"></button>
-								<button type="button" aria-label="공유하기" class="ml-2 text-lg">
-									<svg stroke="currentColor" fill="currentColor" stroke-width="0"
-										viewBox="0 0 24 24" height="1em" width="1em"
-										xmlns="http://www.w3.org/2000/svg">
-									<g>
-									<path fill="none" d="M0 0h24v24H0z"></path>
-									<path
-											d="M10 3v2H5v14h14v-5h2v6a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h6zm7.586 2H13V3h8v8h-2V6.414l-7 7L10.586 12l7-7z"></path></g></svg>
-								</button>
+								<!-- <button class="fa fa-heart" id="wishButton">찜해제하기</button> -->
+								<button class="fa fa-heart-o" id="wishButton">찜하기</button>
 							</div>
 						</h1>
 						<div class="flex items-center justify-between">
 							<div
 								class="text-jnGreen font-bold text-[40px] pe-2 md:pe-0 lg:pe-2 2xl:pe-0 mr-2">${goodsDto.price}원</div>
 						</div>
-						<!-- <a
-							href="/search-price/%EC%A1%B0%EA%B2%BD%EC%88%98%20%EC%82%B0%EC%82%AC%EB%82%98%EB%AC%B4?seq=133947645&amp;actionDetailType=MARKET_PRICE_PRODUCT_DETAIL"><span
-							class="text-sm underline underline-offset-4">이 상품 시세조회하러
-								가기</span></a> -->
 					</div>
 					<div class="py-4 border-b border-gray-300 space-s-4">
 						<div class="pb-1 space-y-5 text-sm">
@@ -231,12 +216,18 @@
 							</div>
 						</div>
 					</div>
-					<div
-						class="flex items-center py-4 border-b border-gray-300 space-s-4">
-						<button data-variant="slim"
-							class="text-[13px] md:text-sm leading-4 inline-flex items-center cursor-pointer transition ease-in-out duration-300 font-semibold font-body text-center justify-center border-0 border-transparent placeholder-white focus-visible:outline-none focus:outline-none rounded-md h-11 md:h-12 px-5 text-white py-2 transform-none normal-case hover:text-white hover:shadow-cart w-full xl:w-full bg-jnblack hover:bg-jnblack/90">
-							<span class="py-2 3xl:px-8">구매하기</span>
-						</button>
+					<div class="flex items-center py-4 border-b border-gray-300 space-s-4">
+					<c:choose>
+					<c:when test="${goodsDto.safeTradingYn eq 'Y'}">
+						<form action="${pageContext.request.contextPath}/payment/pay" method="GET"
+						 class="text-[13px] md:text-sm leading-4 inline-flex items-center cursor-pointer transition ease-in-out duration-300 font-semibold font-body text-center justify-center border-0 border-transparent placeholder-white focus-visible:outline-none focus:outline-none rounded-md h-11 md:h-12 px-5 text-white py-2 transform-none normal-case hover:text-white hover:shadow-cart w-full xl:w-full bg-jnblack hover:bg-jnblack/90">
+    					<input type="hidden" name="goodsId" value="${goodsDto.goodsId}">
+    					<button data-variant="slim">
+        				<span class="py-2 3xl:px-8">안전거래하기</span>
+    					</button>
+						</form>
+					</c:when>
+					</c:choose>
 						<form action="${pageContext.request.contextPath}/chat/insertRoom" method="GET"
 						class="text-[13px] md:text-sm leading-4 inline-flex items-center cursor-pointer transition ease-in-out duration-300 font-semibold font-body text-center justify-center border-0 border-transparent placeholder-white focus-visible:outline-none focus:outline-none rounded-md h-11 md:h-12 px-5 text-white py-2 transform-none normal-case hover:text-white hover:shadow-cart w-full xl:w-full bg-jnblack hover:bg-jnblack/90">
 							<input type="hidden" name="sellerId" value="${goodsDto.userId}">
@@ -308,7 +299,7 @@
 							<strong>신뢰지수 ${goodsDto.ratingScore}</strong><span class="text-jnGray-500 text-sm">100</span>	<!-- 추가 신뢰지수값에 따라 게이지 조정 -->
 						</div>
 						<div class="w-full h-1.5 bg-[#CCF4DC] rounded overflow-hidden">
-							<div class="h-full rounded bg-[#0DCC5A]" style="width: 25%;"></div>
+							<div class="h-full rounded bg-[#0DCC5A]" style="width: ${goodsDto.ratingScore}%;"></div>
 						</div>
 					</div>
 					 <div class="pt-5">
@@ -413,11 +404,10 @@
 
 
 	<!-- Js Plugins -->
-	<script
-		src="${pageContext.request.contextPath}/resources/js/bootstrap.min.js"></script>
+	<script src="${pageContext.request.contextPath}/resources/js/bootstrap.min.js"></script>
 	<script src="${pageContext.request.contextPath}/resources/js/main.js"></script>
-  <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
-  <script src="//dapi.kakao.com/v2/maps/sdk.js?appkey=aec5b89790015b44669217946b7e53f3"></script>
+	<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+  	<script src="//dapi.kakao.com/v2/maps/sdk.js?appkey=aec5b89790015b44669217946b7e53f3"></script>
   
   <script>
     // 페이지가 로드될 때 실행되는 함수
@@ -486,42 +476,70 @@
 			}	  
   );
   
-  // JavaScript를 사용하여 이미지가 없을 때 대체 텍스트를 추가
-  var images = document.querySelectorAll(".swiper-slide img");
-  images.forEach(function(image) {
-    image.addEventListener("error", function() {
-      image.style.display = "none"; // 이미지를 숨김
-      var altText = document.createElement("p");
-      altText.textContent = "이미지 없음";
-      image.parentNode.appendChild(altText);
-    });
-  });
   </script>
 <script>
+	$(document).ready(function () {
+    checkWishlist(); // 찜 여부 확인
+	});
+
+	
+	
 $("#wishButton").click(function() {
     var goodsId = $(this).data("goodsId");
+    var userId = "사용자의 ID"; // 로그인된 사용자의 ID 또는 세션에서 가져온 ID
+
+    $.ajax({
+        type: "POST",
+        url: "${pageContext.request.contextPath}/goods/wish", // 찜 등록 또는 제거 처리할 컨트롤러 경로
+        data: {
+            goodsId: goodsId,
+            userId: userId
+        },
+        success: function (data) {
+            // 요청이 성공했을 때 실행할 코드
+            if (data === "added") {
+                // 찜하기 버튼 아이콘을 "찜됨"으로 변경
+                $("#wishButton").removeClass("fa-heart-o").addClass("fa-heart");
+                alert("해당 상품을 찜목록에 추가하였습니다.");
+            } else if (data === "removed") {
+                // 찜하기 버튼 아이콘을 "찜하기"로 변경
+                $("#wishButton").removeClass("fa-heart").addClass("fa-heart-o");
+                alert("해당 상품을 찜목록에 제거하였습니다.");
+            }
+        }
+    });
+});
+//찜 여부 확인 및 버튼 초기화
+function checkWishlist() {
+    var goodsId = "상품의 ID"; // 해당 상품의 ID
     var userId = "사용자의 ID"; // 로그인된 사용자의 ID 또는 세션에서 가져온 ID
 
     // AJAX 요청 설정
     $.ajax({
         type: "POST",
-        url: "${pageContext.request.contextPath}/goods/wish", // 처리할 컨트롤러 경로
+        url: "${pageContext.request.contextPath}/goods/checkWishlist", // 찜 여부 확인을 처리할 컨트롤러 경로
         data: {
             goodsId: goodsId,
             userId: userId
         },
-        success: function(data) {
-            // 요청이 성공했을 때 실행할 코드 (예: 버튼 텍스트 변경)
+        success: function (data) {
+            var wishButton = $("#wishButton");
             if (data === "added") {
-                // 찜하기 버튼을 "찜됨"으로 변경
-               alert("해당 상품을 찜목록에 추가하였습니다.");
-            } else if (data === "removed") {
-                // 찜하기 버튼을 "찜하기"로 변경
-            	alert("해당 상품을 찜목록에 제거하였습니다.");
+                // 찜하기 버튼 아이콘을 "찜됨"으로 변경
+                wishButton.removeClass("fa-heart-o").addClass("fa-heart");
+            } else {
+                // 찜하기 버튼은 기본 "찜하기"로 유지
+                wishButton.removeClass("fa-heart").addClass("fa-heart-o");
             }
         }
     });
-});
+}
+
+
+var msg = '${msg}';
+if(msg){
+	alert(msg);
+}
 </script>
 	
 
