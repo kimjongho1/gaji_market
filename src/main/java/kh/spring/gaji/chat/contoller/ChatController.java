@@ -52,9 +52,9 @@ public class ChatController {
 	// 채팅 선택
 	@GetMapping("/selectRoom")
 	@ResponseBody
-	public String selectRoom(Principal principal, String chatId) {
+	public String selectRoom(Principal principal, int chatId) {
 		String userId = principal.getName();
-		List<ChatMessageDto> result1 = chatServiceImpl.getChatMessage(Integer.parseInt(chatId));
+		List<ChatMessageDto> result1 = chatServiceImpl.getChatMessage(chatId);
 		System.out.println(result1);
 //		mv.addObject("chatMessage",result1);
 //		mv.setViewName("chat/chatroom");

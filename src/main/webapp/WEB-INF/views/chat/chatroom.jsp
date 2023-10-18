@@ -239,7 +239,7 @@
 					friends.all.forEach(f => {
 						f.addEventListener('mousedown', () => {
 							// 클릭한 noRoom값 전달
-							chatId = f.getAttribute('data-chatid');
+							chatId = parseInt(f.getAttribute('data-chatid'));
 							if (!f.classList.contains('active')) {
 								setActiveChat(f)
 							}
