@@ -57,11 +57,11 @@ public class PayController {
 		@GetMapping("payment/pay")
 		public String pay(Model model,RedirectAttributes attribute,Integer goodsId,HttpServletRequest request,Principal principal) {
 			String userId=principal.getName();
-			if(payServiceImpl.checkGoodsStatus(1)!=1) {	//추후 1은 goodsId로 대체
+			if(payServiceImpl.checkGoodsStatus(goodsId)!=1) {	
 				attribute.addFlashAttribute("msg", "판매중인 상품이 아닙니다.");
 				return "redirect:/";
 			}
-			GoodsPayInfoDto goodsInfo=payServiceImpl.getGoodsInfo(1);	//추후 1은 goodsId로 대체
+			GoodsPayInfoDto goodsInfo=payServiceImpl.getGoodsInfo(goodsId);
 			List<UserAddressDto> userAddress = payServiceImpl.getUserAddressList(userId);	 
 			PayUserInfoDto payUserInfo= payServiceImpl.getUserInfo("userId");			  
 			model.addAttribute("merchantIdentificationCode",merchantIdentificationCode);
@@ -76,7 +76,7 @@ public class PayController {
 		public int closePay(String transactionId,HttpServletRequest request,Principal principal) {
 			int result=0;
 			String userId=principal.getName();
-				result = payServiceImpl.closeSafeTrading(transactionId,userId);	 // session에 저장된 아이디와 일치하면 거래확정을 실행한다.
+				result = payServiceImpl.closeSafeTrading(transactionId,userId);	 
 				if(result==1) {
 					Map<String,Object> map=new HashMap<String,Object>();
 					map.put("status",3);
@@ -131,7 +131,7 @@ public class PayController {
 		String userId=principal.getName();
 		try {
 			result= api.paymentByImpUid(impUid);
-			int amount =(int)Math.round(payServiceImpl.getAmount(1) * 1.035);	//goodsId =1
+			int amount =(int)Math.round(payServiceImpl.getAmount(goodsId) * 1.035);
 			String goodTitle=result.getResponse().getName();
 			if(result.getResponse().getStatus().equals("paid")&&amount==result.getResponse().getAmount().intValue()) {	// 금액이 일치하고 지불이 완료되었다면.
 				insertSafeTradingDto.setTransactionId(impUid);
@@ -141,7 +141,7 @@ public class PayController {
 				insertSafeTradingDto.setPurchaseMethod(result.getResponse().getPayMethod());
 				insertSafeTradingDto.setDetailAddress(detailAddress);
 				insertSafeTradingDto.setRoadAddress(roadAddress);
-				insertSafeTradingDto.setBuyerId(userId);	 //userId =qordmlgjs
+				insertSafeTradingDto.setBuyerId(userId);
 				
 				int addResult = payServiceImpl.addSafeTrading(insertSafeTradingDto); //데이터베이스에 안전거래에 대한 데이터를 넣음
 				
