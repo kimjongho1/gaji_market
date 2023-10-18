@@ -19,7 +19,20 @@
 	rel="stylesheet" />
 <!-- Core theme CSS (includes Bootstrap)-->
 
+<link
+	href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;900&display=swap"
+	rel="stylesheet">
 
+<!-- Css Styles -->
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/resources/css/bootstrap.min.css"
+	type="text/css">
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/resources/css/font-awesome.min.css"
+	type="text/css">
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/resources/css/style.css"
+	type="text/css">
 <script
 	src="${pageContext.request.contextPath}/resources/js/orderstatus.js"></script>
 <link
@@ -28,17 +41,21 @@
 </head>
 
 <body>
+	<header>
+		<jsp:include page="/WEB-INF/views/header.jsp"></jsp:include>
+	</header>
+
 	<!-- Section-->
 	<div class="searchWord">
 		<form
 			action="${pageContext.request.contextPath}/mypage/orderstatus/safe" method="get">
-			<input type="search" name="searchWord"> <input class="btn" type="submit" value="검색">
+			<input type="search" name="searchWord"	placeholder="제목 검색"> <input class="btn1" type="submit" value="검색">
 		</form>
 	</div>
 
 	<div class="buttons-container text-center margin10">
-		<a class="btn safeTrading" href="${pageContext.request.contextPath}/mypage/orderstatus/safe">안전거래</a>
-		<a class="btn infaceTrading" href="${pageContext.request.contextPath}/mypage/orderstatus/inface">직거래</a>
+		<a class="btn1 safeTrading" href="${pageContext.request.contextPath}/mypage/orderstatus/safe">안전거래</a>
+		<a class="btn1 infaceTrading" href="${pageContext.request.contextPath}/mypage/orderstatus/inface">직거래</a>
 	</div>
 
 	<section class="py-1">
@@ -80,7 +97,7 @@
 							<!-- Product actions-->
 							<div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
 								<div class="text-center">
-									<a class="btn btn-outline-dark mt-auto"
+									<a class="btn1 btn-outline-dark mt-auto"
 										href="${pageContext.request.contextPath}/mypage/deal/safe/buyer?transactionId=${safePurchaseInfo.transactionId}">구매정보</a>
 								</div>
 								<!-- 추후${safePurchaseInfo.goodsTitle} 를 담아서 상세정보이동 -->
@@ -126,7 +143,17 @@
 			</c:otherwise>
 		</c:choose>
 	</div>
+	<!-- Footer Section Begin -->
+	<footer>
+		<jsp:include page="/WEB-INF/views/footer.jsp"></jsp:include>
+	</footer>
+	<!-- Footer Section End -->
 
+
+	<!-- Js Plugins -->
+	<script
+		src="${pageContext.request.contextPath}/resources/js/bootstrap.min.js"></script>
+	<script src="${pageContext.request.contextPath}/resources/js/main.js"></script>
 	<!-- Bootstrap core JS-->
 	<script
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
