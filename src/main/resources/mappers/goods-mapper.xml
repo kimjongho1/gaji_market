@@ -174,7 +174,7 @@
 		select list2.* from(
 		(select rownum rn,list1.* from
 		(select goods_id,title,price,(select url from goods_file f where g.goods_id=f.goods_id and rownum between 0 and 1) url
-		from goods g
+		from goods g 
 		<choose>
 			<when test="category==1">
 				where category_id=1
@@ -195,6 +195,8 @@
 				where category_id=6
 			</when>
 		</choose>
+		and status!=4 and
+		active_status='Y'
 		order by created_at desc) list1) list2) where rn &lt; 7
 	</select>
 
