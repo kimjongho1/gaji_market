@@ -11,8 +11,9 @@
 <meta name="description" content="" />
 <meta name="author" content="" />
 <title>안전거래 구매내역</title>
-<!-- Favicon-->
-<!--         <link rel="icon" type="image/x-icon" href="assets/favicon.ico" /> -->
+	<!--favicon  -->
+	<link rel="icon" href="${pageContext.request.contextPath}/resources/img/favicon.ico">
+	<link rel="shortcut icon" href="${pageContext.request.contextPath}/resources/img/favicon.ico">
 <!-- Bootstrap icons-->
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css"
@@ -46,13 +47,13 @@
 	</header>
 			<jsp:include page="/WEB-INF/views/mypage/side.jsp"></jsp:include>
 			
-			<section>
 			
 			
 	<div>
     <h1 class="explain">안전거래 구매목록</h1>
   	</div>
 	<!-- Section-->
+			<section>
 	<div class="row size">
 
 	<div class="buttons-container text-center">
