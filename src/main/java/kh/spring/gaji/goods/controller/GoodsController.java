@@ -269,6 +269,26 @@ public class GoodsController {
 	        return "removedUser"; 
 	    }
 	}
+	
+	@PostMapping("/pullup")
+	@ResponseBody
+	public String pullUpGoods(int goodsId) {
+		if(goodsService.pullUpGoods(goodsId)== 1) {
+			return "update";
+		} else {
+			return "error";
+		}
+	}
+	
+	@PostMapping("/deletegoods")
+	@ResponseBody
+	public String deleteGoods(int goodsId) {
+		if(goodsService.deleteGoods(goodsId)== 1) {
+			return "delete";
+		} else {
+			return "fail";
+		}
+	}
 
 	
 	@PostMapping("/getdong")

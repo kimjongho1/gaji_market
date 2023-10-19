@@ -12,8 +12,7 @@
 		select password from users where user_id = #{userId}
 	</select>
 
-	<select id="userMypage" resultType="MypageDto"
-		parameterType="string">
+	<select id="userMypage" resultType="MypageDto" parameterType="string">
 		SELECT * FROM users JOIN USER_ADDRESS USING
 		(user_id) WHERE USER_ID = #{userId}
 	</select>

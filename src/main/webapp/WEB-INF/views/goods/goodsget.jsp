@@ -254,11 +254,19 @@
 						<br>
 					</div>
 					
-						<div class="flex items-center py-2 space-s-1">
-						<button class="text-[13px] md:text-sm leading-4 inline-flex items-center cursor-pointer transition ease-in-out duration-300 font-semibold font-body text-center justify-center border-0 border-transparent placeholder-white focus-visible:outline-none focus:outline-none rounded-md h-11 md:h-12 px-5 text-white py-2 transform-none normal-case hover:text-white hover:shadow-cart w-full xl:w-full bg-jnblack hover:bg-jnblack/90">끌올</button>
-						<button class="text-[13px] md:text-sm leading-4 inline-flex items-center cursor-pointer transition ease-in-out duration-300 font-semibold font-body text-center justify-center border-0 border-transparent placeholder-white focus-visible:outline-none focus:outline-none rounded-md h-11 md:h-12 px-5 text-white py-2 transform-none normal-case hover:text-white hover:shadow-cart w-full xl:w-full bg-jnblack hover:bg-jnblack/90">수정</button>
-						<button class="text-[13px] md:text-sm leading-4 inline-flex items-center cursor-pointer transition ease-in-out duration-300 font-semibold font-body text-center justify-center border-0 border-transparent placeholder-white focus-visible:outline-none focus:outline-none rounded-md h-11 md:h-12 px-5 text-white py-2 transform-none normal-case hover:text-white hover:shadow-cart w-full xl:w-full bg-jnblack hover:bg-jnblack/90">삭제</button>
-						</div>
+					<c:if test="${loginId eq goodsDto.userId}">
+    				<div class="flex items-center py-2 space-s-1">
+        				<button id="pullUpGoods" class="text-[13px] md:text-sm leading-4 inline-flex items-center cursor-pointer transition ease-in-out duration-300 font-semibold font-body text-center justify-center border-0 border-transparent placeholder-white focus-visible:outline-none focus:outline-none rounded-md h-11 md:h-12 px-5 text-white py-2 transform-none normal-case hover:text-white hover:shadow-cart w-full xl:w-full bg-jnblack hover:bg-jnblack/90">
+            			끌올
+        				</button>
+        				<button id="modifyGoods" class="text-[13px] md:text-sm leading-4 inline-flex items-center cursor-pointer transition ease-in-out duration-300 font-semibold font-body text-center justify-center border-0 border-transparent placeholder-white focus-visible:outline-none focus:outline-none rounded-md h-11 md:h-12 px-5 text-white py-2 transform-none normal-case hover:text-white hover:shadow-cart w-full xl:w-full bg-jnblack hover:bg-jnblack/90">
+            			수정
+        				</button>
+        				<button id="deleteGoods" class="text-[13px] md:text-sm leading-4 inline-flex items-center cursor-pointer transition ease-in-out duration-300 font-semibold font-body text-center justify-center border-0 border-transparent placeholder-white focus-visible:outline-none focus:outline-none rounded-md h-11 md:h-12 px-5 text-white py-2 transform-none normal-case hover:text-white hover:shadow-cart w-full xl:w-full bg-jnblack hover:bg-jnblack/90">
+            			삭제
+        				</button>
+    				</div>
+					</c:if>
 				</div>
 			</div>
 			<div class="z-[15]" style=" top: 80px;">
@@ -545,8 +553,6 @@ $("#favoriteUser").click(function() {
 	var targetId = "${goodsDto.userId}"; // 해당 상품 등록자 ID
     var userId = "${loginId}"; // 로그인된 사용자의 ID 또는 세션에서 가져온 ID
     
-    console.log(targetId);
-    console.log(userId);
 	
     if(userId) {
     	$.ajax({
@@ -574,6 +580,77 @@ $("#favoriteUser").click(function() {
     	window.location.href = '${pageContext.request.contextPath}/login'; 
     }
 });
+
+$("#pullUpGoods").click(function() {		// 등록사용자와 로그인사용자가 일치할경우에만 할것 TODO
+	var goodsId = ${goodsDto.goodsId}; // 해당 상품 등록 id		
+	var userId = "${loginId}";
+    var goodsUserId = "${goodsDto.userId}";
+	
+    console.log(userId);
+    console.log(goodsUserId);
+    
+    
+    if(userId) {
+    	$.ajax({
+        	type: "POST",
+        	url: "${pageContext.request.contextPath}/goods/pullup", 
+      	 	data: {
+      	 	 goodsId: goodsId
+        },
+        success: function (data) {
+            // 요청이 성공했을 때 실행할 코드
+            if(userId == goodsUserId){
+            
+            if (data === "update") {
+                alert("해당 상품을 끌어올렸습니다 !!");
+            } else if (data === "error") {
+                alert("상품을 등록하거나 끌어올린지 1시간 지나야 가능합니다.");
+            }
+          }
+        }
+    });
+    } else {
+    	alert("로그인이 필요한 기능입니다. 먼저 로그인해주세요.");
+    	window.location.href = '${pageContext.request.contextPath}/login'; 
+    }
+});
+
+$("#deleteGoods").click(function() {		// 등록사용자와 로그인사용자가 일치할경우에만 할것 TODO
+	var goodsId = ${goodsDto.goodsId}; // 해당 상품 등록 id
+	var userId = "${loginId}"
+	var goodsUserId = "${goodsDto.userId}";
+	
+    if(userId) {
+    	$.ajax({
+        	type: "POST",
+        	url: "${pageContext.request.contextPath}/goods/deletegoods", 
+      	 	data: {
+      	 	 goodsId: goodsId
+        },
+        success: function (data) {
+            // 요청이 성공했을 때 실행할 코드
+            if(userId == goodsUserId){
+	            if (data === "delete") {
+    	            alert("해당 상품을 삭제했습니다 !!");
+    	            window.location.href = '${pageContext.request.contextPath}/goods/board';
+       	     } else if (data === "fail") {
+       	         alert("상품을 삭제에 실패했습니다.");
+        	    }
+            } else {
+            	alert("등록된 사용자가 아닙니다.");
+            }
+        }
+    });
+    } else {
+    	alert("로그인이 필요한 기능입니다. 먼저 로그인해주세요.");
+    	window.location.href = '${pageContext.request.contextPath}/login'; 
+    }
+});
+
+
+
+
+
 //찜 여부 확인 및 버튼 초기화
 function checkWishlist() {
     var goodsId = ${goodsDto.goodsId}; // 해당 상품의 ID
@@ -604,8 +681,6 @@ function checkFavoriteUser() {
     var targetId = '${goodsDto.userId}'; // 해당 상품의 ID
     var userId = "${loginId}"; // 로그인된 사용자의 ID 또는 세션에서 가져온 ID
 	
-    console.log(targetId);
-    console.log(userId);
     // AJAX 요청 설정
     $.ajax({
         type: "POST",

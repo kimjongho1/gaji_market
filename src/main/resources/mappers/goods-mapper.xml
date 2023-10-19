@@ -146,11 +146,16 @@
 		select user_id, target_id from favorite_user where user_id = #{userId} and target_id = #{targetId}
 	</select>
 	
-	<update id="pullUpGoods" parameterType="_int" >
+	<update id="pullUpGoods" parameterType="_int" > <!-- 상품 끌어올림 -->
 		UPDATE goods
 		SET REFRESHED_AT = SYSDATE
-		WHERE (SYSDATE - REFRESHED_AT) >= 1 AND goods_id = #{goodsID}
+		WHERE (SYSDATE - 1) >= REFRESHED_AT AND goods_id = #{goodsID}
 	</update>
+	
+	<delete id="deleteGoods" parameterType="_int"> <!-- 상품글 삭제는 active_status='N'으로 처리함. -->
+		update goods set active_status='N'
+		where goods_id=#{goodsId}
+	</delete>
 	
 	<update id="updateStatus" parameterType="map"> <!-- 23P 상품상태변경 -->
 		update goods set status=#{status} where goods_id=#{goodsId}
@@ -176,10 +181,7 @@
 		where goods_id=#{goodsId}
 	</update>
 
-	<delete id="deleteGoods" parameterType="_int"> <!-- 상품글 삭제는 active_status='N'으로 처리함. -->
-		update goods set active_status="N"
-		where goods_id=#{goodsId}
-	</delete>
+	
 	
 	<select id="getMainGoods" parameterType="_int" resultType="MainGoodsDto">
 		select list2.* from(
