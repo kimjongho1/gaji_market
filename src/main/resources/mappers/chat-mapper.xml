@@ -18,7 +18,7 @@
 		FROM (
 		    SELECT *
 		    FROM chat_message
-		    where chat_id = #{chatNo}
+		    where chat_id = #{chatId}
 		    ORDER BY chatting_id DESC
 		) 
 		WHERE ROWNUM = 1
@@ -26,11 +26,11 @@
 	<select id="selectChatMessageByChatNo" parameterType="_int" resultType="ChatMessageDto">
 		SELECT chatting_id, sender_id, message, create_at
 		FROM chat_message
-		where chat_id = #{chatNo}
+		where chat_id = #{chatId}
 		ORDER BY chatting_id
 	</select>
 	<insert id="insertMessage" parameterType="hashMap">
 		insert into chat_message
-		values (CHATTING_ID_SEQUENCE.nextval, #{chatNo}, #{senderId}, #{message}, default, default)
+		values (CHATTING_ID_SEQUENCE.nextval, #{chatId}, #{senderId}, #{message}, default, default)
 	</insert>
 </mapper>

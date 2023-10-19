@@ -9,7 +9,7 @@ import kh.spring.gaji.chat.model.dto.ChatRoomDto;
 public interface ChatService {
 	
 	List<ChatRoomDto> getChatRoom(String userId);
-	List<ChatMessageDto> getChatInfo(int chatNo);
+	List<ChatMessageDto> getChatInfo(int chatId);
 	List<ChatMessageDto> getChatMessage(int chatId);
 	int insertChatMessage(Map<String, Object> map);
 }
