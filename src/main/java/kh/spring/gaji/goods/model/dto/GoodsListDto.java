@@ -12,7 +12,7 @@ public class GoodsListDto {
 	private int goodsId;
 	private String userId;
 	private String nickname;
-	private char status;
+	private int status;
 	private int likeCount;
 	private String safeTradingYn;
 	private String dongName;

@@ -61,7 +61,7 @@ public class PayController {
 				attribute.addFlashAttribute("msg", "본인 상품을 구매할 수 없습니다.");
 				return "redirect:/";
 			}
-			if(payServiceImpl.checkGoodsStatus(goodsId)!=1) {	
+			else if(payServiceImpl.checkGoodsStatus(goodsId)!=1) {	
 				attribute.addFlashAttribute("msg", "판매중인 상품이 아닙니다.");
 				return "redirect:/";
 			}
@@ -152,7 +152,7 @@ public class PayController {
 				if(addResult==1) { // 가지 데이터베이스에 값이 정상적으로 들어갔다면
 					Map<String, Object> map=new HashMap<String, Object>();
 					map.put("status", 2);
-					map.put("goodsId",1); // 추후 goodsId로 변경해야함.
+					map.put("goodsId",goodsId); // 추후 goodsId로 변경해야함.
 					if(payServiceImpl.updateStatus(map)==1);
 						return result;	// 거래정보 반환.
 				}

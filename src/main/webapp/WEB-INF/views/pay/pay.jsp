@@ -65,9 +65,9 @@
             </tr>
         </table> 
 
-        <button onclick="kakaoPay()">카카오페이</button>
-        <button onclick="tossPay()">토스페이</button>
-        <button onclick="nicePay()">카드결제</button>
+        <button type="button" onclick="kakaoPay()">카카오페이</button>
+        <button type="button" onclick="tossPay()">토스페이</button>
+        <button type="button" onclick="nicePay()">카드결제</button>
     </div>
 
 	<div class="modal fade" id="AddressModal" tabindex="-1" role="dialog"

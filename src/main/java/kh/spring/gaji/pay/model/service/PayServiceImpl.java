@@ -37,7 +37,7 @@ public class PayServiceImpl implements PayService {
     
     @Override
     public int addSafeTrading(InsertSafeTradingDto insertSafeTradingDto) {
-    	
+ 
         return payDao.addSafeTrading(insertSafeTradingDto);
     }
     
