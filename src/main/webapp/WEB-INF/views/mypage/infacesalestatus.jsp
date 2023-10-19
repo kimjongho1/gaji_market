@@ -11,6 +11,9 @@
 <meta name="description" content="" />
 <meta name="author" content="" />
 <title>직거래 판매목록</title>
+	<!--favicon  -->
+	<link rel="icon" href="${pageContext.request.contextPath}/resources/img/favicon.ico">
+	<link rel="shortcut icon" href="${pageContext.request.contextPath}/resources/img/favicon.ico">
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css"
 	rel="stylesheet" />
@@ -41,21 +44,25 @@
 	<header>
 		<jsp:include page="/WEB-INF/views/header.jsp"></jsp:include>
 	</header>
+	<jsp:include page="/WEB-INF/views/mypage/side.jsp"></jsp:include>
 	<div>
     	<h1 class="explain">직거래 판매목록</h1>
   	</div>
 	<!-- Section-->
+	<section>
+	<div class="row size">
+
+	<div class="buttons-container text-center">
+		<a class="btn1 safeTrading" href="${pageContext.request.contextPath}/mypage/salestatus/safe">안전거래</a>
+		<a class="btn1 infaceTrading" href="${pageContext.request.contextPath}/mypage/salestatus/inface">직거래</a>
+	</div>
 	<div class="searchWord">
 		<form
-			action="${pageContext.request.contextPath}/mypage/salestatus/inface" method="get">
-			<input type="search" name="searchWord" placeholder="제목 검색"> <input class="btn" type="submit" value="검색">
+			action="${pageContext.request.contextPath}/mypage/salestatus/safe" method="get">
+			<input type="search" name="searchWord" placeholder="제목 검색"> <input class="btn1" type="submit" value="검색">
 		</form>
 	</div>
-
-	<div class="buttons-container text-center margin10">
-		<a class="btn safeTrading" href="${pageContext.request.contextPath}/mypage/salestatus/safe">안전거래</a>
-		<a class="btn infaceTrading" href="${pageContext.request.contextPath}/mypage/salestatus/inface">직거래</a>
-	</div>
+  	</div>
 
 	<section class="py-1">
 		<div class="container px-4 px-lg-5 mt-5">
@@ -122,7 +129,7 @@
 						href="<%=request.getContextPath()%>/mypage/salestatus/inface?currentPage=${startPageNum-1}&searchWord=${searchWord}"><span>이전</span></a>
 				</c:if>
 				<c:forEach begin="${startPageNum}" end="${endPageNum}" var="i">
-					<a
+					<a class="page${i}"
 						href="<%=request.getContextPath()%>/mypage/salestatus/inface?currentPage=${i}&searchWord=${searchWord}"><span>${i}</span></a>
 				</c:forEach>
 				<c:if test="${endPageNum<totalPageNum}">
@@ -136,7 +143,7 @@
 						href="<%=request.getContextPath()%>/mypage/salestatus/inface?currentPage=${startPageNum-1}"><span>이전</span></a>
 				</c:if>
 				<c:forEach begin="${startPageNum}" end="${endPageNum}" var="i">
-					<a
+					<a class="page${i}"
 						href="<%=request.getContextPath()%>/mypage/salestatus/inface?currentPage=${i}"><span>${i}
 					</span></a>
 				</c:forEach>
@@ -147,6 +154,7 @@
 			</c:otherwise>
 		</c:choose>
 	</div>
+	</section>
 <!-- Footer Section Begin -->
 	<footer>
 		<jsp:include page="/WEB-INF/views/footer.jsp"></jsp:include>
@@ -161,5 +169,39 @@
 	<!-- Bootstrap core JS-->
 	<script
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+
+
+<script type="text/javascript">
+
+
+document.addEventListener('DOMContentLoaded', function () {
+    // URL에서 currentPage 값을 가져옵니다.
+    const urlParams = new URLSearchParams(window.location.search);
+    const currentPage = urlParams.get('currentPage');
+
+    // 대상 요소를 선택합니다. 예를 들어, 클래스를 추가/제거할 요소가 "example-element"라고 가정합니다.
+    //const targetElement = document.querySelector('.page'${i});
+    const targetElement = document.querySelector('page'{i});
+    const startElement = document.querySelector('.page1');
+
+    console.log(currentPage); //1
+    console.log(urlParams); //1 param
+    console.log(currentPage); //1 
+    console.log(startElement); //주소
+    console.log(targetElement); //주소
+   // console.log('page'${i}); //주소
+    
+    
+    // currentPage 값을 기반으로 클래스를 추가 또는 제거합니다.
+    if (currentPage === '${i}') {
+        startElement.classList.remove('active');
+        targetElement.classList.add('active');
+    } 
+});
+
+
+</script>
+
+
 </body>
 </html>

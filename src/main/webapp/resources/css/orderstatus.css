@@ -73,8 +73,8 @@
   --bs-border-radius-xl: 1rem;
   --bs-border-radius-2xl: 2rem;
   --bs-border-radius-pill: 50rem;
-  --bs-link-color: #0d6efd;
-  --bs-link-hover-color: #0a58ca;
+  --bs-link-color: #5715c9a3;
+  --bs-link-hover-color: #835995;
   --bs-code-color: #d63384;
   --bs-highlight-bg: #fff3cd;
 }
@@ -94,7 +94,7 @@
 
 
 .btn1 {
-	background-color: #007BFF; /* 파란색 배경 */
+	background-color: #835995; /* 파란색 배경 */
 	color: white; /* 흰색 글자색 */
 }
 
@@ -3106,10 +3106,10 @@ textarea.form-control-lg {
 
 .btn-outline-dark {
   --bs-btn-color: #212529;
-  --bs-btn-border-color: #212529;
+  --bs-btn-border-color: #bbb1d6;
   --bs-btn-hover-color: #fff;
-  --bs-btn-hover-bg: #212529;
-  --bs-btn-hover-border-color: #212529;
+  --bs-btn-hover-bg: #835995c9;
+  --bs-btn-hover-border-color: #bbb1d6;
   --bs-btn-focus-shadow-rgb: 33, 37, 41;
   --bs-btn-active-color: #fff;
   --bs-btn-active-bg: #212529;
@@ -10843,7 +10843,7 @@ textarea.form-control-lg {
 }
 
 .btn1 {
-	background-color: #007BFF; /* 파란색 배경 */
+	background-color: #7fad39; /* 파란색 배경 */
 	color: white; /* 흰색 글자색 */
 }
 
@@ -10898,7 +10898,7 @@ textarea.form-control-lg {
 	}
 	
 	.searchWord input[type="submit"]:hover {
-		background-color:#5715C9;
+		background-color:#835995C9;
 		color: white;
 		text-decoration: none;
 	}
@@ -10910,13 +10910,12 @@ textarea.form-control-lg {
 	}
 	
 	.paging a {
-		background-color: #007BFF;
+		background-color: #835995;
 		text-decoration: none;
 		margin: 0 10px;
 		font-size: 16px;
 		font-weight: bold;
 		padding: 5px 10px;
-		border: 1px solid black;
 		border-radius: 5px;
 	}
 	
@@ -10927,7 +10926,7 @@ textarea.form-control-lg {
 	}
 	
 	.paging a:hover {
-		background-color:black;
+		background-color:#835995c9;
 		color: white;
 		text-decoration: none;
 	}
@@ -10954,7 +10953,7 @@ textarea.form-control-lg {
 	}
 	
 	.safeTrading:hover, .infaceTrading:hover {
-		background-color:#5715C9;
+		background-color:#835995C9;
 		color: white;
 		text-decoration: none;
 	}
@@ -10991,5 +10990,7 @@ textarea.form-control-lg {
 section {
 	max-width: 1400px;
 	margin: auto;
-	background-color:#f9f9f9 
+	background-color:#f9f9f9; 
+	z-index: 0;
+	position: relative;
 }

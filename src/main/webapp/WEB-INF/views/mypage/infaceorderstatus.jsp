@@ -11,6 +11,9 @@
 <meta name="description" content="" />
 <meta name="author" content="" />
 <title>직거래 구매목록</title>
+	<!--favicon  -->
+	<link rel="icon" href="${pageContext.request.contextPath}/resources/img/favicon.ico">
+	<link rel="shortcut icon" href="${pageContext.request.contextPath}/resources/img/favicon.ico">
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css"
 	rel="stylesheet" />
@@ -41,21 +44,25 @@
 	<header>
 		<jsp:include page="/WEB-INF/views/header.jsp"></jsp:include>
 	</header>
-	<!-- Section-->
+	<jsp:include page="/WEB-INF/views/mypage/side.jsp"></jsp:include>
 	<div>
     <h1 class="explain">직거래 구매목록</h1>
   	</div>
+	<!-- Section-->
+	<section>
+	<div class="row size">
+
+	<div class="buttons-container text-center">
+		<a class="btn1 safeTrading" href="${pageContext.request.contextPath}/mypage/salestatus/safe">안전거래</a>
+		<a class="btn1 infaceTrading" href="${pageContext.request.contextPath}/mypage/salestatus/inface">직거래</a>
+	</div>
 	<div class="searchWord">
 		<form
-			action="${pageContext.request.contextPath}/mypage/orderstatus/inface" method="get">
-			<input type="search" name="searchWord" placeholder="제목 검색"> <input class="btn1" type="submit" value="찾기">
+			action="${pageContext.request.contextPath}/mypage/salestatus/safe" method="get">
+			<input type="search" name="searchWord" placeholder="제목 검색"> <input class="btn1" type="submit" value="검색">
 		</form>
 	</div>
-
-	<div class="buttons-container text-center margin10">
-		<a class="btn1 safeTrading" href="${pageContext.request.contextPath}/mypage/orderstatus/safe">안전거래</a>
-		<a class="btn1 infaceTrading" href="${pageContext.request.contextPath}/mypage/orderstatus/inface">직거래</a>
-	</div>
+  	</div>
 
 	<section class="py-1">
 		<div class="container px-4 px-lg-5 mt-5">
@@ -147,6 +154,7 @@
 			</c:otherwise>
 		</c:choose>
 	</div>
+	</section>
 <!-- Footer Section Begin -->
 	<footer>
 		<jsp:include page="/WEB-INF/views/footer.jsp"></jsp:include>
