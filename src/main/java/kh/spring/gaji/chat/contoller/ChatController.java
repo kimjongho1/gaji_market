@@ -62,19 +62,24 @@ public class ChatController {
 		}
 	    if(buyerId != null) {
 	    	if(!buyerId.equals(sellerId)) {
+	    		// 채팅방을 만들지의 여부
+
 	    		// 현재 채팅방 리스트 출력 (리스트를 확인하고 방이 없다면, 채팅방을 새로 만듦)
 	    		List<ChatRoomDto> result1 = chatServiceImpl.getChatRoomList(buyerId);
+	    		boolean createRoom = true;
 	    		for (int i = 0; i < result1.size(); i++) {
 	    			// goodsId는 고유값 이므로 채팅방 중복 조회
 	    			int resultGoodsId = result1.get(i).getGoodsId();
-	    			if(resultGoodsId != goodsId) {
-	    				//채팅방 개설
-	    				Map<String, Object> map = new HashMap<String, Object>();
-	    				map.put("goodsId", goodsId);
-	    				map.put("sellerId", sellerId);
-	    				map.put("buyerId", buyerId);
-	    				int result2 = chatServiceImpl.insertChatRoom(map);
+	    			if(resultGoodsId == goodsId) {
+	    				createRoom = false;
 	    			}
+	    		}
+    			if(createRoom) {
+	    			Map<String, Object> map = new HashMap<String, Object>();
+    				map.put("goodsId", goodsId);
+    				map.put("sellerId", sellerId);
+    				map.put("buyerId", buyerId);
+    				chatServiceImpl.insertChatRoom(map);
 	    		}
 	    		return "redirect:/chat";
 	    	} else {
