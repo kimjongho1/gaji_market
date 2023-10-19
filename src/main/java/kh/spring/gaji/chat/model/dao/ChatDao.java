@@ -29,6 +29,9 @@ public class ChatDao {
 		return sqlSession.selectList("chat.selectChatMessageByChatNo", chatId);
 	}
 	public int insertChatMessage(Map<String, Object> map) {
-		return  sqlSession.insert("chat.insertMessage", map);
+		return  sqlSession.insert("chat.inserChatMessage", map);
 	};
+	public int insertChatRoom(Map<String, Object> map) {
+		return sqlSession.insert("chat.insertChatRoom",map);
+	}
 }

@@ -146,6 +146,12 @@
 		select user_id, target_id from favorite_user where user_id = #{userId} and target_id = #{targetId}
 	</select>
 	
+	<update id="pullUpGoods" parameterType="_int" >
+		UPDATE goods
+		SET REFRESHED_AT = SYSDATE
+		WHERE (SYSDATE - REFRESHED_AT) >= 1 AND goods_id = #{goodsID}
+	</update>
+	
 	<update id="updateStatus" parameterType="map"> <!-- 23P 상품상태변경 -->
 		update goods set status=#{status} where goods_id=#{goodsId}
 	</update>

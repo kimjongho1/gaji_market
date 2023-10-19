@@ -76,6 +76,10 @@ public class GoodsDao  {
     public List<GoodsInfoDto> userGoodsList(int goodsId) { // 등록한 사용자의 상품리스트
     	return sqlSession.selectList("goods.userGoodsList", goodsId);
     }
+    
+    public int pullUpGoods(int goodsId) { //상품 날짜 끌어올림
+    	return sqlSession.update("goods.pullUpGoods", goodsId);
+    }
 
     public int updateStatus(Map<String, Object> map) { //23P 상품상태변경 
         return sqlSession.update("goods.updateStatus", map);

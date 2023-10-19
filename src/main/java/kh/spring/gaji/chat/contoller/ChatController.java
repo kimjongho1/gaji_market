@@ -1,6 +1,7 @@
 package kh.spring.gaji.chat.contoller;
 
 import java.security.Principal;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -53,7 +54,6 @@ public class ChatController {
 	public String createRoom (Principal principal, RedirectAttributes attribute,@RequestParam String sellerId, int goodsId) {
 		String buyerId;
 		String redirectGood = "redirect:/goods/get?goodsId=" + goodsId;
-		System.out.println(goodsId);
 		// nullPointerException을 유도하여 로그인이 되지 않았다면, null값 부여
 		try {
 			buyerId = principal.getName();
@@ -69,8 +69,11 @@ public class ChatController {
 	    			int resultGoodsId = result1.get(i).getGoodsId();
 	    			if(resultGoodsId != goodsId) {
 	    				//채팅방 개설
-//	    				int result2 = chatServiceImpl.insertChatRoom(Integer.parseInt(goodsId), sellerId, buyerId);
-	    				
+	    				Map<String, Object> map = new HashMap<String, Object>();
+	    				map.put("goodsId", goodsId);
+	    				map.put("sellerId", sellerId);
+	    				map.put("buyerId", buyerId);
+	    				int result2 = chatServiceImpl.insertChatRoom(map);
 	    			}
 	    		}
 	    		return "redirect:/chat";
