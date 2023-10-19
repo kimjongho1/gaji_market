@@ -12,7 +12,6 @@
 <link href="${pageContext.request.contextPath}/resources/css/chat.css" rel='stylesheet' type='text/css'>
 <link rel="icon" href="favicon.ico" type="image/x-icon">
 </head>
-
 <body>
 	<div class="wrapper">
 		<div class="container">
@@ -34,13 +33,11 @@
 										var dateString = "${item2.createAt}";
 										var date = new Date(dateString);
 										var today = new Date();
-
 										var year = date.getFullYear();
 										var month = date.getMonth() + 1;
 										var day = date.getDate();
 										var hours = date.getHours();
 										var minutes = date.getMinutes();
-
 										if (today.getMonth() == month) {
 											if (today.getDate() == day) {
 												if (hours > 12) {
@@ -81,6 +78,7 @@
 								</c:otherwise>
 							</c:choose>
 						</c:forEach>
+						<div class="bubble you"></div>
 					</div>
 				</c:forEach>
 				<div class="write">
@@ -91,7 +89,6 @@
 			</div>
 		</div>
 	</div>
-
 	<script>
 	let activeChat;
 	// chatId를 많이 사용하므로 전역변수 선언
@@ -129,7 +126,6 @@
 				}
 			});
 		});
-
 
 		// 리스트에서 메시지 시간 체크
 		function formatDate(dateString) {
@@ -216,16 +212,8 @@
 				}
 			}); // keydown event enter 
 
-		
-
-
 		stomp.connect({}, function (frame) {
 			console.log('Connected: ' + frame);
-			/* 
-			stomp.subscribe("sub/chat/room/" + chatId, function (chat) {
-				printMessage(JSON.parse(msg.body).Message);
-			});
-				*/
 			stomp.subscribe("/sub/chat/room/" + chatId, function (chat) {
 				var content = JSON.parse(chat.body);
 
@@ -260,20 +248,7 @@
 				console.log("보내짐");
 				$('#msg').val('');
 			}
-
-			// 메시지 내용이 있다면 화면에 메시지 내용 출력
-			/* 
-			if (message !== "") {
-				const messageElement = document.createElement('div');
-				messageElement.className = 'bubble me';
-				messageElement.textContent = message;
-				activeChat.appendChild(messageElement);
-				$('#msg').val('');
-			}
-			*/
 		} // send function	
-
-		
 	});  // document ready
 	</script>
 </body>
