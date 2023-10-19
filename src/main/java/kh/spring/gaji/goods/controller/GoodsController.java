@@ -215,10 +215,17 @@ public class GoodsController {
 		return mv;
 	}
 	
-	@GetMapping("/update")
-	public String update() { // 중고거래 게시판 글 수정
+	@GetMapping("/modify")
+	public String modifyGoods(int goodsId) { // 중고거래 게시판 글 수정
+		
 		return "goods/goodsupdate";
 	}
+	@PostMapping("")
+	public String goodsUpdate() {
+		
+		return "";
+	}
+	
 	
 	@PostMapping("/wish")
 	@ResponseBody
@@ -289,7 +296,8 @@ public class GoodsController {
 			return "fail";
 		}
 	}
-
+	
+	
 	
 	@PostMapping("/getdong")
 	@ResponseBody

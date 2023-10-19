@@ -72,7 +72,7 @@
 								<c:set var="firstgoodsUrl" value="${goodsUrl[0]}" />
 								<div
 									class="col-span-1 transition duration-150 ease-in hover:opacity-90 w-full relative pt-[100%]">
-									<img alt="${goodsDto.title }" referrerpolicy="no-referrer"
+									<img alt="${goodsDto.title }" referrerpolicy="no-referrer" 
 									<c:choose>
 								<c:when test="${not empty firstgoodsUrl.url }">
 									src="${firstgoodsUrl.url}"
@@ -259,13 +259,9 @@
         				<button id="pullUpGoods" class="text-[13px] md:text-sm leading-4 inline-flex items-center cursor-pointer transition ease-in-out duration-300 font-semibold font-body text-center justify-center border-0 border-transparent placeholder-white focus-visible:outline-none focus:outline-none rounded-md h-11 md:h-12 px-5 text-white py-2 transform-none normal-case hover:text-white hover:shadow-cart w-full xl:w-full bg-jnblack hover:bg-jnblack/90">
             			끌올
         				</button>
-        				<form id="modifyGoodsForm" action="${pageContext.request.contextPath}/goods/modify" method="POST"
-        				 class="text-[13px] md:text-sm leading-4 inline-flex items-center cursor-pointer transition ease-in-out duration-300 font-semibold font-body text-center justify-center border-0 border-transparent placeholder-white focus-visible:outline-none focus:outline-none rounded-md h-11 md:h-12 px-5 text-white py-2 transform-none normal-case hover:text-white hover:shadow-cart w-full xl:w-full bg-jnblack hover:bg-jnblack/90">
-    					<input type="hidden" name="goodsId" value="${goodsDto.goodsId}">
-    					<button id="modifyGoods">
+    					<button id="modifyGoods" class="text-[13px] md:text-sm leading-4 inline-flex items-center cursor-pointer transition ease-in-out duration-300 font-semibold font-body text-center justify-center border-0 border-transparent placeholder-white focus-visible:outline-none focus:outline-none rounded-md h-11 md:h-12 px-5 text-white py-2 transform-none normal-case hover:text-white hover:shadow-cart w-full xl:w-full bg-jnblack hover:bg-jnblack/90">
         				수정
     					</button>
-						</form>
         				<button id="deleteGoods" class="text-[13px] md:text-sm leading-4 inline-flex items-center cursor-pointer transition ease-in-out duration-300 font-semibold font-body text-center justify-center border-0 border-transparent placeholder-white focus-visible:outline-none focus:outline-none rounded-md h-11 md:h-12 px-5 text-white py-2 transform-none normal-case hover:text-white hover:shadow-cart w-full xl:w-full bg-jnblack hover:bg-jnblack/90">
             			삭제
         				</button>
@@ -651,7 +647,21 @@ $("#deleteGoods").click(function() {		// 등록사용자와 로그인사용자�
     }
 });
 
-
+$("#modifyGoods").click(function() {
+	var goodsId = ${goodsDto.goodsId}; // 해당 상품 등록 id
+	var userId = "${loginId}"		// 로그인한 id
+	var goodsUserId = "${goodsDto.userId}";		//글 작성 id
+	if(userId){
+		if(userId == goodsUserId){
+			window.location.href = '${pageContext.request.contextPath}/goods/modify?goodsId=' + goodsId;
+		} else {
+			alert("수정 권한이 없습니다.");
+		}
+	} else {
+		alert("로그인이 필요한 기능입니다. 먼저 로그인해주세요.");
+    	window.location.href = '${pageContext.request.contextPath}/login'; 
+	}
+)}
 
 
 

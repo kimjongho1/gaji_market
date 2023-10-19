@@ -110,6 +110,7 @@
 		active_status='Y'and status != 4
 	</select>
 	
+	
 	<select id="goodsUserInfo" parameterType="_int" resultType="GoodsInfoDto"> <!-- 해당 상품작성자의 후기수, 안전거래횟수, 판매상품수 -->
 		select 
    	 (SELECT COUNT(dr.goods_id) FROM deal_review dr WHERE dr.user_id = g.user_id) reviewcount,
