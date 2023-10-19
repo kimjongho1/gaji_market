@@ -72,7 +72,14 @@
 								<div
 									class="col-span-1 transition duration-150 ease-in hover:opacity-90 w-full relative pt-[100%]">
 									<img alt="${goodsDto.title }" referrerpolicy="no-referrer"
-										src="${firstgoodsUrl.url}"
+									<c:choose>
+								<c:when test="${not empty firstgoodsUrl.url }">
+									src="${firstgoodsUrl.url}"
+								</c:when>
+								<c:otherwise>
+									src="${pageContext.request.contextPath}/resources/img/no_photo.png"
+								</c:otherwise>
+								</c:choose>
 										decoding="async" data-nimg="fill"
 										class="object-cover w-full h-full rounded-lg top-1/2 left-1/2"
 										loading="lazy"
