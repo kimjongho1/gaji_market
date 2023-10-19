@@ -216,9 +216,19 @@ public class GoodsController {
 	}
 	
 	@GetMapping("/modify")
-	public String modifyGoods(int goodsId) { // 중고거래 게시판 글 수정
+	public ModelAndView modifyGoods(Principal principal ,int goodsId, ModelAndView mv) { // 중고거래 게시판 글 수정
 		
-		return "goods/goodsupdate";
+		if(principal != null) {
+			String userId = principal.getName();
+			mv.setViewName("goods/goodsupdate");
+			mv.addObject("loginId", userId);
+			mv.addObject("imageList",fileService.goodsImageList(goodsId)); // 해당 상품 url list값
+			
+		} else {
+			mv.setViewName("redirect:/login");
+			mv.addObject("msg", "로그인이 필요한 페이지입니다. 로그인화면으로 전송됩니다.");
+		}
+		return mv;
 	}
 	@PostMapping("")
 	public String goodsUpdate() {

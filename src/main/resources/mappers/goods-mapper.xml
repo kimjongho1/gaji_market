@@ -181,7 +181,11 @@
 		,dong_id=#{dong_id},lat=#{lat},lng=#{lng}
 		where goods_id=#{goodsId}
 	</update>
-
+	
+	<select id="getGoodsModify" parameterType="_int" resultType="GoodsDto">
+		select GOODS_ID, USER_ID, CATEGORY_ID, DONG_ID, TITLE, STATUS, PRICE, VIEW_COUNT, DESCRIPTION, REFRESHED_AT, CREATED_AT, SAFE_TRADING_YN, LAT, LNG, ACTIVE_STATUS
+		from goods where goods_id = #{goodsId}
+	</select>
 	
 	
 	<select id="getMainGoods" parameterType="_int" resultType="MainGoodsDto">

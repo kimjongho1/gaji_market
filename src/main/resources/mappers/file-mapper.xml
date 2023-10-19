@@ -4,4 +4,8 @@
 	<insert id="insertFile" parameterType="FileDto">
 		insert into goods_file values (#{url}, (select max(goods_id) from goods))
 	</insert>
+	
+	<select id="goodsImageList" parameterType="_int" resultType="FileDto">
+		select url, goods_id from goods_file where goods_id = #{goodsId}
+	</select>
 </mapper>
