@@ -165,8 +165,9 @@
                                    var formattedPastDate = moment(createdAt).fromNow();
                                    document.write(formattedPastDate); 
                                </script>
-								· 조회 ${goodsDto.viewCount} · 찜 ${goodsDto.wishcount}</span><a href="https://thecheat.co.kr/"><div
-										class="flex items-center hover:text-gray-400">
+								· 조회 ${goodsDto.viewCount} · 찜 ${goodsDto.wishcount}</span>
+								<a href="https://thecheat.co.kr/">
+								<div class="flex items-center hover:text-gray-400">
 										<svg stroke="currentColor" fill="currentColor"
 											stroke-width="0" viewBox="0 0 16 16" height="1em" width="1em"
 											xmlns="http://www.w3.org/2000/svg">
@@ -237,7 +238,12 @@
 					</c:choose>
 						<form action="${pageContext.request.contextPath}/chat/insertRoom" method="GET"
 						class="text-[13px] md:text-sm leading-4 inline-flex items-center cursor-pointer transition ease-in-out duration-300 font-semibold font-body text-center justify-center border-0 border-transparent placeholder-white focus-visible:outline-none focus:outline-none rounded-md h-11 md:h-12 px-5 text-white py-2 transform-none normal-case hover:text-white hover:shadow-cart w-full xl:w-full bg-jnblack hover:bg-jnblack/90">
-							<input type="hidden" name="sellerId" value="${goodsDto.userId}">
+							<c:if test="${empty userId}">
+								<input type="hidden" name="sellerId" value="">
+    						</c:if>
+							<c:if test="${not empty userId}">
+        						<input type="hidden" name="sellerId" value="${goodsDto.userId}">
+    						</c:if>
 							<input type="hidden" name="goodsId" value="${goodsDto.goodsId}">
 							<button data-variant="slim">
 								<span class="py-2 3xl:px-8">채팅하기</span>
@@ -291,7 +297,7 @@
 					class="col-span-2 w-full py-10 lg:py-2 px-4">
 					<div class="flex">
 						<div class="flex w-full flex-col justify-around lg:ml-4">
-							<a class="font-semibold text-base text-jnblack" href="/store/7579731">${goodsDto.nickname}</a>
+							<a class="font-semibold text-base text-jnblack" href="${pageContext.request.contextPath}/goods/usergoods?userId=${goodsDto.userId}">${goodsDto.nickname}</a>
 							
 							<span class="font-medium text-sm flex text-jnGray-500">판매상품 ${goodsUserInfo.sellgoods} · 안전거래 ${goodsUserInfo.safetradecount} · 후기 ${goodsUserInfo.reviewcount}</span>
 						</div>
@@ -304,7 +310,7 @@
 					</div>
 					<div class="lg:ml-4">
 						<div class="flex justify-between mt-2 text-[#0CB650] font-medium">
-							<strong>신뢰지수 ${goodsDto.ratingScore}</strong><span class="text-jnGray-500 text-sm">100</span>	<!-- 추가 신뢰지수값에 따라 게이지 조정 -->
+							<strong>가지온도 ${goodsDto.ratingScore}</strong><span class="text-jnGray-500 text-sm">100</span>	<!-- 추가 신뢰지수값에 따라 게이지 조정 -->
 						</div>
 						<div class="w-full h-1.5 bg-[#CCF4DC] rounded overflow-hidden">
 							<div class="h-full rounded bg-[#0DCC5A]" style="width: ${goodsDto.ratingScore}%;"></div>
