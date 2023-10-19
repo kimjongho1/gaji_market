@@ -120,7 +120,7 @@
 								placeholder="주소별칭" class="cellphoneNo" required>
 							</span>
 						</div>
-						<button onclick="addressRegist()">주소 등록</button>
+						<button type="button" onclick="addressRegist()">주소 등록</button>
 					</form>
 					
 				</div>
@@ -367,7 +367,7 @@
 				$("#addresses").replaceWith(html);
 				
 				html="<select id='modalAddresses'>";
-				for(var i=0; i<date.length; i++){
+				for(var i=0; i<data.length; i++){
 					item=data[i];
 					html+="<option value='"+item.roadAddress+","+item.detailAddress+","+item.addressNo+"'>";
 					html+=item.addressNickname+","+item.roadAddress+","+item.detailAddress+"</option>";
