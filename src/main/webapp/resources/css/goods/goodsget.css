@@ -1,0 +1,8 @@
+@charset "UTF-8";
+.fa-facebook,.fa-instagram,.fa-twitter,.fa-pinterest{
+	position:relative;
+	top:0px;
+}
+.log-btn{
+background-color:#7fad39;
+}

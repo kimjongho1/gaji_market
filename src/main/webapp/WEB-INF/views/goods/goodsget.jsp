@@ -41,8 +41,9 @@
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/css/goods/goods.css"
 	type="text/css">
-
-
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/resources/css/goods/goodsget.css"
+	type="text/css">
 
 </head>
 <body>
