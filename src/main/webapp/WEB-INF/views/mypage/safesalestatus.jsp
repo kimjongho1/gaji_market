@@ -46,17 +46,19 @@
     <h1 class="explain">안전거래 판매목록</h1>
   	</div>
   	<!-- Section-->
+	<div class="row size">
+
+	<div class="buttons-container text-center">
+		<a class="btn1 safeTrading" href="${pageContext.request.contextPath}/mypage/salestatus/safe">안전거래</a>
+		<a class="btn1 infaceTrading" href="${pageContext.request.contextPath}/mypage/salestatus/inface">직거래</a>
+	</div>
 	<div class="searchWord">
 		<form
 			action="${pageContext.request.contextPath}/mypage/salestatus/safe" method="get">
 			<input type="search" name="searchWord" placeholder="제목 검색"> <input class="btn1" type="submit" value="검색">
 		</form>
 	</div>
-
-	<div class="buttons-container text-center margin10">
-		<a class="btn1 safeTrading" href="${pageContext.request.contextPath}/mypage/salestatus/safe">안전거래</a>
-		<a class="btn1 infaceTrading" href="${pageContext.request.contextPath}/mypage/salestatus/inface">직거래</a>
-	</div>
+  	</div>
 
 	<section class="py-1">
 		<div class="container px-4 px-lg-5 mt-5">

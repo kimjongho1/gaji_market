@@ -10856,13 +10856,27 @@ textarea.form-control-lg {
 .personal {
 	margin: 0 50px 0 50px;
 }
-  	.searchWord {
-		text-align: center;
-		margin-top: 20px;
+  	.size {
+	margin-top:20px; 
+    display: flex;
+    justify-content: space-around; /* 버튼을 수평으로 가운데 정렬합니다. */
+    align-items: stretch; /* 검색 입력 필드를 수직으로 가운데 정렬합니다. */
+  }
+
+.buttons-container {
+	display: flex;
+	align-items: flex-start;
+	
+}
+
+	.searchWord form{
+	display: flex;
+	
+
 	}
 	
 	.searchWord input[type="search"] {
-		height: 42px;
+		height: 48px;
 		width: 250px;
 		border-radius: 5px;
 		background-color: white;
@@ -10870,13 +10884,16 @@ textarea.form-control-lg {
 	}
 	
 	.searchWord input[type="submit"] {
-		background-color: #007BFF;
 		color: white;
-		border: none;
-		border-radius: 5px;
-		padding: 10px 20px;
-		cursor: pointer;
+		background-color: #835995;
+		text-decoration: none;
+		display: inline-block;
 		font-weight: bold;
+		font-size: 18px;
+		padding: 10px 20px;
+		border: 1px solid #bbb1d6;
+		border-radius: 5px;
+		margin: 0 auto;
 	}
 	
 	.searchWord input[type="submit"]:hover {
@@ -10924,13 +10941,13 @@ textarea.form-control-lg {
 	
 	.safeTrading, .infaceTrading {
 		color: white;
-		background-color: #007BFF;
+		background-color: #835995;
 		text-decoration: none;
 		display: inline-block;
 		font-weight: bold;
 		font-size: 18px;
 		padding: 10px 20px;
-		border: 1px solid #FFC107;
+		border: 1px solid #bbb1d6;
 		border-radius: 5px;
 		margin: 0 auto;
 	}
