@@ -45,6 +45,10 @@
 		<jsp:include page="/WEB-INF/views/header.jsp"></jsp:include>
 	</header>
 			<jsp:include page="/WEB-INF/views/mypage/side.jsp"></jsp:include>
+			
+			<section>
+			
+			
 	<div>
     <h1 class="explain">안전거래 구매목록</h1>
   	</div>
@@ -156,6 +160,10 @@
 			</c:otherwise>
 		</c:choose>
 	</div>
+	
+	
+	</section>
+	
 	<!-- Footer Section Begin -->
 	<footer>
 		<jsp:include page="/WEB-INF/views/footer.jsp"></jsp:include>

@@ -46,6 +46,9 @@
     <h1 class="explain">안전거래 판매목록</h1>
   	</div>
   	<!-- Section-->
+  	
+  	<section>
+  	
 	<div class="row size">
 
 	<div class="buttons-container text-center">
@@ -153,6 +156,8 @@
 			</c:otherwise>
 		</c:choose>
 	</div>
+	
+	</section>
 <!-- Footer Section Begin -->
 	<footer>
 		<jsp:include page="/WEB-INF/views/footer.jsp"></jsp:include>
