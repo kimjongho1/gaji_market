@@ -646,17 +646,17 @@ public class MyPageController {
 		return "mypage/buyer";
 	}
 
-//	@ExceptionHandler
-//	public String exception(Exception e, RedirectAttributes ra, Principal principal) {
-//		try {
-//			if (principal.getName() == null) {
-//				ra.addFlashAttribute("msg", "로그인이 필요한 페이지입니다.");
-//				return "redirect:/";
-//			}
-//		} catch (Exception e1) {
-//			e1.printStackTrace();
-//		}
-//		ra.addFlashAttribute("msg", "예기치않은 오류로 메인페이지로 이동합니다.");
-//		return "redirect:/";
-//	}
+	@ExceptionHandler
+	public String exception(Exception e, RedirectAttributes ra, Principal principal) {
+		try {
+			if (principal.getName() == null) {
+				ra.addFlashAttribute("msg", "로그인이 필요한 페이지입니다.");
+				return "redirect:/";
+			}
+		} catch (Exception e1) {
+			e1.printStackTrace();
+		}
+		ra.addFlashAttribute("msg", "예기치않은 오류로 메인페이지로 이동합니다.");
+		return "redirect:/";
+	}
 }

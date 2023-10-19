@@ -140,8 +140,9 @@
 								<li
 									class="text-sm text-body px-2.5 transition duration-200 ease-in first:ps-0 last:pe-0 hover:text-heading"><a
 									class="capitalize font-semibold text-heading text-xs sm:text-sm"
-									href="#">${goodsDto.title}</a></li>
+									href="#">${goodsDto.title}</a></li>							
 							</ol>
+							
 						</div>
 					</div>
 					<div class="pb-5 border-b border-gray-300">
@@ -222,6 +223,7 @@
             					</c:when>
             					</c:choose>
 							</div>
+							
 						</div>
 					</div>
 					<div class="flex items-center py-4 border-b border-gray-300 space-s-4">
@@ -249,7 +251,14 @@
 								<span class="py-2 3xl:px-8">채팅하기</span>
 							</button>
 						</form>
+						<br>
 					</div>
+					
+						<div class="flex items-center py-2 space-s-1">
+						<button class="text-[13px] md:text-sm leading-4 inline-flex items-center cursor-pointer transition ease-in-out duration-300 font-semibold font-body text-center justify-center border-0 border-transparent placeholder-white focus-visible:outline-none focus:outline-none rounded-md h-11 md:h-12 px-5 text-white py-2 transform-none normal-case hover:text-white hover:shadow-cart w-full xl:w-full bg-jnblack hover:bg-jnblack/90">끌올</button>
+						<button class="text-[13px] md:text-sm leading-4 inline-flex items-center cursor-pointer transition ease-in-out duration-300 font-semibold font-body text-center justify-center border-0 border-transparent placeholder-white focus-visible:outline-none focus:outline-none rounded-md h-11 md:h-12 px-5 text-white py-2 transform-none normal-case hover:text-white hover:shadow-cart w-full xl:w-full bg-jnblack hover:bg-jnblack/90">수정</button>
+						<button class="text-[13px] md:text-sm leading-4 inline-flex items-center cursor-pointer transition ease-in-out duration-300 font-semibold font-body text-center justify-center border-0 border-transparent placeholder-white focus-visible:outline-none focus:outline-none rounded-md h-11 md:h-12 px-5 text-white py-2 transform-none normal-case hover:text-white hover:shadow-cart w-full xl:w-full bg-jnblack hover:bg-jnblack/90">삭제</button>
+						</div>
 				</div>
 			</div>
 			<div class="z-[15]" style=" top: 80px;">
