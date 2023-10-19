@@ -12,5 +12,5 @@ public interface ChatService {
 	List<ChatMessageDto> getChatInfo(int chatId);
 	List<ChatMessageDto> getChatMessage(int chatId);
 	int insertChatMessage(Map<String, Object> map);
-	int insertChatRoom(int goodId, String sellerId, String buyerId);
+	int insertChatRoom(Map<String, Object> map);
 }

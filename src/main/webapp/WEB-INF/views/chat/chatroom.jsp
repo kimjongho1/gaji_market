@@ -65,29 +65,24 @@
 					<!-- 현재 채팅중인 회원 이름 정보 -->
 					<span>To: <span class="name"></span></span>
 				</div>
-
-				<div class="chat" data-chat="person1">
-					<div class="conversation-start">
-						<span>Today, 5:38 PM</span>
+				<c:forEach items="${chatRoomList}" var="item" varStatus="loop">
+					<div class="chat" data-chat="person${loop.count}">
+						<div class="conversation-start">
+							<span>Today, 5:38 PM</span>
+						</div>
+						<c:forEach var="item1" items="${chatMessage}">
+							<div class="bubble you">${item1.senderId }</div>
+							<c:choose>
+								<c:when test="${item1.senderId eq pageContext.request.userPrincipal.name}">
+									<div class="bubble me">${item1.message}</div>
+								</c:when>
+								<c:otherwise>
+									<div class="bubble you">${item1.message}</div>
+								</c:otherwise>
+							</c:choose>
+						</c:forEach>
 					</div>
-					<c:forEach var="item1" items="${chatMessage}">
-						<div class="bubble you">${item1.senderId }</div>
-						<c:choose>
-							<c:when test="${item1.senderId eq pageContext.request.userPrincipal.name}">
-								<div class="bubble me">${item1.message}</div>
-							</c:when>
-							<c:otherwise>
-								<div class="bubble you">${item1.message}</div>
-							</c:otherwise>
-						</c:choose>
-						<!-- <div class="bubble you">${item1.senderId }</div> -->
-					</c:forEach>
-				</div>
-				<div class="chat" data-chat="person2">
-					<div class="conversation-start">
-					</div>
-				</div>
-
+				</c:forEach>
 				<div class="write">
 					<a href="javascript:;" class="write-link attach"></a> <input type="text" id="msg" /> <a
 						href="javascript:;" class="write-link smiley"></a>

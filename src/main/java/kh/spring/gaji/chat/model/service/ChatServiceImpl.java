@@ -39,8 +39,7 @@ public class ChatServiceImpl implements ChatService{
 	}
 
 	@Override
-	public int insertChatRoom(int goodId, String sellerId, String buyerId) {
-		return chatDao.insertChatRoom(goodId, sellerId, buyerId);;
+	public int insertChatRoom(Map<String, Object> map) {
+		return chatDao.insertChatRoom(map);
 	}
-	
 }
