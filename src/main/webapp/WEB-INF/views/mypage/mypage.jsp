@@ -9,9 +9,22 @@
 <head>
 <meta charset="UTF-8">
 <title>마이페이지</title>
+
+<!--favicon  -->
+<link rel="icon"
+	href="${pageContext.request.contextPath}/resources/img/favicon.ico">
+<link rel="shortcut icon"
+	href="${pageContext.request.contextPath}/resources/img/favicon.ico">
+
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
+<!-- Css Styles -->
+<link rel="stylesheet"	href="${pageContext.request.contextPath}/resources/css/bootstrap.min.css"	type="text/css">
+<link rel="stylesheet"	href="${pageContext.request.contextPath}/resources/css/font-awesome.min.css"	type="text/css">
+<link rel="stylesheet"	href="${pageContext.request.contextPath}/resources/css/style.css"	type="text/css">
+<script	src="${pageContext.request.contextPath}/resources/js/orderstatus.js"></script>
+<link	href="${pageContext.request.contextPath}/resources/css/orderstatus.css"	rel='stylesheet' type='text/css'>
 <style>
 	select, table {
             width: 100%;
@@ -63,6 +76,12 @@
 </style>
 </head>
 <body>
+
+<header>
+		<jsp:include page="/WEB-INF/views/header.jsp"></jsp:include>
+	</header>
+	<jsp:include page="/WEB-INF/views/mypage/side.jsp"></jsp:include>
+
 	<h2>회원 정보</h2>
 	<nav>
 		<a href=""></a>
@@ -490,5 +509,21 @@
 	}
 	
 	</script>
+	
+	<!-- Footer Section Begin -->
+	<footer>
+		<jsp:include page="/WEB-INF/views/footer.jsp"></jsp:include>
+	</footer>
+	<!-- Footer Section End -->
+
+
+	<!-- Js Plugins -->
+	<script
+		src="${pageContext.request.contextPath}/resources/js/bootstrap.min.js"></script>
+	<script src="${pageContext.request.contextPath}/resources/js/main.js"></script>
+	<!-- Bootstrap core JS-->
+	<script
+		src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+	
 </body>
 </html>
