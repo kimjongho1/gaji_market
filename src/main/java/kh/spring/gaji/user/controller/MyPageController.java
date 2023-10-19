@@ -657,11 +657,7 @@ public class MyPageController {
 	}
 
 	@GetMapping("/deal/safe/buyer")
-	public String buyer(Model model, String transactionId, RedirectAttributes redirectattr, Principal principal) { // 안전
-																													// 거래
-																													// 상세조회
-																													// 구매자
-																													// 페이지
+	public String buyer(Model model, String transactionId, RedirectAttributes redirectattr, Principal principal) { // 안전거래 상세 조회 구매자페이지
 		if (!userService.checkIdForSafe(transactionId).equals(principal.getName())) {
 			redirectattr.addFlashAttribute("msg", "잘못된 접근입니다.");
 			return "redirect:/main/main";
