@@ -347,8 +347,15 @@
 					<a class="group box-border overflow-hidden flex rounded-md cursor-pointer pe-0 pb-2 lg:pb-3 flex-col items-start transition duration-200 ease-in-out transform hover:-translate-y-1 md:hover:-translate-y-1.5 hover:shadow-product bg-white"
 						title="레이싱휠 풀세트 팝니다" href="${pageContext.request.contextPath}/goods/get?goodsId=${item.goodsId}"><div
 								class="relative w-full rounded-md overflow-hidden pt-[100%] mb-3 md:mb-3.5">
-								<img alt="레이싱휠 풀세트 팝니다" referrerpolicy="no-referrer"
+								<img alt="" referrerpolicy="no-referrer"
+								<c:choose>
+								<c:when test="${not empty item.url }">
 									src="${item.url}"
+								</c:when>
+								<c:otherwise>
+									src="${pageContext.request.contextPath}/resources/img/no_photo.png"
+								</c:otherwise>
+								</c:choose>
 									decoding="async" data-nimg="fill"
 									class="bg-gray-300 object-cover w-full transition duration-200 ease-in rounded-md group-hover:rounded-b-none"
 									style="position: absolute; height: 100%; width: 100%; inset: 0px; color: transparent;">

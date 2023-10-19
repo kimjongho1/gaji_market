@@ -10,7 +10,11 @@
 	content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 <meta name="description" content="" />
 <meta name="author" content="" />
-<title>상품 글 조회</title>
+<title> <c:forEach items="${myGoodsList}" var="item" varStatus="status">
+        <c:if test="${status.index == 0}">
+            ${item.nickname}
+        </c:if>
+    </c:forEach>상품 글</title>
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css"
 	rel="stylesheet" />
@@ -68,7 +72,15 @@
 							</div>
 							<!-- Product image-->
 							<img class="card-img-top"
-								src="${myGoodsInfo.url}" alt="상품 이미지 없음"  width="268" height="179"/>
+							<c:choose>
+								<c:when test="${not empty myGoodsInfo.url }">
+									src="${myGoodsInfo.url}"
+								</c:when>
+								<c:otherwise>
+									src="${pageContext.request.contextPath}/resources/img/no_photo.png"
+								</c:otherwise>
+								</c:choose>
+								alt="상품 이미지 없음"  width="268" height="179"/>
 							<!-- Product details-->
 							<div class="card-body p-4">
 								<div class="text-center">

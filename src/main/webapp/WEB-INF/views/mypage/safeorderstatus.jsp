@@ -80,7 +80,15 @@
 							</div>
 							<!-- Product image-->
 							<img class="card-img-top"
-								src="${safePurchaseInfo.url}" alt="상품 이미지 없음"  width="268" height="179"/>
+							<c:choose>
+								<c:when test="${not empty safePurchaseInfo.url }">
+									src="${safePurchaseInfo.url}"
+								</c:when>
+								<c:otherwise>
+									src="${pageContext.request.contextPath}/resources/img/no_photo.png"
+								</c:otherwise>
+								</c:choose>
+								alt="상품 이미지 없음"  width="268" height="179"/>
 							<!-- Product details-->
 							<div class="card-body p-4">
 								<div class="text-center">
