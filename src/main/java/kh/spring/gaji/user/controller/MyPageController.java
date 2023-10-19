@@ -636,8 +636,9 @@ public class MyPageController {
 		map.put("transactionId", transactionId);
 		if (userService.updateTrackingNumber(map) == 1) {
 			redirectattr.addFlashAttribute("msg", "운송장이 등록되었습니다");
-			TitleBuyerDto titleBuyerDto=payServiceImpl.getBuyerIdFromTransactionId(transactionId);
-			insertNotificationDto.setUserId(titleBuyerDto.getBuyerId());  
+			TitleBuyerDto titleBuyerDto=payServiceImpl.getIdFromTransactionId(transactionId);
+			insertNotificationDto.setBuyerId(titleBuyerDto.getBuyerId());  
+			insertNotificationDto.setSellerId(titleBuyerDto.getSellerId());  
 			insertNotificationDto.setType(3);
 			insertNotificationDto.setReferenceId(transactionId);
 			if(shippingCompany==1)

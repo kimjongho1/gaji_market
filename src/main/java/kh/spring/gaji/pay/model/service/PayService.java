@@ -23,6 +23,6 @@ public interface PayService {
     public PayUserInfoDto getUserInfo(String userId);
     public int changeStatus(Map<String,Object> map);
     public String checkIdForPay(int goodsId);
-    public TitleBuyerDto getBuyerIdFromTransactionId(String transactionId);
+    public TitleBuyerDto getIdFromTransactionId(String transactionId);
     public int insertNoti(InsertNotificationDto insertNotificationDto);
 }

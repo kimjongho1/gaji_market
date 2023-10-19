@@ -85,13 +85,15 @@ public class PayServiceImpl implements PayService {
 
 
 	@Override
-	public TitleBuyerDto getBuyerIdFromTransactionId(String transactionId) {
+	public TitleBuyerDto getIdFromTransactionId(String transactionId) {
 		return payDao.getBuyerIdFromTransactionId(transactionId);
 	}
 
 
 	@Override
+	@Transactional
 	public int insertNoti(InsertNotificationDto insertNotificationDto) {
+		payDao.insertSellerNoti(insertNotificationDto);
 		return payDao.insertNoti(insertNotificationDto);
 	}
 

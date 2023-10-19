@@ -18,7 +18,7 @@
 <h1>안전거래 상세조회</h1>
 <div class="container">
     <c:if test="${safePurchaseInfoDto.tradingStatus eq 1}">
-        <button onclick="cancel('${safePurchaseInfoDto.buyerId}','${safePurchaseInfoDto.transactionId}','${safePurchaseInfoDto.goodsId}')" class="btn btn-primary btn-lg">결제취소</button>
+        <button onclick="cancel('${safePurchaseInfoDto.transactionId}','${safePurchaseInfoDto.goodsId}')" class="btn btn-primary btn-lg">결제취소</button>
     </c:if>
 
 <!-- 모달 트리거 버튼 -->
@@ -110,10 +110,10 @@
 	alert("${msg}");
 </c:if>
 
-var cancel=(userId1,transactionId1,goodsId)=>{
+var cancel=(transactionId1,goodsId)=>{
 	$.ajax({
 		url:"${pageContext.request.contextPath}/payment/cancel",
-		data:{userId:userId1, transactionId:transactionId1,goodsId:goodsId},
+		data:{transactionId:transactionId1,goodsId:goodsId},
 		method: "post",
 		dataType:"json",
 		success:cancelCallBack,

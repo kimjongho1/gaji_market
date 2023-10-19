@@ -77,9 +77,12 @@ public class PayDao {
 	}
     
     public TitleBuyerDto getBuyerIdFromTransactionId(String transactionId) {
-    	return sqlSession.selectOne("pay.getBuyerIdFromTransactionId",transactionId);
+    	return sqlSession.selectOne("pay.getIdFromTransactionId",transactionId);
     }
     public int insertNoti(InsertNotificationDto insertNotificationDto) {
     	return sqlSession.insert("notification.insertNoti",insertNotificationDto);
+    }
+    public int insertSellerNoti(InsertNotificationDto insertNotificationDto) {
+    	return sqlSession.insert("notification.insertSellerNoti",insertNotificationDto);
     }
 }

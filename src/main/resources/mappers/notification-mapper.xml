@@ -11,7 +11,11 @@
 	</select>
 	 
 	<insert id="insertNoti" parameterType="InsertNotificationDto">	<!-- 알림생성 -->
-		insert into notification values(noti_id_sequence.nextval, #{userId}, #{message},default,#{type}, #{referenceId},default)
+		insert into notification values(noti_id_sequence.nextval, #{buyerId}, #{message},default,#{type}, #{referenceId},default)
+	</insert>
+	
+		<insert id="insertSellerNoti" parameterType="InsertNotificationDto">	<!-- 알림생성 -->
+		insert into notification values(noti_id_sequence.nextval,#{sellerId}, #{message},default,#{type}, #{referenceId},default)
 	</insert>
 	
 	<select id="getTradeNotice" resultType="NotificationDto" parameterType="string"> <!-- 18P해당계정의 거래알림 -->

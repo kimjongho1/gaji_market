@@ -21,7 +21,7 @@
 <h1>안전거래 상세조회</h1>
 <div class="container">
     <c:if test="${safePurchaseInfoDto.tradingStatus ne 5}">
-        <button onclick="cancel('${safePurchaseInfoDto.buyerId}','${safePurchaseInfoDto.transactionId}','${safePurchaseInfoDto.goodsId }')">결제취소</button>
+        <button type="button" onclick="cancel('${safePurchaseInfoDto.buyerId}','${safePurchaseInfoDto.transactionId}','${safePurchaseInfoDto.goodsId }')">결제취소</button>
     </c:if>
     <c:if test="${safePurchaseInfoDto.tradingStatus eq 1}">
     <button onclick="accept('${safePurchaseInfoDto.sellerId}','${safePurchaseInfoDto.transactionId}','${safePurchaseInfoDto.goodsId }')">안전결제 수락</button>
@@ -93,11 +93,10 @@
         });
     }
     function cancelCallBack(data){
-        console.log("cancelCallBack들어옴");
         console.log(data);
-        if(data.response.status=="cancelled"){ㄱ
+        if(data.response.status=="cancelled"){
             alert("거래가 취소되었습니다");
-            window.location.href="${pageContext.request.contextPath}/mypage/salesstatus/safe";
+            window.location.href="${pageContext.request.contextPath}/mypage/salestatus/safe";
         }
         else
             alert("거래 취소에 실패하였습니다.");

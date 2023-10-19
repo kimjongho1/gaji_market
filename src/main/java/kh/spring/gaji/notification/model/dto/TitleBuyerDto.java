@@ -7,6 +7,7 @@ import lombok.Data;
 @Data
 @Component
 public class TitleBuyerDto {
-	private String buyerId;
+	private String sellerId;
+	private String buyerId;	
 	private String goodsTitle;
 }

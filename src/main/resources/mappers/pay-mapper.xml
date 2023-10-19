@@ -32,8 +32,8 @@
 		where transaction_id= #{transactionId} and (select user_id from goods g where s.goods_Id=g.goods_Id)=#{userId}
 	</update>
 	
-	<select id="getBuyerIdFromTransactionId" parameterType="string" resultType="kh.spring.gaji.notification.model.dto.TitleBuyerDto">
-		select goods_title,buyer_id from safe_trading where transaction_id = #{transactionId}
+	<select id="getIdFromTransactionId" parameterType="string" resultType="kh.spring.gaji.notification.model.dto.TitleBuyerDto">
+		select goods_title,buyer_id,user_id seller_id from safe_trading join goods using (goods_id) where transaction_id = #{transactionId}
 	</select>
 	
 	<select id="getAmount" parameterType="_int" resultType="_int">	<!-- 결제시 가격확인을 위한 쿼리문 -->

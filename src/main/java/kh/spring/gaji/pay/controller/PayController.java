@@ -91,7 +91,13 @@ public class PayController {
 					map.put("status",3);
 					map.put("goodsId",payServiceImpl.getGoodsId(transactionId));
 					payServiceImpl.updateStatus(map);
-//					payServiceImpl.insertClosePayNotice(transactionId);
+					TitleBuyerDto titleBuyerDto=payServiceImpl.getIdFromTransactionId(transactionId);
+					insertNotificationDto.setBuyerId(titleBuyerDto.getBuyerId());  
+					insertNotificationDto.setSellerId(titleBuyerDto.getSellerId());
+					insertNotificationDto.setType(3);
+					insertNotificationDto.setReferenceId(transactionId);
+					insertNotificationDto.setMessage(titleBuyerDto.getGoodsTitle()+"의 결제가 확정되었습니다.");
+					payServiceImpl.insertNoti(insertNotificationDto);
 				}
 				System.out.println("result:"+result);
 			return result;
@@ -107,8 +113,9 @@ public class PayController {
 		map.put("status", status);
 		map.put("transactionId",transactionId);
 		if(payServiceImpl.changeStatus(map)==1) {
-			TitleBuyerDto titleBuyerDto=payServiceImpl.getBuyerIdFromTransactionId(transactionId);
-			insertNotificationDto.setUserId(titleBuyerDto.getBuyerId());  
+			TitleBuyerDto titleBuyerDto=payServiceImpl.getIdFromTransactionId(transactionId);
+			insertNotificationDto.setBuyerId(titleBuyerDto.getBuyerId());  
+			insertNotificationDto.setSellerId(titleBuyerDto.getSellerId());
 			insertNotificationDto.setType(3);
 			insertNotificationDto.setReferenceId(transactionId);
 			insertNotificationDto.setMessage(titleBuyerDto.getGoodsTitle()+"의 거래가 수락되었습니다.");
@@ -131,8 +138,9 @@ public class PayController {
 				map.put("status",1);
 				map.put("goodsId",goodsId);
 				payServiceImpl.updateStatus(map);
-				TitleBuyerDto titleBuyerDto=payServiceImpl.getBuyerIdFromTransactionId(transactionId);
-				insertNotificationDto.setUserId(titleBuyerDto.getBuyerId());  
+				TitleBuyerDto titleBuyerDto=payServiceImpl.getIdFromTransactionId(transactionId);
+				insertNotificationDto.setBuyerId(titleBuyerDto.getBuyerId());  
+				insertNotificationDto.setSellerId(titleBuyerDto.getSellerId()); 
 				insertNotificationDto.setType(3);
 				insertNotificationDto.setReferenceId(transactionId);
 				insertNotificationDto.setMessage(titleBuyerDto.getGoodsTitle()+"의 거래가 취소되었습니다.");
