@@ -10807,8 +10807,8 @@ cursor: pointer;
   }
   
   .writeBoard{
-  	position:absolute;
-  	right:320px;	
+  	position:relative;
+  	left:250px;	
   }
   .pagination-button{
   	margin:2px 8px 2px 8px;
