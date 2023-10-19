@@ -21,12 +21,12 @@ public class ChatDao {
 		return sqlSession.selectList("chat.selectChatListByUserId", userId);
 	}
 	
-	public List<ChatMessageDto> getChatInfo(int chatNo) {
-		return sqlSession.selectList("chat.selectChatInfoByChatNo", chatNo);
+	public List<ChatMessageDto> getChatInfo(int chatId) {
+		return sqlSession.selectList("chat.selectChatInfoByChatNo", chatId);
 	}
 	
-	public List<ChatMessageDto> getChatMessage(int chatNo) {
-		return sqlSession.selectList("chat.selectChatMessageByChatNo", chatNo);
+	public List<ChatMessageDto> getChatMessage(int chatId) {
+		return sqlSession.selectList("chat.selectChatMessageByChatNo", chatId);
 	}
 	public int insertMessage(Map<String, Object> map) {
 		return  sqlSession.insert("chat.insertMessage", map);

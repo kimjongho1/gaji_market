@@ -1,7 +1,9 @@
 package kh.spring.gaji.chat.contoller;
 
 import java.security.Principal;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.handler.annotation.DestinationVariable;
@@ -14,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
 
 import kh.spring.gaji.chat.model.dto.ChatMessageDto;
@@ -82,10 +85,10 @@ public class ChatController {
 
 //	@GetMapping("/insultChat")
 //	@ResponseBody
-//	public String insertMessage(String senderId, String chatNo, String msg) {
+//	public String insertMessage(String senderId, String chatId, String msg) {
 //		Map<String, Object> map = new HashMap<String, Object>();
 //		map.put("senderId", senderId);
-//		map.put("chatNo", Integer.parseInt(chatNo));
+//		map.put("chatId", Integer.parseInt(chatId));
 //		map.put("message", msg);
 //		int result1 = chatServiceImpl.insertChatMessage(map);
 //		String result2 = null;
@@ -100,14 +103,18 @@ public class ChatController {
 	// JSP로 메시지 출력
 	@MessageMapping("/chat/room")
 	public void receiveMessage(ChatMessageDto message) {
-		template.convertAndSend("/sub/chat/room/" + message.getChatNo(), message);
+		template.convertAndSend("/sub/chat/room/" + message.getChatId(), message);
 	}
 	
 	// DB 저장
 	@MessageMapping("/chat/message")
 	public void message(ChatMessageDto message){
+		ObjectMapper objectMapper = new ObjectMapper();
+		Map<String, Object> map = objectMapper.convertValue(message, Map.class);
+		System.out.println("[jh]1: "+map);
+		int result1 = chatServiceImpl.insertChatMessage(map);
 		//insert 명령어
-		template.convertAndSend("/sub/chat/room/" + message.getChatNo(), message);
+		template.convertAndSend("/sub/chat/room/" + message.getChatId(), message);
 	}
 	
 }
