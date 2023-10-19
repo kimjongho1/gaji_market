@@ -14,6 +14,7 @@ import kh.spring.gaji.goods.model.dto.GoodsListDto;
 import kh.spring.gaji.goods.model.dto.GoodsListInfoDto;
 import kh.spring.gaji.goods.model.dto.GuDongInfoDto;
 import kh.spring.gaji.goods.model.dto.MainGoodsDto;
+import kh.spring.gaji.user.model.dto.FavoriteUserDto;
 import kh.spring.gaji.user.model.dto.WishListDto;
 
 
@@ -45,6 +46,11 @@ public class GoodsServiceImpl implements GoodsService {
 	@Override
 	public WishListDto checkWiskList(Map<String, String> map) {
 		return goodsDao.checkWiskList(map);
+	}
+	
+	@Override
+	public FavoriteUserDto checkFavoriteUser(Map<String, String> map) {
+		return goodsDao.checkFavoriteUser(map);
 	}
 	
 	@Override
@@ -118,6 +124,8 @@ public class GoodsServiceImpl implements GoodsService {
 	    	result.put("myGoodsList",goodsDao.getSearchOnsaleList(userId,currentPage,PAGESIZE,totalCnt,searchWord));
 	    	return result;
 	    }
+
+		
 
 	
 

@@ -338,11 +338,19 @@
 	</select>
 	
 	<insert id="insertWishList" parameterType="map">	<!-- 23P 찜하기 -->	
-		insert into wishlist values(#{goodsId},#{userId},default)
+		insert into wishlist values(#{goodsId},#{userId}, default)
 	</insert>
 	
 	<delete id="deleteWishList" parameterType="map">	<!-- 찜해제 -->
 		DELETE FROM wishlist WHERE user_id = #{userId} AND goods_id = #{goodsId}
+	</delete>
+	
+	<insert id="addFavoriteUser" parameterType="map">	<!-- 로그인 유저 글등록유저 좋아요 추가 -->
+		 insert into favorite_user (user_Id, target_Id, created_Date) values (#{userId}, #{targetId}, default)
+	</insert>
+	
+	<delete id="deleteFavoriteUser" parameterType="map"> <!--  로그인 유저 글등록유저 좋아요 제거 -->
+		DELETE FROM favorite_user WHERE user_id = #{userId} AND target_id = #{targetId}
 	</delete>
 
 	<select id="getProfile" parameterType="string" resultType="UserProfileDto">	<!-- 프로필을 가져올때 유저주소 전부를 가져옴 -->
@@ -453,9 +461,7 @@
 		insert into user_account (user_account,user_id) values(#{userAccount},#{userId})
 	</insert>
 	
-	<insert id="addFavoriteUser" parameterType="map">	<!-- 유저 즐겨찾기(모아보기) 23P -->
-		insert into favorite_user values(#{userId},#{targetId})
-	</insert>
+	
 	
 	<update id="updateRole" parameterType="string">	<!-- 유저 안전거래 가능여부 가능변경 -->
 		update user set role=1 where user_id=#{userId}

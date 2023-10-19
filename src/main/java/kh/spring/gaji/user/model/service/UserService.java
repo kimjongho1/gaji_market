@@ -113,4 +113,6 @@ public interface UserService {
     public int addAccount(Map<String, String> map);
 
     public int addFavoriteUser(Map<String, String> map);
+    
+    public int deleteFavoriteUser(Map<String, String> map);
 }

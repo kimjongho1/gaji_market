@@ -138,10 +138,14 @@
 		update goods set view_count=view_count+1 where goods_id = #{goodsId}
 	</update>
 
-	<select id="checkWiskList" parameterType="map" resultType="WishListDto">
+	<select id="checkWiskList" parameterType="map" resultType="WishListDto"> <!-- 해당 유저 찜목록 조회 -->
 		select GOODS_ID, USER_ID, CREATED_AT from wishlist where user_id = #{userId} and goods_id = #{goodsId}
 	</select>
-
+	
+	<select id="checkFavoriteUser" parameterType="map" resultType="FavoriteUserDto">
+		select user_id, target_id from favorite_user where user_id = #{userId} and target_id = #{targetId}
+	</select>
+	
 	<update id="updateStatus" parameterType="map"> <!-- 23P 상품상태변경 -->
 		update goods set status=#{status} where goods_id=#{goodsId}
 	</update>

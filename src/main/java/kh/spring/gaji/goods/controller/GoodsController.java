@@ -229,7 +229,21 @@ public class GoodsController {
 		
 	}
 	
-	@PostMapping("/checkWishlist")
+	@PostMapping("/favorite")
+	@ResponseBody
+	public String favoriteButton(@RequestParam Map<String, String> map) {
+		
+		try {
+	        userService.addFavoriteUser(map);
+	        return "favoriteadd"; // 찜하기 추가 성공
+	    } catch (Exception e) {
+	        userService.deleteFavoriteUser(map);
+	        return "favoriteremoved"; // 찜하기 제거 성공
+	    }
+		
+	}
+	
+	@PostMapping("/checkwishlist")
 	@ResponseBody
 	public String checkWiskList(@RequestParam Map<String, String> map) {
 		
@@ -239,6 +253,16 @@ public class GoodsController {
 	        return "removed"; // 찜하지 않은 상품임
 	    }
 		
+	}
+	
+	@PostMapping("/checkfavoriteuser")
+	@ResponseBody
+	public String checkFavoriteUser(@RequestParam Map<String, String> map) {
+		if(goodsService.checkFavoriteUser(map) != null) {
+			return "addedUser";
+		}else {
+	        return "removedUser"; 
+	    }
 	}
 
 	

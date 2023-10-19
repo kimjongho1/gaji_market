@@ -34,6 +34,7 @@
 		<typeAlias type="kh.spring.gaji.user.model.dto.WishListDto" alias="WishListDto"/>
 		<typeAlias type="kh.spring.gaji.user.model.dto.UserSafeTradingDto" alias="UserSafeTradingDto"/>
 		<typeAlias type="kh.spring.gaji.mypage.model.dto.MypageDto" alias="MypageDto"/>
+		<typeAlias type="kh.spring.gaji.user.model.dto.FavoriteUserDto" alias="FavoriteUserDto"/>
 		
 		
 		<typeAlias type="kh.spring.gaji.user.model.dto.UserInsertAddressDto" alias="UserInsertAddressDto"/>

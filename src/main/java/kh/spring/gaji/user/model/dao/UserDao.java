@@ -510,12 +510,16 @@ public class UserDao {
     	return sqlSession.insert("user.addAccount", map);
     }
     
-    public int updateRole(String userId) {
-    	return sqlSession.update("user.addFavoriteUser",userId);	// 유저 안전거래 가능여부 가능변경
-    }
+//    public int updateRole(String userId) {
+//    	return sqlSession.update("user.addFavoriteUser",userId);	// 유저 안전거래 가능여부 가능변경
+//    }
 
-    public int addFavoriteUser(Map<String, String> map) {	//유저 즐겨찾기(모아보기) 23P
+    public int addFavoriteUser(Map<String, String> map) {	// 로그인 유저 글 등록 유저 좋아요
     	return sqlSession.insert("user.addFavoriteUser", map);
+    }
+    
+    public int deleteFavoriteUser(Map<String, String> map) { 	// 로그인 유저 글 등록 유저 좋아요 삭제
+    	return sqlSession.delete("user.deleteFavoriteUser", map);
     }
 
     public int addDealReview(DealReviewDto dealReviewDto) {	//거래후기넣기 아직 화면설계없음.

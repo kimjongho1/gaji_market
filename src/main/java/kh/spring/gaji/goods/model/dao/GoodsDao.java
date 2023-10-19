@@ -10,6 +10,7 @@ import kh.spring.gaji.goods.model.dto.GoodsListInfoDto;
 import kh.spring.gaji.goods.model.dto.GuDongInfoDto;
 import kh.spring.gaji.goods.model.dto.MainGoodsDto;
 import kh.spring.gaji.goods.model.dto.MyGoodsListDto;
+import kh.spring.gaji.user.model.dto.FavoriteUserDto;
 import kh.spring.gaji.user.model.dto.WishListDto;
 
 import java.util.HashMap;
@@ -66,6 +67,10 @@ public class GoodsDao  {
     
     public WishListDto checkWiskList(Map<String, String> map) { // 해당 상품에 대해 접속하는 유저가 그 상품 찜목록 조회
     	return sqlSession.selectOne("goods.checkWiskList",map);
+    }
+    
+    public FavoriteUserDto checkFavoriteUser(Map<String, String> map) { // 해당 상품에 접속하는 유저가 글 작성 유저 좋아요 조회
+    	return sqlSession.selectOne("goods.checkFavoriteUser", map);
     }
     
     public List<GoodsInfoDto> userGoodsList(int goodsId) { // 등록한 사용자의 상품리스트

@@ -334,6 +334,11 @@ public class UserServiceImpl implements UserService {
     public int addFavoriteUser(Map<String, String> map) {
         return userDao.addFavoriteUser(map);
     }
+    
+    @Override
+	public int deleteFavoriteUser(Map<String, String> map) {
+		return userDao.deleteFavoriteUser(map);
+	}
 
 	@Override
 	public String checkIdForSafe(String transactionId) {
@@ -367,6 +372,9 @@ public class UserServiceImpl implements UserService {
 			return 0;
 		}
 	}
+
+
+	
 
 
 	

@@ -301,12 +301,7 @@
 							
 							<span class="font-medium text-sm flex text-jnGray-500">판매상품 ${goodsUserInfo.sellgoods} · 안전거래 ${goodsUserInfo.safetradecount} · 후기 ${goodsUserInfo.reviewcount}</span>
 						</div>
-						<a class="flex items-center translate-x-4" href="/store/7579731"><img
-							alt="프로파일"
-							src="https://img2.joongna.com/common/Profile/Default/profile_f.png"
-							width="60" height="60" decoding="async" data-nimg="1"
-							class="rounded-full max-w-none h-[60px] box-content border-4 border-white -translate-x-4"
-							loading="lazy" style="color: transparent;"></a>
+						<button class="fa fa-heart-o" id="favoriteUser"></button>
 					</div>
 					<div class="lg:ml-4">
 						<div class="flex justify-between mt-2 text-[#0CB650] font-medium">
@@ -501,6 +496,7 @@
 <script>
 	$(document).ready(function () {
     checkWishlist(); // 찜 여부 확인
+    checkFavoriteUser() // 글 작성유저 좋아요 확인
 	});
 
 	
@@ -535,6 +531,40 @@ $("#wishButton").click(function() {
     	window.location.href = '${pageContext.request.contextPath}/login'; 
     }
 });
+
+$("#favoriteUser").click(function() {
+	var targetId = "${goodsDto.userId}"; // 해당 상품 등록자 ID
+    var userId = "${loginId}"; // 로그인된 사용자의 ID 또는 세션에서 가져온 ID
+    
+    console.log(targetId);
+    console.log(userId);
+	
+    if(userId) {
+    	$.ajax({
+        	type: "POST",
+        	url: "${pageContext.request.contextPath}/goods/favorite", // 찜 등록 또는 제거 처리할 컨트롤러 경로
+      	 	data: {
+      	 		targetId: targetId,
+                userId: userId
+        },
+        success: function (data) {
+            // 요청이 성공했을 때 실행할 코드
+            if (data === "favoriteadd") {
+                // 찜하기 버튼 아이콘을 "찜됨"으로 변경
+                $("#favoriteUser").removeClass("fa-heart-o").addClass("fa-heart");
+                alert("해당 유저를 모아보기목록에 추가하였습니다.");
+            } else if (data === "favoriteremoved") {
+                // 찜하기 버튼 아이콘을 "찜하기"로 변경
+                $("#favoriteUser").removeClass("fa-heart").addClass("fa-heart-o");
+                alert("해당 유저를 모아보기목록에 제거하였습니다.");
+            }
+        }
+    });
+    } else {
+    	alert("로그인이 필요한 기능입니다. 먼저 로그인해주세요.");
+    	window.location.href = '${pageContext.request.contextPath}/login'; 
+    }
+});
 //찜 여부 확인 및 버튼 초기화
 function checkWishlist() {
     var goodsId = ${goodsDto.goodsId}; // 해당 상품의 ID
@@ -543,7 +573,7 @@ function checkWishlist() {
     // AJAX 요청 설정
     $.ajax({
         type: "POST",
-        url: "${pageContext.request.contextPath}/goods/checkWishlist", // 찜 여부 확인을 처리할 컨트롤러 경로
+        url: "${pageContext.request.contextPath}/goods/checkwishlist", // 찜 여부 확인을 처리할 컨트롤러 경로
         data: {
             goodsId: goodsId,
             userId: userId
@@ -560,6 +590,34 @@ function checkWishlist() {
         }
     });
 }
+// 글 작성유저 좋아요 확인 및 버튼 초기화
+function checkFavoriteUser() {
+    var targetId = '${goodsDto.userId}'; // 해당 상품의 ID
+    var userId = "${loginId}"; // 로그인된 사용자의 ID 또는 세션에서 가져온 ID
+	
+    console.log(targetId);
+    console.log(userId);
+    // AJAX 요청 설정
+    $.ajax({
+        type: "POST",
+        url: "${pageContext.request.contextPath}/goods/checkfavoriteuser", // 찜 여부 확인을 처리할 컨트롤러 경로
+        data: {
+        	targetId: targetId,
+            userId: userId
+        },
+        success: function (data) {
+            var favoriteButton = $("#favoriteUser");
+            if (data === "addedUser") {
+                // 좋아요 버튼 아이콘을 "좋아요전"으로 변경
+                favoriteButton.removeClass("fa-heart-o").addClass("fa-heart");
+            } else {
+                // 좋아요 버튼 아이콘을 기본 "좋아요상태"로 유지
+                favoriteButton.removeClass("fa-heart").addClass("fa-heart-o");
+            }
+        }
+    });
+}
+
 
 var msg = '${msg}';
 if(msg){

@@ -3,6 +3,7 @@ import kh.spring.gaji.goods.model.dto.GoodsDto;
 import kh.spring.gaji.goods.model.dto.GoodsInfoDto;
 import kh.spring.gaji.goods.model.dto.GuDongInfoDto;
 import kh.spring.gaji.goods.model.dto.MainGoodsDto;
+import kh.spring.gaji.user.model.dto.FavoriteUserDto;
 import kh.spring.gaji.user.model.dto.WishListDto;
 
 import java.util.List;
@@ -25,6 +26,8 @@ public interface GoodsService {
     GoodsInfoDto goodsUserInfo(int goodsId);
     
     WishListDto checkWiskList(Map<String, String> map);
+    
+    FavoriteUserDto checkFavoriteUser(Map<String, String> map);
     
     Map<String,Object> getGoodsList(int currentPage,int PAGESIZE,int sort,int priceCeiling,int category,int dongId,String searchWord);
 
