@@ -52,7 +52,7 @@ public class UploadController {
 //		System.out.println(jsonResponse);
 		Map<String, Object> uploaded = new HashMap<String, Object>(); // 위에 String 값으로 해도되나 더러워보여 HashMap형식으로 넣고 Gson으로 json형식 변환
 		uploaded.put("uploaded", true);
-		uploaded.put("uploaded", imageUrl);
+		uploaded.put("url", imageUrl);
 		return new Gson().toJson(uploaded);
 		
 //		return jsonResponse; // 업로드된 이미지와 URL을 표시할 JSP 페이지로 이동

@@ -147,7 +147,6 @@
 						<h1 class="flex justify-between mb-1 text-lg font-bold align-middle text-heading lg:text-xl 2xl:text-2xl hover:text-black">
 							${goodsDto.title}
 							<div>
-								<!-- <button class="fa fa-heart" id="wishButton">찜해제하기</button> -->
 								<button class="fa fa-heart-o" id="wishButton"></button>
 							</div>
 						</h1>
@@ -253,7 +252,7 @@
 					<div class="col-span-1 lg:col-span-3 w-full">
 						<a class="text-base py-2 px-4 border-b-[4px] border-b-transparent text-jnblack w-full lg:w-auto justify-center flex lg:block cursor-pointer false"
 							aria-label="상품내용탭" aria-roledescription="상품내용탭" href="#">${goodsDto.description}</a>
-							<div th:utext="${goodsDto.description}"></div>
+							
 					</div>
 					<div role="presentation" class="col-span-1 lg:col-span-2 w-full">
 						<a class="text-base py-2 px-4 border-b-[4px] border-b-transparent text-jnblack w-full justify-center flex lg:block cursor-pointer border-b-jnblack transition duration-300 ease-in lg:border-b-transparent"
@@ -495,7 +494,8 @@
 $("#wishButton").click(function() {
     var goodsId = ${goodsDto.goodsId};
     var userId ="${loginId}"; // 로그인된 사용자의 ID 또는 세션에서 가져온 ID
-
+	
+    if(userId) {
     $.ajax({
         type: "POST",
         url: "${pageContext.request.contextPath}/goods/wish", // 찜 등록 또는 제거 처리할 컨트롤러 경로
@@ -516,6 +516,10 @@ $("#wishButton").click(function() {
             }
         }
     });
+    } else {
+    	alert("로그인이 필요한 기능입니다. 먼저 로그인해주세요.");
+    	window.location.href = '${pageContext.request.contextPath}/login'; 
+    }
 });
 //찜 여부 확인 및 버튼 초기화
 function checkWishlist() {
