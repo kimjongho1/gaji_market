@@ -81,4 +81,10 @@ public class PayServiceImpl implements PayService {
 		return payDao.getGoodsId(transactionId);
 	}
 
+
+	@Override
+	public String checkIdForPay(int goodsId) {
+		return payDao.checkIdForPay(goodsId);
+	}
+
 }

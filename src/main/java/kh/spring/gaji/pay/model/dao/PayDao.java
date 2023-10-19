@@ -73,4 +73,8 @@ public class PayDao {
     public PayUserInfoDto getUserInfo(String userId) {
     	return sqlSession.selectOne("pay.getUserInfo",userId);
     }
+    
+    public String checkIdForPay(int goodsId) {
+		return sqlSession.selectOne("pay.checkIdForPay",goodsId);
+	}
 }

@@ -63,5 +63,7 @@
 		(transaction_id,buyer_id,goods_id,purchase_method,goods_title,price,trading_date,trading_status,detail_address,road_address) 
 		values(#{transactionId},#{buyerId},#{goodsId},#{purchaseMethod},#{goodsTitle},#{price},systimestamp,1,#{detailAddress},#{roadAddress})
 	</insert>
-	
+	<select id="checkIdForPay" parameterType="_int" resultType="string">
+		select user_id from goods where goods_id=#{goodsId}
+	</select>
 </mapper>
