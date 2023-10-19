@@ -1,20 +1,18 @@
 package kh.spring.gaji.chat.contoller;
 
 import java.security.Principal;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.messaging.handler.annotation.DestinationVariable;
 import org.springframework.messaging.handler.annotation.MessageMapping;
-import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
@@ -32,73 +30,66 @@ public class ChatController {
 	@Autowired
 	private ChatService chatServiceImpl;
 	@Autowired
-	private SimpMessagingTemplate template; // *****
+	private SimpMessagingTemplate template;
 
 	@GetMapping("/chat")
 	public ModelAndView selectChatHome(ModelAndView mv, Principal principal) {
 		// userId 값으로 조회하기 때문에 변수 선언
 		String userId = principal.getName();
-		// 채팅방 리스트 출력
-		List<ChatRoomDto> result1 = chatServiceImpl.getChatRoom(userId);
+		// 현재 채팅방 리스트 출력
+		List<ChatRoomDto> result1 = chatServiceImpl.getChatRoomList(userId);
 		for (int i = 0; i < result1.size(); i++) {
 			result1.get(i).setChatInfo(chatServiceImpl.getChatInfo(result1.get(i).getChatId()));
 		}
 		mv.addObject("username", userId);
 		mv.addObject("chatRoomList", result1);
 		mv.setViewName("chat/chatroom");
-		log.info("getChatRoom 실행");
 		return mv;
 	}
 
 	
-	
-//	@PostMapping(value = "/member/room")
-//	public String create(@RequestParam String roomName, @RequestParam String member, Principal principal,
-//	RedirectAttributes rttr) {
-//	     log.info("# Create Chat Room, roomName: " + roomName + ", userId: " + userId);
-//	String userId = principal.getName();
-//	service.AddChatRoom(roomName, userId);
-//	service.memberInsert(member);
-//	rttr.addFlashAttribute("roomName1", roomName);
-//	rttr.addFlashAttribute("member", member);
-//	return "redirect:/member/rooms";
-//	}
-	
 	// 채팅방 개설
 	@GetMapping("/chat/insertRoom")
-	public String createRoom (@RequestParam String sellerId) {
-	    System.out.println("createRoom " + sellerId);
-	    return "redirect:/chat";
+	public String createRoom (Principal principal, RedirectAttributes attribute,@RequestParam String sellerId, int goodsId) {
+		String buyerId;
+		String redirectGood = "redirect:/goods/get?goodsId=" + goodsId;
+		System.out.println(goodsId);
+		// nullPointerException을 유도하여 로그인이 되지 않았다면, null값 부여
+		try {
+			buyerId = principal.getName();
+		} catch (NullPointerException e) {
+			buyerId = null;
+		}
+	    if(buyerId != null) {
+	    	if(!buyerId.equals(sellerId)) {
+	    		// 현재 채팅방 리스트 출력 (리스트를 확인하고 방이 없다면, 채팅방을 새로 만듦)
+	    		List<ChatRoomDto> result1 = chatServiceImpl.getChatRoomList(buyerId);
+	    		for (int i = 0; i < result1.size(); i++) {
+	    			// goodsId는 고유값 이므로 채팅방 중복 조회
+	    			int resultGoodsId = result1.get(i).getGoodsId();
+	    			if(resultGoodsId != goodsId) {
+	    				//채팅방 개설
+//	    				int result2 = chatServiceImpl.insertChatRoom(Integer.parseInt(goodsId), sellerId, buyerId);
+	    				
+	    			}
+	    		}
+	    		return "redirect:/chat";
+	    	} else {
+	    		attribute.addFlashAttribute("msg", "잘못된 접근입니다.");
+	    		return redirectGood;
+	    	}
+	    } else {
+	    	attribute.addFlashAttribute("msg", "로그인이 필요합니다.");
+	    	return "redirect:/login";
+	    }
 	}
 	// 채팅 선택
 	@GetMapping("/chat/selectRoom")
 	@ResponseBody
 	public String selectRoom(Principal principal, int chatId) {
-		String userId = principal.getName();
 		List<ChatMessageDto> result1 = chatServiceImpl.getChatMessage(chatId);
-		System.out.println(result1);
-//		mv.addObject("chatMessage",result1);
-//		mv.setViewName("chat/chatroom");
-//		return result1;
 		return new Gson().toJson(result1);
 	}
-
-//	@GetMapping("/insultChat")
-//	@ResponseBody
-//	public String insertMessage(String senderId, String chatId, String msg) {
-//		Map<String, Object> map = new HashMap<String, Object>();
-//		map.put("senderId", senderId);
-//		map.put("chatId", Integer.parseInt(chatId));
-//		map.put("message", msg);
-//		int result1 = chatServiceImpl.insertChatMessage(map);
-//		String result2 = null;
-//		if(result1 != 1) {
-//			result2 ="메시지 DB 저장 실패";
-//		} else {
-//			result2 ="메시지 DB 저장 성공";
-//		}
-//		return new Gson().toJson(result2);
-//	}
 
 	// JSP로 메시지 출력
 	@MessageMapping("/chat/room")
@@ -111,8 +102,7 @@ public class ChatController {
 	public void message(ChatMessageDto message){
 		ObjectMapper objectMapper = new ObjectMapper();
 		Map<String, Object> map = objectMapper.convertValue(message, Map.class);
-		System.out.println("[jh]1: "+map);
-		int result1 = chatServiceImpl.insertChatMessage(map);
+		chatServiceImpl.insertChatMessage(map);
 		//insert 명령어
 		template.convertAndSend("/sub/chat/room/" + message.getChatId(), message);
 	}

@@ -2,12 +2,12 @@
 <!DOCTYPE mapper PUBLIC " -//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="chat">
 	<select id="selectChatListByUserId" parameterType="string" resultType="ChatRoomDto">
-		SELECT c.chat_id, u.nickname,c.seller_id, c.created_at
+		SELECT c.chat_id, c.goods_id, u.nickname,c.seller_id, c.created_at
 		FROM chat_room c
 		JOIN users u ON (u.user_id = c.buyer_id)
 		WHERE c.seller_id = #{userId}
 		UNION
-		SELECT c.chat_id, u.nickname,c.seller_id, c.created_at
+		SELECT c.chat_id, c.goods_id, u.nickname,c.seller_id, c.created_at
 		FROM chat_room c
 		JOIN users u ON (u.user_id = c.seller_id)
 		WHERE c.buyer_id = #{userId}

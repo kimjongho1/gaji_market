@@ -19,7 +19,7 @@ public class ChatServiceImpl implements ChatService{
 	private ChatDao chatDao;
 	
 	@Override
-	public List<ChatRoomDto> getChatRoom(String userId) {
+	public List<ChatRoomDto> getChatRoomList(String userId) {
 		return chatDao.getChatRoomList(userId);
 	}
 
@@ -35,7 +35,12 @@ public class ChatServiceImpl implements ChatService{
 
 	@Override
 	public int insertChatMessage(Map<String, Object> map) {
-		return chatDao.insertMessage(map);
+		return chatDao.insertChatMessage(map);
+	}
+
+	@Override
+	public int insertChatRoom(int goodId, String sellerId, String buyerId) {
+		return chatDao.insertChatRoom(goodId, sellerId, buyerId);;
 	}
 	
 }
