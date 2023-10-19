@@ -25,6 +25,8 @@ public interface GoodsService {
     
     GoodsInfoDto goodsUserInfo(int goodsId);
     
+    GoodsDto getGoods(int goodsId);
+    
     WishListDto checkWiskList(Map<String, String> map);
     
     FavoriteUserDto checkFavoriteUser(Map<String, String> map);

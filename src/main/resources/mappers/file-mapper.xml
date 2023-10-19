@@ -6,6 +6,6 @@
 	</insert>
 	
 	<select id="goodsImageList" parameterType="_int" resultType="FileDto">
-		select url, goods_id from goods_file where goods_id = #{goodsId}
+		select url, goods_id, SUBSTR(url, INSTR(url, '/', -1) + 1) AS file_name from goods_file where goods_id = #{goodsId}
 	</select>
 </mapper>

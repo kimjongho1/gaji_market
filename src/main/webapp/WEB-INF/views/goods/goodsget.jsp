@@ -680,7 +680,7 @@ $("#modifyGoods").click(function() {
 	var goodsUserId = "${goodsDto.userId}";		//글 작성 id
 	if(userId){
 		if(userId == goodsUserId){
-			window.location.href = '${pageContext.request.contextPath}/goods/modify?goodsId=' + goodsId;
+			window.location.href = '${pageContext.request.contextPath}/goods/update?goodsId=' + goodsId;
 		} else {
 			alert("수정 권한이 없습니다.");
 		}

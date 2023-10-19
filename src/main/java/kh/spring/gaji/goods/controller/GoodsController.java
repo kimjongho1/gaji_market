@@ -178,7 +178,7 @@ public class GoodsController {
 			throws IOException {
 		if (goodsService.insertGoods(goodsDto) > 0) {
 			System.out.println(files.length);
-			if (files != null && files.length > 0) {
+			if (files != null && files.length > 0 && files.length < 9) {
 				Map params1 = ObjectUtils.asMap("use_filename", true, "unique_filename", true, "overwrite", false);
 				for (MultipartFile file : files) {
 					if (file.getSize() > 0) {
@@ -216,14 +216,15 @@ public class GoodsController {
 		return mv;
 	}
 	
-	@GetMapping("/modify")
+	@GetMapping("/update")
 	public ModelAndView modifyGoods(Principal principal ,int goodsId, ModelAndView mv) { // 중고거래 게시판 글 수정
 		
 		if(principal != null) {
-			String userId = principal.getName();
+			String loginId = principal.getName();
 			mv.setViewName("goods/goodsupdate");
-			mv.addObject("loginId", userId);
+			mv.addObject("loginId", loginId);
 			mv.addObject("imageList",fileService.goodsImageList(goodsId)); // 해당 상품 url list값
+			mv.addObject("goodsDto",goodsService.getGoods(goodsId));
 			mv.addObject("categoryList", categoryService.categoryList());
 			mv.addObject("dongList", regionService.dongList());
 			mv.addObject("guList", regionService.guList());
@@ -234,11 +235,35 @@ public class GoodsController {
 		}
 		return mv;
 	}
-//	@PostMapping("")
-//	public String goodsUpdate() {
-//		
-//		return "";
-//	}
+	
+	@PostMapping("/goodsupdate")
+	@Transactional
+	public String goodsUpdate(RedirectAttributes ra, FileDto fileDto, GoodsDto goodsDto,
+			@RequestParam(value = "files", required = false) MultipartFile[] files) throws IOException{
+		if (goodsService.updateGoods(goodsDto) > 0) {
+			System.out.println(files.length);
+			if (files != null && files.length > 0 && files.length < 9) {
+				Map params1 = ObjectUtils.asMap("use_filename", true, "unique_filename", true, "overwrite", false);
+				for (MultipartFile file : files) {
+					if (file.getSize() > 0) {
+						System.out.println(file.getName());
+						System.out.println(file.getSize());
+						File imageFile = new UploadController().convertMultipartFileToFile(file);
+						Map imageUrl2 = cloudinary.uploader().upload(imageFile, params1);
+						System.out.println(imageUrl2);
+						String imageUrl = cloudinary.url().generate((String) imageUrl2.get("secure_url"));
+						fileDto.setUrl(imageUrl);
+						fileService.insertFile(fileDto);
+					}
+				}
+			}
+			ra.addFlashAttribute("msg", "상품 등록이 성공하였습니다.");
+			return "redirect:/goods/board"; // 성공 시 게시판으로 리다이렉트
+		} else {
+			ra.addFlashAttribute("msg", "상품 등록이 실패하였습니다. 다시 시도해주십시오.");
+			return "redirect:/goods/goodswrite"; // 실패 시 다시 글 작성 페이지로 이동
+		}
+	}
 	
 	
 	@PostMapping("/wish")

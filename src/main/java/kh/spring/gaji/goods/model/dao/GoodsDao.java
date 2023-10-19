@@ -77,8 +77,9 @@ public class GoodsDao  {
     	return sqlSession.selectList("goods.userGoodsList", goodsId);
     }
     
-//    public GoodsDto getGoodsModify()
-    
+    public GoodsDto getGoods(int goodsId){
+    	return sqlSession.selectOne("goods.getGoods", goodsId);
+    }
     public int pullUpGoods(int goodsId) { //상품 날짜 끌어올림
     	return sqlSession.update("goods.pullUpGoods", goodsId);
     }

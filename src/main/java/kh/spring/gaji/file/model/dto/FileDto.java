@@ -8,4 +8,5 @@ import org.springframework.stereotype.Component;
 public class FileDto { //변경해야함.
     private String url;
     private int goodsId;
+    private String filename;
 }

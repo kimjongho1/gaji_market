@@ -44,6 +44,11 @@ public class GoodsServiceImpl implements GoodsService {
 	}
 	
 	@Override
+	public GoodsDto getGoods(int goodsId) {
+		return goodsDao.getGoods(goodsId);
+	}
+	
+	@Override
 	public WishListDto checkWiskList(Map<String, String> map) {
 		return goodsDao.checkWiskList(map);
 	}
@@ -129,6 +134,8 @@ public class GoodsServiceImpl implements GoodsService {
 	    	result.put("myGoodsList",goodsDao.getSearchOnsaleList(userId,currentPage,PAGESIZE,totalCnt,searchWord));
 	    	return result;
 	    }
+
+		
 
 		
 
