@@ -95,9 +95,9 @@
     function cancelCallBack(data){
         console.log("cancelCallBack들어옴");
         console.log(data);
-        if(data.response.status=="cancelled"){
+        if(data.response.status=="cancelled"){ㄱ
             alert("거래가 취소되었습니다");
-            window.location.href="${pageContext.request.contextPath}/mypage/salesstatus";
+            window.location.href="${pageContext.request.contextPath}/mypage/salesstatus/safe";
         }
         else
             alert("거래 취소에 실패하였습니다.");
@@ -106,7 +106,7 @@
     var accept=(sellerId,transactionId)=>{
     	 $.ajax({
              url:"${pageContext.request.contextPath}/payment/changestatus",
-             data:{userId:sellerId, transactionId:transactionId , status:2},
+             data:{transactionId:transactionId , status:2},
              method: "post",
              dataType:"json",
              success:acceptCallback,

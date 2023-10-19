@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import kh.spring.gaji.notification.model.dto.InsertNotificationDto;
+import kh.spring.gaji.notification.model.dto.TitleBuyerDto;
 import kh.spring.gaji.pay.model.dao.PayDao;
 import kh.spring.gaji.pay.model.dto.GoodsPayInfoDto;
 import kh.spring.gaji.pay.model.dto.InsertSafeTradingDto;
@@ -71,12 +73,6 @@ public class PayServiceImpl implements PayService {
 
 
 	@Override
-	public String checkId(String transactionId) {
-		return payDao.checkId(transactionId);
-	}
-
-
-	@Override
 	public int getGoodsId(String transactionId) {
 		return payDao.getGoodsId(transactionId);
 	}
@@ -85,6 +81,18 @@ public class PayServiceImpl implements PayService {
 	@Override
 	public String checkIdForPay(int goodsId) {
 		return payDao.checkIdForPay(goodsId);
+	}
+
+
+	@Override
+	public TitleBuyerDto getBuyerIdFromTransactionId(String transactionId) {
+		return payDao.getBuyerIdFromTransactionId(transactionId);
+	}
+
+
+	@Override
+	public int insertNoti(InsertNotificationDto insertNotificationDto) {
+		return payDao.insertNoti(insertNotificationDto);
 	}
 
 }

@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -28,6 +29,8 @@ import com.siot.IamportRestClient.response.IamportResponse;
 import com.siot.IamportRestClient.response.Payment;
 
 import kh.spring.gaji.goods.model.Service.GoodsService;
+import kh.spring.gaji.notification.model.dto.InsertNotificationDto;
+import kh.spring.gaji.notification.model.dto.TitleBuyerDto;
 import kh.spring.gaji.pay.model.dto.GoodsPayInfoDto;
 import kh.spring.gaji.pay.model.dto.InsertSafeTradingDto;
 import kh.spring.gaji.pay.model.dto.PayUserInfoDto;
@@ -44,6 +47,8 @@ public class PayController {
 	private PayService payServiceImpl;
 	@Autowired
 	private InsertSafeTradingDto insertSafeTradingDto;
+	@Autowired
+	private InsertNotificationDto insertNotificationDto;
 	
 	private CancelData cancelData;
 	
@@ -91,7 +96,8 @@ public class PayController {
 				System.out.println("result:"+result);
 			return result;
 		}
-		
+	
+	@Transactional
 	@PostMapping("payment/changestatus")
 	@ResponseBody
 	public int changeStatus(String transactionId,int status,HttpServletRequest request,Principal principal) {
@@ -100,8 +106,16 @@ public class PayController {
 		map.put("userId", userId);
 		map.put("status", status);
 		map.put("transactionId",transactionId);
-		return payServiceImpl.changeStatus(map);
-	/*	}*/
+		if(payServiceImpl.changeStatus(map)==1) {
+			TitleBuyerDto titleBuyerDto=payServiceImpl.getBuyerIdFromTransactionId(transactionId);
+			insertNotificationDto.setUserId(titleBuyerDto.getBuyerId());  
+			insertNotificationDto.setType(3);
+			insertNotificationDto.setReferenceId(transactionId);
+			insertNotificationDto.setMessage(titleBuyerDto.getGoodsTitle()+"의 거래가 수락되었습니다.");
+			payServiceImpl.insertNoti(insertNotificationDto);
+			return 1;
+		}
+		return 0;
 	}
 		
 	@PostMapping("payment/cancel")	//안전거래 후 취소처리를 위한 버튼
@@ -117,6 +131,12 @@ public class PayController {
 				map.put("status",1);
 				map.put("goodsId",goodsId);
 				payServiceImpl.updateStatus(map);
+				TitleBuyerDto titleBuyerDto=payServiceImpl.getBuyerIdFromTransactionId(transactionId);
+				insertNotificationDto.setUserId(titleBuyerDto.getBuyerId());  
+				insertNotificationDto.setType(3);
+				insertNotificationDto.setReferenceId(transactionId);
+				insertNotificationDto.setMessage(titleBuyerDto.getGoodsTitle()+"의 거래가 취소되었습니다.");
+				payServiceImpl.insertNoti(insertNotificationDto);
 			}
 			return result;	// 거래정보담은 객체반환 이후 페이지에서 이에따른 처리함.
 		} catch (IamportResponseException | IOException e) {

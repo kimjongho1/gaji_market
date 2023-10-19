@@ -8,6 +8,8 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import kh.spring.gaji.notification.model.dto.InsertNotificationDto;
+import kh.spring.gaji.notification.model.dto.TitleBuyerDto;
 import kh.spring.gaji.pay.model.dto.GoodsPayInfoDto;
 import kh.spring.gaji.pay.model.dto.InsertSafeTradingDto;
 import kh.spring.gaji.pay.model.dto.PayUserInfoDto;
@@ -17,10 +19,6 @@ import kh.spring.gaji.user.model.dto.UserAddressDto;
 public class PayDao {
     @Autowired
     private SqlSession sqlSession;
-
-    public String checkId(String transactionId) {
-    	return sqlSession.selectOne("pay.checkId",transactionId);
-    }
     
     public int getGoodsId(String transactionId) {
     	return sqlSession.selectOne("pay.getGoodsId",transactionId);
@@ -77,4 +75,11 @@ public class PayDao {
     public String checkIdForPay(int goodsId) {
 		return sqlSession.selectOne("pay.checkIdForPay",goodsId);
 	}
+    
+    public TitleBuyerDto getBuyerIdFromTransactionId(String transactionId) {
+    	return sqlSession.selectOne("pay.getBuyerIdFromTransactionId",transactionId);
+    }
+    public int insertNoti(InsertNotificationDto insertNotificationDto) {
+    	return sqlSession.insert("notification.insertNoti",insertNotificationDto);
+    }
 }

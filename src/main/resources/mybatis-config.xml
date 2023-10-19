@@ -62,13 +62,15 @@
 		<typeAlias type="kh.spring.gaji.region.model.dto.GuDto" alias="GuDto"/>
 		<typeAlias type="kh.spring.gaji.goods.model.dto.MainGoodsDto" alias="MainGoodsDto"/>
 		
-		<!-- 커뮤니티 인덱스 -->
+		<!-- 커뮤니티 Dto -->
 		<!-- 		
 		<typeAlias type="kh.spring.gaji.community.model.dto.CommunityLikeDto" alias="CommunityLikeDto"/>
 		<typeAlias type="kh.spring.gaji.community.model.dto.CommunityInfoDto" alias="CommunityInfoDto"/>
 		<typeAlias type="kh.spring.gaji.report.model.dto.CommunityReportListDto" alias="CommunityReportListDto"/>
 		<typeAlias type="kh.spring.gaji.report.model.dto.CommunityReportInfoDto" alias="CommunityReportInfoDto"/> --> 
 		
+		<!-- 알림 Dto -->
+		<typeAlias type="kh.spring.gaji.notification.model.dto.InsertNotificationDto" alias="InsertNotificationDto"/>
 		
 	</typeAliases>
 	

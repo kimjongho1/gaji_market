@@ -25,6 +25,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import kh.spring.gaji.goods.model.dto.MyGoodsListDto;
 import kh.spring.gaji.mypage.model.service.MypageService;
+import kh.spring.gaji.notification.model.dto.InsertNotificationDto;
+import kh.spring.gaji.notification.model.dto.TitleBuyerDto;
 import kh.spring.gaji.pay.model.dto.DealReviewDto;
 import kh.spring.gaji.pay.model.dto.InFaceTradingDto;
 import kh.spring.gaji.pay.model.dto.SafePurchaseInfoDto;
@@ -52,6 +54,9 @@ public class MyPageController {
 	@Autowired
 	private BCryptPasswordEncoder bCryptPasswordEncoder;
 
+	@Autowired
+	private InsertNotificationDto insertNotificationDto;
+	
 	@GetMapping("/changepwd")
 	public String changPwd(Principal principal, RedirectAttributes ra, Model model) {
 		if (principal != null) {
@@ -629,8 +634,22 @@ public class MyPageController {
 		map.put("shippingCompany", shippingCompany);
 		map.put("trackingNumber", trackingNumber);
 		map.put("transactionId", transactionId);
-		if (userService.updateTrackingNumber(map) == 1)
+		if (userService.updateTrackingNumber(map) == 1) {
 			redirectattr.addFlashAttribute("msg", "운송장이 등록되었습니다");
+			TitleBuyerDto titleBuyerDto=payServiceImpl.getBuyerIdFromTransactionId(transactionId);
+			insertNotificationDto.setUserId(titleBuyerDto.getBuyerId());  
+			insertNotificationDto.setType(3);
+			insertNotificationDto.setReferenceId(transactionId);
+			if(shippingCompany==1)
+			insertNotificationDto.setMessage(titleBuyerDto.getGoodsTitle()+"의 운송장이 등록되었습니다. (대한통운)운송장 번호는"+trackingNumber+"입니다.");
+			else if(shippingCompany==2)
+			insertNotificationDto.setMessage(titleBuyerDto.getGoodsTitle()+"의 운송장이 등록되었습니다. (우체국)운송장 번호는"+trackingNumber+"입니다.");
+			else if(shippingCompany==3)
+				insertNotificationDto.setMessage(titleBuyerDto.getGoodsTitle()+"의 운송장이 등록되었습니다. (한진택배)운송장 번호는"+trackingNumber+"입니다.");
+			else
+				insertNotificationDto.setMessage(titleBuyerDto.getGoodsTitle()+"의 운송장이 등록되었습니다. (로젠택배)운송장 번호는"+trackingNumber+"입니다.");
+			payServiceImpl.insertNoti(insertNotificationDto);
+		}
 		else
 			redirectattr.addFlashAttribute("msg", "운송장 등록에 실패했습니다");
 		return "redirect:/mypage/deal/safe/seller?transactionId=" + transactionId;

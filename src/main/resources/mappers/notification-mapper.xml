@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC " -//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="norification">
+<mapper namespace="notification">
 
-	<update id="updateNotiYN" parameterType="_int"> <!-- 알림 클릭시 알림 읽음상태로 전환 -->
-		update notification set read_yn='Y' where noti_id=#{notiId}
+	<update id="updateNotiYN" parameterType="map"> <!-- 알림 클릭시 알림 읽음상태로 전환 -->
+		update notification set read_yn='Y' where noti_id=#{notiId} and user_id=#{userId}
 	</update>
 	
 	<select id="countNotification" parameterType="string" resultType="_int">>	<!-- 2P 알림갯수 -->
 		select count(*) from notification where user_id=#{userId} and read_yn='N'
 	</select>
 	 
-	<insert id="insertNoti" parameterType="NotificationDto">	<!-- 알림생성 -->
-		insert into notification values(noti_id_sequence.nextval, #{userId}, #{message}, #{readYN},#{type}, #{referenceId}, "")
+	<insert id="insertNoti" parameterType="InsertNotificationDto">	<!-- 알림생성 -->
+		insert into notification values(noti_id_sequence.nextval, #{userId}, #{message},default,#{type}, #{referenceId},default)
 	</insert>
 	
 	<select id="getTradeNotice" resultType="NotificationDto" parameterType="string"> <!-- 18P해당계정의 거래알림 -->

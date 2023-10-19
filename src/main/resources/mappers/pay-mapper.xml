@@ -18,10 +18,6 @@
 			where goods_id=#{goodsId}
 	</update>
 	
-	<select id="checkId" resultType="string" parameterType="string">
-		select buyer_id from safe_trading where transaction_id=#{transactionId}
-	</select>
-	
 	<select id="getGoodsId" parameterType="string" resultType="_int">
 		select goods_id from goods join safe_trading using (goods_id) where transaction_id=#{transactionId}
 	</select>
@@ -35,6 +31,10 @@
 		update safe_trading s set trading_status=#{status}
 		where transaction_id= #{transactionId} and (select user_id from goods g where s.goods_Id=g.goods_Id)=#{userId}
 	</update>
+	
+	<select id="getBuyerIdFromTransactionId" parameterType="string" resultType="kh.spring.gaji.notification.model.dto.TitleBuyerDto">
+		select goods_title,buyer_id from safe_trading where transaction_id = #{transactionId}
+	</select>
 	
 	<select id="getAmount" parameterType="_int" resultType="_int">	<!-- 결제시 가격확인을 위한 쿼리문 -->
 		select price from goods where goods_id=#{goodsId} and status!=4 and active_status='Y'
