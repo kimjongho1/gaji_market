@@ -265,16 +265,14 @@ public class MyPageController {
 	}
 
 	@GetMapping("/orderstatus/safe")
-	public String safeorderList(Model model, Integer currentPage, String searchWord, Principal principal) { // 나의 안전거래
-																											// 구매내역 페이지.
+	public String safeorderList(Model model, Integer currentPage, String searchWord, Principal principal) { // 나의 안전거래 구매내역 페이지.
 		String userId = principal.getName();
 		int totalCnt = 0;
 		List<UserSafeTradingDto> safePurchaseList = null;
 		if (currentPage == null) // 현재 페이지가 들어온게 없다면 1페이지.
 			currentPage = 1;
 		if (searchWord == null) { // 검색어가 들어온게 없다면 검색어없는 mapper로 목록 가져오기
-			Map<String, Object> map = userService.getSafePurchaseList(userId, (int) currentPage, PAGESIZE); // 추후
-																											// userId들어가야함
+			Map<String, Object> map = userService.getSafePurchaseList(userId, (int) currentPage, PAGESIZE); // 추후 userId들어가야함
 			safePurchaseList = (List<UserSafeTradingDto>) map.get("safePurchaseList");
 			totalCnt = (int) map.get("totalCnt");
 		} else { // 검색어가 있다면 그에따른 mapper로 목록 가져오기
@@ -304,17 +302,14 @@ public class MyPageController {
 	}
 
 	@GetMapping("/orderstatus/inface")
-	public String infaceOrderList(Model model, Integer currentPage, String searchWord, Principal principal) { // 나의 직거래
-																												// 구매내역
-																												// 페이지.
+	public String infaceOrderList(Model model, Integer currentPage, String searchWord, Principal principal) { // 나의 직거래 구매내역 페이지.
 		String userId = principal.getName();
 		int totalCnt = 0;
 		List<InFaceTradingDto> infacePurchaseList = null;
 		if (currentPage == null) // 현재 페이지가 들어온게 없다면 1페이지.
 			currentPage = 1;
 		if (searchWord == null) { // 검색어가 들어온게 없다면 검색어없는 mapper로 목록 가져오기
-			Map<String, Object> map = userService.getInfacePurchaseList(userId, (int) currentPage, PAGESIZE); // 추후
-																												// userId들어가야함
+			Map<String, Object> map = userService.getInfacePurchaseList(userId, (int) currentPage, PAGESIZE); // 추후 userId들어가야함
 			infacePurchaseList = (List<InFaceTradingDto>) map.get("inFacePurchaseList");
 			totalCnt = (int) map.get("totalCnt");
 		} else { // 검색어가 있다면 그에따른 mapper로 목록 가져오기
@@ -342,10 +337,7 @@ public class MyPageController {
 	}
 
 	@GetMapping("/salestatus/inface")
-	public String infaceSellerOrderList(Model model, Integer currentPage, String searchWord, Principal principal) { // 나의
-																													// 직거래
-																													// 구매내역
-																													// 페이지.
+	public String infaceSellerOrderList(Model model, Integer currentPage, String searchWord, Principal principal) { // 나의 직거래 구매내역 페이지.
 		String userId = principal.getName();
 		int totalCnt = 0;
 		List<InFaceTradingDto> infacePurchaseList = null;
@@ -427,12 +419,11 @@ public class MyPageController {
 		if (currentPage == null) // 현재 페이지가 들어온게 없다면 1페이지.
 			currentPage = 1;
 		if (searchWord == null) { // 검색어가 들어온게 없다면 검색어없는 mapper로 목록 가져오기
-			Map<String, Object> map = userService.getOnSaleList(userId, (int) currentPage, PAGESIZE); // 추후 userId들어가야함
+			Map<String, Object> map = userService.getOnSaleList(userId, (int) currentPage, PAGESIZE); 
 			myGoodsList = (List<MyGoodsListDto>) map.get("myGoodsList");
 			totalCnt = (int) map.get("totalCnt");
 		} else { // 검색어가 있다면 그에따른 mapper로 목록 가져오기
-			Map<String, Object> map = userService.getSearchOnSaleList(userId, (int) currentPage, PAGESIZE, searchWord);// 추후
-																														// userId들어가야함
+			Map<String, Object> map = userService.getSearchOnSaleList(userId, (int) currentPage, PAGESIZE, searchWord);
 			myGoodsList = (List<MyGoodsListDto>) map.get("myGoodsList");
 			totalCnt = (int) map.get("totalCnt");
 			model.addAttribute("searchWord", searchWord);
@@ -463,12 +454,11 @@ public class MyPageController {
 		if (currentPage == null) // 현재 페이지가 들어온게 없다면 1페이지.
 			currentPage = 1;
 		if (searchWord == null) { // 검색어가 들어온게 없다면 검색어없는 mapper로 목록 가져오기
-			Map<String, Object> map = userService.getClosedList(userId, (int) currentPage, PAGESIZE); // 추후 userId들어가야함
+			Map<String, Object> map = userService.getClosedList(userId, (int) currentPage, PAGESIZE); 
 			myGoodsList = (List<MyGoodsListDto>) map.get("myGoodsList");
 			totalCnt = (int) map.get("totalCnt");
 		} else { // 검색어가 있다면 그에따른 mapper로 목록 가져오기
-			Map<String, Object> map = userService.getSearchClosedList(userId, (int) currentPage, PAGESIZE, searchWord);// 추후
-																														// userId들어가야함
+			Map<String, Object> map = userService.getSearchClosedList(userId, (int) currentPage, PAGESIZE, searchWord);
 			myGoodsList = (List<MyGoodsListDto>) map.get("myGoodsList");
 			totalCnt = (int) map.get("totalCnt");
 			model.addAttribute("searchWord", searchWord);
@@ -499,12 +489,11 @@ public class MyPageController {
 		if (currentPage == null) // 현재 페이지가 들어온게 없다면 1페이지.
 			currentPage = 1;
 		if (searchWord == null) { // 검색어가 들어온게 없다면 검색어없는 mapper로 목록 가져오기
-			Map<String, Object> map = userService.getHideList(userId, (int) currentPage, PAGESIZE); // 추후 userId들어가야함
+			Map<String, Object> map = userService.getHideList(userId, (int) currentPage, PAGESIZE);
 			myGoodsList = (List<MyGoodsListDto>) map.get("myGoodsList");
 			totalCnt = (int) map.get("totalCnt");
 		} else { // 검색어가 있다면 그에따른 mapper로 목록 가져오기
-			Map<String, Object> map = userService.getSearchHideList(userId, (int) currentPage, PAGESIZE, searchWord);// 추후
-																														// userId들어가야함
+			Map<String, Object> map = userService.getSearchHideList(userId, (int) currentPage, PAGESIZE, searchWord);
 			myGoodsList = (List<MyGoodsListDto>) map.get("myGoodsList");
 			totalCnt = (int) map.get("totalCnt");
 			model.addAttribute("searchWord", searchWord);
@@ -540,12 +529,11 @@ public class MyPageController {
 		if (currentPage == null) // 현재 페이지가 들어온게 없다면 1페이지.
 			currentPage = 1;
 		if (searchWord == null) { // 검색어가 들어온게 없다면 검색어없는 mapper로 목록 가져오기
-			Map<String, Object> map = userService.getKeepUsedList(userId, (int) currentPage, PAGESIZE); // userId들어가야함
+			Map<String, Object> map = userService.getKeepUsedList(userId, (int) currentPage, PAGESIZE); 
 			myGoodsList = (List<MyGoodsListDto>) map.get("myGoodsList");
 			totalCnt = (int) map.get("totalCnt");
 		} else { // 검색어가 있다면 그에따른 mapper로 목록 가져오기
-			Map<String, Object> map = userService.getSearchKeepUsedList(userId, (int) currentPage, PAGESIZE,
-					searchWord);// 추후 userId들어가야함
+			Map<String, Object> map = userService.getSearchKeepUsedList(userId, (int) currentPage, PAGESIZE,searchWord);
 			myGoodsList = (List<MyGoodsListDto>) map.get("myGoodsList");
 			totalCnt = (int) map.get("totalCnt");
 			model.addAttribute("searchWord", searchWord);
@@ -577,8 +565,7 @@ public class MyPageController {
 		if (currentPage == null) // 현재 페이지가 들어온게 없다면 1페이지.
 			currentPage = 1;
 		if (searchWord == null) { // 검색어가 들어온게 없다면 검색어없는 mapper로 목록 가져오기
-			Map<String, Object> map = userService.getKeepUsersList(userId, (int) currentPage, PAGESIZE); // 추후
-																											// userId들어가야함
+			Map<String, Object> map = userService.getKeepUsersList(userId, (int) currentPage, PAGESIZE); 
 			myGoodsList = (List<MyGoodsListDto>) map.get("myGoodsList");
 			totalCnt = (int) map.get("totalCnt");
 		} else { // 검색어가 있다면 그에따른 mapper로 목록 가져오기
@@ -606,11 +593,7 @@ public class MyPageController {
 	}
 
 	@GetMapping("/deal/safe/seller")
-	public String seller(Model model, String transactionId, RedirectAttributes redirectattr, Principal principal) { // 안전
-																													// 거래
-																													// 상세조회
-																													// 판매자
-																													// 페이지
+	public String seller(Model model, String transactionId, RedirectAttributes redirectattr, Principal principal) { // 안전거래 상세조회 판매자 페이지
 		String userId = principal.getName();
 		if (!userService.checkIdForSafeSeller(transactionId).equals(userId)) // session.getAttribute("userId")로 변경해야함.
 		{
