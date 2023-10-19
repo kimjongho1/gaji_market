@@ -38,6 +38,16 @@
 <link
 	href="${pageContext.request.contextPath}/resources/css/orderstatus.css"
 	rel='stylesheet' type='text/css'>
+	
+<style>
+.page${currentPage}{
+	background-color:#5715CC !important;
+}
+</style>	
+	
+
+
+	
 </head>
 
 <body>
@@ -53,12 +63,12 @@
 	<div class="row size">
 
 	<div class="buttons-container text-center">
-		<a class="btn1 safeTrading" href="${pageContext.request.contextPath}/mypage/salestatus/safe">안전거래</a>
-		<a class="btn1 infaceTrading" href="${pageContext.request.contextPath}/mypage/salestatus/inface">직거래</a>
+		<a class="btn1 safeTrading" href="${pageContext.request.contextPath}/mypage/orderstatus/safe">안전거래</a>
+		<a class="btn1 infaceTrading" href="${pageContext.request.contextPath}/mypage/orderstatus/inface">직거래</a>
 	</div>
 	<div class="searchWord">
 		<form
-			action="${pageContext.request.contextPath}/mypage/salestatus/safe" method="get">
+			action="${pageContext.request.contextPath}/mypage/orderstatus/inface" method="get">
 			<input type="search" name="searchWord" placeholder="제목 검색"> <input class="btn1" type="submit" value="검색">
 		</form>
 	</div>
@@ -129,7 +139,7 @@
 						href="<%=request.getContextPath()%>/mypage/orderstatus/inface?currentPage=${startPageNum-1}&searchWord=${searchWord}"><span>이전</span></a>
 				</c:if>
 				<c:forEach begin="${startPageNum}" end="${endPageNum}" var="i">
-					<a
+					<a class="page${i}"
 						href="<%=request.getContextPath()%>/mypage/orderstatus/inface?currentPage=${i}&searchWord=${searchWord}"><span>${i}</span></a>
 				</c:forEach>
 				<c:if test="${endPageNum<totalPageNum}">
@@ -143,7 +153,7 @@
 						href="<%=request.getContextPath()%>/mypage/orderstatus/inface?currentPage=${startPageNum-1}"><span>이전</span></a>
 				</c:if>
 				<c:forEach begin="${startPageNum}" end="${endPageNum}" var="i">
-					<a
+					<a class="page${i}"
 						href="<%=request.getContextPath()%>/mypage/orderstatus/inface?currentPage=${i}"><span>${i}
 					</span></a>
 				</c:forEach>

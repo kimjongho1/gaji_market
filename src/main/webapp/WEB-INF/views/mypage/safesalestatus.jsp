@@ -38,6 +38,14 @@
 <link
 	href="${pageContext.request.contextPath}/resources/css/orderstatus.css"
 	rel='stylesheet' type='text/css'>
+	<style>
+	
+
+.page${currentPage}{
+	background-color:#5715CC !important;
+}
+	
+	</style>
 </head>
 
 <body>
@@ -134,7 +142,7 @@
 						href="<%=request.getContextPath()%>/mypage/salestatus/safe?currentPage=${startPageNum-1}&searchWord=${searchWord}"><span>이전</span></a>
 				</c:if>
 				<c:forEach begin="${startPageNum}" end="${endPageNum}" var="i">
-					<a
+					<a class="page${i}"
 						href="<%=request.getContextPath()%>/mypage/salestatus/safe?currentPage=${i}&searchWord=${searchWord}"><span>${i}</span></a>
 				</c:forEach>
 				<c:if test="${endPageNum<totalPageNum}">
@@ -148,7 +156,7 @@
 						href="<%=request.getContextPath()%>/mypage/salestatus/safe?currentPage=${startPageNum-1}"><span>이전</span></a>
 				</c:if>
 				<c:forEach begin="${startPageNum}" end="${endPageNum}" var="i">
-					<a
+					<a class="page${i}"
 						href="<%=request.getContextPath()%>/mypage/salestatus/safe?currentPage=${i}"><span>${i}
 					</span></a>
 				</c:forEach>

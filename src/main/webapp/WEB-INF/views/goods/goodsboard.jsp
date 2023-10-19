@@ -41,6 +41,10 @@
 	href="${pageContext.request.contextPath}/resources/css/style.css"
 	type="text/css">
 <style>
+.page${currentPage}{
+	background-color:black;
+}
+
 .sortList,
 .guList,
 .dongList {
@@ -425,7 +429,7 @@
     </c:if>
 
     <c:forEach begin="${startPageNum}" end="${endPageNum}" var="i">
-      <button class="pagination-button" onclick="pageMove(${i})">${i}</button>
+      <button class="pagination-button page${i}" onclick="pageMove(${i})">${i}</button>
     </c:forEach>
 
     <c:if test="${endPageNum<totalPageNum}">

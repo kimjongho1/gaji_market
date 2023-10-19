@@ -13,8 +13,9 @@
 <meta name="description" content="" />
 <meta name="author" content="" />
 <title>숨김 상품</title>
-<!-- Favicon-->
-<!--         <link rel="icon" type="image/x-icon" href="assets/favicon.ico" /> -->
+<!--favicon  -->
+	<link rel="icon" href="${pageContext.request.contextPath}/resources/img/favicon.ico">
+	<link rel="shortcut icon" href="${pageContext.request.contextPath}/resources/img/favicon.ico">
 <!-- Bootstrap icons-->
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css"
@@ -37,6 +38,13 @@
 	href="${pageContext.request.contextPath}/resources/css/orderstatus.css"
 	rel='stylesheet' type='text/css'>
 <link href="${pageContext.request.contextPath}/resources/css/mypage/mygoods.css" rel='stylesheet' type='text/css'>
+
+<style>
+.page${currentPage}{
+	background-color:#5715CC !important;
+}
+</style>
+
 </head>
 
 
@@ -44,22 +52,28 @@
 	<header>
 		<jsp:include page="/WEB-INF/views/header.jsp"></jsp:include>
 	</header>
+		<jsp:include page="/WEB-INF/views/mypage/side.jsp"></jsp:include>
+	
 <div>
     <h1 class="explain">숨김 상품</h1>
   </div>
+  
+  <!-- Section-->
+	<section>
+	<div class="row size">
+	<div class="buttons-container text-center margin10">
+		<a class="btn safeTrading" href="${pageContext.request.contextPath}/mypage/goods/onsale">판매중</a>
+		<a class="btn infaceTrading" href="${pageContext.request.contextPath}/mypage/goods/closed">판매완료</a>
+		<a class="btn infaceTrading" href="${pageContext.request.contextPath}/mypage/goods/hide">숨김</a>
+	</div>
+  
 	<div class="searchWord">
 		<form
 			action="${pageContext.request.contextPath}/mypage/goods/hide" method="get">
 			<input type="search" name="searchWord" placeholder="제목 검색"> <input class="btn1" type="submit" value="검색">
 		</form>
 	</div>
-
-	<div class="buttons-container text-center margin10">
-		<a class="btn safeTrading" href="${pageContext.request.contextPath}/mypage/goods/onsale">판매중</a>
-		<a class="btn infaceTrading" href="${pageContext.request.contextPath}/mypage/goods/closed">판매완료</a>
-		<a class="btn infaceTrading" href="${pageContext.request.contextPath}/mypage/goods/hide">숨김</a>
-	</div>
-
+</div>
 	<section class="py-1">
 		<div class="container px-4 px-lg-5 mt-5">
 			<div id="replacePoint"
@@ -134,7 +148,7 @@
 						href="<%=request.getContextPath()%>/mypage/goods/hide?currentPage=${startPageNum-1}&searchWord=${searchWord}"><span>이전</span></a>
 				</c:if>
 				<c:forEach begin="${startPageNum}" end="${endPageNum}" var="i">
-					<a
+					<a class="page${i}
 						href="<%=request.getContextPath()%>/mypage/goods/hide?currentPage=${i}&searchWord=${searchWord}"><span>${i}</span></a>
 				</c:forEach>
 				<c:if test="${endPageNum<totalPageNum}">
@@ -148,7 +162,7 @@
 						href="<%=request.getContextPath()%>/mypage/goods/hide?currentPage=${startPageNum-1}"><span>이전</span></a>
 				</c:if>
 				<c:forEach begin="${startPageNum}" end="${endPageNum}" var="i">
-					<a
+					<a class="page${i}
 						href="<%=request.getContextPath()%>/mypage/goods/hide?currentPage=${i}"><span>${i}
 					</span></a>
 				</c:forEach>
@@ -159,7 +173,7 @@
 			</c:otherwise>
 		</c:choose>
 	</div>
-
+</section>
 		</div>
 	<!-- Footer Section Begin -->
 	<footer>

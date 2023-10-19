@@ -145,7 +145,7 @@
 							
 						</div>
 					</div>
-					<div class="pb-5 border-b border-gray-300">
+					<div class="pb-4 border-b border-gray-300">
 						<h1 class="flex justify-between mb-1 text-lg font-bold align-middle text-heading lg:text-xl 2xl:text-2xl hover:text-black">
 							${goodsDto.title}
 							<div>
@@ -154,8 +154,11 @@
 						</h1>
 						<div class="flex items-center justify-between">
 							<div
-								class="text-jnGreen font-bold text-[40px] pe-2 md:pe-0 lg:pe-2 2xl:pe-0 mr-2">${goodsDto.price}원</div>
+								class="text-jnGreen font-bold text-[40px] pe-2 md:pe-0 lg:pe-2 2xl:pe-0 mr-2">${goodsDto.price}
+								<span class="text-base">원</span>
+							</div>
 						</div>
+						<span class="underline underline-offset-4">판매중</span>
 					</div>
 					<div class="py-4 border-b border-gray-300 space-s-4">
 						<div class="pb-1 space-y-5 text-sm">
@@ -167,6 +170,11 @@
                                    document.write(formattedPastDate); 
                                </script>
 								· 조회 ${goodsDto.viewCount} · 찜 ${goodsDto.wishcount}</span>
+								
+								<div class="flex">
+								
+								
+									
 								<a href="https://thecheat.co.kr/">
 								<div class="flex items-center hover:text-gray-400">
 										<svg stroke="currentColor" fill="currentColor"
@@ -175,8 +183,23 @@
 											<path fill-rule="evenodd"
 												d="M1 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H1zm5-6a3 3 0 100-6 3 3 0 000 6zm7 1.5a.5.5 0 01.5-.5h2a.5.5 0 010 1h-2a.5.5 0 01-.5-.5zm-2-3a.5.5 0 01.5-.5h4a.5.5 0 010 1h-4a.5.5 0 01-.5-.5zm0-3a.5.5 0 01.5-.5h4a.5.5 0 010 1h-4a.5.5 0 01-.5-.5zm2 9a.5.5 0 01.5-.5h2a.5.5 0 010 1h-2a.5.5 0 01-.5-.5z"
 												clip-rule="evenodd"></path></svg>
-										<span class="ml-2 ">사기조회</span> <!-- 더치트사이트로전송 -->
+										<span class="ml-2 mr-2 ">신고하기</span> 
 									</div></a>
+									
+								<a href="https://thecheat.co.kr/">
+								<div class="flex items-center hover:text-gray-400">
+										<svg stroke="currentColor" fill="currentColor"
+											stroke-width="0" viewBox="0 0 16 16" height="1em" width="1em"
+											xmlns="http://www.w3.org/2000/svg">
+											<path fill-rule="evenodd"
+												d="M1 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H1zm5-6a3 3 0 100-6 3 3 0 000 6zm7 1.5a.5.5 0 01.5-.5h2a.5.5 0 010 1h-2a.5.5 0 01-.5-.5zm-2-3a.5.5 0 01.5-.5h4a.5.5 0 010 1h-4a.5.5 0 01-.5-.5zm0-3a.5.5 0 01.5-.5h4a.5.5 0 010 1h-4a.5.5 0 01-.5-.5zm2 9a.5.5 0 01.5-.5h2a.5.5 0 010 1h-2a.5.5 0 01-.5-.5z"
+												clip-rule="evenodd"></path></svg>
+										<span class="ml-2 mr-2 ">사기조회</span> <!-- 더치트사이트로전송 -->
+									</div></a>
+									
+								</div>	
+									
+									
 							</div>
 							<div>
 								<span class="inline-block font-semibold text-heading pe-2">배송비:</span>배송비
@@ -222,6 +245,10 @@
             					<span class="px-2 py-1 mr-2 text-xs pointer-events-none bg-gray-150 rounded-xl">안전거래</span>
             					</c:when>
             					</c:choose>
+							</div>
+							<div class="flex flex-wrap">
+								<span class="inline-block font-semibold text-heading pe-2">판매상태:</span>
+								<span class="px-2 py-1 mr-2 text-xs pointer-events-none bg-gray-150 rounded-xl">판매중</span>
 							</div>
 							
 						</div>

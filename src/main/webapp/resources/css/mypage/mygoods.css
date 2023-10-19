@@ -11,7 +11,7 @@
 }
 
 .btn1 {
-	background-color: #007BFF; /* 파란색 배경 */
+	background-color: #7fad39; /* 파란색 배경 */
 	color: white; /* 흰색 글자색 */
 }
 
@@ -29,26 +29,35 @@
 		margin-top: 20px;
 	}
 	
+	.searchWord form{
+	display: flex;
+	
+
+	}
+	
 	.searchWord input[type="search"] {
-		height: 42px;
+		height: 49px;
 		width: 250px;
-		border-radius: 5px;
+		border-radius: 5px 0 0 5px;
 		background-color: white;
 		color: black;
+		border: 1px solid #bbb1d6;
 	}
 	
 	.searchWord input[type="submit"] {
-		background-color: #007BFF;
 		color: white;
-		border: none;
-		border-radius: 5px;
-		padding: 10px 20px;
-		cursor: pointer;
+		background-color: #835995;
+		text-decoration: none;
+		display: inline-block;
 		font-weight: bold;
+		font-size: 18px;
+		padding: 10px 20px;
+		border-radius: 0 5px 5px 0;
+		margin: 0 auto;
 	}
 	
 	.searchWord input[type="submit"]:hover {
-		background-color:black;
+		background-color:#835995C9;
 		color: white;
 		text-decoration: none;
 	}
@@ -60,13 +69,12 @@
 	}
 	
 	.paging a {
-		background-color: #007BFF;
+		background-color: #835995;
 		text-decoration: none;
 		margin: 0 10px;
 		font-size: 16px;
 		font-weight: bold;
 		padding: 5px 10px;
-		border: 1px solid black;
 		border-radius: 5px;
 	}
 	
@@ -92,19 +100,19 @@
 	
 	.safeTrading, .infaceTrading {
 		color: white;
-		background-color: #007BFF;
+		background-color: #835995;
 		text-decoration: none;
 		display: inline-block;
 		font-weight: bold;
 		font-size: 18px;
 		padding: 10px 20px;
-		border: 1px solid #FFC107;
+		border: 1px solid #bbb1d6;
 		border-radius: 5px;
 		margin: 0 auto;
 	}
 	
 	.safeTrading:hover, .infaceTrading:hover {
-		background-color:black;
+		background-color:#835995C9;
 		color: white;
 		text-decoration: none;
 	}
@@ -112,3 +120,8 @@
 	.margin10{
 		margin:30px 0 30px 0;
 	}
+	
+	.fa-facebook, .fa-instagram, .fa-twitter, .fa-pinterest{
+	position: relative;
+	top:12px;
+}

@@ -10994,3 +10994,8 @@ section {
 	z-index: 0;
 	position: relative;
 }
+
+.fa-facebook, .fa-instagram, .fa-twitter, .fa-pinterest{
+	position: relative;
+	top:12px;
+}

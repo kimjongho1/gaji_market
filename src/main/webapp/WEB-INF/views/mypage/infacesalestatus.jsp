@@ -37,7 +37,14 @@
 	src="${pageContext.request.contextPath}/resources/js/orderstatus.js"></script>
 <link
 	href="${pageContext.request.contextPath}/resources/css/orderstatus.css"
+	
 	rel='stylesheet' type='text/css'>
+	<style>
+	
+.page${currentPage}{
+	background-color:#5715CC !important;
+}
+</style>	
 </head>
 
 <body>
@@ -58,7 +65,7 @@
 	</div>
 	<div class="searchWord">
 		<form
-			action="${pageContext.request.contextPath}/mypage/salestatus/safe" method="get">
+			action="${pageContext.request.contextPath}/mypage/salestatus/inface" method="get">
 			<input type="search" name="searchWord" placeholder="제목 검색"> <input class="btn1" type="submit" value="검색">
 		</form>
 	</div>
@@ -171,36 +178,7 @@
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
 
 
-<script type="text/javascript">
 
-
-document.addEventListener('DOMContentLoaded', function () {
-    // URL에서 currentPage 값을 가져옵니다.
-    const urlParams = new URLSearchParams(window.location.search);
-    const currentPage = urlParams.get('currentPage');
-
-    // 대상 요소를 선택합니다. 예를 들어, 클래스를 추가/제거할 요소가 "example-element"라고 가정합니다.
-    //const targetElement = document.querySelector('.page'${i});
-    const targetElement = document.querySelector('page'{i});
-    const startElement = document.querySelector('.page1');
-
-    console.log(currentPage); //1
-    console.log(urlParams); //1 param
-    console.log(currentPage); //1 
-    console.log(startElement); //주소
-    console.log(targetElement); //주소
-   // console.log('page'${i}); //주소
-    
-    
-    // currentPage 값을 기반으로 클래스를 추가 또는 제거합니다.
-    if (currentPage === '${i}') {
-        startElement.classList.remove('active');
-        targetElement.classList.add('active');
-    } 
-});
-
-
-</script>
 
 
 </body>

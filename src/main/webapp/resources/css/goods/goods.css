@@ -10821,6 +10821,11 @@ cursor: pointer;
 	position:relative;
 	top:0px;		
 }
+.fa-facebook, .fa-instagram, .fa-twitter, .fa-pinterest{
+	position: relative;
+	top:0px;
+}
+
 .month5Price,
 .textStyle {
     font-size: 1.5rem

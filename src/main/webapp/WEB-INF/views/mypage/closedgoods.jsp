@@ -13,8 +13,9 @@
 <meta name="description" content="" />
 <meta name="author" content="" />
 <title>판매완료 상품</title>
-<!-- Favicon-->
-<!--         <link rel="icon" type="image/x-icon" href="assets/favicon.ico" /> -->
+<!--favicon  -->
+	<link rel="icon" href="${pageContext.request.contextPath}/resources/img/favicon.ico">
+	<link rel="shortcut icon" href="${pageContext.request.contextPath}/resources/img/favicon.ico">
 <!-- Bootstrap icons-->
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css"
@@ -48,19 +49,21 @@
 	<div>
     <h1 class="explain">판매완료 상품</h1>
   	</div>
-	<div class="searchWord">
-		<form
-			action="${pageContext.request.contextPath}/mypage/goods/closed" method="get">
-			<input type="search" name="searchWord" placeholder="제목 검색"> <input class="btn" type="submit" value="검색">
-		</form>
-	</div>
+  	<section>
+	<div class="row size">
 
 	<div class="buttons-container text-center margin10">
 		<a class="btn safeTrading" href="${pageContext.request.contextPath}/mypage/goods/onsale">판매중</a>
 		<a class="btn infaceTrading" href="${pageContext.request.contextPath}/mypage/goods/closed">판매완료</a>
 		<a class="btn infaceTrading" href="${pageContext.request.contextPath}/mypage/goods/hide">숨김</a>
 	</div>
-
+	<div class="searchWord">
+		<form
+			action="${pageContext.request.contextPath}/mypage/goods/closed" method="get">
+			<input type="search" name="searchWord" placeholder="제목 검색"> <input class="btn" type="submit" value="검색">
+		</form>
+	</div>
+</div>
 	<section class="py-1">
 		<div class="container px-4 px-lg-5 mt-5">
 			<div id="replacePoint"
@@ -160,6 +163,7 @@
 			</c:otherwise>
 		</c:choose>
 	</div>
+</section>
 	<!-- Footer Section Begin -->
 	<footer>
 		<jsp:include page="/WEB-INF/views/footer.jsp"></jsp:include>
