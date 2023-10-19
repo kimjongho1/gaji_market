@@ -67,7 +67,7 @@ public class PayController {
 			}
 			GoodsPayInfoDto goodsInfo=payServiceImpl.getGoodsInfo(goodsId);
 			List<UserAddressDto> userAddress = payServiceImpl.getUserAddressList(userId);	 
-			PayUserInfoDto payUserInfo= payServiceImpl.getUserInfo("userId");			  
+			PayUserInfoDto payUserInfo= payServiceImpl.getUserInfo(userId);			  
 			model.addAttribute("merchantIdentificationCode",merchantIdentificationCode);
 			model.addAttribute("goodsInfo",goodsInfo);		//상품정보
 			model.addAttribute("userAddress",userAddress);	//유저주소들
@@ -176,6 +176,7 @@ public class PayController {
 	}
 	@ExceptionHandler
 	public String exception(Exception e, RedirectAttributes ra,Principal principal) {
+		e.printStackTrace();
 		try {
 		principal.getName();		
 		}catch(Exception e1) {
@@ -184,6 +185,7 @@ public class PayController {
 			return "redirect:/";
 		}
 		ra.addFlashAttribute("msg", "예기치않은 오류로 메인페이지로 이동합니다.");
+		System.out.println("PayController인가??");
 		return "redirect:/";
 	}	
 }

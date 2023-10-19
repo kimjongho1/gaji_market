@@ -14,7 +14,7 @@
 <body>
     <div class="container">
         <h1>안전결제</h1>
-
+        
         <h3>배송지</h3>
         <select id="addresses">
             <c:forEach var="address" items="${userAddress}">
@@ -369,7 +369,7 @@
 				html="<select id='modalAddresses'>";
 				for(var i=0; i<date.length; i++){
 					item=data[i];
-					html+="<option value="+item.roadAddress+","+item.detailAddress+","+item.addressNo+">";
+					html+="<option value='"+item.roadAddress+","+item.detailAddress+","+item.addressNo+"'>";
 					html+=item.addressNickname+","+item.roadAddress+","+item.detailAddress+"</option>";
 				}
 				html+="</select>";
@@ -402,13 +402,13 @@
 			type:"POST",
 			url:"${pageContext.request.contextPath}/mypage/address/delete",
 			dataType:"json",
-			data: { addressNo: addressNo },
+			data: { addressNo: addressNo},
 			success:  (data)=>{
 				if(data=='1')
 					alert("주소를 삭제했습니다.");
 				else
 					alert("주소 삭제에 실패했습니다.");
-				window.location.href="${pageContext.request.contextPath}/payment/pay";
+				window.location.href="${pageContext.request.contextPath}/payment/pay?goodsId=${goodsInfo.goodsId}";
 			},
 			error : (request,status,error)=>{
 				console.log(request);
@@ -428,11 +428,11 @@
 		$.ajax({
 			type:"POST",
 			url:"${pageContext.request.contextPath}/mypage/address/alterPrimaryAddress",
-			data: { addressNo: addressNo },
+			data: { addressNo: addressNo},
 			dataType:"json",
 			success:  (data)=>{
 				alert("대표주소가 변경되었습니다.");
-				window.location.href="${pageContext.request.contextPath}/payment/pay";
+				window.location.href="${pageContext.request.contextPath}/payment/pay?goodsId=${goodsInfo.goodsId}";
 			},
 			error : (request,status,error)=>{
 				console.log(request);

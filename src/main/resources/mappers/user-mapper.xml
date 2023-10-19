@@ -373,7 +373,7 @@
 	</update>
 	
 	<update id="updateMainAddress2" parameterType="map"> <!-- 대표주소가 된 주소보다 높은순서들을 다시 1씩 내려주기. -->
-		update user_address set address_no=address_no+1 where user_id=#{userId} and address_no &gt; #{addressNo}
+		update user_address set address_no=address_no-1 where user_id=#{userId} and address_no &gt; #{addressNo}
 	</update>
 	
 	<insert id="insertAddress" parameterType="UserInsertAddressDto">	<!-- 새로입력된 주소를 count+1 주소순서에 추가한다 -->
