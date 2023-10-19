@@ -57,7 +57,7 @@ public class MyPageController {
 		String userId = principal.getName();
 		if (userId == null) {
 			ra.addFlashAttribute("msg", "로그인 먼저 해주세요");
-			return "redirect:/";
+			return "redirect:/login";
 		} else {
 		model.addAttribute("userId",userId);
 		return "mypage/passwordchange";
@@ -65,8 +65,11 @@ public class MyPageController {
 	}
 	
 	@PostMapping("/changepassword")
-	public ModelAndView changepassword(@RequestParam Map<String, String> map, ModelAndView mv){
+	public ModelAndView changepassword(@RequestParam Map<String, String> map, ModelAndView mv, RedirectAttributes ra){
 		String userId = map.get("userId");
+		if(userId == null) {
+			
+		}
 		String searchPassword = myPageService.searchPassword(userId);
 		String currentPassword = map.get("password");
 		
@@ -77,14 +80,14 @@ public class MyPageController {
 			 map.put("newPassword", newPassword);
 			int updatePassword = myPageService.changePassword(map);
 			if (updatePassword == 1) {
-				 mv.addObject("message", "비밀번호가 성공적으로 변경되었습니다.");
+				 ra.addFlashAttribute("msg", "비밀번호가 성공적으로 변경되었습니다.");
 				 mv.setViewName("redirect:/");
 			} else {
-				mv.addObject("error", "비밀번호 변경에 실패했습니다. 다시 시도해 주세요.");
+				ra.addFlashAttribute("msg", "비밀번호 변경에 실패했습니다. 다시 시도해 주세요.");
 				mv.setViewName("mypage/passwordchange");
 			}
 		}else {
-			mv.addObject("error", "현재 비밀번호가 일치하지 않습니다.");
+			mv.addObject("msg", "현재 비밀번호가 일치하지 않습니다.");
 		    mv.setViewName("mypage/passwordchange");
 		}
 		
