@@ -21,7 +21,7 @@
              	</ul>
             	<ul class='sidebarul' id="write"> 
 					<strong>작성 글</strong>
-                    <a href="${pageContext.request.contextPath}"><li><span class="liner">판매글</span></li></a>
+                    <a href="${pageContext.request.contextPath}/mypage/goods/onsale"><li><span class="liner">판매글</span></li></a>
                	</ul>
             	<ul class='sidebarul' id="privacy" >
 					<strong>개인정보</strong>
