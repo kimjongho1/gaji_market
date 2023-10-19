@@ -21,4 +21,5 @@ public interface PayService {
     public List<UserAddressDto> getUserAddressList(String userId);
     public PayUserInfoDto getUserInfo(String userId);
     public int changeStatus(Map<String,Object> map);
+    public String checkIdForPay(int goodsId);
 }

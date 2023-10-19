@@ -57,6 +57,10 @@ public class PayController {
 		@GetMapping("payment/pay")
 		public String pay(Model model,RedirectAttributes attribute,Integer goodsId,HttpServletRequest request,Principal principal) {
 			String userId=principal.getName();
+			if(payServiceImpl.checkIdForPay(goodsId).equals(userId)) {
+				attribute.addFlashAttribute("msg", "본인 상품을 구매할 수 없습니다.");
+				return "redirect:/";
+			}
 			if(payServiceImpl.checkGoodsStatus(goodsId)!=1) {	
 				attribute.addFlashAttribute("msg", "판매중인 상품이 아닙니다.");
 				return "redirect:/";

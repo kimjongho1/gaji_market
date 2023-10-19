@@ -333,7 +333,14 @@
 												title="${userGoods.title}" href="${pageContext.request.contextPath}/goods/get?goodsId=${userGoods.goodsId}"><div
 													class="relative w-full rounded-md overflow-hidden pt-[100%] mb-3 pb-0">
 													<img alt="${userGoods.title}" referrerpolicy="no-referrer"
-														src="${userGoods.url}"
+														<c:choose>
+								<c:when test="${not empty userGoods.url }">
+									src="${userGoods.url}"
+								</c:when>
+								<c:otherwise>
+									src="${pageContext.request.contextPath}/resources/img/no_photo.png"
+								</c:otherwise>
+								</c:choose>
 														decoding="async" data-nimg="fill"
 														class="bg-gray-300 object-cover w-full transition duration-200 ease-in rounded-md duration-150 ease-linear transform group-hover:scale-105"
 														loading="lazy"
