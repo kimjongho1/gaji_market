@@ -24,7 +24,7 @@ public class MypageDao {
 	}
 	
 	public int changePassword(Map<String, String> map) {
-		return sqlSession.update("mypage.updateNmae",map);
+		return sqlSession.update("mypage.changePassword",map);
 	}
 	
 	public int updateName(Map<String, String> map) {

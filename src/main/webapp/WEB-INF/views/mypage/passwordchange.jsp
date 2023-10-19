@@ -22,6 +22,9 @@
         <input type="submit" value="변경">
         </form>
         <script>
+        
+        console.log("${userId}");
+        
         function validateForm() {
             var currentPassword = document.getElementById("password").value;
             var newPassword = document.getElementById("newPassword").value;
@@ -53,6 +56,8 @@
     	if(msg){
     		alert(msg);
     	}
+    	
+    	
         </script>
 </body>
 </html>

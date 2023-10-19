@@ -554,7 +554,6 @@ function checkWishlist() {
         }
     });
 }
-console.log("${loginId}");
 
 var msg = '${msg}';
 if(msg){
