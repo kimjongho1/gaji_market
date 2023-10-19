@@ -61,7 +61,7 @@ public class GoodsDao  {
     	return sqlSession.selectList("goods.goodsUrl", goodsId);
     }
     
-    public GoodsInfoDto goodsUserInfo(int goodsId) { // 상품글 작성자의 후기 안전거래횟수 상풍개수
+    public GoodsInfoDto goodsUserInfo(int goodsId) { // 상품글 작성자의 후기 안전거래횟수 상품개수
     	return sqlSession.selectOne("goods.goodsUserInfo",goodsId);
     }
     
@@ -76,6 +76,8 @@ public class GoodsDao  {
     public List<GoodsInfoDto> userGoodsList(int goodsId) { // 등록한 사용자의 상품리스트
     	return sqlSession.selectList("goods.userGoodsList", goodsId);
     }
+    
+//    public GoodsDto getGoodsModify()
     
     public int pullUpGoods(int goodsId) { //상품 날짜 끌어올림
     	return sqlSession.update("goods.pullUpGoods", goodsId);

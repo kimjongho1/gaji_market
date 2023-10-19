@@ -186,6 +186,7 @@ public class GoodsController {
 						System.out.println(file.getSize());
 						File imageFile = new UploadController().convertMultipartFileToFile(file);
 						Map imageUrl2 = cloudinary.uploader().upload(imageFile, params1);
+						System.out.println(imageUrl2);
 						String imageUrl = cloudinary.url().generate((String) imageUrl2.get("secure_url"));
 						fileDto.setUrl(imageUrl);
 						fileService.insertFile(fileDto);
@@ -223,6 +224,9 @@ public class GoodsController {
 			mv.setViewName("goods/goodsupdate");
 			mv.addObject("loginId", userId);
 			mv.addObject("imageList",fileService.goodsImageList(goodsId)); // 해당 상품 url list값
+			mv.addObject("categoryList", categoryService.categoryList());
+			mv.addObject("dongList", regionService.dongList());
+			mv.addObject("guList", regionService.guList());
 			
 		} else {
 			mv.setViewName("redirect:/login");
@@ -230,11 +234,11 @@ public class GoodsController {
 		}
 		return mv;
 	}
-	@PostMapping("")
-	public String goodsUpdate() {
-		
-		return "";
-	}
+//	@PostMapping("")
+//	public String goodsUpdate() {
+//		
+//		return "";
+//	}
 	
 	
 	@PostMapping("/wish")
