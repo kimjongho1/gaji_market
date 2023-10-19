@@ -213,7 +213,6 @@
         });
         var msg = '${msg}';
     	if(msg){
-    		console.log(msg);
     		alert(msg);
     	}
 
