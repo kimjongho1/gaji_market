@@ -32,6 +32,8 @@ public interface GoodsService {
     Map<String,Object> getGoodsList(int currentPage,int PAGESIZE,int sort,int priceCeiling,int category,int dongId,String searchWord);
 
     int updateStatus(Map<String, Object> map);
+    
+    int pullUpGoods(int goodsId);
 
     int updateGoods(GoodsDto goodsDto);
 

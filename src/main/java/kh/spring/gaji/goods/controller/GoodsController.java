@@ -158,11 +158,16 @@ public class GoodsController {
 	}
 
 	@GetMapping("/write")
-	public ModelAndView write(ModelAndView mv) { // 중고거래 게시판 글 작성
+	public ModelAndView write(ModelAndView mv, Principal principal, RedirectAttributes ra) { // 중고거래 게시판 글 작성
+		if(principal != null) {
 		mv.setViewName("goods/goodswrite");
 		mv.addObject("categoryList", categoryService.categoryList());
 		mv.addObject("dongList", regionService.dongList());
 		mv.addObject("guList", regionService.guList());
+		} else {
+			mv.setViewName("redirect:/login");
+			mv.addObject("msg", "로그인이 필요한 페이지입니다. 로그인화면으로 전송됩니다.");
+		}
 		return mv;
 	}
 
@@ -210,10 +215,10 @@ public class GoodsController {
 		return mv;
 	}
 	
-//	@GetMapping("/update")
-//	public String update() { // 중고거래 게시판 글 수정
-//		return "goods/goodsupdate";
-//	}
+	@GetMapping("/update")
+	public String update() { // 중고거래 게시판 글 수정
+		return "goods/goodsupdate";
+	}
 	
 	@PostMapping("/wish")
 	@ResponseBody

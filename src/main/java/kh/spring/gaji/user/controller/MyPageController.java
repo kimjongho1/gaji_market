@@ -55,27 +55,27 @@ public class MyPageController {
 	@GetMapping("/changepwd")
 	public String changPwd(Principal principal, RedirectAttributes ra, Model model) {
 		if (principal != null) {
-	        String userId = principal.getName();
-	        model.addAttribute("userId", userId);
-	        return "mypage/passwordchange";
-	    } else {
-	        ra.addFlashAttribute("msg", "로그인 먼저 해주세요");
-	        return "redirect:/login";
-	    }
-		
+			String userId = principal.getName();
+			model.addAttribute("userId", userId);
+			return "mypage/passwordchange";
+		} else {
+			ra.addFlashAttribute("msg", "로그인 먼저 해주세요");
+			return "redirect:/login";
+		}
+
 	}
 
 	@PostMapping("/changepassword")
 	public ModelAndView changepassword(@RequestParam Map<String, String> map, ModelAndView mv, RedirectAttributes ra) {
 		String userId = map.get("userId");
 		if (userId == null) {
-			 ra.addFlashAttribute("msg", "사용자 값이 일치하지않습니다.");
-			 mv.setViewName("redirect:/login");
-		      return mv;
+			ra.addFlashAttribute("msg", "사용자 값이 일치하지않습니다.");
+			mv.setViewName("redirect:/login");
+			return mv;
 		}
 		String searchPassword = myPageService.searchPassword(userId);
 		String currentPassword = map.get("password");
-		
+
 		boolean isPasswordMatch = bCryptPasswordEncoder.matches(currentPassword, searchPassword);
 		System.out.println(searchPassword);
 		System.out.println(currentPassword);
@@ -102,11 +102,17 @@ public class MyPageController {
 	}
 
 	@GetMapping("")
-	public ModelAndView mypage(@RequestParam(name = "userId", required = false, defaultValue = "asdf") String userId,
-			ModelAndView mv) { // 마이페이지
-		mv.setViewName("mypage/mypage");
-		mv.addObject("userMypage", myPageService.userMypage(userId));
-		mv.addObject("userAddress", payServiceImpl.getUserAddressList(userId));
+	public ModelAndView mypage(Principal principal, ModelAndView mv, RedirectAttributes ra) { // 마이페이지
+		
+		if (principal != null) {
+			String userId = principal.getName();
+			mv.setViewName("mypage/mypage");
+			mv.addObject("userMypage", myPageService.userMypage(userId));
+			mv.addObject("userAddress", payServiceImpl.getUserAddressList(userId));
+		} else {
+			ra.addFlashAttribute("msg", "로그인 먼저 해주세요");
+			mv.setViewName("redirect:/login");
+		}
 		return mv;
 	}
 

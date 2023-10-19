@@ -491,6 +491,11 @@
 		src="${pageContext.request.contextPath}/resources/js/bootstrap.min.js"></script>
 	<script src="${pageContext.request.contextPath}/resources/js/main.js"></script>
 	<script>
+	var msg = '${msg}';
+	if(msg){
+		alert(msg);
+	}
+	
 	function selectGu(guId,guName){
 		$("#selectedGuName").text(guName+"(구)");
 		$("#selectedDongName").text("(동)");
