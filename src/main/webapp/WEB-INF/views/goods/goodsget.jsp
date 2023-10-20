@@ -54,6 +54,39 @@
 	</header>
 	<!-- header end -->
 	
+	<div class="modal fade" id="reportModal" tabindex="-1" role="dialog" aria-labelledby="reportModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="reportModalLabel">신고하기</h5>
+      </div>
+      <div class="modal-body">
+        <form action="${pageContext.request.contextPath}/reportGoods" method="post">	<!--신고처리할 url-->
+          <div class="form-group">
+            <label for="reportCategory">신고 카테고리</label>
+            <select class="form-control" id="reportCategory" name="reportCategory">
+              <option value="1">광고</option>
+              <option value="2">욕설/비방</option>
+              <option value="3">음란물</option>
+              <option value="4">사기</option>
+              <option value="5">기타</option>
+            </select>
+          </div>
+          <input type="hidden" name="refId" value="${goodsDto.goodsId}">	<!--상품아이디 적용하시면됩니다.-->
+          <div class="form-group">
+            <label for="reportContent">신고 내용</label>
+            <textarea class="form-control" id="reportContent" name="content" rows="10" required="required"></textarea>
+          </div>
+          <button type="submit">신고 제출</button>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" data-dismiss="modal">닫기</button>
+      </div>
+    </div>
+  </div>
+</div>
+	
 	<main class="relative flex-grow border-b-2"
 		style="min-height: -webkit-fill-available; -webkit-overflow-scrolling: touch">
 		<div
@@ -175,7 +208,7 @@
 								
 								
 									
-								<a href="https://thecheat.co.kr/">
+								<a>
 								<div class="flex items-center hover:text-gray-400">
 										<svg stroke="currentColor" fill="currentColor"
 											stroke-width="0" viewBox="0 0 16 16" height="1em" width="1em"
@@ -183,9 +216,8 @@
 											<path fill-rule="evenodd"
 												d="M1 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H1zm5-6a3 3 0 100-6 3 3 0 000 6zm7 1.5a.5.5 0 01.5-.5h2a.5.5 0 010 1h-2a.5.5 0 01-.5-.5zm-2-3a.5.5 0 01.5-.5h4a.5.5 0 010 1h-4a.5.5 0 01-.5-.5zm0-3a.5.5 0 01.5-.5h4a.5.5 0 010 1h-4a.5.5 0 01-.5-.5zm2 9a.5.5 0 01.5-.5h2a.5.5 0 010 1h-2a.5.5 0 01-.5-.5z"
 												clip-rule="evenodd"></path></svg>
-										<span class="ml-2 mr-2 ">신고하기</span> 
+										<span id="showReportModalBtn" data-toggle="modal" data-target="#reportModal" class="ml-2 mr-2 ">신고하기</span> 
 									</div></a>
-									
 								<a href="https://thecheat.co.kr/">
 								<div class="flex items-center hover:text-gray-400">
 										<svg stroke="currentColor" fill="currentColor"
@@ -743,7 +775,25 @@ function checkFavoriteUser() {
     });
 }
 
+<script>
+$(document).ready(function () {
+    $('#reportModal').modal({
+        backdrop: 'static', // 모달 바깥을 클릭해도 모달이 닫히지 않도록 설정
+        show: false // 페이지 로드 시 모달을 표시하지 않도록 설정
+    });
 
+    // 신고하기 버튼을 클릭하면 모달을 표시
+    $('#showReportModalBtn').click(function () {
+        $('#reportModal').modal('show');
+    });
+    
+    $('.btn-secondary').click(function(){
+    	 $('#reportModal').modal('hide');
+    })
+});
+</script>
+
+<script>
 var msg = '${msg}';
 if(msg){
 	alert(msg);

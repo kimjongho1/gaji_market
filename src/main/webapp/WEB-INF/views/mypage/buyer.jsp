@@ -29,7 +29,7 @@
         <button onclick="redirectReview()" class="btn btn-primary btn-lg">리뷰작성</button>
  </c:if>
 
-<!-- 모달 -->
+<!-- 신고하기 모달 -->
 <div class="modal fade" id="reportModal" tabindex="-1" role="dialog" aria-labelledby="reportModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
