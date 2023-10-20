@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import kh.spring.gaji.notification.model.Service.NotificationService;
 
@@ -44,5 +45,14 @@ public class NotificationController {
 			return "redirect:/mypage/deal/safe/buyer?transactionId="+refId;
 		else
 			return "redirect:/mypage/deal/safe/seller?transactionId="+refId;		
+	}
+	
+	@PostMapping("/getNotiCount")
+	@ResponseBody
+	public int getNotiCount(Principal principal) {
+		Map<String,Object> map=new HashMap<String,Object>();
+		map.put("type", 2);
+		map.put("userId", principal.getName());
+		return notificationServiceImpl.countNotification(map);
 	}
 }

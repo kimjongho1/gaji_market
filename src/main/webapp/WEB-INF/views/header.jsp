@@ -2,6 +2,8 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="sec"
 	uri="http://www.springframework.org/security/tags"%>
+<script
+		src="${pageContext.request.contextPath}/resources/js/jquery-3.3.1.min.js"></script>
 <style>
 header {
 	position: static;
@@ -59,7 +61,7 @@ header {
 
 					<div class="header__cart rights">
 						<ul>
-							<li><a href="#"><i class="fa fa-bell"></i> <span>3</span></a></li>
+							<li><a href="${pageContext.request.contextPath}/notice"><i class="fa fa-bell"></i></a></li>
 							<li><a href="${pageContext.request.contextPath}/mypage/keepuseds"><i class="fa fa-heart"></i></a></li>
 							<li><a href="${pageContext.request.contextPath}/mypage/keepusers"><i class="fa fa-shopping-bag"></i></a></li>
 							<sec:authorize access="isAnonymous()">
@@ -135,10 +137,33 @@ header {
 				document.querySelector("#header").className = 'sc';
 			}
 		});
+		
+		function loadNoti(){
+			$.ajax({
+				  url: "<%=request.getContextPath()%>/notice/getNotiCount" ,	
+				  method: "post",
+				  dataType: "text",
+			  	  success: function(count){
+			  		  console.log(count);
+			  		if(count!=0)
+						$(".fa-bell").replaceWith("<i class='fa fa-bell'><span>"+count+"</span></i>");
+			  	  },
+					error : (request,status,error)=>{
+						console.log(request);
+						console.log(status);
+						console.log(error);
+						alert("code:"+request.status+"\n"+"message"+request.responseText+"\n"+error+":error");
+					}
+				  });		
+		}
+		
+		$(document).ready(function() {
+			  // 페이지가 로드될 때 실행할 코드
+			  loadNoti();
+		});
+		setInterval(loadNoti, 30000);	// 이후 30초마다 최신화.
 	</script>
-
-	<script
-		src="${pageContext.request.contextPath}/resources/js/jquery-3.3.1.min.js"></script>
+	
 	<script
 		src="${pageContext.request.contextPath}/resources/js/bootstrap.min.js"></script>
 	<script
@@ -152,9 +177,5 @@ header {
 	<script
 		src="${pageContext.request.contextPath}/resources/js/owl.carousel.min.js"></script>
 	<script src="${pageContext.request.contextPath}/resources/js/main.js"></script>
-
-
-
 </body>
-
 </html>
