@@ -159,12 +159,20 @@
 	.gt {
 	color: #0CB650;
 	font-weight: 500;
+	width: 73.5%;
 	}	
 	
 	.contls {
 	
-	width: 500px;
-	justify-content: between; 
+    width: 500px;
+    display: flex;
+    justify-content: space-between;
+	}
+	
+	.contls input {
+	
+	min-width: 350px;
+	
 	}
 	
 </style>
@@ -194,10 +202,10 @@
 	</span>
 	</div>
 	<div class="pline">
-	<span class="row flex justify-content-between">
+	<span class="row flex justify-content-between align-items-center">
 		<label>가지온도 :</label> 
 		<div class="contls">
-		<div class="flex justify-between mt-2 gt">
+		<div class="flex justify-between mb-2 gt">
 						<strong>${user.ratingScore}%</strong>
 						<div class="bgo">
 							<div class="bgs" style="width: ${user.ratingScore}%;"></div>
@@ -207,7 +215,7 @@
 	</span>
 	</div>
 	<div class="pline">
-	<span class="row flex justify-content-between">
+	<span class="row flex justify-content-between align-items-center">
 		<label>닉네임 :</label> 
 		<div class="contls">
 		<input type="text" name="nickname" id="nickname" value="${user.nickname}">
@@ -216,7 +224,7 @@
 	</span>
 	</div>
 	<div class="pline">
-	<span class="row flex justify-content-between">
+	<span class="row flex justify-content-between align-items-center">
 		<label>이메일 :</label> 
 		<div class="contls">
 		<input type="text" name="email" id="email" value="${user.email}">
@@ -225,7 +233,7 @@
 	</span>
 	</div>
 	<div class="pline">
-	<span class="row flex justify-content-between">
+	<span class="row flex justify-content-between align-items-center">
 		<label>연락처 :</label> 
 		<div class="contls">
 		<input type="text" name="mobileNumber" id="mobileNumber" value="${user.mobileNumber}">
@@ -234,7 +242,7 @@
 	</span>
 	</div>
 	<div class="pline">
-	<span class="row flex justify-content-between">
+	<span class="row flex justify-content-between align-items-center">
 	<label>주소 : </label> 
 		<div class="contls">
 		<input type="text" name="name" id="name" value="${user.roadAddress} ${user.detailAddress}">

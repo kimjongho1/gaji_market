@@ -51,8 +51,14 @@ public class NotificationController {
 	@ResponseBody
 	public int getNotiCount(Principal principal) {
 		Map<String,Object> map=new HashMap<String,Object>();
+		String userId="";
 		map.put("type", 2);
-		map.put("userId", principal.getName());
+		try {
+			userId=principal.getName();
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		map.put("userId",userId);
 		return notificationServiceImpl.countNotification(map);
 	}
 }
