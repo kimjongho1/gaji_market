@@ -794,6 +794,12 @@ input[type=text]::-webkit-input-placeholder {
     padding-right: 30px
 }
 
+.id_pw_wrap .input_row .input_text.pw{
+    display: table-cell;
+    padding-right: 0px
+	
+}
+
 .id_pw_wrap .input_row:first-child {
     border-radius: 6px 6px 0 0;
     box-shadow: none
