@@ -10979,10 +10979,15 @@ textarea.form-control-lg {
     text-decoration: none;
 }
 
-.fa-shopping-bag, .fa-heart{
+.fa-shopping-bag, .fa-heart,.fa-bell{
 	position:relative;
 	top:0px;
 }
+
+.header__cart ul li a span {
+top: -8px;
+}
+
 .explain {
     text-align: center;
     background-color: #835995;

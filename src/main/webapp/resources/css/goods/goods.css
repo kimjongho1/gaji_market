@@ -10817,10 +10817,15 @@ cursor: pointer;
   	position:relative;
   	top:0px;
   }
-.fa-heart,.fa-shopping-bag{
+.fa-heart,.fa-shopping-bag,.fa-bell{
 	position:relative;
 	top:0px;		
 }
+
+.header__cart ul li a span {
+top: -8px;
+}
+
 .fa-facebook, .fa-instagram, .fa-twitter, .fa-pinterest{
 	position: relative;
 	top:0px;

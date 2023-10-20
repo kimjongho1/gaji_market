@@ -80,7 +80,11 @@
     }
    .content {
    margin: 50px auto;
-   padding: 0px 100px;
+   padding: 50px 100px;
+   width: 1000px;
+   border: 1px solid #bbb1d6;
+   border-radius: 5px;
+   box-shadow: 5px 5px 5px 1px #bbb1d6cc;
    }
     
     label {
@@ -103,14 +107,64 @@
 	
 	.btn-modi {
 	
+	display: inline-block;
+  padding: 4px 8px;
+  font-size: 16px;
+  background-color: #7b6aa6;;
+  color: #ffffff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
 	
 	
 	}
+	.btn-modi:hover {
+	
+	background-color: #6a598f;
+	}
+	
+	.btn-modi:active {
+  	background-color: #5a4978; 
+}
 	
 	.pline{
 	
     border-bottom: 1px solid #bbb1d6;
    	margin: 10px;
+	}
+	
+	.pline input {
+	
+	border: 0;
+	background-color: #f1f1f1;
+	
+	}
+	
+	
+	.bgo {
+	background-color: rgba(204,244,220,1); 
+	border-radius: 0.25rem;
+	overflow: hidden;
+	width: 100%;
+	height: 0.375rem;
+	}
+	
+	.bgs {
+	background-color: rgba(13,204,90,1);
+	height: 100%;
+	border-radius: 0.25rem;
+	
+	}
+	.gt {
+	color: #0CB650;
+	font-weight: 500;
+	}	
+	
+	.contls {
+	
+	width: 500px;
+	justify-content: between; 
 	}
 	
 </style>
@@ -133,7 +187,7 @@
 	<div class="pline">
 	<span class="row flex justify-content-between align-items-center">
 		<label><strong>이름 : </strong></label> 
-		<div>
+		<div class="contls">
 		<input type="text" name="name" id="name" value="${user.name}">
 		<button type="button" class="btn-modi" id="nameUpdate">변경</button>
 		</div>
@@ -142,15 +196,20 @@
 	<div class="pline">
 	<span class="row flex justify-content-between">
 		<label>가지온도 :</label> 
-		<div>
-		<input type="text" name="ratingScore" id="ratingScore" value="${user.ratingScore}">
+		<div class="contls">
+		<div class="flex justify-between mt-2 gt">
+						<strong>${user.ratingScore}%</strong>
+						<div class="bgo">
+							<div class="bgs" style="width: ${user.ratingScore}%;"></div>
+						</div>
+					</div>
 		</div>
 	</span>
 	</div>
 	<div class="pline">
 	<span class="row flex justify-content-between">
 		<label>닉네임 :</label> 
-		<div>
+		<div class="contls">
 		<input type="text" name="nickname" id="nickname" value="${user.nickname}">
 		<button type="button" class="btn-modi" id="nicknameUpdate">변경</button>
 		</div>
@@ -159,7 +218,7 @@
 	<div class="pline">
 	<span class="row flex justify-content-between">
 		<label>이메일 :</label> 
-		<div>
+		<div class="contls">
 		<input type="text" name="email" id="email" value="${user.email}">
 		<button type="button" class="btn-modi" id="emailUpdate">변경</button>
 		</div>
@@ -168,7 +227,7 @@
 	<div class="pline">
 	<span class="row flex justify-content-between">
 		<label>연락처 :</label> 
-		<div>
+		<div class="contls">
 		<input type="text" name="mobileNumber" id="mobileNumber" value="${user.mobileNumber}">
 		<button type="button" class="btn-modi" id="mobileNumberUpdate">변경</button>
 		</div>
@@ -177,10 +236,10 @@
 	<div class="pline">
 	<span class="row flex justify-content-between">
 	<label>주소 : </label> 
-		<div>
+		<div class="contls">
 		<input type="text" name="name" id="name" value="${user.roadAddress} ${user.detailAddress}">
 		<!-- 모달 트리거 버튼 -->
-        <button type="button" id="showAddressModalBtn" class="btn-primary" data-toggle="modal" data-target="#AddressModal">
+        <button type="button" id="showAddressModalBtn" class="btn-modi" data-toggle="modal" data-target="#AddressModal">
   			주소등록
 		</button>
 		</div>
