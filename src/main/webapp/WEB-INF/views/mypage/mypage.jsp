@@ -29,7 +29,8 @@
 <style>
 	select, table {
             width: 100%;
-            margin-top: 20px;
+            margin: 10px 0 10px;
+
         }
 
  /* 모달 배경 스타일 */
@@ -119,14 +120,44 @@
 	
 	
 	}
+	.modal-content .btn-modi {
+	
+	display: inline-block;
+  padding: 4px 8px;
+  font-size: 16px;
+  background-color: #7b6aa6;;
+  color: #ffffff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+ 
+  }
 	.btn-modi:hover {
 	
-	background-color: #6a598f;
+	background-color: #6a598f !important;
 	}
 	
 	.btn-modi:active {
-  	background-color: #5a4978; 
+  	background-color: #5a4978 !important; 
 }
+
+	.modal-content .bline {
+	margin-bottom: 10px;
+	}
+	
+	.bline button {
+	width: 230px;
+	}
+	
+
+  .modal-content .btn-postcode {
+  width: 156px;
+  }
+
+	.modal-footer {
+	padding: 10px 0 0 ;
+	}
 	
 	.pline{
 	
@@ -184,7 +215,6 @@
 	</header>
 	<jsp:include page="/WEB-INF/views/mypage/side.jsp"></jsp:include>
 
-	<h2>회원 정보</h2>
 	<section>
 	
 <div class="content">
@@ -275,14 +305,16 @@
                 			</option>
             			</c:forEach>
         			</select>
-        			<button id="deleteAddress" onclick="deleteAddress()">주소삭제</button>
-        			<button id="alterPrimaryAddress" onclick="alterPrimaryAddress()">대표주소 변경</button>
+        			<div class="bline">
+        			<button class="btn-modi" id="deleteAddress" onclick="deleteAddress()">주소삭제</button>
+        			<button class="btn-modi" id="alterPrimaryAddress" onclick="alterPrimaryAddress()">대표주소 변경</button>
+        			</div>
         			
 					<form id="addressForm">
 						<div class="textForm">
 							<span style="display: flex;"> <input type="text"
-								name="postCode" id="sample4_postcode" placeholder="우편번호" class="cellphoneNo" required="required" readonly>
-								<button type="button" class="btn-postcode" onclick="sample4_execDaumPostcode()">우편번호 찾기</button>
+								name="postCode" id="sample4_postcode" placeholder="우편번호" class="cellphoneNo mr-1" required="required" readonly>
+								<button type="button" class="btn-postcode btn-modi" onclick="sample4_execDaumPostcode()">우편번호 찾기</button>
 							</span>
 						</div>
 						<div class="textForm">
@@ -307,13 +339,13 @@
 								placeholder="주소별칭" class="cellphoneNo" required>
 							</span>
 						</div>
-						<button onclick="addressRegist()">주소 등록</button>
+				<div class="modal-footer justify-content-between">
+					<button class="btn-modi" onclick="addressRegist()">주소 등록</button>
+					<button type="button" class="btn btn-modi"
+						data-dismiss="modal">닫기</button>
+				</div>
 					</form>
 					
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-secondary"
-						data-dismiss="modal">닫기</button>
 				</div>
 			</div>
 		</div>
