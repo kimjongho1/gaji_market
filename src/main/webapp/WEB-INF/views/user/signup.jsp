@@ -456,8 +456,7 @@ $('#mail-Check-Btn').click(function() {
         url: '${pageContext.request.contextPath}/mailcheck', // 수정된 URL
         data: { email: email }, // 이메일을 데이터로 전달
         success: function(data) {
-            console.log("data: " + data);
-            checkInput.prop('disabled', false);
+            /* checkInput.prop('disabled', false); */
             code = data;
             alert('인증번호가 전송되었습니다.');
         }

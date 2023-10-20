@@ -191,7 +191,23 @@
 								<span class="text-base">원</span>
 							</div>
 						</div>
-						<span class="underline underline-offset-4">판매중</span>
+						<c:choose>
+    						<c:when test="${goodsDto.status == 1}">
+        						<span class="underline underline-offset-4">판매중</span>
+    						</c:when>
+    						<c:when test="${goodsDto.status == 2}">
+        						<span class="underline underline-offset-4">예약중</span>
+    						</c:when>
+						    <c:when test="${goodsDto.status == 3}">
+						        <span class="underline underline-offset-4">판매완료</span>
+						    </c:when>
+						    <c:when test="${goodsDto.status == 4}">
+						        <span class="underline underline-offset-4">숨김</span>
+						    </c:when>
+						    <c:otherwise>
+						        <span class="underline underline-offset-4">알 수 없음</span>
+						    </c:otherwise>
+						</c:choose>
 					</div>
 					<div class="py-4 border-b border-gray-300 space-s-4">
 						<div class="pb-1 space-y-5 text-sm">
@@ -280,7 +296,23 @@
 							</div>
 							<div class="flex flex-wrap">
 								<span class="inline-block font-semibold text-heading pe-2">판매상태:</span>
-								<span class="px-2 py-1 mr-2 text-xs pointer-events-none bg-gray-150 rounded-xl">판매중</span>
+								<c:choose>
+    							<c:when test="${goodsDto.status == 1}">
+        							<span class="px-2 py-1 mr-2 text-xs pointer-events-none bg-gray-150 rounded-xl">판매중</span>
+	    						</c:when>
+	    						<c:when test="${goodsDto.status == 2}">
+	        						<span class="px-2 py-1 mr-2 text-xs pointer-events-none bg-gray-150 rounded-xl">예약중</span>
+	    						</c:when>
+							    <c:when test="${goodsDto.status == 3}">
+							        <span class="px-2 py-1 mr-2 text-xs pointer-events-none bg-gray-150 rounded-xl">판매완료</span>
+							    </c:when>
+							    <c:when test="${goodsDto.status == 4}">
+							        <span class="px-2 py-1 mr-2 text-xs pointer-events-none bg-gray-150 rounded-xl">숨김</span>
+							    </c:when>
+							    <c:otherwise>
+						        	<span class="px-2 py-1 mr-2 text-xs pointer-events-none bg-gray-150 rounded-xl">알 수 없음</span>
+						    	</c:otherwise>
+								</c:choose>
 							</div>
 							
 						</div>
