@@ -25,6 +25,7 @@
 <link rel="stylesheet"	href="${pageContext.request.contextPath}/resources/css/style.css"	type="text/css">
 <script	src="${pageContext.request.contextPath}/resources/js/orderstatus.js"></script>
 <link	href="${pageContext.request.contextPath}/resources/css/orderstatus.css"	rel='stylesheet' type='text/css'>
+
 <style>
 	select, table {
             width: 100%;
@@ -73,6 +74,27 @@
     .modal-footer button:hover {
         background-color: #0056b3;
     }
+    
+    .fa-facebook, .fa-instagram, .fa-twitter, .fa-pinterest {
+    top: 0;    
+    }
+   .content {
+   
+   margin: 50px auto;
+   padding: 0px 100px;
+   }
+    
+    label {
+	height: 30px;
+	width: 100px;
+}
+
+	section input {
+	
+	width: auto;
+	
+	}
+
 </style>
 </head>
 <body>
@@ -83,55 +105,71 @@
 	<jsp:include page="/WEB-INF/views/mypage/side.jsp"></jsp:include>
 
 	<h2>회원 정보</h2>
+	<section>
+	
+<div class="content">
 	<nav>
 		<a href=""></a>
 	</nav>
-	<c:forEach items="${userMypage}" var="user">
+	<c:forEach items="${userMypage}" var="user" begin="0" end="0">
 	<div>
-	<span>
-		<label>이름 : </label> 
+	<span class="row flex justify-content-between">
+		<label><strong>이름 : </strong></label> 
+		<div>
 		<input type="text" name="name" id="name" value="${user.name}">
 		<button type="button" id="nameUpdate">변경</button>
+		</div>
 	</span>
 	</div>
 	<div>
-	<span>
+	<span class="row flex justify-content-between">
 		<label>가지온도 :</label> 
+		<div>
 		<input type="text" name="ratingScore" id="ratingScore" value="${user.ratingScore}">
+		</div>
 	</span>
 	</div>
 	<div>
-	<span>
+	<span class="row flex justify-content-between">
 		<label>닉네임 :</label> 
+		<div>
 		<input type="text" name="nickname" id="nickname" value="${user.nickname}">
 		<button type="button" id="nicknameUpdate">변경</button>
+		</div>
 	</span>
 	</div>
 	<div>
-	<span>
+	<span class="row flex justify-content-between">
 		<label>이메일 :</label> 
+		<div>
 		<input type="text" name="email" id="email" value="${user.email}">
 		<button type="button" id="emailUpdate">변경</button>
+		</div>
 	</span>
 	</div>
 	<div>
-	<span>
+	<span class="row flex justify-content-between">
 		<label>연락처 :</label> 
+		<div>
 		<input type="text" name="mobileNumber" id="mobileNumber" value="${user.mobileNumber}">
 		<button type="button" id="mobileNumberUpdate">변경</button>
+		</div>
 	</span>
 	</div>
 	<div>
-	<span>
+	<span class="row flex justify-content-between">
 	<label>주소 : </label> 
+		<div>
 		<input type="text" name="name" id="name" value="${user.roadAddress} ${user.detailAddress}">
 		<!-- 모달 트리거 버튼 -->
         <button type="button" id="showAddressModalBtn" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#AddressModal">
   			주소등록
 		</button>
+		</div>
 	</span>
 	</div>
-	
+	</div>
+</section>	
 	<!-- 모달부분 -->
 	
 	<div class="modal fade" id="AddressModal" tabindex="-1" role="dialog"
@@ -509,6 +547,8 @@
 	}
 	
 	</script>
+	
+	
 	
 	<!-- Footer Section Begin -->
 	<footer>
