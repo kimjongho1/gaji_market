@@ -88,8 +88,8 @@
                 			</option>
             			</c:forEach>
         			</select>
-        			<button id="deleteAddress" onclick="deleteAddress()">주소삭제</button>
-        			<button id="alterPrimaryAddress" onclick="alterPrimaryAddress()">대표주소 변경</button>
+        			<button type="button" id="deleteAddress" onclick="deleteAddress()">주소삭제</button>
+        			<button type="button" id="alterPrimaryAddress" onclick="alterPrimaryAddress()">대표주소 변경</button>
         			
 					<form id="addressForm">
 						<div class="textForm">
@@ -121,8 +121,6 @@
 							</span>
 						</div>
 						<button type="button" onclick="addressRegist()">주소 등록</button>
-					</form>
-					
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-secondary"
@@ -130,7 +128,6 @@
 				</div>
 			</div>
 		</div>
-	</div>
 
 	<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
     <script src="https://cdn.iamport.kr/v1/iamport.js"></script>
@@ -393,8 +390,6 @@
 	}
 	
 	var deleteAddress=()=>{
-		var selectedOption = $("#addresses > option:selected").val();
-		var addressParts = selectedOption.split(', ');
 		var selectedOption = $("#modalAddresses option:selected").val();
 		var addressParts = selectedOption.split(', ');
 		var addressNo = addressParts[2];
@@ -420,8 +415,6 @@
 	}
 	
 	var alterPrimaryAddress=()=>{
-		var selectedOption = $("#addresses > option:selected").val();
-		var addressParts = selectedOption.split(', ');
 		var selectedOption = $("#modalAddresses option:selected").val();
 		var addressParts = selectedOption.split(', ');
 		var addressNo = addressParts[2];

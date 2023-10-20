@@ -306,16 +306,14 @@
                 			</option>
             			</c:forEach>
         			</select>
-        			<div class="bline">
-        			<button class="btn-modi" id="deleteAddress" onclick="deleteAddress()">주소삭제</button>
-        			<button class="btn-modi" id="alterPrimaryAddress" onclick="alterPrimaryAddress()">대표주소 변경</button>
-        			</div>
+        			<button class="btn-modi" type="button" id="deleteAddress" onclick="deleteAddress()">주소삭제</button>
+        			<button class="btn-modi" type="button" id="alterPrimaryAddress" onclick="alterPrimaryAddress()">대표주소 변경</button>
         			
 					<form id="addressForm">
 						<div class="textForm">
 							<span style="display: flex;"> <input type="text"
-								name="postCode" id="sample4_postcode" placeholder="우편번호" class="cellphoneNo mr-1" required="required" readonly>
-								<button type="button" class="btn-postcode btn-modi" onclick="sample4_execDaumPostcode()">우편번호 찾기</button>
+								name="postCode" id="sample4_postcode" placeholder="우편번호" class="cellphoneNo" required="required" readonly>
+								<button type="button" class="btn-postcode" onclick="sample4_execDaumPostcode()">우편번호 찾기</button>
 							</span>
 						</div>
 						<div class="textForm">
@@ -340,12 +338,12 @@
 								placeholder="주소별칭" class="cellphoneNo" required>
 							</span>
 						</div>
-				<div class="modal-footer justify-content-between">
-					<button class="btn-modi" onclick="addressRegist()">주소 등록</button>
-					<button type="button" class="btn btn-modi"
+						<button type="button" onclick="addressRegist()">주소 등록</button>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary"
 						data-dismiss="modal">닫기</button>
 				</div>
-					</form>
 					
 				</div>
 			</div>
@@ -360,7 +358,7 @@
 	        backdrop: 'static', // 모달 바깥을 클릭해도 모달이 닫히지 않도록 설정
 	        show: false // 페이지 로드 시 모달을 표시하지 않도록 설정
 	    });
-	}
+
 	    // 주소변경 버튼을 클릭하면 모달을 표시
 	    $('#showAddressModalBtn').click(function () {
 	        $('#AddressModal').modal('show');
@@ -369,8 +367,8 @@
 	    $('.btn-secondary').click(function(){
 	    	 $('#AddressModal').modal('hide');
 	    });
-	    
-	    
+	   });
+
 		
 	    // 버튼 클릭 시 서버에 이름 업데이트 요청 보내기
 	    $("#nameUpdate").click(function() {
@@ -545,10 +543,6 @@
 	            }
 	        });
 	    });
-	 
-	 
-	 
-	});
 	
 	
 	var addressRegist=()=> {
