@@ -257,16 +257,16 @@
 					<c:choose>
 					<c:when test="${goodsDto.safeTradingYn eq 'Y'}">
 						<form action="${pageContext.request.contextPath}/payment/pay" method="GET"
-						 class="text-[13px] md:text-sm leading-4 inline-flex items-center cursor-pointer transition ease-in-out duration-300 font-semibold font-body text-center justify-center border-0 border-transparent placeholder-white focus-visible:outline-none focus:outline-none rounded-md h-11 md:h-12 px-5 text-white py-2 transform-none normal-case hover:text-white hover:shadow-cart w-full xl:w-full bg-jnblack hover:bg-jnblack/90">
+						 class="text-[13px] md:text-sm leading-4 inline-flex items-center cursor-pointer transition ease-in-out duration-300 font-semibold font-body text-center justify-center border-0 border-transparent placeholder-white focus-visible:outline-none focus:outline-none rounded-md h-11 md:h-12  text-white  transform-none normal-case hover:text-white hover:shadow-cart w-full xl:w-full bg-jnblack hover:bg-jnblack/90">
     					<input type="hidden" name="goodsId" value="${goodsDto.goodsId}">
-    					<button data-variant="slim">
+    					<button data-variant="slim" class="btn-full">
         				<span class="py-2 3xl:px-8">안전거래하기</span>
     					</button>
 						</form>
 					</c:when>
 					</c:choose>
 						<form action="${pageContext.request.contextPath}/chat/insertRoom" method="GET"
-						class="text-[13px] md:text-sm leading-4 inline-flex items-center cursor-pointer transition ease-in-out duration-300 font-semibold font-body text-center justify-center border-0 border-transparent placeholder-white focus-visible:outline-none focus:outline-none rounded-md h-11 md:h-12 px-5 text-white py-2 transform-none normal-case hover:text-white hover:shadow-cart w-full xl:w-full bg-jnblack hover:bg-jnblack/90">
+						class="text-[13px] md:text-sm leading-4 inline-flex items-center cursor-pointer transition ease-in-out duration-300 font-semibold font-body text-center justify-center border-0 border-transparent placeholder-white focus-visible:outline-none focus:outline-none rounded-md h-11 md:h-12  text-white  transform-none normal-case hover:text-white hover:shadow-cart w-full xl:w-full bg-jnblack hover:bg-jnblack/90">
 							<%-- <c:if test="${empty goodsDto.userId}">
 								<input type="hidden" name="sellerId" value="">
     						</c:if>
@@ -274,7 +274,7 @@
         						<input type="hidden" name="sellerId" value="${goodsDto.userId}">
     						<%-- </c:if> --%>
 							<input type="hidden" name="goodsId" value="${goodsDto.goodsId}">
-							<button data-variant="slim">
+							<button data-variant="slim" class="btn-full">
 								<span class="py-2 3xl:px-8">채팅하기</span>
 							</button>
 						</form>
