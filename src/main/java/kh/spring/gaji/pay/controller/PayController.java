@@ -94,7 +94,7 @@ public class PayController {
 					TitleBuyerDto titleBuyerDto=payServiceImpl.getIdFromTransactionId(transactionId);
 					insertNotificationDto.setBuyerId(titleBuyerDto.getBuyerId());  
 					insertNotificationDto.setSellerId(titleBuyerDto.getSellerId());
-					insertNotificationDto.setType(3);
+					insertNotificationDto.setType(2);
 					insertNotificationDto.setReferenceId(transactionId);
 					insertNotificationDto.setMessage(titleBuyerDto.getGoodsTitle()+"의 결제가 확정되었습니다.");
 					payServiceImpl.insertNoti(insertNotificationDto);
@@ -116,7 +116,7 @@ public class PayController {
 			TitleBuyerDto titleBuyerDto=payServiceImpl.getIdFromTransactionId(transactionId);
 			insertNotificationDto.setBuyerId(titleBuyerDto.getBuyerId());  
 			insertNotificationDto.setSellerId(titleBuyerDto.getSellerId());
-			insertNotificationDto.setType(3);
+			insertNotificationDto.setType(2);
 			insertNotificationDto.setReferenceId(transactionId);
 			insertNotificationDto.setMessage(titleBuyerDto.getGoodsTitle()+"의 거래가 수락되었습니다.");
 			payServiceImpl.insertNoti(insertNotificationDto);
@@ -141,7 +141,7 @@ public class PayController {
 				TitleBuyerDto titleBuyerDto=payServiceImpl.getIdFromTransactionId(transactionId);
 				insertNotificationDto.setBuyerId(titleBuyerDto.getBuyerId());  
 				insertNotificationDto.setSellerId(titleBuyerDto.getSellerId()); 
-				insertNotificationDto.setType(3);
+				insertNotificationDto.setType(2);
 				insertNotificationDto.setReferenceId(transactionId);
 				insertNotificationDto.setMessage(titleBuyerDto.getGoodsTitle()+"의 거래가 취소되었습니다.");
 				payServiceImpl.insertNoti(insertNotificationDto);
@@ -181,8 +181,16 @@ public class PayController {
 					Map<String, Object> map=new HashMap<String, Object>();
 					map.put("status", 2);
 					map.put("goodsId",goodsId); // 추후 goodsId로 변경해야함.
-					if(payServiceImpl.updateStatus(map)==1);
+					if(payServiceImpl.updateStatus(map)==1) {
+						TitleBuyerDto titleBuyerDto=payServiceImpl.getIdFromTransactionId(impUid);
+						insertNotificationDto.setBuyerId(titleBuyerDto.getBuyerId());  
+						insertNotificationDto.setSellerId(titleBuyerDto.getSellerId()); 
+						insertNotificationDto.setType(2);
+						insertNotificationDto.setReferenceId(impUid);
+						insertNotificationDto.setMessage(titleBuyerDto.getGoodsTitle()+"의 안전거래가 신청되었습니다.");
+						payServiceImpl.insertNoti(insertNotificationDto);
 						return result;	// 거래정보 반환.
+					}
 				}
 				else			// 가지 데이터베이스에 값이 입력되지 않았거나 거래중으로 변경이 안되었다면 거래취소함.
 				{

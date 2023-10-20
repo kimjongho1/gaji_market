@@ -622,12 +622,12 @@ public class MyPageController {
 			TitleBuyerDto titleBuyerDto=payServiceImpl.getIdFromTransactionId(transactionId);
 			insertNotificationDto.setBuyerId(titleBuyerDto.getBuyerId());  
 			insertNotificationDto.setSellerId(titleBuyerDto.getSellerId());  
-			insertNotificationDto.setType(3);
+			insertNotificationDto.setType(2);
 			insertNotificationDto.setReferenceId(transactionId);
 			if(shippingCompany==1)
 			insertNotificationDto.setMessage(titleBuyerDto.getGoodsTitle()+"의 운송장이 등록되었습니다. (대한통운)운송장 번호는"+trackingNumber+"입니다.");
 			else if(shippingCompany==2)
-			insertNotificationDto.setMessage(titleBuyerDto.getGoodsTitle()+"의 운송장이 등록되었습니다. (우체국)운송장 번호는"+trackingNumber+"입니다.");
+			insertNotificationDto.setMessage(titleBuyerDto.getGoodsTitle()+"의 운송장이 등록되었습니다.(우체국택배)운송장 번호는"+trackingNumber+"입니다.");
 			else if(shippingCompany==3)
 				insertNotificationDto.setMessage(titleBuyerDto.getGoodsTitle()+"의 운송장이 등록되었습니다. (한진택배)운송장 번호는"+trackingNumber+"입니다.");
 			else

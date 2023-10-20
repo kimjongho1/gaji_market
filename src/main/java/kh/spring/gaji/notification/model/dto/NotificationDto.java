@@ -7,9 +7,8 @@ import java.math.BigDecimal;
 @Data
 public class NotificationDto {
     private int notiId;
-    private String userId;
     private String message;
-    private int readYn;
+    private String readYn;
     private int type;
     private String referenceId;
     private String createdAt;

@@ -6,8 +6,8 @@
 		update notification set read_yn='Y' where noti_id=#{notiId} and user_id=#{userId}
 	</update>
 	
-	<select id="countNotification" parameterType="string" resultType="_int">>	<!-- 2P 알림갯수 -->
-		select count(*) from notification where user_id=#{userId} and read_yn='N'
+	<select id="countNotification" parameterType="map" resultType="_int">	<!-- 2P 알림갯수 -->
+		select count(*) from notification where user_id=#{userId} and read_yn='N' and type=#{type}
 	</select>
 	 
 	<insert id="insertNoti" parameterType="InsertNotificationDto">	<!-- 알림생성 -->
@@ -18,8 +18,14 @@
 		insert into notification values(noti_id_sequence.nextval,#{sellerId}, #{message},default,#{type}, #{referenceId},default)
 	</insert>
 	
-	<select id="getTradeNotice" resultType="NotificationDto" parameterType="string"> <!-- 18P해당계정의 거래알림 -->
-		select noti_id,message,read_yn,type,reference_id,created_at from notification where type=3 and user_id=#{userId}
+	<select id="getNoticeList" resultType="NotificationDto" parameterType="map"> <!-- 18P해당계정의 거래알림 -->
+		select noti_id,message,read_yn,type,reference_id,to_char(created_at,'YYYY-MM-DD HH24:MI:SS') created_at 
+		from notification where type=#{type} and user_id=#{userId}
+		order by created_at
+	</select>
+	
+	<select id="getIdFromTransactionId"	parameterType="string" resultType="string">
+		select buyer_id from safe_trading where transaction_id = #{transactionId}
 	</select>
 	
 </mapper>
