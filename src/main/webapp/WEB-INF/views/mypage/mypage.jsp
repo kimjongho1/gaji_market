@@ -210,7 +210,7 @@
 </head>
 <body>
 
-<header>
+	<header>
 		<jsp:include page="/WEB-INF/views/header.jsp"></jsp:include>
 	</header>
 	<jsp:include page="/WEB-INF/views/mypage/side.jsp"></jsp:include>
@@ -281,10 +281,10 @@
   			주소등록
 		</button>
 		</div>
-	</c:forEach>
 	</span>
 	</div>
 	</div>
+	</c:forEach>
 </section>	
 	<!-- 모달부분 -->
 	
@@ -352,7 +352,7 @@
 		</div>
 	</div>
 
-	
+
 	<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 	<script>
 	$(document).ready(function() {
@@ -360,7 +360,7 @@
 	        backdrop: 'static', // 모달 바깥을 클릭해도 모달이 닫히지 않도록 설정
 	        show: false // 페이지 로드 시 모달을 표시하지 않도록 설정
 	    });
-
+	}
 	    // 주소변경 버튼을 클릭하면 모달을 표시
 	    $('#showAddressModalBtn').click(function () {
 	        $('#AddressModal').modal('show');
