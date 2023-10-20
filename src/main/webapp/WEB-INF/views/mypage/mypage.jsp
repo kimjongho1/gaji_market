@@ -79,7 +79,6 @@
     top: 0;    
     }
    .content {
-   
    margin: 50px auto;
    padding: 0px 100px;
    }
@@ -93,8 +92,27 @@
 	
 	width: auto;
 	
+	
 	}
-
+	
+	section {
+	
+	min-height: 1200px;
+	
+	}
+	
+	.btn-modi {
+	
+	
+	
+	}
+	
+	.pline{
+	
+    border-bottom: 1px solid #bbb1d6;
+   	margin: 10px;
+	}
+	
 </style>
 </head>
 <body>
@@ -112,16 +130,16 @@
 		<a href=""></a>
 	</nav>
 	<c:forEach items="${userMypage}" var="user" begin="0" end="0">
-	<div>
-	<span class="row flex justify-content-between">
+	<div class="pline">
+	<span class="row flex justify-content-between align-items-center">
 		<label><strong>이름 : </strong></label> 
 		<div>
 		<input type="text" name="name" id="name" value="${user.name}">
-		<button type="button" id="nameUpdate">변경</button>
+		<button type="button" class="btn-modi" id="nameUpdate">변경</button>
 		</div>
 	</span>
 	</div>
-	<div>
+	<div class="pline">
 	<span class="row flex justify-content-between">
 		<label>가지온도 :</label> 
 		<div>
@@ -129,40 +147,40 @@
 		</div>
 	</span>
 	</div>
-	<div>
+	<div class="pline">
 	<span class="row flex justify-content-between">
 		<label>닉네임 :</label> 
 		<div>
 		<input type="text" name="nickname" id="nickname" value="${user.nickname}">
-		<button type="button" id="nicknameUpdate">변경</button>
+		<button type="button" class="btn-modi" id="nicknameUpdate">변경</button>
 		</div>
 	</span>
 	</div>
-	<div>
+	<div class="pline">
 	<span class="row flex justify-content-between">
 		<label>이메일 :</label> 
 		<div>
 		<input type="text" name="email" id="email" value="${user.email}">
-		<button type="button" id="emailUpdate">변경</button>
+		<button type="button" class="btn-modi" id="emailUpdate">변경</button>
 		</div>
 	</span>
 	</div>
-	<div>
+	<div class="pline">
 	<span class="row flex justify-content-between">
 		<label>연락처 :</label> 
 		<div>
 		<input type="text" name="mobileNumber" id="mobileNumber" value="${user.mobileNumber}">
-		<button type="button" id="mobileNumberUpdate">변경</button>
+		<button type="button" class="btn-modi" id="mobileNumberUpdate">변경</button>
 		</div>
 	</span>
 	</div>
-	<div>
+	<div class="pline">
 	<span class="row flex justify-content-between">
 	<label>주소 : </label> 
 		<div>
 		<input type="text" name="name" id="name" value="${user.roadAddress} ${user.detailAddress}">
 		<!-- 모달 트리거 버튼 -->
-        <button type="button" id="showAddressModalBtn" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#AddressModal">
+        <button type="button" id="showAddressModalBtn" class="btn-primary" data-toggle="modal" data-target="#AddressModal">
   			주소등록
 		</button>
 		</div>
