@@ -210,7 +210,7 @@
 </head>
 <body>
 
-<header>
+	<header>
 		<jsp:include page="/WEB-INF/views/header.jsp"></jsp:include>
 	</header>
 	<jsp:include page="/WEB-INF/views/mypage/side.jsp"></jsp:include>
@@ -221,12 +221,11 @@
 	<nav>
 		<a href=""></a>
 	</nav>
-	<c:forEach items="${userMypage}" var="user" begin="0" end="0">
 	<div class="pline">
 	<span class="row flex justify-content-between align-items-center">
 		<label><strong>이름 : </strong></label> 
 		<div class="contls">
-		<input type="text" name="name" id="name" value="${user.name}">
+		<input type="text" name="name" id="name" value="${userMypage.name}">
 		<button type="button" class="btn-modi" id="nameUpdate">변경</button>
 		</div>
 	</span>
@@ -236,9 +235,9 @@
 		<label>가지온도 :</label> 
 		<div class="contls">
 		<div class="flex justify-between mb-2 gt">
-						<strong>${user.ratingScore}%</strong>
+						<strong>${userMypage.ratingScore}%</strong>
 						<div class="bgo">
-							<div class="bgs" style="width: ${user.ratingScore}%;"></div>
+							<div class="bgs" style="width: ${userMypage.ratingScore}%;"></div>
 						</div>
 					</div>
 		</div>
@@ -248,7 +247,7 @@
 	<span class="row flex justify-content-between align-items-center">
 		<label>닉네임 :</label> 
 		<div class="contls">
-		<input type="text" name="nickname" id="nickname" value="${user.nickname}">
+		<input type="text" name="nickname" id="nickname" value="${userMypage.nickname}">
 		<button type="button" class="btn-modi" id="nicknameUpdate">변경</button>
 		</div>
 	</span>
@@ -257,7 +256,7 @@
 	<span class="row flex justify-content-between align-items-center">
 		<label>이메일 :</label> 
 		<div class="contls">
-		<input type="text" name="email" id="email" value="${user.email}">
+		<input type="text" name="email" id="email" value="${userMypage.email}">
 		<button type="button" class="btn-modi" id="emailUpdate">변경</button>
 		</div>
 	</span>
@@ -266,16 +265,17 @@
 	<span class="row flex justify-content-between align-items-center">
 		<label>연락처 :</label> 
 		<div class="contls">
-		<input type="text" name="mobileNumber" id="mobileNumber" value="${user.mobileNumber}">
+		<input type="text" name="mobileNumber" id="mobileNumber" value="${userMypage.mobileNumber}">
 		<button type="button" class="btn-modi" id="mobileNumberUpdate">변경</button>
 		</div>
 	</span>
 	</div>
 	<div class="pline">
 	<span class="row flex justify-content-between align-items-center">
+	<c:forEach items="${userAddress}" var="item" begin="0" end="0" >
 	<label>주소 : </label> 
 		<div class="contls">
-		<input type="text" name="name" id="name" value="${user.roadAddress} ${user.detailAddress}">
+		<input type="text" name="name" id="name" value="${item.roadAddress} ${item.detailAddress}" readonly>
 		<!-- 모달 트리거 버튼 -->
         <button type="button" id="showAddressModalBtn" class="btn-modi" data-toggle="modal" data-target="#AddressModal">
   			주소등록
@@ -284,6 +284,7 @@
 	</span>
 	</div>
 	</div>
+	</c:forEach>
 </section>	
 	<!-- 모달부분 -->
 	
@@ -351,16 +352,15 @@
 		</div>
 	</div>
 
-	
+
 	<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-	</c:forEach>
 	<script>
 	$(document).ready(function() {
 		$('#AddressModal').modal({
 	        backdrop: 'static', // 모달 바깥을 클릭해도 모달이 닫히지 않도록 설정
 	        show: false // 페이지 로드 시 모달을 표시하지 않도록 설정
 	    });
-
+	}
 	    // 주소변경 버튼을 클릭하면 모달을 표시
 	    $('#showAddressModalBtn').click(function () {
 	        $('#AddressModal').modal('show');
@@ -551,26 +551,30 @@
 	});
 	
 	
-	var addressRegist=()=>{
+	var addressRegist=()=> {
 		var formData = $('#addressForm').serialize();
+		var item;
 		$.ajax({
 			type:"POST",
 			url:"${pageContext.request.contextPath}/mypage/address/regist/do",
 			data:formData,
-			success: function(data){
-				var item;
+			dataType:"json",
+			async:false,
+			success: (data)=>{
 				alert("주소 등록에 성공했습니다.");
-				var html="<select id='addresses' items='${userAddress}'>";
-				for(var i=0; i<data.length; i++){
-				item=data[i];
-				html+="<option value="+item.roadAddress+","+item.detailAddress+">";
-				html+=item.addressNickname+","+item.roadAddress+","+item.detailAddress+"</option>";
-				}
-				$("#addresses").replaceWith(html);
+				window.location.href="${pageContext.request.contextPath}/mypage";
 			},
-			error: function(data){
+			error: (data)=>{
 				if($("#modalAddresses option").length > 8)
 					alert("등록가능한 주소갯수를 초과하였습니다.");
+				else if($(".textForm input[name=postCode]").val()==="")
+					alert("우편번호를 입력해주세요.");
+				else if($(".textForm input[name=address]").val()==="")
+					alert("지번주소를 입력해주세요.");
+				else if($(".textForm input[name=detailAddress]").val()==="")
+					alert("상세주소를 입력해주세요.");
+				else if($(".textForm input[name=addressNickname]").val()==="")
+					alert("주소별칭을 입력해주세요.");
 				else
 					alert("잘못된 접근입니다.");
 			}
@@ -578,21 +582,44 @@
 	}
 	
 	var deleteAddress=()=>{
-		var selectedOption = $("#addresses > option:selected").val();
-		var addressParts = selectedOption.split(', ');
 		var selectedOption = $("#modalAddresses option:selected").val();
 		var addressParts = selectedOption.split(', ');
 		var addressNo = addressParts[2];
 		$.ajax({
 			type:"POST",
 			url:"${pageContext.request.contextPath}/mypage/address/delete",
-			data: { addressNo: addressNo },
-			success: function(data){
-				if(data=='1')
+			dataType:"json",
+			data: { addressNo: addressNo},
+			success:  (data)=>{
+				if(data=='1'){
 					alert("주소를 삭제했습니다.");
+					window.location.href="${pageContext.request.contextPath}/mypage";
+				}
 				else
 					alert("주소 삭제에 실패했습니다.");
-				window.location.href="${pageContext.request.contextPath}/payment/pay";
+				;
+			},
+			error : (request,status,error)=>{
+				console.log(request);
+				console.log(status);
+				console.log(error);
+				alert("code:"+request.status+"\n"+"message"+request.responseText+"\n"+error+":error");
+			}
+		});
+	}
+	
+	var alterPrimaryAddress=()=>{
+		var selectedOption = $("#modalAddresses option:selected").val();
+		var addressParts = selectedOption.split(', ');
+		var addressNo = addressParts[2];
+		$.ajax({
+			type:"POST",
+			url:"${pageContext.request.contextPath}/mypage/address/alterPrimaryAddress",
+			data: {addressNo: addressNo},
+			dataType:"json",
+			success:  (data)=>{
+				alert("대표주소가 변경되었습니다.");
+				window.location.href="${pageContext.request.contextPath}/mypage";
 			},
 			error : (request,status,error)=>{
 				console.log(request);

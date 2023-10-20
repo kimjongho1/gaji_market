@@ -13,8 +13,7 @@
 	</select>
 
 	<select id="userMypage" resultType="MypageDto" parameterType="string">
-		SELECT * FROM users JOIN USER_ADDRESS USING
-		(user_id) WHERE USER_ID = #{userId}
+		SELECT * FROM users WHERE USER_ID = #{userId}
 	</select>
 
 	<update id="updateName" parameterType="map">

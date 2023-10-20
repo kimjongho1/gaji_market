@@ -1,13 +1,11 @@
 package kh.spring.gaji.mypage.model.service;
-
-import java.util.List;
 import java.util.Map;
 
 import kh.spring.gaji.mypage.model.dto.MypageDto;
 
 public interface MypageService {
 	
-	public List<MypageDto> userMypage(String userId);
+	public MypageDto userMypage(String userId);
 	
 	public int changePassword(Map<String, String> map);
 	

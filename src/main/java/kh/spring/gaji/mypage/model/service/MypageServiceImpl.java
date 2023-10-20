@@ -18,7 +18,7 @@ public class MypageServiceImpl implements MypageService{
 	private MypageDao mypageDao;
 	
 	@Override
-	public List<MypageDto> userMypage(String userId) {
+	public MypageDto userMypage(String userId) {
 		return mypageDao.userMypage(userId);
 	}
 	
