@@ -15,8 +15,8 @@ public class MypageDao {
 	@Autowired
     private SqlSession sqlSession;
 	
-	public List<MypageDto> userMypage(String userId){
-		return sqlSession.selectList("mypage.userMypage",userId);
+	public MypageDto userMypage(String userId){
+		return sqlSession.selectOne("mypage.userMypage",userId);
 	}
 	
 	public String searchPassword(String userId) {
