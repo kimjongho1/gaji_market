@@ -243,7 +243,7 @@ body {
 	<div class="container-box">
 
 		<form action="${pageContext.request.contextPath}/signup" method="POST"
-			class="joinForm" onsubmit="return Validation(); return false;">
+			class="joinForm" onsubmit="return Validation();">
 
 			<div class="textForm">
 				<span style="display: flex;"> <input name="userId"
@@ -308,32 +308,32 @@ body {
 			<div class="textForm">
 				<span style="display: flex;"> <input type="text"
 					name="roadAddress" id="sample4_roadAddress" placeholder="도로명주소"
-					class="cellphoneNo">
+					class="cellphoneNo" required="required">
 				</span>
 			</div>
 			<div class="textForm">
 				<span style="display: flex;"> <input type="text"
 					name="address" id="sample4_jibunAddress" placeholder="지번주소"
-					class="cellphoneNo"> <span id="guide"
+					class="cellphoneNo" required="required"> <span id="guide"
 					style="color: #999; display: none"></span>
 				</span>
 			</div>
 			<div class="textForm">
 				<span style="display: flex;"> <input type="text"
 					name="detailAddress" id="sample4_detailAddress" placeholder="상세주소"
-					class="cellphoneNo">
+					class="cellphoneNo" required="required">
 				</span>
 			</div>
 			<div class="textForm">
 				<span style="display: flex;"> <input type="text"
 					name="addressNickname" id="sample4_detailAddress"
-					placeholder="주소별칭" class="cellphoneNo">
+					placeholder="주소별칭" class="cellphoneNo" required="required">
 				</span>
 			</div>
 			<div>
 			<!-- 구 선택 드롭다운 -->
 			<label for="selectedGu">구 선택:</label> <select name="selectedGu"
-				id="selectedGu" onchange="updateDongDropdown()">
+				id="selectedGu" onchange="updateDongDropdown()" required="required">
 				<option value="">구를 선택하세요</option>
 				<c:forEach items="${guList}" var="gu">
 					<option value="${gu.guId}">${gu.guName}</option>
@@ -342,7 +342,7 @@ body {
 
 			<!-- 동 선택 드롭다운 -->
 			<label for="selectedDong">동 선택:</label> <select name="dongId"
-				id="selectedDong">
+				id="selectedDong" required="required">
 				<option value="">동을 선택하세요</option>
 				<c:forEach items="${dongList}" var="dong">
 					<option value="${dong.dongId}" data-gu="${dong.guId}">${dong.dongName}</option>
@@ -509,7 +509,7 @@ $('#verify-button').click(function() {
         var emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/; // 이메일 주소 형식
         var namePattern = /^[가-힣a-zA-Z]{2,30}$/; // 이름은 2~30자의 한글 또는 영문 허용
         var nicknamePattern = /^[a-zA-Z0-9ㄱ-ㅎ가-힣]{4,30}$/; // 닉네임은 4~30자의 영문 대소문자, 숫자, 한글 허용
-        var mobileNumberPattern = /^[0-9]{10,11}$/; // 전화번호는 10자 또는 11자의 숫자만 허용
+        var mobileNumberPattern = /^\d{10,11}$/; // 전화번호는 10자 또는 11자의 숫자만 허용
         var postCodePattern = /^[0-9]{5}$/; // 우편번호는 5자리 숫자만 허용
 		
        
@@ -547,13 +547,6 @@ $('#verify-button').click(function() {
         if (!passwordPattern.test(password.value)) {
             alert("비밀번호는 6~20자의 영문 대소문자, 숫자, 특수문자를 허용합니다.");
             password.focus();
-            return false;
-        }
-
-        // 비밀번호 확인
-        if (loginPwConfirm.value !== password.value) {
-            alert("비밀번호와 확인 비밀번호가 일치하지 않습니다.");
-            loginPwConfirm.focus();
             return false;
         }
 
@@ -632,6 +625,7 @@ $('#verify-button').click(function() {
         else {
             // 중복 확인 또는 인증 번호 확인이 실패한 경우 사용자에게 알림
             alert('중복확인과 인증번호 확인을 먼저 해주세요.');
+           	return false;
         }
     }
     
@@ -640,7 +634,10 @@ $('#verify-button').click(function() {
     	console.log("버튼클릭확인");
         // 중복 확인할 아이디 값을 가져옴
         var userId = $("#userId").val();
-
+        if (userId === "") {
+            alert("아이디를 입력하세요.");
+            return;
+        }
         // 서버에 보낼 요청 URL (실제로는 서버 엔드포인트에 맞게 수정해야 함)
         var apiUrl = "${pageContext.request.contextPath}/checkid"; // 예시 URL, 실제로는 서버의 URL로 수정
         
@@ -670,7 +667,10 @@ $('#verify-button').click(function() {
     	console.log("버튼클릭확인");
         // 중복 확인할 아이디 값을 가져옴
         var nickname = $("#nickname").val();
-
+        if (nickname === "") {
+            alert("닉네임을 입력하세요.");
+            return;
+        }
         // 서버에 보낼 요청 URL (실제로는 서버 엔드포인트에 맞게 수정해야 함)
         var url = "${pageContext.request.contextPath}/checknickname"; // 예시 URL, 실제로는 서버의 URL로 수정
         

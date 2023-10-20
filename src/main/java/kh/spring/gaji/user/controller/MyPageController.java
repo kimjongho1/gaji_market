@@ -112,6 +112,7 @@ public class MyPageController {
 		if (principal != null) {
 			String userId = principal.getName();
 			mv.setViewName("mypage/mypage");
+			mv.addObject("loginId",userId);
 			mv.addObject("userMypage", myPageService.userMypage(userId));
 			mv.addObject("userAddress", payServiceImpl.getUserAddressList(userId));
 		} else {
@@ -163,7 +164,7 @@ public class MyPageController {
 	public Map<String, Object> updateEmail(@RequestParam Map<String, String> map, String email) {
 		Map<String, Object> response = new HashMap<>();
 		String result = myPageService.checkEmail(email);
-
+		System.out.println(result);
 		if (result != null) {
 			response.put("status", -1); // 중복 이메일 오류
 			response.put("msg3", "중복된 이메일입니다.");

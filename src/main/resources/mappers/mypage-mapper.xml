@@ -49,7 +49,7 @@
 		parameterType="string">
 		select nickname from users where nickname = #{nickname}
 	</select>
-
+	
 	<select id="checkEmail" resultType="string"
 		parameterType="string">
 		select email from users where email = #{email}
