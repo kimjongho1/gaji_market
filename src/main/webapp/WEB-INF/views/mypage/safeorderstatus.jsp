@@ -44,7 +44,7 @@
 .page${currentPage}{
 	background-color:#5715CC !important;
 }
-	
+	</style>
 </head>
 
 <body>
@@ -82,7 +82,7 @@
 					<div class="col mb-5">
 						<div class="card h-100">
 							<!-- Sale badge-->
-							<div class="badge bg-dark text-white position-absolute"
+							<div class="badge bg-purple text-white position-absolute"
 								style="top: 0.5rem; right: 0.5rem">
 								<c:choose>
 									<c:when test="${safePurchaseInfo.tradingStatus eq 1}">입금완료</c:when>
