@@ -9,4 +9,8 @@ public interface FileService {
 	public int insertFile(FileDto fileDto);
 	
 	public List<FileDto> goodsImageList(int goodsId);
+	
+	public int deleteImg(String imageUrl);
+	
+	public int modifyFile(FileDto fileDto);
 }

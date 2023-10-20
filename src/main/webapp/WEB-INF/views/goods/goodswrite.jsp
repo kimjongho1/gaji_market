@@ -6,6 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 <!--favicon  -->
 	<link rel="icon" href="${pageContext.request.contextPath}/resources/img/favicon.ico">
@@ -78,7 +79,7 @@
 	<h2>중고 거래 게시판 글 작성</h2>
 	<form action="${pageContext.request.contextPath}/goods/write.do"
 		method="post" enctype="multipart/form-data">
-		<input type="hidden" name="userId" value="qordmlgjs">
+		<input type="hidden" name="userId" value="${loginId }">
 		<input type="text" name="title" id="title" placeholder="제목" required="required"> <br>
 		<!-- 카테고리 선택 드롭다운 -->
 		<label for="selectedCategory">카테고리 선택:</label> <select
@@ -357,7 +358,7 @@
         var container = document.getElementById('kakaoMap');
         var options = {
             center: new kakao.maps.LatLng(37.5665, 126.9780), // 지도의 중심 좌표 (서울)
-            level: 8 // 지도의 확대 레벨
+            level: 4 // 지도의 확대 레벨
         };
         var map = new kakao.maps.Map(container, options);
         
@@ -367,10 +368,10 @@
         });
         
         // 지도를 클릭한 위치 정보를 가져와서 출력하는 함수
-        function displayLatLng(lat, lng) {
+        /* function displayLatLng(lat, lng) {
             var resultDiv = document.getElementById('clickLatlng');
             resultDiv.innerHTML = '선택한 위치의 위도: ' + lat + ', 경도: ' + lng;
-        }
+        } */
         
         // 지도 클릭 이벤트 리스너 등록
         kakao.maps.event.addListener(map, 'click', function (mouseEvent) {

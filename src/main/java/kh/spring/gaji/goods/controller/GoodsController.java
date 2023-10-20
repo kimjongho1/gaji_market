@@ -160,7 +160,9 @@ public class GoodsController {
 	@GetMapping("/write")
 	public ModelAndView write(ModelAndView mv, Principal principal, RedirectAttributes ra) { // 중고거래 게시판 글 작성
 		if(principal != null) {
+		String loginId = principal.getName();
 		mv.setViewName("goods/goodswrite");
+		mv.addObject("loginId",loginId);
 		mv.addObject("categoryList", categoryService.categoryList());
 		mv.addObject("dongList", regionService.dongList());
 		mv.addObject("guList", regionService.guList());
@@ -224,7 +226,7 @@ public class GoodsController {
 			mv.setViewName("goods/goodsupdate");
 			mv.addObject("loginId", loginId);
 			mv.addObject("imageList",fileService.goodsImageList(goodsId)); // 해당 상품 url list값
-			mv.addObject("goodsDto",goodsService.getGoods(goodsId));
+			mv.addObject("goodsDto",goodsService.getGoods(goodsId));	// 해당상품의 정보
 			mv.addObject("categoryList", categoryService.categoryList());
 			mv.addObject("dongList", regionService.dongList());
 			mv.addObject("guList", regionService.guList());
@@ -237,7 +239,6 @@ public class GoodsController {
 	}
 	
 	@PostMapping("/goodsupdate")
-	@Transactional
 	public String goodsUpdate(RedirectAttributes ra, FileDto fileDto, GoodsDto goodsDto,
 			@RequestParam(value = "files", required = false) MultipartFile[] files) throws IOException{
 		if (goodsService.updateGoods(goodsDto) > 0) {
@@ -253,18 +254,29 @@ public class GoodsController {
 						System.out.println(imageUrl2);
 						String imageUrl = cloudinary.url().generate((String) imageUrl2.get("secure_url"));
 						fileDto.setUrl(imageUrl);
-						fileService.insertFile(fileDto);
+						fileService.modifyFile(fileDto);
 					}
 				}
 			}
-			ra.addFlashAttribute("msg", "상품 등록이 성공하였습니다.");
+			ra.addFlashAttribute("msg", "상품 수정이 성공하였습니다.");
 			return "redirect:/goods/board"; // 성공 시 게시판으로 리다이렉트
 		} else {
-			ra.addFlashAttribute("msg", "상품 등록이 실패하였습니다. 다시 시도해주십시오.");
-			return "redirect:/goods/goodswrite"; // 실패 시 다시 글 작성 페이지로 이동
+			ra.addFlashAttribute("msg", "상품 수정이 실패하였습니다. 다시 시도해주십시오.");
+			return "redirect:/goods/board"; // 실패 시 다시 글 작성 페이지로 이동
 		}
 	}
 	
+	@PostMapping("/deleteimg")
+	@ResponseBody
+	public String deleteImg(@RequestParam("imageUrl") String imageUrl, @RequestParam("imageFilename") String imageFilename) {
+		try {
+			cloudinary.uploader().destroy(imageFilename, ObjectUtils.emptyMap());
+			fileService.deleteImg(imageUrl);
+            return "success";
+        } catch (Exception e) {
+            return "error";
+        }
+	}
 	
 	@PostMapping("/wish")
 	@ResponseBody

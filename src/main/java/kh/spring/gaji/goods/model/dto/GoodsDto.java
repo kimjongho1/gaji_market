@@ -19,8 +19,10 @@ public class GoodsDto {
 	private double lat;
 	private double lng;
 	private int dongId;
+	private int guId;
 	private String activeStatus;
 	private int wishlist;
+	private String guName;
 	
 	
 }

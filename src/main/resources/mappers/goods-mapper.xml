@@ -176,13 +176,15 @@
 	<update id="updateGoods" parameterType="GoodsDto"> <!-- 25P 상품글 수정 -->
 		update goods
 		set 
-		goods_id = max(goods_id),title=#{title},status=#{status},category_id=#{categoryId},price=#{price},description=#{description},safe_trading_yn=#{safeTradingYn},dong_id=#{dongId},lat=#{lat},lng=#{lng}
+		title=#{title},status=#{status},category_id=#{categoryId},price=#{price},description=#{description},safe_trading_yn=#{safeTradingYn},dong_id=#{dongId},lat=#{lat},lng=#{lng}
 		where goods_id=#{goodsId}
 	</update>
 	
 	<select id="getGoods" parameterType="_int" resultType="GoodsDto">
-		select GOODS_ID, USER_ID, CATEGORY_ID, DONG_ID, TITLE, STATUS, PRICE, VIEW_COUNT, DESCRIPTION, REFRESHED_AT, CREATED_AT, SAFE_TRADING_YN, LAT, LNG, ACTIVE_STATUS
-		from goods where goods_id = #{goodsId}
+		select GOODS_ID, USER_ID, CATEGORY_ID, DONG_ID, TITLE, STATUS, PRICE, VIEW_COUNT, DESCRIPTION, REFRESHED_AT, CREATED_AT, SAFE_TRADING_YN, LAT, LNG, ACTIVE_STATUS, gu_id, gu_name
+		from goods g
+		JOIN GU gu on g.DONG_ID = gu.GU_ID
+		where goods_id = #{goodsId}
 	</select>
 	
 	

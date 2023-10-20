@@ -6,6 +6,9 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+
 
 <!--favicon  -->
 <link rel="icon"
@@ -95,22 +98,22 @@
 <body>
 	<!-- header start -->
 	<header>
-		<jsp:include page="/WEB-INF/views/header.jsp"></jsp:include>
+		<%-- <jsp:include page="/WEB-INF/views/header.jsp"></jsp:include> --%>
 	</header>
 	<!-- header end -->
-	<h2>중고 거래 게시판 글 수정</h2>
+	
 	<div id="container">
-	<h2>중고 거래 게시판 글 작성</h2>
-	<form action="${pageContext.request.contextPath}/goods/write.do"
+	<h2>중고 거래 게시판 글 수정</h2>
+	<form action="${pageContext.request.contextPath}/goods/goodsupdate"
 		method="post" enctype="multipart/form-data">
-		<input type="hidden" name="userId" value="qordmlgjs">
-		<input type="text" name="title" id="title" placeholder="제목" required="required" value="#{goodsDto.title }"> <br>
+		<input type="hidden" name="userId" value="${loginId }">
+		<input type="hidden" name="goodsId" value="${goodsDto.goodsId }">
+		<input type="text" name="title" id="title" placeholder="제목" required="required" value="${goodsDto.title }"> <br>
 		<!-- 카테고리 선택 드롭다운 -->
-		<label for="selectedCategory">카테고리 선택:</label> <select
-			name="categoryId" id="selectedCategory" required="required">
+		<label for="selectedCategory">카테고리 선택:</label> <select name="categoryId" id="selectedCategory" required="required">
 			<option value="">카테고리를 선택하세요</option>
 			<c:forEach items="${categoryList}" var="category">
-				<option value="${category.categoryId}">${category.categoryName}</option>
+				<option value="${category.categoryId}" <c:if test="${category.categoryId == goodsDto.categoryId}">selected</c:if>>${category.categoryName}</option>
 			</c:forEach>
 		</select>
 		<!-- 구 선택 드롭다운 -->
@@ -119,32 +122,31 @@
 			id="selectedGu" onchange="updateDongDropdown()" required="required">
 			<option value="">구를 선택하세요</option>
 			<c:forEach items="${guList}" var="gu">
-				<option value="${gu.guId}">${gu.guName}</option>
+				<option value="${gu.guId}" <c:if test="${gu.guId == goodsDto.guId}">selected</c:if>>${gu.guName}</option>
 			</c:forEach>
 		</select>
 		<!-- 동 선택 드롭다운 -->
 		<label for="selectedDong">동 선택:</label> 
-		<select name="dongId"
-			id="selectedDong" required="required">
+		<select name="dongId" id="selectedDong" required="required">
 			<option value="">동을 선택하세요</option>
 			<c:forEach items="${dongList}" var="dong">
-				<option value="${dong.dongId}" data-gu="${dong.guId}">${dong.dongName}</option>
+				<option value="${dong.dongId}" data-gu="${dong.guId}" <c:if test="${dong.dongId == goodsDto.dongId}">selected</c:if>>${dong.dongName}</option>
 			</c:forEach>
 		</select>
 		 <input type="text" id="price" name="price" placeholder="판매가격" required="required" value="${goodsDto.price }">
 		<br>
-
 			<textarea name="description" id="editor">${goodsDto.description }</textarea>
-		
 		<label for="safeTradingYn">안전결제</label>
-		<input type="checkbox" name="safeTradingYn" id="safeTradingYn" value="#{goodsDto.safeTradingYn }">
+		<input type="checkbox" name="safeTradingYn" id="safeTradingYn" value="N">
 
 		<!-- 모달 열기 버튼 -->
 		<br>
 		<!-- 모달 열기 버튼 -->
 		<button id="openMapModal" type="button">거래희망장소</button>
+		<br>
+		<label> 추가 사진 파일 선택 : </label>
 		<input type="file" name="files" multiple="multiple" accept="image/*">
-
+		
 		<!-- 모달 -->
 		<div id="mapModal" class="modal">
 			<div class="modal-content">
@@ -159,16 +161,38 @@
 				<div id="clickLatlng"></div>
 			</div>
 		</div>
-		<input type="hidden" name="lat" id="latitudeInput"> <input
-			type="hidden" name="lng" id="longitudeInput"> <br>
+		<label for="selectedStatus">상품 상태 선택:</label>
+		<select name="status" id="selectedStatus" required="required">
+    		<option value="1" <c:if test="${goodsDto.status == 1}">selected</c:if>>판매중</option>
+    		<option value="2" <c:if test="${goodsDto.status == 2}">selected</c:if>>예약중</option>
+    		<option value="3" <c:if test="${goodsDto.status == 3}">selected</c:if>>판매완료</option>
+    		<option value="4" <c:if test="${goodsDto.status == 4}">selected</c:if>>숨김</option>
+		</select>
+		
+		<input type="hidden" name="lat" id="latitudeInput" value="${goodsDto.lat }"> <input
+			type="hidden" name="lng" id="longitudeInput" value="${goodsDto.lng }"> 
+		<br>
+		<br>
+		<div id="imageContainer">
+   	 		<c:forEach var="imageInfo" items="${imageList}">
+        	<div class="image-item">
+            <img src="${imageInfo.url}" alt="이미지">
+            <button class="delete-button" data-image-url="${imageInfo.url}" data-image-filename="${imageInfo.filename}" type="button">삭제</button>
+        	</div>
+    		</c:forEach>
+		</div>	
+		<br>
 		<input type="submit" value="확인">
 		</form>
+		
+		
+		
 </div>
 	
 
 	<!-- Footer Section Begin -->
 	<footer>
-		<jsp:include page="/WEB-INF/views/footer.jsp"></jsp:include>
+		<%-- <jsp:include page="/WEB-INF/views/footer.jsp"></jsp:include> --%>
 	</footer>
 	<!-- Footer Section End -->
 <!-- Js Plugins -->
@@ -176,6 +200,34 @@
     <script src="${pageContext.request.contextPath}/resources/js/main.js"></script>
 	<script src="https://cdn.ckeditor.com/ckeditor5/37.0.0/super-build/ckeditor.js"></script>
 	<script src="https://cdn.ckeditor.com/ckeditor5/40.0.0/super-build/translations/ko.js"></script>
+<script>
+$(document).on("click", ".delete-button", function() {
+        // 삭제할 이미지 파일 URL 및 파일 이름 가져오기
+        const imageUrl = $(this).data("image-url");
+        const imageFilename = $(this).data("image-filename");
+        const DeleteButton = $(this);
+        // 이미지 삭제 요청을 보내는 Ajax 호출
+        $.ajax({
+            type: "POST",
+            url: "${pageContext.request.contextPath}/goods/deleteimg",
+            data: { imageUrl: imageUrl, imageFilename: imageFilename },
+            success: function(response) {
+                if (response === "success") {
+                    // 이미지 삭제 성공 시 해당 이미지와 삭제 버튼 제거
+                    alert("이미지 삭제 성공");
+                    DeleteButton.parent().remove();
+                } else {
+                    // 이미지 삭제 실패 시 오류 처리
+                	alert("이미지 삭제 실패");
+                }
+            },
+            error: function(request, status, error) {
+                console.error("이미지 삭제 요청 중 오류 발생", error);
+            }
+    });
+});
+</script>
+
 <script>
 	var msg = '${msg}';
 	if(msg){
@@ -342,23 +394,29 @@
 </script>
 <script src="//dapi.kakao.com/v2/maps/sdk.js?appkey=aec5b89790015b44669217946b7e53f3"></script>
 <script>
-	// 체크박스 요소 가져오기
-	/* document.getElementById('latitudeInput').value = '91';
-	document.getElementById('longitudeInput').value = '181'; */
-	
-	
-	const safeTradingCheckbox = document.getElementById("safeTradingYn");
+document.addEventListener("DOMContentLoaded", function() {
+    // 페이지가 로드되면 실행될 코드
 
-	// 체크박스 상태가 변경될 때 실행되는 함수
-	safeTradingCheckbox.addEventListener("change", function() {
-	    if (safeTradingCheckbox.checked) {
-	        // 체크되었을 때 'Y'로 설정
-	        safeTradingCheckbox.value = "Y";
-	    } else {
-	        // 체크 해제됐을 때 'N'로 설정
-	        safeTradingCheckbox.value = "N";
-	    }
-	});
+    const safeTradingCheckbox = document.getElementById("safeTradingYn");
+
+    // goodsDto.safeTradingYn 값이 'Y'인 경우 체크박스를 체크함
+    if ("${goodsDto.safeTradingYn}" === "Y") {
+        safeTradingCheckbox.checked = true;
+    } else {
+        safeTradingCheckbox.checked = false;
+    }
+
+    // 체크박스 상태가 변경될 때 실행되는 함수
+    safeTradingCheckbox.addEventListener("change", function() {
+        if (safeTradingCheckbox.checked) {
+            // 체크되었을 때 'Y'로 설정
+            safeTradingCheckbox.value = "Y";
+        } else {
+            // 체크 해제됐을 때 'N'로 설정
+            safeTradingCheckbox.value = "N";
+        }
+    });
+});
     // 모달 열기 버튼 클릭 시 모달 열기
     document.getElementById("openMapModal").addEventListener("click", function () {
         document.getElementById("mapModal").style.display = "block";
@@ -377,24 +435,32 @@
 
     // 카카오맵 초기화 함수
     function initializeKakaoMap() {
+    	
+    	var defaultLat = ${goodsDto.lat };
+    	var defaultLng = ${goodsDto.lng};
+    	
         // 카카오맵 API를 사용하여 지도를 생성하고 설정합니다.
         var container = document.getElementById('kakaoMap');
         var options = {
-            center: new kakao.maps.LatLng(37.5665, 126.9780), // 지도의 중심 좌표 (서울)
-            level: 8 // 지도의 확대 레벨
+            center: new kakao.maps.LatLng(defaultLat, defaultLng), // 지도의 중심 좌표 (서울)
+            level: 2 // 지도의 확대 레벨
         };
         var map = new kakao.maps.Map(container, options);
         
+       /*  var markerPosition  = new kakao.maps.LatLng(defaultLat, defaultLng); */
+        
         // 지도를 클릭한 위치에 마커를 추가합니다.
         var marker = new kakao.maps.Marker({
+        	position: new kakao.maps.LatLng(defaultLat, defaultLng),
             map: map
+            
         });
         
         // 지도를 클릭한 위치 정보를 가져와서 출력하는 함수
-        function displayLatLng(lat, lng) {
-            var resultDiv = document.getElementById('clickLatlng');
-            resultDiv.innerHTML = '선택한 위치의 위도: ' + lat + ', 경도: ' + lng;
-        }
+         function displayLatLng(lat, lng) {
+           /*  var resultDiv = document.getElementById('clickLatlng');
+            resultDiv.innerHTML = '선택한 위치의 위도: ' + lat + ', 경도: ' + lng; */
+        } 
         
         // 지도 클릭 이벤트 리스너 등록
         kakao.maps.event.addListener(map, 'click', function (mouseEvent) {
@@ -416,7 +482,7 @@
             var lng = position.getLng(); // 마커의 경도
             
             // 가져온 위치 정보를 활용하여 원하는 동작 수행
-            console.log('선택한 마커의 위도: ' + lat + ', 경도: ' + lng);
+            /* console.log('선택한 마커의 위도: ' + lat + ', 경도: ' + lng); */
             
             
             
