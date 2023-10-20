@@ -21,41 +21,43 @@
 					<input type="text" placeholder="Search" /> <a href="javascript:;" class="search"></a>
 				</div>
 				<!-- 채팅중인 회원 list -->
-				<ul class="people">
-					<c:forEach var="item1" items="${chatRoomList}" varStatus="status">
-						<input type="hidden" id="${item1.chatId }" value="${item1.chatId }">
-						<li class="person" data-chat="person${status.count}" data-chatid="${item1.chatId}">
-							<img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/382994/dog.png" alt="" />
-							<span class="name">${item1.nickname}</span>
-							<c:forEach var="item2" items="${item1.chatInfo}">
-								<span class="time">
-									<script>
-										var dateString = "${item2.createAt}";
-										var date = new Date(dateString);
-										var today = new Date();
-										var year = date.getFullYear();
-										var month = date.getMonth() + 1;
-										var day = date.getDate();
-										var hours = date.getHours();
-										var minutes = date.getMinutes();
-										if (today.getMonth() == month) {
-											if (today.getDate() == day) {
-												if (hours > 12) {
-													document.write("오후 " + (hours - 12) + ":" + minutes);
-												} else {
-													document.write("오전 " + hours + ":" + minutes);
+				<div class="people_list">
+					<ul class="people">
+						<c:forEach var="item1" items="${chatRoomList}" varStatus="status">
+							<input type="hidden" id="${item1.chatId }" value="${item1.chatId }">
+							<li class="person" data-chat="person${status.count}" data-chatid="${item1.chatId}">
+								<img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/382994/dog.png" alt="" />
+								<span class="name">${item1.nickname}</span>
+								<c:forEach var="item2" items="${item1.chatInfo}">
+									<span class="time">
+										<script>
+											var dateString = "${item2.createAt}";
+											var date = new Date(dateString);
+											var today = new Date();
+											var year = date.getFullYear();
+											var month = date.getMonth() + 1;
+											var day = date.getDate();
+											var hours = date.getHours();
+											var minutes = date.getMinutes();
+											if (today.getMonth() == month) {
+												if (today.getDate() == day) {
+													if (hours > 12) {
+														document.write("오후 " + (hours - 12) + ":" + minutes);
+													} else {
+														document.write("오전 " + hours + ":" + minutes);
+													}
 												}
+											} else {
+												document.write(month + 1 + "월 " + day + "일");
 											}
-										} else {
-											document.write(month + 1 + "월 " + day + "일");
-										}
-									</script>
-								</span>
-								<span class="preview">${item2.message }</span>
-							</c:forEach>
-						</li>
-					</c:forEach>
-				</ul>
+										</script>
+									</span>
+									<span class="preview">${item2.message }</span>
+								</c:forEach>
+							</li>
+						</c:forEach>
+					</ul>
+				</div>
 			</div>
 			<div class="right">
 				<div class="top">
@@ -63,7 +65,7 @@
 					<span>To: <span class="name"></span></span>
 				</div>
 				<c:forEach items="${chatRoomList}" var="item" varStatus="loop">
-					<div class="chat" data-chat="person${loop.count}">
+					<div class="chat" data-chat="person${loop.count}" style="overflow-y: scroll;">
 						<div class="conversation-start">
 							<span>Today, 5:38 PM</span>
 						</div>
@@ -78,7 +80,6 @@
 								</c:otherwise>
 							</c:choose>
 						</c:forEach>
-						<div class="bubble you"></div>
 					</div>
 				</c:forEach>
 				<div class="write">
@@ -98,10 +99,6 @@
 	// socket들을 담을 객체 생성
 	var endPoint = "${pageContext.request.contextPath}/chat";
 	$(document).ready(function () {
-		// 활성 채팅 설정 및 friends, chat 객체 생성
-		document.querySelector('.chat[data-chat=person2]').classList.add('active-chat');
-		document.querySelector('.person[data-chat=person2]').classList.add('active');
-		
 		let friends = {
 				list: document.querySelector('ul.people'),
 				all: document.querySelectorAll('.left .person'),
@@ -164,11 +161,13 @@
 				dataType: "json",
 				success: function (result) { // 결과 성공 콜백함수
 					console.log(result);
-					friends.list.querySelector('.active').classList.remove('active');
+					friends.list.querySelector('.active')?.classList.remove('active');
 					f.classList.add('active');
 					chat.current = chat.container.querySelector('.active-chat');
 					chat.person = f.getAttribute('data-chat');
-					chat.current.classList.remove('active-chat');
+					if (chat.current && chat.current.classList.contains('active-chat')) {
+					    chat.current.classList.remove('active-chat');
+					}
 					chat.container.querySelector('[data-chat="' + chat.person + '"]').classList.add('active-chat');
 					friends.name = f.querySelector('.name').innerText;
 					chat.name.innerHTML = friends.name;

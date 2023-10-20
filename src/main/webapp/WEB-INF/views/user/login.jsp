@@ -60,7 +60,7 @@ if(msg ){
 										</span>
 									</div>
 									<input type="password" id="pw" name="password"
-										placeholder="비밀번호" title="비밀번호" class="input_text"
+										placeholder="비밀번호" title="비밀번호" class="input_text pw"
 										maxlength="16">
 								</div>
 							</div>

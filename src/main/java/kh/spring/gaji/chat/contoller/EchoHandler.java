@@ -42,9 +42,7 @@ public class EchoHandler extends TextWebSocketHandler {
 		for (WebSocketSession sess : sessionList) {
 			// 메시지 출력 시 배열에 담긴 순서대로 이름, 채팅내용, 방번호 전달
 			sess.sendMessage(new TextMessage(msg));
-
 		}
-
 		log.info("메시지 보낸사람 : {}", msg);
 	}
 
@@ -55,5 +53,4 @@ public class EchoHandler extends TextWebSocketHandler {
 		log.info("{} 연결 끊김", session.getId());
 		sessionList.remove(session);
 	}
-
 }
