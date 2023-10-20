@@ -25,8 +25,8 @@
                	</ul>
             	<ul class='sidebarul' id="privacy" >
 					<strong>개인정보</strong>
-                    <a href="${pageContext.request.contextPath}"><li><span class="liner">회원정보</span></li></a>
-                    <a href="${pageContext.request.contextPath}"><li><span class="liner">비밀번호 변경</span></li></a>
+                    <a href="${pageContext.request.contextPath}/mypage"><li><span class="liner">회원정보</span></li></a>
+                    <a href="${pageContext.request.contextPath}/mypage/changepwd"><li><span class="liner">비밀번호 변경</span></li></a>
              	</ul>
             </nav>
         </div>
