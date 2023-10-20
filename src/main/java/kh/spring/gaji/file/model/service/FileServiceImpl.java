@@ -24,4 +24,14 @@ public class FileServiceImpl implements FileService{
 		return fileDao.goodsImageList(goodsId);
 	}
 
+	@Override
+	public int deleteImg(String imageUrl) {
+		return fileDao.deleteImg(imageUrl);
+	}
+
+	@Override
+	public int modifyFile(FileDto fileDto) {
+		return fileDao.modifyFile(fileDto);
+	}
+
 }

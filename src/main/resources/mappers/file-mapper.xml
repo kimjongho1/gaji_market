@@ -5,7 +5,15 @@
 		insert into goods_file values (#{url}, (select max(goods_id) from goods))
 	</insert>
 	
+	<insert id="modifyFile" parameterType="FileDto">
+		insert into goods_file (url, goods_id) values (#{url}, #{goodsId})
+	</insert>
+	
 	<select id="goodsImageList" parameterType="_int" resultType="FileDto">
-		select url, goods_id, SUBSTR(url, INSTR(url, '/', -1) + 1) AS file_name from goods_file where goods_id = #{goodsId}
+		select url, goods_id, SUBSTR(url, INSTR(url, '/', -1) + 1) AS filename from goods_file where goods_id = #{goodsId}
 	</select>
+	
+	<delete id="deleteImg" parameterType="string">
+		DELETE FROM goods_file WHERE url = #{imageUrl}
+	</delete>
 </mapper>

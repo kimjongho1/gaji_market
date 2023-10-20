@@ -20,4 +20,12 @@ public class FileDao {
 	public List<FileDto> goodsImageList(int goodsId){
 		return sqlSession.selectList("file.goodsImageList", goodsId);
 	}
+	
+	public int deleteImg(String imageUrl) {
+		return sqlSession.delete("file.deleteImg", imageUrl);
+	}
+	
+	public int modifyFile(FileDto fileDto) {
+		return sqlSession.insert("file.modifyFile", fileDto);
+	}
 }
