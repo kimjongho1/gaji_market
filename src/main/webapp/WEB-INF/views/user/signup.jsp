@@ -242,107 +242,90 @@ body {
 
 	<div class="container-box">
 
-		<form action="${pageContext.request.contextPath}/signup" method="POST"
-			class="joinForm" onsubmit="return Validation();">
-
+		<form action="${pageContext.request.contextPath}/signup" method="POST" class="joinForm" onsubmit="return Validation();">
 			<div class="textForm">
-				<span style="display: flex;"> <input name="userId"
-					type="text" class="id" placeholder="아이디" id="userId"
-					required="required">
+				<span style="display: flex;">
+				 <input name="userId" type="text" class="id" placeholder="아이디" id="userId" required="required">
 					<button type="button" class="btn-id" id="checkDuplicateBtn">중복확인</button>
 				</span>
 			</div>
 			<div class="textForm">
-				<span style="display: flex;"> <input name="password"
-					type="password" class="pw" placeholder="비밀번호" id="password"
-					required="required">
+				<span style="display: flex;">
+				 <input name="password" type="password" class="pw" placeholder="비밀번호" id="password" required="required">
 				</span>
 			</div>
 			<div class="textForm">
-				<span style="display: flex;"> <input name="loginPwConfirm"
-					type="password" class="pw" id="passwordVerification"
-					placeholder="비밀번호 확인" required="required">
+				<span style="display: flex;">
+				 <input name="loginPwConfirm" type="password" class="pw" id="passwordVerification" placeholder="비밀번호 확인" required="required">
 				</span>
 			</div>
 			<div class="textForm">
-				<span style="display: flex;"> <input name="email" type="text"
-					class="email" placeholder="이메일" id="email" required="required">
-					<button type="button" class="btn-email" id="mail-Check-Btn">인증번호
-						요청</button>
+				<span style="display: flex;"> <input name="email" type="text" class="email" placeholder="이메일" id="email" required="required">
+					<button type="button" class="btn-email" id="mail-Check-Btn">인증번호 요청</button>
 				</span>
 			</div>
 			<div class="textForm">
-				<span style="display: flex;"> <input name="certification"
-					type="text" class="mail-check-input" id="verificationCode"
-					placeholder="인증번호 확인" required="required">
-					<button type="button" class="btn-mail-check-input"
-						id="verify-button">인증번호 확인</button>
+				<span style="display: flex;">
+				 <input name="certification" type="text" class="mail-check-input" id="verificationCode" placeholder="인증번호 확인" required="required">
+					<button type="button" class="btn-mail-check-input" id="verify-button">인증번호 확인</button>
 				</span>
 			</div>
 			<div class="textForm">
-				<span style="display: flex;"> <input name="name" type="text"
-					class="name" placeholder="이름" id="name" required="required">
+				<span style="display: flex;">
+				 <input name="name" type="text" class="name" placeholder="이름" id="name" required="required">
 				</span>
 			</div>
 			<div class="textForm">
-				<span style="display: flex;"> <input name="nickname"
-					type="text" class="nickname" placeholder="닉네임" id="nickname"
-					required="required">
+				<span style="display: flex;"> 
+					<input name="nickname" type="text" class="nickname" placeholder="닉네임" id="nickname" required="required">
 					<button type="button" class="btn-id" id="checkNickName">중복확인</button>
 				</span>
 			</div>
 			<div class="textForm">
-				<span style="display: flex;"> <input name="mobileNumber"
-					type="text" class="cellphoneNo" id="mobileNumber"
-					placeholder="전화번호" required="required">
+				<span style="display: flex;">
+				 <input name="mobileNumber" type="text" class="cellphoneNo" id="mobileNumber" placeholder="전화번호" required="required">
+				 <button type="button" class="btn-id" id="checkMobileNumber">중복확인</button>
 				</span>
 			</div>
 			<div class="textForm">
-				<span style="display: flex;"> <input type="text"
-					name="postCode" id="sample4_postcode" placeholder="우편번호"
-					required="required" class="cellphoneNo">
-					<button type="button" class="btn-postcode"
-						onclick="sample4_execDaumPostcode()">우편번호 찾기</button>
+				<span style="display: flex;">
+				 <input type="text" name="postCode" id="sample4_postcode" placeholder="우편번호" required="required" class="cellphoneNo">
+					<button type="button" class="btn-postcode" onclick="sample4_execDaumPostcode()">우편번호 찾기</button>
 				</span>
 			</div>
 			<div class="textForm">
-				<span style="display: flex;"> <input type="text"
-					name="roadAddress" id="sample4_roadAddress" placeholder="도로명주소"
-					class="cellphoneNo" required="required">
+				<span style="display: flex;">
+				 <input type="text" name="roadAddress" id="sample4_roadAddress" placeholder="도로명주소" class="cellphoneNo" required="required">
 				</span>
 			</div>
 			<div class="textForm">
-				<span style="display: flex;"> <input type="text"
-					name="address" id="sample4_jibunAddress" placeholder="지번주소"
-					class="cellphoneNo" required="required"> <span id="guide"
-					style="color: #999; display: none"></span>
+				<span style="display: flex;">
+				 <input type="text" name="address" id="sample4_jibunAddress" placeholder="지번주소" class="cellphoneNo" required="required">
+				  <span id="guide" style="color: #999; display: none"></span>
 				</span>
 			</div>
 			<div class="textForm">
-				<span style="display: flex;"> <input type="text"
-					name="detailAddress" id="sample4_detailAddress" placeholder="상세주소"
-					class="cellphoneNo" required="required">
+				<span style="display: flex;">
+				 <input type="text" name="detailAddress" id="sample4_detailAddress" placeholder="상세주소" class="cellphoneNo" required="required">
 				</span>
 			</div>
 			<div class="textForm">
-				<span style="display: flex;"> <input type="text"
-					name="addressNickname" id="sample4_detailAddress"
-					placeholder="주소별칭" class="cellphoneNo" required="required">
+				<span style="display: flex;">
+				 <input type="text" name="addressNickname" id="sample4_detailAddress" placeholder="주소별칭" class="cellphoneNo" required="required">
 				</span>
 			</div>
 			<div>
 			<!-- 구 선택 드롭다운 -->
-			<label for="selectedGu">구 선택:</label> <select name="selectedGu"
-				id="selectedGu" onchange="updateDongDropdown()" required="required">
+			<label for="selectedGu">구 선택:</label>
+			 <select name="selectedGu" id="selectedGu" onchange="updateDongDropdown()" required="required">
 				<option value="">구를 선택하세요</option>
 				<c:forEach items="${guList}" var="gu">
 					<option value="${gu.guId}">${gu.guName}</option>
 				</c:forEach>
 			</select>
-
 			<!-- 동 선택 드롭다운 -->
-			<label for="selectedDong">동 선택:</label> <select name="dongId"
-				id="selectedDong" required="required">
+			<label for="selectedDong">동 선택:</label>
+			 <select name="dongId" id="selectedDong" required="required">
 				<option value="">동을 선택하세요</option>
 				<c:forEach items="${dongList}" var="dong">
 					<option value="${dong.dongId}" data-gu="${dong.guId}">${dong.dongName}</option>
@@ -443,10 +426,11 @@ body {
 	}
 </script>
 <script>
-let code;
+var code;
 var duplicateChecked = false;
 var verificationChecked = false;
 var buttonNickName = false;
+var buttonMobileNumber = false;
 
 
 $('#mail-Check-Btn').click(function() {
@@ -454,7 +438,19 @@ $('#mail-Check-Btn').click(function() {
     console.log('완성된 이메일 : ' + email); // 이메일 확인
     const checkInput = $('.mail-check-input'); // 인증번호 입력하는 곳
     /* let code; */
-
+	var emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/; 
+	
+	if (email === "") {
+        alert("이메일을 입력하세요.");
+        return;
+    }
+	
+	if (!emailPattern.test(email)) {
+        alert("올바른 이메일 주소 형식이 아닙니다.");
+        email.focus();
+        return ;
+    }
+	
     $.ajax({
         type: 'get',
         url: '${pageContext.request.contextPath}/mailcheck', // 수정된 URL
@@ -468,21 +464,58 @@ $('#mail-Check-Btn').click(function() {
     }); // end ajax
     
 });
+$('#verify-button').click(function () {
+    console.log("인증 및 중복 확인 버튼 클릭 확인");
 
-//인증번호 비교
-$('#verify-button').click(function() {
-    // 서버에서 받은 인증번호를 변수에 저장
-    const inputCode = $('#verificationCode').val(); // 입력한 인증번호를 가져옴
+    var email = $("#email").val();
+    var inputCode = $('#verificationCode').val();
+    var emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/; // 이메일 주소 형식
+
+    if (email === "") {
+        alert("이메일을 입력하세요.");
+        return;
+    }
+
+    if (inputCode === "") {
+        alert("인증번호를 입력하세요.");
+        return;
+    }
+    
+   
+
+    var url = "${pageContext.request.contextPath}/checkemail"; // 이메일 중복 확인 엔드포인트 URL 수정
+
+    // AJAX를 사용하여 서버에 이메일 중복 확인 요청을 보냄
+    $.ajax({
+        url: url,
+        type: "post",
+        data: { email: email },
+        success: function (data) {
+            if (data !== "") {
+                alert("이미 사용 중인 이메일 주소입니다.");
+            } else {
+                alert("사용 가능한 이메일 주소입니다.");
+                // 이메일 중복 확인이 성공한 경우, 인증번호 확인 수행
+                verifyCode(inputCode);
+            }
+        },
+        error: function (error) {
+            console.error("중복 확인 중 오류 발생:", error);
+        }
+    });
+});
+function verifyCode(inputCode) {
     if (code === inputCode) {
         alert('인증번호 확인 완료');
         verificationChecked = true;
-        
-        // 인증번호 확인이 성공한 경우 원하는 동작 수행
+        // 인증번호 확인이 성공한 경우, 원하는 동작 수행
     } else {
         alert('인증번호를 다시 확인해주세요.');
-        // 인증번호 확인이 실패한 경우 사용자에게 알림
     }
-});
+}
+
+
+
 
     // 유효성 검사 메서드
     function Validation() {
@@ -629,15 +662,25 @@ $('#verify-button').click(function() {
         }
     }
     
-    // 중복 확인을 수행하는 함수
-    $("#checkDuplicateBtn").click(function () {
+// 중복 확인을 수행하는 함수
+$("#checkDuplicateBtn").click(function () {
     	console.log("버튼클릭확인");
         // 중복 확인할 아이디 값을 가져옴
         var userId = $("#userId").val();
+        var idPattern = /^[a-zA-Z0-9]{4,10}$/;
+        
+        
         if (userId === "") {
             alert("아이디를 입력하세요.");
             return;
         }
+        if (!idPattern.test(userId)) {
+            alert("아이디는 4~10자의 영문 대소문자와 숫자만 허용합니다.");
+            userId.focus();
+            return;	
+        }
+        
+        
         // 서버에 보낼 요청 URL (실제로는 서버 엔드포인트에 맞게 수정해야 함)
         var apiUrl = "${pageContext.request.contextPath}/checkid"; // 예시 URL, 실제로는 서버의 URL로 수정
         
@@ -663,12 +706,19 @@ $('#verify-button').click(function() {
         });
     });
     
-    $("#checkNickName").click(function () {
+$("#checkNickName").click(function () {
     	console.log("버튼클릭확인");
         // 중복 확인할 아이디 값을 가져옴
         var nickname = $("#nickname").val();
+        var namePattern = /^[가-힣a-zA-Z]{2,30}$/;
+        
         if (nickname === "") {
             alert("닉네임을 입력하세요.");
+            return;
+        }
+        if (!nicknamePattern.test(nickname)) {
+            alert("닉네임은 4~30자의 영문 대소문자, 숫자, 한글만 허용합니다.");
+            nickname.focus();
             return;
         }
         // 서버에 보낼 요청 URL (실제로는 서버 엔드포인트에 맞게 수정해야 함)
@@ -695,7 +745,46 @@ $('#verify-button').click(function() {
             }
         });
     });
+$("#checkMobileNumber").click(function () {
+	console.log("버튼클릭확인");
+    // 중복 확인할 아이디 값을 가져옴
+    var mobileNumber = $("#mobileNumber").val();
+    var mobileNumberPattern = /^\d{10,11}$/; // 전화번호는 10자 또는 11자의 숫자만 허용
+    if (mobileNumber === "") {
+        alert("핸드폰번호를 입력하세요.");
+        return;
+    }
     
+    if (!mobileNumberPattern.test(mobileNumber)) {
+        alert("전화번호는 10자 또는 11자의 숫자만 허용합니다.");
+        mobileNumber.focus();
+        return;
+    }
+    
+    // 서버에 보낼 요청 URL (실제로는 서버 엔드포인트에 맞게 수정해야 함)
+    var url = "${pageContext.request.contextPath}/checkmn"; // 예시 URL, 실제로는 서버의 URL로 수정
+    
+ // AJAX를 사용하여 서버에 중복 확인 요청 보냄
+    $.ajax({
+        url: url,
+        type: "post",
+        data: { mobileNumber: mobileNumber },
+        success: function (data) {
+        	console.log(data);
+        	if (data !== ""){
+        		 // 아이디가 중복된 경우 처리 (예: 메시지 표시)
+        		alert("이미 사용 중인 핸드폰 번호입니다.");
+        	}else {
+        		// 아이디가 중복되지 않은 경우 처리 (예: 메시지 표시)
+                alert("사용 가능한 핸드폰 번호입니다.");
+                buttonMobileNumber = true;
+        	}
+        },
+        error: function (error) {
+            console.error("중복 확인 중 오류 발생:", error);
+        }
+    });
+});    
     var msg = '${msg}';
 	if(msg ){
 		alert(msg);

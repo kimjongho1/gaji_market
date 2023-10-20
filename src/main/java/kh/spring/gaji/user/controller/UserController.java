@@ -16,6 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import kh.spring.gaji.common.MailSendService;
+import kh.spring.gaji.mypage.model.service.MypageService;
 import kh.spring.gaji.region.model.service.RegionService;
 import kh.spring.gaji.user.model.dto.UserDto;
 import kh.spring.gaji.user.model.dto.UserInsertAddressDto;
@@ -31,6 +32,9 @@ public class UserController {
 	
 	@Autowired
 	private RegionService regionService;
+	
+	@Autowired
+	private MypageService myPageService;
 
 	@Autowired
 	private BCryptPasswordEncoder bCryptPasswordEncoder; 
@@ -69,21 +73,33 @@ public class UserController {
 		return mailService.joinEmail(email);
 	}
 	
-	@GetMapping("idfind")
+	@GetMapping("/idfind")
 	public String idFind() {
 		return "user/idfindresult"; // 아이디 찾기 폼을 보여주는 뷰 이름
 	}
 	
-	@PostMapping("checkid")
+	@PostMapping("/checkid")
 	@ResponseBody
 	public String checkId(String userId) {
 		return userService.checkId(userId);
 	}
 	
-	@PostMapping("checknickname")
+	@PostMapping("/checknickname")
 	@ResponseBody
 	public String checkNickName(String nickname) {
 		return userService.checkNickname(nickname);
+	}
+	
+	@PostMapping("/checkmn")
+	@ResponseBody
+	public String checkMobileNumber(String mobileNumber) {
+		return myPageService.checkMobilNumber(mobileNumber);
+	}
+	
+	@PostMapping("/checkemail")
+	@ResponseBody
+	public String checkEmail(String email) {
+		return myPageService.checkEmail(email);
 	}
 
 	@GetMapping("/idInquiry")

@@ -439,10 +439,10 @@
 	                nickname: nickname
 	            },
 	            success: function(data) {
-	                if (data.status === 1) {
+	                if (data.status === "1") {
 	                    // 성공 메시지를 alert 창으로 표시
 	                    alert(data.msg2);
-	                } else if (data.status === -1) {
+	                } else if (data.status === "-1") {
 	                    // 중복 메시지를 alert 창으로 표시
 	                    alert(data.msg2);
 	                } else {
@@ -460,9 +460,10 @@
 	 // 버튼 클릭 시 서버에 이메일 업데이트 요청 보내기
 	    $("#emailUpdate").click(function() {
 	    	console.log("버튼클릭확인");
-	        var userId = "${loginId}"; // 사용자 아이디
+	    	var userId = "${loginId}"; // 사용자 아이디
 	        var email = $("#email").val(); // 입력된 이름
 	        var emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/; // 이메일 주소 형식
+	        console.log(userId);
 	     // 이메일 확인
 	        if (email == "") {
 	            alert("이메일을 입력하세요.");
@@ -483,10 +484,10 @@
 	                email: email
 	            },
 	            success: function(data) {
-	                if (data.status === 1) {
+	                if (data.status === "1") {
 	                    // 성공 메시지를 alert 창으로 표시
 	                    alert(data.msg3);
-	                } else if (data.status === -1) {
+	                } else if (data.status === "-1") {
 	                    // 중복 메시지를 alert 창으로 표시
 	                    alert(data.msg3);
 	                } else {
@@ -526,10 +527,10 @@
 	                mobileNumber: mobileNumber
 	            },
 	            success: function(data) {
-	                if (data.status === 1) {
+	                if (data.status === "1") {
 	                    // 성공 메시지를 alert 창으로 표시
 	                    alert(data.msg4);
-	                } else if (data.status === -1) {
+	                } else if (data.status === "-1") {
 	                    // 중복 메시지를 alert 창으로 표시
 	                    alert(data.msg4);
 	                } else {
