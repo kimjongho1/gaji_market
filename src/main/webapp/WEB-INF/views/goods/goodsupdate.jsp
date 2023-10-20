@@ -177,7 +177,7 @@
    	 		<c:forEach var="imageInfo" items="${imageList}">
         	<div class="image-item">
             <img src="${imageInfo.url}" alt="이미지">
-            <button class="delete-button" data-image-url="${imageInfo.url}" data-image-filename="${imageInfo.filename}">삭제</button>
+            <button class="delete-button" data-image-url="${imageInfo.url}" data-image-filename="${imageInfo.filename}" type="button">삭제</button>
         	</div>
     		</c:forEach>
 		</div>	
