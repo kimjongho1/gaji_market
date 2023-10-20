@@ -202,8 +202,6 @@
 	<script src="https://cdn.ckeditor.com/ckeditor5/40.0.0/super-build/translations/ko.js"></script>
 <script>
 $(document).on("click", ".delete-button", function() {
-    // 삭제 버튼을 모두 선택
-    $(".delete-button").click(function() {
         // 삭제할 이미지 파일 URL 및 파일 이름 가져오기
         const imageUrl = $(this).data("image-url");
         const imageFilename = $(this).data("image-filename");
@@ -226,7 +224,6 @@ $(document).on("click", ".delete-button", function() {
             error: function(request, status, error) {
                 console.error("이미지 삭제 요청 중 오류 발생", error);
             }
-        });
     });
 });
 </script>
