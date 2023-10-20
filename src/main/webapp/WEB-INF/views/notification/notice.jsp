@@ -9,57 +9,61 @@
     <meta charset="UTF-8">
     <title>알림</title>
     <style>
-    body {
-        font-family: Arial, sans-serif;
-        background-color: #f5f5f5;
-        margin: 0;
-        padding: 0;
-    }
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            margin: 0;
+            padding: 0;
+        }
 
-    /* 공통 스타일 */
-    .notification-container {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 100vh;
-    }
+        /* 공통 스타일 */
+        .notification-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
 
-    .notification-card {
-        background-color: #fff;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        border-radius: 5px;
-        padding: 20px;
-        width: 400px; /* 고정된 너비 */
-        height: auto; /* 높이를 자동으로 조정하도록 설정 */
-    }
+        .notification-card {
+            background-color: #fff;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            border-radius: 5px;
+            padding: 20px;
+            max-width: 400px;
+            width: 100%;
+        }
 
-    h2 {
-        font-size: 24px;
-        color: #333;
-        margin-bottom: 10px;
-    }
+        h2 {
+            font-size: 24px;
+            color: #333;
+            margin-bottom: 10px;
+        }
 
-    .unread {
-        font-weight: bold;
-        color: #e74c3c;
-        margin-bottom: 10px;
-    }
+        .unread {
+            font-weight: bold;
+            color: #e74c3c;
+            margin-bottom: 10px;
+        }
 
-    .message {
-        font-size: 18px;
-        margin-bottom: 10px;
-    }
+        .message {
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
 
-    .createdAt {
-        font-size: 14px;
-        color: #777;
-    }
+        .createdAt {
+            font-size: 14px;
+            color: #777;
+        }
 
-    .readYn {
-        font-size: 14px;
-        color: #3498db;
-    }
-</style>
+        .readYn {
+            font-size: 14px;
+            color: #3498db;
+        }
+        .noticeButton{
+        	width:;
+        	height:;
+        }
+    </style>
 </head>
 <body>
     <div class="notification-container">
@@ -68,7 +72,7 @@
             <div class="unread">읽지 않은 메시지 + ${notiCount}</div>
             <c:forEach items="${safeTradingNotice}" var="item">
                 <form action="${pageContext.request.contextPath}/notice/read?refId=${item.referenceId}&readYn=${item.readYn}&notiId=${item.notiId}" method="post">
-                    <button type="submit">
+                    <button type="submit" class="noticeButton">
                         <div class="message">${item.message}</div>
                         <div class="createdAt">
                             생성일:
