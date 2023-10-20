@@ -63,7 +63,7 @@
 					<span>To: <span class="name"></span></span>
 				</div>
 				<c:forEach items="${chatRoomList}" var="item" varStatus="loop">
-					<div class="chat" data-chat="person${loop.count}">
+					<div class="chat" data-chat="person${loop.count}" style="overflow-y: scroll;">
 						<div class="conversation-start">
 							<span>Today, 5:38 PM</span>
 						</div>
@@ -78,7 +78,6 @@
 								</c:otherwise>
 							</c:choose>
 						</c:forEach>
-						<div class="bubble you"></div>
 					</div>
 				</c:forEach>
 				<div class="write">
