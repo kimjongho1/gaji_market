@@ -688,7 +688,7 @@ $("#modifyGoods").click(function() {
 		alert("로그인이 필요한 기능입니다. 먼저 로그인해주세요.");
     	window.location.href = '${pageContext.request.contextPath}/login'; 
 	}
-)}
+});
 
 
 
