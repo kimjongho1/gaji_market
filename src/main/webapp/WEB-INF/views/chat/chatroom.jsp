@@ -21,41 +21,43 @@
 					<input type="text" placeholder="Search" /> <a href="javascript:;" class="search"></a>
 				</div>
 				<!-- 채팅중인 회원 list -->
-				<ul class="people">
-					<c:forEach var="item1" items="${chatRoomList}" varStatus="status">
-						<input type="hidden" id="${item1.chatId }" value="${item1.chatId }">
-						<li class="person" data-chat="person${status.count}" data-chatid="${item1.chatId}">
-							<img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/382994/dog.png" alt="" />
-							<span class="name">${item1.nickname}</span>
-							<c:forEach var="item2" items="${item1.chatInfo}">
-								<span class="time">
-									<script>
-										var dateString = "${item2.createAt}";
-										var date = new Date(dateString);
-										var today = new Date();
-										var year = date.getFullYear();
-										var month = date.getMonth() + 1;
-										var day = date.getDate();
-										var hours = date.getHours();
-										var minutes = date.getMinutes();
-										if (today.getMonth() == month) {
-											if (today.getDate() == day) {
-												if (hours > 12) {
-													document.write("오후 " + (hours - 12) + ":" + minutes);
-												} else {
-													document.write("오전 " + hours + ":" + minutes);
+				<div class="people_list">
+					<ul class="people">
+						<c:forEach var="item1" items="${chatRoomList}" varStatus="status">
+							<input type="hidden" id="${item1.chatId }" value="${item1.chatId }">
+							<li class="person" data-chat="person${status.count}" data-chatid="${item1.chatId}">
+								<img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/382994/dog.png" alt="" />
+								<span class="name">${item1.nickname}</span>
+								<c:forEach var="item2" items="${item1.chatInfo}">
+									<span class="time">
+										<script>
+											var dateString = "${item2.createAt}";
+											var date = new Date(dateString);
+											var today = new Date();
+											var year = date.getFullYear();
+											var month = date.getMonth() + 1;
+											var day = date.getDate();
+											var hours = date.getHours();
+											var minutes = date.getMinutes();
+											if (today.getMonth() == month) {
+												if (today.getDate() == day) {
+													if (hours > 12) {
+														document.write("오후 " + (hours - 12) + ":" + minutes);
+													} else {
+														document.write("오전 " + hours + ":" + minutes);
+													}
 												}
+											} else {
+												document.write(month + 1 + "월 " + day + "일");
 											}
-										} else {
-											document.write(month + 1 + "월 " + day + "일");
-										}
-									</script>
-								</span>
-								<span class="preview">${item2.message }</span>
-							</c:forEach>
-						</li>
-					</c:forEach>
-				</ul>
+										</script>
+									</span>
+									<span class="preview">${item2.message }</span>
+								</c:forEach>
+							</li>
+						</c:forEach>
+					</ul>
+				</div>
 			</div>
 			<div class="right">
 				<div class="top">
