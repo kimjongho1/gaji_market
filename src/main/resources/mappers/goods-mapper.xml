@@ -7,7 +7,7 @@
 	<select id="getGoodsListInfo" parameterType="map"
 		resultType="kh.spring.gaji.goods.model.dto.GoodsListInfoDto">
 		select count(*) totalCnt,min(price) bottomPrice,avg(price)
-		averagePrice,max(price) topPrice from goods where status!=4 and
+		averagePrice,max(price) topPrice from goods where
 		active_status='Y'
 		<if test="category!=-1">
 			and category_id=#{category}
@@ -15,6 +15,14 @@
 		<if test='searchWord!=""'>
 			and title like #{searchWord}
 		</if>
+		<choose>
+		<when test="onsale!=-1">
+			and status=1
+		</when>
+		<otherwise>
+			and status!=4
+		</otherwise>
+		</choose>
 		<choose>
 			<when test="priceCeiling==100000">
 				and price &lt;= 100000
@@ -48,7 +56,7 @@
 		g.goods_id=w.goods_id) likeCount
 		from goods g join users u
 		using(user_id) join dong d on g.dong_id=d.dong_id
-		where status!=4 and
+		where
 		active_status='Y'
 		<if test="category!=-1">
 			and category_id=#{category}
@@ -69,6 +77,14 @@
 			<when test="priceCeiling==700000">
 				and price &gt;= 500000
 			</when>
+		</choose>
+				<choose>
+		<when test="onsale!=-1">
+			and g.status=1
+		</when>
+		<otherwise>
+			and g.status!=4
+		</otherwise>
 		</choose>
 		<if test="dongId!=-1">
 			and g.dong_id=#{dongId}

@@ -85,9 +85,9 @@ public class GoodsServiceImpl implements GoodsService {
 
 	@Override
 	public Map<String,Object> getGoodsList(int currentPage, int PAGESIZE, int sort, int priceCeiling,
-	int category, int dongId, String searchWord) {
+	int category, int dongId,int onsale, String searchWord) {
 		Map<String,Object> result=new HashMap<String,Object>();
-		GoodsListInfoDto goodsListInfo=goodsDao.getGoodsListInfo(priceCeiling, category, dongId, searchWord);
+		GoodsListInfoDto goodsListInfo=goodsDao.getGoodsListInfo(priceCeiling, category, dongId, onsale,searchWord);
 		int totalCnt=goodsListInfo.getTotalCnt();
 		int averagePrice=goodsListInfo.getAveragePrice();
 		int topPrice=goodsListInfo.getTopPrice();
@@ -98,7 +98,7 @@ public class GoodsServiceImpl implements GoodsService {
 		result.put("bottomPrice",bottomPrice);
 		result.put("totalCnt",totalCnt);
 		result.put("goodsListDto", goodsDao.getGoodsList(currentPage,PAGESIZE,sort,priceCeiling,
-				category,dongId,searchWord,totalCnt));
+				category,dongId,onsale,searchWord,totalCnt));
 		return result;
 	}
 	

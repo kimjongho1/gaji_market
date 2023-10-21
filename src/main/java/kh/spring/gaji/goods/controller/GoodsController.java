@@ -63,7 +63,7 @@ public class GoodsController {
 	private UserService userService;
 
 	@GetMapping("/board")
-	public String board(Model model,Integer currentPage,String searchWord,Integer sort,Integer priceFloor, Integer priceCeiling,Integer category,Integer guId,String guName,String dongName,Integer dongId,Principal principal) { // 중고거래 게시판
+	public String board(Model model,Integer currentPage,String searchWord,Integer sort,Integer priceFloor, Integer priceCeiling,Integer category,Integer guId,String guName,String dongName,Integer dongId,Integer onsale,Principal principal) { // 중고거래 게시판
 		model.addAttribute("guList", regionService.guList());
 	
 		String userId=null;
@@ -125,9 +125,11 @@ public class GoodsController {
 			sort=-1;
 		if(dongId==null)
 			dongId=-1;
+		if(onsale==null)
+			onsale=-1;
 		
 		
-		Map<String,Object> map= goodsService.getGoodsList((int)currentPage,PAGESIZE,sort,priceCeiling,category,dongId,searchWord);
+		Map<String,Object> map= goodsService.getGoodsList((int)currentPage,PAGESIZE,sort,priceCeiling,category,dongId,onsale,searchWord);
 		goodsListDto = (List<GoodsListDto>)map.get("goodsListDto");
 		totalCnt= (int)map.get("totalCnt");	
 
@@ -151,6 +153,7 @@ public class GoodsController {
 		model.addAttribute("searchWord",searchWord);
 		model.addAttribute("goodsListDto",goodsListDto);
 		model.addAttribute("sort",sort);
+		model.addAttribute("onsale",onsale);
 		model.addAttribute("topPrice",(int)map.get("topPrice"));
 		model.addAttribute("averagePrice",(int)map.get("averagePrice"));
 		model.addAttribute("bottomPrice",(int)map.get("bottomPrice"));

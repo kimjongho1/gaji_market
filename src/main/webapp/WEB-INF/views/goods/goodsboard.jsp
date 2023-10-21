@@ -286,6 +286,14 @@
 							<span class="ps-2.5">필터</span>
 						</button>
 						<div class="flex items-center justify-end">
+					
+						<label
+											class="mys5 flex items-center text-sm cursor-pointer group text-heading"><input
+												type="radio"  id="onsaleOption1" onclick="onsaleOption()"
+												class="w-5 h-5 transition duration-500 ease-in-out border border-gray-300 rounded-full cursor-pointer form-radio text-heading focus:ring-offset-0 hover:border-heading focus:outline-none focus:ring-0 focus-visible:outline-none checked:bg-heading"
+												readonly="" name="onsale1" value=""><span
+												class="relative text-sm ms-2 text-heading">판매 중</span></label>
+					
 							<div
 								class="flex-shrink-0 text-body text-xs md:text-sm leading-4 pe-4 md:me-6 ps-2 hidden lg:block">${totalCnt}
 								개의 상품</div>
@@ -480,6 +488,12 @@
     	value="${sort}"
     	</c:if>
     	>
+    	
+    	<input type="hidden" name="onsale" id="onsale"
+    	<c:if test="${not empty onsale}">
+    	value="${onsale}"
+    	</c:if>
+    	>
     
     <input type="hidden" name="currentPage" id="currentPage" value="${currentPage}">
     
@@ -578,6 +592,14 @@
 		$("#condition").submit();
 	}
 	
+	function onsaleOption(){
+		if($("#onsale").val()==1)
+			$("#onsale").val(-1);
+		else
+			$("#onsale").val(1);
+		$("#condition").submit();
+	}
+	
 	function pageMove(i){
 		$("#currentPage").val(i);
 		$("#condition").submit();
@@ -599,6 +621,10 @@
 		 
 		 else if($("#priceCeiling").val()==="700000")
 			 $("#priceOption4").prop("checked", true);
+		 
+		 if($("#onsale").val()=='1')
+			 $("#onsaleOption1").prop("checked",true);
+		 
      }
 	 
 	function showSort(){

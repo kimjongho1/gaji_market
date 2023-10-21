@@ -94,6 +94,12 @@ sup {
     top: -.5em
 }
 
+.mys5{
+	position:relative;
+	top:4px;
+	right:20px;
+}
+
 table {
     text-indent: 0;
     border-color: inherit
