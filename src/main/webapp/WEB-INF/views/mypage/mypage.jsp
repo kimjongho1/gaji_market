@@ -272,10 +272,18 @@
 	</div>
 	<div class="pline">
 	<span class="row flex justify-content-between align-items-center">
-	<c:forEach items="${userAddress}" var="item" begin="0" end="0" >
 	<label>주소 : </label> 
 		<div class="contls">
+		<c:choose>
+		<c:when test="${empty userAddress}">
+		<input type="text" name="name" id="name" value="주소를 등록해주세요" readonly>
+		</c:when>
+		<c:otherwise>
+		<c:forEach items="${userAddress}" var="item" begin="0" end="0" >
 		<input type="text" name="name" id="name" value="${item.roadAddress} ${item.detailAddress}" readonly>
+		</c:forEach>
+		</c:otherwise>
+		</c:choose>
 		<!-- 모달 트리거 버튼 -->
         <button type="button" id="showAddressModalBtn" class="btn-modi" data-toggle="modal" data-target="#AddressModal">
   			주소등록
@@ -284,7 +292,6 @@
 	</span>
 	</div>
 	</div>
-	</c:forEach>
 </section>	
 	<!-- 모달부분 -->
 	
