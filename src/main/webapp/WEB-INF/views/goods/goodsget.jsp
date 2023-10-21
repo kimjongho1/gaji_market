@@ -221,9 +221,6 @@
 								· 조회 ${goodsDto.viewCount} · 찜 ${goodsDto.wishcount}</span>
 								
 								<div class="flex">
-								
-								
-									
 								<a>
 								<div class="flex items-center hover:text-gray-400">
 										<svg stroke="currentColor" fill="currentColor"
@@ -815,7 +812,15 @@ $(document).ready(function () {
 
     // 신고하기 버튼을 클릭하면 모달을 표시
     $('#showReportModalBtn').click(function () {
-        $('#reportModal').modal('show');
+    	 var userId = "${loginId}";
+    	 if(userId){
+    		 $('#reportModal').modal('show');
+    		 /* return; */
+    	 }else{
+    		 alert("로그인이 필요한 기능입니다.");
+    		 window.location.href = '${pageContext.request.contextPath}/login';
+    	 }
+       
     });
     
     $('.btn-secondary').click(function(){
