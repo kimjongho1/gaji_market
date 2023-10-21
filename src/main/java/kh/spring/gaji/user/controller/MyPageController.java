@@ -161,20 +161,20 @@ public class MyPageController {
 
 	@PostMapping("/updateemail")
 	@ResponseBody
-	public Map<String, Object> updateEmail(@RequestParam Map<String, String> map, String email) {
-		Map<String, Object> response = new HashMap<>();
+	public Map<String, String> updateEmail(@RequestParam Map<String, String> map, String email) {
+		Map<String, String> response = new HashMap<>();
 		String result = myPageService.checkEmail(email);
-		System.out.println(result);
+		System.out.println(result + "=================================================");
 		if (result != null) {
-			response.put("status", -1); // 중복 이메일 오류
+			response.put("status", "-1"); // 중복 이메일 오류
 			response.put("msg3", "중복된 이메일입니다.");
 		} else {
 			int updateResult = myPageService.updateEmail(map);
 			if (updateResult == 1) {
-				response.put("status", 1); // 성공
+				response.put("status", "1"); // 성공
 				response.put("msg3", "이메일이 업데이트되었습니다.");
 			} else {
-				response.put("status", 0); // 업데이트 오류
+				response.put("status", "0"); // 업데이트 오류
 				response.put("msg3", "이메일 변경 중 오류가 발생했습니다.");
 			}
 		}
