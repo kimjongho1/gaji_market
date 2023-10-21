@@ -27,10 +27,8 @@ public class HomeController {
 	@GetMapping("/")
 	public String main(Model model,Principal principal) { //메인 페이지
 		String userId=null;
-		try {
+		if(principal!=null) {
 			userId=principal.getName();
-		}catch(NullPointerException e) {
-			e.printStackTrace();
 		}
 		model.addAttribute("userId",userId);
 		model.addAttribute("cateGoods1",GoodsServiceImpl.getMainGoods(1));
