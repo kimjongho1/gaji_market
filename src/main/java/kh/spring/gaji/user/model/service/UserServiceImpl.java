@@ -352,30 +352,17 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public int checkTradingStatus(String transactionId,String userId) {
-		String goodsId=userDao.checkTradingStatus(transactionId,userId);
-		if(goodsId!=null)
-			return userDao.checkReview(goodsId, userId);
+		String goodsId=userDao.checkTradingStatus(transactionId,userId);	// 해당 거래번호와 구매자아이디가 일치하는지를 검사.
+		if(goodsId!=null)													// 존재한다면
+			return userDao.checkReview(goodsId, userId);					// 리뷰가 존재하는지를 검사 (0이 반환되어야함)
 		else
 			return 1;
 	}
 
 	@Override
 	public int doDealreview(DealReviewDto dealReviewDto,String transactionId) {
-		String userId=dealReviewDto.getUserId();
-		dealReviewDto.setGoodsId(userDao.checkTradingStatus(transactionId,userId));
-		if(userDao.addDealReview(dealReviewDto)==1) {
-			System.out.println("111");
-			return userDao.updateRatingScore(transactionId,dealReviewDto);
-		}
-		else {
-			System.out.println("222");
-			return 0;
-		}
+		String userId=dealReviewDto.getUserId();								//받아온 객체로부터 userId를 꺼내서
+		dealReviewDto.setGoodsId(userDao.checkTradingStatus(transactionId,userId));	// 거래번호,구매자ID에 해당하는 레코드가 거래완료 상태인지도 체크
+		return userDao.addDealReview(dealReviewDto);
 	}
-
-
-	
-
-
-	
 }

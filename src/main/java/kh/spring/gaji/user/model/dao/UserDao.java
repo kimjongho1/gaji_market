@@ -523,15 +523,7 @@ public class UserDao {
     }
 
     public int addDealReview(DealReviewDto dealReviewDto) {	//거래후기넣기 아직 화면설계없음.
-    	return sqlSession.insert("user.addDealReview", dealReviewDto);
-    }
-
-    public int updateRatingScore(String transactionId,DealReviewDto dealReviewDto) {	// trade-mapper의 거래후기에따른 매너온도 업데이트
-    	Map<String,Object> map=new HashMap<String,Object>();
-    	map.put("transactionId", transactionId);
-    	map.put("goodsPoint", dealReviewDto.getGoodsPoint());
-    	map.put("timePoint", dealReviewDto.getTimePoint());
-    	map.put("mannerPoint", dealReviewDto.getMannerPoint());
-    	return sqlSession.update("user.updateRatingScore", map);
+    	sqlSession.selectOne("user.addDealReview", dealReviewDto);
+    	return dealReviewDto.getResult1();
     }
 }

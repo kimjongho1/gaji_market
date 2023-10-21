@@ -11,4 +11,5 @@ public class DealReviewDto {
     private int mannerPoint;
     private int timePoint;
     private int goodsPoint;
+    private int result1;
 }

@@ -467,13 +467,16 @@
 		update user set role=1 where user_id=#{userId}
 	</update>
 	
-	<insert id="addDealReview" parameterType="DealReviewDto"> <!-- 거래후기넣기 아직 화면설계없음. -->
-		insert into deal_review values(#{goodsId},#{userId},#{message},#{mannerPoint},#{timePoint},#{goodsPoint})
-	</insert>
-	
-	<update id="updateRatingScore" parameterType="map"> <!-- trade-mapper의 거래후기에따른 매너온도 업데이트 -->
-		update users set rating_score= rating_score + (#{mannerPoint}+#{timePoint}+#{goodsPoint}-11)/5 
-		where user_Id=(select user_Id from goods join safe_trading using (goods_id) where transaction_Id=#{transactionId})
-	</update>
+	<select id="addDealReview" parameterType="DealReviewDto" resultType="_int" statementType="CALLABLE"> 
+    {call updateRatingScore(
+      #{goodsId, mode=IN},
+      #{userId, mode=IN},
+      #{message, mode=IN},
+      #{mannerPoint, mode=IN},
+      #{timePoint, mode=IN},
+      #{goodsPoint, mode=IN},
+      #{result1, mode=OUT, jdbcType=INTEGER, javaType=INTEGER}
+    )}
+  </select>
 	
 </mapper>
