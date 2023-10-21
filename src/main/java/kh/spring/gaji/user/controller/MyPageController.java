@@ -91,16 +91,19 @@ public class MyPageController {
 			int updatePassword = myPageService.changePassword(map);
 			if (updatePassword == 1) {
 				ra.addFlashAttribute("msg", "비밀번호가 성공적으로 변경되었습니다.");
+				mv.addObject("userId",userId);
 				mv.setViewName("redirect:/");
 				return mv;
 			} else {
 				ra.addFlashAttribute("msg", "비밀번호 변경에 실패했습니다. 다시 시도해 주세요.");
-				mv.setViewName("redirect:/mypage/passwordchange");
+				mv.addObject("userId",userId);
+				mv.setViewName("mypage/passwordchange");
 				return mv;
 			}
 		} else {
 			mv.addObject("msg", "현재 비밀번호가 일치하지 않습니다.");
-			mv.setViewName("redirect:/mypage/passwordchange");
+			mv.addObject("userId",userId);
+			mv.setViewName("mypage/passwordchange");
 			return mv;
 		}
 
