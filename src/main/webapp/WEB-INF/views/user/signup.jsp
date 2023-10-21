@@ -451,6 +451,8 @@ $('#mail-Check-Btn').click(function() {
         return ;
     }
 	
+	alert('인증번호가 전송되었습니다.');
+	
     $.ajax({
         type: 'get',
         url: '${pageContext.request.contextPath}/mailcheck', // 수정된 URL
@@ -458,7 +460,7 @@ $('#mail-Check-Btn').click(function() {
         success: function(data) {
             /* checkInput.prop('disabled', false); */
             code = data;
-            alert('인증번호가 전송되었습니다.');
+            
         }
     }); // end ajax
     
@@ -493,7 +495,6 @@ $('#verify-button').click(function () {
             if (data !== "") {
                 alert("이미 사용 중인 이메일 주소입니다.");
             } else {
-                alert("사용 가능한 이메일 주소입니다.");
                 // 이메일 중복 확인이 성공한 경우, 인증번호 확인 수행
                 verifyCode(inputCode);
             }
@@ -505,7 +506,7 @@ $('#verify-button').click(function () {
 });
 function verifyCode(inputCode) {
     if (code === inputCode) {
-        alert('인증번호 확인 완료');
+        alert('사용 가능한 이메일입니다 !! 인증번호 확인 완료');
         verificationChecked = true;
         // 인증번호 확인이 성공한 경우, 원하는 동작 수행
     } else {
@@ -545,8 +546,27 @@ function verifyCode(inputCode) {
         var postCodePattern = /^[0-9]{5}$/; // 우편번호는 5자리 숫자만 허용
 		
        
+       	if(duplicateChecked == false) {
+       		alert("아이디 중복확인을 먼저 해주세요.")
+       		return false;
+       	};
         
-        if (duplicateChecked && verificationChecked && buttonNickName){
+    	if(verificationChecked == false) {
+       		alert("이메일 인증을 먼저 해주세요.")
+       		return false;
+       	};
+       	
+    	if(duplicateChecked == false) {
+       		alert("닉네임 중복확인을 먼저 해주세요.")
+       		return false;
+       	};
+       	
+    	if(buttonMobileNumber == false) {
+       		alert("핸드폰 중복확인을 먼저 해주세요.")
+       		return false;
+       	};
+        
+        if (duplicateChecked && verificationChecked && buttonNickName && buttonMobileNumber){
 
         // 비밀번호와 비밀번호 확인란 값이 일치하지 않을 때
         const password1 = $('#password').val();
@@ -709,7 +729,7 @@ $("#checkNickName").click(function () {
     	console.log("버튼클릭확인");
         // 중복 확인할 아이디 값을 가져옴
         var nickname = $("#nickname").val();
-        var namePattern = /^[가-힣a-zA-Z]{2,30}$/;
+        var nicknamePattern = /^[a-zA-Z0-9ㄱ-ㅎ가-힣]{4,30}$/;
         
         if (nickname === "") {
             alert("닉네임을 입력하세요.");

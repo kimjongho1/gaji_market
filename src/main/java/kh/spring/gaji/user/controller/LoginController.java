@@ -1,6 +1,8 @@
 package kh.spring.gaji.user.controller;
 
 
+import java.security.Principal;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Controller;
@@ -12,7 +14,10 @@ import org.springframework.web.servlet.ModelAndView;
 public class LoginController {
 	
 	@GetMapping("/login")
-	public ModelAndView login(ModelAndView mv) {		//  로그인페이지 -- 관리자 로그인 페이지도 따로 만들 예정 추후 논의
+	public ModelAndView login(ModelAndView mv, Principal principal) {		//  로그인페이지 -- 관리자 로그인 페이지도 따로 만들 예정 추후 논의
+		if(principal != null) {
+			
+		}
 		mv.setViewName("user/login");
 		return mv;
 	}
