@@ -64,7 +64,7 @@ public class MyPageController {
 			model.addAttribute("userId", userId);
 			return "mypage/passwordchange";
 		} else {
-			ra.addFlashAttribute("msg", "로그인 먼저 해주세요");
+			ra.addFlashAttribute("msg", "로그인이 필요한 페이지입니다.");
 			return "redirect:/login";
 		}
 
@@ -119,7 +119,7 @@ public class MyPageController {
 			mv.addObject("userMypage", myPageService.userMypage(userId));
 			mv.addObject("userAddress", payServiceImpl.getUserAddressList(userId));
 		} else {
-			ra.addFlashAttribute("msg", "로그인 먼저 해주세요");
+			ra.addFlashAttribute("msg", "로그인이 필요한 페이지입니다.");
 			mv.setViewName("redirect:/login");
 		}
 		return mv;
