@@ -8,62 +8,7 @@
 <head>
     <meta charset="UTF-8">
     <title>알림</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f5f5f5;
-            margin: 0;
-            padding: 0;
-        }
-
-        /* 공통 스타일 */
-        .notification-container {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-        }
-
-        .notification-card {
-            background-color: #fff;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            border-radius: 5px;
-            padding: 20px;
-            max-width: 430px;
-            width: 100%;
-        }
-
-        h2 {
-            font-size: 24px;
-            color: #333;
-            margin-bottom: 10px;
-        }
-
-        .unread {
-            font-weight: bold;
-            color: #e74c3c;
-            margin-bottom: 10px;
-        }
-
-        .message {
-            font-size: 18px;
-            margin-bottom: 10px;
-        }
-
-        .createdAt {
-            font-size: 14px;
-            color: #777;
-        }
-
-        .readYn {
-            font-size: 14px;
-            color: #3498db;
-        }
-        .noticeButton{
-        	width:430px;
-        	height:120px;
-        }
-    </style>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/notice.css" type="text/css">
 </head>
 <body>
     <div class="notification-container">

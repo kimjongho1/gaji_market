@@ -72,7 +72,7 @@
               <option value="5">기타</option>
             </select>
           </div>
-          <input type="hidden" name="refId" value="${goodsDto.goodsId}">	<!--상품아이디 적용하시면됩니다.-->
+          <input type="hidden" name="refId" value="${goodsDto.goodsId}">	
           <div class="form-group">
             <label for="reportContent">신고 내용</label>
             <textarea class="form-control" id="reportContent" name="content" rows="10" required="required"></textarea>
@@ -497,7 +497,7 @@
 
 	<!-- Js Plugins -->
 	<script src="${pageContext.request.contextPath}/resources/js/bootstrap.min.js"></script>
-	<script src="${pageContext.request.contextPath}/resources/js/main.js"></script>
+<%-- 	<script src="${pageContext.request.contextPath}/resources/js/main.js"></script> --%>
 	<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
   	<script src="//dapi.kakao.com/v2/maps/sdk.js?appkey=aec5b89790015b44669217946b7e53f3"></script>
   
