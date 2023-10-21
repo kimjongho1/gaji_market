@@ -361,7 +361,7 @@
 		select detail_address,post_code,road_address,address,address_nickname,address_no
 		from user_address 
 		where user_id=#{userId}
-		order by address_no
+		order by address_no asc
 	</select>
 	
 	<update id="updateMainAddressNo" parameterType="string">	<!-- 대표주소를 변경하기위해 주소순서를 하나씩 뒤로 민다 -->

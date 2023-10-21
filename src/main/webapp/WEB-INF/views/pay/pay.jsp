@@ -358,7 +358,7 @@
 				for(var i=0; i<data.length; i++){
 				item=data[i];
 				html+="<option value='"+item.roadAddress+","+item.detailAddress+"'>";
-				html+=item.addressNickname+","+item.roadAddress+","+item.detailAddress+"</option>";
+				html+=item.addressNickname+", "+item.roadAddress+", "+item.detailAddress+"</option>";
 				}
 				html+="</select>";
 				$("#addresses").replaceWith(html);
@@ -366,8 +366,8 @@
 				html="<select id='modalAddresses'>";
 				for(var i=0; i<data.length; i++){
 					item=data[i];
-					html+="<option value='"+item.roadAddress+","+item.detailAddress+","+item.addressNo+"'>";
-					html+=item.addressNickname+","+item.roadAddress+","+item.detailAddress+"</option>";
+					html+="<option value='"+item.roadAddress+", "+item.detailAddress+", "+item.addressNo+"'>";
+					html+=item.addressNickname+ ", "+item.roadAddress+", "+item.detailAddress+"</option>";
 				}
 				html+="</select>";
 				$("#modalAddresses").replaceWith(html);
@@ -393,6 +393,7 @@
 		var selectedOption = $("#modalAddresses option:selected").val();
 		var addressParts = selectedOption.split(', ');
 		var addressNo = addressParts[2];
+		console.log("AddressNo:"+addressNo);
 		$.ajax({
 			type:"POST",
 			url:"${pageContext.request.contextPath}/mypage/address/delete",
