@@ -39,16 +39,16 @@
 											var day = date.getDate();
 											var hours = date.getHours();
 											var minutes = date.getMinutes();
-											if (today.getMonth() == month) {
+											if (today.getMonth() + 1 == month) {
 												if (today.getDate() == day) {
-													if (hours > 12) {
+													if (hours > 11) {
 														document.write("오후 " + (hours - 12) + ":" + minutes);
 													} else {
 														document.write("오전 " + hours + ":" + minutes);
 													}
 												}
 											} else {
-												document.write(month + 1 + "월 " + day + "일");
+												document.write(month + "월 " + day + "일");
 											}
 										</script>
 									</span>
@@ -125,25 +125,15 @@
 		});
 
 		// 리스트에서 메시지 시간 체크
-		function formatDate(dateString) {
-			var date = new Date(dateString);
+		function now() {
 			var today = new Date();
-			var year = date.getFullYear();
-			var month = date.getMonth() + 1;
-			var day = date.getDate();
-			var hours = date.getHours();
-			var minutes = date.getMinutes();
+			var hours = today.getHours();
+			var minutes = today.getMinutes();
 
-			if (today.getMonth() == month) {
-				if (today.getDate() == day) {
-					if (hours > 12) {
-						return "오후 " + (hours - 12) + ":" + minutes;
-					} else {
-						return "오전 " + hours + ":" + minutes;
-					}
-				}
+			if (hours > 12) {
+				return "오후 " + (hours - 12) + ":" + minutes;
 			} else {
-				return month + 1 + "월 " + day + "일";
+				return "오전 " + hours + ":" + minutes;
 			}
 		}
 
@@ -225,6 +215,16 @@
 					}
 					messageElement.textContent = content.message;
 					activeChat.appendChild(messageElement);
+					
+					var personElement = document.querySelector('li[data-chatid="' + chatId + '"]');
+					if (personElement) {
+					    var timeElement = personElement.querySelector('.time');
+					    var previewElement = personElement.querySelector('.preview');
+					    
+					    // '.time' 및 '.preview' 요소 내용을 변경
+					    timeElement.textContent = now(); // 원하는 시간 값으로 변경
+					    previewElement.textContent = content.message; // 원하는 프리뷰 값으로 변경
+					}
 				}
 			});
 		});  // connect cb function
@@ -243,9 +243,13 @@
 					'senderId': username,
 					'chatId': chatId,
 					'message': message
-				}))
+				}),
+				
+				)
 				console.log("보내짐");
 				$('#msg').val('');
+				
+				
 			}
 		} // send function	
 	});  // document ready
