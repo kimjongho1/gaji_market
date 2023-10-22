@@ -60,14 +60,16 @@ public class PayController {
 	}
 	
 		@GetMapping("payment/pay")
-		public String pay(Model model,RedirectAttributes attribute,Integer goodsId,HttpServletRequest request,Principal principal) {
-			String userId=principal.getName();
+		public String pay(Model model,RedirectAttributes reatt,Integer goodsId,HttpServletRequest request,Principal principal) {
+			String userId=null;
+			if(principal!=null) {
+			userId=principal.getName();
 			if(payServiceImpl.checkIdForPay(goodsId).equals(userId)) {
-				attribute.addFlashAttribute("msg", "본인 상품을 구매할 수 없습니다.");
+				reatt.addFlashAttribute("msg", "본인 상품을 구매할 수 없습니다.");
 				return "redirect:/";
 			}
 			else if(payServiceImpl.checkGoodsStatus(goodsId)!=1) {	
-				attribute.addFlashAttribute("msg", "판매중인 상품이 아닙니다.");
+				reatt.addFlashAttribute("msg", "판매중인 상품이 아닙니다.");
 				return "redirect:/";
 			}
 			GoodsPayInfoDto goodsInfo=payServiceImpl.getGoodsInfo(goodsId);
@@ -78,6 +80,9 @@ public class PayController {
 			model.addAttribute("userAddress",userAddress);	//유저주소들
 			model.addAttribute("payUserInfo",payUserInfo);	//유저정보
 			return "pay/pay";
+			}
+			reatt.addFlashAttribute("msg","로그인이 필요한 페이지입니다.");
+			return "redirect:/";
 		}
 		
 		@PostMapping("payment/closepay")
@@ -157,8 +162,7 @@ public class PayController {
 
 	@PostMapping("payment/callback")
 	@ResponseBody
-	public IamportResponse<Payment> callback(String impUid, String detailAddress,
-			String roadAddress,Integer goodsId,HttpServletRequest request,Principal principal) {
+	public IamportResponse<Payment> callback(String impUid,InsertSafeTradingDto insertSafeTradingDto,Integer goodsId,HttpServletRequest request,Principal principal) {
 		IamportResponse<Payment> result=null;
 		String userId=principal.getName();
 		try {
@@ -167,12 +171,9 @@ public class PayController {
 			String goodTitle=result.getResponse().getName();
 			if(result.getResponse().getStatus().equals("paid")&&amount==result.getResponse().getAmount().intValue()) {	// 금액이 일치하고 지불이 완료되었다면.
 				insertSafeTradingDto.setTransactionId(impUid);
-				insertSafeTradingDto.setGoodsId(goodsId);
 				insertSafeTradingDto.setGoodsTitle(goodTitle);
 				insertSafeTradingDto.setPrice(amount);
 				insertSafeTradingDto.setPurchaseMethod(result.getResponse().getPayMethod());
-				insertSafeTradingDto.setDetailAddress(detailAddress);
-				insertSafeTradingDto.setRoadAddress(roadAddress);
 				insertSafeTradingDto.setBuyerId(userId);
 				
 				int addResult = payServiceImpl.addSafeTrading(insertSafeTradingDto); //데이터베이스에 안전거래에 대한 데이터를 넣음
@@ -180,7 +181,7 @@ public class PayController {
 				if(addResult==1) { // 가지 데이터베이스에 값이 정상적으로 들어갔다면
 					Map<String, Object> map=new HashMap<String, Object>();
 					map.put("status", 2);
-					map.put("goodsId",goodsId); // 추후 goodsId로 변경해야함.
+					map.put("goodsId",goodsId);
 					if(payServiceImpl.updateStatus(map)==1) {
 						TitleBuyerDto titleBuyerDto=payServiceImpl.getIdFromTransactionId(impUid);
 						insertNotificationDto.setBuyerId(titleBuyerDto.getBuyerId());  
