@@ -34,15 +34,13 @@
 
 ### 메인 페이지 
 <img src="https://github.com/bellho/gaji_market/assets/135290607/36b400fe-e7c8-49ef-921d-73d97ce22d9e">
-<br>
+<br><br>
 
 ### 상품 리스트 페이지 
 <img src="https://github.com/bellho/gaji_market/assets/135290607/bb9a295a-d2b6-4bb6-b02b-d99819c6884f"><br>
 
 <details>
-  <summary>안전거래 유효성 검사 코드</summary>
-  
->   검색 조건에 따른 데이터를 불러오기 위한 동적 쿼리문
+  <summary>검색 조건에 따른 데이터를 불러오기 위한 동적 쿼리문</summary>
 
     <select id="getGoodsList" parameterType="map"
 		resultType="GoodsListDto">
@@ -163,7 +161,7 @@
 <br>
 
 ### 결제 진행
-<img src="https://github.com/bellho/gaji_market/assets/135290607/c80ada47-991e-438a-b36e-1956bda96da5"><br>
+<img src="https://github.com/bellho/gaji_market/assets/135290607/c80ada47-991e-438a-b36e-1956bda96da5">
 
 
 
