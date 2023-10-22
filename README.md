@@ -31,10 +31,12 @@
 
 ## 메인 페이지, 상품 리스트 페이지
 #### 화면구현- (신정훈), 기능구현- (백의헌)
+
+### 메인 페이지 
 <img src="https://github.com/bellho/gaji_market/assets/135290607/36b400fe-e7c8-49ef-921d-73d97ce22d9e">
 <br>
 
-### 주소 변경
+### 상품 리스트 페이지 
 <img src="https://github.com/bellho/gaji_market/assets/135290607/bb9a295a-d2b6-4bb6-b02b-d99819c6884f"><br>
 
 
