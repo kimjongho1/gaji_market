@@ -2,14 +2,19 @@
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
-<link href="${pageContext.request.contextPath}/resources/css/mypage/buyer.css" rel='stylesheet' type='text/css'>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 <!DOCTYPE html>
 <html>
 <head>
 <title>판매내역 상세조회</title>
+<!--favicon  -->
+<link rel="icon"
+	href="${pageContext.request.contextPath}/resources/img/favicon.ico">
+<link rel="shortcut icon"
+	href="${pageContext.request.contextPath}/resources/img/favicon.ico">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+<link href="${pageContext.request.contextPath}/resources/css/mypage/buyer.css" rel='stylesheet' type='text/css'>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
 
@@ -20,26 +25,29 @@
 </script>
 </c:if>
 
+<div class="container top">
 <h1>안전거래 상세조회</h1>
+</div>
 <div class="container">
-    <c:if test="${safePurchaseInfoDto.tradingStatus ne 5}">
-        <button type="button" onclick="cancel('${safePurchaseInfoDto.buyerId}','${safePurchaseInfoDto.transactionId}','${safePurchaseInfoDto.goodsId }')">결제취소</button>
-    </c:if>
     <c:if test="${safePurchaseInfoDto.tradingStatus eq 1}">
     <button onclick="accept('${safePurchaseInfoDto.sellerId}','${safePurchaseInfoDto.transactionId}','${safePurchaseInfoDto.goodsId }')">안전결제 수락</button>
 	</c:if>
     
 	<c:if test="${safePurchaseInfoDto.tradingStatus eq 2}">
-    <form action="${pageContext.request.contextPath}/mypage/deal/safe/seller/insert/trackingnumber" method="post">
-   		<select name="shippingCompany">
+    <form class="tracking" action="${pageContext.request.contextPath}/mypage/deal/safe/seller/insert/trackingnumber" method="post"
+    style="border: 1px solid #bbb1d6"
+    >
+    	<input type="hidden" value="${safePurchaseInfoDto.transactionId}" name="transactionId">
+    	<div class="d-flex justify-content-evenly align-items-center flex-wrap"><span>운송장번호</span>
+   		<select name="shippingCompany" style="height: 30px">
     		<option value="1">대한통운</option>
     		<option value="2">우체국택배</option>
     		<option value="3">한진택배</option>
     		<option value="4">로젠택배</option>
     	</select>
-    	<input type="hidden" value="${safePurchaseInfoDto.transactionId}" name="transactionId">
-    	<div><span>운송장번호</span><input type="text" name="trackingNumber" pattern="^\d{13}$" title="13자리 입력" required></div>
+    	<input type="text" name="trackingNumber" pattern="^\d{13}$" title="13자리 입력" required>
     	<button type="submit">운송장 등록</button>    
+    	</div>
     </form>
     </c:if>
     
@@ -75,8 +83,14 @@
         	로젠택배
         </c:when>
         </c:choose>
-         ${safePurchaseInfoDto.trackingNumber}</p>
+         <p>${safePurchaseInfoDto.trackingNumber}</p>
     </c:if>
+    <div>
+		<button onclick="history.back()">이전으로</button>
+    <c:if test="${safePurchaseInfoDto.tradingStatus ne 5}">
+        <button type="button" onclick="cancel('${safePurchaseInfoDto.buyerId}','${safePurchaseInfoDto.transactionId}','${safePurchaseInfoDto.goodsId }')">결제취소</button>
+    </c:if>
+    </div>
 </div>
 
 <script>

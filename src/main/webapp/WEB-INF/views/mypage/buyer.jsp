@@ -1,33 +1,40 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
-<link href="${pageContext.request.contextPath}/resources/css/mypage/buyer.css" rel='stylesheet' type='text/css'>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>안전거래 상세조회</title>
+<!--favicon  -->
+<link rel="icon"
+	href="${pageContext.request.contextPath}/resources/img/favicon.ico">
+<link rel="shortcut icon"
+	href="${pageContext.request.contextPath}/resources/img/favicon.ico">
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+<link href="${pageContext.request.contextPath}/resources/css/mypage/buyer.css" rel='stylesheet' type='text/css'>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
 </head>
 <body>
 
 
 
+<div class="container top">
 <h1>안전거래 상세조회</h1>
+</div>
 <div class="container">
     <c:if test="${safePurchaseInfoDto.tradingStatus eq 1}">
         <button onclick="cancel('${safePurchaseInfoDto.transactionId}','${safePurchaseInfoDto.goodsId}')" class="btn btn-primary btn-lg">결제취소</button>
     </c:if>
 
 <!-- 모달 트리거 버튼 -->
-<button type="button" id="showReportModalBtn" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#reportModal">
+<button type="button" id="showReportModalBtn" data-toggle="modal" data-target="#reportModal">
   신고하기
 </button>
  <c:if test="${reviewYN eq 0}">
-        <button onclick="redirectReview()" class="btn btn-primary btn-lg">리뷰작성</button>
+        <button onclick="redirectReview()">리뷰작성</button>
  </c:if>
 
 <!-- 신고하기 모달 -->
@@ -103,9 +110,9 @@
         	로젠택배
         </c:when>
         </c:choose>
-         ${safePurchaseInfoDto.trackingNumber}</p>
+         <p>${safePurchaseInfoDto.trackingNumber}</p>
     </c:if>
-
+		<button onclick="history.back()">이전으로</button>
 </div>
 <script>
 
