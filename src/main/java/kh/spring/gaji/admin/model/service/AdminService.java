@@ -3,6 +3,7 @@ import java.util.List;
 import java.util.Map;
 
 import kh.spring.gaji.admin.model.dto.UserBlockingDto;
+import kh.spring.gaji.admin.model.dto.UserListDto;
 import kh.spring.gaji.goods.model.dto.GoodsReportCountDto;
 import kh.spring.gaji.pay.model.dto.AdminSafeTradingDto;
 import kh.spring.gaji.pay.model.dto.InFacePurchaseDto;
@@ -64,4 +65,17 @@ public interface AdminService {
     List<ReportDto> getGoodsReportList(String refId);
 
     GoodsReportInfoDto getGoodsReportInfo(Map<String, String> map);
+    
+    
+    List<UserListDto> userList();
+    
+    List<UserListDto> userReportList(String userId);
+    
+    UserListDto userReportInfo(int refId);
+    
+    int reportReview(int refId);
+    
+    int checkBan(String userId);
+    
+    String checkReview(int refId);
 }

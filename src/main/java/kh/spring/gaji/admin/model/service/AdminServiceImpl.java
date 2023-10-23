@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import kh.spring.gaji.admin.model.dao.AdminDao;
 import kh.spring.gaji.admin.model.dto.UserBlockingDto;
+import kh.spring.gaji.admin.model.dto.UserListDto;
 import kh.spring.gaji.goods.model.dto.GoodsReportCountDto;
 import kh.spring.gaji.pay.model.dto.AdminSafeTradingDto;
 import kh.spring.gaji.pay.model.dto.InFacePurchaseDto;
@@ -25,6 +26,8 @@ import org.springframework.stereotype.Service;
 	public class AdminServiceImpl implements AdminService {
 	    @Autowired
 	    private AdminDao adminDao;
+	    
+	    
 	 // 33P 직거래 조회
 	    @Override
 	    public List<InFacePurchaseDto> getInfacePurchaseList() {
@@ -152,6 +155,30 @@ import org.springframework.stereotype.Service;
 	    public GoodsReportInfoDto getGoodsReportInfo(Map<String, String> map) {
 	        return adminDao.getGoodsReportInfo(map);
 	    }
+		@Override
+		public List<UserListDto> userList() {
+			return adminDao.userList();
+		}
+		@Override
+		public List<UserListDto> userReportList(String userId) {
+			return adminDao.userReportList(userId);
+		}
+		@Override
+		public UserListDto userReportInfo(int refId) {
+			return adminDao.userReportInfo(refId);
+		}
+		@Override
+		public int reportReview(int refId) {
+			return adminDao.reportReview(refId);
+		}
+		@Override
+		public int checkBan(String userId) {
+			return adminDao.checkBan(userId);
+		}
+		@Override
+		public String checkReview(int refId) {
+			return adminDao.checkReview(refId);
+		}
 
 	
 }

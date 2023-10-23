@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import kh.spring.gaji.admin.model.dto.UserBlockingDto;
+import kh.spring.gaji.admin.model.dto.UserListDto;
 import kh.spring.gaji.goods.model.dto.GoodsReportCountDto;
 import kh.spring.gaji.pay.model.dto.AdminSafeTradingDto;
 import kh.spring.gaji.pay.model.dto.InFacePurchaseDto;
@@ -148,4 +149,26 @@ public class AdminDao {
     public GoodsReportInfoDto getGoodsReportInfo(Map<String, String> map) {
         return sqlSession.selectOne("admin.trading.getGoodsReportInfo", map);
     }
+    
+    
+    public List<UserListDto> userList(){
+    	return sqlSession.selectList("admin.userList");
+    }
+    public List<UserListDto> userReportList(String userId){
+    	return sqlSession.selectList("admin.userReportList",userId);
+    }
+    public UserListDto userReportInfo(int refId) {
+    	return sqlSession.selectOne("admin.userReportInfo",refId);
+    }
+    
+    public int reportReview(int refId) {
+    	return sqlSession.update("admin.reportReview",refId);
+    }
+    public int checkBan(String userId) {
+    	return sqlSession.selectOne("admin.checkBan",userId);
+    }
+    public String checkReview(int refId) {
+    	return sqlSession.selectOne("admin.checkReview",refId);
+    }
+    
 }

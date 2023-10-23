@@ -20,6 +20,7 @@ public class UserListDto {
 	private int reportCategory;
 	private String approvalStatus;
 	private String content;
+	private String title;
 	
 	 
 }

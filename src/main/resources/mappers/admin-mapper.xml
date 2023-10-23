@@ -223,21 +223,43 @@
 	</select>
 	
 	<update id="banUser" parameterType="string">	<!-- 38P 유저 계정 정지 사용예정--> 
-		update user set enabled = 0 where user_id = #{userId}
+		update users set enabled = 0 where user_id = #{userId}
 	</update>
 	
 	<update id="unBanUser" parameterType="string">	<!-- 38P 유저 계정 정지 해제 사용예정-->
-		update user set enabled = 1 where user_id = #{userId}
+		update users set enabled = 1 where user_id = #{userId}
 	</update>
 	
+	<update id="reportReview" parameterType="_int">
+		update goods_report set approval_status = 'Y' where ref_id = #{refId}
+	</update>
+	
+	<select id="checkBan" parameterType="String" resultType="_int">
+		select enabled from users where user_id = #{userId}
+	</select>
+	
+	<select id="checkReview" parameterType="_int" resultType="string">
+		select approval_status from goods_report where ref_id = #{refId}
+	</select>
+	
 	<select id="userList" resultType="UserListDto"> <!-- 등록유저에 대한 리스트 -->
-		SELECT user_id,rating_score, created_at, enabled,
-		(SELECT COUNT(*) FROM safe_trading st WHERE st.goods_id IN (SELECT goods_id
-   	 	FROM goods g WHERE u.user_id = g.user_id)) safetradecount,
-   	 	(select Count(goods_id) from goods g where g.user_id = u.user_id) sellgoods,
-   	 	(SELECT count(*) FROM goods JOIN users using (user_id) JOIN GOODS_REPORT ON ref_id = goods_id) reportcount
-		FROM USERs u
-		order by reportcount desc		
+		SELECT
+    	u.user_id, u.rating_score, u.created_at, u.enabled,
+	    COUNT(gr.reporter_id) AS reportcount,
+	    (SELECT COUNT(*) FROM safe_trading st WHERE st.goods_id IN (SELECT goods_id FROM goods g WHERE u.user_id = g.user_id)) AS safetradecount,
+	    (SELECT COUNT(g.goods_id) FROM goods g WHERE g.user_id = u.user_id) AS sellgoods
+		FROM
+	    users u
+		LEFT JOIN
+	    goods g ON u.user_id = g.user_id
+		LEFT JOIN
+	    goods_report gr ON g.goods_id = gr.ref_id
+	    WHERE
+   		u.athority = 'ROLE_USER'
+		GROUP BY
+	    u.user_id, u.rating_score, u.created_at, u.enabled
+		ORDER BY
+	    reportcount DESC
 	</select>
 	
 	<select id="userReportList" resultType="UserListDto" parameterType="string"> <!-- 해당 유저에 대한 신고리스트 -->
@@ -248,11 +270,12 @@
 		ORDER BY approval_status
 	</select>
 	
-	<select id="userReportInfo" resultType="UserListDto" parameterType="string"> <!-- 해당 상품에 대한 신고 내용 -->
-		select ref_id, u.user_id, reporter_id, content, report_category, gr.created_at, title from goods_report gr
+	<select id="userReportInfo" resultType="UserListDto" parameterType="_int"> <!-- 해당 상품에 대한 신고 내용 -->
+		select gr.ref_id, u.user_id, reporter_id, gr.content, gr.report_category, gr.created_at, g.title , u.enabled
+		from goods_report gr
 		join goods g on ref_id = goods_id
 		join users u on g.user_id = u.user_id
-		where u.user_id = #{userId}
+		where ref_id = #{refId}
 	</select>
 	
 	
