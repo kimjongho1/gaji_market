@@ -380,18 +380,23 @@
 </svg>${item.likeCount}
 								<div
 									class="font-semibold space-s-2 mt-0.5 text-heading lg:text-lg lg:mt-1.5">
-									${item.price} <c:choose>
+									<div class="flex justify-content-between">
+									${item.price}원 <c:choose>
 								<c:when test="${item.status eq 1}">
-									(판매중)
+									<span class="px-2 py-1 mr-2 text-xs pointer-events-none bg-gray-150 rounded-xl flex align-items-center">판매중</span>
 								</c:when>
 								<c:when test="${item.status eq 2}">
-									(예약)
+									<span class="px-2 py-1 mr-2 text-xs pointer-events-none bg-gray-150 rounded-xl flex align-items-center">예약중</span>
 								</c:when>
 								<c:otherwise>
-									(판매완료)
+									<span class="px-2 py-1 mr-2 text-xs pointer-events-none bg-gray-150 rounded-xl flex align-items-center">판매완료</span>
 								</c:otherwise>
-								</c:choose><br>${item.nickname}
-									</div>
+								</c:choose>
+								</div>
+								<span class="m-0">
+								${item.nickname}
+								</span>
+								</div>
 								<div class="my-1">
 								
 									<span class="text-sm text-gray-400">${item.dongName}</span><span
