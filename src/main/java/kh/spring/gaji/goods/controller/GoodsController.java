@@ -407,9 +407,4 @@ public class GoodsController {
 		model.addAttribute("userId",userId);
 		return "goods/usergoods";
 	}
-
-//	@GetMapping("/get/map")
-//	public String map() { // 중고거래 게시판에서 위치 설정 기능 -- 모달을 사용할 예정이라 페이지를 만들지 글 작성 페이지에 넣을지 고민 -천
-//		return "goods/goodsmap";
-//	}
 }
