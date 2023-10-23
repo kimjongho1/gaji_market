@@ -33,7 +33,10 @@
 <body>
     <div class="notification-container">
         <div class="notification-card">
+            <div class="d-flex justify-content-between unread">
             <h2>거래 알림</h2>
+            <button onclick="history.back()">이전으로 (홈으로가야하나?)</button>
+            </div>
             <div class="d-flex justify-content-between unread"><span>읽지 않은 메시지 + ${notiCount}</span> 
             <button class="btn">123</button>
             </div>
