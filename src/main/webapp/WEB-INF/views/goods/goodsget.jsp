@@ -78,6 +78,9 @@ margin-bottom: 10px;
         padding-bottom: 0.5rem;
 }
 
+main a:hover {
+
+color: #835995 }
 
 </style>
 
