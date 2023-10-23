@@ -371,7 +371,7 @@
 						<a class="text-base py-2 px-4 border-b-[4px] border-b-transparent text-jnblack w-full justify-center flex lg:block cursor-pointer border-b-jnblack transition duration-300 ease-in lg:border-b-transparent"
 							aria-label="가게정보탭" aria-roledescription="가게정보탭" href="#">유저정보</a>
 					</div>
-					<div id="kakaoMap" style="width: 300%; height: 200px;"></div>
+					<div id="kakaoMap"" OnClick="location.href ='http://maps.google.com/maps?&z=18.5&q=${goodsDto.lat},${goodsDto.lng }&ll=${goodsDto.lat},${goodsDto.lng }'" style="cursor:pointer; width: 300%; height: 200px;"></div>
 				</div>
 			</div>
 			<div class="block grid-cols-5 lg:grid lg:mb-10">
@@ -651,7 +651,7 @@ $("#pullUpGoods").click(function() {		// 등록사용자와 로그인사용자�
             if (data === "update") {
                 alert("해당 상품을 끌어올렸습니다 !!");	
             } else if (data === "error") {
-                alert("상품을 등록하거나 끌어올린지 1시간 지나야 가능합니다.");
+                alert("상품을 등록하거나 끌어올린지 하루가 지나야 가능합니다.");
             }
           }
         }
