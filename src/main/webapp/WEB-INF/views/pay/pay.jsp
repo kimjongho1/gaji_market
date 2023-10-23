@@ -5,6 +5,7 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
 <link href="${pageContext.request.contextPath}/resources/css/pay/pay.css" rel='stylesheet' type='text/css'>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -47,11 +48,15 @@
             <tr>
                 <td>안전결제수수료</td>
                 <td>
-                    <script>
-                        var price = ${goodsInfo.price}; // JSP 변수로부터 가격을 가져옴
-                        var fee = Math.round(price * 0.035); // 계산
-                        document.write(fee); // 결과를 출력
-                    </script>
+                   <script>
+   					 var price = ${goodsInfo.price}; // JSP 변수로부터 가격을 가져옴
+    				 var fee = Math.round(price * 0.035); // 계산
+    				 var formattedFee = new Intl.NumberFormat('en-US', {
+        				style: 'decimal',
+        				maximumFractionDigits: 2,
+    				}).format(fee);
+    				document.write(formattedFee); // 결과를 출력
+				  </script>
                 </td>
             </tr>
             <tr>
@@ -59,7 +64,11 @@
                 <td>
                     <script>
                         var total = Math.round(price * 1.035);// 계산
-                        document.write(total); // 결과를 출력
+        				 var formattedFee = new Intl.NumberFormat('en-US', {
+            				style: 'decimal',
+            				maximumFractionDigits: 2,
+        				}).format(total);
+        				document.write(formattedFee); // 결과를 출력
                     </script>
                 </td>
             </tr>
