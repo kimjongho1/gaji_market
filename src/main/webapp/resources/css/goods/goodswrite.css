@@ -1,0 +1,73 @@
+body{
+	background-color: #f9f9f9
+}
+	
+
+.wbg {
+	border: 1px solid #bbb1d6;
+}
+
+.wbg form {
+	width: 1000px;
+	margin: auto;
+}
+.con-header{
+	margin: 10px 0;
+	
+}
+
+.con-header input {
+  padding: 10px;
+  font-size: 16px; 
+  border: 1px solid #ccc;
+  border-radius: 5px; 
+  margin: 50px 0 20px;
+}
+
+#title {
+	width: 60%; 
+}
+
+#price {
+	width: 35%; 
+
+}
+
+.con-header input:hover {
+	border-color: #666;
+} 
+.con-header input:focus {
+	border-color: #bbb1d6; 
+  box-shadow: 0 0 5px rgba(52, 152, 219, 0.7); 
+  outline: none; 
+}
+.con-header input:active {
+	 border-color: #5715CC; 
+  box-shadow: 0 0 5px rgba(231, 76, 60, 0.7); /* 클릭 시 그림자 효과 추가 */
+}
+
+.con-header select{
+	position: relative;
+  display: inline-block;
+  background: #fff;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  width: 200px;
+}
+
+.con-header select:after{ content: '\25BC'; /* 화살표 아이콘 */
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);}
+.con-header select:hover{ background: #f1f1f1;
+  border-color: #999;
+}}
+.con-header select:active{background: #fff;
+  border-color: #666;}
+.con-header select option{padding: 10px;
+  font-size: 16px;}
+

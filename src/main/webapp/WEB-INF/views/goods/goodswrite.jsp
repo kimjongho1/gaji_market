@@ -5,13 +5,17 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>글 작성</title>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 <!--favicon  -->
 	<link rel="icon" href="${pageContext.request.contextPath}/resources/img/favicon.ico">
 	<link rel="shortcut icon" href="${pageContext.request.contextPath}/resources/img/favicon.ico">
 
+<link rel="stylesheet"	href="${pageContext.request.contextPath}/resources/css/bootstrap.min.css"	type="text/css">
+<link rel="stylesheet"	href="${pageContext.request.contextPath}/resources/css/font-awesome.min.css"	type="text/css">
+<link rel="stylesheet"	href="${pageContext.request.contextPath}/resources/css/style.css"	type="text/css">
+<link rel="stylesheet"	href="${pageContext.request.contextPath}/resources/css/goods/goodswrite.css"	type="text/css">
 
 <style>
 /* 모달 스타일 */
@@ -53,7 +57,7 @@
 }
 
 #container {
-	width: 1000px;
+	width: 1200px;
 	margin: 20px auto;
 }
 
@@ -75,12 +79,21 @@
 </style>
 </head>
 <body>
-<div id="container">
+<header>
+		<jsp:include page="/WEB-INF/views/header.jsp"></jsp:include>
+</header>
+<div id="container" style="min-height: 800px;">
 	<h2>중고 거래 게시판 글 작성</h2>
+	<div class="wbg">
 	<form action="${pageContext.request.contextPath}/goods/write.do"
 		method="post" enctype="multipart/form-data">
+		<div class="con-header">
+		<div class="d-flex justify-content-between">
 		<input type="hidden" name="userId" value="${loginId }">
-		<input type="text" name="title" id="title" placeholder="제목" required="required"> <br>
+		<input type="text" name="title" id="title" placeholder="제목" required="required"> 
+		<input type="text" id="price" name="price" placeholder="판매가격" required="required">
+		</div>
+		<div class="d-flex justify-content-between align-items-baseline">
 		<!-- 카테고리 선택 드롭다운 -->
 		<label for="selectedCategory">카테고리 선택:</label> <select
 			name="categoryId" id="selectedCategory" required="required">
@@ -107,14 +120,16 @@
 				<option value="${dong.dongId}" data-gu="${dong.guId}">${dong.dongName}</option>
 			</c:forEach>
 		</select>
-		 <input type="text" id="price" name="price" placeholder="판매가격" required="required">
-		<br>
+		</div>
+		</div>
 
 			<textarea name="description" id="editor"></textarea>
 		
-		<label for="safeTradingYn">안전결제</label>
-		<input type="checkbox" name="safeTradingYn" id="safeTradingYn" value="N">
+		<div class="bar row align-items-baseline">
+		<label  for="safeTradingYn">안전결제</label>
+		<input  type="checkbox" name="safeTradingYn" id="safeTradingYn" value="N">
 
+		<div class="d-flex align-items-center">
 		<!-- 모달 열기 버튼 -->
 		<br>
 		<!-- 모달 열기 버튼 -->
@@ -135,11 +150,23 @@
 				<div id="clickLatlng"></div>
 			</div>
 		</div>
+		</div>
+		</div>
+		<div>
+		<!-- 확인 버튼 -->
 		<input type="hidden" name="lat" id="latitudeInput"> <input
 			type="hidden" name="lng" id="longitudeInput"> <br>
 		<input type="submit" value="확인">
+		</div>
+		
 		</form>
+		</div>
 </div>
+
+<!-- Footer Section Begin -->
+	<footer>
+		<jsp:include page="/WEB-INF/views/footer.jsp"></jsp:include>
+	</footer>
 	
 	<!--
             The "super-build" of CKEditor&nbsp;5 served via CDN contains a large set of plugins and multiple editor types.
