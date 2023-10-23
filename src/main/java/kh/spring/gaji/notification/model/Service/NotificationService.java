@@ -3,6 +3,7 @@ package kh.spring.gaji.notification.model.Service;
 import java.util.List;
 import java.util.Map;
 
+import kh.spring.gaji.notification.model.dto.DeleteNotiDto;
 import kh.spring.gaji.notification.model.dto.NotificationDto;
 
 public interface NotificationService {
@@ -17,4 +18,6 @@ public interface NotificationService {
     String getIdFromTransactionId(String refId);
     
     int getTotalCnt(String userId);
+    
+    int deleteNotice(DeleteNotiDto deleteNotiDto);
 }

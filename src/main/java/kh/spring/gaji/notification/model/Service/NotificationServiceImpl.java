@@ -3,6 +3,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import kh.spring.gaji.notification.model.dao.NotificationDao;
+import kh.spring.gaji.notification.model.dto.DeleteNotiDto;
 import kh.spring.gaji.notification.model.dto.NotificationDto;
 
 import java.util.List;
@@ -41,5 +42,9 @@ public class NotificationServiceImpl implements NotificationService {
 	@Override
 	public int getTotalCnt(String userId) {
 		return notificationDao.getTotalCnt(userId);
+	}
+	@Override
+	public int deleteNotice(DeleteNotiDto deleteNotiDto) {
+		return notificationDao.deleteNotice(deleteNotiDto);
 	}
 }

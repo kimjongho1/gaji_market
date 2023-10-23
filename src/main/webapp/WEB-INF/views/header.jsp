@@ -63,7 +63,7 @@ header {
 
 					<div class="header__cart rights">
 						<ul>
-							<li><a href="${pageContext.request.contextPath}/notice"><i class="fa fa-bell"></i></a></li>
+							<li><a target="_blink" href="${pageContext.request.contextPath}/notice"><i class="fa fa-bell"></i></a></li>
 							<li><a href="${pageContext.request.contextPath}/mypage/keepuseds"><i class="fa fa-heart"></i></a></li>
 							<li><a href="${pageContext.request.contextPath}/mypage/keepusers"><i class="fa fa-shopping-bag"></i></a></li>
 							<sec:authorize access="isAnonymous()">

@@ -35,6 +35,30 @@
 		select count(*) from notification where user_id = #{userId} and type=2
 	</select>
 	
+<delete id="deleteNotice" parameterType="kh.spring.gaji.notification.model.dto.DeleteNotiDto">
+    DELETE FROM notification 
+    WHERE user_Id = #{userId}
+    AND noti_id IN (
+        <if test="notiId != null">
+            #{notiId}<if test="notiId1 != null or notiId2 != null or notiId3 != null or notiId4 != null or notiId5 != null">, </if>
+        </if>
+        <if test="notiId1 != null">
+            #{notiId1}<if test="notiId2 != null or notiId3 != null or notiId4 != null or notiId5 != null">, </if>
+        </if>
+        <if test="notiId2 != null">
+            #{notiId2}<if test="notiId3 != null or notiId4 != null or notiId5 != null">, </if>
+        </if>
+        <if test="notiId3 != null">
+            #{notiId3}<if test="notiId4 != null or notiId5 != null">, </if>
+        </if>
+        <if test="notiId4 != null">
+            #{notiId4}<if test="notiId5 != null">, </if>
+        </if>
+        <if test="notiId5 != null">
+            #{notiId5}
+        </if>
+    )
+</delete>
 	
 </mapper>
 

@@ -222,7 +222,7 @@ public class PayController {
 			return "redirect:/";
 		}
 		ra.addFlashAttribute("msg", "예기치않은 오류로 메인페이지로 이동합니다.");
-		System.out.println("PayController인가??");
+		System.out.println("PayController exception");
 		return "redirect:/";
 	}	
 }
