@@ -153,10 +153,36 @@
 	<script
 		src="https://cdn.ckeditor.com/ckeditor5/40.0.0/super-build/translations/ko.js"></script>
 	<script>
+	$(document).ready(function() {
+        getUrl();
+    });
+	var locationData = {};
+	function getUrl(){
+	    var apiKey = '발급받은키';
+	    var regUrl = 'http://api.ipstack.com/check?access_key=64c3d4bcce89eca41b279b0205516102&format=1';
+	 
+	    $.ajax({
+	        type:"POST",
+	        url:regUrl,
+	        dataType : "json",
+	        success: function(data){
+	        	locationData = data;
+	            console.log(data); // 리턴받은 json
+	             
+	        },
+	        error: function(xhr, status, error) {
+	            alert(error);
+	        }  
+	    });
+	}
+	
+	
 	var msg = '${msg}';
 	if(msg){
 		alert(msg);
 	}
+	
+	
 	
             // This sample still does not showcase all CKEditor&nbsp;5 features (!)
             // Visit https://ckeditor.com/docs/ckeditor5/latest/features/index.html to browse all the features.
@@ -357,14 +383,16 @@
         // 카카오맵 API를 사용하여 지도를 생성하고 설정합니다.
         var container = document.getElementById('kakaoMap');
         var options = {
-            center: new kakao.maps.LatLng(37.5665, 126.9780), // 지도의 중심 좌표 (서울)
-            level: 4 // 지도의 확대 레벨
+            center: new kakao.maps.LatLng(locationData.latitude, locationData.longitude), // 지도의 중심 좌표 (서울)
+            level: 6 // 지도의 확대 레벨
         };
         var map = new kakao.maps.Map(container, options);
         
         // 지도를 클릭한 위치에 마커를 추가합니다.
         var marker = new kakao.maps.Marker({
-            map: map
+            map: map,
+            position: new kakao.maps.LatLng(locationData.latitude, locationData.longitude)
+
         });
         
         // 지도를 클릭한 위치 정보를 가져와서 출력하는 함수
@@ -382,8 +410,8 @@
             // 클릭한 위치에 마커 표시
             marker.setPosition(latlng);
             
-            // 선택한 위치 정보 출력
-            displayLatLng(lat, lng);
+            /* // 선택한 위치 정보 출력
+            displayLatLng(lat, lng); */
         });
         
         // 확인 버튼 클릭 시 마커의 위치 정보 가져오기
@@ -431,6 +459,9 @@
     
     // 페이지 로드 시 호출하여 초기화
     updateDongDropdown();
+</script>
+<script>
+
 </script>
 </body>
 </html>

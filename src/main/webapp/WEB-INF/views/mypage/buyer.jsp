@@ -5,6 +5,7 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
 <link href="${pageContext.request.contextPath}/resources/css/mypage/buyer.css" rel='stylesheet' type='text/css'>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -70,11 +71,13 @@
     </c:if>
     
     <a href="${pageContext.request.contextPath}/goods/get?goodsId=${safePurchaseInfoDto.goodsId}"><p>상품명:${safePurchaseInfoDto.goodsTitle}</p></a>
+    <p>상품가격:<fmt:formatNumber value="${safePurchaseInfoDto.price}" pattern="#,###"/></p>
     <p>판매자명:${safePurchaseInfoDto.sellerName}</p>
     <p>구매자명:${safePurchaseInfoDto.buyerName}</p>
     <p>휴대폰번호:${safePurchaseInfoDto.mobileNumber}</p>
     <p>배송지:${safePurchaseInfoDto.roadAddress}, ${safePurchaseInfoDto.detailAddress}</p>
     <p>거래일자:${safePurchaseInfoDto.tradingDate}</p>
+    
 
     <c:choose>
         <c:when test="${safePurchaseInfoDto.tradingStatus eq 1}"><p>거래상태:입금완료</p></c:when>
