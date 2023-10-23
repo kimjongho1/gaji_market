@@ -222,13 +222,39 @@
 		where user_id=#{user_id}
 	</select>
 	
-	<update id="banUser" parameterType="string">	<!-- 38P 유저 계정 정지 -->
+	<update id="banUser" parameterType="string">	<!-- 38P 유저 계정 정지 사용예정--> 
 		update user set enabled = 0 where user_id = #{userId}
 	</update>
 	
-	<update id="unBanUser" parameterType="string">	<!-- 38P 유저 계정 정지 해제 -->
+	<update id="unBanUser" parameterType="string">	<!-- 38P 유저 계정 정지 해제 사용예정-->
 		update user set enabled = 1 where user_id = #{userId}
 	</update>
+	
+	<select id="userList" resultType="UserListDto"> <!-- 등록유저에 대한 리스트 -->
+		SELECT user_id,rating_score, created_at, enabled,
+		(SELECT COUNT(*) FROM safe_trading st WHERE st.goods_id IN (SELECT goods_id
+   	 	FROM goods g WHERE u.user_id = g.user_id)) safetradecount,
+   	 	(select Count(goods_id) from goods g where g.user_id = u.user_id) sellgoods,
+   	 	(SELECT count(*) FROM goods JOIN users using (user_id) JOIN GOODS_REPORT ON ref_id = goods_id) reportcount
+		FROM USERs u
+		order by reportcount desc		
+	</select>
+	
+	<select id="userReportList" resultType="UserListDto" parameterType="string"> <!-- 해당 유저에 대한 신고리스트 -->
+		SELECT ref_id, u.user_id,reporter_id, gr.report_category, gr.CREATED_AT, approval_status FROM GOODS_REPORT gr 
+		JOIN GOODS g ON ref_id = goods_id 
+		JOIN USERS u ON g.user_id = u.user_id
+		where u.user_id = #{userId}
+		ORDER BY approval_status
+	</select>
+	
+	<select id="userReportInfo" resultType="UserListDto" parameterType="string"> <!-- 해당 상품에 대한 신고 내용 -->
+		select ref_id, u.user_id, reporter_id, content, report_category, gr.created_at, title from goods_report gr
+		join goods g on ref_id = goods_id
+		join users u on g.user_id = u.user_id
+		where u.user_id = #{userId}
+	</select>
+	
 	
 	<insert id="insertBanUser"	parameterType="UserBlockingDto">	<!-- 38P 계정정지 테이블에 아이디추가 -->
 		insert into User_Blocking values(ban_no_sequence.nextval,#{bannedId},#{administerId},#{reasonForBlocking},"")

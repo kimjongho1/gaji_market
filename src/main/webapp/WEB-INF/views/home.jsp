@@ -33,11 +33,11 @@
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css"/>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/mainswiper.css" type="text/css">
    
-   <script>
-   <c:if test="${not empty msg}">
-	alert("${msg}");
-	</c:if>
-   </script>
+  <c:if test="${not empty msg}">
+    <script>
+        alert("<c:out value='${msg}'/>");
+    </script>
+</c:if>
  
 </head>
 
