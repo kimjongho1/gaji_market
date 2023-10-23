@@ -1,8 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/locale/ko.js"></script>
 <!DOCTYPE html>
 <html>
 <head>
@@ -15,6 +13,8 @@
 <link rel="shortcut icon"
 	href="${pageContext.request.contextPath}/resources/img/favicon.ico">
     
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/locale/ko.js"></script>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/notice.css" type="text/css">
 </head>
 <body>
