@@ -46,6 +46,41 @@
 	href="${pageContext.request.contextPath}/resources/css/goods/goodsget.css"
 	type="text/css">
 
+<style>
+
+#header .site-btn {
+    font-size: 14px;
+    color: #ffffff;
+    font-weight: 800;
+    text-transform: uppercase;
+    display: inline-block;
+    padding: 13px 30px 12px;
+    background: #7fad39;
+    border: none;
+}
+
+button:not(:disabled) div{
+cursor: text;
+	
+}
+
+article p {
+padding: 2.5rem 1rem; 
+word-break: break-word; 
+word-break: break-all; 
+white-space: pre-line; 
+margin-bottom: 10px;
+}
+
+@media (min-width: 1024px) {
+    article p {
+        padding-top: 0.5rem;  
+        padding-bottom: 0.5rem;
+}
+
+
+</style>
+
 </head>
 <body>
 
@@ -363,15 +398,13 @@
 					class="mb-2 grid grid-cols-2 lg:grid-cols-5 list-none pl-0 w-full bg-white"
 					data-nav-ref="true">
 					<div class="col-span-1 lg:col-span-3 w-full">
-						<a class="text-base py-2 px-4 border-b-[4px] border-b-transparent text-jnblack w-full lg:w-auto justify-center flex lg:block cursor-pointer false"
-							aria-label="상품내용탭" aria-roledescription="상품내용탭" href="#">${goodsDto.description}</a>
+						<strong class="text-base py-2 px-4 border-b-[4px] border-b-transparent text-jnblack w-full lg:w-auto justify-center flex lg:block false">
+							상품내용</strong>
 							
 					</div>
 					<div role="presentation" class="col-span-1 lg:col-span-2 w-full">
-						<a class="text-base py-2 px-4 border-b-[4px] border-b-transparent text-jnblack w-full justify-center flex lg:block cursor-pointer border-b-jnblack transition duration-300 ease-in lg:border-b-transparent"
-							aria-label="가게정보탭" aria-roledescription="가게정보탭" href="#">유저정보</a>
+					<strong class="text-base py-2 px-4 border-b-[4px] border-b-transparent text-jnblack w-full justify-center flex lg:block border-b-jnblack transition duration-300 ease-in lg:border-b-transparent">유저정보</strong>
 					</div>
-					<div id="kakaoMap"" OnClick="location.href ='http://maps.google.com/maps?&z=18.5&q=${goodsDto.lat},${goodsDto.lng }&ll=${goodsDto.lat},${goodsDto.lng }'" style="cursor:pointer; width: 300%; height: 200px;"></div>
 				</div>
 			</div>
 			<div class="block grid-cols-5 lg:grid lg:mb-10">
@@ -392,12 +425,13 @@
 							판매자가 별도의 메신저로 결제링크를 보내거나 직거래(직접송금)을 <br>유도하는 경우 사기일 가능성이 높으니
 							거래를 자제해 주시고
 						</div>
-						<span class="text-xs font-bold underline truncate">중고나라
+						<span class="text-xs font-bold underline truncate">가지마켓
 							고객센터로 신고해주시기 바랍니다.</span>
 					</div>
 					<article>
-						<p class="px-4 py-10 break-words break-all whitespace-pre-line lg:py-2"></p>
+						${goodsDto.description}
 					</article>
+					<div id="kakaoMap"" OnClick="location.href ='http://maps.google.com/maps?&z=18.5&q=${goodsDto.lat},${goodsDto.lng }&ll=${goodsDto.lat},${goodsDto.lng }'" style="cursor:pointer; width: 768px; height: 200px;"></div>
 				</div>
 				<div name="product-store"
 					class="col-span-2 w-full py-10 lg:py-2 px-4">
