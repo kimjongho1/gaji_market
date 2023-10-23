@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/locale/ko.js"></script>
@@ -111,7 +112,7 @@
                                    document.write(formattedPastDate); 
                                	   </script>
                                <br>
-                                    가격:${myGoodsInfo.price}<br>
+                                    가격:<fmt:formatNumber value="${myGoodsInfo.price}" pattern="#,###"/><br>
                                     ${myGoodsInfo.dongName} 조회수:${myGoodsInfo.viewCount}<br>
                                     판매자:${myGoodsInfo.nickname}
 								</div>

@@ -658,7 +658,7 @@ public class MyPageController {
 	@ExceptionHandler
 	public String exception(Exception e, RedirectAttributes ra, Principal principal) {
 		try {
-			if (principal.getName() == null) {
+			if (principal == null) {
 				ra.addFlashAttribute("msg", "로그인이 필요한 페이지입니다.");
 				return "redirect:/";
 			}
