@@ -16,6 +16,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import kh.spring.gaji.goods.model.dto.MyGoodsListDto;
 import kh.spring.gaji.notification.model.Service.NotificationService;
+import kh.spring.gaji.notification.model.dto.DeleteNotiDto;
 
 @Controller
 @RequestMapping("/notice")
@@ -57,6 +58,7 @@ public class NotificationController {
 			startPageNum = ((currentPage/pageBlockSize))*pageBlockSize +1;
 		}
 		int endPageNum = (startPageNum+pageBlockSize > totalPageNum) ? totalPageNum : startPageNum+pageBlockSize-1;
+		model.addAttribute("currentPage", currentPage);
 		model.addAttribute("totalPageNum", totalPageNum);
 		model.addAttribute("startPageNum", startPageNum);
 		model.addAttribute("endPageNum", endPageNum);
@@ -105,4 +107,15 @@ public class NotificationController {
 		}
 		return 0;
 		}
+	
+	@PostMapping("/deletenotice")
+	@ResponseBody
+	public int getNotiCount(Principal principal,DeleteNotiDto deleteNotiDto) {
+		int result=0;
+		if(principal==null)
+			return -1;	
+		deleteNotiDto.setUserId(principal.getName());
+		result=notificationServiceImpl.deleteNotice(deleteNotiDto);
+		return result;
+	}
 }

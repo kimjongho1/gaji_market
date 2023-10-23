@@ -6,6 +6,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import kh.spring.gaji.notification.model.dto.DeleteNotiDto;
 import kh.spring.gaji.notification.model.dto.NotificationDto;
 
 @Repository
@@ -47,5 +48,9 @@ public class NotificationDao {
     
     public int getTotalCnt(String userId) {
     	return sqlSession.selectOne("notification.getTotalCnt",userId);
+    }
+    
+    public int deleteNotice(DeleteNotiDto deleteNotiDto) {
+    	return sqlSession.delete("notification.deleteNotice",deleteNotiDto);
     }
 }
