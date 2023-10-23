@@ -21,11 +21,11 @@ public class ReportController {
 	@PostMapping("/report")
 	public String report(RedirectAttributes redirectAttr,int reportCategory,int refId,String content,String url,Principal principal) {
 		Map<String,Object> map=new HashMap<String,Object>();
-		try {
+		if(principal!=null) {
 			String userId=principal.getName();
 			map.put("reporterId",userId); //이후 session을 통해 얻어온 아이디 작성
-		}catch(Exception e) {
-			e.printStackTrace();
+		}
+		else{
 			redirectAttr.addFlashAttribute("msg","로그인이 필요한 기능입니다."); 
 			return "redirect:/"+url; 
 		}
@@ -44,11 +44,12 @@ public class ReportController {
 	@PostMapping("/reportGoods")
 	public String reportGoods(RedirectAttributes reatt,int reportCategory,int refId,String content,Principal principal) {
 		Map<String,Object> map=new HashMap<String,Object>();
-		try {
-			String userId=principal.getName();
+		String userId=null;
+		if(principal!=null) {
+			userId=principal.getName();
 			map.put("reporterId",userId); //이후 session을 통해 얻어온 아이디 작성
-		}catch(Exception e) {
-			e.printStackTrace();
+		}
+		else{
 			reatt.addFlashAttribute("msg","로그인이 필요한 기능입니다."); 
 			return "redirect:/goods/get?goodsId="+refId;
 		}

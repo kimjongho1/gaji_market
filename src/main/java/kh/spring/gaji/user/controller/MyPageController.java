@@ -67,7 +67,6 @@ public class MyPageController {
 			ra.addFlashAttribute("msg", "로그인이 필요한 페이지입니다.");
 			return "redirect:/login";
 		}
-
 	}
 
 	@PostMapping("/changepassword")
@@ -231,10 +230,10 @@ public class MyPageController {
 				rattr.addFlashAttribute("msg", "리뷰가 정상적으로 등록되었습니다.");
 				return "redirect:/";
 			}
-			rattr.addFlashAttribute("msg", "잘못된 접근입니다1.");
+			rattr.addFlashAttribute("msg", "잘못된 접근입니다.");
 			return "redirect:/";
 		}
-		rattr.addFlashAttribute("msg", "잘못된 접근입니다2.");
+		rattr.addFlashAttribute("msg", "잘못된 접근입니다.");
 		return "redirect:/";
 	}
 

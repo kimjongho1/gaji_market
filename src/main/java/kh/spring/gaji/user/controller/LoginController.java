@@ -31,10 +31,4 @@ public class LoginController {
 		request.getSession().invalidate();
 		return mv;
 	}
-	
-	@GetMapping("/login/error")
-	public ModelAndView viewLoginError(ModelAndView mv) {
-		mv.setViewName("user/login/error");
-		return mv;
-	}
 }
