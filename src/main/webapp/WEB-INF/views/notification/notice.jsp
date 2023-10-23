@@ -49,5 +49,21 @@
             </c:forEach>
         </div>
     </div>
+    
+    <div class="paging">
+				<c:if test="${startPageNum!=1}">
+					<%--페이징 이전,번호,다음에 대한 코드 --%>
+					<a
+						href="<%=request.getContextPath()%>/notice?currentPage=${startPageNum-1}"><span>이전</span></a>
+				</c:if>
+				<c:forEach begin="${startPageNum}" end="${endPageNum}" var="i">
+					<a class="page${i}"
+						href="<%=request.getContextPath()%>/notice?currentPage=${i}"><span>${i}</span></a>
+				</c:forEach>
+				<c:if test="${endPageNum<totalPageNum}">
+					<a
+						href="<%=request.getContextPath()%>/notice?currentPage=${endPageNum+1}"><span>다음</span></a>
+				</c:if>
+	</div>
 </body>
 </html>

@@ -19,14 +19,22 @@
 	</insert>
 	
 	<select id="getNoticeList" resultType="NotificationDto" parameterType="map"> <!-- 18P해당계정의 거래알림 -->
-		select noti_id,message,read_yn,type,reference_id,to_char(created_at,'YYYY-MM-DD HH24:MI:SS') created_at 
+		select list2.* from(
+		(select list1.*,rownum rn from
+		(select noti_id,message,read_yn,type,reference_id,to_char(created_at,'YYYY-MM-DD HH24:MI:SS') created_at 
 		from notification where type=#{type} and user_id=#{userId}
-		order by created_at
+		order by created_at) list1) list2)
+		where rn between #{startRownum} and #{endRownum}
 	</select>
 	
 	<select id="getIdFromTransactionId"	parameterType="string" resultType="string">
 		select buyer_id from safe_trading where transaction_id = #{transactionId}
 	</select>
+	
+	<select id="getTotalCnt" parameterType="string" resultType="_int">
+		select count(*) from notification where user_id = #{userId} and type=2
+	</select>
+	
 	
 </mapper>
 

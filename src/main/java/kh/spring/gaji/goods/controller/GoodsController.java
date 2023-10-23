@@ -375,7 +375,7 @@ public class GoodsController {
 	@GetMapping("/usergoods")	// 유저 상품
 	public String onsaleGoods(Model model,Integer currentPage,String searchWord,String userId) {	
 		int totalCnt=0;
-		int pageSize1=8;
+		int pageSize1=6;
 		List<MyGoodsListDto> myGoodsList=null;
 		model.addAttribute("myGoodsList",myGoodsList);
 		if(currentPage==null)	//현재 페이지가 들어온게 없다면 1페이지.

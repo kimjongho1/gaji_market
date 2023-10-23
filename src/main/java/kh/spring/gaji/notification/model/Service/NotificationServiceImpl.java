@@ -37,4 +37,9 @@ public class NotificationServiceImpl implements NotificationService {
 	public String getIdFromTransactionId(String refId) {
 		return notificationDao.getIdFromTransactionId(refId);
 	}
+	
+	@Override
+	public int getTotalCnt(String userId) {
+		return notificationDao.getTotalCnt(userId);
+	}
 }

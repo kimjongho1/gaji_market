@@ -25,6 +25,15 @@ public class NotificationDao {
     
     //해당계정의 거래알림 불러오기.
     public List<NotificationDto> getNotiList(Map<String,Object> map) { 
+    	int startRownum = 0;
+		int endRownum = 0;
+		int currentPage=(int)map.get("currentPage");
+		int totalCnt=(int)map.get("totalCnt");
+		int PAGESIZE=(int)map.get("PAGESIZE");
+		startRownum = (currentPage-1)*PAGESIZE +1;
+		endRownum = ((currentPage*PAGESIZE) > totalCnt) ? totalCnt: (currentPage*PAGESIZE);
+		map.put("startRownum",startRownum);
+		map.put("endRownum",endRownum);
         return sqlSession.selectList("notification.getNoticeList", map);
     }
     // 알림생성
@@ -34,5 +43,9 @@ public class NotificationDao {
     
     public String getIdFromTransactionId(String refId) {
     	return sqlSession.selectOne("notification.getIdFromTransactionId",refId);
+    }
+    
+    public int getTotalCnt(String userId) {
+    	return sqlSession.selectOne("notification.getTotalCnt",userId);
     }
 }

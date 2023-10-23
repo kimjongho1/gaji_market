@@ -15,4 +15,6 @@ public interface NotificationService {
     int insertNoti(NotificationDto notificationDto); // 알림생성
     
     String getIdFromTransactionId(String refId);
+    
+    int getTotalCnt(String userId);
 }

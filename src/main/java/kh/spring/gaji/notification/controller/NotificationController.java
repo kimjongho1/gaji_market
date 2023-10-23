@@ -2,6 +2,7 @@ package kh.spring.gaji.notification.controller;
 
 import java.security.Principal;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import kh.spring.gaji.goods.model.dto.MyGoodsListDto;
 import kh.spring.gaji.notification.model.Service.NotificationService;
 
 @Controller
@@ -21,8 +23,17 @@ public class NotificationController {
 	@Autowired
 	NotificationService notificationServiceImpl;
 	
+	int pageBlockSize=5;
+	
 	@GetMapping("")
-	public String notice(Principal principal,Model model,RedirectAttributes reatt) {
+	public String notice(Principal principal,Integer currentPage,Model model,RedirectAttributes reatt) {
+		int totalCnt=0;
+		int pageSize1=6;
+		List<MyGoodsListDto> myGoodsList=null;
+		model.addAttribute("myGoodsList",myGoodsList);
+		if(currentPage==null)	//현재 페이지가 들어온게 없다면 1페이지.
+			currentPage=1;
+		
 		String userId=null;
 		if(principal!=null) {
 		userId= principal.getName();
@@ -30,8 +41,27 @@ public class NotificationController {
 		Map<String,Object> map=new HashMap<String,Object>();
 		map.put("userId",userId);
 		map.put("type",type);
-		model.addAttribute("notiCount",notificationServiceImpl.countNotification(map));
+		map.put("currentPage", currentPage);
+		map.put("PAGESIZE", pageSize1); 
+		totalCnt=notificationServiceImpl.getTotalCnt(userId);
+		map.put("totalCnt", totalCnt);
+		model.addAttribute("notiCount",notificationServiceImpl.countNotification(map));	//읽지 않은 알림갯수
 		model.addAttribute("safeTradingNotice",notificationServiceImpl.getNotiList(map));
+		
+		
+		int totalPageNum = totalCnt/pageSize1 + (totalCnt%pageSize1 == 0 ? 0 : 1);
+		int startPageNum = 1;
+		if((currentPage%pageBlockSize) == 0) {
+			startPageNum = ((currentPage/pageBlockSize)-1)*pageBlockSize +1;
+		} else {
+			startPageNum = ((currentPage/pageBlockSize))*pageBlockSize +1;
+		}
+		int endPageNum = (startPageNum+pageBlockSize > totalPageNum) ? totalPageNum : startPageNum+pageBlockSize-1;
+		model.addAttribute("totalPageNum", totalPageNum);
+		model.addAttribute("startPageNum", startPageNum);
+		model.addAttribute("endPageNum", endPageNum);
+		
+		
 		return "notification/notice";
 		}
 		else {
