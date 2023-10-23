@@ -62,11 +62,11 @@
             <label for="reportContent">신고 내용</label>
             <textarea class="form-control" id="reportContent" name="content" rows="10" required="required"></textarea>
           </div>
-          <button type="submit" class="btn btn-primary">신고 제출</button>
-        </form>
-      </div>
       <div class="modal-footer">
+          <button type="submit" class="btn btn-p">신고 제출</button>
         <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
+      </div>
+        </form>
       </div>
     </div>
   </div>

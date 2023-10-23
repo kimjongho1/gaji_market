@@ -74,3 +74,27 @@ form input:focus {
   border-color: #007BFF;
   box-shadow: 0 0 10px rgba(0, 123, 255, 0.6);
 }
+
+textarea {
+	resize: none;
+}
+
+label {
+	margin: 5px;
+}
+
+.btn-p{
+	--bs-btn-color: #fff;
+    --bs-btn-bg: #855994;
+    --bs-btn-border-color: #855994;
+    --bs-btn-hover-color: #fff;
+    --bs-btn-hover-bg: #613c65;
+    --bs-btn-hover-border-color: #4b3842;
+    --bs-btn-focus-shadow-rgb: 49,132,253;
+    --bs-btn-active-color: #fff;
+    --bs-btn-active-bg: #4b3842;
+    --bs-btn-active-border-color: #4b3856;
+    --bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+    --bs-btn-disabled-color: #fff;
+    --bs-btn-disabled-bg: #855994;
+    --bs-btn-disabled-border-color: #855994;}
