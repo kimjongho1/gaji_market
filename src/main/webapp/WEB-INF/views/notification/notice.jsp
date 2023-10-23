@@ -8,6 +8,13 @@
 <head>
     <meta charset="UTF-8">
     <title>알림</title>
+    
+    <!--favicon  -->
+<link rel="icon"
+	href="${pageContext.request.contextPath}/resources/img/favicon.ico">
+<link rel="shortcut icon"
+	href="${pageContext.request.contextPath}/resources/img/favicon.ico">
+    
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/notice.css" type="text/css">
 </head>
 <body>
