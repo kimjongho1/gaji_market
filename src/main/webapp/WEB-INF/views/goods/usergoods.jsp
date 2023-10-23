@@ -15,6 +15,11 @@
             ${item.nickname}
         </c:if>
     </c:forEach>상품 글</title>
+    
+    <!--favicon  -->
+	<link rel="icon" href="${pageContext.request.contextPath}/resources/img/favicon.ico">
+	<link rel="shortcut icon" href="${pageContext.request.contextPath}/resources/img/favicon.ico">
+    
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css"
 	rel="stylesheet" />
@@ -37,6 +42,19 @@
 	href="${pageContext.request.contextPath}/resources/css/orderstatus.css"
 	rel='stylesheet' type='text/css'>
 <link href="${pageContext.request.contextPath}/resources/css/mypage/mygoods.css" rel='stylesheet' type='text/css'>
+
+<style>
+.searchWord {
+display: flex;
+justify-content: center;
+
+}
+.page${currentPage}{
+	background-color:#5715CC !important;
+}
+</style>
+
+
 </head>
 
 
@@ -63,7 +81,7 @@
 					<div class="col mb-5">
 						<div class="card h-100">
 							<!-- Sale badge-->
-							<div class="badge bg-dark text-white position-absolute"
+							<div class="badge bg-purple text-white position-absolute"
 								style="top: 0.5rem; right: 0.5rem">
 								<c:choose>
 									<c:when test="${myGoodsInfo.status eq 1}">판매중</c:when>
@@ -126,7 +144,7 @@
 						href="<%=request.getContextPath()%>/goods/usergoods?currentPage=${startPageNum-1}&searchWord=${searchWord}&userId=${userId}"><span>이전</span></a>
 				</c:if>
 				<c:forEach begin="${startPageNum}" end="${endPageNum}" var="i">
-					<a
+					<a class="page${i}"
 						href="<%=request.getContextPath()%>/goods/usergoods?currentPage=${i}&searchWord=${searchWord}&userId=${userId}"><span>${i}</span></a>
 				</c:forEach>
 				<c:if test="${endPageNum<totalPageNum}">
@@ -140,7 +158,7 @@
 						href="<%=request.getContextPath()%>/goods/usergoods?currentPage=${startPageNum-1}&userId=${userId}"><span>이전</span></a>
 				</c:if>
 				<c:forEach begin="${startPageNum}" end="${endPageNum}" var="i">
-					<a
+					<a class="page${i}"
 						href="<%=request.getContextPath()%>/goods/usergoods?currentPage=${i}&userId=${userId}"><span>${i}
 					</span></a>
 				</c:forEach>

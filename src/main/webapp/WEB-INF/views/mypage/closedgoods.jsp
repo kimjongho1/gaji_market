@@ -38,6 +38,11 @@
 	href="${pageContext.request.contextPath}/resources/css/orderstatus.css"
 	rel='stylesheet' type='text/css'>
 <link href="${pageContext.request.contextPath}/resources/css/mypage/mygoods.css" rel='stylesheet' type='text/css'>
+<style>
+.page${currentPage}{
+	background-color:#5715CC !important;
+}
+</style>
 </head>
 
 
@@ -72,7 +77,7 @@
 					<div class="col mb-5">
 						<div class="card h-100">
 							<!-- Sale badge-->
-							<div class="badge bg-dark text-white position-absolute"
+							<div class="badge bg-purple text-white position-absolute"
 								style="top: 0.5rem; right: 0.5rem">
 								판매완료
 							</div>
@@ -138,7 +143,7 @@
 						href="<%=request.getContextPath()%>/mypage/goods/onsale?currentPage=${startPageNum-1}&searchWord=${searchWord}"><span>이전</span></a>
 				</c:if>
 				<c:forEach begin="${startPageNum}" end="${endPageNum}" var="i">
-					<a
+					<a class="page${i}"
 						href="<%=request.getContextPath()%>/mypage/goods/onsale?currentPage=${i}&searchWord=${searchWord}"><span>${i}</span></a>
 				</c:forEach>
 				<c:if test="${endPageNum<totalPageNum}">
@@ -152,7 +157,7 @@
 						href="<%=request.getContextPath()%>/mypage/goods/onsale?currentPage=${startPageNum-1}"><span>이전</span></a>
 				</c:if>
 				<c:forEach begin="${startPageNum}" end="${endPageNum}" var="i">
-					<a
+					<a class="page${i}"
 						href="<%=request.getContextPath()%>/mypage/goods/onsale?currentPage=${i}"><span>${i}
 					</span></a>
 				</c:forEach>

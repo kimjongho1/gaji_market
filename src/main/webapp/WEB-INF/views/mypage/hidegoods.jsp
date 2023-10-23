@@ -82,7 +82,7 @@
 					<div class="col mb-5">
 						<div class="card h-100">
 							<!-- Sale badge-->
-							<div class="badge bg-dark text-white position-absolute"
+							<div class="badge bg-purple text-white position-absolute"
 								style="top: 0.5rem; right: 0.5rem">
 								숨김
 							</div>
@@ -148,7 +148,7 @@
 						href="<%=request.getContextPath()%>/mypage/goods/hide?currentPage=${startPageNum-1}&searchWord=${searchWord}"><span>이전</span></a>
 				</c:if>
 				<c:forEach begin="${startPageNum}" end="${endPageNum}" var="i">
-					<a class="page${i}
+					<a class="page${i}"
 						href="<%=request.getContextPath()%>/mypage/goods/hide?currentPage=${i}&searchWord=${searchWord}"><span>${i}</span></a>
 				</c:forEach>
 				<c:if test="${endPageNum<totalPageNum}">
