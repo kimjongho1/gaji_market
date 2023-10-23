@@ -194,6 +194,17 @@ cursor:pointer}
   width: 62.4%;
   height: 100%;
 }
+.container .right::after {
+    content: "";
+    display: block;
+    background: #fff;
+    height: 71px;
+    width: 100%;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    z-index: 1;
+}
 .container .right .top {
   width: 100%;
   height: 47px;
@@ -218,8 +229,10 @@ cursor:pointer}
   border-style: solid;
   border-color: var(--light);
   height: calc(100% - 48px);
-  justify-content: flex-end;
   flex-direction: column;
+}
+.container .right .chat::-webkit-scrollbar {
+	display:none;
 }
 .container .right .chat.active-chat {
   display: block;
@@ -239,6 +252,7 @@ cursor:pointer}
   background-color: #eceff1;
   width: calc(100% - 58px);
   border-radius: 5px;
+  z-index: 5;
 }
 .container .right .write input {
   font-size: 16px;
@@ -253,7 +267,7 @@ cursor:pointer}
   font-family: "Source Sans Pro", sans-serif;
   font-weight: 400;
 }
-.container .right .write .write-link.attach:before {
+.container .right .write .write-link.attach {
   display: inline-block;
   float: left;
   width: 20px;

@@ -110,9 +110,23 @@ public class ChatController {
 	public void message(ChatMessageDto message){
 		ObjectMapper objectMapper = new ObjectMapper();
 		Map<String, Object> map = objectMapper.convertValue(message, Map.class);
-		chatServiceImpl.insertChatMessage(map);
+//		chatServiceImpl.insertChatMessage(map);
 		//insert 명령어
 		template.convertAndSend("/sub/chat/room/" + message.getChatId(), message);
 	}
-	
+	// DB 저장
+	@MessageMapping("/chat/file")
+	public void file(ChatMessageDto message){
+		System.out.println("동작");
+		String imgCode = message.getImgCode();
+		if(imgCode != null) {
+			System.out.println("있다");
+		} else {
+			System.out.println("없다");
+		}
+		System.out.println(message.getChatId());
+//			chatServiceImpl.insertChatMessage(map);
+		//insert 명령어
+		template.convertAndSend("/sub/chat/room/" + message.getChatId(), message);
+	}
 }

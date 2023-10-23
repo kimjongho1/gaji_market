@@ -23,39 +23,43 @@
 				<!-- 채팅중인 회원 list -->
 				<div class="people_list">
 					<ul class="people">
-						<c:forEach var="item1" items="${chatRoomList}" varStatus="status">
-							<input type="hidden" id="${item1.chatId }" value="${item1.chatId }">
-							<li class="person" data-chat="person${status.count}" data-chatid="${item1.chatId}">
-								<img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/382994/dog.png" alt="" />
-								<span class="name">${item1.nickname}</span>
-								<c:forEach var="item2" items="${item1.chatInfo}">
-									<span class="time">
-										<script>
-											var dateString = "${item2.createAt}";
-											var date = new Date(dateString);
-											var today = new Date();
-											var year = date.getFullYear();
-											var month = date.getMonth() + 1;
-											var day = date.getDate();
-											var hours = date.getHours();
-											var minutes = date.getMinutes();
-											if (today.getMonth() + 1 == month) {
-												if (today.getDate() == day) {
-													if (hours > 11) {
-														document.write("오후 " + (hours - 12) + ":" + minutes);
-													} else {
-														document.write("오전 " + hours + ":" + minutes);
-													}
-												}
-											} else {
-												document.write(month + "월 " + day + "일");
-											}
-										</script>
-									</span>
-									<span class="preview">${item2.message }</span>
-								</c:forEach>
-							</li>
-						</c:forEach>
+					    <c:forEach var="item1" items="${chatRoomList}" varStatus="status">
+					        <input type="hidden" id="${item1.chatId}" value="${item1.chatId}">
+					        <li class="person" data-chat="person${status.count}" data-chatid="${item1.chatId}">
+					            <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/382994/dog.png" alt="" />
+					            <span class="name">${item1.nickname}</span>
+					            <c:forEach var="item2" items="${item1.chatInfo}">
+					                <span class="time">
+					                    <c:choose>
+					                        <c:when test="${item2.createAt != null}">
+					                            <script>
+					                                var dateString = "${item2.createAt}";
+					                                var date = new Date(dateString);
+					                                var today = new Date();
+					                                var year = date.getFullYear();
+					                                var month = date.getMonth() + 1;
+					                                var day = date.getDate();
+					                                var hours = date.getHours();
+					                                var minutes = date.getMinutes();
+					                                if (today.getMonth() + 1 == month) {
+					                                    if (today.getDate() == day) {
+					                                        if (hours > 11) {
+					                                            document.write("오후 " + (hours - 12) + ":" + minutes);
+					                                        } else {
+					                                            document.write("오전 " + hours + ":" + minutes);
+					                                        }
+					                                    }
+					                                } else {
+					                                    document.write(month + "월 " + day + "일");
+					                                }
+					                            </script>
+					                        </c:when>
+					                    </c:choose>
+					                </span>
+					                <span class="preview">${item2.message }</span>
+					            </c:forEach>
+					        </li>
+					    </c:forEach>
 					</ul>
 				</div>
 			</div>
@@ -66,9 +70,6 @@
 				</div>
 				<c:forEach items="${chatRoomList}" var="item" varStatus="loop">
 					<div class="chat" data-chat="person${loop.count}" style="overflow-y: scroll;">
-						<div class="conversation-start">
-							<span>Today, 5:38 PM</span>
-						</div>
 						<c:forEach var="item1" items="${chatMessage}">
 							<div class="bubble you">${item1.senderId }</div>
 							<c:choose>
@@ -83,7 +84,13 @@
 					</div>
 				</c:forEach>
 				<div class="write">
-					<a href="javascript:;" class="write-link attach"></a> <input type="text" id="msg" /> <a
+					<!-- template 적용하려고 label 태그 사용 -->
+					<input type="file" id="file" name="file" style="display:none" accept="image/png, image/jpeg"/>
+					<label class="write-link attach" for="file"></label>
+					<div id="div-preview">
+					
+					</div>
+					<input type="text" id="msg" /> <a
 						href="javascript:;" class="write-link smiley"></a>
 					<button class="write-link send" type="button" id="button-send"></button>
 				</div>
@@ -98,7 +105,43 @@
 	var username = "${username}";
 	// socket들을 담을 객체 생성
 	var endPoint = "${pageContext.request.contextPath}/chat";
+	var imgValue = null;
+	
+	/* let fileTag = document.querySelector("input[name=file]");
+	let divTag = document.querySelector('#div-preview');
+	var imgTag;
+
+	function preview() {
+		if(fileTag.files.length > 0) {
+			let reader = new FileReader();
+			reader.onload = function(data) {
+				imgTag = document.createElement('img');
+				imgValue = data.target.result;
+				
+				imgTag.setAttribute('src', data.target.result);
+				imgTag.setAttribute('width','250');
+				imgTag.setAttribute('height', '150');
+				
+				divTag.appendChild(imgTag);
+			}
+			reader.readAsDataURL(fileTag.files[0]);
+		} else {
+			imgTag.src = null;
+			divTag.innerHTML = "";
+		}
+	} // preview() */
+	
 	$(document).ready(function () {
+		function scrollToBottom() {
+		    const activeChat = document.querySelector(".container .right .chat.active-chat");
+		    activeChat.scrollTop = activeChat.scrollHeight;
+		}
+
+		$("#file").change(function () {
+			  readImage( this );
+        });
+        $("#baseFile").trigger("change");
+	
 		let friends = {
 				list: document.querySelector('ul.people'),
 				all: document.querySelectorAll('.left .person'),
@@ -112,18 +155,20 @@
 			};
 
 		// 친구 클릭 이벤트 처리
-		console.log("friends.all.forEach 실행 전2");
 		friends.all.forEach(f => {
 			console.log("friends.all.forEach");
 			f.addEventListener('mousedown', () => {
 				// 클릭한 noRoom값 전달
 				chatId = parseInt(f.getAttribute('data-chatid'));
 				if (!f.classList.contains('active')) {
-					setActiveChat(f)
+					setActiveChat(f);
+					var chatBox = document.querySelector(".right .chat");
+					chatBox.scrollTop = chatBox.scrollHeight;
 				}
 			});
 		});
 
+		
 		// 리스트에서 메시지 시간 체크
 		function now() {
 			var today = new Date();
@@ -163,8 +208,11 @@
 					chat.name.innerHTML = friends.name;
 					// WebSocket 연결 생성 함수
 					createWebSocketConnection(username);
-
-					htmlVal = '		<div class="conversation-start"><span></div>'; // TODO(1013 김종호 날짜 기록)
+					try {
+						htmlVal = '		<div class="conversation-start"><span>' + createDate(result[0].createAt) + '</span></div>'; // TODO(1013 김종호 날짜 기록)
+					} catch (err) {
+						htmlVal = '		<div class="conversation-start"><span>' + createDate() + '</span></div>';
+					}
 					for (var i = 0; i < result.length; i++) {
 						var item1 = result[i];
 						if (item1.senderId == '${pageContext.request.userPrincipal.name}') {
@@ -176,12 +224,24 @@
 					//</div>
 					chat.container.querySelector('[data-chat="' + chat.person + '"]').innerHTML = htmlVal;
 					activeChat = document.querySelector('.chat.active-chat');
-				},
-				error: function (request, status, error) { // 결과 에러 콜백함수
-					console.log(error)
+					
+					scrollToBottom();
+
 				}
 			});
 		}  // setActiveChat
+		
+		function createDate(date) {
+			if(date != null) {
+				var date = new Date(date);
+				var result = date.getFullYear() + "년 " + (date.getMonth() + 1) + "월 " + date.getDate() + "일";
+			} else {
+				var date = new Date();
+				var result = date.getFullYear() + "년 " + (date.getMonth() + 1) + "월 " + date.getDate() + "일";
+			}
+				return result;
+		}
+		
 		let stomp;
 		// socket 생성
 		function createWebSocketConnection(person) {
@@ -199,8 +259,8 @@
 					e.stopPropagation();
 					send();
 				}
-			}); // keydown event enter 
-
+			}); // keydown event enter
+			
 		stomp.connect({}, function (frame) {
 			console.log('Connected: ' + frame);
 			stomp.subscribe("/sub/chat/room/" + chatId, function (chat) {
@@ -252,6 +312,22 @@
 				
 			}
 		} // send function	
+		
+		function readImage(input) {
+	        if ( input.files && input.files[0] ) {
+	            var FR= new FileReader();
+	            FR.onload = function(e) {
+	            	stomp.send("/pub/chat/file", {}, JSON.stringify({
+	            		'senderId': username, 
+	            		'chatId': chatId, 
+	            		imgCode:e.target.result
+	            		})); //receiver:participant,
+	                //$('#source').text( e.target.result );
+	            };
+	            //console.log(FR.readAsDataURL( input.files[0] ));
+	            FR.readAsDataURL( input.files[0] ); // 이거 없으면 작동 안되나???
+	        }
+	    }// readImage()
 	});  // document ready
 	</script>
 </body>

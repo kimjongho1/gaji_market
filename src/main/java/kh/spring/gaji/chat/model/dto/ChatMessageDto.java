@@ -11,4 +11,5 @@ public class ChatMessageDto {
     private String message;			//채팅메세지
     private String readYn;			//읽기 여부
     private String createAt; 		//타입으로 변경
+    private String imgCode; 		//byte 코드로 이미지를 받음
   }
