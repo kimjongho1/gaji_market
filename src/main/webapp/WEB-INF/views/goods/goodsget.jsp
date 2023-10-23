@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -187,7 +188,7 @@
 						</h1>
 						<div class="flex items-center justify-between">
 							<div
-								class="text-jnGreen font-bold text-[40px] pe-2 md:pe-0 lg:pe-2 2xl:pe-0 mr-2">${goodsDto.price}
+								class="text-jnGreen font-bold text-[40px] pe-2 md:pe-0 lg:pe-2 2xl:pe-0 mr-2"><fmt:formatNumber value="${goodsDto.price}" pattern="#,###"/>
 								<span class="text-base">원</span>
 							</div>
 						</div>
@@ -270,15 +271,15 @@
 											<div>CU 알뜰택배 무제한 무료배송</div>
 											<div>편의점 픽업 수수료 무료</div>
 										</div>
-										<span class="self-center ml-4 text-gray-400">&gt;</span>
+										<span class="self-center ml-4 text-gray-400"></span>
 									</button>
 								</div>
 							</div>
 							<div class="flex">
 								<span class="inline-block font-semibold text-heading pe-2">무이자혜택:</span>
 								<div>
-									<a href="https://web.joongna.com/event/detail/1082">1만원 이상
-										무이자 할부<span class="self-center ml-4 text-gray-400">&gt;</span>
+									<a>1만원 이상
+										무이자 할부<span class="self-center ml-4 text-gray-400"></span>
 									</a>
 								</div>
 							</div>
@@ -456,52 +457,10 @@
 												<div class="w-full overflow-hidden p-2 ps-0">
 													<h2 class="line-clamp-2 text-sm h-10 text-heading">${userGoods.title}</h2>
 													<div
-														class="font-semibold space-s-2 mt-0.5 text-heading text-sm">${userGoods.price}</div>
+														class="font-semibold space-s-2 mt-0.5 text-heading text-sm"><fmt:formatNumber value="${userGoods.price}" pattern="#,###"/></div>
 												</div></a>
 										</div>
 										</c:forEach>
-										<!-- <div class="card"
-											style="width: 117px; margin-right: 4px;">
-											<a
-												class="group box-border overflow-hidden flex rounded-md cursor-pointer bg-white pe-0 md:pb-1 flex-col items-start"
-												title="도수 수경 -2.0 / 물안경 미러 수영" href="/product/107965151"><div
-													class="relative w-full rounded-md overflow-hidden pt-[100%] mb-3 pb-0">
-													<img alt="도수 수경 -2.0 / 물안경 미러 수영"
-														referrerpolicy="no-referrer"
-														src="https://img2.joongna.com/media/original/2023/04/24/1682311015633kvQ_w4WmT.jpg"
-														decoding="async" data-nimg="fill"
-														class="bg-gray-300 object-cover w-full transition duration-200 ease-in rounded-md duration-150 ease-linear transform group-hover:scale-105"
-														loading="lazy"
-														style="position: absolute; height: 100%; width: 100%; inset: 0px; color: transparent;">
-												</div>
-												<div class="w-full overflow-hidden p-2 ps-0">
-													<h2 class="line-clamp-2 text-sm h-10 text-heading">도수
-														수경 -2.0 / 물안경 미러 수영</h2>
-													<div
-														class="font-semibold space-s-2 mt-0.5 text-heading text-sm">22,000원</div>
-												</div></a>
-										</div>
-										<div class="card"
-											style="width: 117px; margin-right: 4px;">
-											<a
-												class="group box-border overflow-hidden flex rounded-md cursor-pointer bg-white pe-0 md:pb-1 flex-col items-start"
-												title="도수 수경 -3.5 / 물안경 미러 수영" href="/product/107966533"><div
-													class="relative w-full rounded-md overflow-hidden pt-[100%] mb-3 pb-0">
-													<img alt="도수 수경 -3.5 / 물안경 미러 수영"
-														referrerpolicy="no-referrer"
-														src="https://img2.joongna.com/media/original/2023/04/24/1682312100404D6Z_K07mD.jpg"
-														decoding="async" data-nimg="fill"
-														class="bg-gray-300 object-cover w-full transition duration-200 ease-in rounded-md duration-150 ease-linear transform group-hover:scale-105"
-														loading="lazy"
-														style="position: absolute; height: 100%; width: 100%; inset: 0px; color: transparent;">
-												</div>
-												<div class="w-full overflow-hidden p-2 ps-0">
-													<h2 class="line-clamp-2 text-sm h-10 text-heading">도수
-														수경 -3.5 / 물안경 미러 수영</h2>
-													<div
-														class="font-semibold space-s-2 mt-0.5 text-heading text-sm">25,000원</div>
-												</div></a>
-										</div> -->
 									</div>
 									
 								</div>
@@ -690,7 +649,7 @@ $("#pullUpGoods").click(function() {		// 등록사용자와 로그인사용자�
             if(userId == goodsUserId){
             
             if (data === "update") {
-                alert("해당 상품을 끌어올렸습니다 !!");
+                alert("해당 상품을 끌어올렸습니다 !!");	
             } else if (data === "error") {
                 alert("상품을 등록하거나 끌어올린지 1시간 지나야 가능합니다.");
             }

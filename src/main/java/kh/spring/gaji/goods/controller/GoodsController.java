@@ -301,10 +301,10 @@ public class GoodsController {
 		
 		try {
 	        userService.addFavoriteUser(map);
-	        return "favoriteadd"; // 찜하기 추가 성공
+	        return "favoriteadd"; // 모아보기 추가 성공
 	    } catch (Exception e) {
 	        userService.deleteFavoriteUser(map);
-	        return "favoriteremoved"; // 찜하기 제거 성공
+	        return "favoriteremoved"; // 모아보기 제거 성공
 	    }
 		
 	}
