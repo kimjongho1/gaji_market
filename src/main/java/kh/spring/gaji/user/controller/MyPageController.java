@@ -516,7 +516,7 @@ public class MyPageController {
 		model.addAttribute("endPageNum", endPageNum);
 		model.addAttribute("currentPage", currentPage);
 		model.addAttribute("myGoodsList", myGoodsList);
-		return "mypage/closedgoods";
+		return "mypage/hidegoods";
 	}
 
 	@GetMapping("/myinfo")

@@ -126,6 +126,18 @@
 		active_status='Y'and status != 4
 	</select>
 	
+		<select id="getHideGoodsInfo" parameterType="_int" resultType="GoodsInfoDto"> <!--23P 상품글 상세조회 -->
+		select
+		goods_id,user_id,category_id,category_name,title,status,price,view_count,description,g.created_at,safe_trading_yn
+		,g.dong_id,lat,lng,nickname,rating_score,
+		 (select count(user_id) from wishlist w where w.goods_id = g.goods_id) wishcount
+		from goods g join
+		users u using (user_id)
+		JOIN CATEGORY c USING (category_id)
+		where goods_id=#{goodsId} and
+		active_status='Y'and status = 4
+	</select>
+	
 	
 	<select id="goodsUserInfo" parameterType="_int" resultType="GoodsInfoDto"> <!-- 해당 상품작성자의 후기수, 안전거래횟수, 판매상품수 -->
 		select 

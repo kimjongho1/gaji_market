@@ -59,6 +59,10 @@ public class GoodsDao  {
         return sqlSession.selectOne("goods.getGoodsInfo", goodsId);
     }
     
+    public GoodsInfoDto getHideGoodsInfo(int goodsId) {// 상품글 상세조회  
+        return sqlSession.selectOne("goods.getHideGoodsInfo", goodsId);
+    }
+    
     public List<GoodsInfoDto> goodsUrl(int goodsId) { // 상품글 사진 url
     	return sqlSession.selectList("goods.goodsUrl", goodsId);
     }

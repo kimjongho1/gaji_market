@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <!DOCTYPE html>
 <html lang="en">
@@ -110,7 +111,7 @@
                                     </div>
 									<!-- Product price-->
 									거래일자:${infacePurchaseInfo.tradingDate}<br>
-									가격:${infacePurchaseInfo.price}
+									가격:<fmt:formatNumber value="${infacePurchaseInfo.price}" pattern="#,###"/>
 								</div>
 							</div>
 							<!-- Product actions-->

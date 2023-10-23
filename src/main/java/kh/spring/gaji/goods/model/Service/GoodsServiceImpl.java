@@ -34,6 +34,11 @@ public class GoodsServiceImpl implements GoodsService {
 	}
 	
 	@Override
+	public GoodsInfoDto getHideGoodsInfo(int goodsId) {
+		return goodsDao.getHideGoodsInfo(goodsId);
+	}
+	
+	@Override
 	public List<GoodsInfoDto> goodsUrl(int goodsId) {
 		return goodsDao.goodsUrl(goodsId);
 	}

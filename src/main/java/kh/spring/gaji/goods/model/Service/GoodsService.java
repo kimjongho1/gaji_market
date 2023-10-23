@@ -15,6 +15,8 @@ public interface GoodsService {
 
     GoodsInfoDto getGoodsInfo(int goodsId);
     
+    GoodsInfoDto getHideGoodsInfo(int goodsId);
+    
     List<GoodsInfoDto> goodsUrl(int goodsID);
     
     List<GoodsInfoDto> userGoodsList(int goodsId);
