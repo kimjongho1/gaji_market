@@ -7,6 +7,7 @@
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css"
 	rel="stylesheet" />
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -381,7 +382,7 @@
 								<div
 									class="font-semibold space-s-2 mt-0.5 text-heading lg:text-lg lg:mt-1.5">
 									<div class="flex justify-content-between">
-									${item.price}원 <c:choose>
+									<fmt:formatNumber value="${item.price}" pattern="#,###"/>원 <c:choose>
 								<c:when test="${item.status eq 1}">
 									<span class="px-2 py-1 mr-2 text-xs pointer-events-none bg-gray-150 rounded-xl flex align-items-center">판매중</span>
 								</c:when>
