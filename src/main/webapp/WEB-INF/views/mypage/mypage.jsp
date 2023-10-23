@@ -362,7 +362,6 @@
 	<script>
 	$(document).ready(function() {
 		$('#AddressModal').modal({
-	        backdrop: 'static', // 모달 바깥을 클릭해도 모달이 닫히지 않도록 설정
 	        show: false // 페이지 로드 시 모달을 표시하지 않도록 설정
 	    });
 
