@@ -12,14 +12,15 @@
             justify-content: center;
             align-items: center;
             height: 100vh;
+            background-color: #f1f1f1;
         }
 
         .notification-card {
-            background-color: #fff;
+            background-color: #fafafa;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
             border-radius: 5px;
             padding: 20px;
-            max-width: 430px;
+            max-width: 470px;
             width: 100%;
         }
 
@@ -64,3 +65,23 @@
         	
         	background-color: #85599475;
         }
+        
+        form {
+        margin-bottom: 1em; 
+        }
+        
+        .paging{
+        display:flex;
+    	justify-content: center;	
+  		}	
+  		
+  		span {
+	margin: 3px;
+}
+
+		ul {
+		
+		list-style: none;
+		padding-left:0px;
+	
+}
