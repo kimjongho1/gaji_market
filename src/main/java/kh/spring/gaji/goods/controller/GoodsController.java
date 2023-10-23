@@ -359,7 +359,7 @@ public class GoodsController {
 		return regionService.dongList(guId);
 	}
 	
-	@GetMapping("/usergoods")	// 판매중 상품
+	@GetMapping("/usergoods")	// 유저 상품
 	public String onsaleGoods(Model model,Integer currentPage,String searchWord,String userId) {	
 		int totalCnt=0;
 		int pageSize1=8;
