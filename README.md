@@ -1,4 +1,4 @@
-![찜목록 상단](https://github.com/bellho/gaji_market/assets/135290607/0586f4fd-8242-4124-86c2-cfa9786fed31)# Gaji_Market (가지마켓) 
+# Gaji_Market (가지마켓) 
 
 <br>
 
@@ -118,34 +118,22 @@
 ## 마이페이지 - 구매내역, 판매내역, 판매글, 찜목록, 모아보기, 유저상품
 #### 화면구현- (신정훈, 백의헌), 기능구현- (백의헌)
 <details>
-  <summary>구매내역 페이지(Click)</summary>
-  	<img src="https://github.com/bellho/gaji_market/assets/135290607/fa2d346d-5192-4897-b50e-31c6820ff941">
-  	<img src="https://github.com/bellho/gaji_market/assets/135290607/3ba6c942-2bce-44bf-8674-5062c03adbe2">
-</details>
-<details>
-  <summary>판매내역 페이지(Click)</summary>
-	<img src="https://github.com/bellho/gaji_market/assets/135290607/7cbee790-ae0d-4ec6-bd1a-5798f5a672b0">
-	<img src="https://github.com/bellho/gaji_market/assets/135290607/f7e87110-f679-429d-9e05-8347dde6f578">
+<summary>구매, 판매내역 페이지(Click)</summary>
+	<img src="https://github.com/bellho/gaji_market/assets/135290607/d79c28d2-ec15-4cfa-9a24-47acd01386b4">
+	<img src="https://github.com/bellho/gaji_market/assets/135290607/d5dd7f26-399c-4be9-bf60-4754e2f6e737">
 </details>
 <details>
   <summary>판매글(Click)</summary>
-	<img src="https://github.com/bellho/gaji_market/assets/135290607/9e9e6f0e-3d58-4dd1-9af0-d453e016281a">
-	<img src="https://github.com/bellho/gaji_market/assets/135290607/3107ac15-19d9-4821-a405-8ae67d6ece02">
+	<img src="https://github.com/bellho/gaji_market/assets/135290607/4d7b155b-9820-49b8-9fb4-ddb12c1bdee4">
+</details>
+
+<details>
+  <summary>즐겨찾기 유저 페이지(모아보기), 찜 페이지(Click)</summary>
+	<img src="https://github.com/bellho/gaji_market/assets/135290607/4ff71d5d-4258-442c-b4d0-49d0a96f64dc">
 </details>
 <details>
-  <summary>찜 목록(Click)</summary>
-	<img src="https://github.com/bellho/gaji_market/assets/135290607/89d96028-bf8b-4399-87a5-12048319033e">
-	<img src="https://github.com/bellho/gaji_market/assets/135290607/7839aa2b-9f2d-4189-a6cc-21b14a369ef0">
-</details>
-<details>
-  <summary>모아보기(Click)</summary>
-	<img src="https://github.com/bellho/gaji_market/assets/135290607/6932a3a9-df50-4339-84e9-eddf48ca1d32">
-	<img src="https://github.com/bellho/gaji_market/assets/135290607/14ea84cb-a624-43b5-99db-0c7942870330">
-</details>
-<details>
-  <summary>유저상품(Click)</summary>
-	<img src="https://github.com/bellho/gaji_market/assets/135290607/55275da5-992a-4348-9c7a-508fec98c5ca">
-	<img src="https://github.com/bellho/gaji_market/assets/135290607/01cf26ee-db5d-4025-ab33-9f8194821df7">
+  <summary>특정유저 상품 더보기(Click)</summary>
+	<img src="https://github.com/bellho/gaji_market/assets/135290607/ee3f10b5-5ab1-489b-9d99-1ac76910a912">
 </details>
 
 #
