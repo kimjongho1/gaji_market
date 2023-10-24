@@ -55,8 +55,8 @@
                     <div>
                 <ul>
                 	<li class="d-flex justify-content-between">
-                		<input type="radio" onclick="selectNoti(${loopStatus.index},${item.notiId})">
-                		<button type="button" class="btn" onclick="deleteNotice(${item.notiId})">삭제</button>
+                		<input type="radio" class="button-d" onclick="selectNoti(${loopStatus.index},${item.notiId})">
+                		<button type="button" class="btn button-db" onclick="deleteNotice(${item.notiId})">삭제</button>
                 	</li>
                 	<li>
                     <button type="submit" class="noticeButton">

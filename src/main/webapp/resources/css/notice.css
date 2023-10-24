@@ -85,3 +85,27 @@
 		padding-left:0px;
 	
 }
+
+.button-d{
+	z-index:1;
+	position:relative;
+	top:35px;	
+	
+}
+.button-db{
+	z-index:1;
+	position:relative;
+	top:120px;
+}
+.button-db:hover{
+	color: #988fb2 !important;
+}
+
+input[type=checkbox],input[type=radio]
+{padding: 10px; margin: 10px;
+	
+}
+
+.btn:hover {
+	color:#855994 !important;
+}
