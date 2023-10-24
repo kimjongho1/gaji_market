@@ -102,6 +102,13 @@
 				<option value="${category.categoryId}">${category.categoryName}</option>
 			</c:forEach>
 		</select>
+		
+				<label  for="safeTradingYn">안전결제</label>
+		<input  type="checkbox" name="safeTradingYn" id="safeTradingYn" value="N">
+		
+		</div>
+		<div class="d-flex justify-content-between align-items-baseline">
+		
 		<!-- 구 선택 드롭다운 -->
 		<label for="selectedGu">구 선택:</label>
 		 <select name="selectedGu"
@@ -126,8 +133,7 @@
 			<textarea name="description" id="editor"></textarea>
 		
 		<div class="bar row align-items-baseline">
-		<label  for="safeTradingYn">안전결제</label>
-		<input  type="checkbox" name="safeTradingYn" id="safeTradingYn" value="N">
+
 
 		<div class="d-flex align-items-center">
 		<!-- 모달 열기 버튼 -->
