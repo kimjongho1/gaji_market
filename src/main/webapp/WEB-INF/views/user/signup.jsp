@@ -481,8 +481,8 @@ $('#verify-button').click(function () {
         alert("인증번호를 입력하세요.");
         return;
     }
+
     
-   
 
     var url = "${pageContext.request.contextPath}/checkemail"; // 이메일 중복 확인 엔드포인트 URL 수정
 
@@ -513,8 +513,6 @@ function verifyCode(inputCode) {
         alert('인증번호를 다시 확인해주세요.');
     }
 }
-
-
 
 
     // 유효성 검사 메서드
