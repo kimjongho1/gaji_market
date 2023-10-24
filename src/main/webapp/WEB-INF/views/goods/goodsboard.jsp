@@ -56,6 +56,11 @@
 color: #835995;
 }
 
+.fa-facebook, .fa-instagram, .fa-twitter, .fa-pinterest {
+    position: relative;
+    top: 11px;
+}
+
 </style>
 </head>
 <body>
