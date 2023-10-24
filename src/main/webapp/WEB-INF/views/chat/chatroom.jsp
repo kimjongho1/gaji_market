@@ -106,31 +106,7 @@
 	// socket들을 담을 객체 생성
 	var endPoint = "${pageContext.request.contextPath}/chat";
 	var imgValue = null;
-	
-	/* let fileTag = document.querySelector("input[name=file]");
-	let divTag = document.querySelector('#div-preview');
-	var imgTag;
 
-	function preview() {
-		if(fileTag.files.length > 0) {
-			let reader = new FileReader();
-			reader.onload = function(data) {
-				imgTag = document.createElement('img');
-				imgValue = data.target.result;
-				
-				imgTag.setAttribute('src', data.target.result);
-				imgTag.setAttribute('width','250');
-				imgTag.setAttribute('height', '150');
-				
-				divTag.appendChild(imgTag);
-			}
-			reader.readAsDataURL(fileTag.files[0]);
-		} else {
-			imgTag.src = null;
-			divTag.innerHTML = "";
-		}
-	} // preview() */
-	
 	$(document).ready(function () {
 		function scrollToBottom() {
 		    const activeChat = document.querySelector(".container .right .chat.active-chat");
@@ -167,7 +143,6 @@
 				}
 			});
 		});
-
 		
 		// 리스트에서 메시지 시간 체크
 		function now() {
@@ -214,12 +189,24 @@
 						htmlVal = '		<div class="conversation-start"><span>' + createDate() + '</span></div>';
 					}
 					for (var i = 0; i < result.length; i++) {
-						var item1 = result[i];
-						if (item1.senderId == '${pageContext.request.userPrincipal.name}') {
-							htmlVal += `					<div class="bubble me">\${item1.message}</div>`;
-						} else {
-							htmlVal += `					<div class="bubble you">\${item1.message}</div>`;
-						}
+					    var item1 = result[i];
+					    if (item1.senderId == '${pageContext.request.userPrincipal.name}') {
+					        if (item1.message.startsWith("https://res.cloudinary.com/")) {
+					            // 이미지 URL로 시작하는 경우
+					            htmlVal += `					<div class="bubble me"><img src="${item1.message}"></div>`;
+					        } else {
+					            // 이미지 URL로 시작하지 않는 경우
+					            htmlVal += `					<div class="bubble me">\${item1.message}</div>`;
+					        }
+					    } else {
+					        if (item1.message.startsWith("https://res.cloudinary.com/")) {
+					            // 이미지 URL로 시작하는 경우
+					            htmlVal += `					<div class="bubble you"><img src="${item1.message}"></div>`;
+					        } else {
+					            // 이미지 URL로 시작하지 않는 경우
+					            htmlVal += `					<div class="bubble you">\${item1.message}</div>`;
+					        }
+					    }
 					}
 					//</div>
 					chat.container.querySelector('[data-chat="' + chat.person + '"]').innerHTML = htmlVal;
@@ -261,33 +248,52 @@
 				}
 			}); // keydown event enter
 			
-		stomp.connect({}, function (frame) {
-			console.log('Connected: ' + frame);
-			stomp.subscribe("/sub/chat/room/" + chatId, function (chat) {
-				var content = JSON.parse(chat.body);
+			stomp.connect({}, function (frame) {
+			    console.log('Connected: ' + frame);
+			    stomp.subscribe("/sub/chat/room/" + chatId, function (chat) {
+			        var content = JSON.parse(chat.body);
 
-				if (activeChat) {
-					const messageElement = document.createElement('div');
-					if(username == content.senderId){
-						messageElement.className = 'bubble me';
-					}else {
-						messageElement.className = 'bubble you';
-					}
-					messageElement.textContent = content.message;
-					activeChat.appendChild(messageElement);
-					
-					var personElement = document.querySelector('li[data-chatid="' + chatId + '"]');
-					if (personElement) {
-					    var timeElement = personElement.querySelector('.time');
-					    var previewElement = personElement.querySelector('.preview');
-					    
-					    // '.time' 및 '.preview' 요소 내용을 변경
-					    timeElement.textContent = now(); // 원하는 시간 값으로 변경
-					    previewElement.textContent = content.message; // 원하는 프리뷰 값으로 변경
-					}
-				}
-			});
-		});  // connect cb function
+			        if (activeChat) {
+			            if (content.message.startsWith("https://res.cloudinary.com/")) {
+			            	// 메시지 내용이 이미지 URL로 시작하는 경우
+			                const imageElement = document.createElement('img');
+			                imageElement.src = content.message; // 이미지 URL을 설정합니다;
+
+			                // 이미지를 화면에 추가합니다.
+			                const containerDiv = document.createElement('div');
+			                if (username == content.senderId) {
+			                    containerDiv.className = 'bubble me';
+			                } else {
+			                    containerDiv.className = 'bubble you';
+			                }
+			                containerDiv.appendChild(imageElement);
+			                activeChat.appendChild(containerDiv);
+			            } else {
+			                // 메시지 내용이 이미지 URL로 시작하지 않는 경우
+			                const messageElement = document.createElement('div');
+			                if (username == content.senderId) {
+			                    messageElement.className = 'bubble me';
+			                } else {
+			                    messageElement.className = 'bubble you';
+			                }
+			                messageElement.textContent = content.message;
+			                activeChat.appendChild(messageElement);
+			            }
+			            var personElement = document.querySelector('li[data-chatid="' + chatId + '"]');
+		                if (personElement) {
+		                    var timeElement = personElement.querySelector('.time');
+		                    var previewElement = personElement.querySelector('.preview');
+
+		                    // '.time' 및 '.preview' 요소 내용을 변경
+		                    timeElement.textContent = now(); // 원하는 시간 값으로 변경
+		                    // 이미지 파일인 경우 '첨부파일', 메시지일 경우에는 preview
+		                    previewElement.textContent = content.message.startsWith("https://res.cloudinary.com/") ? "이미지" : content.message;
+		                    scrollToBottom();
+		                }
+			        }
+			    });
+			});  // connect cb function
+
 		}  // createWebSocketConnection
 		// 메시지 보내기
 		function send() {
@@ -300,16 +306,14 @@
 			if (message !== "") {
 				// 메시지 정보를 /chat/room으로 보냄
 				stomp.send("/pub/chat/message", {}, JSON.stringify({
-					'senderId': username,
-					'chatId': chatId,
-					'message': message
+					senderId: username,
+					chatId: chatId,
+					message: message
 				}),
 				
 				)
 				console.log("보내짐");
 				$('#msg').val('');
-				
-				
 			}
 		} // send function	
 		
@@ -318,9 +322,9 @@
 	            var FR= new FileReader();
 	            FR.onload = function(e) {
 	            	stomp.send("/pub/chat/file", {}, JSON.stringify({
-	            		'senderId': username, 
-	            		'chatId': chatId, 
-	            		imgCode:e.target.result
+	            		senderId: username, 
+	            		chatId: chatId, 
+	            		imgCode: e.target.result
 	            		})); //receiver:participant,
 	                //$('#source').text( e.target.result );
 	            };
