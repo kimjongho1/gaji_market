@@ -11,6 +11,13 @@
 <head>
     <meta charset="UTF-8">
     <title>안전결제</title> 
+    
+    <!--favicon  -->
+<link rel="icon"
+	href="${pageContext.request.contextPath}/resources/img/favicon.ico">
+<link rel="shortcut icon"
+	href="${pageContext.request.contextPath}/resources/img/favicon.ico">
+    
 </head>
 <body>
     <div class="container">
@@ -28,7 +35,8 @@
         </select>
         
         <!-- 모달 트리거 버튼 -->
-        <button type="button" id="showAddressModalBtn" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#AddressModal">
+        <button type="button" id="showAddressModalBtn" class="
+ btn-p mx-2" data-toggle="modal" data-target="#AddressModal">
   			주소변경
 		</button>
 		
@@ -74,9 +82,9 @@
             </tr>
         </table> 
 
-        <button type="button" onclick="kakaoPay()">카카오페이</button>
-        <button type="button" onclick="tossPay()">토스페이</button>
-        <button type="button" onclick="nicePay()">카드결제</button>
+        <button type="button" class="mx-2" onclick="kakaoPay()">카카오페이</button>
+        <button type="button" class="mx-2" onclick="tossPay()">토스페이</button>
+        <button type="button" class="mx-2" onclick="nicePay()">카드결제</button>
     </div>
 
 	<div class="modal fade" id="AddressModal" tabindex="-1" role="dialog"
@@ -97,14 +105,16 @@
                 			</option>
             			</c:forEach>
         			</select>
-        			<button type="button" id="deleteAddress" onclick="deleteAddress()">주소삭제</button>
-        			<button type="button" id="alterPrimaryAddress" onclick="alterPrimaryAddress()">대표주소 변경</button>
+        			<div class="my-1">
+        			<button type="button" class="btn-modi" id="deleteAddress" onclick="deleteAddress()">주소삭제</button>
+        			<button type="button" class="btn-modi" id="alterPrimaryAddress" onclick="alterPrimaryAddress()">대표주소 변경</button>
+        			</div>
         			
 					<form id="addressForm">
 						<div class="textForm">
 							<span style="display: flex;"> <input type="text"
-								name="postCode" id="sample4_postcode" placeholder="우편번호" class="cellphoneNo" required="required" readonly>
-								<button type="button" class="btn-postcode" onclick="sample4_execDaumPostcode()">우편번호 찾기</button>
+								name="postCode" id="sample4_postcode" placeholder="우편번호" class="cellphoneNo bro" required="required" readonly>
+								<button type="button" class="btn-postcode btn-modi" onclick="sample4_execDaumPostcode()">우편번호 찾기</button>
 							</span>
 						</div>
 						<div class="textForm">
@@ -129,11 +139,12 @@
 								placeholder="주소별칭" class="cellphoneNo" required>
 							</span>
 						</div>
-						<button type="button" onclick="addressRegist()">주소 등록</button>
-				</div>
-				<div class="modal-footer">
+				<div class="modal-footer flex justify-content-between p-0">
+				
+						<button type="button" class="btn-modi" onclick="addressRegist()">주소 등록</button>
 					<button type="button" class="btn btn-secondary"
 						data-dismiss="modal">닫기</button>
+				</div>
 				</div>
 			</div>
 		</div>

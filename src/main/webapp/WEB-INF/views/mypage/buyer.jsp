@@ -26,7 +26,7 @@
 </div>
 <div class="container">
     <c:if test="${safePurchaseInfoDto.tradingStatus eq 1}">
-        <button onclick="cancel('${safePurchaseInfoDto.transactionId}','${safePurchaseInfoDto.goodsId}')" class="btn btn-primary btn-lg">결제취소</button>
+        <button onclick="cancel('${safePurchaseInfoDto.transactionId}','${safePurchaseInfoDto.goodsId}')" class="btn-p">결제취소</button>
     </c:if>
 
 <!-- 모달 트리거 버튼 -->
@@ -74,7 +74,7 @@
 
 
     <c:if test="${safePurchaseInfoDto.tradingStatus eq 3}">
-        <button onclick="closePay('${safePurchaseInfoDto.transactionId}','${safePurchaseInfoDto.goodsId}')"  class="btn btn-primary btn-lg">결제확정</button>
+        <button onclick="closePay('${safePurchaseInfoDto.transactionId}','${safePurchaseInfoDto.goodsId}')"  class="btn-p">결제확정</button>
     </c:if>
     
     <a href="${pageContext.request.contextPath}/goods/get?goodsId=${safePurchaseInfoDto.goodsId}"><p>상품명:${safePurchaseInfoDto.goodsTitle}</p></a>

@@ -27,14 +27,17 @@
             text-align: left;
         }
         button {
+        
+        
+
+       		border-radius: 5px;
         	position:relative;
         	right:7px;
         	border-radius: 0.375rem;
-            background-color: #007bff;
+            background-color: #855994;
             color: #fff;
             border: none black;
             padding: 10px 20px;
-            margin: 10px;
             cursor: pointer;
         }
         button:hover {
@@ -45,7 +48,7 @@
         	left:330px;
         }
         h3{
-        	position:relative;
+
         	top:35px;
         }
         
@@ -79,15 +82,146 @@
     }
 
     /* 모달 버튼 스타일 */
-    .modal-footer button {
+    /* .modal-footer button {
         background-color: #007bff;
         color: #fff;
         border: none;
         border-radius: 5px;
         padding: 10px 20px;
         cursor: pointer;
-    }
+    } 
 
     .modal-footer button:hover {
         background-color: #0056b3;
+    }	*/
+    
+    button:hover {
+        background-color: #683b77;
     }
+    
+    .btn-p{
+	--bs-btn-color: #fff;
+    --bs-btn-bg: #855994;
+    --bs-btn-border-color: #855994;
+    --bs-btn-hover-color: #fff;
+    --bs-btn-hover-bg: #613c65;
+    --bs-btn-hover-border-color: #4b3842;
+    --bs-btn-focus-shadow-rgb: 49,132,253;
+    --bs-btn-active-color: #fff;
+    --bs-btn-active-bg: #4b3842;
+    --bs-btn-active-border-color: #4b3856;
+    --bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+    --bs-btn-disabled-color: #fff;
+    --bs-btn-disabled-bg: #855994;
+    --bs-btn-disabled-border-color: #855994;}
+    
+    
+    
+ select{
+	position: relative;
+  display: inline-block;
+  background: #fff;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  width: 200px;
+}
+
+select{
+  position: relative;
+  display: inline-block;
+  background: #fff;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  width: 100%;
+  margin: 10px 0 10px; 
+}
+
+select:after{ content: '\25BC'; /* 화살표 아이콘 */
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);}
+select:hover{ background: #f1f1f1;
+  border-color: #999;
+}
+select:active{background: #fff;
+  border-color: #666;}
+select option{padding: 10px;
+  font-size: 16px;}
+    
+    
+    
+    table {
+  width: 100%;
+  border-collapse: collapse;
+  border: 2px solid #333;
+  margin-bottom: 20px;
+  border-radius: 10px;
+}
+
+/* 테이블 헤더 스타일 */
+th {
+  background-color: #333;
+  color: #fff;
+  font-weight: bold;
+  padding: 10px;
+  text-align: left;
+  border: 1px solid #555;
+}
+
+/* 테이블 셀 스타일 */
+td {
+  padding: 10px;
+  border: 1px solid #ccc;
+}
+
+/* 짝수 행 배경색 설정 */
+tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+tr:nth-child(5) {
+  background-color: #85599430;
+}
+
+	.modal-content .btn-modi {
+	
+	display: inline-block;
+  padding: 4px 8px;
+  font-size: 16px;
+  background-color: #7b6aa6;;
+  color: #ffffff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+ 
+  }
+	.btn-modi:hover {
+	
+	background-color: #6a598f !important;
+	}
+	
+	.btn-modi:active {
+  	background-color: #5a4978 !important; 
+}
+
+.bro {
+	border-radius: 5px 0px 0px 5px !important; 
+	}
+	
+	  .modal-content .btn-postcode {
+  width: 156px;
+  border-radius: 0 5px 5px 0;
+  }
+  
+  .modal-footer {
+  border: 0px;
+  }
+  
+  

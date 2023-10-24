@@ -62,7 +62,7 @@
         border-radius: 5px;
     }
 
-    /* 모달 버튼 스타일 */
+    /* 모달 버튼 스타일 
     .modal-footer button {
         background-color: #007bff;
         color: #fff;
@@ -74,7 +74,7 @@
 
     .modal-footer button:hover {
         background-color: #0056b3;
-    }
+    } */
     
     .fa-facebook, .fa-instagram, .fa-twitter, .fa-pinterest {
     top: 0;    
@@ -93,18 +93,49 @@
 	width: 100px;
 }
 
-	section input {
-	
-	width: auto;
-	
-	
-	}
-	
-	section {
-	
-	min-height: 1200px;
-	
-	}
+	.btn-p{
+	--bs-btn-color: #fff;
+    --bs-btn-bg: #855994;
+    --bs-btn-border-color: #855994;
+    --bs-btn-hover-color: #fff;
+    --bs-btn-hover-bg: #613c65;
+    --bs-btn-hover-border-color: #4b3842;
+    --bs-btn-focus-shadow-rgb: 49,132,253;
+    --bs-btn-active-color: #fff;
+    --bs-btn-active-bg: #4b3842;
+    --bs-btn-active-border-color: #4b3856;
+    --bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+    --bs-btn-disabled-color: #fff;
+    --bs-btn-disabled-bg: #855994;
+    --bs-btn-disabled-border-color: #855994;}
+    
+    
+
+select{
+  position: relative;
+  display: inline-block;
+  background: #fff;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  width: 100%;
+  margin: 10px 0 10px; 
+}
+
+select:after{ content: '\25BC'; /* 화살표 아이콘 */
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);}
+select:hover{ background: #f1f1f1;
+  border-color: #999;
+}
+select:active{background: #fff;
+  border-color: #666;}
+select option{padding: 10px;
+  font-size: 16px;}
 	
 	.btn-modi {
 	
@@ -153,10 +184,12 @@
 
   .modal-content .btn-postcode {
   width: 156px;
+  border-radius: 0 5px 5px 0;
   }
 
 	.modal-footer {
 	padding: 10px 0 0 ;
+	border: 0;
 	}
 	
 	.pline{
@@ -205,6 +238,11 @@
 	min-width: 350px;
 	
 	}
+	
+	.bro {
+	border-radius: 5px 0px 0px 5px !important; 
+	}
+	
 	
 </style>
 </head>
@@ -313,14 +351,18 @@
                 			</option>
             			</c:forEach>
         			</select>
+        			
+        			<div class="my-1">
+        			
         			<button class="btn-modi" type="button" id="deleteAddress" onclick="deleteAddress()">주소삭제</button>
         			<button class="btn-modi" type="button" id="alterPrimaryAddress" onclick="alterPrimaryAddress()">대표주소 변경</button>
+        			</div>
         			
 					<form id="addressForm">
 						<div class="textForm">
 							<span style="display: flex;"> <input type="text"
-								name="postCode" id="sample4_postcode" placeholder="우편번호" class="cellphoneNo" required="required" readonly>
-								<button type="button" class="btn-postcode" onclick="sample4_execDaumPostcode()">우편번호 찾기</button>
+								name="postCode" id="sample4_postcode" placeholder="우편번호" class="cellphoneNo bro" required="required" readonly>
+								<button type="button" class="btn-modi btn-postcode" onclick="sample4_execDaumPostcode()">우편번호 찾기</button>
 							</span>
 						</div>
 						<div class="textForm">
@@ -345,11 +387,11 @@
 								placeholder="주소별칭" class="cellphoneNo" required>
 							</span>
 						</div>
-						<button type="button" onclick="addressRegist()">주소 등록</button>
-				</div>
-				<div class="modal-footer">
+				<div class="modal-footer flex justify-content-between">
+					<button type="button" class="btn-modi" onclick="addressRegist()" style="margin: 0;">주소 등록</button>
 					<button type="button" class="btn btn-secondary"
 						data-dismiss="modal">닫기</button>
+				</div>
 				</div>
 					
 				</div>
