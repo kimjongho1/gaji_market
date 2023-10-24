@@ -40,9 +40,8 @@
             padding: 10px 20px;
             cursor: pointer;
         }
-        button:hover {
-            background-color: #007bff;
-        }
+
+        
         h1{
         	position:relative;
         	left:330px;

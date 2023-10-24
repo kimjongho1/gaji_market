@@ -6,7 +6,12 @@
 <link href="${pageContext.request.contextPath}/resources/css/mypage/dealreview.css" rel='stylesheet' type='text/css'>
 <meta charset="UTF-8">
 <title>거래후기</title>
-
+    <!--favicon  -->
+<link rel="icon"
+	href="${pageContext.request.contextPath}/resources/img/favicon.ico">
+<link rel="shortcut icon"
+	href="${pageContext.request.contextPath}/resources/img/favicon.ico">
+    
 
 </head>
 <body>
