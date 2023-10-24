@@ -40,9 +40,9 @@ public class AdministerController {
 	@PostMapping("/report/review")
 	@ResponseBody
 	public String reportReview(int refId) {
-		int result = adminService.reportReview(refId);
 		String check = adminService.checkReview(refId);
 		if (check.equals("N")) {
+			int result = adminService.reportReview(refId);
 			if (result == 1) {
 				return "success";
 			} else {
@@ -56,9 +56,9 @@ public class AdministerController {
 	@PostMapping("/report/ban")
 	@ResponseBody
 	public String banUser(String userId) {
-		int result = adminService.banUser(userId);
 		int check = adminService.checkBan(userId);
 		if (check == 1) {
+			int result = adminService.banUser(userId);
 			if (result == 1) {
 				return "banSuccess";
 			} else {
@@ -72,9 +72,9 @@ public class AdministerController {
 	@PostMapping("/report/unban")
 	@ResponseBody
 	public String unBanUser(String userId) {
-		int result = adminService.unBanUser(userId);
 		int check = adminService.checkBan(userId);
 		if (check == 0) {
+			int result = adminService.unBanUser(userId);
 			if (result == 1) {
 				return "unBanSuccess";
 			} else {
