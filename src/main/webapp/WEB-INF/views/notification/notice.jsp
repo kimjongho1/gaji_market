@@ -55,7 +55,7 @@
                     <div>
                 <ul>
                 	<li class="d-flex justify-content-between">
-                		<input type="radio" class="button-d" onclick="selectNoti(${loopStatus.index},${item.notiId})">
+                		<input type="checkbox" class="button-d" onclick="selectNoti(${loopStatus.index},${item.notiId},this)">
                 		<button type="button" class="btn button-db" onclick="deleteNotice(${item.notiId})">삭제</button>
                 	</li>
                 	<li>
@@ -104,6 +104,8 @@
     </div>
     
     <script>
+    var count=0;
+    
     	function deleteNotice(notiId){
     		$.ajax({
 				  url: "${pageContext.request.contextPath}/notice/deletenotice",	
@@ -117,8 +119,6 @@
 			  		  }
 			  		  else if(data=='-1')
 			  			  alert("로그인이 필요한 기능입니다.");
-			  		  else
-			  			  alert("알림 삭제에 실패했습니다.");
 			  	  },
 					error : (request,status,error)=>{
 						console.log(request);
@@ -130,6 +130,10 @@
     	}
     	
     	function deleteAll(){
+    		if(count==0){
+    			console.log("선택된 알림이 없습니다.");
+    			return;
+    		}
     		var noticesFormdata=$('#notices').serialize();
     		$.ajax({
 				  url: "${pageContext.request.contextPath}/notice/deletenotice",	
@@ -155,20 +159,68 @@
 				  });		
     	}
     	
-    	function selectNoti(index,notiId1){
+    	function selectNoti(index,notiId1,radio){
+    		
     		if(index==0){
-    			$("#notiId").val(notiId1);
+    			if($("#notiId").val()==""){
+    				$("#notiId").val(notiId1);
+    				count=count+1;
+    			}
+    			else{
+    				$("#notiId").val("");
+    				count=count-1;
+    			}
     		}
-    		else if(index==1)
-    			$("#notiId1").val(notiId1);
-    		else if(index==2)
-    			$("#notiId2").val(notiId1);
-    		else if(index==3)
-    			$("#notiId3").val(notiId1);
-    		else if(index==4)
-    			$("#notiId4").val(notiId1);
-    		else
-    			$("#notiId5").val(notiId1);
+    		else if(index==1){
+    			if($("#notiId1").val()==""){
+    				$("#notiId1").val(notiId1);
+    			count=count+1;
+			}
+    			else{
+    				$("#notiId1").val();
+    			count=count-1;
+			}
+    		}
+    		else if(index==2){
+    			if($("#notiId2").val()==""){
+    				$("#notiId2").val(notiId1);
+    			count=count+1;
+			}
+    			else{
+    				$("#notiId2").val("");
+    			count=count-1;
+			}
+    		}
+    		else if(index==3){
+    			if($("#notiId3").val()==""){
+    				$("#notiId3").val(notiId1);
+    				count=count+1;
+    			}
+    			else{
+    				$("#notiId3").val("");
+    				count=count-1;
+    			}
+    		}
+    		else if(index==4){
+    			if($("#notiId4").val()==""){
+    				$("#notiId4").val(notiId1);
+    			count=count+1;
+			}
+    			else{
+    				$("#notiId4").val("");
+    			count=count-1;
+			}
+    		}
+    		else{
+    			if($("#notiId5").val()==""){
+    				$("#notiId5").val(notiId1);
+    			count=count+1;
+			}
+    			else{
+    				$("#notiId5").val("");
+    			count=count-1;
+			}
+    		}
     	}
     </script>
     
