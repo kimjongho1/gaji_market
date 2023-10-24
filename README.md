@@ -1,4 +1,4 @@
-# Gaji_Market (가지마켓) 
+![찜목록 상단](https://github.com/bellho/gaji_market/assets/135290607/0586f4fd-8242-4124-86c2-cfa9786fed31)# Gaji_Market (가지마켓) 
 
 <br>
 
@@ -43,7 +43,7 @@
 <img src="https://github.com/bellho/gaji_market/assets/135290607/bb9a295a-d2b6-4bb6-b02b-d99819c6884f"><br>
 
 <details>
-  <summary>검색 조건에 따른 데이터를 불러오기 위한 동적 쿼리문</summary>
+  <summary>검색 조건에 따른 데이터를 불러오기 위한 동적 쿼리문(Click)</summary>
 
     <select id="getGoodsList" parameterType="map"
 		resultType="GoodsListDto">
@@ -115,6 +115,40 @@
 <br>
 
 #
+## 마이페이지 - 구매내역, 판매내역, 판매글, 찜목록, 모아보기, 유저상품
+#### 화면구현- (신정훈, 백의헌), 기능구현- (백의헌)
+<details>
+  <summary>구매내역 페이지(Click)</summary>
+  	<img src="https://github.com/bellho/gaji_market/assets/135290607/fa2d346d-5192-4897-b50e-31c6820ff941">
+  	<img src="https://github.com/bellho/gaji_market/assets/135290607/3ba6c942-2bce-44bf-8674-5062c03adbe2">
+</details>
+<details>
+  <summary>판매내역 페이지(Click)</summary>
+	<img src="https://github.com/bellho/gaji_market/assets/135290607/7cbee790-ae0d-4ec6-bd1a-5798f5a672b0">
+	<img src="https://github.com/bellho/gaji_market/assets/135290607/f7e87110-f679-429d-9e05-8347dde6f578">
+</details>
+<details>
+  <summary>판매글(Click)</summary>
+	<img src="https://github.com/bellho/gaji_market/assets/135290607/9e9e6f0e-3d58-4dd1-9af0-d453e016281a">
+	<img src="https://github.com/bellho/gaji_market/assets/135290607/3107ac15-19d9-4821-a405-8ae67d6ece02">
+</details>
+<details>
+  <summary>찜 목록(Click)</summary>
+	<img src="https://github.com/bellho/gaji_market/assets/135290607/89d96028-bf8b-4399-87a5-12048319033e">
+	<img src="https://github.com/bellho/gaji_market/assets/135290607/7839aa2b-9f2d-4189-a6cc-21b14a369ef0">
+</details>
+<details>
+  <summary>모아보기(Click)</summary>
+	<img src="https://github.com/bellho/gaji_market/assets/135290607/6932a3a9-df50-4339-84e9-eddf48ca1d32">
+	<img src="https://github.com/bellho/gaji_market/assets/135290607/14ea84cb-a624-43b5-99db-0c7942870330">
+</details>
+<details>
+  <summary>유저상품(Click)</summary>
+	<img src="https://github.com/bellho/gaji_market/assets/135290607/55275da5-992a-4348-9c7a-508fec98c5ca">
+	<img src="https://github.com/bellho/gaji_market/assets/135290607/01cf26ee-db5d-4025-ab33-9f8194821df7">
+</details>
+
+#
 ## 결제 페이지 주소 변경, 결제 진행, 리뷰작성 (추가 기능 ajax 구현)
 <br>
 
@@ -126,7 +160,7 @@
 
 <br>
 <details>
-  <summary>주소 변경, 삭제, 추가를 위한 Mapper코드</summary>
+  <summary>주소 변경, 삭제, 추가를 위한 Mapper코드(Click)</summary>
 
 >    
 
@@ -169,7 +203,7 @@
 
 
 <details>
-  <summary>안전거래 유효성 검사 코드</summary>
+  <summary>안전거래 유효성 검사 코드(Click)</summary>
 
 > 
 
@@ -240,7 +274,7 @@
 <img src="https://github.com/bellho/gaji_market/assets/135290607/18f935e1-8afb-437f-920e-f9bf13cabfe8"><br>
 
 <details>
-  <summary>리뷰작성 프로시저 코드</summary>
+  <summary>리뷰작성 프로시저 코드(Click)</summary>
 
 >   `프로시저`를 활용하여 리뷰작성과 유저평점 업데이트를 `Transactional`하게 처리 
 
