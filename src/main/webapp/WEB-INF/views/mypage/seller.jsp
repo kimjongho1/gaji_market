@@ -66,7 +66,8 @@
         <c:when test="${safePurchaseInfoDto.tradingStatus eq 4}"><p>거래상태:거래완료</p></c:when>
         <c:when test="${safePurchaseInfoDto.tradingStatus eq 5}"><p>거래상태:결제취소</p></c:when>
     </c:choose>
-
+	
+	 <p>
     <c:if test="${not empty safePurchaseInfoDto.trackingNumber}">
         운송장번호:
         <c:choose>
@@ -83,7 +84,7 @@
         	로젠택배
         </c:when>
         </c:choose>
-         <p>${safePurchaseInfoDto.trackingNumber}</p>
+        ${safePurchaseInfoDto.trackingNumber}</p>
     </c:if>
     <div>
 		<button onclick="history.back()">이전으로</button>
