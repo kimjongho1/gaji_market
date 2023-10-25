@@ -137,13 +137,18 @@
 
 			<textarea name="description" class="editor-container" id="editor"></textarea>
 
-		<div class="bar row align-items-baseline">
+		<div class="con-footer">
+		
+
+		<div>
+		
 		<input type="file" name="files" multiple="multiple" accept="image/*">
 
+		</div>
 
 		
 		<!-- 모달 열기 버튼 -->
-		<br>
+		
 		<!-- 모달 열기 버튼 -->
 		<button id="openMapModal" type="button">거래희망장소</button>
 
@@ -152,24 +157,25 @@
 			<div class="modal-content">
 				<span class="close" id="closeMapModal">&times;</span>
 				<!-- 카카오맵을 표시할 영역 -->
-				<div id="kakaoMap" style="width: 700px; height: 300px;"></div>
+				<div id="kakaoMap" style="width: auto; height: 300px;"></div>
 				<p>
 					<em>거래희망장소를 클릭해주세요!</em>
 				</p>
+				<div class="modalbtn">
 				<button id="cancelButton" type="button">취소</button>
 				<button id="confirmButton" type="button">확인</button>
+				</div>
 				<div id="clickLatlng"></div>
 			</div>
 		</div>
 	
-		</div>
 		<div>
 		<!-- 확인 버튼 -->
 		<input type="hidden" name="lat" id="latitudeInput"> <input
-			type="hidden" name="lng" id="longitudeInput"> <br>
+			type="hidden" name="lng" id="longitudeInput"> 
 		<input type="submit" value="확인">
 		</div>
-		
+		</div>
 		</form>
 		</div>
 </div>
@@ -269,7 +275,7 @@
                     ]
                 },
                 // https://ckeditor.com/docs/ckeditor5/latest/features/editor-placeholder.html#using-the-editor-configuration
-                placeholder: '안녕하세요',
+                placeholder: '내용을 입력해주세요.',
                 // https://ckeditor.com/docs/ckeditor5/latest/features/font.html#configuring-the-font-family-feature
                 fontFamily: {
                     options: [
