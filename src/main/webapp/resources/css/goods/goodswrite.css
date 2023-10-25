@@ -74,7 +74,7 @@ body{
 .checkbox {
 	margin: 0 !important; 
 	width: 25px;
-	height: 25px;
+	height: 25px;	
 }
 
 /*  */
@@ -161,8 +161,28 @@ input[type=file]::file-selector-button {
 #imageContainer{
 	display:flex;
 	
-	margin-bottom: 60px;
+	margin:30px 0 60px;
 	border: 1px solid #ccc; 
+}
+#imageContainer .delete-button{
+	margin-top: 5px;
+ 	position: relative;
+  display: inline-block;
+  background: #fff;
+  border: 0px;
+  border-top: 1px solid #ccc;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+
+}
+
+#imageContainer .delete-button:hover{background: #f1f1f1;
+  border-color: #999;}
+#imageContainer .delete-button:active{
+	background: #835995;
+	color:#988fb2;
+ 	border-color: #bbb1d6;
 }
 
 

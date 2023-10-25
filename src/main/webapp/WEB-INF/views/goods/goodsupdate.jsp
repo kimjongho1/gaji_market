@@ -136,9 +136,6 @@
 
 			<textarea name="description" id="editor">${goodsDto.description }</textarea>
 
-		<div class="con-footer">
-		
-		
 		<div id="imageContainer">
    	 		<c:forEach var="imageInfo" items="${imageList}">
         	<div class="image-item">
@@ -147,6 +144,9 @@
         	</div>
     		</c:forEach>
 		</div>
+		
+		<div class="con-footer">
+		
 		
 
 <!-- 모달 열기 버튼 -->
