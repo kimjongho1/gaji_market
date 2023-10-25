@@ -5,9 +5,12 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>글 수정</title>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
+<!--favicon  -->
+	<link rel="icon" href="${pageContext.request.contextPath}/resources/img/favicon.ico">
+	<link rel="shortcut icon" href="${pageContext.request.contextPath}/resources/img/favicon.ico">
 
 
 <!--favicon  -->
@@ -92,6 +95,8 @@
 	max-height: 160px; /* or anything else, more likely ~300px or so */
 	overflow-y: auto;
 }
+
+.ck-editor__editable { height: 600px; }
 </style>	
 
 </head>

@@ -76,6 +76,11 @@
 	max-height: 160px; /* or anything else, more likely ~300px or so */
 	overflow-y: auto;
 }
+
+
+.ck-editor__editable { height: 600px; }
+
+
 </style>
 </head>
 <body>
@@ -93,7 +98,7 @@
 		<input type="text" name="title" id="title" placeholder="제목" required="required"> 
 		<input type="text" id="price" name="price" placeholder="판매가격" required="required">
 		</div>
-		<div class="d-flex justify-content-between align-items-baseline">
+		<div class="my-2 d-flex justify-content-between align-items-center">
 		<!-- 카테고리 선택 드롭다운 -->
 		<label for="selectedCategory">카테고리 선택:</label> <select
 			name="categoryId" id="selectedCategory" required="required">
@@ -104,10 +109,10 @@
 		</select>
 		
 				<label  for="safeTradingYn">안전결제</label>
-		<input  type="checkbox" name="safeTradingYn" id="safeTradingYn" value="N">
+		<input class="checkbox"  type="checkbox" name="safeTradingYn" id="safeTradingYn" value="N">
 		
 		</div>
-		<div class="d-flex justify-content-between align-items-baseline">
+		<div class="my-4 d-flex justify-content-between align-items-baseline">
 		
 		<!-- 구 선택 드롭다운 -->
 		<label for="selectedGu">구 선택:</label>
@@ -130,17 +135,17 @@
 		</div>
 		</div>
 
-			<textarea name="description" id="editor"></textarea>
-		
+			<textarea name="description" class="editor-container" id="editor"></textarea>
+
 		<div class="bar row align-items-baseline">
+		<input type="file" name="files" multiple="multiple" accept="image/*">
 
 
-		<div class="d-flex align-items-center">
+		
 		<!-- 모달 열기 버튼 -->
 		<br>
 		<!-- 모달 열기 버튼 -->
 		<button id="openMapModal" type="button">거래희망장소</button>
-		<input type="file" name="files" multiple="multiple" accept="image/*">
 
 		<!-- 모달 -->
 		<div id="mapModal" class="modal">
@@ -156,7 +161,7 @@
 				<div id="clickLatlng"></div>
 			</div>
 		</div>
-		</div>
+	
 		</div>
 		<div>
 		<!-- 확인 버튼 -->
@@ -242,6 +247,8 @@
                 },
                 // Changing the language of the interface requires loading the language file using the <script> tag.
                  language: 'ko',
+                 width: '100%', // 에디터 가로 크기
+                 height: '1800px', // 에디터 세로 높이
                 list: {
                     properties: {
                         styles: true,
@@ -280,7 +287,7 @@
                 },
                 // https://ckeditor.com/docs/ckeditor5/latest/features/font.html#configuring-the-font-size-feature
                 fontSize: {
-                    options: [ 10, 11, 11.3514, 12, 13, 14, 15, 16,  'default', 17, 18, 19, 20, 21, 22 ],
+                    options: [3.141592653589793248 ,10, 11, 11.3514, 12, 13, 14, 15, 16,  'default', 17, 18, 19, 20, 21, 22 ],
                     supportAllValues: true
                 },
                 // Be careful with the setting below. It instructs CKEditor to accept ALL HTML markup.
@@ -494,6 +501,14 @@
     updateDongDropdown();
 </script>
 <script>
+
+window.addEventListener("scroll", function() {
+	if (window.pageYOffset > 0.1) {
+		document.querySelector("#header").className = 'sc';
+	} else {
+		document.querySelector("#header").className = 'sc';
+	}
+});
 
 </script>
 </body>
