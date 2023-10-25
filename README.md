@@ -49,6 +49,10 @@
 
 <details>
   <summary> 검색 조건에 따른 데이터를 불러오기 위한 동적 쿼리문(Click) </summary>
+  <br>
+  동적 쿼리문을 통해 여러가지 입력 가능한 정렬 조건중 입력된 값에 대해서만 where절이 적용 되도록 하였습니다.
+  
+  <br>
 
     <select id="getGoodsList" parameterType="map"
 		resultType="GoodsListDto">
@@ -123,8 +127,12 @@
 ## 마이페이지 - 구매내역, 판매내역, 판매글, 찜목록, 모아보기, 유저상품
 #### 화면구현- `신정훈, 백의헌`, 기능구현- `백의헌`
 <details>
-<summary>구매, 판매내역 페이지(Click)</summary>
-	<img src="https://github.com/bellho/gaji_market/assets/135290607/d79c28d2-ec15-4cfa-9a24-47acd01386b4">
+<summary>구매, 판매내역 페이지(Click)</summary> 
+    <br>
+    <구매내역>
+    <br>
+	<img src="https://github.com/bellho/gaji_market/assets/135290607/d79c28d2-ec15-4cfa-9a24-47acd01386b4"><br><br>
+     <판매내역-판매자 아이디로 접속후 진행되었습니다.>
 	<img src="https://github.com/bellho/gaji_market/assets/135290607/d5dd7f26-399c-4be9-bf60-4754e2f6e737">
 </details>
 <details>
@@ -153,7 +161,14 @@
 
 <br>
 <details>
+<br>
   <summary>주소 변경, 삭제, 추가를 위한 Mapper코드(Click)</summary>
+      <알고리즘 설명><br>
+    &nbsp;&nbsp;&nbsp; 1. 주소순서 1번을 대표주소로 본다.<br>
+    &nbsp;&nbsp;&nbsp; 2. 대표주소 변경시 모든 주소순서를 +1 한다.<br>
+    &nbsp;&nbsp;&nbsp; 3. 대표주소로 설정할 주소의 주소순서를 1로 설정한다.<br>
+    &nbsp;&nbsp;&nbsp; 4. 마지막으로 대표주소로 변경한 주소의 주소순서보다 큰 주소에 대해서 -1을 적용한다.
+    <br><br>
 
 >    
 
@@ -200,8 +215,9 @@
 
 > 
 
-  안전거래의 핵심은 `유효성 검사`입니다. <br>JSP에서 아임포트 API를 통해 결제가 이루어지면 <br>`Controller`에서는 `Database`에 저장된 정보와 `API`에서 결제된 정보를 `대조`합니다.<br>
+  안전거래의 핵심은 `유효성 검사`입니다. JSP를 통해 결제가 이루어지게 되면 <br> 클라이언트는 개발자 도구를 통해 상품가격과 같은 결제정보를 변조하여 결제를 시도 할 수 있습니다.<br>이를 방지하고자 JSP에서 아임포트 API를 통해 결제가 이루어지면 <br>`Controller`에서는 `Database`에 저장된 정보와 `API`에서 결제된 정보를 `대조`합니다.<br>
   이 결과에 따라 `Database`에 안전결제에 대한 데이터를 삽입한 후 <br>
+  삽입이 성공하였다면
   최종적으로 안전결제 성공여부를 `클라이언트`에게 전달합니다.
 
   
@@ -268,8 +284,11 @@
 
 <details>
   <summary>리뷰작성 프로시저 코드(Click)</summary>
+<br>
 
->   `프로시저`를 활용하여 리뷰작성과 유저평점 업데이트를 `Transactional`하게 처리 
+
+>   `프로시저`를 활용하여 `리뷰작성`과 `유저평점 업데이트`를 `Transactional`하게 처리<br><br>
+    리뷰작성이 발생하였을 경우 리뷰점수를 바탕으로 해당 유저의 평점도 항상 업데이트 됩니다.<br>  떄문에 `transactional` 또는 `프로시저`로 처리하는것이 적절합니다. <br><br> 프로시저를 사용함으로써 spring 코드의 복잡성을 줄이고 한번의 입력으로 데이터베이스에서 여러가지 실행을 하도록 하여 네트워크 오버헤드를 줄일 수 있습니다.<br>
 
     CREATE OR REPLACE PROCEDURE updateRatingScore(
     goodsId IN NUMBER,
