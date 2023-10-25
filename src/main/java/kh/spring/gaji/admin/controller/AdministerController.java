@@ -1,5 +1,7 @@
 package kh.spring.gaji.admin.controller;
 
+import java.security.Principal;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -7,7 +9,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import kh.spring.gaji.admin.model.dto.UserBlockingDto;
 import kh.spring.gaji.admin.model.service.AdminService;
 
 @Controller
@@ -17,23 +21,60 @@ public class AdministerController {
 	private AdminService adminService;
 
 	@GetMapping("")
-	public ModelAndView admin(ModelAndView mv) { // 관리자페이지
-		mv.addObject("userList", adminService.userList());
-		mv.setViewName("admin/admin");
-		return mv;
+	public ModelAndView admin(ModelAndView mv, Principal principal, RedirectAttributes ra) { // 관리자페이지
+		if (principal != null) {
+			String administerId = principal.getName();
+			if (administerId != null && administerId.equals("cjsdudwns") || administerId.equals("qordmlgjs") || administerId.equals("rlawhdgh")) {
+				mv.addObject("userList", adminService.userList());
+				mv.setViewName("admin/admin");
+				return mv;
+			} else {
+				ra.addFlashAttribute("msg","관리자 계정이 아닙니다.");
+				mv.setViewName("redirect:/");
+				return mv;
+			}
+		} else {
+			ra.addFlashAttribute("msg", "관리자 계정으로 로그인해주시길 바랍니다.");
+			mv.setViewName("redirect:/");
+			return mv;
+		}
 	}
 
 	@GetMapping("/reportlist")
-	public ModelAndView reportList(ModelAndView mv, String userId) {
-		mv.addObject("userReportList", adminService.userReportList(userId));
-		mv.setViewName("admin/reportuserslist");
+	public ModelAndView reportList(ModelAndView mv, String userId, Principal principal, RedirectAttributes ra) {
+		if (principal != null) {
+			String administerId = principal.getName();
+			if (administerId != null && administerId.equals("cjsdudwns") || administerId.equals("qordmlgjs") || administerId.equals("rlawhdgh")) {
+				mv.addObject("userReportList", adminService.userReportList(userId));
+				mv.setViewName("admin/reportuserslist");
+			} else {
+				ra.addFlashAttribute("msg", "관리자 계정이 아닙니다.");
+				mv.setViewName("redirect:/");
+			}
+		} else {
+			ra.addFlashAttribute("msg", "관리자 계정으로 로그인해주시길 바랍니다.");
+			mv.setViewName("redirect:/");
+		}
 		return mv;
+
 	}
 
 	@GetMapping("/report/get")
-	public ModelAndView reportGet(ModelAndView mv, int refId) {
-		mv.addObject("userReportInfo", adminService.userReportInfo(refId));
-		mv.setViewName("admin/reportusersget");
+	public ModelAndView reportGet(ModelAndView mv, int refId, Principal principal, RedirectAttributes ra) {
+		if (principal != null) {
+			String administerId = principal.getName();
+			if (administerId != null && administerId.equals("cjsdudwns") || administerId.equals("qordmlgjs") || administerId.equals("rlawhdgh")) {
+				mv.addObject("administerId",administerId);
+				mv.addObject("userReportInfo", adminService.userReportInfo(refId));
+				mv.setViewName("admin/reportusersget");
+			} else {
+				ra.addFlashAttribute("msg", "관리자 계정이 아닙니다.");
+				mv.setViewName("redirect:/");
+			}
+		} else {
+			ra.addFlashAttribute("msg", "관리자 계정으로 로그인해주시길 바랍니다.");
+			mv.setViewName("redirect:/");
+		}
 		return mv;
 	}
 
@@ -55,10 +96,14 @@ public class AdministerController {
 
 	@PostMapping("/report/ban")
 	@ResponseBody
-	public String banUser(String userId) {
+	public String banUser(String userId, String administerId, String reasonForBlocking ,UserBlockingDto dto) {
 		int check = adminService.checkBan(userId);
 		if (check == 1) {
 			int result = adminService.banUser(userId);
+			dto.setAdministerId(administerId);
+			dto.setBannedId(userId);
+			dto.setReasonForBlocking(reasonForBlocking);
+			adminService.insertBanUser(dto);
 			if (result == 1) {
 				return "banSuccess";
 			} else {
@@ -83,6 +128,14 @@ public class AdministerController {
 		} else {
 			return "unBanExist";
 		}
+	}
+
+	@GetMapping("/banlist")
+	public ModelAndView banList(ModelAndView mv) {
+		mv.setViewName("admin/userslist");
+		
+		
+		return mv;
 	}
 
 //	@GetMapping("/deal/safe/list")

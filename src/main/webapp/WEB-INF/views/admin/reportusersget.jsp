@@ -8,7 +8,9 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
+<script>
+		    var reasonForBlocking = ""; // 전역 변수로 선언
+</script>
 </head>
 <body>
 	<h2>유저 신고내역 상세보기</h2>
@@ -32,11 +34,21 @@
 		<tr>
 			<th>신고 카테고리</th>
 			<td><c:choose>
-					<c:when test="${userReportInfo.reportCategory eq 1}">광고</c:when>
-					<c:when test="${userReportInfo.reportCategory eq 2}">욕설/비방</c:when>
-					<c:when test="${userReportInfo.reportCategory eq 3}">음란물</c:when>
-					<c:when test="${userReportInfo.reportCategory eq 4}">사기</c:when>
-					<c:when test="${userReportInfo.reportCategory eq 5}">기타</c:when>
+					<c:when test="${userReportInfo.reportCategory eq 1}">광고<script>
+		             reasonForBlocking = "광고";
+		        	</script></c:when>
+					<c:when test="${userReportInfo.reportCategory eq 2}">욕설/비방<script>
+		            reasonForBlocking = "욕설/비방";
+		        	</script></c:when>
+							<c:when test="${userReportInfo.reportCategory eq 3}">음란물<script>
+		             reasonForBlocking = "음란물";
+		        	</script></c:when>
+							<c:when test="${userReportInfo.reportCategory eq 4}">사기<script>
+		             reasonForBlocking = "사기";
+		        	</script></c:when>
+							<c:when test="${userReportInfo.reportCategory eq 5}">기타<script>
+		             reasonForBlocking = "기타";
+		        	</script></c:when>
 				</c:choose></td>
 		</tr>
 		<tr>
@@ -81,11 +93,15 @@
         // 유저 정지 버튼 클릭 이벤트
         $("#banUserButton").click(function() {
 			var userId = '${userReportInfo.userId}';    
-            console.log(userId);
+			var administerId = '${administerId}';
+            console.log(reasonForBlocking);
             $.ajax({
             	type: 'post',
             	url:"${pageContext.request.contextPath}/admin/report/ban",
-            	data:{userId : userId},
+            	data:{userId : userId,
+            		administerId : administerId,
+            		reasonForBlocking : reasonForBlocking
+            	},
             	success: function(ban){
             		if(ban == 'banSuccess'){
             			alert("유저 정지 완료");
@@ -99,6 +115,8 @@
             	
             })
         });
+        
+        
         $("#unBanUserButton").click(function() {
 			var userId = '${userReportInfo.userId}';    
             console.log(userId);
