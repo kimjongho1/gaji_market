@@ -17,8 +17,9 @@
 		<div class="container">
 			<div class="left">
 				<div class="top">
-					<!-- 채팅중인 회원 검색 기능 -->
-					<input type="text" placeholder="Search" /> <a href="javascript:;" class="search"></a>
+					<a href="${pageContext.request.contextPath}"><img
+							src="${pageContext.request.contextPath}/resources/img/gaji_logo.png"
+							alt="GaJi" height="60" width="170"></a>
 				</div>
 				<!-- 채팅중인 회원 list -->
 				<div class="people_list">
@@ -41,15 +42,13 @@
 					                                var day = date.getDate();
 					                                var hours = date.getHours();
 					                                var minutes = date.getMinutes();
-					                                if (today.getMonth() + 1 == month) {
-					                                    if (today.getDate() == day) {
-					                                        if (hours > 11) {
-					                                            document.write("오후 " + (hours - 12) + ":" + minutes);
-					                                        } else {
-					                                            document.write("오전 " + hours + ":" + minutes);
-					                                        }
-					                                    }
-					                                } else {
+				                                    if (today.getDate() == day) {
+				                                        if (hours > 11) {
+				                                            document.write("오후 " + (hours - 12) + ":" + minutes);
+				                                        } else {
+				                                            document.write("오전 " + hours + ":" + minutes);
+				                                        }
+				                                    } else {
 					                                    document.write(month + "월 " + day + "일");
 					                                }
 					                            </script>
@@ -193,7 +192,7 @@
 					    if (item1.senderId == '${pageContext.request.userPrincipal.name}') {
 					        if (item1.message.startsWith("https://res.cloudinary.com/")) {
 					            // 이미지 URL로 시작하는 경우
-					            htmlVal += `					<div class="bubble me"><img src="${item1.message}"></div>`;
+					            htmlVal += `					<div class="bubble me"><img src=\${item1.message}></div>`;
 					        } else {
 					            // 이미지 URL로 시작하지 않는 경우
 					            htmlVal += `					<div class="bubble me">\${item1.message}</div>`;
@@ -201,7 +200,7 @@
 					    } else {
 					        if (item1.message.startsWith("https://res.cloudinary.com/")) {
 					            // 이미지 URL로 시작하는 경우
-					            htmlVal += `					<div class="bubble you"><img src="${item1.message}"></div>`;
+					            htmlVal += `					<div class="bubble you"><img src=\${item1.message}></div>`;
 					        } else {
 					            // 이미지 URL로 시작하지 않는 경우
 					            htmlVal += `					<div class="bubble you">\${item1.message}</div>`;
@@ -325,10 +324,8 @@
 	            		senderId: username, 
 	            		chatId: chatId, 
 	            		imgCode: e.target.result
-	            		})); //receiver:participant,
-	                //$('#source').text( e.target.result );
+	            		})); 
 	            };
-	            //console.log(FR.readAsDataURL( input.files[0] ));
 	            FR.readAsDataURL( input.files[0] ); // 이거 없으면 작동 안되나???
 	        }
 	    }// readImage()

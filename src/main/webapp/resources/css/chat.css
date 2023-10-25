@@ -79,6 +79,9 @@ cursor:pointer}
   background-color: var(--light);
   transform: translate(-50%, 0);
 }
+.container .left .top img {
+	margin: 0 34px;
+}
 .container .left input {
   float: left;
   width: 188px;
@@ -105,6 +108,9 @@ cursor:pointer}
   background-repeat: no-repeat;
   background-position: top 12px left 14px;
   border-radius: 50%;
+}
+.people {
+	list-style-type: none;
 }
 .people_list {
 	height: 504px;
