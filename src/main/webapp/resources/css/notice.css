@@ -61,6 +61,7 @@
         	height:200px;
         	background-color: #85599494;
         	border: 0px;
+        	border-radius:10px; 
         }
         .noticeButton:hover{
         	
@@ -97,7 +98,7 @@
 	top:50px;
 	height: 30px;
 	width: 30px;
-		
+	margin: 10px;
 	
 }
 
@@ -113,6 +114,11 @@
 }
 .button-db:hover{
 	color: #988fb2 !important;
+}
+.button-db:focus{
+
+    box-shadow: -4px -4px 1px 0.2rem rgb(88 0 255 / 25%) !important;
+}
 }
 
 input[type=checkbox],input[type=radio]
