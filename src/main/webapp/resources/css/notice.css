@@ -61,7 +61,8 @@
         	height:200px;
         	background-color: #85599494;
         	border: 0px;
-        	border-radius:10px; 
+        	border-radius:10px;
+        	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
         }
         .noticeButton:hover{
         	
