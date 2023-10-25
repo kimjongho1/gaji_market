@@ -5,7 +5,10 @@
 
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>1:1채팅</title>
+<!--favicon  -->
+	<link rel="icon" href="${pageContext.request.contextPath}/resources/img/favicon.ico">
+	<link rel="shortcut icon" href="${pageContext.request.contextPath}/resources/img/favicon.ico">
 <script src="https://cdn.jsdelivr.net/npm/sockjs-client@1/dist/sockjs.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
 <script src="${pageContext.request.contextPath}/resources/js/jquery-3.3.1.min.js"></script>
