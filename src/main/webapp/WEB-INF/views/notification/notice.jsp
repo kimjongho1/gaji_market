@@ -60,6 +60,7 @@
                 	</li>
                 	<li>
                     <button type="submit" class="noticeButton">
+                     <div class="bcon">
                         <div class="message">${item.message}</div>
                         <div class="createdAt">
                             생성일:
@@ -79,6 +80,7 @@
                                 </c:otherwise>
                             </c:choose>
                         </div>
+                       </div>
                     </button>
                     </li>
                 </ul>

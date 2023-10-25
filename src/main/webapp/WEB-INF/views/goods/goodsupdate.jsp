@@ -13,11 +13,6 @@
 	<link rel="shortcut icon" href="${pageContext.request.contextPath}/resources/img/favicon.ico">
 
 
-<!--favicon  -->
-<link rel="icon"
-	href="${pageContext.request.contextPath}/resources/img/favicon.ico">
-<link rel="shortcut icon"
-	href="${pageContext.request.contextPath}/resources/img/favicon.ico">
 
 <!-- Google Font -->
 <link
