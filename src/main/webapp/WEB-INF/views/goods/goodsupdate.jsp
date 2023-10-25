@@ -14,25 +14,12 @@
 
 
 
-<!-- Google Font -->
-<link
-	href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;900&display=swap"
-	rel="stylesheet">
-
 <!-- Css Styles -->
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/resources/css/bootstrap.min.css"
-	type="text/css">
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/resources/css/style.css"
-	type="text/css">
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/resources/css/elegant-icons.css"
-	type="text/css">
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/resources/css/font-awesome.min.css"
-	type="text/css">
+<link rel="stylesheet"	href="${pageContext.request.contextPath}/resources/css/bootstrap.min.css"	type="text/css">
+<link rel="stylesheet"	href="${pageContext.request.contextPath}/resources/css/font-awesome.min.css"	type="text/css">
+<link rel="stylesheet"	href="${pageContext.request.contextPath}/resources/css/style.css"	type="text/css">
 <link rel="stylesheet"	href="${pageContext.request.contextPath}/resources/css/goods/goodswrite.css"	type="text/css">
+
 <style>
 .modal {
 	display: none; /* 초기에는 숨김 상태 */
@@ -97,11 +84,9 @@
 
 </head>
 <body>
-	<!-- header start -->
-	<header>
-		<%-- <jsp:include page="/WEB-INF/views/header.jsp"></jsp:include> --%>
-	</header>
-	<!-- header end -->
+<header>
+		<jsp:include page="/WEB-INF/views/header.jsp"></jsp:include>
+</header>
 	
 	<div id="container" style="min-height: 800px;">
 	<h2>중고 거래 게시판 글 수정</h2>
@@ -151,29 +136,56 @@
 
 			<textarea name="description" id="editor">${goodsDto.description }</textarea>
 
+		<div class="con-footer">
+		
+		
+		<div id="imageContainer">
+   	 		<c:forEach var="imageInfo" items="${imageList}">
+        	<div class="image-item">
+            <img src="${imageInfo.url}" alt="이미지">
+            <button class="delete-button" data-image-url="${imageInfo.url}" data-image-filename="${imageInfo.filename}" type="button" style="width: 100%">삭제</button>
+        	</div>
+    		</c:forEach>
+		</div>
+		
 
-		<!-- 모달 열기 버튼 -->
-		<br>
+<!-- 모달 열기 버튼 -->
+		
 		<!-- 모달 열기 버튼 -->
 		<button id="openMapModal" type="button">거래희망장소</button>
-		<br>
-		<label> 추가 사진 파일 선택 : </label>
-		<input type="file" name="files" multiple="multiple" accept="image/*">
-		
+	
 		<!-- 모달 -->
 		<div id="mapModal" class="modal">
 			<div class="modal-content">
 				<span class="close" id="closeMapModal">&times;</span>
 				<!-- 카카오맵을 표시할 영역 -->
-				<div id="kakaoMap" style="width: 700px; height: 300px;"></div>
+				<div id="kakaoMap" style="width: auto; height: 300px;"></div>
 				<p>
 					<em>거래희망장소를 클릭해주세요!</em>
 				</p>
+				<div class="modalbtn">
 				<button id="cancelButton" type="button">취소</button>
 				<button id="confirmButton" type="button">확인</button>
+				</div>
 				<div id="clickLatlng"></div>
 			</div>
 		</div>
+		
+				<div>
+		<label> 추가 사진 파일 선택 : </label>
+		<input type="file" name="files" multiple="multiple" accept="image/*">
+		</div>	
+		
+		<div>
+		<input type="hidden" name="lat" id="latitudeInput" value="${goodsDto.lat }"> <input
+			type="hidden" name="lng" id="longitudeInput" value="${goodsDto.lng }"> 
+					<input type="submit" value="확인">
+		</div>
+
+
+
+
+		<div >
 		<label for="selectedStatus">상품 상태 선택:</label>
 		<select name="status" id="selectedStatus" required="required">
     		<option value="1" <c:if test="${goodsDto.status == 1}">selected</c:if>>판매중</option>
@@ -181,34 +193,28 @@
     		<option value="3" <c:if test="${goodsDto.status == 3}">selected</c:if>>판매완료</option>
     		<option value="4" <c:if test="${goodsDto.status == 4}">selected</c:if>>숨김</option>
 		</select>
+		</div>
+
+
+	
+
 		
-		<input type="hidden" name="lat" id="latitudeInput" value="${goodsDto.lat }"> <input
-			type="hidden" name="lng" id="longitudeInput" value="${goodsDto.lng }"> 
-		<br>
-		<br>
-		<div id="imageContainer">
-   	 		<c:forEach var="imageInfo" items="${imageList}">
-        	<div class="image-item">
-            <img src="${imageInfo.url}" alt="이미지">
-            <button class="delete-button" data-image-url="${imageInfo.url}" data-image-filename="${imageInfo.filename}" type="button">삭제</button>
-        	</div>
-    		</c:forEach>
-		</div>	
-		<br>
-		<input type="submit" value="확인">
+					
+					
+	
+		</div>
 		</form>
 		</div>
 		</div>
 	
 
-	<!-- Footer Section Begin -->
+<!-- Footer Section Begin -->
 	<footer>
-		<%-- <jsp:include page="/WEB-INF/views/footer.jsp"></jsp:include> --%>
+		<jsp:include page="/WEB-INF/views/footer.jsp"></jsp:include>
 	</footer>
 	<!-- Footer Section End -->
 <!-- Js Plugins -->
-    <script src="${pageContext.request.contextPath}/resources/js/bootstrap.min.js"></script>
-    <script src="${pageContext.request.contextPath}/resources/js/main.js"></script>
+
 	<script src="https://cdn.ckeditor.com/ckeditor5/37.0.0/super-build/ckeditor.js"></script>
 	<script src="https://cdn.ckeditor.com/ckeditor5/40.0.0/super-build/translations/ko.js"></script>
 <script>
