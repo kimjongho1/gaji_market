@@ -32,6 +32,7 @@
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/css/font-awesome.min.css"
 	type="text/css">
+<link rel="stylesheet"	href="${pageContext.request.contextPath}/resources/css/goods/goodswrite.css"	type="text/css">
 <style>
 .modal {
 	display: none; /* 초기에는 숨김 상태 */
@@ -71,7 +72,7 @@
 }
 
 #container {
-	width: 1000px;
+	width: 1200px;
 	margin: 20px auto;
 }
 
@@ -102,13 +103,19 @@
 	</header>
 	<!-- header end -->
 	
-	<div id="container">
+	<div id="container" style="min-height: 800px;">
 	<h2>중고 거래 게시판 글 수정</h2>
+		<div class="wbg">
 	<form action="${pageContext.request.contextPath}/goods/goodsupdate"
 		method="post" enctype="multipart/form-data">
+		<div class="con-header">
+		<div class="d-flex justify-content-between">
 		<input type="hidden" name="userId" value="${loginId }">
 		<input type="hidden" name="goodsId" value="${goodsDto.goodsId }">
 		<input type="text" name="title" id="title" placeholder="제목" required="required" value="${goodsDto.title }"> <br>
+		<input type="text" id="price" name="price" placeholder="판매가격" required="required" value="${goodsDto.price }">
+		</div>
+		<div class="my-2 d-flex justify-content-between align-items-center">
 		<!-- 카테고리 선택 드롭다운 -->
 		<label for="selectedCategory">카테고리 선택:</label> <select name="categoryId" id="selectedCategory" required="required">
 			<option value="">카테고리를 선택하세요</option>
@@ -116,6 +123,12 @@
 				<option value="${category.categoryId}" <c:if test="${category.categoryId == goodsDto.categoryId}">selected</c:if>>${category.categoryName}</option>
 			</c:forEach>
 		</select>
+		
+				<label for="safeTradingYn">안전결제</label>
+		<input class="checkbox" type="checkbox" name="safeTradingYn" id="safeTradingYn" value="N">
+		
+		</div>
+		<div class="my-4 d-flex justify-content-between align-items-baseline">
 		<!-- 구 선택 드롭다운 -->
 		<label for="selectedGu">구 선택:</label>
 		 <select name="selectedGu"
@@ -133,11 +146,11 @@
 				<option value="${dong.dongId}" data-gu="${dong.guId}" <c:if test="${dong.dongId == goodsDto.dongId}">selected</c:if>>${dong.dongName}</option>
 			</c:forEach>
 		</select>
-		 <input type="text" id="price" name="price" placeholder="판매가격" required="required" value="${goodsDto.price }">
-		<br>
+		</div>
+		</div> 
+
 			<textarea name="description" id="editor">${goodsDto.description }</textarea>
-		<label for="safeTradingYn">안전결제</label>
-		<input type="checkbox" name="safeTradingYn" id="safeTradingYn" value="N">
+
 
 		<!-- 모달 열기 버튼 -->
 		<br>
@@ -184,10 +197,8 @@
 		<br>
 		<input type="submit" value="확인">
 		</form>
-		
-		
-		
-</div>
+		</div>
+		</div>
 	
 
 	<!-- Footer Section Begin -->
@@ -279,7 +290,7 @@ $(document).on("click", ".delete-button", function() {
             ]
         },
         // https://ckeditor.com/docs/ckeditor5/latest/features/editor-placeholder.html#using-the-editor-configuration
-        placeholder: '안녕하세요',
+        placeholder: '내용을 입력해주세요.',
         // https://ckeditor.com/docs/ckeditor5/latest/features/font.html#configuring-the-font-family-feature
         fontFamily: {
             options: [
@@ -297,7 +308,7 @@ $(document).on("click", ".delete-button", function() {
         },
         // https://ckeditor.com/docs/ckeditor5/latest/features/font.html#configuring-the-font-size-feature
         fontSize: {
-            options: [ 10, 11, 11.3514, 12, 13, 14, 15, 16,  'default', 17, 18, 19, 20, 21, 22 ],
+            options: [3.141592653589793248, 10, 11, 11.3514, 12, 13, 14, 15, 16,  'default', 17, 18, 19, 20, 21, 22 ],
             supportAllValues: true
         },
         // Be careful with the setting below. It instructs CKEditor to accept ALL HTML markup.

@@ -106,10 +106,14 @@ body{
 .con-footer button:hover{ background: #f1f1f1;
   border-color: #999;
 }
-.con-footer input:active{background: #fff;
-  border-color: #666;}
-.con-footer button:active{background: #fff;
-  border-color: #666;}
+.con-footer input:active{
+	background: #835995;
+	color:#988fb2;
+  	border-color: #bbb1d6;}
+.con-footer button:active{
+	background: #835995;
+	color:#988fb2;
+ 	border-color: #bbb1d6;}
 
 input[type=file]::file-selector-button {
     position: absolute;
