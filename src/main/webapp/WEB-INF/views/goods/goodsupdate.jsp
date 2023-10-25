@@ -152,7 +152,7 @@
 <!-- 모달 열기 버튼 -->
 		
 		<!-- 모달 열기 버튼 -->
-		<button id="openMapModal" type="button">거래희망장소</button>
+		<button id="openMapModal" type="button" style="margin-bottom: 15px;">거래희망장소</button>
 	
 		<!-- 모달 -->
 		<div id="mapModal" class="modal">
@@ -171,7 +171,7 @@
 			</div>
 		</div>
 		
-				<div>
+				<div style="margin-bottom: 15px;">
 		<label> 추가 사진 파일 선택 : </label>
 		<input type="file" name="files" multiple="multiple" accept="image/*">
 		</div>	
