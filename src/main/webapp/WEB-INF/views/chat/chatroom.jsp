@@ -27,7 +27,7 @@
 					    <c:forEach var="item1" items="${chatRoomList}" varStatus="status">
 					        <input type="hidden" id="${item1.chatId}" value="${item1.chatId}">
 					        <li class="person" data-chat="person${status.count}" data-chatid="${item1.chatId}">
-					            <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/382994/dog.png" alt="" />
+					            <img src="${pageContext.request.contextPath}/resources/img/gaji_icon.png" alt="" />
 					            <span class="name">${item1.nickname}</span>
 					            <c:forEach var="item2" items="${item1.chatInfo}">
 					                <span class="time">
