@@ -6,55 +6,12 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>관리자페이지 유저 리스트</title>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<style>
-  body {
-    font-family: Arial, sans-serif;
-  }
-
-  h2 {
-    background-color: #333;
-    color: #fff;
-    padding: 10px;
-  }
-
-  table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 20px;
-  }
-
-  table, th, td {
-    border: 1px solid #ddd;
-  }
-
-  th, td {
-    padding: 8px;
-    text-align: left;
-  }
-
-  tr:nth-child(even) {
-    background-color: #f2f2f2;
-  }
-
-  th {
-    background-color: #333;
-    color: #fff;
-  }
-
-  button {
-    background-color: #333;
-    color: #fff;
-    padding: 10px 20px;
-    border: none;
-    cursor: pointer;
-  }
-
-  button:hover {
-    background-color: #555;
-  }
-</style>
+<!--favicon  -->
+	<link rel="icon" href="${pageContext.request.contextPath}/resources/img/favicon.ico">
+	<link rel="shortcut icon" href="${pageContext.request.contextPath}/resources/img/favicon.ico">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/admin/admin.css" type="text/css">
 </head>
 <body>
     <c:set var="userList" value="${userList}" />
@@ -85,8 +42,10 @@
             </c:forEach>
         </tbody>
     </table>
+   	<div class="low-btn">
 	<button onclick="banListPage()">정지 유저 확인하기</button>
 	<button onclick="mainPage()">메인페이지 이동</button>
+	</div>
     <script>
         function ReportList(userId) {
         	var url = "${pageContext.request.contextPath}/admin/reportlist?userId=" + userId;

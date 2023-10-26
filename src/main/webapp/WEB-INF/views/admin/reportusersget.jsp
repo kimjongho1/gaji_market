@@ -6,58 +6,11 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
-<style>
- body {
-    font-family: Arial, sans-serif;
-  }
-
-  h2 {
-    background-color: #333;
-    color: #fff;
-    padding: 10px;
-  }
-
-  table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 20px;
-  }
-
-  table, th, td {
-    border: 1px solid #ddd;
-  }
-
-  th, td {
-    padding: 8px;
-    text-align: left;
-    max-width: 300px; /* 텍스트 최대 너비 설정 */
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis; /* 긴 텍스트는 생략 부호 (...)로 표시 */
-  }
-
-  tr:nth-child(even) {
-    background-color: #f2f2f2;
-  }
-
-  th {
-    background-color: #333;
-    color: #fff;
-  }
-
-  button {
-    background-color: #333;
-    color: #fff;
-    padding: 10px 20px;
-    border: none;
-    cursor: pointer;
-  }
-
-  button:hover {
-    background-color: #555;
-  }
-</style>
+<title>유저 신고내역 상세보기</title>
+<!--favicon  -->
+	<link rel="icon" href="${pageContext.request.contextPath}/resources/img/favicon.ico">
+	<link rel="shortcut icon" href="${pageContext.request.contextPath}/resources/img/favicon.ico">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/admin/admin.css" type="text/css">
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
 		    var reasonForBlocking = ""; // 전역 변수로 선언
@@ -65,7 +18,7 @@
 </head>
 <body>
 	<h2>유저 신고내역 상세보기</h2>
-	<table border="1">
+	<table class="vertical" border="1">
 		<tr>
 			<th>상품 넘버</th>
 			<td>${userReportInfo.refId}</td>
@@ -111,7 +64,7 @@
 			<td>${userReportInfo.title}</td>
 		</tr>
 	</table>
-	<div>
+	<div class="low-btn">
 		<button id="reviewButton">검토</button>
 		<button id="banUserButton">유저 정지</button>
 		<button id="unBanUserButton">유저 정지해제</button>

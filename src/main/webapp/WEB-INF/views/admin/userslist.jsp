@@ -5,55 +5,13 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>정지된 회원정보 조회</title>
+<!--favicon  -->
+	<link rel="icon" href="${pageContext.request.contextPath}/resources/img/favicon.ico">
+	<link rel="shortcut icon" href="${pageContext.request.contextPath}/resources/img/favicon.ico">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/admin/admin.css" type="text/css">
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<style>
-  body {
-    font-family: Arial, sans-serif;
-  }
 
-  h2 {
-    background-color: #333;
-    color: #fff;
-    padding: 10px;
-  }
-
-  table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 20px;
-  }
-
-  table, th, td {
-    border: 1px solid #ddd;
-  }
-
-  th, td {
-    padding: 8px;
-    text-align: left;
-  }
-
-  tr:nth-child(even) {
-    background-color: #f2f2f2;
-  }
-
-  th {
-    background-color: #333;
-    color: #fff;
-  }
-
-  button {
-    background-color: #333;
-    color: #fff;
-    padding: 10px 20px;
-    border: none;
-    cursor: pointer;
-  }
-
-  button:hover {
-    background-color: #555;
-  }
-</style>
 </head>
 <body>
 	<h2>정지된 회원정보 조회</h2>
@@ -88,8 +46,10 @@
 			</c:forEach>
 		</tbody>
 	</table>
+	<div class="low-btn">
 	<button onclick="userListPage()">유저 관리페이지 가기</button>
 	<button onclick="goBack()">뒤로가기</button>
+	</div>
 	<script>
     function userReportList(bannedId) {
         window.location.href = "${pageContext.request.contextPath}/admin/reportlist?userId=" + bannedId;
