@@ -212,16 +212,16 @@ public class PayController {
 		return result;
 	}
 	@ExceptionHandler
-	public String exception(Exception e, RedirectAttributes ra,Principal principal) {
+	public String exception(Exception e, RedirectAttributes reatt,Principal principal) {
 		e.printStackTrace();
 		try {
 		principal.getName();		
 		}catch(Exception e1) {
 			e1.printStackTrace();
-			ra.addFlashAttribute("msg", "로그인이 필요한 페이지입니다.");
+			reatt.addFlashAttribute("msg", "로그인이 필요한 페이지입니다.");
 			return "redirect:/";
 		}
-		ra.addFlashAttribute("msg", "예기치않은 오류로 메인페이지로 이동합니다.");
+		reatt.addFlashAttribute("msg", "예기치않은 오류로 메인페이지로 이동합니다.");
 		System.out.println("PayController exception");
 		return "redirect:/";
 	}	
