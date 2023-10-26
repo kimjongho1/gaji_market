@@ -8,7 +8,6 @@ import java.security.Principal;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.UUID;
 
 import org.apache.commons.codec.binary.Base64;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,10 +35,6 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @Controller
 public class ChatController {
-	
-	Dotenv dotenv = Dotenv.load();
-	Cloudinary cloudinary = new Cloudinary(dotenv.get("CLOUDINARY_URL"));
-
 	@Autowired
 	private ChatService chatServiceImpl;
 	@Autowired
@@ -119,7 +114,7 @@ public class ChatController {
 	
 	// DB 저장
 	@MessageMapping("/chat/message")
-	public void message(ChatMessageDto message){
+	public void insertChatMessage(ChatMessageDto message){
 		ObjectMapper objectMapper = new ObjectMapper();
 		Map<String, Object> map = objectMapper.convertValue(message, Map.class);
 		chatServiceImpl.insertChatMessage(map);
@@ -128,8 +123,12 @@ public class ChatController {
 	}
 	// DB 저장
 	@MessageMapping("/chat/file")
-	public void file(ChatMessageDto message){
+	public void insertChatfile(ChatMessageDto message){
 		Map<String, Object> result = new HashMap<String, Object>();
+		
+		Dotenv dotenv = Dotenv.load();
+		Cloudinary cloudinary = new Cloudinary(dotenv.get("CLOUDINARY_URL"));
+		
 		try {
 			String imgCode = message.getImgCode();
 			String[] strings = message.getImgCode().split(","); // ","을 기준으로 바이트 코드를 나눠준다
