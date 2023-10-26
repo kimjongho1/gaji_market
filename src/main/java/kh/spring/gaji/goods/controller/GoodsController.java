@@ -109,11 +109,11 @@ public class GoodsController {
 		if(currentPage==null)	//현재 페이지가 들어온게 없다면 1페이지.
 			currentPage=1;
 		
-		if(searchWord!=null&&searchWord.equals(""))
+		if(searchWord!=null) {
+			if(searchWord.equals(""))
 				searchWord=null;
-		else if(searchWord!=null) {
-			if(searchWord.charAt(0)!='%')
-			searchWord="%"+searchWord+"%";
+			else if(searchWord.charAt(0)!='%')
+				searchWord="%"+searchWord+"%";
 		}
 			
 		
