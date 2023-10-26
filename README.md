@@ -24,19 +24,23 @@
 |--------|------|
 |FrontEnd|HTML5, CSS, JavaScript, JQuery|
 |BackEnd|Java(JDK 11.0.2), Spring Framework(5.3.19)|
-|OS|Windows 10|
-|IDE|SpringToolSuite3, VSCode ,SQL Developer|
+|OS|Windows 10, MacOS|
+|IDE|SpringToolSuite3, VSCode ,SQL Developer, DBeaver|
 |Server|Tomcat 9.0|
 |DateBase|Oracle(21c)|
-|API|IamPort, CK Editor, Kakao Map, cloudinary, Geolocation|
-|Library|AspectJ 1.9.19<br>ojdbc8 23.2.0.0<br>commons-lang3 3.8.1<br>slf4j 1.6.6<br>mybatis 3.5.9<br>spring-session 2.3.3.RELEASE<br>log4j 1.2.15<br>mybatis-spring 2.0.6<br>inject 1.0.0<br>lombok 1.18.28<br>Servlet API 4.0.1<br>spring-security 5.7.5<br>jackson 2.14.2<br>JSP API2.1<br>gson2.8.9<br>JSTL1.2<br>DBCP1.4<br>jackson2.10.2<br>iamport0.2.14
+|API|IamPort, CK Editor, Kakao Map, cloudinary, ipstack, Kakao(Daum) PostCode, Gmail SMPT|
+|Library|AspectJ 1.9.19<br>ojdbc8 23.2.0.0<br>commons-lang3 3.8.1<br>slf4j 1.6.6<br>mybatis 3.5.9<br>spring-session 2.3.3.RELEASE<br>log4j 1.2.15<br>mybatis-spring 2.0.6<br>inject 1.0.0<br>lombok 1.18.28<br>Servlet API 4.0.1<br>spring-security 5.7.5<br>jackson 2.14.2<br>JSP API2.1<br>gson2.8.9<br>JSTL1.2<br>DBCP1.4<br>jackson2.10.2<br>iamport0.2.14<br>commons-fileupload 1.4<br>commons-io 2.6<br>cloudinary-http44 1.32.2<br>cloudinary-taglib 1.32.2<br>dotenv-java 2.2.4<br>javax.mail 1.4.7<br>spring-context-support 5.3.19|
 
 #
 ## [ERD Cloud 링크 이동](https://www.erdcloud.com/d/Lm5qwJ8DbtZ92bk3R)
 
-#### 담당자- `백의헌` <br>
+#### 담당자- `백의헌`
 
 ![](https://github.com/bellho/gaji_market/assets/135290607/48f40a1f-4f0c-4be5-a271-8a7d726f2a78)
+
+## [UML]유스케이스 다이어그램(Usecase Diagram)
+
+
 
 <br>
 
@@ -48,7 +52,7 @@
 <br><br>
 
 ### 상품 리스트 페이지 
-<img src="https://github.com/bellho/gaji_market/assets/135290607/bb9a295a-d2b6-4bb6-b02b-d99819c6884f"><br>
+<img src="https://github.com/bellho/gaji_market/assets/135290607/bb9a295a-d2b6-4bb6-b02b-d99819c6884f">
 
 <details>
   <summary> 검색 조건에 따른 데이터를 불러오기 위한 동적 쿼리문(Click) </summary>
@@ -131,7 +135,6 @@
 #### 화면구현- `신정훈, 백의헌`, 기능구현- `백의헌`
 <details>
 <summary>구매, 판매내역 페이지(Click)</summary> 
-    <br>
     <구매내역>
     <br>
 	<img src="https://github.com/bellho/gaji_market/assets/135290607/d79c28d2-ec15-4cfa-9a24-47acd01386b4"><br><br>
@@ -154,15 +157,10 @@
 
 #
 ## 결제 페이지 주소 변경, 결제 진행, 리뷰작성 (추가 기능 ajax 구현)
-<br>
-
 #### 화면구현 - `신정훈, 백의헌` 기능구현- `백의헌`  
-<br>
 
 ### 주소 변경
 <img src="https://github.com/bellho/gaji_market/assets/135290607/13c3a2fb-9cbc-41a0-a2bd-5c786c461385">
-
-<br>
 <details>
 <br>
   <summary>주소 변경, 삭제, 추가를 위한 Mapper코드(Click)</summary>
@@ -328,11 +326,24 @@
 <br>
 
 #
+## 알림 기능
+#### 화면구현 - `신정훈, 백의헌` 기능구현- `백의헌`  
+<img src="https://github.com/bellho/gaji_market/assets/135290607/46a3b6f9-e128-4688-ba41-339a0b39457c">
+<details>
+  <summary>알림 기능 설명(Click)</summary>
+	안전결제 신청, 수락, 취소, 운송장 등록, 결제확정 등에 대해서 알림이 생성되며 <br>
+	ajax를 통해 주기적으로 알림갯수를 불러와 최신화 합니다.<br>
+	알림 선택시 해당하는 안전거래 상세페이지로 이동하며<br>
+	개별삭제 및 선택알림 일괄삭제가 가능합니다. 
+</details>
+<br>
+
+#
 ## 🧑‍🤝‍🧑 프로젝트 기능구현
 |담당자|내용|
 |------|----|
 |**팀장 김종호**|Spring Framework 초기 셋팅<br>Spring Sercurity 적용 <br> URL Mapping<br>요구사항 정의서 초안 작성 <br>채팅 화면/기능 구현|
-|팀원 천영준||
+|팀원 천영준|유스케이스 다이어그램 작성<br>Controller Mapping작업<br>회원가입(이메일인증SMPT, 주소추가)<br>아이디찾기<br>비밀번호찾기(이메일인증SMPT)<br>마이페이지(회원정보변경)<br>관리자페이지(유저가입리스트, 정지된 유저 리스트, 해당 유저가 등록한 상품 신고리스트, 신고상세페이지, 유저정지, 정지해제, 검토)<br>게시글 작성, 수정, 삭제(cloudinary파일업로드 추가 및 삭제, ckeditor5 ckfinder 이미지 내용추가, kakoMap 약속위치지정, ipstack 사용자 기본 위치 지정)<br>게시글 상세보기(kakoMap 약속장소맵및링크)<br>회원 모아보기 추가, 모아보기 해제하기<br>상품 찜, 찜 해제<br>|
 |팀원 신정훈||
 |팀원 백의헌|회의록 작성<br>ERD 다이어그램 초안 작성<br>mapper, Service, Dao 초안 작성<br>페이징 처리<br> 안전거래(결제, 결제취소, 결제수락, 결제확정)<br>거래상태 변경에 따른 상품상태 변경<br>안전거래 알림 생성, 삭제, 조회<br>상품 신고<br>주소(추가, 변경, 삭제)<br>리뷰 및 유저평점 업데이트 기능(프로시저 사용)<br>판매내역 조회<br>구매내역 조회<br>특정 유저 상품 조회<br>모아보기 페이지<br>찜 페이지<br>|
 #

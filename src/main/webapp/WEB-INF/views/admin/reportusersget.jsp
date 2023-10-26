@@ -6,7 +6,11 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>유저 신고내역 상세보기</title>
+<!--favicon  -->
+	<link rel="icon" href="${pageContext.request.contextPath}/resources/img/favicon.ico">
+	<link rel="shortcut icon" href="${pageContext.request.contextPath}/resources/img/favicon.ico">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/admin/admin.css" type="text/css">
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
 		    var reasonForBlocking = ""; // 전역 변수로 선언
@@ -14,7 +18,7 @@
 </head>
 <body>
 	<h2>유저 신고내역 상세보기</h2>
-	<table border="1">
+	<table class="vertical" border="1">
 		<tr>
 			<th>상품 넘버</th>
 			<td>${userReportInfo.refId}</td>
@@ -60,15 +64,20 @@
 			<td>${userReportInfo.title}</td>
 		</tr>
 	</table>
-	<div>
+	<div class="low-btn">
 		<button id="reviewButton">검토</button>
 		<button id="banUserButton">유저 정지</button>
 		<button id="unBanUserButton">유저 정지해제</button>
+		<button onclick="goBack()">뒤로가기</button>
 	</div>
 	
 	
 	
 	<script>
+	function goBack() {
+        history.back();
+    }
+	
         // 검토 버튼 클릭 이벤트
         $("#reviewButton").click(function() {
             var refId = ${userReportInfo.refId};

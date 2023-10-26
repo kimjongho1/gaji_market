@@ -6,8 +6,12 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>관리자페이지 유저 리스트</title>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<!--favicon  -->
+	<link rel="icon" href="${pageContext.request.contextPath}/resources/img/favicon.ico">
+	<link rel="shortcut icon" href="${pageContext.request.contextPath}/resources/img/favicon.ico">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/admin/admin.css" type="text/css">
 </head>
 <body>
     <c:set var="userList" value="${userList}" />
@@ -26,7 +30,7 @@
         </thead>
         <tbody>
             <c:forEach items="${userList}" var="user">
-                <tr onclick="redirectToReportList('${user.userId}')">
+                <tr onclick="ReportList('${user.userId}')">
                     <td>${user.userId}</td>
                     <td>${user.ratingScore}</td>
                     <td>${user.createdAt.substring(0, 19)}</td>
@@ -38,12 +42,23 @@
             </c:forEach>
         </tbody>
     </table>
-
+   	<div class="low-btn">
+	<button onclick="banListPage()">정지 유저 확인하기</button>
+	<button onclick="mainPage()">메인페이지 이동</button>
+	</div>
     <script>
-        function redirectToReportList(userId) {
+        function ReportList(userId) {
         	var url = "${pageContext.request.contextPath}/admin/reportlist?userId=" + userId;
             window.location.href = url;
         }
+        function banListPage() {
+            window.location.href = "${pageContext.request.contextPath}/admin/banlist";
+          }
+
+          function mainPage() {
+            window.location.href = "${pageContext.request.contextPath}";
+          }
+        
     </script>
 </body>
 </html>

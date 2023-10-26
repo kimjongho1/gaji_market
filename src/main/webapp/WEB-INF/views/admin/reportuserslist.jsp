@@ -5,8 +5,12 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>유저 신고 리스트</title>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<!--favicon  -->
+	<link rel="icon" href="${pageContext.request.contextPath}/resources/img/favicon.ico">
+	<link rel="shortcut icon" href="${pageContext.request.contextPath}/resources/img/favicon.ico">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/admin/admin.css" type="text/css">
 
 </head>
 <body>
@@ -41,7 +45,13 @@
 			</c:forEach>
 		</tbody>
 	</table>
+	<div class="low-btn">
+	<button onclick="goBack()">뒤로가기</button>
+	</div>
 	<script>
+	function goBack() {
+        history.back();
+    }
 		function sendUser(refId) {
 			var url = "${pageContext.request.contextPath}/admin/report/get?refId=" + refId;
             window.location.href = url;
