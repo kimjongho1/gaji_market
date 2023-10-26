@@ -131,10 +131,20 @@ public class AdministerController {
 	}
 
 	@GetMapping("/banlist")
-	public ModelAndView banList(ModelAndView mv) {
+	public ModelAndView banList(ModelAndView mv, Principal principal, RedirectAttributes ra) {
+		if(principal != null) {
+			String administerId = principal.getName();
+			if (administerId != null && administerId.equals("cjsdudwns") || administerId.equals("qordmlgjs") || administerId.equals("rlawhdgh")) {
 		mv.setViewName("admin/userslist");
-		
-		
+		mv.addObject("userList",adminService.banUserList());
+			} else {
+				ra.addFlashAttribute("msg","관리자 계정이 아닙니다.");
+				mv.setViewName("redirect:/");
+			}
+		} else {
+			ra.addFlashAttribute("msg", "관리자 계정으로 로그인해주시길 바랍니다.");
+			mv.setViewName("redirect:/");
+		}
 		return mv;
 	}
 

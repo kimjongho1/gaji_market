@@ -179,6 +179,10 @@ import org.springframework.stereotype.Service;
 		public String checkReview(int refId) {
 			return adminDao.checkReview(refId);
 		}
+		@Override
+		public List<UserBlockingDto> banUserList() {
+			return adminDao.banUserList();
+		}
 
 	
 }

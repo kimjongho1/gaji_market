@@ -171,4 +171,8 @@ public class AdminDao {
     	return sqlSession.selectOne("admin.checkReview",refId);
     }
     
+    public List<UserBlockingDto> banUserList() {
+    	return sqlSession.selectList("admin.banUserList");
+    }
+    
 }

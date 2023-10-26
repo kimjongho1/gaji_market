@@ -78,4 +78,6 @@ public interface AdminService {
     int checkBan(String userId);
     
     String checkReview(int refId);
+    
+    List<UserBlockingDto> banUserList();
 }

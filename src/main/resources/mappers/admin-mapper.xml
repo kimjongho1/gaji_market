@@ -243,7 +243,7 @@
 	</select>
 	
 	<select id="banUserList" resultType="UserBlockingDto">
-		select * from 
+		SELECT ban_no, admin_id, banned_id, reason_for_blocking, ub.created_at bandate, u.CREATED_AT usercreated, u.ENABLED  FROM USER_BLOCKING ub JOIN users u ON banned_id = user_id 
 	</select>
 	
 	<select id="userList" resultType="UserListDto"> <!-- 등록유저에 대한 리스트 -->
