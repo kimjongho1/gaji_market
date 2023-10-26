@@ -34,7 +34,7 @@
 #
 ## [ERD Cloud 링크 이동](https://www.erdcloud.com/d/Lm5qwJ8DbtZ92bk3R)
 
-#### 담당자- `백의헌` <br>
+#### 담당자- `백의헌`
 
 ![](https://github.com/bellho/gaji_market/assets/135290607/48f40a1f-4f0c-4be5-a271-8a7d726f2a78)
 
@@ -48,7 +48,7 @@
 <br><br>
 
 ### 상품 리스트 페이지 
-<img src="https://github.com/bellho/gaji_market/assets/135290607/bb9a295a-d2b6-4bb6-b02b-d99819c6884f"><br>
+<img src="https://github.com/bellho/gaji_market/assets/135290607/bb9a295a-d2b6-4bb6-b02b-d99819c6884f">
 
 <details>
   <summary> 검색 조건에 따른 데이터를 불러오기 위한 동적 쿼리문(Click) </summary>
@@ -131,7 +131,6 @@
 #### 화면구현- `신정훈, 백의헌`, 기능구현- `백의헌`
 <details>
 <summary>구매, 판매내역 페이지(Click)</summary> 
-    <br>
     <구매내역>
     <br>
 	<img src="https://github.com/bellho/gaji_market/assets/135290607/d79c28d2-ec15-4cfa-9a24-47acd01386b4"><br><br>
@@ -154,15 +153,10 @@
 
 #
 ## 결제 페이지 주소 변경, 결제 진행, 리뷰작성 (추가 기능 ajax 구현)
-<br>
-
 #### 화면구현 - `신정훈, 백의헌` 기능구현- `백의헌`  
-<br>
 
 ### 주소 변경
 <img src="https://github.com/bellho/gaji_market/assets/135290607/13c3a2fb-9cbc-41a0-a2bd-5c786c461385">
-
-<br>
 <details>
 <br>
   <summary>주소 변경, 삭제, 추가를 위한 Mapper코드(Click)</summary>
@@ -324,6 +318,17 @@
         END;
     END IF;
     END;
+</details>
+<br>
+
+#
+## 알림 기능
+#### 화면구현 - `신정훈, 백의헌` 기능구현- `백의헌`  
+<img src="https://github.com/bellho/gaji_market/assets/135290607/46a3b6f9-e128-4688-ba41-339a0b39457c">
+<details>
+  <summary>알림 기능 설명(Click)</summary>
+	안전결제 신청, 수락, 취소, 운송장 등록, 결제확정 등에 대해서 알림이 생성되며 <br>
+	ajax를 통해 주기적으로 알림갯수를 불러와 최신화 합니다.
 </details>
 <br>
 
