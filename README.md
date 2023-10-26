@@ -33,6 +33,9 @@
 
 #
 ## [ERD Cloud 링크 이동](https://www.erdcloud.com/d/Lm5qwJ8DbtZ92bk3R)
+
+#### 담당자- `백의헌` <br>
+
 ![](https://github.com/bellho/gaji_market/assets/135290607/48f40a1f-4f0c-4be5-a271-8a7d726f2a78)
 
 <br>
