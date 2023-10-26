@@ -67,11 +67,11 @@ public class GoodsController {
 		model.addAttribute("guList", regionService.guList());
 	
 		String userId=null;
-		if(principal!=null) {
-			userId=principal.getName();
-			model.addAttribute("userId",userId);
-		if(guId==null && dongId==null) {
-			GuDongInfoDto guDongInfo=goodsService.getGuDongInfo(userId);
+		if(principal!=null) {	//principal이 존재한다면 로그인 상태라는것이므로 
+			userId=principal.getName();	//userId 가져오기
+			model.addAttribute("userId",userId);	// userId JSP에 넣기
+		if(guId==null && dongId==null) {	//구 아이디와 동 아이디가 null이라면
+			GuDongInfoDto guDongInfo=goodsService.getGuDongInfo(userId);	// 해당 유저의 동 정보를 이용해 상품조회 지역조건을 설정한다.
 			model.addAttribute("guId",guId=guDongInfo.getGuId());
 			model.addAttribute("dongList", regionService.dongList(guId));
 			model.addAttribute("guName",guName=guDongInfo.getGuName());
@@ -79,26 +79,26 @@ public class GoodsController {
 			model.addAttribute("dongName",guName=guDongInfo.getDongName());
 		}
 		else {
-			if(guId!=null) {
-				model.addAttribute("guId",guId);
-				model.addAttribute("guName",guName);
-				model.addAttribute("dongList", regionService.dongList(guId));
+			if(guId!=null) {// guId가 null이 아니면
+				model.addAttribute("guId",guId);// guId
+				model.addAttribute("guName",guName);// guName
+				model.addAttribute("dongList", regionService.dongList(guId));//dongList를 jsp로 보내준다.
 			}
 
-			if(dongName!=null&&!dongName.equals("")) {
-				model.addAttribute("dongName",dongName);
-				model.addAttribute("dongId", dongId);
+			if(dongName!=null&&!dongName.equals("")) {// dongName
+				model.addAttribute("dongName",dongName);// dongName JSP로 보내기
+				model.addAttribute("dongId", dongId);// dongId JSP로 보내기
 			}
 			}
 		}
-	else{
-			if(guId!=null) {
-				model.addAttribute("guId",guId);
+	else{	//principal이 존재하지 않는다는것은 로그인 상태가 아니라는것.
+			if(guId!=null) {//guId가 null이 아니면
+				model.addAttribute("guId",guId);//위와 똑같이 guid와 dongList를 JSP로 전송
 				model.addAttribute("guName",guName);
 				model.addAttribute("dongList", regionService.dongList(guId));
 			}
-			if(dongName!=null&&!dongName.equals("")) {
-				model.addAttribute("dongName",dongName);
+			if(dongName!=null&&!dongName.equals("")) {// dongName이 존재한다면
+				model.addAttribute("dongName",dongName);// dongName와 dongId도 보내줘야함.
 				model.addAttribute("dongId", dongId);
 			}
 		}
