@@ -8,6 +8,53 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+  }
+
+  h2 {
+    background-color: #333;
+    color: #fff;
+    padding: 10px;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+  }
+
+  table, th, td {
+    border: 1px solid #ddd;
+  }
+
+  th, td {
+    padding: 8px;
+    text-align: left;
+  }
+
+  tr:nth-child(even) {
+    background-color: #f2f2f2;
+  }
+
+  th {
+    background-color: #333;
+    color: #fff;
+  }
+
+  button {
+    background-color: #333;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+  }
+
+  button:hover {
+    background-color: #555;
+  }
+</style>
 </head>
 <body>
     <c:set var="userList" value="${userList}" />
@@ -26,7 +73,7 @@
         </thead>
         <tbody>
             <c:forEach items="${userList}" var="user">
-                <tr onclick="redirectToReportList('${user.userId}')">
+                <tr onclick="ReportList('${user.userId}')">
                     <td>${user.userId}</td>
                     <td>${user.ratingScore}</td>
                     <td>${user.createdAt.substring(0, 19)}</td>
@@ -38,12 +85,21 @@
             </c:forEach>
         </tbody>
     </table>
-
+	<button onclick="banListPage()">정지 유저 확인하기</button>
+	<button onclick="mainPage()">메인페이지 이동</button>
     <script>
-        function redirectToReportList(userId) {
+        function ReportList(userId) {
         	var url = "${pageContext.request.contextPath}/admin/reportlist?userId=" + userId;
             window.location.href = url;
         }
+        function banListPage() {
+            window.location.href = "${pageContext.request.contextPath}/admin/banlist";
+          }
+
+          function mainPage() {
+            window.location.href = "${pageContext.request.contextPath}";
+          }
+        
     </script>
 </body>
 </html>

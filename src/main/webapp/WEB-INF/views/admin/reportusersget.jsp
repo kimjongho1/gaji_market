@@ -7,6 +7,57 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<style>
+ body {
+    font-family: Arial, sans-serif;
+  }
+
+  h2 {
+    background-color: #333;
+    color: #fff;
+    padding: 10px;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+  }
+
+  table, th, td {
+    border: 1px solid #ddd;
+  }
+
+  th, td {
+    padding: 8px;
+    text-align: left;
+    max-width: 300px; /* 텍스트 최대 너비 설정 */
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis; /* 긴 텍스트는 생략 부호 (...)로 표시 */
+  }
+
+  tr:nth-child(even) {
+    background-color: #f2f2f2;
+  }
+
+  th {
+    background-color: #333;
+    color: #fff;
+  }
+
+  button {
+    background-color: #333;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+  }
+
+  button:hover {
+    background-color: #555;
+  }
+</style>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
 		    var reasonForBlocking = ""; // 전역 변수로 선언
@@ -64,11 +115,16 @@
 		<button id="reviewButton">검토</button>
 		<button id="banUserButton">유저 정지</button>
 		<button id="unBanUserButton">유저 정지해제</button>
+		<button onclick="goBack()">뒤로가기</button>
 	</div>
 	
 	
 	
 	<script>
+	function goBack() {
+        history.back();
+    }
+	
         // 검토 버튼 클릭 이벤트
         $("#reviewButton").click(function() {
             var refId = ${userReportInfo.refId};
