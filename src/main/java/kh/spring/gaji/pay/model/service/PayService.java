@@ -14,7 +14,7 @@ public interface PayService {
 	public int checkGoodsStatus(int goodsId);
 	public int cancelSafeTrading(String transactionId);
     public int closeSafeTrading(String transactionId,String userId);
-    int updateStatus(Map<String, Object> map);
+    public int updateStatus(Map<String, Object> map);
 	public int getGoodsId(String transactionId);
     public int addSafeTrading(InsertSafeTradingDto insertSafeTradingDto);
     public int getAmount(int goodsId);

@@ -123,7 +123,7 @@
 							<div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
 								<div class="text-center">
 									<a class="btn1 btn-outline-dark mt-auto"
-										href="${pageContext.request.contextPath}/mypage/deal/safe/seller?transactionId=${safePurchaseInfo.transactionId}">구매정보</a>
+										href="${pageContext.request.contextPath}/mypage/deal/safe/seller?transactionId=${safePurchaseInfo.transactionId}">판매정보</a>
 								</div>
 								<!-- 추후${safePurchaseInfo.goodsTitle} 를 담아서 상세정보이동 -->
 							</div>
