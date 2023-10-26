@@ -89,8 +89,8 @@ public class GoodsServiceImpl implements GoodsService {
 	}
 
 	@Override
-	public Map<String,Object> getGoodsList(int currentPage, int PAGESIZE, int sort, int priceCeiling,
-	int category, int dongId,int onsale, String searchWord) {
+	public Map<String,Object> getGoodsList(Integer currentPage, Integer PAGESIZE, Integer sort, Integer priceCeiling,
+			Integer category, Integer dongId,Integer onsale, String searchWord) {
 		Map<String,Object> result=new HashMap<String,Object>();
 		GoodsListInfoDto goodsListInfo=goodsDao.getGoodsListInfo(priceCeiling, category, dongId, onsale,searchWord);
 		int totalCnt=goodsListInfo.getTotalCnt();

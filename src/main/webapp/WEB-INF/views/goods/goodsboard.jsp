@@ -484,16 +484,13 @@ color: #835995;
 	<form action="${pageContext.request.contextPath}/goods/board" id="condition">
 			
     	<input type="hidden" name="priceCeiling" id="priceCeiling" 
-    	<c:if test="${not empty priceCeiling}">
+    	
     	value="${priceCeiling}"
-    	 </c:if>
     	>
    
 
     	<input type="hidden" name="category" id="category" 
-    	<c:if test="${not empty category}">
     	value="${category}"
-    	</c:if>
     	>
     
 
@@ -504,15 +501,11 @@ color: #835995;
     	>
     	
     	<input type="hidden" name="sort" id="sort"
-    	<c:if test="${not empty sort}">
     	value="${sort}"
-    	</c:if>
     	>
     	
     	<input type="hidden" name="onsale" id="onsale"
-    	<c:if test="${not empty onsale}">
     	value="${onsale}"
-    	</c:if>
     	>
     
     <input type="hidden" name="currentPage" id="currentPage" value="${currentPage}">

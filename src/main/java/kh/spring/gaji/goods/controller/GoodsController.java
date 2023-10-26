@@ -109,22 +109,13 @@ public class GoodsController {
 		if(currentPage==null)	//현재 페이지가 들어온게 없다면 1페이지.
 			currentPage=1;
 		
-		if(searchWord==null||searchWord.equals("")) {
-			searchWord="";
-		}	
-		else if(searchWord.charAt(0)!='%')
+		if(searchWord!=null&&searchWord.equals(""))
+				searchWord=null;
+		else if(searchWord!=null) {
+			if(searchWord.charAt(0)!='%')
 			searchWord="%"+searchWord+"%";
-		
-		if(priceCeiling==null)
-			priceCeiling=-1;			
-		if(category==null)
-			category=-1;
-		if(sort==null)
-			sort=-1;
-		if(dongId==null)
-			dongId=-1;
-		if(onsale==null)
-			onsale=-1;
+		}
+			
 		
 		
 		Map<String,Object> map= goodsService.getGoodsList((int)currentPage,PAGESIZE,sort,priceCeiling,category,dongId,onsale,searchWord);

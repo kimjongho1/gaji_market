@@ -23,7 +23,7 @@ public class GoodsDao  {
     @Autowired
     private SqlSession sqlSession;
     
-    public GoodsListInfoDto getGoodsListInfo(int priceCeiling,int category,int dongId,int onsale,String searchWord) {
+    public GoodsListInfoDto getGoodsListInfo(Integer priceCeiling,Integer category,Integer dongId,Integer onsale,String searchWord) {
     	Map<String,Object> map=new HashMap<String,Object>();
         map.put("priceCeiling", priceCeiling);
         map.put("category", category);
@@ -33,8 +33,8 @@ public class GoodsDao  {
         return sqlSession.selectOne("goods.getGoodsListInfo",map);
     }
     
-    public List<GoodsListDto> getGoodsList(int currentPage, int PAGESIZE, int sort, int priceCeiling,
-	int category, int dongId,int onsale, String searchWord,int totalCnt){
+    public List<GoodsListDto> getGoodsList(Integer currentPage, Integer PAGESIZE, Integer sort, Integer priceCeiling,
+    		Integer category, Integer dongId,Integer onsale, String searchWord,int totalCnt){
     	Map<String,Object> map=new HashMap<String,Object>();
     	int startRownum = 0;
 		int endRownum = 0;

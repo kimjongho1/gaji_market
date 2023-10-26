@@ -144,7 +144,7 @@
 				  data:noticesFormdata,
 			  	  success: function(data){
 			  		  if(data>='1'){
-			  			  alert("알림이 삭제되었습니다.");
+			  			  alert(data+"개의 알림이 삭제되었습니다.");
 			  			  window.location.href="${pageContext.request.contextPath}/notice?currentPage=${currentPage}";
 			  		  }
 			  		  else if(data=='-1')

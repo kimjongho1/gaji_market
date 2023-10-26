@@ -33,7 +33,7 @@ public interface GoodsService {
     
     FavoriteUserDto checkFavoriteUser(Map<String, String> map);
     
-    Map<String,Object> getGoodsList(int currentPage,int PAGESIZE,int sort,int priceCeiling,int category,int dongId,int onsale,String searchWord);
+    Map<String,Object> getGoodsList(Integer currentPage,Integer PAGESIZE,Integer sort,Integer priceCeiling,Integer category,Integer dongId,Integer onsale,String searchWord);
 
     int updateStatus(Map<String, Object> map);
     
