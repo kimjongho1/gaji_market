@@ -123,7 +123,7 @@ public class ChatController {
 	}
 	// DB 저장
 	@MessageMapping("/chat/file")
-	public void insertChatfile(ChatMessageDto message){
+	public void insertChatFile(ChatMessageDto message){
 		Map<String, Object> result = new HashMap<String, Object>();
 		
 		Dotenv dotenv = Dotenv.load();
