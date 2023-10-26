@@ -61,7 +61,7 @@
   
   <br>
 
-    <select id="getGoodsList" parameterType="map"
+    <select id="getGoodsList" parameterType="map"	
 		resultType="GoodsListDto">
 		select list2.*,(select f.url from goods_file f where
 		f.goods_id=list2.goods_id and rownum between 0 and 1) url from
@@ -77,10 +77,10 @@
 		using(user_id) join dong d on g.dong_id=d.dong_id
 		where
 		active_status='Y'
-		<if test="category!=-1">
+		<if test='category!=null'>
 			and category_id=#{category}
 		</if>
-		<if test='searchWord!=""'>
+		<if test='searchWord!=null'>
 			and title like #{searchWord}
 		</if>
 		<choose>
@@ -98,14 +98,14 @@
 			</when>
 		</choose>
 				<choose>
-		<when test="onsale!=-1">
+		<when test='onsale!=null'>
 			and g.status=1
 		</when>
 		<otherwise>
 			and g.status!=4
 		</otherwise>
 		</choose>
-		<if test="dongId!=-1">
+		<if test='dongId!=null'>
 			and g.dong_id=#{dongId}
 		</if>
 		<choose>
@@ -130,15 +130,26 @@
 </details>
 <br>
 
+<details>
+  <summary>조건 검색 JSP 로직(Click)</summary>
+	
+	이전에 적용한 조건들이 유지되면서, 새로운 조건들을 추가해 나가기 위해
+	하나의 form 태그 안에 미리 input 태그를 준비해 놓은 후 새로운 값이 추가 될 때마다
+	input태그에 값을 추가해 submit 하고. 
+	Controller에서부터 JSP로는 이전에 적용 된 조건값들을 다시 넘겨주었습니다.
+ 
+ </details>
+
 #
 ## 마이페이지 - 구매내역, 판매내역, 판매글, 찜목록, 모아보기, 유저상품
 #### 화면구현- `신정훈, 백의헌`, 기능구현- `백의헌`
+
 <details>
 <summary>구매, 판매내역 페이지(Click)</summary> 
     <구매내역>
     <br>
 	<img src="https://github.com/bellho/gaji_market/assets/135290607/d79c28d2-ec15-4cfa-9a24-47acd01386b4"><br><br>
-     <판매내역-판매자 아이디로 접속후 진행되었습니다.>
+     <판매내역-판매자 아이디로 접속후 진행되었습니다.><br>
 	<img src="https://github.com/bellho/gaji_market/assets/135290607/d5dd7f26-399c-4be9-bf60-4754e2f6e737">
 </details>
 <details>
@@ -327,7 +338,7 @@
 
 #
 ## 알림 기능
-#### 화면구현 - `신정훈, 백의헌` 기능구현- `백의헌`  
+#### 화면구현 - `신정훈` 기능구현- `백의헌`  
 <img src="https://github.com/bellho/gaji_market/assets/135290607/46a3b6f9-e128-4688-ba41-339a0b39457c">
 <details>
   <summary>알림 기능 설명(Click)</summary>
