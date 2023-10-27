@@ -104,7 +104,7 @@ header {
 						<li><a href="${pageContext.request.contextPath}/mypage">마이페이지</a></li>
 						<li>
 							<sec:authorize access="hasRole('ROLE_ADMIN')">
-	   							<a href="${pageContext.request.contextPath}/mypage">관리자 페이지</a>
+	   							<a href="${pageContext.request.contextPath}/admin">관리자 페이지</a>
    							</sec:authorize>
 						</li>
 					</ul>
