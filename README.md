@@ -36,7 +36,7 @@
 
 #### 담당자- `백의헌`
 
-![](https://github.com/bellho/gaji_market/assets/135290607/48f40a1f-4f0c-4be5-a271-8a7d726f2a78)
+![](https://github.com/bellho/gaji_market/assets/135290607/67e87eab-1541-4db1-add1-3dfa03ff6d87)
 
 ## [UML]유스케이스 다이어그램(Usecase Diagram)
 
