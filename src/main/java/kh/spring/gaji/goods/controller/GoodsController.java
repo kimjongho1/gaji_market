@@ -364,7 +364,7 @@ public class GoodsController {
 	}
 	
 	@GetMapping("/usergoods")	// 유저 상품
-	public String onsaleGoods(Model model,Integer currentPage,String searchWord,String userId) {	
+	public String onsaleGoods(Model model,Integer currentPage,String searchWord,String nickname) {	
 		int totalCnt=0;
 		int pageSize1=8;
 		List<MyGoodsListDto> myGoodsList=null;
@@ -372,12 +372,12 @@ public class GoodsController {
 		if(currentPage==null)	//현재 페이지가 들어온게 없다면 1페이지.
 			currentPage=1;
 		if(searchWord==null) {	// 검색어가 들어온게 없다면 검색어없는 mapper로 목록 가져오기
-			Map<String,Object> map= userService.getOnSaleList(userId,(int)currentPage,pageSize1);	//추후 userId들어가야함
+			Map<String,Object> map= userService.getNOnSaleList(nickname,(int)currentPage,pageSize1);	//추후 userId들어가야함
 			myGoodsList = (List<MyGoodsListDto>)map.get("myGoodsList");
 			totalCnt= (int)map.get("totalCnt");
 		}
 		else {					//검색어가 있다면 그에따른 mapper로 목록 가져오기
-			Map<String,Object> map= userService.getSearchOnSaleList(userId,(int)currentPage,pageSize1,searchWord);//추후 userId들어가야함
+			Map<String,Object> map= userService.getNSearchOnSaleList(nickname,(int)currentPage,pageSize1,searchWord);//추후 userId들어가야함
 			myGoodsList = (List<MyGoodsListDto>)map.get("myGoodsList");
 			totalCnt= (int)map.get("totalCnt");
 			model.addAttribute("searchWord",searchWord);
@@ -395,7 +395,7 @@ public class GoodsController {
 		model.addAttribute("endPageNum", endPageNum);
 		model.addAttribute("currentPage", currentPage);
 		model.addAttribute("myGoodsList",myGoodsList);
-		model.addAttribute("userId",userId);
+		model.addAttribute("nickname",nickname);
 		return "goods/usergoods";
 	}
 }

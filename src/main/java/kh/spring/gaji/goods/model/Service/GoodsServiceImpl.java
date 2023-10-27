@@ -139,14 +139,4 @@ public class GoodsServiceImpl implements GoodsService {
 	    	result.put("myGoodsList",goodsDao.getSearchOnsaleList(userId,currentPage,PAGESIZE,totalCnt,searchWord));
 	    	return result;
 	    }
-
-		
-
-		
-
-		
-
-	
-
-	
 }

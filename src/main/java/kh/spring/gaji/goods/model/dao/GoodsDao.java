@@ -149,6 +149,5 @@ public class GoodsDao  {
 			map.put("endRownum",endRownum);
 			map.put("searchWord", searchWord);
 	    	return sqlSession.selectList("goods.getSearchOnsaleList", map);
-	    }
-	    
+	    }    
 }

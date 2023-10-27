@@ -48,6 +48,10 @@ public interface UserService {
     
     public Map<String,Object> getSearchOnSaleList(String userId,int currentPage,int PAGESIZE,String searchWord);
     
+    public Map<String,Object> getNOnSaleList(String userId,int currentPage,int PAGESIZE);
+    
+    public Map<String,Object> getNSearchOnSaleList(String userId,int currentPage,int PAGESIZE,String searchWord);
+    
     public Map<String,Object> getKeepUsedList(String userId,int currentPage,int PAGESIZE);
     
     public Map<String,Object> getSearchKeepUsedList(String userId,int currentPage,int PAGESIZE,String searchWord);

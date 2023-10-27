@@ -69,7 +69,7 @@ justify-content: center;
 	<div class="searchWord">
 		<form
 			action="${pageContext.request.contextPath}/goods/usergoods" method="get">
-			<input type="hidden" name="userId" value="${userId}"> 
+			<input type="hidden" name="nickname" value="${nickname}"> 
 			<input type="search" name="searchWord" placeholder="제목 검색"> <input class="btn1" type="submit" value="검색">
 		</form>
 	</div>
@@ -142,30 +142,30 @@ justify-content: center;
 				<c:if test="${startPageNum!=1}">
 					<%--페이징 이전,번호,다음에 대한 코드 --%>
 					<a
-						href="<%=request.getContextPath()%>/goods/usergoods?currentPage=${startPageNum-1}&searchWord=${searchWord}&userId=${userId}"><span>이전</span></a>
+						href="<%=request.getContextPath()%>/goods/usergoods?currentPage=${startPageNum-1}&searchWord=${searchWord}&nickname=${nickname}"><span>이전</span></a>
 				</c:if>
 				<c:forEach begin="${startPageNum}" end="${endPageNum}" var="i">
 					<a class="page${i}"
-						href="<%=request.getContextPath()%>/goods/usergoods?currentPage=${i}&searchWord=${searchWord}&userId=${userId}"><span>${i}</span></a>
+						href="<%=request.getContextPath()%>/goods/usergoods?currentPage=${i}&searchWord=${searchWord}&nickname=${nickname}"><span>${i}</span></a>
 				</c:forEach>
 				<c:if test="${endPageNum<totalPageNum}">
 					<a
-						href="<%=request.getContextPath()%>/goods/usergoods?currentPage=${endPageNum+1}&searchWord=${searchWord}&userId=${userId}"><span>다음</span></a>
+						href="<%=request.getContextPath()%>/goods/usergoods?currentPage=${endPageNum+1}&searchWord=${searchWord}&nickname=${nickname}"><span>다음</span></a>
 				</c:if>
 			</c:when>
 			<c:otherwise>
 				<c:if test="${startPageNum!=1}">
 					<a
-						href="<%=request.getContextPath()%>/goods/usergoods?currentPage=${startPageNum-1}&userId=${userId}"><span>이전</span></a>
+						href="<%=request.getContextPath()%>/goods/usergoods?currentPage=${startPageNum-1}&nickname=${nickname}"><span>이전</span></a>
 				</c:if>
 				<c:forEach begin="${startPageNum}" end="${endPageNum}" var="i">
 					<a class="page${i}"
-						href="<%=request.getContextPath()%>/goods/usergoods?currentPage=${i}&userId=${userId}"><span>${i}
+						href="<%=request.getContextPath()%>/goods/usergoods?currentPage=${i}&nickname=${nickname}"><span>${i}
 					</span></a>
 				</c:forEach>
 				<c:if test="${endPageNum<totalPageNum}">
 					<a
-						href="<%=request.getContextPath()%>/goods/usergoods?currentPage=${endPageNum+1}&userId=${userId}"><span>다음</span></a>
+						href="<%=request.getContextPath()%>/goods/usergoods?currentPage=${endPageNum+1}&nickname=${nickname}"><span>다음</span></a>
 				</c:if>
 			</c:otherwise>
 		</c:choose>

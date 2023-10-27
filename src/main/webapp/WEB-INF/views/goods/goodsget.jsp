@@ -440,7 +440,7 @@ color: #835995 }
 					class="col-span-2 w-full py-10 lg:py-2 px-4">
 					<div class="flex">
 						<div class="flex w-full flex-col justify-around lg:ml-4">
-							<a class="font-semibold text-base text-jnblack" href="${pageContext.request.contextPath}/goods/usergoods?userId=${goodsDto.userId}">${goodsDto.nickname}</a>
+							<a class="font-semibold text-base text-jnblack" href="${pageContext.request.contextPath}/goods/usergoods?nickname=${goodsDto.nickname}">${goodsDto.nickname}</a>
 							
 							<span class="font-medium text-sm flex text-jnGray-500">판매상품 ${goodsUserInfo.sellgoods} · 안전거래 ${goodsUserInfo.safetradecount} · 후기 ${goodsUserInfo.reviewcount}</span>
 						</div>
@@ -462,7 +462,7 @@ color: #835995 }
 									${goodsDto.nickname} <span>${goodsUserInfo.sellgoods}</span>
 								</p>
 								<a class="text-sm font-medium text-gray-600"
-									href="${pageContext.request.contextPath}/goods/usergoods?userId=${goodsDto.userId}">더 보기 &gt;</a> <!-- 해당 유저의 상품 모아보기 -->
+									href="${pageContext.request.contextPath}/goods/usergoods?nickname=${goodsDto.nickname}">더 보기 &gt;</a> <!-- 해당 유저의 상품 모아보기 -->
 							</div>
 							<div class="carouselWrapper relative    ">
 								<div

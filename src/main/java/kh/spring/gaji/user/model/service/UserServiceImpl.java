@@ -129,6 +129,23 @@ public class UserServiceImpl implements UserService {
     }
     
     @Override
+    public Map<String,Object> getNOnSaleList(String userId,int currentPage,int PAGESIZE){
+    	Map<String,Object> result=new HashMap<String,Object>();
+    	int totalCnt = userDao.getNOnsaleTotalCnt(userId);
+    	result.put("totalCnt",totalCnt);
+    	result.put("myGoodsList",userDao.getNOnsaleList(userId,currentPage,PAGESIZE,totalCnt));
+    	return result;
+    }
+    @Override
+    public Map<String,Object> getNSearchOnSaleList(String userId,int currentPage,int PAGESIZE,String searchWord){
+    	Map<String,Object> result=new HashMap<String,Object>();
+    	int totalCnt = userDao.getNSearchOnsaleTotalCnt(userId,searchWord);
+    	result.put("totalCnt",totalCnt);
+    	result.put("myGoodsList",userDao.getNSearchOnsaleList(userId,currentPage,PAGESIZE,totalCnt,searchWord));
+    	return result;
+    }
+    
+    @Override
     public Map<String,Object> getClosedList(String userId,int currentPage,int PAGESIZE){
     	Map<String,Object> result=new HashMap<String,Object>();
     	int totalCnt = userDao.getClosedTotalCnt(userId);
