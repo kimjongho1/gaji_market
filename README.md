@@ -1,5 +1,7 @@
 # Gaji_Market (가지마켓) 
 
+## [홈페이지 구경하기](http://ec2-3-34-124-55.ap-northeast-2.compute.amazonaws.com/)
+
 <details>
 <summary>목차</summary>
 
