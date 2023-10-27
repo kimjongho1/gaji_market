@@ -55,7 +55,7 @@ public class GoodsServiceImpl implements GoodsService {
 	
 	@Override
 	public WishListDto checkWiskList(Map<String, String> map) {
-		return goodsDao.checkWiskList(map);
+		return goodsDao.checkWishList(map);
 	}
 	
 	@Override

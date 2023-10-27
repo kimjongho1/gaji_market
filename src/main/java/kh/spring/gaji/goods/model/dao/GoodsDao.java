@@ -71,7 +71,7 @@ public class GoodsDao  {
     	return sqlSession.selectOne("goods.goodsUserInfo",goodsId);
     }
     
-    public WishListDto checkWiskList(Map<String, String> map) { // 해당 상품에 대해 접속하는 유저가 그 상품 찜목록 조회
+    public WishListDto checkWishList(Map<String, String> map) { // 해당 상품에 대해 접속하는 유저가 그 상품 찜목록 조회
     	return sqlSession.selectOne("goods.checkWiskList",map);
     }
     

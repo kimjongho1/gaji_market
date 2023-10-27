@@ -5,8 +5,8 @@ import lombok.Data;
 @Component
 @Data
 public class GuDongInfoDto {
-	int guId;
-	int dongId;
-	String guName;
-	String dongName;
+	private int guId;
+	private int dongId;
+	private String guName;
+	private String dongName;
 }
