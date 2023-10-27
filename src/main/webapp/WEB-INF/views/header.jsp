@@ -1,9 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib prefix="sec"
-	uri="http://www.springframework.org/security/tags"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
 <script
 		src="${pageContext.request.contextPath}/resources/js/jquery-3.3.1.min.js"></script>
+		
 <style>
 header {
 	position: static;
@@ -97,24 +97,20 @@ header {
 								<li><a href="${pageContext.request.contextPath}/goods/board?category=4">생활/주방</a></li>
 								<li><a href="${pageContext.request.contextPath}/goods/board?category=5">취미/게임</a></li>
 								<li><a href="${pageContext.request.contextPath}/goods/board?category=6">기타</a></li>
-							</ul></li>
+							</ul>
+						</li>
 						<li><a href="${pageContext.request.contextPath}/goods/board">상품</a></li>
 						<li><a href="${pageContext.request.contextPath}/chat">1:1채팅</a></li>
 						<li><a href="${pageContext.request.contextPath}/mypage">마이페이지</a></li>
+						<li>
+							<sec:authorize access="hasRole('ROLE_ADMIN')">
+	   							<a href="${pageContext.request.contextPath}/mypage">관리자 페이지</a>
+   							</sec:authorize>
+						</li>
 					</ul>
 <!-- class="active" -->
-
-
 				</nav>
-
-
-
-
-
-
-
 			</div>
-
 		</div>
 	</header>
 	<!-- Header Section End -->
