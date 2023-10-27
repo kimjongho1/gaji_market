@@ -101,6 +101,7 @@ header {
 						<li><a href="${pageContext.request.contextPath}/goods/board">상품</a></li>
 						<li><a href="${pageContext.request.contextPath}/chat">1:1채팅</a></li>
 						<li><a href="${pageContext.request.contextPath}/mypage">마이페이지</a></li>
+						<li><a href="${pageContext.request.contextPath}/mypage">관리자 페이지</a></li>
 					</ul>
 <!-- class="active" -->
 
