@@ -338,7 +338,7 @@
 
 #
 ## 알림 기능
-#### 화면구현 - `신정훈` 기능구현- `백의헌`  
+#### 화면구현 - `신정훈` 기능구현- `신정훈`  
 <img src="https://github.com/bellho/gaji_market/assets/135290607/46a3b6f9-e128-4688-ba41-339a0b39457c">
 <details>
   <summary>알림 기능 설명(Click)</summary>
