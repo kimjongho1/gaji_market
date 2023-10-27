@@ -19,17 +19,18 @@ import kh.spring.gaji.admin.model.service.AdminService;
 public class AdministerController {
 	@Autowired
 	private AdminService adminService;
-
+	
 	@GetMapping("")
 	public ModelAndView admin(ModelAndView mv, Principal principal, RedirectAttributes ra) { // 관리자페이지
 		if (principal != null) {
 			String administerId = principal.getName();
-			if (administerId != null && administerId.equals("cjsdudwns") || administerId.equals("qordmlgjs") || administerId.equals("rlawhdgh")) {
+			if (administerId != null && administerId.equals("cjsdudwns") || administerId.equals("qordmlgjs")
+					|| administerId.equals("rlawhdgh") || administerId.equals("tlswjdgns")) {
 				mv.addObject("userList", adminService.userList());
 				mv.setViewName("admin/admin");
 				return mv;
 			} else {
-				ra.addFlashAttribute("msg","관리자 계정이 아닙니다.");
+				ra.addFlashAttribute("msg", "관리자 계정이 아닙니다.");
 				mv.setViewName("redirect:/");
 				return mv;
 			}
@@ -44,7 +45,8 @@ public class AdministerController {
 	public ModelAndView reportList(ModelAndView mv, String userId, Principal principal, RedirectAttributes ra) {
 		if (principal != null) {
 			String administerId = principal.getName();
-			if (administerId != null && administerId.equals("cjsdudwns") || administerId.equals("qordmlgjs") || administerId.equals("rlawhdgh")) {
+			if (administerId != null && administerId.equals("cjsdudwns") || administerId.equals("qordmlgjs")
+					|| administerId.equals("rlawhdgh") || administerId.equals("tlswjdgns")) {
 				mv.addObject("userReportList", adminService.userReportList(userId));
 				mv.setViewName("admin/reportuserslist");
 			} else {
@@ -63,10 +65,30 @@ public class AdministerController {
 	public ModelAndView reportGet(ModelAndView mv, int refId, Principal principal, RedirectAttributes ra) {
 		if (principal != null) {
 			String administerId = principal.getName();
-			if (administerId != null && administerId.equals("cjsdudwns") || administerId.equals("qordmlgjs") || administerId.equals("rlawhdgh")) {
-				mv.addObject("administerId",administerId);
+			if (administerId != null && administerId.equals("cjsdudwns") || administerId.equals("qordmlgjs")
+					|| administerId.equals("rlawhdgh") || administerId.equals("tlswjdgns")) {
+				mv.addObject("administerId", administerId);
 				mv.addObject("userReportInfo", adminService.userReportInfo(refId));
 				mv.setViewName("admin/reportusersget");
+			} else {
+				ra.addFlashAttribute("msg", "관리자 계정이 아닙니다.");
+				mv.setViewName("redirect:/");
+			}
+		} else {
+			ra.addFlashAttribute("msg", "관리자 계정으로 로그인해주시길 바랍니다.");
+			mv.setViewName("redirect:/");
+		}
+		return mv;
+	}
+	
+	@GetMapping("/banlist")
+	public ModelAndView banList(ModelAndView mv, Principal principal, RedirectAttributes ra) {
+		if (principal != null) {
+			String administerId = principal.getName();
+			if (administerId != null && administerId.equals("cjsdudwns") || administerId.equals("qordmlgjs")
+					|| administerId.equals("rlawhdgh") || administerId.equals("tlswjdgns")) {
+				mv.setViewName("admin/userslist");
+				mv.addObject("userList", adminService.banUserList());
 			} else {
 				ra.addFlashAttribute("msg", "관리자 계정이 아닙니다.");
 				mv.setViewName("redirect:/");
@@ -96,7 +118,7 @@ public class AdministerController {
 
 	@PostMapping("/report/ban")
 	@ResponseBody
-	public String banUser(String userId, String administerId, String reasonForBlocking ,UserBlockingDto dto) {
+	public String banUser(String userId, String administerId, String reasonForBlocking, UserBlockingDto dto) {
 		int check = adminService.checkBan(userId);
 		if (check == 1) {
 			int result = adminService.banUser(userId);
@@ -130,23 +152,7 @@ public class AdministerController {
 		}
 	}
 
-	@GetMapping("/banlist")
-	public ModelAndView banList(ModelAndView mv, Principal principal, RedirectAttributes ra) {
-		if(principal != null) {
-			String administerId = principal.getName();
-			if (administerId != null && administerId.equals("cjsdudwns") || administerId.equals("qordmlgjs") || administerId.equals("rlawhdgh")) {
-		mv.setViewName("admin/userslist");
-		mv.addObject("userList",adminService.banUserList());
-			} else {
-				ra.addFlashAttribute("msg","관리자 계정이 아닙니다.");
-				mv.setViewName("redirect:/");
-			}
-		} else {
-			ra.addFlashAttribute("msg", "관리자 계정으로 로그인해주시길 바랍니다.");
-			mv.setViewName("redirect:/");
-		}
-		return mv;
-	}
+	
 
 //	@GetMapping("/deal/safe/list")
 //	public String safeList() {		// 안전 거래 리스트 조회
