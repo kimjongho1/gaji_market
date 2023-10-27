@@ -1,5 +1,37 @@
 # Gaji_Market (가지마켓) 
 
+목차
+
+1. [기간](#프로젝트-기간)
+2. [노션](#가지마켓-노션-구경하기click)
+3. [팀원](#📣-팀-프로젝트)
+4. [개발환경](#개발환경)
+5. [ERD](#erd-cloud-링크-이동)
+6. [UML](#uml유스케이스-다이어그램usecase-diagram)
+7. [페이지](#페이지)
+- [메인페이지](#)
+	- [메인페이지](#페이지)
+    - [상품 리스트 페이지](#페이지)
+- [마이페이지](#페이지)
+	- [화면](#페이지)
+	- [화면](#페이지)
+	- [화면](#페이지)
+	- [화면](#페이지)
+- [결제](#페이지)
+	- [화면](#페이지)
+	- [화면](#페이지)
+	- [화면](#페이지)
+	- [화면](#페이지)
+- [알림](#페이지)
+	- [화면](#페이지)
+	- [화면](#페이지)
+	- [화면](#페이지)
+	- [화면](#페이지)
+	
+8. [기능구현](#🧑‍🤝‍🧑-프로젝트-기능구현)
+9. [주요기능](#📌-주요기능)
+
+
 <br>
 
 ## 프로젝트 기간
@@ -32,6 +64,7 @@
 |Library|AspectJ 1.9.19<br>ojdbc8 23.2.0.0<br>commons-lang3 3.8.1<br>slf4j 1.6.6<br>mybatis 3.5.9<br>spring-session 2.3.3.RELEASE<br>log4j 1.2.15<br>mybatis-spring 2.0.6<br>inject 1.0.0<br>lombok 1.18.28<br>Servlet API 4.0.1<br>spring-security 5.7.5<br>jackson 2.14.2<br>JSP API2.1<br>gson2.8.9<br>JSTL1.2<br>DBCP1.4<br>jackson2.10.2<br>iamport0.2.14<br>commons-fileupload 1.4<br>commons-io 2.6<br>cloudinary-http44 1.32.2<br>cloudinary-taglib 1.32.2<br>dotenv-java 2.2.4<br>javax.mail 1.4.7<br>spring-context-support 5.3.19|
 
 #
+
 #### ERD 담당자- `백의헌`
 
 ![](https://github.com/bellho/gaji_market/assets/135290607/67e87eab-1541-4db1-add1-3dfa03ff6d87)
@@ -39,8 +72,10 @@
 ## [UML]유스케이스 다이어그램(Usecase Diagram)
 
 
-
 <br>
+
+# 페이지
+
 
 ## 메인 페이지, 상품 리스트 페이지
 #### 화면구현- `신정훈`, 기능구현- `백의헌`
@@ -143,23 +178,31 @@
 #### 화면구현- `신정훈, 백의헌`, 기능구현- `백의헌`
 
 <details>
+
+### 구매, 판매내역 
 <summary>구매, 판매내역 페이지(Click)</summary> 
-    <구매내역>
-    <br>
+	<구매내역>
+	<br>
 	<img src="https://github.com/bellho/gaji_market/assets/135290607/d79c28d2-ec15-4cfa-9a24-47acd01386b4"><br><br>
      <판매내역-판매자 아이디로 접속후 진행되었습니다.><br>
 	<img src="https://github.com/bellho/gaji_market/assets/135290607/d5dd7f26-399c-4be9-bf60-4754e2f6e737">
 </details>
 <details>
+
+### 판매글
   <summary>판매글(Click)</summary>
 	<img src="https://github.com/bellho/gaji_market/assets/135290607/4d7b155b-9820-49b8-9fb4-ddb12c1bdee4">
 </details>
 
 <details>
+
+### 즐겨찾기 
   <summary>즐겨찾기 유저 페이지(모아보기), 찜 페이지(Click)</summary>
 	<img src="https://github.com/bellho/gaji_market/assets/135290607/4ff71d5d-4258-442c-b4d0-49d0a96f64dc">
 </details>
 <details>
+
+### 상품 더보기
   <summary>특정유저 상품 더보기(Click)</summary>
 	<img src="https://github.com/bellho/gaji_market/assets/135290607/ee3f10b5-5ab1-489b-9d99-1ac76910a912">
 </details>
