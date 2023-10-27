@@ -177,7 +177,7 @@
 #### 화면구현- `신정훈, 백의헌`, 기능구현- `백의헌`
 
 
-### 구매내역<br>
+### 구매내역
 <img src="https://github.com/bellho/gaji_market/assets/135290607/d79c28d2-ec15-4cfa-9a24-47acd01386b4" width="700" height="400"><br>
 
 ### 판매내역
