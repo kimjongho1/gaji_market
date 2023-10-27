@@ -273,7 +273,7 @@ select option{padding: 10px;
 		<label>가지온도 :</label> 
 		<div class="contls">
 		<div class="flex justify-between mb-2 gt">
-						<strong>${userMypage.ratingScore}℃/strong>
+						<strong>${userMypage.ratingScore}℃</strong>
 						<div class="bgo">
 							<div class="bgs" style="width: ${userMypage.ratingScore}%;"></div>
 						</div>
