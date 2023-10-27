@@ -1,5 +1,68 @@
 # Gaji_Market (가지마켓) 
 
+<details>
+<summary>목차</summary>
+
+
+
+1. [기간](#프로젝트-기간)
+2. [노션](#가지마켓-노션-구경하기click)
+3. [팀원](#-팀-프로젝트)
+4. [개발환경](#개발환경)
+5. [다이어그램](#erd-cloud-구경하러-가기)
+	- [ERD](#)
+	- [UML](#)
+6. [화면구성](#페이지)
+- [메인페이지](#)
+	- [헤더](#)
+	- [푸터](#)
+- [로그인페이지](#)
+	- [회원가입](#)
+	- [아이디 찾기](#)
+	- [비밀번호 찾기](#)
+- [마이페이지](#)
+	- [사이드바](#) 
+	- [회원정보](#) (주소변경)
+	- [비밀번호 변경](#)
+	- [구매내역](#) (리뷰작성 신고)
+	- [판매내역](#) (운송장등록 )
+	- [판매 상품 글](#)
+	- [찜 목록](#)
+	- [모아보기 목록](#)
+	- [알림 조회](#)
+- [상품페이지](#)
+	- [상품리스트](#)
+	- [상품 상세조회](#) (결제)
+	- [상품 등록](#) (수정)
+- [채팅페이지](#)
+- [관리자페이지](#)
+	- [유저리스트](#) ()
+
+<br>
+<br>
+<br>
+<br>
+<br>
+
+- [메인,상품 페이지 ](#메인-페이지-상품-리스트-페이지)
+	- [메인페이지](#메인-페이지)
+    - [상품 리스트 페이지](#상품-리스트-페이지)
+- [마이페이지](#마이페이지---구매내역-판매내역-판매글-찜목록-모아보기-유저상품)
+	- [구매,판매 내역](#구매-판매내역)
+	- [판매글](#판매글)
+	- [즐겨찾기](#즐겨찾기)
+	- [상품 더보기](#상품-더보기)
+- [결제](#결제-페이지-주소-변경-결제-진행-리뷰작성-추가-기능-ajax-구현)
+	- [주소 변경](#주소-변경)
+	- [결제 진행](#결제-진행)
+	- [리뷰 작성](#리뷰-작성)
+- [알림](#알림-기능)
+	
+7. [기능구현](#-프로젝트-기능구현)
+8. [주요기능](#-주요기능)
+
+</details>
+
 <br>
 
 ## 프로젝트 기간
@@ -12,7 +75,7 @@
 ## [가지마켓 노션 구경하기(Click)](https://brave-hall-1f1.notion.site/98ac7c797b4443bb924189bb4d820d05?pvs=4)
 <br><br>
 
-##  📣 팀 프로젝트
+## 📣 팀 프로젝트
 - 팀장 : 김종호
 - 팀원 : 천영준, 신정훈, 백의헌 
 
@@ -32,27 +95,28 @@
 |Library|AspectJ 1.9.19<br>ojdbc8 23.2.0.0<br>commons-lang3 3.8.1<br>slf4j 1.6.6<br>mybatis 3.5.9<br>spring-session 2.3.3.RELEASE<br>log4j 1.2.15<br>mybatis-spring 2.0.6<br>inject 1.0.0<br>lombok 1.18.28<br>Servlet API 4.0.1<br>spring-security 5.7.5<br>jackson 2.14.2<br>JSP API2.1<br>gson2.8.9<br>JSTL1.2<br>DBCP1.4<br>jackson2.10.2<br>iamport0.2.14<br>commons-fileupload 1.4<br>commons-io 2.6<br>cloudinary-http44 1.32.2<br>cloudinary-taglib 1.32.2<br>dotenv-java 2.2.4<br>javax.mail 1.4.7<br>spring-context-support 5.3.19|
 
 #
-## [ERD Cloud 링크 이동](https://www.erdcloud.com/d/Lm5qwJ8DbtZ92bk3R)
-
-#### 담당자- `백의헌`
+## [ERD Cloud 구경하러 가기](https://www.erdcloud.com/d/Lm5qwJ8DbtZ92bk3R)
+#### ERD 담당자- `백의헌`
 
 ![](https://github.com/bellho/gaji_market/assets/135290607/67e87eab-1541-4db1-add1-3dfa03ff6d87)
 
 ## [UML]유스케이스 다이어그램(Usecase Diagram)
 
 
-
 <br>
+
+# 페이지
+
 
 ## 메인 페이지, 상품 리스트 페이지
 #### 화면구현- `신정훈`, 기능구현- `백의헌`
 
 ### 메인 페이지 
-<img src="https://github.com/bellho/gaji_market/assets/135290607/36b400fe-e7c8-49ef-921d-73d97ce22d9e">
+<img src="https://github.com/bellho/gaji_market/assets/135290607/36b400fe-e7c8-49ef-921d-73d97ce22d9e"  width="700" height="400">
 <br><br>
 
 ### 상품 리스트 페이지 
-<img src="https://github.com/bellho/gaji_market/assets/135290607/bb9a295a-d2b6-4bb6-b02b-d99819c6884f">
+<img src="https://github.com/bellho/gaji_market/assets/135290607/bb9a295a-d2b6-4bb6-b02b-d99819c6884f"  width="700" height="400">
 
 <details>
   <summary> 검색 조건에 따른 데이터를 불러오기 위한 동적 쿼리문(Click) </summary>
@@ -144,34 +208,30 @@
 ## 마이페이지 - 구매내역, 판매내역, 판매글, 찜목록, 모아보기, 유저상품
 #### 화면구현- `신정훈, 백의헌`, 기능구현- `백의헌`
 
-<details>
-<summary>구매, 판매내역 페이지(Click)</summary> 
-    <구매내역>
-    <br>
-	<img src="https://github.com/bellho/gaji_market/assets/135290607/d79c28d2-ec15-4cfa-9a24-47acd01386b4"><br><br>
-     <판매내역-판매자 아이디로 접속후 진행되었습니다.><br>
-	<img src="https://github.com/bellho/gaji_market/assets/135290607/d5dd7f26-399c-4be9-bf60-4754e2f6e737">
-</details>
-<details>
-  <summary>판매글(Click)</summary>
-	<img src="https://github.com/bellho/gaji_market/assets/135290607/4d7b155b-9820-49b8-9fb4-ddb12c1bdee4">
-</details>
 
-<details>
-  <summary>즐겨찾기 유저 페이지(모아보기), 찜 페이지(Click)</summary>
-	<img src="https://github.com/bellho/gaji_market/assets/135290607/4ff71d5d-4258-442c-b4d0-49d0a96f64dc">
-</details>
-<details>
-  <summary>특정유저 상품 더보기(Click)</summary>
-	<img src="https://github.com/bellho/gaji_market/assets/135290607/ee3f10b5-5ab1-489b-9d99-1ac76910a912">
-</details>
+### 구매내역
+<img src="https://github.com/bellho/gaji_market/assets/135290607/d79c28d2-ec15-4cfa-9a24-47acd01386b4" width="700" height="400"><br>
+
+### 판매내역
+<img src="https://github.com/bellho/gaji_market/assets/135290607/d5dd7f26-399c-4be9-bf60-4754e2f6e737" width="700" height="400"><br>
+
+### 판매글 페이지
+<img src="https://github.com/bellho/gaji_market/assets/135290607/4d7b155b-9820-49b8-9fb4-ddb12c1bdee4" width="700" height="400"><br>
+
+
+
+### 즐겨찾기 유저 페이지(모아보기), 찜 페이지
+<img src="https://github.com/bellho/gaji_market/assets/135290607/4ff71d5d-4258-442c-b4d0-49d0a96f64dc" width="700" height="400"><br>
+
+### 특정유저 상품 더보기
+<img src="https://github.com/bellho/gaji_market/assets/135290607/ee3f10b5-5ab1-489b-9d99-1ac76910a912" width="700" height="400"><br>
 
 #
 ## 결제 페이지 주소 변경, 결제 진행, 리뷰작성 (추가 기능 ajax 구현)
 #### 화면구현 - `신정훈, 백의헌` 기능구현- `백의헌`  
 
 ### 주소 변경
-<img src="https://github.com/bellho/gaji_market/assets/135290607/13c3a2fb-9cbc-41a0-a2bd-5c786c461385">
+<img src="https://github.com/bellho/gaji_market/assets/135290607/13c3a2fb-9cbc-41a0-a2bd-5c786c461385" width="700" height="400">
 <details>
 <br>
   <summary>주소 변경, 삭제, 추가를 위한 Mapper코드(Click)</summary>
@@ -218,7 +278,7 @@
 <br>
 
 ### 결제 진행
-<img src="https://github.com/bellho/gaji_market/assets/135290607/c80ada47-991e-438a-b36e-1956bda96da5">
+<img src="https://github.com/bellho/gaji_market/assets/135290607/c80ada47-991e-438a-b36e-1956bda96da5" width="700" height="400">
 
 
 
@@ -292,7 +352,7 @@
     
 
 ### 리뷰 작성
-<img src="https://github.com/bellho/gaji_market/assets/135290607/18f935e1-8afb-437f-920e-f9bf13cabfe8"><br>
+<img src="https://github.com/bellho/gaji_market/assets/135290607/18f935e1-8afb-437f-920e-f9bf13cabfe8" width="700" height="400"><br>
 
 <details>
   <summary>리뷰작성 프로시저 코드(Click)</summary>
@@ -339,7 +399,7 @@
 #
 ## 알림 기능
 #### 화면구현 - `신정훈` 기능구현- `신정훈`  
-<img src="https://github.com/bellho/gaji_market/assets/135290607/46a3b6f9-e128-4688-ba41-339a0b39457c">
+<img src="https://github.com/bellho/gaji_market/assets/135290607/46a3b6f9-e128-4688-ba41-339a0b39457c" width="700" height="400">
 <details>
   <summary>알림 기능 설명(Click)</summary>
 	안전결제 신청, 수락, 취소, 운송장 등록, 결제확정 등에 대해서 알림이 생성되며 <br>
