@@ -116,11 +116,11 @@ color: #835995 }
             <label for="reportContent">신고 내용</label>
             <textarea class="form-control" id="reportContent" name="content" rows="10" required="required"></textarea>
           </div>
+	<div class="mfoot d-flex justify-content-between">
           <button type="submit">신고 제출</button>
-        </form>
-      </div>
-      <div class="modal-footer">
         <button type="button" data-dismiss="modal">닫기</button>
+      </div>
+        </form>
       </div>
     </div>
   </div>

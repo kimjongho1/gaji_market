@@ -16,3 +16,16 @@ background-color:#7fad39;
 	width: 100%;
 	height: 100%;
 }
+
+.form-control{
+	resize: none;
+}
+
+.mfoot button:hover{
+	font-weight: bold;
+	
+}
+.mfoot button:active{
+	box-shadow: inset 0px -2px 20px 0.4rem rgb(88 0 255 / 25%) !important
+		
+}
