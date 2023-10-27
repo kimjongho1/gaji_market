@@ -11003,6 +11003,7 @@ section {
 	background-color:#f9f9f9; 
 	z-index: 0;
 	position: relative;
+	min-height: 800px;
 }
 
 .fa-facebook, .fa-instagram, .fa-twitter, .fa-pinterest{
