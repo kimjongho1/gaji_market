@@ -10,7 +10,7 @@
   --dark: #1a1a1a;
   --light: #e6e6e6;
   --wrapper: 1000px;
-  --blue: #00b0ff;
+  --purple: #9268dc;
 }
 
 body {
@@ -114,7 +114,7 @@ cursor:pointer}
   height: 42px;
   margin-left: 10px;
   border: 1px solid var(--light);
-  background-color: var(--blue);
+  background-color: var(--purple);
   background-image: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/382994/name-type.png");
   background-repeat: no-repeat;
   background-position: top 12px left 14px;
@@ -194,7 +194,7 @@ cursor:pointer}
   margin-left: -1px;
   padding-top: 13px;
   border: 0;
-  background-color: var(--blue);
+  background-color: var(--purple);
   width: calc(100% + 2px);
   padding-left: calc(10% + 1px);
 }
@@ -253,6 +253,7 @@ cursor:pointer}
   border-color: var(--light);
   height: calc(100% - 48px);
   flex-direction: column;
+  border-bottom-right-radius: 10px;
 }
 .container .right .chat::-webkit-scrollbar {
 	display:none;
@@ -344,13 +345,13 @@ cursor:pointer}
 .container .right .bubble.you {
   float: left;
   color: var(--white);
-  background-color: var(--blue);
+  background-color: var(--purple);
   align-self: flex-start;
   animation-name: slideFromLeft;
 }
 .container .right .bubble.you:before {
   left: -3px;
-  background-color: var(--blue);
+  background-color: var(--purple);
 }
 .container .right .bubble.me {
   float: right;

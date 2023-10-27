@@ -58,7 +58,16 @@
 					                        </c:when>
 					                    </c:choose>
 					                </span>
-					                <span class="preview">${item2.message }</span>
+					                <span class="preview">
+									    <c:choose>
+									        <c:when test="${item2.message.startsWith('https://res.cloudinary.com/')}">
+									            이미지 파일
+									        </c:when>
+									        <c:otherwise>
+									            ${item2.message}
+									        </c:otherwise>
+									    </c:choose>
+									</span>
 					            </c:forEach>
 					        </li>
 					    </c:forEach>
@@ -289,7 +298,7 @@
 		                    // '.time' 및 '.preview' 요소 내용을 변경
 		                    timeElement.textContent = now(); // 원하는 시간 값으로 변경
 		                    // 이미지 파일인 경우 '첨부파일', 메시지일 경우에는 preview
-		                    previewElement.textContent = content.message.startsWith("https://res.cloudinary.com/") ? "이미지" : content.message;
+		                    previewElement.textContent = content.message.startsWith("https://res.cloudinary.com/") ? "이미지 파일" : content.message;
 		                    scrollToBottom();
 		                }
 			        }
