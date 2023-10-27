@@ -1,6 +1,9 @@
 # Gaji_Market (가지마켓) 
 
-목차
+<details>
+<summary>목차</summary>
+</details>
+
 
 1. [기간](#프로젝트-기간)
 2. [노션](#가지마켓-노션-구경하기click)
