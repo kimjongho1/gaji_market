@@ -27,8 +27,6 @@ import com.siot.IamportRestClient.exception.IamportResponseException;
 import com.siot.IamportRestClient.request.CancelData;
 import com.siot.IamportRestClient.response.IamportResponse;
 import com.siot.IamportRestClient.response.Payment;
-
-import kh.spring.gaji.goods.model.Service.GoodsService;
 import kh.spring.gaji.notification.model.dto.InsertNotificationDto;
 import kh.spring.gaji.notification.model.dto.TitleBuyerDto;
 import kh.spring.gaji.pay.model.dto.GoodsPayInfoDto;
@@ -45,8 +43,6 @@ public class PayController {
 	private IamportClient api;
 	@Autowired
 	private PayService payServiceImpl;
-	@Autowired
-	private InsertSafeTradingDto insertSafeTradingDto;
 	@Autowired
 	private InsertNotificationDto insertNotificationDto;
 	
@@ -66,11 +62,12 @@ public class PayController {
 			userId=principal.getName();
 			if(payServiceImpl.checkIdForPay(goodsId).equals(userId)) {
 				reatt.addFlashAttribute("msg", "본인 상품을 구매할 수 없습니다.");
-				return "redirect:/";
+				System.out.println(request.getRequestURL());
+				return "redirect:/goods/get?goodsId="+goodsId;
 			}
 			else if(payServiceImpl.checkGoodsStatus(goodsId)!=1) {	
 				reatt.addFlashAttribute("msg", "판매중인 상품이 아닙니다.");
-				return "redirect:/";
+				return "redirect:/goods/get?goodsId="+goodsId;
 			}
 			GoodsPayInfoDto goodsInfo=payServiceImpl.getGoodsInfo(goodsId);
 			List<UserAddressDto> userAddress = payServiceImpl.getUserAddressList(userId);	 
@@ -82,7 +79,7 @@ public class PayController {
 			return "pay/pay";
 			}
 			reatt.addFlashAttribute("msg","로그인이 필요한 페이지입니다.");
-			return "redirect:/";
+			return "redirect:/login";
 		}
 		
 		@PostMapping("payment/closepay")

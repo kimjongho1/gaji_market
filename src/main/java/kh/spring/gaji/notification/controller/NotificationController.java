@@ -68,7 +68,7 @@ public class NotificationController {
 		}
 		else {
 			reatt.addFlashAttribute("msg","로그인이 필요한 페이지입니다.");
-			return "redirect:/";
+			return "redirect:/login";
 		}
 	}
 	
@@ -90,7 +90,7 @@ public class NotificationController {
 		}
 		else {
 			reatt.addFlashAttribute("msg","로그인이 필요한 페이지입니다.");
-			return "redirect:/";
+			return "redirect:/login";
 		}
 	}
 	
