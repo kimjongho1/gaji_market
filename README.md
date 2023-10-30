@@ -97,7 +97,7 @@
 |Server|Tomcat 9.0|
 |DateBase|Oracle(21c)|
 |API|IamPort, CK Editor, Kakao Map, cloudinary, ipstack, Kakao(Daum) PostCode, Gmail SMPT|
-|Library|AspectJ 1.9.19<br>ojdbc8 23.2.0.0<br>commons-lang3 3.8.1<br>slf4j 1.6.6<br>mybatis 3.5.9<br>spring-session 2.3.3.RELEASE<br>log4j 1.2.15<br>mybatis-spring 2.0.6<br>inject 1.0.0<br>lombok 1.18.28<br>Servlet API 4.0.1<br>spring-security 5.7.5<br>jackson 2.14.2<br>JSP API2.1<br>gson2.8.9<br>JSTL1.2<br>DBCP1.4<br>jackson2.10.2<br>iamport0.2.14<br>commons-fileupload 1.4<br>commons-io 2.6<br>cloudinary-http44 1.32.2<br>cloudinary-taglib 1.32.2<br>dotenv-java 2.2.4<br>javax.mail 1.4.7<br>spring-context-support 5.3.19|
+|Library|AspectJ 1.9.19<br>ojdbc8 23.2.0.0<br>commons-lang3 3.8.1<br>slf4j 1.6.6<br>mybatis 3.5.9<br>spring-session 2.3.3.RELEASE<br>log4j 1.2.15<br>mybatis-spring 2.0.6<br>inject 1.0.0<br>lombok 1.18.28<br>Servlet API 4.0.1<br>spring-security 5.7.5<br>jackson 2.14.2<br>JSP API2.1<br>gson2.8.9<br>JSTL1.2<br>DBCP1.4<br>jackson2.10.2<br>iamport0.2.14<br>commons-fileupload 1.4<br>commons-io 2.6<br>cloudinary-http44 1.32.2<br>cloudinary-taglib 1.32.2<br>dotenv-java 2.2.4<br>javax.mail 1.4.7<br>spring-context-support 5.3.19<br>spring-websocket 5.3.19<br>stomp-websocket 2.3.3-1|
 
 #
 ## [ERD Cloud 구경하러 가기](https://www.erdcloud.com/d/Lm5qwJ8DbtZ92bk3R)
