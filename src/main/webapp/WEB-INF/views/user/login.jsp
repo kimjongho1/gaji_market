@@ -112,7 +112,7 @@ if(msg ){
 		</div>
 		<ul class="find_wrap" id="find_wrap">
 
-			<li><a target="_blank" href="/gaji/pwInquiry" class="find_text">비밀번호 찾기</a></li>
+			<li><a target="_blank" href="./pwInquiry" class="find_text">비밀번호 찾기</a></li>
 			<li><a target="_blank" href="./idInquiry" class="find_text">아이디 찾기</a></li>
 			<li><a target="_blank" href="./signup" class="find_text">회원가입</a></li>
 
