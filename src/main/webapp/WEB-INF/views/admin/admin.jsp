@@ -56,7 +56,7 @@
           }
 
           function mainPage() {
-            window.location.href = "${pageContext.request.contextPath}";
+            window.location.href = "${pageContext.request.contextPath}/";
           }
         
     </script>
