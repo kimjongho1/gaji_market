@@ -43,7 +43,7 @@ header {
 				<div class="row">
 
 					<div class="header__logo">
-						<a href="${pageContext.request.contextPath}"><img
+						<a href="${pageContext.request.contextPath}/"><img
 							src="${pageContext.request.contextPath}/resources/img/gaji_logo.png"
 							alt="GaJi" height="70" width="170"></a>
 					</div>
