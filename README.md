@@ -500,7 +500,11 @@
 	}
 </details>
 <br>
-    
+
+#### 안전결제 시퀀스 다이어그램
+![image](https://github.com/bellho/gaji_market/assets/135290607/1da567b3-5808-4129-8769-808e0280b68a)
+
+#
 
 ### 리뷰 작성
 <img src="https://github.com/bellho/gaji_market/assets/135290607/18f935e1-8afb-437f-920e-f9bf13cabfe8" width="700" height="400"><br>
