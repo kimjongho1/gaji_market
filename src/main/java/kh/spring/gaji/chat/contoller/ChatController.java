@@ -106,7 +106,7 @@ public class ChatController {
 		return new Gson().toJson(result1);
 	}
 
-	// JSP로 메시지 출력
+	// JSP로 메시지 출력 //TODO 중복코드일 가능성이 있음
 	@MessageMapping("/chat/room")
 	public void receiveMessage(ChatMessageDto message) {
 		template.convertAndSend("/sub/chat/room/" + message.getChatId(), message);
