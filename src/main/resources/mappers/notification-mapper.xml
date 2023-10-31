@@ -23,7 +23,7 @@
 		(select list1.*,rownum rn from
 		(select noti_id,message,read_yn,type,reference_id,to_char(created_at,'YYYY-MM-DD HH24:MI:SS') created_at 
 		from notification where type=#{type} and user_id=#{userId}
-		order by created_at) list1) list2)
+		order by created_at desc) list1) list2)
 		where rn between #{startRownum} and #{endRownum}
 	</select>
 	
