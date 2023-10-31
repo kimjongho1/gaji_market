@@ -354,6 +354,55 @@
  
  </details>
 
+## 상품 - 게시글 작성, 글 삭제, 상품 수정, 찜, 모아보기, 더보기, 끌올, 신고  
+#### 화면구현- `신정훈`, 기능구현- `천영준`
+
+### 게시글 작성
+<img src="https://github.com/bellho/gaji_market/assets/135290607/b016cf18-92e1-4bd2-953f-76b9fa7de699"><br>
+
+### 글 삭제
+<img src="https://github.com/bellho/gaji_market/assets/135290607/41b5884b-38d3-44a4-a9d1-eeb93062a558"><br>
+
+### 상품 수정
+<img src="https://github.com/bellho/gaji_market/assets/135290607/a075f501-4709-4756-83f4-978aab050767"><br>
+
+### 찜
+<img src="https://github.com/bellho/gaji_market/assets/135290607/75c090d4-404d-45f0-861e-cdb2721826b5"><br>
+
+### 모아보기 (해당 유저 즐겨찾기)
+<img src="https://github.com/bellho/gaji_market/assets/135290607/f6a816ac-2d7b-4594-a9d1-eff6c5d4a10e"><br>
+
+### 해당 유저 상품 모아보기 (더보기)
+<img src="https://github.com/bellho/gaji_market/assets/135290607/ff824fe3-4ff4-4aea-9d4a-c8a90724f7e8"><br>
+
+### 끌올
+<img src="https://github.com/bellho/gaji_market/assets/135290607/9cda3ec8-c424-44dd-a4fe-9f796711b1aa"><br>
+
+### 신고
+<img src="https://github.com/bellho/gaji_market/assets/135290607/b617a239-2255-4002-8712-737efc342206"><br>
+
+
+ 
+#
+## 마이페이지 - 회원가입, 회원정보 변경, 비밀번호 변경, 비밀번호 재설정, 아이디 찾기
+#### 화면구현- `신정훈`, 기능구현- `천영준`
+
+### 회원가입
+<img src="https://github.com/bellho/gaji_market/assets/135290607/420e2c56-b362-4816-90cc-0738514776f3"><br>
+
+### 회원정보 변경
+<img src="https://github.com/bellho/gaji_market/assets/135290607/f15474de-6a30-4703-aaa7-761011171046"><br>
+
+### 비밀번호 변경
+<img src="https://github.com/bellho/gaji_market/assets/135290607/2046eaf2-222a-4311-985b-b248012b23e8"><br>
+
+### 비밀번호 재설정
+<img src="https://github.com/bellho/gaji_market/assets/135290607/17a52a9a-99be-4270-bbf9-3c777fbbc251"><br>
+
+### 아이디 찾기
+<img src="https://github.com/bellho/gaji_market/assets/135290607/5aafdb60-e8de-4fba-9cea-b0eee26606c9"><br>
+
+
 #
 ## 마이페이지 - 구매내역, 판매내역, 판매글, 찜목록, 모아보기, 유저상품
 #### 화면구현- `신정훈, 백의헌`, 기능구현- `백의헌`
