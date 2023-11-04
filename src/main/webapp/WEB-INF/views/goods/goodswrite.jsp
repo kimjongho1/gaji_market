@@ -202,7 +202,7 @@
     });
 	var locationData = {};
 	function getUrl(){
-	    var apiKey = '발급받은키';
+	    
 	    var regUrl = 'http://api.ipstack.com/check?access_key=64c3d4bcce89eca41b279b0205516102&format=1';
 	 
 	    $.ajax({
@@ -440,24 +440,13 @@
             position: new kakao.maps.LatLng(locationData.latitude, locationData.longitude)
 
         });
-        
-        // 지도를 클릭한 위치 정보를 가져와서 출력하는 함수
-        /* function displayLatLng(lat, lng) {
-            var resultDiv = document.getElementById('clickLatlng');
-            resultDiv.innerHTML = '선택한 위치의 위도: ' + lat + ', 경도: ' + lng;
-        } */
-        
         // 지도 클릭 이벤트 리스너 등록
         kakao.maps.event.addListener(map, 'click', function (mouseEvent) {
             var latlng = mouseEvent.latLng;
             var lat = latlng.getLat(); // 위도
             var lng = latlng.getLng(); // 경도
-            
             // 클릭한 위치에 마커 표시
             marker.setPosition(latlng);
-            
-            /* // 선택한 위치 정보 출력
-            displayLatLng(lat, lng); */
         });
         
         // 확인 버튼 클릭 시 마커의 위치 정보 가져오기
@@ -465,20 +454,9 @@
             var position = marker.getPosition();
             var lat = position.getLat(); // 마커의 위도
             var lng = position.getLng(); // 마커의 경도
-            
-            // 가져온 위치 정보를 활용하여 원하는 동작 수행
-            console.log('선택한 마커의 위도: ' + lat + ', 경도: ' + lng);
-            
-            
-            
             // 폼에 위도와 경도 추가
             document.getElementById('latitudeInput').value = lat.toFixed(6);
 			document.getElementById('longitudeInput').value = lng.toFixed(6);
-            
-           /*  document.getElementById('latitudeInput').value = lat;
-            document.getElementById('longitudeInput').value = lng;
-            lat = parseFloat(lat.toFixed(10)); // 위도를 소수점 10자리까지 저장
-            lng = parseFloat(lng.toFixed(10)); */
             // 모달 닫기
             document.getElementById('mapModal').style.display = 'none';
         });

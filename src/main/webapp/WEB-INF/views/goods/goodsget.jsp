@@ -778,11 +778,9 @@ function checkWishlist() {
 function checkFavoriteUser() {
     var targetId = '${goodsDto.userId}'; // 해당 상품의 ID
     var userId = "${loginId}"; // 로그인된 사용자의 ID 또는 세션에서 가져온 ID
-	
-    // AJAX 요청 설정
     $.ajax({
         type: "POST",
-        url: "${pageContext.request.contextPath}/goods/checkfavoriteuser", // 찜 여부 확인을 처리할 컨트롤러 경로
+        url: "${pageContext.request.contextPath}/goods/checkfavoriteuser",
         data: {
         	targetId: targetId,
             userId: userId

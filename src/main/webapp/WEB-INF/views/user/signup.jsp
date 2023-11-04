@@ -515,6 +515,7 @@ function verifyCode(inputCode) {
 }
 
 
+
     // 유효성 검사 메서드
     function Validation() {
         // 변수에 저장
