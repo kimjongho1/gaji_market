@@ -255,22 +255,23 @@
 	채팅방 리스트를 클릭하면 내 아이디 값과 상대방 아이디 값을 가져오게 됨.
 	판매자와 구매자를 구별하기 위해 union사용.
 	<br>
-	<code>
-		<select id="selectChatListByUserId" parameterType="string" resultType="ChatRoomDto">
-			SELECT c.chat_id, c.goods_id, u.nickname,c.seller_id, c.created_at
-			FROM chat_room c
-			JOIN users u ON (u.user_id = c.buyer_id)
-			WHERE c.seller_id = #{userId}
-			UNION
-			SELECT c.chat_id, c.goods_id, u.nickname,c.seller_id, c.created_at
-			FROM chat_room c
-			JOIN users u ON (u.user_id = c.seller_id)
-			WHERE c.buyer_id = #{userId}
-			ORDER BY created_at
-		</select>
-	</code>
+
+     
 </details>
 <br>
+
+    <select id="selectChatListByUserId" parameterType="string" resultType="ChatRoomDto">
+		SELECT c.chat_id, c.goods_id, u.nickname,c.seller_id, c.created_at
+		FROM chat_room c
+		JOIN users u ON (u.user_id = c.buyer_id)
+		WHERE c.seller_id = #{userId}
+		UNION
+		SELECT c.chat_id, c.goods_id, u.nickname,c.seller_id, c.created_at
+		FROM chat_room c
+		JOIN users u ON (u.user_id = c.seller_id)
+		WHERE c.buyer_id = #{userId}
+		ORDER BY created_at
+	</select>
 
 ## 채팅 시작하기
 <img src="https://github.com/bellho/bellho/assets/134384518/dd7a3224-06c6-412b-8c25-c85a69f5697a"  width="700" height="400">
@@ -312,7 +313,7 @@
   동적 쿼리문을 통해 여러가지 입력 가능한 정렬 조건중 입력된 값에 대해서만 where절이 적용 되도록 하였습니다.
   
   <br>
-
+  
     <select id="getGoodsList" parameterType="map"	
 		resultType="GoodsListDto">
 		select list2.*,(select f.url from goods_file f where
