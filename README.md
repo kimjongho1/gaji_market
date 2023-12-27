@@ -255,20 +255,20 @@
 	채팅방 리스트를 클릭하면 내 아이디 값과 상대방 아이디 값을 가져오게 됨.
 	판매자와 구매자를 구별하기 위해 union사용.
 	<br>
-	```
-	<select id="selectChatListByUserId" parameterType="string" resultType="ChatRoomDto">
-		SELECT c.chat_id, c.goods_id, u.nickname,c.seller_id, c.created_at
-		FROM chat_room c
-		JOIN users u ON (u.user_id = c.buyer_id)
-		WHERE c.seller_id = #{userId}
-		UNION
-		SELECT c.chat_id, c.goods_id, u.nickname,c.seller_id, c.created_at
-		FROM chat_room c
-		JOIN users u ON (u.user_id = c.seller_id)
-		WHERE c.buyer_id = #{userId}
-		ORDER BY created_at
-	</select>
-	```
+	<code>
+		<select id="selectChatListByUserId" parameterType="string" resultType="ChatRoomDto">
+			SELECT c.chat_id, c.goods_id, u.nickname,c.seller_id, c.created_at
+			FROM chat_room c
+			JOIN users u ON (u.user_id = c.buyer_id)
+			WHERE c.seller_id = #{userId}
+			UNION
+			SELECT c.chat_id, c.goods_id, u.nickname,c.seller_id, c.created_at
+			FROM chat_room c
+			JOIN users u ON (u.user_id = c.seller_id)
+			WHERE c.buyer_id = #{userId}
+			ORDER BY created_at
+		</select>
+	</code>
 </details>
 <br>
 
