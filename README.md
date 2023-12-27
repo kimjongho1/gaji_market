@@ -1,4 +1,15 @@
-# Gaji_Market (가지마켓) 
+<select id="selectChatListByUserId" parameterType="string" resultType="ChatRoomDto">
+		SELECT c.chat_id, c.goods_id, u.nickname,c.seller_id, c.created_at
+		FROM chat_room c
+		JOIN users u ON (u.user_id = c.buyer_id)
+		WHERE c.seller_id = #{userId}
+		UNION
+		SELECT c.chat_id, c.goods_id, u.nickname,c.seller_id, c.created_at
+		FROM chat_room c
+		JOIN users u ON (u.user_id = c.seller_id)
+		WHERE c.buyer_id = #{userId}
+		ORDER BY created_at
+	</select># Gaji_Market (가지마켓) 
 
 ## [홈페이지 구경하기](http://ec2-3-34-124-55.ap-northeast-2.compute.amazonaws.com/)
 게스트ID: rkwlakzpt(가지마켓) <br> 비밀번호: rkwlakzpt123(가지마켓123)
@@ -256,11 +267,7 @@
 	판매자와 구매자를 구별하기 위해 union사용.
 	<br>
 
-     
-</details>
-<br>
-
-    <select id="selectChatListByUserId" parameterType="string" resultType="ChatRoomDto">
+     <select id="selectChatListByUserId" parameterType="string" resultType="ChatRoomDto">
 		SELECT c.chat_id, c.goods_id, u.nickname,c.seller_id, c.created_at
 		FROM chat_room c
 		JOIN users u ON (u.user_id = c.buyer_id)
@@ -272,6 +279,8 @@
 		WHERE c.buyer_id = #{userId}
 		ORDER BY created_at
 	</select>
+</details>
+<br>
 
 ## 채팅 시작하기
 <img src="https://github.com/bellho/bellho/assets/134384518/dd7a3224-06c6-412b-8c25-c85a69f5697a"  width="700" height="400">
