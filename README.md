@@ -280,6 +280,50 @@
 		ORDER BY created_at
 	</select>
 </details>
+<details>
+	<summary> 채팅방 리스트 시간 변경</summary>
+	<br>
+	메시지를 입력하면 priview와 현재시간을 채팅방 리스트에 최신화
+	<br>
+
+     <c:forEach var="item2" items="${item1.chatInfo}">
+	<span class="time">
+	    <c:choose>
+		<c:when test="${item2.createAt != null}">
+		    <script>
+			var dateString = "${item2.createAt}";
+			var date = new Date(dateString);
+			var today = new Date();
+			var year = date.getFullYear();
+			var month = date.getMonth() + 1;
+			var day = date.getDate();
+			var hours = date.getHours();
+			var minutes = date.getMinutes();
+		    if (today.getDate() == day) {
+			if (hours > 11) {
+			    document.write("오후 " + (hours - 12) + ":" + minutes);
+			} else {
+			    document.write("오전 " + hours + ":" + minutes);
+			}
+		    } else {
+			    document.write(month + "월 " + day + "일");
+			}
+		    </script>
+		</c:when>
+	    </c:choose>
+	</span>
+	<span class="preview">
+	    <c:choose>
+		<c:when test="${item2.message.startsWith('https://res.cloudinary.com/')}">
+		    이미지 파일
+		</c:when>
+		<c:otherwise>
+		    ${item2.message}
+		</c:otherwise>
+	    </c:choose>
+	</span>
+	</c:forEach>
+</details>
 <br>
 
 ## 채팅 시작하기
