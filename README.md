@@ -248,6 +248,10 @@
 
 ## 채팅 리스트 불러오기
 <img src="https://github.com/bellho/bellho/assets/134384518/e4724921-5b7d-4ff2-97a8-20977a9ac988"  width="700" height="400">
+
+<details>
+	<summary> 채팅방에 따라 DB값 불러오기(Click) </summary>
+</details>
 <br>
 
 ## 채팅 시작하기
