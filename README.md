@@ -253,6 +253,10 @@
 ## 1 : 1 채팅
 <img src="https://github.com/bellho/bellho/assets/134384518/fa49d3e4-ef57-44af-933b-3bdcfb4c99e2"  width="700" height="400">
 <br>
+
+## 이미지 업로드
+<img src="https://github.com/bellho/bellho/assets/134384518/be7ee919-2921-46e2-b4d3-18e5bdf7c520"  width="700" height="400">
+<br>
 ## 관리자 페이지
 
 <!--여기에 관리자 페이지-->
