@@ -280,6 +280,15 @@
 		ORDER BY created_at
 	</select>
 </details>
+<br>
+
+## 채팅 시작하기
+<img src="https://github.com/bellho/bellho/assets/134384518/dd7a3224-06c6-412b-8c25-c85a69f5697a"  width="700" height="400">
+<br>
+
+## 1 : 1 채팅
+<img src="https://github.com/bellho/bellho/assets/134384518/fa49d3e4-ef57-44af-933b-3bdcfb4c99e2"  width="700" height="400">
+
 <details>
 	<summary> 채팅방 리스트 시간 변경</summary>
 	<br>
@@ -324,14 +333,6 @@
 	</span>
 	</c:forEach>
 </details>
-<br>
-
-## 채팅 시작하기
-<img src="https://github.com/bellho/bellho/assets/134384518/dd7a3224-06c6-412b-8c25-c85a69f5697a"  width="700" height="400">
-<br>
-
-## 1 : 1 채팅
-<img src="https://github.com/bellho/bellho/assets/134384518/fa49d3e4-ef57-44af-933b-3bdcfb4c99e2"  width="700" height="400">
 <br>
 
 ## 이미지 업로드
